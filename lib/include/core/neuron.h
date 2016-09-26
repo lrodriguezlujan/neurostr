@@ -56,9 +56,7 @@ class Neuron : public WithProperties {
   typedef typename std::vector<Node>::const_iterator const_soma_iterator;
 
   // Find in neurites
-  typedef Neurite::branch_type branch_type;
   typedef Neurite::branch_iterator branch_iterator;
-  typedef Neurite::branch_type::node_type branch_node_type;
 
   // Basic constructors
   Neuron() 
@@ -288,7 +286,7 @@ class Neuron : public WithProperties {
   }
 
  Neurite::base_node_iterator find(Node::id_type id) { 
-    return find(branch_node_type(id)); 
+    return find(Node(id)); 
   }
 
   // Find in soma

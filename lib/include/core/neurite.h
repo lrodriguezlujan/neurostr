@@ -51,9 +51,6 @@ class Neurite : public WithProperties  {
   using terminal_branch_iterator  = tree_type::leaf_iterator;
   using branch_bfs_iterator       = tree_type::breadth_first_iterator;
   using sibling_iterator          = tree_type::sibling_iterator;
-  
-  // Branch node type
-  using node_type = typename branch_type::node_type;
 
   // Constructors
   Neurite()
@@ -133,12 +130,12 @@ class Neurite : public WithProperties  {
   
   // Root checker
   bool has_root() const { return begin_branch()->has_root(); }
-  node_type root() const { return begin_branch()->root(); }
+  const Node& root() const { return begin_branch()->root(); }
   
   // ROOT SET
   // Empty root
   void set_root();
-  void set_root(const node_type& node);
+  void set_root(const Node& node);
 
 
   // Size and counter
@@ -233,7 +230,7 @@ class Neurite : public WithProperties  {
   template <typename iter>
   class node_iterator : public boost::iterator_facade<
                           node_iterator<iter>,
-                          node_type,
+                          Node,
                           typename std::iterator_traits<iter>::iterator_category> {
 
    public:
@@ -311,8 +308,8 @@ class Neurite : public WithProperties  {
     friend class boost::iterator_core_access;
     template <typename OtherIter> friend class node_iterator;
 
-    node_type& dereference() { return *node_current_; }
-    node_type& dereference() const { return *node_current_; }
+    Node& dereference() { return *node_current_; }
+    Node& dereference() const { return *node_current_; }
 
     template< typename OtherIter>
     bool equal(const node_iterator<OtherIter>& other) const {
@@ -435,19 +432,19 @@ class Neurite : public WithProperties  {
   /*** Find methods ****/
   branch_iterator find(const Branch& b);
   
-  base_node_iterator find(const node_type& n) { 
+  base_node_iterator find(const Node& n) { 
     return std::find(begin_node(), end_node(), n); 
   }
 
   // Diferent name different return...find should work like select
-  base_node_iterator find(node_type::id_type id) { return find(node_type(id));}
+  base_node_iterator find(Node::id_type id) { return find(Node(id));}
 
   template<typename iter>
   std::vector<base_node_iterator> find(iter b, iter e) {
     // Check iter type
     static_assert(
       std::is_convertible<typename std::iterator_traits<iter>::value_type, 
-                          typename node_type::id_type>::value);
+                          typename Node::id_type>::value);
 
     std::vector<base_node_iterator> tmp;
     for (iter it = b; it != e; ++it) 
@@ -486,13 +483,13 @@ class Neurite : public WithProperties  {
   auto bounding_box = boost::geometry::model::box<point_type>(min_corner, max_corner);
   // Return lambda expresion that takes node and checks if
   // its position is inside de bbox
-  return[bb = bounding_box](const node_type & n)->bool {
+  return[bb = bounding_box](const Node & n)->bool {
     return boost::geometry::covered_by(n.position(), bb);
   };
 }
 
 static  auto node_filter_distance(const point_type& x, float min_value, float max_value) {
-    return[ p = x, min = min_value, max = max_value ](const node_type& n)->bool {
+    return[ p = x, min = min_value, max = max_value ](const Node& n)->bool {
                                                      auto dist = boost::geometry::distance(p, n.position());
                                                       return dist >= min && dist < max;
     };
@@ -534,7 +531,7 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
 
   // Add nodes
   template <typename iter>
-  node_iterator<iter> insert_node(const node_iterator<iter>& pos, const node_type& node){
+  node_iterator<iter> insert_node(const node_iterator<iter>& pos, const Node& node){
       if( pos.branch().node == tree_.feet){
         set_root();  // Empty root
         tree_.begin()->push_back(node);
@@ -580,11 +577,11 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
   }
   
   // Node - based function
-  base_node_iterator insert_node(node_type::id_type parent_id, const node_type& node);
+  base_node_iterator insert_node(Node::id_type parent_id, const Node& node);
 
   // Add branch
   template <typename iter> 
-  iter append_branch(iter pos, const Branch& b) { 
+  iter append_branch(iter pos, Branch& b) { 
     Branch b_copy(b);
     b_copy.neurite(this);
     return tree_.append_child(pos, b_copy); 
