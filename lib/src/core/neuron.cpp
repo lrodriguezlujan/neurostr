@@ -1,0 +1,258 @@
+#include "core/neuron.h"
+
+#include <limits>
+
+
+#include <boost/any.hpp>
+#include <boost/geometry/geometry.hpp>
+
+
+namespace neurostr {
+
+  std::vector<point_type> Neuron::soma_positions() const {
+    std::vector<point_type> v(soma_.size());
+    for(auto it = soma_.begin(); it != soma_.end(); ++it)
+      v.push_back(it->position());
+    return v;
+  }
+  
+    // Soma baricenter
+  point_type Neuron::soma_barycenter() const{
+    return geometry::barycenter(soma_positions());
+  }
+
+  // Scale
+  void Neuron::scale(float r){
+    
+    // First neurites
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->scale(r);
+      
+    // Then soma
+    auto p = soma_barycenter();
+    for( auto it = begin_soma(); it!= end_soma(); ++it )
+      it->scale(r,p);
+  }
+  
+  // Axis scale corrections
+  void Neuron::scale( float rx, float ry, float rz){
+    
+    // Do it for neurites
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->scale(rx,ry,rz);
+      
+    // Do it for the soma nodes
+    for( auto it = begin_soma(); it!= end_soma(); ++it )
+      it->scale(rx,ry,rz);
+  }
+
+  // Traslate
+  void Neuron::traslate(const point_type& p){
+    // Neurites
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->traslate(p);
+    
+    // Soma
+    for( auto it = begin_soma(); it!= end_soma(); ++it )
+      it->traslate(p);
+  }
+
+  // Rotate
+  void Neuron::rotate(const Eigen::Quaternionf& q){
+    // Neurites
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->rotate(q);
+    
+    // Soma
+    for( auto it = begin_soma(); it!= end_soma(); ++it )
+      it->rotate(q);
+  }
+  
+  void Neuron::center() {
+    auto p = soma_barycenter();
+    
+    // Dont move if it not needed
+    if( geometry::distance(p, point_type(0,0,0)) > 1E-3 ){
+      geometry::negate(p);
+      traslate(p);
+    }
+  }
+  
+  // Orient apical towards "up" direction
+  // Todo...all nodes or just terminals?
+  void Neuron::set_apical_up(){
+    
+    //TODO
+    return ;
+    /*// Center soma
+    center();
+    
+    auto measure = measures::node::nodeset_avg_orientation(point_type(0,0,0));
+    measures::Measure<decltype(measure), void> m(measure);
+    
+    auto sel = selector::neurite_node_selector(begin_apical());
+    point_type avg_dir = m.measure(sel.begin(),sel.end());
+    
+    // Align avg_dir with up
+    rotate(geometry::align_vectors(avg_dir,up_));*/
+  }
+  
+  void Neuron::set_basal_roots_xz(){
+  
+    // Center soma
+    center();
+    
+    // PCA
+    // if(begin_dendrites() == end_dendrites() ) return;
+    auto n = std::distance(begin_dendrites(), end_dendrites());
+    if( n < 3 ) return ;
+    
+    // Create nx3 matrix
+    Eigen::Matrix<double, Eigen::Dynamic, 3> m;
+    
+    m.resize(n, 3);
+    
+    // Fill it
+    int i = 0;
+    for (auto it = begin_dendrites(); it != end_dendrites(); ++it, ++i) {
+      if(it->has_root()){
+        m(i, 0) = it->root().x();
+        m(i, 1) = it->root().y();
+        m(i, 2) = it->root().z();
+      }
+      else 
+        --n;
+    } 
+    
+    // Then perform jacobisvd
+    Eigen::JacobiSVD<decltype(m)> svd(m, Eigen::ComputeFullV);
+    Eigen::Matrix<double, Eigen::Dynamic, 3> aux = svd.matrixV();  
+    auto data = aux.data(); 
+
+    // Align dir with up
+    rotate(geometry::align_vectors(point_type(data[6],data[7],data[8]) ,up_));
+  }
+  
+  void Neuron::remove_null_segments(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->remove_null_segments();
+  }
+  
+  // Axis aligned bounding box
+  box_type Neuron::boundingBox(){
+    
+    // Initialize limits
+    point_type min_corner( std::numeric_limits<float>::max(),
+                           std::numeric_limits<float>::max(), 
+                           std::numeric_limits<float>::max());
+    
+    point_type max_corner( std::numeric_limits<float>::min(),
+                           std::numeric_limits<float>::min(), 
+                           std::numeric_limits<float>::min());
+                           
+    
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      for( auto n_it = it->begin_node(); n_it != it->end_node(); ++n_it ) {
+        geometry::max_by_component(n_it->position(),max_corner);
+        geometry::min_by_component(n_it->position(),min_corner);
+      }
+    }
+    
+    for(auto it = begin_soma(); it != end_soma(); ++it){
+        geometry::max_by_component(it->position(),max_corner);
+        geometry::min_by_component(it->position(),min_corner);
+    }
+    
+    return box_type(min_corner,max_corner);
+  }
+  
+  // Compute soma planar area
+  float Neuron::somaArea(){
+    return geometry::polygon_area(geometry::as_planar_polygon(soma_positions()));
+  }
+
+  void Neuron::order(){
+    /*for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->childOrder();*/
+  }
+  
+  void Neuron::simplify(float eps){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it)
+      it->simplify(eps);
+  }
+  
+  // Print neuron
+std::ostream& operator<<(std::ostream& os, const Neuron& n) {
+  // Print * line
+  os << std::string(50, '*') << std::endl;
+
+  // Print ID:
+  os << "Neuron ID: " << n.id_ << std::endl;
+
+  // Print Number of  neurites
+  if (n.neurites_.size() > 0) os << n.neurites_.size() << " neurites" << std::endl;
+
+  // Print metadata/properties
+  if (n.properties.size() > 0) {
+    os << "Properties: " << std::endl;
+    for (auto it = n.properties.begin(); it != n.properties.end(); ++it) {
+      if (PropertyMap::empty(*it))
+        os << "\t" << it->first << std::endl;
+      else
+        os << "\t" << PropertyMap::key(*it) << ": " << PropertyMap::value_as_string(*it) << std::endl;
+    }
+  }
+
+  // Contour
+  if (n.soma_.size() > 0) {
+    os << "Cell body contour:" << std::endl;
+    for (auto it = n.begin_soma(); it != n.end_soma(); ++it) {
+      os << "\t" << (*it) << std::endl;
+    }
+  }
+
+  // Print neurites
+  if (n.size() > 0) {
+    os << "Neurites:" << std::endl << std::endl;
+    for (auto it = n.begin_neurite(); it != n.end_neurite(); ++it) {
+      os << *it << std::endl;
+    }
+  }
+
+  // Print * line
+  os << std::string(50, '*') << std::endl;
+
+  return os;
+};
+
+// Print Reconstruction
+std::ostream& operator<<(std::ostream& os, const Reconstruction& r) {
+  // Print * line
+  os << std::string(50, '*') << std::endl;
+  // Print ID:
+  os << "Reconstruction ID: " << r.id_ << std::endl;
+  // Print Number of neurons
+  os << "Neuron count: " << r.neurons_.size() << std::endl;
+  // Contour TODO
+  /* if (r.has_contour()) {
+    os << "Reconstruction contour:" << std::endl;
+
+    for (auto it = r.contour().begin(); it != r.contour().end(); ++it) {
+      os << "\t" << boost::format("(%.2f, %.2f, %.2f)") % boost::geometry::get<0>(*it) % boost::geometry::get<1>(*it) %
+                        boost::geometry::get<2>(*it) << std::endl;
+    }
+  } */
+  // Print neurons
+  if (r.size() > 0) {
+    os << "Neurons:" << std::endl << std::endl;
+    for (auto it = r.begin(); it != r.end(); ++it) {
+      os << *it << std::endl;
+    }
+  }
+  // Print * line
+  os << std::string(50, '*') << std::endl;
+
+  return os;
+};
+
+}  // End namespace neurostr

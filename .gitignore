@@ -1,0 +1,11 @@
+*.workspace
+*.tags
+*.project
+.codelite
+*.o
+*.o.d
+*.d
+*.mk
+*.a
+build_debug/
+build_release/
