@@ -21,8 +21,8 @@ const auto node_parent = [](Node& n) -> Node& {
   
   if(n.valid_parent()) return n.parent();
   
-  // If node is root
-  if(n == n.branch().root()){
+  // If node is root (if any)
+  if(n.branch().has_root() && n == n.branch().root()){
     // Find branch
     auto branch_it = n.branch().neurite().find(n.branch());
     if(branch_it.node->parent == nullptr){

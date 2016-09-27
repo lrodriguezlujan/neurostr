@@ -289,6 +289,12 @@ void ASCParser::process_(Reconstruction & r) {
         // Create neuron
         Neuron* n = new Neuron(r.id() + std::string("_") + std::to_string(r.size() + 1),
                                std::vector<Node>(aux.begin_node(), aux.end_node()));
+        // Invalidate all branches and parent int soma nodes!
+        for(auto it = n->begin_soma(); it != n->end_soma(); ++it){
+          it->parent(nullptr);
+          it->branch(nullptr);
+        }
+        
         r.addNeuron(n);
       }
 

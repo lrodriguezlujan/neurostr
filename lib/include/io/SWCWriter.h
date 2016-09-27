@@ -44,7 +44,7 @@ namespace io {
       void writeProperty(const PropertyMap::property_type&) const ;
       
       // Data 
-      void writeNode(Node&, unsigned int type) const ;
+      void writeNode(Node&, unsigned int type, int parent) const ;
     
     
       std::ostream& stream_;
