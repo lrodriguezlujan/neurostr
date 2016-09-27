@@ -982,7 +982,7 @@ iter tree<T, tree_node_allocator>::append_child(iter position, T&& x)
 
 	tree_node* tmp = alloc_.allocate(1,0);
    // This should invoke the move constructor... :S
-	std::allocator_traits<tree_node_<T>>::construct(alloc_, tmp, x);
+	std::allocator_traits<tree_node_allocator>::construct(alloc_, tmp, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -1036,7 +1036,7 @@ iter tree<T, tree_node_allocator>::prepend_child(iter position, T&& x)
 
 	tree_node* tmp = alloc_.allocate(1,0);
   // Move constructor
-  std::allocator_traits<tree_node_<T>>::construct(alloc_, tmp, x);
+  std::allocator_traits<tree_node_allocator>::construct(alloc_, tmp, x);
 //	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;

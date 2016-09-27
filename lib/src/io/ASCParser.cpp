@@ -365,10 +365,12 @@ Neurite::base_node_iterator ASCParser::process_container_(
         // Create branch
         std::vector<int> id = current_pos.branch()->id();
         id.push_back(current_pos.branch().number_of_children()+1);
-        Branch b{id, current_pos.branch()->order()+1, *current_pos };
+        
         
         // Insert branch at current posititon with last node as root
-        Neurite::branch_iterator inserted = current_pos.neurite().append_branch(current_pos.branch(),b);
+        Neurite::branch_iterator inserted = current_pos.neurite()
+          .append_branch(current_pos.branch(),
+          Branch(id, current_pos.branch()->order()+1, *current_pos ));
         Neurite::base_node_iterator new_pos = 
         Neurite::base_node_iterator(current_pos.begin(),current_pos.end(),inserted);
         

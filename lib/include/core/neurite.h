@@ -466,66 +466,6 @@ class Neurite : public WithProperties  {
     return ret;
   };
   
-
-/*****
- *  FILTERS
- *
- *  to be used with filter_iterator from boost- Creates lambda expressions
- *  that can be used as arguments of boost::filter_iterator predicate
- *
- ******/
-
-// Node filters
-
-// FILTERS
-/*static auto node_filter_inbox(const point_type& min_corner, const point_type& max_corner) {
-  auto bounding_box = boost::geometry::model::box<point_type>(min_corner, max_corner);
-  // Return lambda expresion that takes node and checks if
-  // its position is inside de bbox
-  return[bb = bounding_box](const Node & n)->bool {
-    return boost::geometry::covered_by(n.position(), bb);
-  };
-}
-
-static  auto node_filter_distance(const point_type& x, float min_value, float max_value) {
-    return[ p = x, min = min_value, max = max_value ](const Node& n)->bool {
-                                                     auto dist = boost::geometry::distance(p, n.position());
-                                                      return dist >= min && dist < max;
-    };
-}
-
-
-static auto branch_filter_inbox(const point_type& min_corner, const point_type& max_corner, bool strict) {
-  auto bounding_box = boost::geometry::model::box<point_type>(min_corner, max_corner);
-  // Return lambda expresion that takes node and checks if
-  // its position is inside de bbox
-    return [bb = bounding_box, strict = strict ](const Branch & b)->bool {
-        for(auto it = b.begin(); it != b.end(); ++it)
-          if( strict ^ boost::geometry::covered_by(it->position(), bb)) return !strict; // Note: ^ is xor
-            return strict;
-    };
-}
-
-static auto branch_filter_distance(const point_type& x, float min_value, float max_value, bool strict) {
-
-  return[ p = x, min = min_value, max = max_value, strict = strict ](const Branch & b)->bool {
-                                                                      float dist;
-    for (auto it = b.begin(); it != b.end(); ++it) {
-      dist = boost::geometry::distance(p, it->position());
-      if (strict ^ (dist >= max && dist < min)) return !strict;
-    }
-    return strict;
-  };
-}
-
-static auto branch_filter_order(const point_type& x, int min_order, int max_order) {
-  return[ p = x, min = min_order, max = max_order ](const Branch & b)->bool {
-                                                     return b.order() >= min && b.order() < max;
-  };
-}*/
-
-/***** END FILTERS ***/
-
   /** INSERT / DELETE NODES **/
 
   // Add nodes
@@ -545,7 +485,8 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
       }
       // Check if pos is the last one
       else if (pos.node() < (pos.branch()->end() - 1)) {
-        // Split if we are not inserting in the last position
+        // Split if we are not inserting in the last position split - pos is
+        // still valid in this case
         split(pos);  
       }
 
@@ -578,12 +519,11 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
   // Node - based function
   base_node_iterator insert_node(Node::id_type parent_id, const Node& node);
 
-  // Add branch
+  // Add branch (move)
   template <typename iter> 
-  iter append_branch(iter pos, Branch& b) { 
-    Branch b_copy(b);
-    b_copy.neurite(this);
-    return tree_.append_child(pos, b_copy); 
+  iter append_branch(iter pos, Branch&& b) { 
+    b.neurite(this);
+    return tree_.append_child(pos, b); 
   }
   
   template <typename iter> 
@@ -604,7 +544,7 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
       b.order(pos.branch()->order()+1);
 
       // Preppend child
-      branch_iterator new_pos = tree_.prepend_child(pos.branch(), b);
+      branch_iterator new_pos = tree_.prepend_child(pos.branch(), std::move(b) );
       new_pos->set_nodes_branch();
 
       // Reparent

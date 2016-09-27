@@ -95,9 +95,9 @@ namespace io {
        auto tmp = v["children"].GetArray();
        for(auto it = tmp.begin() ; it != tmp.end() ; ++it){
          
-         Branch b; // Temporal branch
+         // Add temporal branch
          auto newpos = pos->neurite()
-                        .append_branch(pos,b); // This copies neurite in b.
+                        .append_branch(pos,Branch()); // This copies neurite in b.
          
          // Parse recursive
          parseBranch(it->GetObject(), newpos);

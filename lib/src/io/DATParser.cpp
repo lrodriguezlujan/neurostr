@@ -306,9 +306,11 @@ Neurite::base_node_iterator DATParser::process_container_(
       std::vector<int> id = current_pos.branch()->id();
       id.push_back(current_pos.branch().number_of_children()+1);
       
-      Branch b{id, current_pos.branch()->order()+1, *current_pos.node() };
+      ;
       
-      Neurite::branch_iterator inserted = current_pos.neurite().append_branch(current_pos.branch(),b);
+      Neurite::branch_iterator inserted = current_pos.neurite()
+        .append_branch(current_pos.branch(),
+          Branch(id, current_pos.branch()->order()+1, *current_pos.node()));
               
       Neurite::node_iterator<Neurite::branch_iterator> new_pos = current_pos.neurite().begin_node(inserted);
       
