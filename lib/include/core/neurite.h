@@ -35,9 +35,8 @@ class Neurite : public WithProperties  {
     class const_node_iterator;
 
   // Traits
-  using branch_type   = Branch;
-  using tree_type     = tree<branch_type>;
-  using tree_node     = tree_node_<branch_type>;
+  using tree_type     = tree<Branch>;
+  using tree_node     = tree_node_<Branch>;
   using id_type       = int;
 
   // Iterators renamed  
@@ -256,7 +255,7 @@ class Neurite : public WithProperties  {
     node_iterator(const iter& b,
                   const iter& e,
                   const iter& c,
-                  const typename branch_type::iterator& nodeit)
+                  const typename Branch::iterator& nodeit)
         : begin_(b), current_(c), end_(e), node_current_(nodeit){};
         
 
@@ -272,7 +271,7 @@ class Neurite : public WithProperties  {
     iter begin_;
     iter current_;
     iter end_;
-    branch_type::iterator node_current_;
+    Branch::iterator node_current_;
 
    public:
     iter begin() const { return begin_; }
@@ -280,7 +279,7 @@ class Neurite : public WithProperties  {
     
     iter current() const { return current_; }
     iter branch() const { return current_; }
-    branch_type::iterator node() const { return node_current_; }
+    Branch::iterator node() const { return node_current_; }
     // Neurite&  neurite() const { return neurite_; }
     // Neuron& neuron() const { return neurite_->neuron(); }
     
@@ -500,7 +499,7 @@ static auto branch_filter_inbox(const point_type& min_corner, const point_type& 
   auto bounding_box = boost::geometry::model::box<point_type>(min_corner, max_corner);
   // Return lambda expresion that takes node and checks if
   // its position is inside de bbox
-    return [bb = bounding_box, strict = strict ](const branch_type & b)->bool {
+    return [bb = bounding_box, strict = strict ](const Branch & b)->bool {
         for(auto it = b.begin(); it != b.end(); ++it)
           if( strict ^ boost::geometry::covered_by(it->position(), bb)) return !strict; // Note: ^ is xor
             return strict;
@@ -509,7 +508,7 @@ static auto branch_filter_inbox(const point_type& min_corner, const point_type& 
 
 static auto branch_filter_distance(const point_type& x, float min_value, float max_value, bool strict) {
 
-  return[ p = x, min = min_value, max = max_value, strict = strict ](const branch_type & b)->bool {
+  return[ p = x, min = min_value, max = max_value, strict = strict ](const Branch & b)->bool {
                                                                       float dist;
     for (auto it = b.begin(); it != b.end(); ++it) {
       dist = boost::geometry::distance(p, it->position());
@@ -520,7 +519,7 @@ static auto branch_filter_distance(const point_type& x, float min_value, float m
 }
 
 static auto branch_filter_order(const point_type& x, int min_order, int max_order) {
-  return[ p = x, min = min_order, max = max_order ](const branch_type & b)->bool {
+  return[ p = x, min = min_order, max = max_order ](const Branch & b)->bool {
                                                      return b.order() >= min && b.order() < max;
   };
 }*/
@@ -561,7 +560,7 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
         id.push_back(pos.branch().number_of_children() + 1);
 
         // Create branch - pos node will be the root
-        branch_type b{id, pos.branch()->order() + 1, *pos};  // Create branch
+        Branch b{id, pos.branch()->order() + 1, *pos};  // Create branch
         b.neurite(this); // Set ourselves as neurite
         
         // Add node
@@ -599,7 +598,7 @@ static auto branch_filter_order(const point_type& x, int min_order, int max_orde
       id.push_back(1);  // This new branch is the first
 
       // Split branch - this modifies the it.current branch
-      branch_type b = pos.branch()->split(pos.node());
+      Branch b = pos.branch()->split(pos.node());
       b.neurite(this); 
       b.id(id);
       b.order(pos.branch()->order()+1);

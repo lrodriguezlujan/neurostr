@@ -305,6 +305,8 @@ class tree {
 		/// Insert node as last/first child of node pointed to by position.
 		template<typename iter> iter append_child(iter position, const T& x);
 		template<typename iter> iter prepend_child(iter position, const T& x);
+    template<typename iter> iter append_child(iter position, T&& x);
+		template<typename iter> iter prepend_child(iter position, T&& x);
 		/// Append the node (plus its children) at other_position as last/first child of position.
 		template<typename iter> iter append_child(iter position, iter other_position);
 		template<typename iter> iter prepend_child(iter position, iter other_position);
@@ -938,7 +940,7 @@ iter tree<T, tree_node_allocator>::prepend_child(iter position)
 template <class T, class tree_node_allocator>
 template <class iter>
 iter tree<T, tree_node_allocator>::append_child(iter position, const T& x)
-	{
+{
 	// If your program fails here you probably used 'append_child' to add the top
 	// node to an empty tree. From version 1.45 the top element should be added
 	// using 'insert'. See the documentation for further information, and sorry about
@@ -956,15 +958,46 @@ iter tree<T, tree_node_allocator>::append_child(iter position, const T& x)
 	tmp->parent=position.node;
 	if(position.node->last_child!=0) {
 		position.node->last_child->next_sibling=tmp;
-		}
+	}
 	else {
 		position.node->first_child=tmp;
-		}
+	}
 	tmp->prev_sibling=position.node->last_child;
 	position.node->last_child=tmp;
 	tmp->next_sibling=0;
 	return tmp;
+}
+
+template <class T, class tree_node_allocator>
+template <class iter>
+iter tree<T, tree_node_allocator>::append_child(iter position, T&& x)
+{
+	// If your program fails here you probably used 'append_child' to add the top
+	// node to an empty tree. From version 1.45 the top element should be added
+	// using 'insert'. See the documentation for further information, and sorry about
+	// the API change.
+	assert(position.node!=head);
+	assert(position.node!=feet);
+	assert(position.node);
+
+	tree_node* tmp = alloc_.allocate(1,0);
+   // This should invoke the move constructor... :S
+	std::allocator_traits<tree_node_<T>>::construct(alloc_, tmp, x);
+	tmp->first_child=0;
+	tmp->last_child=0;
+
+	tmp->parent=position.node;
+	if(position.node->last_child!=0) {
+		position.node->last_child->next_sibling=tmp;
 	}
+	else {
+		position.node->first_child=tmp;
+	}
+	tmp->prev_sibling=position.node->last_child;
+	position.node->last_child=tmp;
+	tmp->next_sibling=0;
+	return tmp;
+}
 
 template <class T, class tree_node_allocator>
 template <class iter>
@@ -991,7 +1024,35 @@ iter tree<T, tree_node_allocator>::prepend_child(iter position, const T& x)
 	position.node->first_child=tmp;
 	tmp->prev_sibling=0;
 	return tmp;
-	}
+}
+
+template <class T, class tree_node_allocator>
+template <class iter>
+iter tree<T, tree_node_allocator>::prepend_child(iter position, T&& x)
+	{
+	assert(position.node!=head);
+	assert(position.node!=feet);
+	assert(position.node);
+
+	tree_node* tmp = alloc_.allocate(1,0);
+  // Move constructor
+  std::allocator_traits<tree_node_<T>>::construct(alloc_, tmp, x);
+//	kp::constructor(&tmp->data, x);
+	tmp->first_child=0;
+	tmp->last_child=0;
+
+	tmp->parent=position.node;
+	if(position.node->first_child!=0) {
+		position.node->first_child->prev_sibling=tmp;
+		}
+	else {
+		position.node->last_child=tmp;
+		}
+	tmp->next_sibling=position.node->first_child;
+	position.node->first_child=tmp;
+	tmp->prev_sibling=0;
+	return tmp;
+}
 
 template <class T, class tree_node_allocator>
 template <class iter>
