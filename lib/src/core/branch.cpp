@@ -51,22 +51,25 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
 
   // Erase
   Branch::iterator Branch::erase(const Branch::iterator& pos) { 
-    auto next = pos + 1;
-    if( next != nodes_.end() ){
+    
+    if(pos == end()) return pos;
+    
+    auto next = std::next(pos,1);
+    if( next != end() ){
       next->invalidate_basis();
       next->invalidate_length();
       next->parent(&(pos->parent()));
     }
-    return nodes_.erase(pos);
+    return nodes_.erase(pos.base());
   }
   Branch::iterator Branch::erase(const Branch::iterator& first,
                                  const Branch::iterator& last) { 
-    if( last != nodes_.end() ){
+    if( last != end() ){
       last->invalidate_basis();
       last->invalidate_length();
     }
     
-    return nodes_.erase(first, last);
+    return nodes_.erase(first.base(), last.base());
   }
   
   // Transformations
@@ -76,70 +79,77 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
       return;
       
     } else if(eps < 0) {
-      eps = (-eps) * (root_.radius() + nodes_.back().radius() ) / 2.0 ;
+      eps = (-eps) * (root_->radius() + last().radius() ) / 2.0 ;
     }
     
     std::vector<Node> tmp;
     
     // Add root
-    tmp.push_back(root_);
+    tmp.push_back(*root_);
     
     // Add nodes
-    tmp.insert(tmp.end(), nodes_.begin(),nodes_.end() );
+    tmp.insert(tmp.end(), begin(), end() );
     
     // RDP Simplification
     geometry::RDPSimplifier<Node>(eps,tmp).simplify();
     
-    for(auto it = tmp.begin() ; it != tmp.end() ; ++it ){
-      it->invalidate_basis(); 
-      it->invalidate_length();
+    // Remove nodes
+    auto ref = begin();
+    for(auto it = std::next(tmp.begin(),1); it != tmp.end(); ++it){
+      while(*ref != *it){
+        ref = erase(ref);
+      }
+      
+      if (ref != end()){
+        ++ref;
+      }
     }
     
-    // Change root and nodes
-    root_ = *tmp.begin();
-    nodes_ = std::vector<Node>(++tmp.begin(),tmp.end());
   }
   
   void Branch::scale(float r){
     
     // First node scales wrt to root...if it exists
-    if ( has_root() ) nodes_.begin()->scale(r,root().position()) ;
-    else nodes_.begin()->scale(r,point_type(0,0,0)) ;
+    if ( has_root() ){
+      begin()->scale(r,root().position()) ;
+    } else {
+      begin()->scale(r,point_type(0,0,0)) ;
+    }
       
-    for(auto it  = nodes_.begin()+1; it != nodes_.end() ; ++it){
+    for(auto it  = std::next(begin(),1); it != end() ; ++it){
       it->scale(r,(it-1)->position());
     }
   }
   
   void Branch::scale(float rx, float ry, float rz){
     // First node scales wrt to root...if it exists
-    if ( has_root() ) root().scale(rx,ry,rz);
+    if ( has_root() ) root_->scale(rx,ry,rz);
   
-    for(auto it  = nodes_.begin()+1; it != nodes_.end() ; ++it){
+    for(auto it  = begin(); it != end() ; ++it){
       it->scale(rx,ry,rz);
     }
   }
   
   void Branch::traslate(const point_type& p){
       
-    for(auto it  = nodes_.begin(); it != nodes_.end() ; ++it){
+    for(auto it  = begin(); it != end() ; ++it){
       it->traslate(p);
     }
       
     // Move also the root
     if ( has_root() ) {
-      root_.traslate(p);
+      root_->traslate(p);
     }
   }
   
   void Branch::rotate(const Eigen::Quaternionf& q){
-    for(auto it  = nodes_.begin(); it != nodes_.end() ; ++it){
+    for(auto it  = begin(); it != end() ; ++it){
       it->rotate(q);
     }
       
       // Move also the root
     if ( has_root() ) {
-      root_.rotate(q);
+      root_->rotate(q);
     }
   }
   
@@ -147,13 +157,13 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     // Check if we should remove the first node
     if( has_root() ){
       // Do it ...
-      while(geometry::equal(nodes_.begin()->position(), root_.position()) && nodes_.size() > 0){
-        erase(nodes_.begin());
+      while(geometry::equal(begin()->position(), root_->position()) && nodes_.size() > 0){
+        erase(begin());
       }
     }
     if(size() > 0)
-      for(auto it = nodes_.begin()+1 ; it != nodes_.end(); ++it){
-        if ( geometry::equal((it-1)->position(), it->position()) ){
+      for(auto it = std::next(begin(),1) ; it != end(); ++it){
+        if ( geometry::equal( std::prev(it,1)->position(), it->position()) ){
           it = erase(it);
           --it;
         }

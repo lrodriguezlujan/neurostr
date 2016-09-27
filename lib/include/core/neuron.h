@@ -451,7 +451,10 @@ class Reconstruction : public WithProperties{
   }
 
   neuron_iterator add_neurite_to_closest_soma(Neurite* n) {
-    auto closest = closest_soma(n->root().position());
+    
+    
+    auto closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
+    
     if (closest == end()) {
       throw std::runtime_error("Orphan neurite");
     } else {

@@ -500,16 +500,10 @@ class Neurite : public WithProperties  {
         std::vector<int> id{pos.branch()->id()};
         id.push_back(pos.branch().number_of_children() + 1);
 
-        // Create branch - pos node will be the root
-        Branch b{id, pos.branch()->order() + 1, *pos};  // Create branch
-        b.neurite(this); // Set ourselves as neurite
-        
-        // Add node
-        b.push_back(node);
-        
-        // Add new branch
-        auto aux = tree_.append_child(pos.branch(), b);
-        aux->set_nodes_branch(); // Needed. Append child copies so..
+        // Create branch - pos node will be the root        
+        auto aux = tree_.append_child(pos.branch(), Branch(id, pos.branch()->order() + 1, *pos) );
+        aux->neurite(this);
+        aux->push_back(node);
         
         // POST INSERT
         return node_iterator<iter>(pos.begin(),pos.end(), aux, aux->begin());
@@ -523,7 +517,7 @@ class Neurite : public WithProperties  {
   template <typename iter> 
   iter append_branch(iter pos, Branch&& b) { 
     b.neurite(this);
-    return tree_.append_child(pos, b); 
+    return tree_.append_child(pos, std::move(b)); 
   }
   
   template <typename iter> 
@@ -538,13 +532,12 @@ class Neurite : public WithProperties  {
       id.push_back(1);  // This new branch is the first
 
       // Split branch - this modifies the it.current branch
-      Branch b = pos.branch()->split(pos.node());
-      b.neurite(this); 
-      b.id(id);
-      b.order(pos.branch()->order()+1);
 
       // Preppend child
-      branch_iterator new_pos = tree_.prepend_child(pos.branch(), std::move(b) );
+      branch_iterator new_pos = tree_.prepend_child(pos.branch(), pos.branch()->split(pos.node()) );
+      new_pos->neurite(this);
+      new_pos->id(id);
+      new_pos->order(pos.branch()->order()+1);
       new_pos->set_nodes_branch();
 
       // Reparent
@@ -560,7 +553,6 @@ class Neurite : public WithProperties  {
       return ;
   }
 
-// What it doeS?
   void correct();
   void remove_null_segments();
 

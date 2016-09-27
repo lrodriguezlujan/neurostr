@@ -45,7 +45,9 @@ namespace methods {
     auto local_b = root_b.local_basis( ref_b, root_a.branch().neurite().neuron().up() );
     
     // Copy a
-    Branch tmp_a(a);
+    Branch tmp_a;
+    tmp_a.root(a.root());
+    tmp_a.insert(tmp_a.begin(), a.begin(), a.end());
     
     // Align branches
     tmp_a.rotate( geometry::align_vectors(local_a[0], local_b[0]) );

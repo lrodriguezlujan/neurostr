@@ -7,12 +7,10 @@ namespace neurostr {
 
 // Empty root
 void Neurite::set_root() {
-  if (tree_.empty()) {
-    Branch b{std::vector<int>{1}, 0}; // ID / ORder constructor
+  if (tree_.empty()) {    
     // Set branch neurite
-    b.neurite(this);
-    tree_.set_head(b);
-    
+    tree_.set_head(Branch(std::vector<int>{1}, 0));
+    tree_.begin()->neurite(this);
     
   } else {
     // Create an empty node in the root branch

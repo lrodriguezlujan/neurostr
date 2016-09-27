@@ -6,6 +6,10 @@
 #include <type_traits>  // For aserts and stuff
 #include <iterator>
 #include <algorithm>
+
+#include <memory>
+#include <boost/iterator/indirect_iterator.hpp>
+
 #include <Eigen/Geometry>
 #include "core/property.h"
 #include "core/definitions.h"
@@ -21,15 +25,14 @@ class Branch : public WithProperties{
 
   // In class definitions
   using id_type = std::vector<int>;
-  using node_type = Node;
-  using storage_type = std::vector<Node>;
+  using storage_type = std::vector< std::unique_ptr<Node> >;
   using size_type = typename storage_type::size_type;
   
   // Define iterators
-  using iterator = typename storage_type::iterator;
-  using reverse_iterator = typename storage_type::reverse_iterator;
-  using const_iterator = typename storage_type::const_iterator;
-  using const_reverse_iterator = typename storage_type::const_reverse_iterator;
+  using iterator = boost::indirect_iterator<typename storage_type::iterator>;
+  using reverse_iterator = boost::indirect_iterator<typename storage_type::reverse_iterator>;
+  using const_iterator = boost::indirect_iterator<typename storage_type::const_iterator>;
+  using const_reverse_iterator = boost::indirect_iterator<typename storage_type::const_reverse_iterator>;
 
   // Constructors
   Branch() : WithProperties(), id_(), order_(-1), root_(), nodes_() {};
@@ -39,74 +42,67 @@ class Branch : public WithProperties{
     , id_(id)
     , neurite_(nullptr)
     , order_(order)
-    , root_()
+    , root_(nullptr)
     , nodes_() {
-      set_nodes_branch();
   };
 
   // Copy root (small type...)
-  Branch(const id_type& id, int order, const node_type& root)
+  Branch(const id_type& id, int order, const Node& root)
       : WithProperties()
       , id_(id)
       , neurite_(nullptr)
       , order_(order)
-      , root_(root) {
-        set_nodes_branch();
-        
+      , root_(new Node(root) ) {
+        root_->branch(this);
   };
-
-  // Copy both root and nodes
-  Branch(const id_type& id, int order, 
-         const node_type& root, const storage_type& nodes)
-      : WithProperties()
-      , id_(id)
-      , neurite_(nullptr)
-      , order_(order)
-      , root_(root)
-      , nodes_(nodes) {
-        set_nodes_branch();
-  };
-
+  
   // Move nodes
   Branch(const id_type& id, int order, 
-         const node_type& root, storage_type&& nodes)
+         const Node& root, const std::vector<Node>& nodes)
       : WithProperties()
       , id_(id)
       , neurite_(nullptr)
       , order_(order)
-      , root_(root)
-      , nodes_(nodes) {
-      set_nodes_branch();
+      , root_(new Node(root))
+      , nodes_() {
+        root_->branch(this);
+        for(auto it = std::begin(nodes); it != std::end(nodes); ++it ){
+          Node* tmp = new Node(*it);
+          tmp->branch(this);
+          nodes_.emplace_back(tmp);
+        }
   };
 
   // Now with iterators
   template <typename Iter>
   Branch(const id_type& id, int order, 
-         const node_type& root, const Iter& b, const Iter& e)
+         const Node& root, const Iter& b, const Iter& e)
       : WithProperties()
       , id_(id)
       , neurite_(nullptr)
       , order_(order)
-      , root_(root)
+      , root_(new Node(root))
       , nodes_() {
-    // assert that iter actually defers to node_type
-    static_assert(std::is_same<node_type, 
+    // assert that iter actually defers to Node
+    static_assert(std::is_same<Node, 
                   std::remove_reference_t<
                     typename std::iterator_traits<Iter>::value_type>
                   >(),
                   "Iterator must defers to node type");
-                  
-    nodes_.insert(nodes_.begin(), b, e);
-    set_nodes_branch();
+    root_->branch(this);
+    for(auto it = b; it != e ; ++it){
+      Node* tmp = new Node(*it);
+      tmp->branch(this);
+      nodes_.emplace_back(tmp);
+    }
   };
 
   // Nothing to do here
   ~Branch() {};
 
-  // Copy
-  Branch(const Branch& b)  = default;
-  
-  Branch& operator=(const Branch& b) = default;
+  // Copy (not allowd)
+  Branch(const Branch& b)  = delete;
+  Branch& operator=(const Branch& b) = delete;
 
   // Move
   Branch(Branch&& b) = default;
@@ -142,44 +138,48 @@ class Branch : public WithProperties{
   bool operator==(const Branch& b) const {
     return (id_.size() == b.id_.size()) && (nodes_.size() == b.nodes_.size()) &&
            std::equal(id_.cbegin(), id_.cend(), b.id_.cbegin()) && (root_ == b.root_) && 
-           std::equal(nodes_.cbegin(), nodes_.cend(), b.nodes_.cbegin());
+           std::equal(begin(), end(), b.begin());
   }
   bool operator!=(const Branch& b) const { return !(b == (*this)); }
 
   // Size (number of nodes)
   size_type size() const { return nodes_.size(); }
-  bool has_root() const { return root_.id() != -1; }
+  bool has_root() const { return root_.get() != nullptr; }
 
   // These funcs may throw exceptions
   // Get root node
-  node_type root() const {
-    return root_;
+  const Node& root() const {
+    return *root_;
   };
   
-  node_type& root() {
-    return root_;
+  Node& root() {
+    return *root_;
   };
   
-  void root(const node_type& n) {
-    root_ = n;
+  void root(const Node& n) {
+    root_.reset(new Node(n));
+  }
+  
+  void root(Node&& n) {
+    root_.reset(new Node(n));
   }
   
   // Get first non root node
-  const node_type& first() const {
-    return nodes_.front();
+  const Node& first() const {
+    return *(nodes_.front());
   };
   // Get last node (non root)
-  const node_type& last() const {
-    return nodes_.back();
+  const Node& last() const {
+    return *(nodes_.back());
   };
   
   // Get first non root node
-  node_type& first() {
-    return nodes_.front();
+  Node& first() {
+    return *(nodes_.front());
   };
   // Get last node (non root)
-  node_type& last() {
-    return nodes_.back();
+  Node& last() {
+    return *(nodes_.back());
   };
   
   // Set property
@@ -206,76 +206,87 @@ class Branch : public WithProperties{
 
 
   // Begin at root - End remains at the same place
-  iterator begin() { return nodes_.begin(); }
-  iterator end() { return nodes_.end(); }
+  iterator begin() { return std::begin(nodes_); }
+  iterator end() { return std::end(nodes_); }
   
-  reverse_iterator rbegin() { return nodes_.rbegin(); }
-  reverse_iterator rend() { return nodes_.rend(); }
+  reverse_iterator rbegin() { return std::rbegin(nodes_); }
+  reverse_iterator rend() { return std::rend(nodes_); }
   
-  const_iterator begin() const { return nodes_.begin(); }
-  const_iterator end() const { return nodes_.end(); }
+  const_iterator begin() const { return std::begin(nodes_); }
+  const_iterator end() const { return std::end(nodes_); }
   
-  const_reverse_iterator rbegin() const { return nodes_.rbegin(); }
-  const_reverse_iterator rend() const { return nodes_.rend(); }
-
-  const_iterator cbegin() const { return nodes_.cbegin(); }
-  const_iterator cend() const { return nodes_.cend(); }
+  const_reverse_iterator rbegin() const { return std::rbegin(nodes_); }
+  const_reverse_iterator rend() const { return std::rend(nodes_); }
+  
+  const_iterator cbegin() const { return std::begin(nodes_); }
+  const_iterator cend() const { return std::end(nodes_); }
   
   // END Iterator definition
 
   // Push back (cp and mv)
-  void push_back(const node_type& n) { 
-    Node ncopy = n;
-    ncopy.branch(this);
-    nodes_.push_back(ncopy); 
+  void push_back(const Node& n) { 
+    Node* ncopy = new Node(n);
+    ncopy->branch(this);
+    nodes_.emplace_back(ncopy); 
   }
-  void push_back(node_type&& n) { 
+  
+  void push_back(Node&& n) { 
     n.branch(this);
-    nodes_.push_back(n);
+    nodes_.emplace_back(new Node(n));
   }
 
   // Insert at position
-  iterator insert(iterator pos, const node_type& n) { 
-    if( pos != nodes_.end() ){
+  iterator insert(iterator pos, const Node& n) { 
+    if( pos != end() ){
       pos->invalidate_basis();
       pos->invalidate_length();
     }
-    Node ncopy = n;
-    ncopy.branch(this);
-    return (nodes_.insert(pos, ncopy));
+    Node* ncopy = new Node(n);
+    ncopy->branch(this);
+    return (nodes_.emplace(pos.base(), ncopy));
   }
 
   template <typename Iter> 
   void insert(iterator pos, Iter b, Iter e) {
-    if( pos != nodes_.end() ){
+    if( pos != end() ){
       pos->invalidate_basis();
       pos->invalidate_length();
     }
     // Change node branch
+    Node * tmp;
     for(auto it = b ; it != e ; ++it){
-      it->branch(this);
+      tmp = new Node(*it);
+      tmp->branch(this);
+      pos = nodes_.emplace(pos.base(),tmp);
     }
-    nodes_.insert(pos, b, e);
   };
   
   // Erase
   iterator erase(const iterator& pos);
   iterator erase(const iterator& first,const iterator& last);
+  
   void clear() { nodes_.clear(); }
 
   // Split
+  // FIXME (move instead of copy elements!)
   Branch split(const iterator& pos) {
-      if (pos == nodes_.end() )
-        return Branch();
-      else{
+    
+    Branch splitbranch{id_, order_+1};
+    splitbranch.neurite(neurite_); // Set neurite
+    
+    if (pos == end() ){
+        return splitbranch;
+    } else{
         iterator b = pos;
         
         // Create branch 
-        Branch splitbranch{id_, order_+1, *pos, ++b, nodes_.end()};
-        splitbranch.neurite(neurite_);
+        splitbranch.root(*pos); // Copy root
         
-        // Remove cp nodes
-        erase(b,nodes_.end());
+        // move
+        std::move(std::next(b,1).base(),nodes_.end(), std::back_inserter(splitbranch.nodes_));
+        
+        // Remove nodes
+        erase(std::next(b,1), end());
         return splitbranch;
       }
   }
@@ -293,9 +304,10 @@ class Branch : public WithProperties{
   float discrete_frechet( const Branch& other) const;
   
   void set_nodes_branch(){
-    for(auto it = nodes_.begin(); it != nodes_.end(); ++it)
+    for(auto it = begin(); it != end(); ++it)
       it->branch(this);
-    root_.branch(this);
+    if(root_.get()!=nullptr)
+      root_->branch(this);
   };
   
   private:
@@ -318,8 +330,8 @@ class Branch : public WithProperties{
   int order_;
 
   // Node storage
-  node_type root_;
-  std::vector<node_type> nodes_;
+  std::unique_ptr<Node> root_;
+  std::vector<std::unique_ptr<Node>> nodes_;
 
 };  // class template Branch
 
