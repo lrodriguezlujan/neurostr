@@ -163,6 +163,7 @@ Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
     
     // Rotation axis (normalized)
     auto axis = geometry::cross_product(from, to);
+    
     float angle;
     
     if(geometry::norm(axis) == 0){
@@ -171,9 +172,9 @@ Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
         //axis (any orthogonal vector)
         axis = point_type(-bg::get<1>(from),bg::get<0>(from),0);
     } else {
-      bg::divide_value(axis, geometry::norm(axis));  
-      // Angle bw dir and up_
-      angle = std::acos(bg::dot_product(from, to));
+      normalize(axis);
+      // Angle bw dir and to
+      angle = geometry::vector_vector_directed_angle(from,to);
     }
     
     // Compute angle axis rotation and rotate.
