@@ -3,6 +3,38 @@
 
 namespace neurostr {
   
+// Constructors
+
+Neurite::Neurite()
+      : WithProperties()
+      , tree_()  // Call constructor
+      , id_(-1)
+      , type_(NeuriteType::kUndefined)
+      , root_is_soma_(false)
+      , neuron_(){
+        //set_root();
+  };
+  
+Neurite::Neurite(int id)
+      : WithProperties()
+      , tree_()  // Call constructor
+      , id_(id)
+      , type_(NeuriteType::kUndefined)
+      , root_is_soma_(false)
+      , neuron_(){
+        //set_root();
+  };
+  
+Neurite::Neurite(int id, const NeuriteType& t)
+      : WithProperties()
+      , tree_()  // Call constructor
+      , id_(id)
+      , type_(t)
+      , root_is_soma_(false)
+      , neuron_(){
+        //set_root();
+  };
+  
 // ROOT SET
 
 // Empty root
@@ -24,6 +56,30 @@ void Neurite::set_root(const Node& node) {
   tree_.begin()->root(node);
   root_is_soma_ = true;
 }
+
+int Neurite::node_count() const {
+    int count = 0;
+    for (auto it = begin_branch(); it != end_branch(); it++) count += it->size();
+    return count;
+}
+
+
+Neurite::branch_iterator Neurite::end_branch_subtree(
+  const typename Neurite::tree_type::iterator_base& other) const {
+    tree_node* tn = other.node;
+
+    if (tn == nullptr)
+      return Neurite::branch_iterator(other);
+    else {
+      while (tn->next_sibling == nullptr) {
+        tn = tn->parent;
+        if (tn == nullptr) return Neurite::branch_iterator(tn);
+      }
+      // The next "node"
+      return Neurite::branch_iterator(tn->next_sibling);
+    }
+}
+
 
 // Node - based function
 Neurite::base_node_iterator Neurite::insert_node(Node::id_type parent_id, const Node& node) {
@@ -132,6 +188,8 @@ Neurite::branch_iterator Neurite::find(const Branch& b){
   }
 }*/
 
+
+
 int Neurite::max_centrifugal_order() const{
   
   int maxOrder = -1;
@@ -205,7 +263,56 @@ std::ostream& operator<<(std::ostream& os, const Neurite& n) {
     return os;
 };
 
+// STEM ITERATOR
 
+
+    Neurite::stem_iterator::stem_iterator() 
+      : tree_type::iterator_base() {};
+      
+
+    Neurite::stem_iterator::stem_iterator(tree_node* tn) 
+      : tree_type::iterator_base(tn) {};
+      
+
+    Neurite::stem_iterator::stem_iterator(
+      const typename Neurite::tree_type::iterator_base& other) 
+      : tree_type::iterator_base(other.node) {};
+
+
+    bool Neurite::stem_iterator::operator==(const Neurite::stem_iterator& other) const {
+      return (this->node == other.node);
+    };
+    
+    bool Neurite::stem_iterator::operator!=(const Neurite::stem_iterator& other) const {
+      return (this->node != other.node);
+    };
+
+
+    Neurite::stem_iterator& Neurite::stem_iterator::operator++() {
+      assert(this->node != nullptr);
+      if(this->node->parent == nullptr){
+        assert(this->node->prev_sibling != nullptr);
+        this->node = this->node->prev_sibling;
+      } else
+        this->node = this->node->parent;
+      return *this;
+    };
+
+
+    Neurite::stem_iterator Neurite::stem_iterator::operator++(int) {
+      stem_iterator copy = *this;
+      ++(*this);
+      return copy;
+    };
+
+
+    Neurite::stem_iterator& Neurite::stem_iterator::operator+=(unsigned int num) {
+      while (num > 0) {
+        ++(*this);
+        num--;
+      }
+      return *this;
+    };
 
 
 

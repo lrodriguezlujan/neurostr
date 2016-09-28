@@ -55,30 +55,14 @@ class Neurite : public WithProperties  {
    * @brief Empty neurite constructor. Id -1 and type undefined
    * @return Neurite
    */
-  Neurite()
-      : WithProperties()
-      , tree_()  // Call constructor
-      , id_(-1)
-      , type_(NeuriteType::kUndefined)
-      , root_is_soma_(false)
-      , neuron_(){
-        //set_root();
-  };
+  Neurite();
 
   /**
    * @brief Create a neurite with given id and type undefined
    * @param id Neurite id
    * @return Neurite
    */
-  Neurite(int id)
-      : WithProperties()
-      , tree_()  // Call constructor
-      , id_(id)
-      , type_(NeuriteType::kUndefined)
-      , root_is_soma_(false)
-      , neuron_(){
-        //set_root();
-  };
+  Neurite(int id);
 
   /**
    * @brief Create a neurite with given id and type
@@ -86,15 +70,7 @@ class Neurite : public WithProperties  {
    * @param t Neurite type
    * @return  Neurite
    */
-  Neurite(int id, const NeuriteType& t)
-      : WithProperties()
-      , tree_()  // Call constructor
-      , id_(id)
-      , type_(t)
-      , root_is_soma_(false)
-      , neuron_(){
-        //set_root();
-  };
+  Neurite(int id, const NeuriteType& t);
 
   // Copy and assign (Default)
   Neurite(const Neurite& n) = default;
@@ -225,11 +201,7 @@ class Neurite : public WithProperties  {
    * @brief Neurite node count
    * @return Number of distinct node ins the neurite (roots excluded)
    */
-  int node_count() const {
-    int count = 0;
-    for (auto it = begin_branch(); it != end_branch(); it++) count += it->size();
-    return count;
-  }
+  int node_count() const ;
   
   /**
    * @brief Adds a property to the neurite and optionally to its branches
@@ -274,69 +246,47 @@ class Neurite : public WithProperties  {
      * @brief Empty constructor
      * @return Default iterator (actually, useless)
      */
-    stem_iterator() 
-      : tree_type::iterator_base() {};
+    stem_iterator() ;
       
     /**
      * @brief Creates an stem iterator that points to tn
      * @param tn Tree node pointer
      * @return Stem iterator
      */
-    stem_iterator(tree_node* tn) 
-      : tree_type::iterator_base(tn) {};
+    stem_iterator(tree_node* tn) ;
       
     /**
      * @brief Copies the given iterator as stem iterator
      * @param other Iterator
      * @return  Copied stem iterator
      */
-    stem_iterator(const typename tree_type::iterator_base& other) 
-      : tree_type::iterator_base(other.node) {};
+    stem_iterator(const typename tree_type::iterator_base& other) ;
 
 
-    bool operator==(const stem_iterator& other) const {
-      return (this->node == other.node);
-    };
+    bool operator==(const stem_iterator& other) const ;
     
-    bool operator!=(const stem_iterator& other) const {
-      return (this->node != other.node);
-    };
+    bool operator!=(const stem_iterator& other) const ;
 
     /**
      * @brief Stem iterator single step - ascend one branch
      * @return Updated iterator
      */
-    stem_iterator& operator++() {
-      assert(this->node != nullptr);
-      if(this->node->parent == nullptr){
-        assert(this->node->prev_sibling != nullptr);
-        this->node = this->node->prev_sibling;
-      } else
-        this->node = this->node->parent;
-      return *this;
-    };
+    stem_iterator& operator++() ;
+      
 
     /**
      * @brief Stem iterator single step - ascend one branch
      * @return new updated iterator
      */
-    stem_iterator operator++(int) {
-      stem_iterator copy = *this;
-      ++(*this);
-      return copy;
-    };
+    stem_iterator operator++(int) ;
+      
 
     /**
      * @brief Stem iterator multi step - ascend num branches
      * @return Updated iterator
      */
-    stem_iterator& operator+=(unsigned int num) {
-      while (num > 0) {
-        ++(*this);
-        num--;
-      }
-      return *this;
-    };
+    stem_iterator& operator+=(unsigned int num) ;
+      
   };
   /**********************************************************************/
 
@@ -360,12 +310,8 @@ class Neurite : public WithProperties  {
      * @brief Empty constructor. Nonsense
      * @return Node iterator
      */
-    node_iterator() 
-      : begin_()
-      , current_()
-      , end_()
-      , node_current_(){};
-
+    node_iterator();
+    
     /**
      * @brief Creates a node iterator that starts at the first node of b and ends
      * at the first node of e.
@@ -373,11 +319,7 @@ class Neurite : public WithProperties  {
      * @param e Last branch
      * @return Node iterator
      */
-    node_iterator(const iter& b, const iter& e)
-        : begin_(b)
-        , current_(b)
-        , end_(e)
-        , node_current_(b->begin()){};
+    node_iterator(const iter& b, const iter& e);
 
      /**
      * @brief Creates a node iterator that starts at the first node of b and ends
@@ -387,12 +329,8 @@ class Neurite : public WithProperties  {
      * @param c Current branch
      * @return Node iterator
      */
-    node_iterator(const iter& b, const iter& e, const iter& c)
-        : begin_(b)
-        , current_(c)
-        , end_(e)
-        , node_current_(c->begin()){};
-
+    node_iterator(const iter& b, const iter& e, const iter& c);
+    
      /**
      * @brief Creates a node iterator that starts at the first node of b and ends
      * at the first node of e. Current node is the nodeit node of c.
@@ -405,9 +343,7 @@ class Neurite : public WithProperties  {
     node_iterator(const iter& b,
                   const iter& e,
                   const iter& c,
-                  const typename Branch::iterator& nodeit)
-        : begin_(b), current_(c), end_(e), node_current_(nodeit){};
-        
+                  const typename Branch::iterator& nodeit);
 
     // Copy and move
     node_iterator(const node_iterator<iter>&) = default;
@@ -429,65 +365,55 @@ class Neurite : public WithProperties  {
      * @brief Get iterator first branch
      * @return First branch
      */
-    iter begin() const { return begin_; }
+    iter begin() const;
     
     /**
      * @brief Get iterator last branch
      * @return Last branch
      */
-    iter end() const { return end_; }
+    iter end() const;
     
     /**
      * @brief Get iterator current branch
      * @return Current branch
      */
-    iter current() const { return current_; }
+    iter current() const;
     
     /**
      * @brief Get iterator current branch
      * @return Current branch
      */
-    iter branch() const { return current_; }
+    iter branch() const ;
     
     /**
      * @brief Get iterator current noe
      * @return Current node
      */
-    Branch::iterator node() const { return node_current_; }
+    Branch::iterator node() const ;
 
     /**
      * @brief Get current branch neurite
      * @return Neurite reference
      */
-    Neurite& neurite() const { return current_->neurite(); } 
+    Neurite& neurite() const ;
     
     /**
      * @brief Get current branch neuron
      * @return Neuron reference
      */
-    Neuron& neuron() const { return current_->neurite().neuron(); }
+    Neuron& neuron() const ;
     
     /**
      * @brief Get an iterator to the end node
      * @return End node iterator
      */
-    node_iterator<iter> last() const {
-      node_iterator n(*this);  // Copy ourselves
-      n.current_ = end_;
-      n.node_current_ = end_->begin();
-      return n;
-    }
+    node_iterator<iter> last() const ;
 
     /**
      * @brief Get an iterator to the first node
      * @return First node iterator
      */
-    node_iterator<iter> first() const {
-      node_iterator n(*this);  // Copy ourselves
-      n.current_ = begin_;
-      n.node_current_ = begin_->begin();
-      return n;
-    }
+    node_iterator<iter> first() const ;
 
     // FACADE METHODS
     private:
@@ -499,13 +425,13 @@ class Neurite : public WithProperties  {
      * @brief Dereference facade method
      * @return Node reference
      */
-    Node& dereference() { return *node_current_; }
+    Node& dereference() ;
     
     /**
      * @brief Dereference facade method
      * @return Node reference
      */
-    Node& dereference() const { return *node_current_; }
+    Node& dereference() const ;
 
     /**
      * @brief Compares two iterators by current branch and node
@@ -513,37 +439,18 @@ class Neurite : public WithProperties  {
      * @return Ture if both current branch and node matches
      */
     template< typename OtherIter>
-    bool equal(const node_iterator<OtherIter>& other) const {
-      return current_ == other.current_ && node_current_ == other.node_current_;
-    }
+    bool equal(const node_iterator<OtherIter>& other) const ;
 
     /**
      * @brief Increments the node iterator by 1
      */
-    void increment() {
-      if (current_ != end_) {
-        ++node_current_;
-        if (node_current_ == current_->end()) {
-          ++current_;
-          node_current_ = current_->begin();
-        }
-      }
-    }
+    void increment() ;
     
     /**
      * @brief Decrements the node iterator by 1
      */
-    void decrement() {
-      if (node_current_ != begin_->begin()) {
-
-        if (node_current_ == current_->begin()) {
-          --current_;
-          node_current_ = --(current_->end());
-        } else {
-          --node_current_;
-        }
-      }
-    }
+    void decrement() ;
+    
   };  // End node iterator
 
   /**********************
@@ -582,20 +489,7 @@ class Neurite : public WithProperties  {
    * @param other Branch iterator
    * @return DFS branch iterator
    */
-  branch_iterator end_branch_subtree(const typename tree_type::iterator_base& other) const {
-    tree_node* tn = other.node;
-
-    if (tn == nullptr)
-      return Neurite::branch_iterator(other);
-    else {
-      while (tn->next_sibling == nullptr) {
-        tn = tn->parent;
-        if (tn == nullptr) return Neurite::branch_iterator(tn);
-      }
-      // The next "node"
-      return Neurite::branch_iterator(tn->next_sibling);
-    }
-  }
+  branch_iterator end_branch_subtree(const typename tree_type::iterator_base& other) const ;
 
   // Fixed centrifugal order (from the root)
   
@@ -955,9 +849,7 @@ class Neurite : public WithProperties  {
    * @param it Branch iterator
    * @return Index
    */
-  unsigned int index(sibling_iterator it) const {
-    return tree_.index(it);
-  }
+  unsigned int index(sibling_iterator it) const { return tree_.index(it); }
 
   friend std::ostream& operator<<(std::ostream&, const Neurite&);
 
@@ -970,8 +862,113 @@ class Neurite : public WithProperties  {
   
 };  // Class Neurite
 
-// Auxiliar functions
+// Print 
 std::ostream& operator<<(std::ostream& os, const Neurite& n);
+
+
+// NODE ITERATOR IMPLEMENTATION
+
+template <typename iter> 
+Neurite::node_iterator<iter>::node_iterator() 
+      : begin_()
+      , current_()
+      , end_()
+      , node_current_(){};
+
+template <typename iter> 
+Neurite::node_iterator<iter>::node_iterator(const iter& b, const iter& e)
+        : begin_(b)
+        , current_(b)
+        , end_(e)
+        , node_current_(b->begin()){};
+
+template <typename iter> 
+Neurite::node_iterator<iter>::node_iterator(const iter& b, const iter& e, const iter& c)
+        : begin_(b)
+        , current_(c)
+        , end_(e)
+        , node_current_(c->begin()){};
+
+template <typename iter> 
+Neurite::node_iterator<iter>::node_iterator(const iter& b,
+                  const iter& e,
+                  const iter& c,
+                  const typename Branch::iterator& nodeit)
+        : begin_(b), current_(c), end_(e), node_current_(nodeit){};
+        
+    
+template <typename iter>
+iter Neurite::node_iterator<iter>::begin() const { return begin_; }
+    
+template <typename iter>
+iter Neurite::node_iterator<iter>::end() const { return end_; }
+    
+template <typename iter>
+iter Neurite::node_iterator<iter>::current() const { return current_; }
+    
+template <typename iter>
+iter Neurite::node_iterator<iter>::branch() const { return current_; }
+    
+template <typename iter>
+Branch::iterator Neurite::node_iterator<iter>::node() const { return node_current_; }
+
+template <typename iter>
+Neurite& Neurite::node_iterator<iter>::neurite() const { return current_->neurite(); } 
+    
+template <typename iter>
+Neuron& Neurite::node_iterator<iter>::neuron() const { return current_->neurite().neuron(); }
+    
+template <typename iter>
+Neurite::node_iterator<iter> Neurite::node_iterator<iter>::last() const {
+      node_iterator n(*this);  // Copy ourselves
+      n.current_ = end_;
+      n.node_current_ = end_->begin();
+      return n;
+    }
+
+template <typename iter>
+Neurite::node_iterator<iter> Neurite::node_iterator<iter>::first() const {
+      node_iterator n(*this);  // Copy ourselves
+      n.current_ = begin_;
+      n.node_current_ = begin_->begin();
+      return n;
+    }
+
+template <typename iter>
+Node& Neurite::node_iterator<iter>::dereference() { return *node_current_; }
+    
+template <typename iter>
+Node& Neurite::node_iterator<iter>::dereference() const { return *node_current_; }
+
+template <typename iter>
+template< typename OtherIter>
+bool Neurite::node_iterator<iter>::equal(const node_iterator<OtherIter>& other) const {
+      return current_ == other.current_ && node_current_ == other.node_current_;
+    }
+
+template <typename iter>
+void Neurite::node_iterator<iter>::increment() {
+      if (current_ != end_) {
+        ++node_current_;
+        if (node_current_ == current_->end()) {
+          ++current_;
+          node_current_ = current_->begin();
+        }
+      }
+    }
+    
+template <typename iter>
+void Neurite::node_iterator<iter>::decrement() {
+      if (node_current_ != begin_->begin()) {
+
+        if (node_current_ == current_->begin()) {
+          --current_;
+          node_current_ = --(current_->end());
+        } else {
+          --node_current_;
+        }
+      }
+    }
 
 }  // namespace neurostr
 
