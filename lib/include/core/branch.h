@@ -40,12 +40,7 @@ class Branch : public WithProperties{
    * @brief Default constructor. creates a branch with order -1 and empty id
    * @return Branch
    */
-  Branch() 
-    : WithProperties()
-    , id_()
-    , order_(-1)
-    , root_(nullptr)
-    , nodes_() {};
+  Branch();
 
   /**
    * @brief Creates a branch with given id and order
@@ -53,14 +48,7 @@ class Branch : public WithProperties{
    * @param order Branch order
    * @return Branch
    */
-  Branch(const id_type& id, int order) 
-    : WithProperties()
-    , id_(id)
-    , neurite_(nullptr)
-    , order_(order)
-    , root_(nullptr)
-    , nodes_() {
-  };
+  Branch(const id_type& id, int order);
 
   /**
    * @brief Creates a branch with given id,order and root
@@ -69,14 +57,7 @@ class Branch : public WithProperties{
    * @param root Branch root node
    * @return Branch
    */
-  Branch(const id_type& id, int order, const Node& root)
-      : WithProperties()
-      , id_(id)
-      , neurite_(nullptr)
-      , order_(order)
-      , root_(new Node(root) ) {
-        root_->branch(this);
-  };
+  Branch(const id_type& id, int order, const Node& root);
   
   /**
    * @brief Creates a branch with given id,order, root and nodes
@@ -87,20 +68,7 @@ class Branch : public WithProperties{
    * @return Branch
    */
   Branch(const id_type& id, int order, 
-         const Node& root, const std::vector<Node>& nodes)
-      : WithProperties()
-      , id_(id)
-      , neurite_(nullptr)
-      , order_(order)
-      , root_(new Node(root))
-      , nodes_() {
-        root_->branch(this);
-        for(auto it = std::begin(nodes); it != std::end(nodes); ++it ){
-          Node* tmp = new Node(*it);
-          tmp->branch(this);
-          nodes_.emplace_back(tmp);
-        }
-  };
+         const Node& root, const std::vector<Node>& nodes);
 
     /**
    * @brief Creates a branch with given id,order, root and nodes
@@ -169,30 +137,20 @@ class Branch : public WithProperties{
    * @brief Branch parent neurite
    * @return Parent neurite reference
    */
-  const Neurite& neurite() const { 
-    _check_neurite();
-    return *neurite_;
-  }
+  const Neurite& neurite() const;
   
   /**
    * @brief Branch parent neurite
    * @return Parent neurite reference
    */
-  Neurite& neurite() { 
-    _check_neurite();
-    return *neurite_;
-  }
+  Neurite& neurite();
 
-  
   /**
    * @brief Set branch id
    * @param id new id
    * @return Update branch reference
    */
-  Branch& id(const id_type& id) {
-    id_ = id;
-    return *this;
-  }
+  Branch& id(const id_type& id);
   
   
   /**
@@ -200,36 +158,26 @@ class Branch : public WithProperties{
    * @param o new centrifugal order
    * @return Update branch reference
    */
-  Branch& order(int o) {
-    order_ = o;
-    return *this;
-  }
+  Branch& order(int o);
   
   /**
    * @brief Set branch parent neurite
    * @param n Neurite pointer
    * @return Update branch reference
    */
-  Branch& neurite(Neurite* n) {
-    neurite_ = n;
-    return *this;
-  }
+  Branch& neurite(Neurite* n);
   
   /**
    * @brief Copy a node as new root
    * @param n node to copy
    */
-  void root(const Node& n) {
-    root_.reset(new Node(n));
-  }
+  void root(const Node& n) { root_.reset(new Node(n)); }
   
   /**
    * @brief Move a node as new root
    * @param n node to move
    */
-  void root(Node&& n) {
-    root_.reset(new Node(n));
-  }
+  void root(Node&& n) { root_.reset(new Node(n)); }
 
   /**
    * @brief Compares two branches by ID
@@ -260,60 +208,42 @@ class Branch : public WithProperties{
    * @throws runtime_error Attempt to access nullptr
    * @return Root node reference
    */
-  const Node& root() const {
-    _check_root();
-    return *root_;
-  };
+  const Node& root() const;
   
   /**
    * @brief Get root node reference
    * @throws runtime_error Attempt to access nullptr
    * @return Root node reference
    */
-  Node& root() {
-    _check_root();
-    return *root_;
-  };
+  Node& root();
   
   /**
    * @brief Returns branch first node
    * @throws runtime_error Attempt to access empty branch
    * @return Node reference
    */
-  const Node& first() const {
-    _check_size();
-    return *(nodes_.front());
-  };
+  const Node& first() const;
   
   /**
    * @brief Returns branch last node
    * @throws runtime_error Attempt to access empty branch
    * @return Node reference
    */
-  const Node& last() const {
-    _check_size();
-    return *(nodes_.back());
-  };
+  const Node& last() const;
   
   /**
    * @brief Returns branch first node
    * @throws runtime_error Attempt to access empty branch
    * @return Node reference
    */
-  Node& first() {
-    _check_size();
-    return *(nodes_.front());
-  };
+  Node& first();
   
   /**
    * @brief Returns branch last node
    * @throws runtime_error Attempt to access empty branch
    * @return Node reference
    */
-  Node& last() {
-    _check_size();
-    return *(nodes_.back());
-  };
+  Node& last();
   
   /**
    * @brief Adds a property to the branch and optionally to its nodes
@@ -415,20 +345,13 @@ class Branch : public WithProperties{
    * @brief Copy a node to the end of the branch
    * @param n Node to copy
    */
-  void push_back(const Node& n) { 
-    Node* ncopy = new Node(n);
-    ncopy->branch(this);
-    nodes_.emplace_back(ncopy); 
-  }
+  void push_back(const Node& n);
   
   /**
    * @brief Move a node to the end of the branch
    * @param n Node to move
    */
-  void push_back(Node&& n) { 
-    n.branch(this);
-    nodes_.emplace_back(new Node(n));
-  }
+  void push_back(Node&& n);
 
   /**
    * @brief Copies the given node at the position
@@ -436,15 +359,7 @@ class Branch : public WithProperties{
    * @param n Node
    * @return Updated iterator
    */
-  iterator insert(iterator pos, const Node& n) { 
-    if( pos != end() ){
-      pos->invalidate_basis();
-      pos->invalidate_length();
-    }
-    Node* ncopy = new Node(n);
-    ncopy->branch(this);
-    return (nodes_.emplace(pos.base(), ncopy));
-  }
+  iterator insert(iterator pos, const Node& n);
 
   /**
    * @brief Copies a range of nodes into the branch
@@ -492,27 +407,7 @@ class Branch : public WithProperties{
    * @param pos Split position
    * @return Split branch
    */
-  Branch split(const iterator& pos) {
-    
-    Branch splitbranch{id_, order_+1};
-    splitbranch.neurite(neurite_); // Set neurite
-    
-    if (pos == end() ){
-        return splitbranch;
-    } else{
-        iterator b = pos;
-        
-        // Create branch 
-        splitbranch.root(*pos); // Copy root
-        
-        // move
-        std::move(std::next(b,1).base(),nodes_.end(), std::back_inserter(splitbranch.nodes_));
-        
-        // Remove nodes
-        erase(std::next(b,1), end());
-        return splitbranch;
-      }
-  }
+  Branch split(const iterator& pos);
   
   // Transformations
   
@@ -565,39 +460,24 @@ class Branch : public WithProperties{
   /**
    * @brief Updates branch memeber in all nodes
    */
-  void set_nodes_branch(){
-    for(auto it = begin(); it != end(); ++it)
-      it->branch(this);
-    if(root_.get()!=nullptr)
-      root_->branch(this);
-  };
+  void set_nodes_branch();
   
   private:
   
   /**
    * @brief Throw an exception if root is null
    */
-  void _check_root() const{
-    /*if(root_.get() == nullptr )
-      throw std::runtime_error("Access invalid root");*/
-  }
+  void _check_root() const;
   
   /**
    * @brief Throw an exception if neurite is null
    */
-  void _check_neurite() const{
-    /*if(neurite_ == nullptr )
-      throw std::runtime_error("Access invalid neurite");*/
-  }
+  void _check_neurite() const;
   
   /**
    * @brief Throw an exception if size is 0
    */
-  void _check_size() const{
-    /*if(nodes_.size() == 0 )
-      throw std::runtime_error("Access empty branch");*/
-  }
- 
+  void _check_size() const;
   /**
    * @brief Recursive frechet distance function. i,j are the indexes to acess tmp
    * @param i ith-index

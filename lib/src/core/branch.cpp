@@ -11,6 +11,235 @@ namespace neurostr{
  * 
  */
  
+ // Constructors
+ 
+ 
+  /**
+   * @brief Default constructor. creates a branch with order -1 and empty id
+   * @return Branch
+   */
+  Branch::Branch() 
+    : WithProperties()
+    , id_()
+    , order_(-1)
+    , root_(nullptr)
+    , nodes_() {};
+
+  /**
+   * @brief Creates a branch with given id and order
+   * @param id Branch id
+   * @param order Branch order
+   * @return Branch
+   */
+  Branch::Branch(const Branch::id_type& id, int order) 
+    : WithProperties()
+    , id_(id)
+    , neurite_(nullptr)
+    , order_(order)
+    , root_(nullptr)
+    , nodes_() {
+  };
+
+  /**
+   * @brief Creates a branch with given id,order and root
+   * @param id Branch id
+   * @param order Centrifugal order
+   * @param root Branch root node
+   * @return Branch
+   */
+  Branch::Branch(const Branch::id_type& id, int order, const Node& root)
+      : WithProperties()
+      , id_(id)
+      , neurite_(nullptr)
+      , order_(order)
+      , root_(new Node(root) ) {
+        root_->branch(this);
+  };
+  
+  /**
+   * @brief Creates a branch with given id,order, root and nodes
+   * @param id Branch id
+   * @param order Centrifugal order
+   * @param root Branch root node
+   * @param nodes Branch nodes
+   * @return Branch
+   */
+  Branch::Branch(const Branch::id_type& id, int order, 
+         const Node& root, const std::vector<Node>& nodes)
+      : WithProperties()
+      , id_(id)
+      , neurite_(nullptr)
+      , order_(order)
+      , root_(new Node(root))
+      , nodes_() {
+        root_->branch(this);
+        for(auto it = std::begin(nodes); it != std::end(nodes); ++it ){
+          Node* tmp = new Node(*it);
+          tmp->branch(this);
+          nodes_.emplace_back(tmp);
+        }
+  };
+  
+  const Neurite& Branch::neurite() const { 
+    _check_neurite();
+    return *neurite_;
+  }
+  
+  Neurite& Branch::neurite() { 
+    _check_neurite();
+    return *neurite_;
+  }
+  
+    /**
+   * @brief Set branch id
+   * @param id new id
+   * @return Update branch reference
+   */
+  Branch& Branch::id(const Branch::id_type& id) {
+    id_ = id;
+    return *this;
+  }
+  
+  
+  /**
+   * @brief Set branch centrifugal order
+   * @param o new centrifugal order
+   * @return Update branch reference
+   */
+  Branch& Branch::order(int o) {
+    order_ = o;
+    return *this;
+  }
+  
+  /**
+   * @brief Set branch parent neurite
+   * @param n Neurite pointer
+   * @return Update branch reference
+   */
+  Branch& Branch::neurite(Neurite* n) {
+    neurite_ = n;
+    return *this;
+  }
+  
+  
+  /**
+   * @brief Get root node reference
+   * @throws runtime_error Attempt to access nullptr
+   * @return Root node reference
+   */
+  const Node& Branch::root() const {
+    _check_root();
+    return *root_;
+  };
+  
+  /**
+   * @brief Get root node reference
+   * @throws runtime_error Attempt to access nullptr
+   * @return Root node reference
+   */
+  Node& Branch::root() {
+    _check_root();
+    return *root_;
+  };
+  
+  /**
+   * @brief Returns branch first node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
+  const Node& Branch::first() const {
+    _check_size();
+    return *(nodes_.front());
+  };
+  
+  /**
+   * @brief Returns branch last node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
+  const Node& Branch::last() const {
+    _check_size();
+    return *(nodes_.back());
+  };
+  
+  /**
+   * @brief Returns branch first node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
+  Node& Branch::first() {
+    _check_size();
+    return *(nodes_.front());
+  };
+  
+  /**
+   * @brief Returns branch last node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
+  Node& Branch::last() {
+    _check_size();
+    return *(nodes_.back());
+  };
+  
+  /**
+   * @brief Copy a node to the end of the branch
+   * @param n Node to copy
+   */
+  void Branch::push_back(const Node& n) { 
+    Node* ncopy = new Node(n);
+    ncopy->branch(this);
+    nodes_.emplace_back(ncopy); 
+  }
+  
+  /**
+   * @brief Move a node to the end of the branch
+   * @param n Node to move
+   */
+  void Branch::push_back(Node&& n) { 
+    n.branch(this);
+    nodes_.emplace_back(new Node(n));
+  }
+
+  /**
+   * @brief Copies the given node at the position
+   * @param pos Position to insert
+   * @param n Node
+   * @return Updated iterator
+   */
+  Branch::iterator Branch::insert(Branch::iterator pos, const Node& n) { 
+    if( pos != end() ){
+      pos->invalidate_basis();
+      pos->invalidate_length();
+    }
+    Node* ncopy = new Node(n);
+    ncopy->branch(this);
+    return (nodes_.emplace(pos.base(), ncopy));
+  }
+  
+  Branch Branch::split(const Branch::iterator& pos) {
+    
+    Branch splitbranch{id_, order_+1};
+    splitbranch.neurite(neurite_); // Set neurite
+    
+    if (pos == end() ){
+        return splitbranch;
+    } else{
+        iterator b = pos;
+        
+        // Create branch 
+        splitbranch.root(*pos); // Copy root
+        
+        // move
+        std::move(std::next(b,1).base(),nodes_.end(), 
+                  std::back_inserter(splitbranch.nodes_));
+        
+        // Remove nodes
+        erase(std::next(b,1), end());
+        return splitbranch;
+      }
+  }
+ 
  std::string Branch::idString() const {
    std::string ret = std::to_string(*(id_.begin()));
    for( auto it = ++id_.begin(); it != id_.end() ; it++ ){
@@ -18,6 +247,38 @@ namespace neurostr{
    }
    return ret;
  }
+ 
+ void Branch::set_nodes_branch(){
+    for(auto it = begin(); it != end(); ++it)
+      it->branch(this);
+    if(root_.get()!=nullptr)
+      root_->branch(this);
+  };
+  
+  /**
+   * @brief Throw an exception if root is null
+   */
+  void Branch::_check_root() const{
+    /*if(root_.get() == nullptr )
+      throw std::runtime_error("Access invalid root");*/
+  }
+  
+  /**
+   * @brief Throw an exception if neurite is null
+   */
+  void Branch::_check_neurite() const{
+    /*if(neurite_ == nullptr )
+      throw std::runtime_error("Access invalid neurite");*/
+  }
+  
+  /**
+   * @brief Throw an exception if size is 0
+   */
+  void Branch::_check_size() const{
+    /*if(nodes_.size() == 0 )
+      throw std::runtime_error("Access empty branch");*/
+  }
+  
  
 // Friend output method
 std::ostream& operator<<(std::ostream& os, const Branch& b){
