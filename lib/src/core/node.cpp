@@ -1,6 +1,94 @@
 #include "core/node.h"
 
 namespace neurostr{
+  
+  // Constr.
+  Node::Node()
+      : WithProperties()
+      , id_(-1)
+      , branch_(nullptr)
+      , parent_(nullptr)
+      , position_(point_type(0, 0, 0))
+      , radius_(0.)
+      , valid_length_(false)
+      , valid_local_basis_(false) {}  
+      
+  Node::Node(int id)
+      : WithProperties()
+      , id_(id)
+      , branch_(nullptr)
+      , parent_(nullptr)
+      , position_(point_type(0, 0, 0))
+      , radius_(0.)
+      , valid_length_(false)
+      , valid_local_basis_(false) {} 
+      
+  Node::Node( int id, const point_type& p, double r)
+      : WithProperties()
+      , id_(id)
+      , branch_(nullptr)
+      , parent_(nullptr)
+      , position_(p)
+      , radius_(r)
+      , valid_length_(false)
+      , valid_local_basis_(false) {}  
+      
+  Node::Node(int id, double x, double y, double z, double r)
+      : WithProperties()
+      , id_(id)
+      , branch_(nullptr)
+      , parent_(nullptr)
+      , position_(point_type(x, y, z))
+      , radius_(r)
+      , valid_length_(false)
+      , valid_local_basis_(false) {} 
+      
+  // Access
+  Branch& Node::branch(){ 
+    _check_null_branch();
+    return *branch_; 
+  }
+  
+  const Branch& Node::branch() const { 
+    _check_null_branch();
+    return *branch_;
+  } 
+  
+  // Set
+  Node& Node::position(const point_type& p){
+    position_ = p;
+    return (*this);
+  }
+  
+  Node& Node::position(float x, float y, float z) {
+    position_ = point_type(x,y,z);
+    return (*this);
+  }
+  
+  Node& Node::radius(float r) {
+    radius_ = r;
+    return (*this);
+  }
+  
+  Node& Node::branch(Branch* b ){
+    branch_ = b;
+    return (*this);
+  }
+  
+  Node& Node::parent(Node* n ){
+    parent_ = n;
+    return (*this);
+  }
+  
+  const Node& Node::parent() const { 
+    _check_null_parent();
+    return *parent_;
+  }
+  
+  Node& Node::parent() { 
+    _check_null_parent();
+    return *parent_;
+  }
 
   // NODE MEHTHODS
   
@@ -87,5 +175,15 @@ namespace neurostr{
       }
       return local_basis_;
     }
+    
+  void Node::_check_null_branch() const{
+    /*if( branch_ == nullptr )
+      throw std::runtime_error("[Node] Null branch access");*/
+  }
+  
+  void Node::_check_null_parent() const{
+    /*if(parent_ == nullptr)
+      throw std::runtime_error("[Node] Null parent access");*/
+  }
   
 }// namespace neurostr

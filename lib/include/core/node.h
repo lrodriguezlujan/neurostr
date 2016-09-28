@@ -36,30 +36,14 @@ class Node : public WithProperties{
    * @brief Empty constructor, creates a node with ID -1 at 0,0,0 with radius 0
    * @return Node
    */
-  Node()
-      : WithProperties()
-      , id_(-1)
-      , branch_(nullptr)
-      , parent_(nullptr)
-      , position_(point_type(0, 0, 0))
-      , radius_(0.)
-      , valid_length_(false)
-      , valid_local_basis_(false) {}  
+  Node();
   
   /**
    * @brief Creates a node with ID \param{id} at 0,0,0 with radius 0
    * @param id Node id
    * @return Node
    */
-  Node(int id)
-      : WithProperties()
-      , id_(id)
-      , branch_(nullptr)
-      , parent_(nullptr)
-      , position_(point_type(0, 0, 0))
-      , radius_(0.)
-      , valid_length_(false)
-      , valid_local_basis_(false) {}  
+  Node(int id);
       
   /**
    * @brief Creates a node with ID \param{id} at \param{p} with radius \param{r}
@@ -68,15 +52,7 @@ class Node : public WithProperties{
    * @param r Node radius
    * @return Node
    */
-  Node( int id, const point_type& p, double r)
-      : WithProperties()
-      , id_(id)
-      , branch_(nullptr)
-      , parent_(nullptr)
-      , position_(p)
-      , radius_(r)
-      , valid_length_(false)
-      , valid_local_basis_(false) {}  
+  Node( int id, const point_type& p, double r);
   
   /**
    * @brief Creates a node with ID \param{id} at (\param{x},\param{y},\param{z})
@@ -88,15 +64,7 @@ class Node : public WithProperties{
    * @param r Node radius
    * @return Node
    */
-  Node(int id, double x, double y, double z, double r)
-      : WithProperties()
-      , id_(id)
-      , branch_(nullptr)
-      , parent_(nullptr)
-      , position_(point_type(x, y, z))
-      , radius_(r)
-      , valid_length_(false)
-      , valid_local_basis_(false) {}  
+  Node(int id, double x, double y, double z, double r); 
 
   // Default copy/move ops (we allow both, move and copy)
   Node(const Node& n) = default;
@@ -166,39 +134,28 @@ class Node : public WithProperties{
    * @brief Checks wether the parent branch referece is valid
    * @return True if the reference is valid
    */
-  bool valid_branch(){
-    return branch_ != nullptr;
-  }
+  bool valid_branch(){ return branch_ != nullptr; }
   
   /**
    * @brief  Returns parent branch
    * @throws runtime_exception If we attempt to access null branch
    * @return Parent branch reference
    */
-  Branch& branch(){ 
-    _check_null_branch();
-    return *branch_; 
-  }
+  Branch& branch();
   
   /**
    * @brief  Returns parent branch
    * @throws runtime_exception If attempt to access null branch
    * @return Parent branch const reference
    */
-  const Branch& branch() const { 
-    _check_null_branch();
-    return *branch_;
-  } 
+  const Branch& branch() const ; 
   
   /**
    * @brief Changes node position for \param{p}
    * @param p New node position
    * @return Updated node reference
    */
-  Node& position(const point_type& p) {
-    position_ = p;
-    return (*this);
-  }
+  Node& position(const point_type& p);
   
   /**
    * @brief Changes node position to \code{x},\code{y},\code{z}
@@ -207,40 +164,27 @@ class Node : public WithProperties{
    * @param z New z coordiante
    * @return Updated node reference
    */
-  Node& position(float x, float y, float z) {
-    position_ = point_type(x,y,z);
-    return (*this);
-  }
+  Node& position(float x, float y, float z);
 
   /**
    * @brief Changes node radius to \code{r}
    * @param r New node radius
    * @return Updated node reference
    */
-  Node& radius(float r) {
-    radius_ = r;
-    return (*this);
-  }
+  Node& radius(float r);
   
   /**
    * @brief Changes node parent branch for \code{b}
    * @param b Parent branch pointer
    * @return Updated node refernece
    */
-  Node& branch(Branch* b ){
-    branch_ = b;
-    return (*this);
-  }
-
+  Node& branch(Branch* b );
   /**
    * @brief Changes node parent node for \code{n}
    * @param n Parent node pointer
    * @return Updated node refernece
    */  
-  Node& parent(Node* n ){
-    parent_ = n;
-    return (*this);
-  }
+  Node& parent(Node* n );
   
   /**
    * @brief Constructs the vector form \code{this} to \code{p}
@@ -282,20 +226,14 @@ class Node : public WithProperties{
    * @throws runtime_exception Attempt to access null parent
    * @return Parent node reference
    */
-  const Node& parent() const { 
-    _check_null_parent();
-    return *parent_;
-  }
+  const Node& parent() const;
   
   /**
    * @brief Returns a reference to the parent node
    * @throws runtime_exception Attempt to access null parent
    * @return Parent node reference
    */
-  Node& parent() { 
-    _check_null_parent();
-    return *parent_;
-  }
+  Node& parent() ;
   
   /**
    * @brief Distance to our parent node (given). Alias for distance.
@@ -308,9 +246,7 @@ class Node : public WithProperties{
   /**
    * @brief Invalidate length cached value
    */
-  void invalidate_length() const {
-    valid_length_ = false;
-  };
+  void invalidate_length() const { valid_length_ = false; };
 
   /**
    * @brief Compute node local basis. parent->node vector determines
@@ -362,18 +298,12 @@ class Node : public WithProperties{
  /**
   * @brief Throws an exception if branch is null
   */
-  void _check_null_branch() const{
-    /*if( branch_ == nullptr )
-      throw std::runtime_error("[Node] Null branch access");*/
-  }
+  void _check_null_branch() const;
   
   /**
   * @brief Throws an exception if parent is null
   */
-  void _check_null_parent() const{
-    /*if(parent_ == nullptr)
-      throw std::runtime_error("[Node] Null parent access");*/
-  }
+  void _check_null_parent() const;
   
   // Node identifier
   id_type id_;
