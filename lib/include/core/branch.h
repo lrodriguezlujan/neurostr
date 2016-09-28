@@ -6,11 +6,13 @@
 #include <type_traits>  // For aserts and stuff
 #include <iterator>
 #include <algorithm>
-
+#include <stdexcept>
 #include <memory>
+
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include <Eigen/Geometry>
+
 #include "core/property.h"
 #include "core/definitions.h"
 #include "core/node.h"
@@ -34,9 +36,23 @@ class Branch : public WithProperties{
   using const_iterator = boost::indirect_iterator<typename storage_type::const_iterator>;
   using const_reverse_iterator = boost::indirect_iterator<typename storage_type::const_reverse_iterator>;
 
-  // Constructors
-  Branch() : WithProperties(), id_(), order_(-1), root_(), nodes_() {};
+  /**
+   * @brief Default constructor. creates a branch with order -1 and empty id
+   * @return Branch
+   */
+  Branch() 
+    : WithProperties()
+    , id_()
+    , order_(-1)
+    , root_(nullptr)
+    , nodes_() {};
 
+  /**
+   * @brief Creates a branch with given id and order
+   * @param id Branch id
+   * @param order Branch order
+   * @return Branch
+   */
   Branch(const id_type& id, int order) 
     : WithProperties()
     , id_(id)
@@ -46,7 +62,13 @@ class Branch : public WithProperties{
     , nodes_() {
   };
 
-  // Copy root (small type...)
+  /**
+   * @brief Creates a branch with given id,order and root
+   * @param id Branch id
+   * @param order Centrifugal order
+   * @param root Branch root node
+   * @return Branch
+   */
   Branch(const id_type& id, int order, const Node& root)
       : WithProperties()
       , id_(id)
@@ -56,7 +78,14 @@ class Branch : public WithProperties{
         root_->branch(this);
   };
   
-  // Move nodes
+  /**
+   * @brief Creates a branch with given id,order, root and nodes
+   * @param id Branch id
+   * @param order Centrifugal order
+   * @param root Branch root node
+   * @param nodes Branch nodes
+   * @return Branch
+   */
   Branch(const id_type& id, int order, 
          const Node& root, const std::vector<Node>& nodes)
       : WithProperties()
@@ -73,7 +102,15 @@ class Branch : public WithProperties{
         }
   };
 
-  // Now with iterators
+    /**
+   * @brief Creates a branch with given id,order, root and nodes
+   * @param id Branch id
+   * @param order Centrifugal order
+   * @param root Branch root node
+   * @param b Node begin iterator
+   * @param e Node end iterator
+   * @return Branch
+   */
   template <typename Iter>
   Branch(const id_type& id, int order, 
          const Node& root, const Iter& b, const Iter& e)
@@ -97,44 +134,108 @@ class Branch : public WithProperties{
     }
   };
 
-  // Nothing to do here
+  /**
+   * @brief Empty destructor
+   */
   ~Branch() {};
 
-  // Copy (not allowd)
+  // Delete copy
   Branch(const Branch& b)  = delete;
   Branch& operator=(const Branch& b) = delete;
 
-  // Move
+  // Default 
   Branch(Branch&& b) = default;
   Branch& operator=(Branch&& b) = default;
 
-  /** Accessor **/
+  /**
+   * @brief Centrifugal order accessor
+   * @return Centrifugal order
+   */
   int order() const { return order_; }
+  
+  /**
+   * @brief ID accessor
+   * @return Branch Id
+   */
   const id_type& id() const { return id_; }
   
+  /**
+   * @brief Returns Branch ID as a string
+   * @return ID as string
+   */
   std::string idString() const;
   
-  const Neurite& neurite() const { return *neurite_;}
-  Neurite& neurite() { return *neurite_;}
+  /**
+   * @brief Branch parent neurite
+   * @return Parent neurite reference
+   */
+  const Neurite& neurite() const { 
+    _check_neurite();
+    return *neurite_;
+  }
+  
+  /**
+   * @brief Branch parent neurite
+   * @return Parent neurite reference
+   */
+  Neurite& neurite() { 
+    _check_neurite();
+    return *neurite_;
+  }
 
   
-  /** SETTERS **/
+  /**
+   * @brief Set branch id
+   * @param id new id
+   * @return Update branch reference
+   */
   Branch& id(const id_type& id) {
     id_ = id;
     return *this;
   }
   
+  
+  /**
+   * @brief Set branch centrifugal order
+   * @param o new centrifugal order
+   * @return Update branch reference
+   */
   Branch& order(int o) {
     order_ = o;
     return *this;
   }
   
+  /**
+   * @brief Set branch parent neurite
+   * @param n Neurite pointer
+   * @return Update branch reference
+   */
   Branch& neurite(Neurite* n) {
     neurite_ = n;
     return *this;
   }
+  
+  /**
+   * @brief Copy a node as new root
+   * @param n node to copy
+   */
+  void root(const Node& n) {
+    root_.reset(new Node(n));
+  }
+  
+  /**
+   * @brief Move a node as new root
+   * @param n node to move
+   */
+  void root(Node&& n) {
+    root_.reset(new Node(n));
+  }
 
-  // Operators
+  /**
+   * @brief Compares two branches by ID
+   * @param b Branch
+   * @return True if two ids are equal
+   */
   bool operator==(const Branch& b) const {
     return (id_.size() == b.id_.size()) && (nodes_.size() == b.nodes_.size()) &&
            std::equal(id_.cbegin(), id_.cend(), b.id_.cbegin()) && (root_ == b.root_) && 
@@ -142,47 +243,85 @@ class Branch : public WithProperties{
   }
   bool operator!=(const Branch& b) const { return !(b == (*this)); }
 
-  // Size (number of nodes)
+  /**
+   * @brief Number of nodes in the b
+   * @return Branch size 
+   */
   size_type size() const { return nodes_.size(); }
+  
+  /**
+   * @brief Branch root validity check
+   * @return True/False
+   */
   bool has_root() const { return root_.get() != nullptr; }
 
-  // These funcs may throw exceptions
-  // Get root node
+  /**
+   * @brief Get root node reference
+   * @throws runtime_error Attempt to access nullptr
+   * @return Root node reference
+   */
   const Node& root() const {
+    _check_root();
     return *root_;
   };
   
+  /**
+   * @brief Get root node reference
+   * @throws runtime_error Attempt to access nullptr
+   * @return Root node reference
+   */
   Node& root() {
+    _check_root();
     return *root_;
   };
   
-  void root(const Node& n) {
-    root_.reset(new Node(n));
-  }
-  
-  void root(Node&& n) {
-    root_.reset(new Node(n));
-  }
-  
-  // Get first non root node
+  /**
+   * @brief Returns branch first node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
   const Node& first() const {
+    _check_size();
     return *(nodes_.front());
   };
-  // Get last node (non root)
+  
+  /**
+   * @brief Returns branch last node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
   const Node& last() const {
+    _check_size();
     return *(nodes_.back());
   };
   
-  // Get first non root node
+  /**
+   * @brief Returns branch first node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
   Node& first() {
+    _check_size();
     return *(nodes_.front());
   };
-  // Get last node (non root)
+  
+  /**
+   * @brief Returns branch last node
+   * @throws runtime_error Attempt to access empty branch
+   * @return Node reference
+   */
   Node& last() {
+    _check_size();
     return *(nodes_.back());
   };
   
-  // Set property
+  /**
+   * @brief Adds a property to the branch and optionally to its nodes
+   * @param key Property name
+   * @param value Property value
+   * @param recursive If true, property is also added to branch nodes
+   * @return Iterator to added property
+   */
   template <typename T>
   auto add_property(const std::string& key, T value, bool recursive = false){
     if(recursive){
@@ -193,6 +332,12 @@ class Branch : public WithProperties{
     return properties.set(key,value);
   }
   
+  /**
+   * @brief Adds an empty property to the branch and optionally to its nodes
+   * @param key Property name
+   * @param recursive If true, property is also added to branch nodes
+   * @return Iterator to added property
+   */
   auto add_property(const std::string& key, bool recursive = false){
     if(recursive){
       for(auto it = begin(); it != end(); ++it){
@@ -203,39 +348,94 @@ class Branch : public WithProperties{
   }
 
   /*** ITERATORS **/
-
-
-  // Begin at root - End remains at the same place
+  
+  /**
+   * @brief Begin node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   iterator begin() { return std::begin(nodes_); }
+  
+  /**
+   * @brief End node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   iterator end() { return std::end(nodes_); }
   
+  /**
+   * @brief Reverse begin node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   reverse_iterator rbegin() { return std::rbegin(nodes_); }
+  
+  /**
+   * @brief Reverse end node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   reverse_iterator rend() { return std::rend(nodes_); }
   
+  /**
+   * @brief Begin node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_iterator begin() const { return std::begin(nodes_); }
+  
+  /**
+   * @brief End node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_iterator end() const { return std::end(nodes_); }
   
+  /**
+   * @brief Reverse begin node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_reverse_iterator rbegin() const { return std::rbegin(nodes_); }
+  
+  /**
+   * @brief Reverse end node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_reverse_iterator rend() const { return std::rend(nodes_); }
   
+  /**
+   * @brief Begin const node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_iterator cbegin() const { return std::begin(nodes_); }
+  
+  /**
+   * @brief End const node iterator (indirect iterator)
+   * @return Indirect iterator
+   */
   const_iterator cend() const { return std::end(nodes_); }
   
   // END Iterator definition
 
-  // Push back (cp and mv)
+  /**
+   * @brief Copy a node to the end of the branch
+   * @param n Node to copy
+   */
   void push_back(const Node& n) { 
     Node* ncopy = new Node(n);
     ncopy->branch(this);
     nodes_.emplace_back(ncopy); 
   }
   
+  /**
+   * @brief Move a node to the end of the branch
+   * @param n Node to move
+   */
   void push_back(Node&& n) { 
     n.branch(this);
     nodes_.emplace_back(new Node(n));
   }
 
-  // Insert at position
+  /**
+   * @brief Copies the given node at the position
+   * @param pos Position to insert
+   * @param n Node
+   * @return Updated iterator
+   */
   iterator insert(iterator pos, const Node& n) { 
     if( pos != end() ){
       pos->invalidate_basis();
@@ -246,6 +446,12 @@ class Branch : public WithProperties{
     return (nodes_.emplace(pos.base(), ncopy));
   }
 
+  /**
+   * @brief Copies a range of nodes into the branch
+   * @param pos Insert position
+   * @param b Range begin iterator
+   * @param e Range end iterator
+   */
   template <typename Iter> 
   void insert(iterator pos, Iter b, Iter e) {
     if( pos != end() ){
@@ -261,14 +467,31 @@ class Branch : public WithProperties{
     }
   };
   
-  // Erase
+  /**
+   * @brief Deletes a node in the branch
+   * @param pos Position to delete
+   * @return Updated iterator
+   */
   iterator erase(const iterator& pos);
+  
+  /**
+   * @brief Deletes a range of nodes in the branch
+   * @param first first position to delete
+   * @param last last position to delete
+   * @return Updated iterator
+   */
   iterator erase(const iterator& first,const iterator& last);
   
+  /**
+   * @brief Deletes all nodes in the brnach
+   */
   void clear() { nodes_.clear(); }
 
-  // Split
-  // FIXME (move instead of copy elements!)
+  /**
+   * @brief Divides the branch at given position and creates a new branch
+   * @param pos Split position
+   * @return Split branch
+   */
   Branch split(const iterator& pos) {
     
     Branch splitbranch{id_, order_+1};
@@ -292,17 +515,56 @@ class Branch : public WithProperties{
   }
   
   // Transformations
+  
+  /**
+   * @brief Applies RDF simplification to the branch nodes. Root and last are 
+   * always keeped
+   * @param eps RDF algorithm epsilon parameter (tolerance). If eps is <0 
+   * is used as a relative tolerance to the node radius
+   */
   void simplify(float eps = -1.5 );
+  
+  /**
+   * @brief Scales the branch wrt root by r (>1 bigger, <1 smaller)
+   * @param r Scale rate
+   */
   void scale(float r);
+  
+  /**
+   * @brief Scales branch (including root) 
+   * @param rx x-axis scale
+   * @param ry y-axis scale
+   * @param rz z-axis scale
+   */
   void scale(float rx, float ry, float rz);
+  
+  /**
+   * @brief Moves the branch (root included) by the vector p
+   * @param p Translation vector
+   */
   void traslate(const point_type& p);
+  
+  /**
+   * @brief Rotates the branch (Root included) aplying the quaternion q
+   * @param q rotation quaternion
+   */
   void rotate(const Eigen::Quaternionf& q);
   
+  /**
+   * @brief Removes zero-length segments in the branch
+   */
   void remove_null_segments();
 
-  // Discrete frechet distance
+  /**
+   * @brief Computes the frechet distance between two branche s
+   * @param other Branch
+   * @return Discrete frechet distance
+   */
   float discrete_frechet( const Branch& other) const;
   
+  /**
+   * @brief Updates branch memeber in all nodes
+   */
   void set_nodes_branch(){
     for(auto it = begin(); it != end(); ++it)
       it->branch(this);
@@ -311,10 +573,43 @@ class Branch : public WithProperties{
   };
   
   private:
+  
+  /**
+   * @brief Throw an exception if root is null
+   */
+  void _check_root() const{
+    /*if(root_.get() == nullptr )
+      throw std::runtime_error("Access invalid root");*/
+  }
+  
+  /**
+   * @brief Throw an exception if neurite is null
+   */
+  void _check_neurite() const{
+    /*if(neurite_ == nullptr )
+      throw std::runtime_error("Access invalid neurite");*/
+  }
+  
+  /**
+   * @brief Throw an exception if size is 0
+   */
+  void _check_size() const{
+    /*if(nodes_.size() == 0 )
+      throw std::runtime_error("Access empty branch");*/
+  }
  
+  /**
+   * @brief Recursive frechet distance function. i,j are the indexes to acess tmp
+   * @param i ith-index
+   * @param j jth-index
+   * @param tmp auxiliar matrix
+   * @param other Branch
+   * @return Distance value @ (i-j)
+   */
   float _discrete_frechet_recursive(size_t i, size_t j, 
                                     std::vector<float>& tmp,
                                     const Branch& other) const;
+
   
 
   

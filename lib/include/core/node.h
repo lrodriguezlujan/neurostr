@@ -5,8 +5,12 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include <stdexcept>
+
 #include <boost/geometry.hpp>
+
 #include <Eigen/Geometry>
+
 #include "core/definitions.h"
 #include "core/property.h"
 #include "core/geometry.h"
@@ -359,16 +363,16 @@ class Node : public WithProperties{
   * @brief Throws an exception if branch is null
   */
   void _check_null_branch() const{
-    if( branch_ == nullptr )
-      throw std::runtime_error("[Node] Null branch access");
+    /*if( branch_ == nullptr )
+      throw std::runtime_error("[Node] Null branch access");*/
   }
   
   /**
   * @brief Throws an exception if parent is null
   */
   void _check_null_parent() const{
-    if(parent_ == nullptr)
-      throw std::runtime_error("[Node] Null parent access");
+    /*if(parent_ == nullptr)
+      throw std::runtime_error("[Node] Null parent access");*/
   }
   
   // Node identifier
