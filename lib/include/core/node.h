@@ -219,7 +219,7 @@ class Node : public WithProperties{
    * @brief Checks whether the parent reference is valid
    * @return True if the reference is valid
    */
-  bool valid_parent() { return parent_ != nullptr; }
+  bool valid_parent() const { return parent_ != nullptr; }
   
   /**
    * @brief Returns a reference to the parent node
@@ -244,6 +244,13 @@ class Node : public WithProperties{
   float length(const Node& parent) const;
   
   /**
+   * @brief Distance to our parent node (stored). Alias for distance.
+   * Length result is cached
+   * @return Euclidean distance
+   */
+  float length() const;
+  
+  /**
    * @brief Invalidate length cached value
    */
   void invalidate_length() const { valid_length_ = false; };
@@ -257,6 +264,15 @@ class Node : public WithProperties{
    */
   const std::array<point_type, 3>& local_basis(const Node& parent ,
                                                const point_type& up) const;
+                                               
+  
+/**
+   * @brief Compute node local basis. parent->node vector determines
+   * the first vector of the basis. The rest are computed to create a right-oriented
+   * orthonormal basis using up vector. Basis are cached. Uses stored parent
+   * @param up Up reference (Z) in the environment
+   */                                            
+  const std::array<point_type, 3>& local_basis(const point_type& up) const;
                             
   /**
    * @brief Invalidate local basis cached value

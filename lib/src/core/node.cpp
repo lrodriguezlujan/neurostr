@@ -57,11 +57,15 @@ namespace neurostr{
   // Set
   Node& Node::position(const point_type& p){
     position_ = p;
+    invalidate_basis();
+    invalidate_length();
     return (*this);
   }
   
   Node& Node::position(float x, float y, float z) {
     position_ = point_type(x,y,z);
+    invalidate_basis();
+    invalidate_length();
     return (*this);
   }
   
@@ -77,6 +81,8 @@ namespace neurostr{
   
   Node& Node::parent(Node* n ){
     parent_ = n;
+    invalidate_basis();
+    invalidate_length();
     return (*this);
   }
   
@@ -132,6 +138,14 @@ namespace neurostr{
         return length_;
     }
     
+    float Node::length() const {
+      if(valid_parent()){
+          return length(parent());
+      }else{
+          return -1;
+      }
+    }
+    
     void Node::traslate(const point_type& v ) {
       geometry::traslate(position_, v);
       invalidate_basis();
@@ -175,7 +189,15 @@ namespace neurostr{
       }
       return local_basis_;
     }
-    
+  
+  const std::array<point_type, 3>& Node::local_basis(const point_type& up) const{
+    if(valid_parent()){
+      return local_basis(parent(),up);
+    } else {
+      return local_basis(Node(),up);
+    }
+  }
+  
   void Node::_check_null_branch() const{
     /*if( branch_ == nullptr )
       throw std::runtime_error("[Node] Null branch access");*/
