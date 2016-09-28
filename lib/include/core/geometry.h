@@ -25,25 +25,53 @@ namespace geometry
   using planar_point = bg::model::point<float, 2, bg::cs::cartesian>;
   using polygon_type =  bg::model::polygon<planar_point>;
   
+  /**
+   * @brief Gets the ith component from a point
+   * @param p Point
+   * @return Ith component (float)
+   */
   template <int I>
   inline float get(const point_type& p){
     return bg::get<I>(p);
   }
   
+  /**
+   * @brief Euclidean distance between a and b
+   * @param a First point
+   * @param b Second point
+   * @return  Eculidean distance (Float)
+   */
   inline float distance(const point_type& a, const point_type& b){
     return bg::distance(a,b);
   }
   
+  /**
+   * @brief Vector with origin in \code{from} and end in \code{to}
+   * @param from Vector origin
+   * @param to Vector end
+   * @return Vector (point type)
+   */
   inline point_type vectorFromTo(const point_type& from, const point_type& to){
     point_type ret = to;
     bg::subtract_point(ret,from);
     return ret;
   }
   
+  /**
+   * @brief Adds v to p
+   * @param p point to be modified
+   * @param v traslation vector
+   */
   inline void traslate(point_type& p, const point_type& v ){
     bg::add_point(p,v);
   }
   
+  /**
+   * @brief Modifies the point p scaling it by \code{scale} wrt ref
+   * @param p Point to be modified
+   * @param scale Scale
+   * @param ref Referecne point
+   */
   inline void scale(point_type& p, float scale, const point_type&  ref){
     auto tmp = p ; 
     bg::subtract_point(tmp, ref); // tmp is our "vector to scale"
@@ -52,6 +80,13 @@ namespace geometry
     p = tmp;
   }
   
+  /**
+   * @brief  Modifies the point \code{p} scaling it by (rx,ry,rz)
+   * @param p Point to be modified
+   * @param rx X scale
+   * @param ry Y Scale
+   * @param rz Z scale
+   */
   inline void scale(point_type& p, float rx, float ry, float rz){
     bg::multiply_point(p, point_type(rx,ry,rz));
   }
@@ -182,9 +217,10 @@ namespace geometry
   }
 
   /**
-   * @brief 
-   * @param p
-   * @param res
+   * @brief Set the ith component in res to the minimim betweeen the ith components
+   * in p and res
+   * @param p Base point. unmodified
+   * @param res Point to be modified
    */
   template<int I, typename Point>
   void min_component(const Point& p, Point& res){
@@ -193,9 +229,10 @@ namespace geometry
   };
 
   /**
-   * @brief 
-   * @param p
-   * @param res
+   * @brief Set the ith component in res to the maximum betweeen the ith components
+   * in p and res
+   * @param p Base point. unmodified
+   * @param res Point to be modified
    */
   template<int I, typename Point>
   void max_component(const Point& p, Point& res){
@@ -204,9 +241,9 @@ namespace geometry
   };
 
   /**
-   * @brief 
-   * @param p
-   * @param res
+   * @brief Computes the component-wise maximum between p and res and stores it in res
+   * @param p Base point
+   * @param res Return point
    */
   template<typename Point>
   void max_by_component(const Point& p, Point& res){
@@ -216,9 +253,9 @@ namespace geometry
   };
 
   /**
-   * @brief 
-   * @param p
-   * @param res
+   * @brief Computes the component-wise minimum between p and res and stores it in res
+   * @param p Base point
+   * @param res Return point
    */
   template<typename Point>
   void min_by_component(const Point& p, Point& res){
@@ -228,7 +265,7 @@ namespace geometry
   };
 
   /**
-  *
+  * Axis enum
   */
   enum class Axis: int {
       X_POS = 0,
@@ -258,23 +295,73 @@ namespace geometry
   
   polygon_type as_planar_polygon( const std::vector<point_type>& v);
   
+  /**
+   * @brief Number of points in the geometry
+   * @param geom Geoemtry object
+   * @return Number of point
+   */
   template<typename G>
   std::size_t num_points(const G& geom){
     return bg::num_points(geom);
   }
   
+  /**
+   * @brief Computes the pclosed polygon area
+   * @param p Polygon object
+   * @return Area
+   */
   float polygon_area(const polygon_type& p);
   
+  /**
+   * @brief Multiplies every component by -1
+   * @param p Point to negate
+   */
   void negate(point_type &p);
   
+  /**
+   * @brief Computes the barycenter of a pointset
+   * @param v Vector of points
+   * @return Barycenter
+   */
   point_type barycenter(const std::vector<point_type>& v);
   
+  /**
+   * @brief Modifies p so its norm is equal to 1
+   * @param p Point to normalize
+   */
   void normalize(point_type& p);
+  
+  /**
+   * @brief Computes the planar vector-vector shortest angle 
+   * @param a First vector
+   * @param b Second vector
+   * @return Angle between a and b  [0,pi]
+   */
   float vector_vector_angle(const point_type&a ,const point_type &b);
+  
+  /**
+   * @brief Computes the planar angle from a to b
+   * @param a First vector
+   * @param b Second vector
+   * @return Angle from a to b  [0,wpi)
+   */
   float vector_vector_directed_angle(const point_type&a ,const point_type &b);
   
+  /**
+   * @brief Computes the local orientation (Azimuth and elevation) of p wrt basis
+   * @param p Point
+   * @param basis local basis
+   * @return pair (azimuth, elevation)
+   */
   std::pair<float,float> local_orientation(const point_type& p, const std::array<point_type,3>& basis);
   
+  /**
+   * @class RDPSimplifier
+   * @author luis
+   * @date 28/09/16
+   * @file geometry.h
+   * @brief Auxiliar class that applies RDP simplification to a line-segment
+   */
   template <typename Node>
   class RDPSimplifier{
     
@@ -283,13 +370,25 @@ namespace geometry
       std::vector<Node>& v;
       
     public:
+      /**
+       * @brief Base constructor, sets toleracne and the line-segment
+       * @param eps Tolerance
+       * @param v Node set (vector)
+       */
       RDPSimplifier(float eps, std::vector<Node>& v) : eps(eps), v(v) {};
       
+      /**
+       * @brief Applies the simplification to the line-segment
+       */
       void simplify(){
         simplify_recursive(v.begin(), v.end() );
       }
       
     private:
+      /**
+       * @brief Auxiliar function to recursively simplify the line-segment
+       * @param end
+       */
       void simplify_recursive(const typename std::vector<Node>::iterator ini, 
                               const typename std::vector<Node>::iterator end){
         
@@ -323,23 +422,40 @@ namespace geometry
       }
   }; // RDP simplifier
   
-   template< typename IterA, typename IterB >
+  /**
+   * @class DiscreteFrechet
+   * @author luis
+   * @date 28/09/16
+   * @file geometry.h
+   * @brief Class to compute the discrete frechet distance in a line-segment
+   */
+  template< typename IterA, typename IterB >
   class DiscreteFrechet {
     
     private:
       
+      // ITerators
       IterA ini_a;
       IterA end_a;
       IterB ini_b;
       IterB end_b;
       
+      // a and b sizes
       int p;
       int q;
       
-      // Create matrix
+      // Axuiliar DP matrix
       Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> buffer;
       
     public:
+      /**
+       * @brief Base constructor. Initializes the class with the tow line-segment
+       * @param ini_a First branch line-segment begin iterator
+       * @param end_a First branch line-segment end iterator
+       * @param ini_b Second branch line-segment begin iterator
+       * @param end_b Secondbranch line-segment end iterator
+       * @return DiscreteFrechet class
+       */
       DiscreteFrechet(IterA ini_a, IterA end_a, IterB ini_b, IterB end_b)
         : ini_a(ini_a)
         , end_a(end_a)
@@ -351,12 +467,22 @@ namespace geometry
           buffer.fill(-1.0); // Fill buffer 
       }
     
+      /**
+       * @brief Computes de discrete frechet distance recursively
+       * @return Discrete frechet distance
+       */
       double value(){        
         return recursive_value(p-1,q-1);
       };
     
     private:
       
+      /**
+       * @brief Internal function. Computes the value i,j of the DP matrix
+       * @param i Row
+       * @param j Column
+       * @return  i-j value in DP matrix
+       */
       double recursive_value(int i, int j){
         // Computed already
         if (buffer(i,j) < 0) {
@@ -387,7 +513,7 @@ namespace geometry
 
 } // namespace geometry
 
-  // expose them
+  // Expose geometry types in the neurostr namespace
   using point_type =    geometry::point_type;
   using box_type =      geometry::box_type;
   using segment_type =  geometry::segment_type;
