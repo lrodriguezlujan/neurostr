@@ -32,7 +32,7 @@ class PropertyMap {
     /**
      * @brief Initializes an empty property map
      */
-    PropertyMap() : storage_(){};
+    PropertyMap();
     
     /**
      * @brief Initializes a property map with the content in the range
@@ -47,9 +47,7 @@ class PropertyMap {
      * @param k Property key
      * @return Const iterator. End() if no property with key k exists
      */
-    const_iterator find(const std::string& k) const {
-      return storage_.find(k);
-    }
+    const_iterator find(const std::string& k) const;
     
     /**
      * @brief Returns the value of the poperty with key k
@@ -66,18 +64,14 @@ class PropertyMap {
      * @param p Property to add 
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const property_type& p) {
-      return storage_.insert(p);
-    }
+    std::pair<iterator,bool> set(const property_type& p);
     
     /**
      * @brief Adds an empty property to the map
      * @param k Property key
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k) {
-      return storage_.insert(property_type(k, boost::any()));
-    }
+    std::pair<iterator,bool> set(const std::string& k);
     
      /**
      * @brief Adds a new int valued property to the map
@@ -85,9 +79,7 @@ class PropertyMap {
      * @param v Property value
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k, int v) {
-      return storage_.emplace(k, v);
-    }
+    std::pair<iterator,bool> set(const std::string& k, int v);
     
     /**
      * @brief Adds a new float valued property to the map
@@ -95,9 +87,7 @@ class PropertyMap {
      * @param v Property value
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k, float v) {
-      return storage_.emplace(k, v);
-    }
+    std::pair<iterator,bool> set(const std::string& k, float v);
     
     /**
      * @brief Adds a new string valued property to the map
@@ -105,9 +95,7 @@ class PropertyMap {
      * @param v Property value
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k,const std::string v) {
-      return storage_.emplace(k, v);
-    }
+    std::pair<iterator,bool> set(const std::string& k,const std::string v);
     
     /**
      * @brief Adds a new point valued property to the map
@@ -115,9 +103,7 @@ class PropertyMap {
      * @param v Property value
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k,const point_type v) {
-      return storage_.emplace(k, v);
-    }
+    std::pair<iterator,bool> set(const std::string& k,const point_type v);
     
     /**
      * @brief Adds a property to the map
@@ -125,80 +111,52 @@ class PropertyMap {
      * @param v Property value
      * @return pair(iterator, T/F property added)
      */
-    std::pair<iterator,bool> set(const std::string& k,boost::any v) {
-      return storage_.emplace(k, v);
-    }
+    std::pair<iterator,bool> set(const std::string& k,boost::any v);
     
     /**
      * @brief Property exists
      * @param k Property name
      * @return True if the property exists
      */
-    bool exists(const std::string& k) const {
-      return storage_.count(k) > 0;
-    }
+    bool exists(const std::string& k) const ;
     
     /**
      * @brief Deletes a property
      * @param k Poperty key
      */
-    void remove(const std::string& k){
-      storage_.erase(k);
-    }
+    void remove(const std::string& k);
+    
     
     /**
      * @brief Deletes a property
      * @param i property iterator
      */
-    void remove(const iterator& i){
-      storage_.erase(i);
-    }
+    void remove(const iterator& i);
     
     /**
      * @brief Property map size
      * @return  Number of properties in the map
      */
-    map_type::size_type size() const{
-      return storage_.size();
-    }
+    map_type::size_type size() const;
     
     /**
      * @brief Property begin iterator
      * @return iterator
      */
-    const_iterator begin() const {
-      return storage_.begin();
-    }
+    const_iterator begin() const ;
     
     /**
      * @brief Property end iterator
      * @return iterator
      */
-    const_iterator end() const {
-      return storage_.end();
-    }
+    const_iterator end() const ;
   
   /**
    * @brief Property value as string
    * @param p Property
    * @return value as string
    */
-  static std::string value_as_string(const property_type& p){
-      if (empty(p)) return std::string();
-      else if (is<std::string>(p)) return value<std::string>(p);
-      else if (is<int>(p)) return std::to_string(value<int>(p));
-      else if (is<float>(p)) return std::to_string(value<float>(p));
-      else if (is<point_type>(p)){
-        char buff[30];
-        snprintf(buff, sizeof(buff), "%.3f %.3f %.3f",  
-          geometry::get<0>(value<point_type>(p)), 
-          geometry::get<1>(value<point_type>(p)), 
-          geometry::get<2>(value<point_type>(p)));
-        
-        return std::string(buff);
-      }
-      else return std::string();
-  };
+  static std::string value_as_string(const property_type& p);
   
   /**
    * @brief Checks if a property value is of some type
@@ -225,18 +183,14 @@ class PropertyMap {
    * @param p property
    * @return  True if p is empty
    */
-  static bool empty(const property_type& p){
-    return p.second.empty();
-  }
+  static bool empty(const property_type& p);
   
   /**
    * @brief Gets property key
    * @param p Property
    * @return Property key
    */
-  static const std::string& key(const property_type& p){
-    return p.first;
-  }
+  static const std::string& key(const property_type& p);
 };
 
 /**
@@ -253,7 +207,7 @@ class WithProperties{
     /**
      * @brief create an empty property map
      */
-    WithProperties() : properties() {};
+    WithProperties() ;
     
     // Copy
     WithProperties(const WithProperties& other) = default;
@@ -294,28 +248,22 @@ class WithProperties{
      * @param key Property key
      * @return property iterator 
      */
-    auto add_property(const std::string& key) {
-      return properties.set(
-        std::pair<std::string, boost::any>(key, boost::any()));
-    }
+    std::pair<PropertyMap::iterator,bool> add_property(const std::string& key);
 
     /**
      * @brief Adds a property
      * @param v Propery
      * @return property iterator
     */
-    auto add_property(const std::pair<std::string, boost::any>& v) {
-      return properties.set(v);
-    }
+    std::pair<PropertyMap::iterator,bool> 
+    add_property(const std::pair<std::string, boost::any>& v);
     
     /**
      * @brief Get property
      * @param key Property key
      * @return property iterator
      */
-    auto get_property(const std::string& key) const { 
-      return properties.find(key); 
-    }
+    PropertyMap::const_iterator  get_property(const std::string& key) const;
 };
 
 using property_type  = PropertyMap::property_type;
