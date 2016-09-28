@@ -78,12 +78,7 @@ class Neuron : public WithProperties {
    * up vector is set to default value (0,0,1)
    * @return Neuron
    */
-  Neuron() 
-    : WithProperties()
-    , id_()
-    , neurites_()
-    , soma_()
-    , up_(0,0,1) {};
+  Neuron() ;
   
   /**
    * @brief Create a neuron with given id, and no neurites nor soma.
@@ -91,12 +86,7 @@ class Neuron : public WithProperties {
    * @param id Neuron id
    * @return Neuron
    */
-  Neuron(const std::string& id) 
-    : WithProperties()
-    , id_(id)
-    , neurites_()
-    , soma_()
-    , up_(0,0,1) {};
+  Neuron(const std::string& id);
   
   /**
    * @brief Creates a neuron with given id and soma nodes. up vector is set to default value (0,0,1)
@@ -104,12 +94,7 @@ class Neuron : public WithProperties {
    * @param soma Soma nodes
    * @return Neuron
    */
-  Neuron(const std::string& id, const std::vector<Node>& soma)
-      : WithProperties()
-      , id_(id)
-      , neurites_()
-      , soma_(soma)
-      , up_(0,0,1) {};
+  Neuron(const std::string& id, const std::vector<Node>& soma);
 
   private:
   
@@ -148,10 +133,7 @@ class Neuron : public WithProperties {
    * @brief Set neuron up vector. Given vector is normalized
    * @param up New up vector 
    */
-  void up(const point_type& up) {
-    up_ = up;
-    geometry::normalize(up_);
-  }
+  void up(const point_type& up);
 
   // Counts and other aux methods
   
@@ -165,31 +147,20 @@ class Neuron : public WithProperties {
    * @brief Number of different nodes in the neuron
    * @return Node count
    */
-  int node_count() const {
-    int accum = 0;
-    for (auto it = begin_neurite(); it != end_neurite(); ++it) 
-      accum += it->node_count();
-    return accum;
-  }
+  int node_count() const ;
 
   /**
    * @brief Add new neurite to the neuron
    * @param n Neurite pointer to be added
    * @return  Insert point
    */
-  neurite_iterator add_neurite(Neurite* const n) {
-    n->neuron(this);
-    neurites_.emplace_back(n);
-    return neurite_iterator(std::prev(neurites_.end(),1));
-  }
+  neurite_iterator add_neurite(Neurite* const n) ;
 
   /**
    * @brief Add node set to soma
    * @param v Vector of nodes to add to the soma
    */
-  void add_soma(const std::vector<Node>& v) { 
-    soma_.insert(soma_.end(), v.begin(), v.end()); 
-  }
+  void add_soma(const std::vector<Node>& v);
   
   /**
    * @brief Add single node to soma
@@ -233,65 +204,49 @@ class Neuron : public WithProperties {
    * @brief Creates neurite iterator
    * @return Begin neurite iterator
    */
-  neurite_iterator begin_neurite() { 
-    return neurite_iterator(neurites_.begin()); 
-  }
+  neurite_iterator begin_neurite(){return neurite_iterator(neurites_.begin());} 
   
   /**
    * @brief Creates neurite iterator
    * @return End neurite iterator
    */
-  neurite_iterator end_neurite() { 
-    return neurite_iterator(neurites_.end()); 
-  }
+  neurite_iterator end_neurite() {return neurite_iterator(neurites_.end());}
 
   /**
    * @brief Creates neurite iterator
    * @return Begin neurite iterator
    */
-  const_neurite_iterator begin_neurite() const { 
-    return const_neurite_iterator(neurites_.begin()); 
-  }
+  const_neurite_iterator begin_neurite() const {return const_neurite_iterator(neurites_.begin());}
   
   /**
    * @brief Creates neurite iterator
    * @return End neurite iterator
    */
-  const_neurite_iterator end_neurite() const { 
-    return const_neurite_iterator(neurites_.end()); 
-  }
+  const_neurite_iterator end_neurite() const {return const_neurite_iterator(neurites_.end());}
 
   /**
    * @brief Iterator over soma nodes
    * @return Begin soma iterator
    */
-  soma_iterator begin_soma() { 
-    return soma_.begin(); 
-  }
+  soma_iterator begin_soma() {return soma_.begin();}
   
   /**
    * @brief Iterator over soma nodes
    * @return End soma iterator
    */
-  soma_iterator end_soma() { 
-    return soma_.end(); 
-  }
+  soma_iterator end_soma() {return soma_.end();}
 
 /**
    * @brief Iterator over soma nodes
    * @return Begin soma iterator
    */
-  const_soma_iterator begin_soma() const { 
-    return soma_.begin();
-  }
+  const_soma_iterator begin_soma() const { return soma_.begin();}
   
   /**
    * @brief Iterator over soma nodes
    * @return End soma iterator
    */
-  const_soma_iterator end_soma() const { 
-    return soma_.end(); 
-  }
+  const_soma_iterator end_soma() const { return soma_.end(); }
 
   /**
    * @brief Iterator over axon. Axon is supposed to be unique...
@@ -420,33 +375,25 @@ class Neuron : public WithProperties {
    * @brief Counts number of axon neuritesin the neuron
    * @return Number of axon
    */
-  int axon_count() const { 
-    return std::distance(begin_axon(), end_axon()); 
-  }
+  int axon_count() const { return std::distance(begin_axon(), end_axon()); }
   
   /**
    * @brief Counts number of apical neurites in the neuron
    * @return Number of apical
    */
-  int apical_count() const { 
-    return std::distance(begin_apical(), end_apical()); 
-  }
+  int apical_count() const {return std::distance(begin_apical(), end_apical());}
   
   /**
    * @brief Counts number of basal dendrites in the neuron
    * @return Number of apical
    */
-  int dendrite_count() const { 
-    return std::distance(begin_dendrites(), end_dendrites()); 
-  }
+  int dendrite_count() const {return std::distance(begin_dendrites(), end_dendrites());}
   
   /**
    * @brief Checks if the neuron soma is not empty
    * @return True if soma is not empty
    */
-  bool has_soma() const { 
-    return !soma_.empty(); 
-  }
+  bool has_soma() const {return !soma_.empty();}
 
   /**
    * @brief Finds a node in the neuron. doesnt search in soma nodes
@@ -454,16 +401,7 @@ class Neuron : public WithProperties {
    * @return Node iterator. IF node is not found returns the iterator created
    * by the empty constructor
    */
-  Neurite::base_node_iterator find(const Node& n) {
-
-    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
-      auto nodeit = it->find(n);
-      if (nodeit != it->end_node()) return nodeit;
-    }
-
-    // Not valid
-    return Neurite::base_node_iterator();
-  }
+  Neurite::base_node_iterator find(const Node& n);
 
   /**
    * @brief Finds a node in the neuron that matches the id. doesnt search in soma nodes
@@ -471,22 +409,14 @@ class Neuron : public WithProperties {
    * @return Node iterator. IF node is not found returns the iterator created
    * by the empty constructor
    */
- Neurite::base_node_iterator find(Node::id_type id) { 
-    return find(Node(id)); 
-  }
+ Neurite::base_node_iterator find(Node::id_type id) { return find(Node(id)); }
 
   /**
    * @brief Finds a node in the soma
    * @param n Node to be found
    * @return Iterator to the node. end_soma otherwise
    */
-  soma_iterator find_soma(const Node& n) {
-    auto it = std::find(soma_.begin(), soma_.end(), n);
-    if (it != soma_.end())
-      return soma_iterator(it);
-    else
-      return soma_iterator(soma_.end());
-  }
+  soma_iterator find_soma(const Node& n);
 
    /**
    * @brief Finds a node in the soma by id
@@ -502,35 +432,12 @@ class Neuron : public WithProperties {
    * @param p Point
    * @return True if point is considered to be in the soma
    **/
-  bool point_in_soma(const point_type& p) const {
-
-    // Criteria: point is in soma if
-    // It is closer to the soma baricenter than at least one point of the soma contour
-    point_type b = soma_barycenter();
-
-    
-    float dist = geometry::distance(p, b);
-
-    for (auto it = soma_.begin(); it != soma_.end(); ++it) {
-      if (geometry::distance(it->position(), b) < dist) 
-        return true;
-    }
-    return false;
-  }
+  bool point_in_soma(const point_type& p) const ;
 
   /**
    * @brief  TODO
    */
-  void correct() {
-    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
-      if (!it->has_root()) {
-        auto n = it->begin_node();
-        if (point_in_soma(n->position())) it->set_root(*n);
-      }
-
-      it->correct();
-    }
-  }
+  void correct();
   
   /**
    * @brief Removes zero-length segements in all neurites
@@ -613,19 +520,19 @@ class Neuron : public WithProperties {
   
   private:
   
-    /**
-     * @brief Applies the rotation that transform \code{from} to \code{to} to all
-     * nodes in the neuron
-     * @param from First vector
-     * @param to Taget vector
-     */
-    void rotateAlign(const point_type& from, const point_type& to);
+  /**
+   * @brief Applies the rotation that transform \code{from} to \code{to} to all
+   * nodes in the neuron
+   * @param from First vector
+   * @param to Taget vector
+   */
+  void rotateAlign(const point_type& from, const point_type& to);
     
-    /**
-     * @brief Extract the position on every soma node
-     * @return Position vector
-     */
-    std::vector<point_type> soma_positions() const;
+  /**
+   * @brief Extract the position on every soma node
+   * @return Position vector
+   */
+  std::vector<point_type> soma_positions() const;
     
     
 };
@@ -657,13 +564,13 @@ class Reconstruction : public WithProperties{
   /**
    * @brief Creates a reconsturction with no id, neurons nor contour
    */
-  Reconstruction() : WithProperties(), id_(), neurons_(), contour_() {};
+  Reconstruction() ;
   
   /**
    * @brief Creates an empty reconstruction with given id
    * @param id Reconstruction ID
    */
-  Reconstruction(const std::string& id) : WithProperties(), id_(id), neurons_(), contour_() {};
+  Reconstruction(const std::string& id);
   
   ~Reconstruction() {} 
 
@@ -687,17 +594,13 @@ class Reconstruction : public WithProperties{
    * @brief Adds a neuron to the reconstruction
    * @param n Neuron pointer
    */
-  void addNeuron(Neuron* const n) {
-    neurons_.emplace_back(n);
-  };
+  void addNeuron(Neuron* const n) { neurons_.emplace_back(n); };
 
   /**
    * @brief Sets a vector of points as reconstruction contour
    * @param v Point vector
    */
-  void addContour(const std::vector<point_type>& v) {
-    contour_ = geometry::as_planar_polygon(v);
-  }
+  void addContour(const std::vector<point_type>& v);
 
   friend std::ostream& operator<<(std::ostream&, const Reconstruction&);
 
@@ -729,31 +632,14 @@ class Reconstruction : public WithProperties{
    * @brief Counts number of different nodes in the reconstruction
    * @return Node count
    */
-  int node_count() const {
-    int accum = 0;
-    for (auto it = begin(); it != end(); ++it) accum += it->node_count();
-    return accum;
-  }
+  int node_count() const ;
 
   /**
    * @brief Finds the neuron whose soma is the closest one to a given point
    * @param p Point
    * @return Neuron iterator
    */
-  neuron_iterator closest_soma(const point_type& p) {
-    auto ret = end();
-    float tmp, min_dist = std::numeric_limits<float>().max();
-    for (auto it = begin(); it != end(); ++it) {
-      for (auto s_it = it->begin_soma(); s_it != it->end_soma() && ret != it; ++s_it) {
-        tmp = s_it->distance(p);
-        if (tmp < min_dist) {
-          ret = it;
-          min_dist = tmp;
-        }
-      }
-    }
-    return ret;
-  }
+  neuron_iterator closest_soma(const point_type& p);
 
   /**
    * @brief Adds a neurite to the neuron whose soma is the closest one to the
@@ -761,50 +647,31 @@ class Reconstruction : public WithProperties{
    * @param n Neurite pointer
    * @return Neuron iterator (insertion point)
    */
-  neuron_iterator add_neurite_to_closest_soma(Neurite* n) {
-        
-    auto closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
-    
-    if (closest == end()) {
-      throw std::runtime_error("Orphan neurite");
-    } else {
-      n->id(closest->size() + 1);
-      closest->add_neurite(n);
-    }
-    return closest;
-  }
+  neuron_iterator add_neurite_to_closest_soma(Neurite* n);
   
   /**
    * @brief Neuron iterator
    * @return begin neuron interator
    */
-  neuron_iterator begin() { 
-    return neuron_iterator(neurons_.begin()); 
-  }
+  neuron_iterator begin() { return neuron_iterator(neurons_.begin()); }
   
   /**
    * @brief Neuron iterator
    * @return end neuron interator
    */
-  neuron_iterator end() { 
-    return neuron_iterator(neurons_.end()); 
-  }
+  neuron_iterator end() { return neuron_iterator(neurons_.end()); }
   
   /**
    * @brief Neuron iterator
    * @return begin neuron interator
    */
-  const_neuron_iterator begin() const { 
-    return const_neuron_iterator(neurons_.begin()); 
-  }
+  const_neuron_iterator begin() const { return const_neuron_iterator(neurons_.begin()); }
   
   /**
    * @brief Neuron iterator
    * @return end neuron interator
    */
-  const_neuron_iterator end() const {
-    return const_neuron_iterator(neurons_.end()); 
-  }
+  const_neuron_iterator end() const { return const_neuron_iterator(neurons_.end()); }
   
 };
 

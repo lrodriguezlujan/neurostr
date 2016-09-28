@@ -9,6 +9,104 @@
 
 namespace neurostr {
 
+ /****************
+ * 
+ * Neuron
+ * 
+ *****************/
+ 
+  // Constructors
+  Neuron::Neuron() 
+    : WithProperties()
+    , id_()
+    , neurites_()
+    , soma_()
+    , up_(0,0,1) {};
+  
+
+  Neuron::Neuron(const std::string& id) 
+    : WithProperties()
+    , id_(id)
+    , neurites_()
+    , soma_()
+    , up_(0,0,1) {};
+  
+  Neuron::Neuron(const std::string& id, const std::vector<Node>& soma)
+      : WithProperties()
+      , id_(id)
+      , neurites_()
+      , soma_(soma)
+      , up_(0,0,1) {};
+      
+  void Neuron::up(const point_type& up) {
+    up_ = up;
+    geometry::normalize(up_);
+  }
+  
+  int Neuron::node_count() const {
+    int accum = 0;
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) 
+      accum += it->node_count();
+    return accum;
+  }
+  
+  Neuron::neurite_iterator Neuron::add_neurite(Neurite* const n) {
+    n->neuron(this);
+    neurites_.emplace_back(n);
+    return neurite_iterator(std::prev(neurites_.end(),1));
+  }
+  
+  void  Neuron::add_soma(const std::vector<Node>& v) { 
+    soma_.insert(soma_.end(), v.begin(), v.end()); 
+  }
+  
+  Neurite::base_node_iterator Neuron::find(const Node& n) {
+
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
+      auto nodeit = it->find(n);
+      if (nodeit != it->end_node()) return nodeit;
+    }
+
+    // Not valid
+    return Neurite::base_node_iterator();
+  }
+  
+  Neuron::soma_iterator Neuron::find_soma(const Node& n) {
+    auto it = std::find(soma_.begin(), soma_.end(), n);
+    if (it != soma_.end())
+      return soma_iterator(it);
+    else
+      return soma_iterator(soma_.end());
+  }
+  
+  bool Neuron::point_in_soma(const point_type& p) const {
+
+    // Criteria: point is in soma if
+    // It is closer to the soma baricenter than at least one point of the soma contour
+    point_type b = soma_barycenter();
+
+    
+    float dist = geometry::distance(p, b);
+
+    for (auto it = soma_.begin(); it != soma_.end(); ++it) {
+      if (geometry::distance(it->position(), b) < dist) 
+        return true;
+    }
+    return false;
+  }
+  
+  void Neuron::correct() {
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
+      if (!it->has_root()) {
+        auto n = it->begin_node();
+        if (point_in_soma(n->position())) it->set_root(*n);
+      }
+
+      it->correct();
+    }
+  }
+
+  
   std::vector<point_type> Neuron::soma_positions() const {
     std::vector<point_type> v(soma_.size());
     for(auto it = soma_.begin(); it != soma_.end(); ++it)
@@ -225,7 +323,55 @@ std::ostream& operator<<(std::ostream& os, const Neuron& n) {
   return os;
 };
 
-// Print Reconstruction
+
+/****************
+ * 
+ * Reconstruction
+ * 
+ *****************/
+ 
+Reconstruction::Reconstruction() : WithProperties(), id_(), neurons_(), contour_() {};
+  
+Reconstruction::Reconstruction(const std::string& id) : WithProperties(), id_(id), neurons_(), contour_() {};
+
+void Reconstruction::addContour(const std::vector<point_type>& v) {
+    contour_ = geometry::as_planar_polygon(v);
+}
+
+int Reconstruction::node_count() const {
+    int accum = 0;
+    for (auto it = begin(); it != end(); ++it) accum += it->node_count();
+    return accum;
+}
+
+Reconstruction::neuron_iterator Reconstruction::closest_soma(const point_type& p) {
+    auto ret = end();
+    float tmp, min_dist = std::numeric_limits<float>().max();
+    for (auto it = begin(); it != end(); ++it) {
+      for (auto s_it = it->begin_soma(); s_it != it->end_soma() && ret != it; ++s_it) {
+        tmp = s_it->distance(p);
+        if (tmp < min_dist) {
+          ret = it;
+          min_dist = tmp;
+        }
+      }
+    }
+    return ret;
+}
+
+Reconstruction::neuron_iterator Reconstruction::add_neurite_to_closest_soma(Neurite* n) {
+        
+    auto closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
+    
+    if (closest == end()) {
+      throw std::runtime_error("Orphan neurite");
+    } else {
+      n->id(closest->size() + 1);
+      closest->add_neurite(n);
+    }
+    return closest;
+}
+ 
 std::ostream& operator<<(std::ostream& os, const Reconstruction& r) {
   // Print * line
   os << std::string(50, '*') << std::endl;
