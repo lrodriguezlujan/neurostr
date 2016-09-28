@@ -2,8 +2,48 @@
 
 namespace neurostr {
 namespace geometry {
+  
+  float distance(const point_type& a, const point_type& b){ 
+    return bg::distance(a,b);
+  }
+  
+  point_type vectorFromTo(const point_type& from, const point_type& to){
+    point_type ret = to;
+    bg::subtract_point(ret,from);
+    return ret;
+  }
+  
+  void traslate(point_type& p, const point_type& v ){ 
+    bg::add_point(p,v); 
+  }
+  
+  void scale(point_type& p, float scale, const point_type&  ref){
+    auto tmp = p ; 
+    bg::subtract_point(tmp, ref); // tmp is our "vector to scale"
+    bg::multiply_value(tmp, scale);
+    bg::add_point(tmp, ref);
+    p = tmp;
+  }
+  
+  void scale(point_type& p, float rx, float ry, float rz){
+    bg::multiply_point(p, point_type(rx,ry,rz));
+  }
+  
+  point_type cross_product(const point_type& p, const point_type& q) {
+    point_type r;
+    bg::set<0>(r, bg::get<1>(p) * bg::get<2>(q) - bg::get<2>(p) * bg::get<1>(q));
+    bg::set<1>(r, bg::get<2>(p) * bg::get<0>(q) - bg::get<0>(p) * bg::get<2>(q));
+    bg::set<2>(r, bg::get<0>(p) * bg::get<1>(q) - bg::get<1>(p) * bg::get<0>(q));
+    
+    return r;
+  }
+  
+  float norm(const point_type& p) {
+    return bg::distance(p, point_type(0,0,0));
+  }
 
-std::array<point_type, 3> get_basis(const point_type& vx, const point_type& up) {
+  std::array<point_type, 3> get_basis(const point_type& vx, 
+                                      const point_type& up){
 
   std::array<point_type, 3> basis;
 

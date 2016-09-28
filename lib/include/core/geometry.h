@@ -25,6 +25,19 @@ namespace geometry
   using planar_point = bg::model::point<float, 2, bg::cs::cartesian>;
   using polygon_type =  bg::model::polygon<planar_point>;
   
+  
+  /**
+  * Axis enum
+  */
+  enum class Axis: int {
+      X_POS = 0,
+      X_NEG,
+      Y_POS,
+      Y_NEG,
+      Z_POS,
+      Z_NEG
+  };  
+  
   /**
    * @brief Gets the ith component from a point
    * @param p Point
@@ -41,9 +54,7 @@ namespace geometry
    * @param b Second point
    * @return  Eculidean distance (Float)
    */
-  inline float distance(const point_type& a, const point_type& b){
-    return bg::distance(a,b);
-  }
+  float distance(const point_type& a, const point_type& b);
   
   /**
    * @brief Vector with origin in \code{from} and end in \code{to}
@@ -51,20 +62,14 @@ namespace geometry
    * @param to Vector end
    * @return Vector (point type)
    */
-  inline point_type vectorFromTo(const point_type& from, const point_type& to){
-    point_type ret = to;
-    bg::subtract_point(ret,from);
-    return ret;
-  }
+  point_type vectorFromTo(const point_type& from, const point_type& to);
   
   /**
    * @brief Adds v to p
    * @param p point to be modified
    * @param v traslation vector
    */
-  inline void traslate(point_type& p, const point_type& v ){
-    bg::add_point(p,v);
-  }
+  void traslate(point_type& p, const point_type& v );
   
   /**
    * @brief Modifies the point p scaling it by \code{scale} wrt ref
@@ -72,13 +77,7 @@ namespace geometry
    * @param scale Scale
    * @param ref Referecne point
    */
-  inline void scale(point_type& p, float scale, const point_type&  ref){
-    auto tmp = p ; 
-    bg::subtract_point(tmp, ref); // tmp is our "vector to scale"
-    bg::multiply_value(tmp, scale);
-    bg::add_point(tmp, ref);
-    p = tmp;
-  }
+  void scale(point_type& p, float scale, const point_type&  ref);
   
   /**
    * @brief  Modifies the point \code{p} scaling it by (rx,ry,rz)
@@ -87,9 +86,7 @@ namespace geometry
    * @param ry Y Scale
    * @param rz Z scale
    */
-  inline void scale(point_type& p, float rx, float ry, float rz){
-    bg::multiply_point(p, point_type(rx,ry,rz));
-  }
+  void scale(point_type& p, float rx, float ry, float rz);
   
   /**
    * @brief Computes the 3D cross product p ^ q
@@ -98,23 +95,14 @@ namespace geometry
    * @param q Second 3D Vector
    * @return Cross product p^q
    */
-  inline point_type cross_product(const point_type& p, const point_type& q) {
-    point_type r;
-    bg::set<0>(r, bg::get<1>(p) * bg::get<2>(q) - bg::get<2>(p) * bg::get<1>(q));
-    bg::set<1>(r, bg::get<2>(p) * bg::get<0>(q) - bg::get<0>(p) * bg::get<2>(q));
-    bg::set<2>(r, bg::get<0>(p) * bg::get<1>(q) - bg::get<1>(p) * bg::get<0>(q));
-    
-    return r;
-  }
+  point_type cross_product(const point_type& p, const point_type& q);
 
   /**
    * @brief Returns de 2-norm of p as vector
    * @param p 3D Vector
    * @return P 2-Norm
    */
-  inline float norm(const point_type& p) {
-    return bg::distance(p, point_type(0,0,0));
-  }
+  float norm(const point_type& p);
   
   /**
    * @brief Checks whether two point a and b are equal
@@ -131,7 +119,6 @@ namespace geometry
   /**
    * @brief Retunrs a orthonormal right-oriented basis where vx is 
    * the first vector
-   * 
    * @param vx First vector in the basis
    * @param up Up reference position (to be z)
    */
@@ -170,6 +157,12 @@ namespace geometry
                                  const segment_type&  s, 
                                  point_type&          inter);
 
+  /**
+   * @brief Checks if first geometry is covered by the second
+   * @param g1 First geometry
+   * @param g2 Second geometry
+   * @return True if g1 is covered by g2
+   */
   template <typename G1, typename G2>
   bool covered_by(const G1& g1, const G2& g2){
     return bg::covered_by(g1,g2);
@@ -264,17 +257,6 @@ namespace geometry
     min_component<2>(p,res);
   };
 
-  /**
-  * Axis enum
-  */
-  enum class Axis: int {
-      X_POS = 0,
-      X_NEG,
-      Y_POS,
-      Y_NEG,
-      Z_POS,
-      Z_NEG
-  };  
 
   /**
    * @brief Return box axis length
