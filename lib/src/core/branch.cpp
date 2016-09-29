@@ -452,10 +452,11 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     // Check if we should remove the first node
     if( has_root() ){
       // Do it ...
-      while(geometry::equal(begin()->position(), root_->position()) && nodes_.size() > 0){
+      while(nodes_.size() > 0 && geometry::equal(begin()->position(), root_->position())){
         erase(begin());
       }
     }
+    
     if(size() > 0)
       for(auto it = std::next(begin(),1) ; it != end(); ++it){
         if ( geometry::equal( std::prev(it,1)->position(), it->position()) ){

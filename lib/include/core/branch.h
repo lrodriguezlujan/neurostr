@@ -484,21 +484,7 @@ class Branch : public WithProperties{
    * @brief Throw an exception if size is 0
    */
   void _check_size() const;
-  /**
-   * @brief Recursive frechet distance function. i,j are the indexes to acess tmp
-   * @param i ith-index
-   * @param j jth-index
-   * @param tmp auxiliar matrix
-   * @param other Branch
-   * @return Distance value @ (i-j)
-   */
-  float _discrete_frechet_recursive(size_t i, size_t j, 
-                                    std::vector<float>& tmp,
-                                    const Branch& other) const;
 
-  
-
-  
   // DATA MEMBERS
 
   // Branch identifier
