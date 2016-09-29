@@ -134,6 +134,12 @@ class Branch : public WithProperties{
   std::string idString() const;
   
   /**
+   * @brief Branch neurite reference validity check
+   * @return True if Neurite reference is valid
+   */
+   bool valid_neurite() const { return neurite_ != nullptr; }
+  
+  /**
    * @brief Branch parent neurite
    * @return Parent neurite reference
    */
