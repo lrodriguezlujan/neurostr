@@ -199,13 +199,15 @@ namespace neurostr{
   }
   
   void Node::_check_null_branch() const{
-    /*if( branch_ == nullptr )
-      throw std::runtime_error("[Node] Null branch access");*/
+    if( branch_ == nullptr ){
+      throw std::logic_error("Null parent branch access attempt");
+    }
   }
   
   void Node::_check_null_parent() const{
-    /*if(parent_ == nullptr)
-      throw std::runtime_error("[Node] Null parent access");*/
+    if( parent_ == nullptr ){
+      throw std::logic_error("Null parent node access attempt");
+    }
   }
   
 }// namespace neurostr

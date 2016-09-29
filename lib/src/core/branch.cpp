@@ -21,6 +21,7 @@ namespace neurostr{
   Branch::Branch() 
     : WithProperties()
     , id_()
+    , neurite_(nullptr)
     , order_(-1)
     , root_(nullptr)
     , nodes_() {};
@@ -241,11 +242,15 @@ namespace neurostr{
   }
  
  std::string Branch::idString() const {
-   std::string ret = std::to_string(*(id_.begin()));
-   for( auto it = ++id_.begin(); it != id_.end() ; it++ ){
+   if(id_.size() == 0){
+     return std::string();
+   } else {
+    std::string ret = std::to_string(*(id_.begin()));
+    for( auto it = ++id_.begin(); it != id_.end() ; it++ ){
      ret += std::string("-") + std::to_string(*it);
+    }
+    return ret;
    }
-   return ret;
  }
  
  void Branch::set_nodes_branch(){
@@ -259,24 +264,27 @@ namespace neurostr{
    * @brief Throw an exception if root is null
    */
   void Branch::_check_root() const{
-    /*if(root_.get() == nullptr )
-      throw std::runtime_error("Access invalid root");*/
+    if(root_.get() == nullptr ){
+      throw std::logic_error("Empty root access attempt");
+    }
   }
   
   /**
    * @brief Throw an exception if neurite is null
    */
   void Branch::_check_neurite() const{
-    /*if(neurite_ == nullptr )
-      throw std::runtime_error("Access invalid neurite");*/
+    if(neurite_ == nullptr ){
+      throw std::logic_error("Invalid neurite reference access");
+    }
   }
   
   /**
    * @brief Throw an exception if size is 0
    */
-  void Branch::_check_size() const{
-    /*if(nodes_.size() == 0 )
-      throw std::runtime_error("Access empty branch");*/
+  void Branch::_check_size() const {
+    if(nodes_.size() == 0 ){
+      throw std::length_error("Empty branch access attempt");
+    }
   }
   
  
@@ -319,7 +327,11 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     if( next != end() ){
       next->invalidate_basis();
       next->invalidate_length();
-      next->parent(&(pos->parent()));
+      if(pos->valid_parent()){
+        next->parent(&(pos->parent()));
+      } else {
+        next->parent(nullptr);
+      }
     }
     return nodes_.erase(pos.base());
   }
