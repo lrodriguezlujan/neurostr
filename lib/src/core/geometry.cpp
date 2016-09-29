@@ -30,6 +30,9 @@ namespace geometry {
   }
   
   void scale(point_type& p, float r){
+    
+    if(r == 1) return;
+    
     float factor = r * norm(p);
     normalize(p);
     bg::multiply_value(p, factor);
