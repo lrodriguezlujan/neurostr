@@ -191,6 +191,7 @@ TEST(set_parent){
   neurostr::Node a_parent(0, 1, 1, 0, 1);
   
   CHECK(!a.valid_parent());
+  CHECK_THROW(a.parent(),std::logic_error); // Invalid access
   
   a.parent(&a_parent);
   CHECK(a.valid_parent());
@@ -202,12 +203,14 @@ TEST(set_null_parent){
   neurostr::Node a_parent(0, 1, 1, 0, 1);
   
   CHECK(!a.valid_parent());
+  CHECK_THROW(a.parent(),std::logic_error); // Invalid access
   
   a.parent(&a_parent);
   CHECK(a.valid_parent());
   
   a.parent(nullptr);
   CHECK(!a.valid_parent());
+  CHECK_THROW(a.parent(),std::logic_error); // Invalid access
 }
 
 // Branch
@@ -217,6 +220,7 @@ TEST(set_branch){
   neurostr::Node a(1, 1, 1, 1, 1);
   
   CHECK(!a.valid_branch());
+  CHECK_THROW(a.branch(),std::logic_error); // Invalid access
   
   a.branch(&b);
   CHECK(a.valid_branch());
@@ -229,12 +233,14 @@ TEST(set_null_branch){
   neurostr::Node a(1, 1, 1, 1, 1);
   
   CHECK(!a.valid_branch());
+  CHECK_THROW(a.branch(),std::logic_error); // Invalid access
   
   a.branch(&b);
   CHECK(a.valid_branch());
   
   a.branch(nullptr);
   CHECK(!a.valid_branch());
+  CHECK_THROW(a.branch(),std::logic_error); // Invalid access
 }
 
 // Position
