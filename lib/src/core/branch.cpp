@@ -348,7 +348,7 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
   // Transformations
   void Branch::simplify(float eps){
     
-    if(size() == 1) {
+    if(size() <= 1) {
       return;
       
     } else if(eps < 0) {

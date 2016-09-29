@@ -384,7 +384,7 @@ namespace geometry
         typename std::vector<Node>::iterator m;
         
         //Check distance bw every node and the line ini->end
-        for(auto it = (ini+1); it != (end-1) ; ++it){
+        for(auto it = (ini+1); it != end ; ++it){
           tmp = bg::distance(segm, it->position() );
           if( tmp > maxd ) {
             maxd = tmp;
@@ -399,7 +399,7 @@ namespace geometry
         }
         else{
           // DELETE intermediate nodes
-          v.erase(ini+1,end-1);
+          v.erase(ini+1,end);
         }
       }
   }; // RDP simplifier
