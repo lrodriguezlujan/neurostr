@@ -169,10 +169,120 @@ constexpr auto selector_in_single_to_set(const F& f){
   return f;
 }; 
 
-// Alias for compatibility
-template <typename F>
-constexpr auto join_selector_factory(const F& f){
-  return selector_in_single_to_set(f);
+/** Foreach - F1 input single  - F2 output single **/
+template <typename F1, typename F2,
+          std::enable_if_t<!selector_func_traits<F1>::in_set >* = nullptr,
+          std::enable_if_t<!selector_func_traits<F2>::out_set >* = nullptr>
+constexpr auto selector_foreach(const F1& f1, const F2& f2){
+ 
+  
+  using f1_traits      = selector_func_traits<F1>;
+  using f2_traits      = selector_func_traits<F2>;
+
+  static_assert( !f2_traits::in_set, ""  );  
+  static_assert( std::is_convertible< 
+                  typename f1_traits::out_type,
+                  typename f2_traits::in_type>::value, "" );
+  
+  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using in  = typename f1_traits::in_type;
+  
+  return [f1_ = f1, f2_ = f2](in& r) -> std::vector<reference_out> {
+      auto sel = f1_(r);
+      std::vector<reference_out> ret;
+      ret.reserve(size(sel));
+      for(auto it = sel.beign(); it != sel.end() ; ++it){
+        ret.emplace_back(f2_(it->get()));
+      }
+  };
+};
+
+/** Foreach - F1 input single  - F2 output set **/
+template <typename F1, typename F2,
+          std::enable_if_t<!selector_func_traits<F1>::in_set >* = nullptr,
+          std::enable_if_t<selector_func_traits<F2>::out_set >* = nullptr>
+constexpr auto selector_foreach(const F1& f1, const F2& f2){
+ 
+  
+  using f1_traits      = selector_func_traits<F1>;
+  using f2_traits      = selector_func_traits<F2>;
+
+  static_assert( !f2_traits::in_set, ""  );  
+  static_assert( std::is_convertible< 
+                  typename f1_traits::out_type,
+                  typename f2_traits::in_type>::value, "" );
+  
+  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using in  = typename f1_traits::in_type;
+  
+  return [f1_ = f1, f2_ = f2](in& r) -> std::vector<reference_out> {
+      auto sel = f1_(r);
+      std::vector<reference_out> ret;
+      for(auto it = sel.beign(); it != sel.end() ; ++it){
+        auto aux =  f2_(it->get());
+        for(auto it2 = aux.beign(); it2 != aux.end() ; ++it2){
+          ret.emplace_back(*it2);
+        }
+      }
+  };
+};
+
+/** Foreach - F1 input set  - F2 output single **/
+template <typename F1, typename F2,
+          std::enable_if_t<selector_func_traits<F1>::in_set >* = nullptr,
+          std::enable_if_t<!selector_func_traits<F2>::out_set >* = nullptr>
+constexpr auto selector_foreach(const F1& f1, const F2& f2){
+ 
+  
+  using f1_traits      = selector_func_traits<F1>;
+  using f2_traits      = selector_func_traits<F2>;
+
+  static_assert( !f2_traits::in_set, ""  );  
+  static_assert( std::is_convertible< 
+                  typename f1_traits::out_type,
+                  typename f2_traits::in_type>::value, "" );
+  
+  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using reference_in = std::reference_wrapper<typename f1_traits::in_type>;
+  
+  return [f1_ = f1, f2_ = f2](const reference_in& b, const reference_in& e) -> std::vector<reference_out> {
+      auto sel = f1_(b,e);
+      std::vector<reference_out> ret;
+      ret.reserve(size(sel));
+      for(auto it = sel.beign(); it != sel.end() ; ++it){
+        ret.emplace_back(f2_(it->get()));
+      }
+  };
+};
+
+/** Foreach - F1 input set  - F2 output set **/
+template <typename F1, typename F2,
+          std::enable_if_t<selector_func_traits<F1>::in_set >* = nullptr,
+          std::enable_if_t<selector_func_traits<F2>::out_set >* = nullptr>
+constexpr auto selector_foreach(const F1& f1, const F2& f2){
+ 
+  
+  using f1_traits      = selector_func_traits<F1>;
+  using f2_traits      = selector_func_traits<F2>;
+
+  static_assert( !f2_traits::in_set, ""  );  
+  static_assert( std::is_convertible< 
+                  typename f1_traits::out_type,
+                  typename f2_traits::in_type>::value, "" );
+  
+  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using reference_in = std::reference_wrapper<typename f1_traits::in_type>;
+  
+  return [f1_ = f1, f2_ = f2](const reference_in& b, const reference_in& e) -> std::vector<reference_out> {
+      auto sel = f1_(b,e);
+      std::vector<reference_out> ret;
+      for(auto it = sel.beign(); it != sel.end() ; ++it){
+        auto aux =  f2_(it->get());
+        for(auto it2 = aux.beign(); it2 != aux.end() ; ++it2){
+          ret.emplace_back(*it2);
+        }
+      }
+  };
 };
 
 // End template selector_in_single_to_set

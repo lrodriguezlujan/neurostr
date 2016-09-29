@@ -168,7 +168,7 @@ class Validator {
   
   void run(type<Branch>){
     auto sel = selector::compose_selector(
-      selector::join_selector_factory(selector::neurite_branch_selector), 
+      selector::selector_in_single_to_set(selector::neurite_branch_selector), 
       selector::neuron_neurites)(*neuron_);
     
     value_type v ;

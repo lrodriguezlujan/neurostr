@@ -59,7 +59,7 @@ namespace methods {
   std::vector<float> inter_pair_distance(  Neuron& n, bool restrict_order, bool sided ){
   
     auto v = selector::compose_selector(
-              selector::join_selector_factory(selector::neurite_branch_selector), 
+              selector::selector_in_single_to_set(selector::neurite_branch_selector), 
               selector::neuron_neurites)(n);
               
     std::vector<float> distances( ( v.size() * (v.size()-1) ) / 2 ); // Biggest size possible
@@ -106,7 +106,7 @@ namespace methods {
   std::vector<std::vector<float>> inter_pair_distance_byorder(  Neuron& n, bool sided){
   
     auto v = selector::compose_selector(
-              selector::join_selector_factory(selector::neurite_branch_selector), 
+              selector::selector_in_single_to_set(selector::neurite_branch_selector), 
               selector::neuron_neurites)(n);
     
     int maxOrder = 0;
