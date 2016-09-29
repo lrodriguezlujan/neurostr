@@ -49,7 +49,7 @@ TEST(counter_measure) {
   
   
   // This selects all nodes in a neurite set (converts single selector to set selector by join)
-  auto neuriteset_nodes = ns::join_selector_factory(ns::neurite_node_selector);
+  auto neuriteset_nodes = ns::selector_in_single_to_set(ns::neurite_node_selector);
   // Composition magic : In neuron out nodes
   auto neuron_node_selector = ns::compose_selector(neuriteset_nodes,ns::neuron_neurites);
   
@@ -87,7 +87,7 @@ TEST(counter_measure) {
   for (auto it = neuron.begin_neurite(); it != neuron.end_neurite(); ++it)
     count+= it->size();
   
-  auto neuron_branch_selector = ns::compose_selector(ns::join_selector_factory(ns::neurite_branch_selector),
+  auto neuron_branch_selector = ns::compose_selector(ns::selector_in_single_to_set(ns::neurite_branch_selector),
                                             ns::neuron_neurites);
   
   
@@ -116,7 +116,7 @@ TEST(node_radius){
   // Average starting at 0.
   auto avg_fn = nm::aggregate::avg_aggr_factory<float>(0.);
 
-  auto node_sel = ns::compose_selector(ns::join_selector_factory(ns::neurite_node_selector),
+  auto node_sel = ns::compose_selector(ns::selector_in_single_to_set(ns::neurite_node_selector),
                                             ns::neuron_neurites);
                                             
   CHECK_EQUAL(nm::selectorMeasureCompose(
