@@ -58,7 +58,7 @@ namespace methods {
   
   std::vector<float> inter_pair_distance(  Neuron& n, bool restrict_order, bool sided ){
   
-    auto v = selector::compose(
+    auto v = selector::compose_selector(
               selector::join_selector_factory(selector::neurite_branch_selector), 
               selector::neuron_neurites)(n);
               
@@ -105,7 +105,7 @@ namespace methods {
   
   std::vector<std::vector<float>> inter_pair_distance_byorder(  Neuron& n, bool sided){
   
-    auto v = selector::compose(
+    auto v = selector::compose_selector(
               selector::join_selector_factory(selector::neurite_branch_selector), 
               selector::neuron_neurites)(n);
     

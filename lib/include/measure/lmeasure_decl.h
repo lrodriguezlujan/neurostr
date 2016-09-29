@@ -16,31 +16,31 @@ namespace lmeasure{
   
   namespace detail {
     
-    const auto all_branch_selector = ns::compose(
-      ns::join_selector_factory(ns::neurite_branch_selector),
+    const auto all_branch_selector = ns::compose_selector(
+      ns::selector_in_single_to_set(ns::neurite_branch_selector),
       ns::neuron_neurites);
       
-    const auto terminal_branch_selector = ns::compose(
-      ns::join_selector_factory(ns::neurite_terminal_branches),
+    const auto terminal_branch_selector = ns::compose_selector(
+      ns::selector_in_single_to_set(ns::neurite_terminal_branches),
       ns::neuron_neurites);
       
-    const auto preterminal_branch_selector = ns::compose(
-      ns::join_selector_factory(ns::neurite_pre_terminal_branches),
+    const auto preterminal_branch_selector = ns::compose_selector(
+      ns::selector_in_single_to_set(ns::neurite_pre_terminal_branches),
       ns::neuron_neurites);
       
-    const auto terminal_bif_selector = ns::compose(
-      ns::join_selector_factory(ns::neurite_terminal_bifurcations),
+    const auto terminal_bif_selector = ns::compose_selector(
+      ns::selector_in_single_to_set(ns::neurite_terminal_bifurcations),
       ns::neuron_neurites);
       
     // This selects all non terminal branches in the neuron
-    const auto non_terminal_selector = ns::compose(
-      ns::join_selector_factory(ns::neurite_non_terminal_branches),
+    const auto non_terminal_selector = ns::compose_selector(
+      ns::selector_in_single_to_set(ns::neurite_non_terminal_branches),
       ns::neuron_neurites);
     
     const auto intermediate_branch_selector = 
       ns::diff_selector_factory(non_terminal_selector,
-        ns::compose(
-          ns::join_selector_factory(ns::neurite_first_branch_selector),
+        ns::compose_selector(
+          ns::selector_in_single_to_set(ns::neurite_first_branch_selector),
           ns::neuron_neurites
         )
       );

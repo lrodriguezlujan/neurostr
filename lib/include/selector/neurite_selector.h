@@ -138,7 +138,7 @@ const auto neurite_pre_terminal_branches = [](Neurite &n) ->
 };
 
 const auto neurite_terminal_bifurcations = 
-  compose(join_selector_factory(branch_last_node_selector), 
+  compose_selector(join_selector_factory(branch_last_node_selector), 
           neurite_pre_terminal_branches);
 
 

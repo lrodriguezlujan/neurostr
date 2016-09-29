@@ -26,7 +26,7 @@ const auto neuron_neurites = [](Neuron &n) -> std::vector<neurite_reference> {
 };
 
 // Im using this all the time
-const auto neuron_node_selector =  compose(join_selector_factory(neurite_node_selector),
+const auto neuron_node_selector =  compose_selector(join_selector_factory(neurite_node_selector),
                                             neuron_neurites);
 
 /*

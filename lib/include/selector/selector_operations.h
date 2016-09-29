@@ -1,0 +1,189 @@
+#ifndef NEUROSTR_SELECTOR_SELECTOR_OPERATIONS_H_
+#define NEUROSTR_SELECTOR_SELECTOR_OPERATIONS_H_
+
+#include <functional>
+#include <boost/iterator.hpp>
+
+#include "core/traits.h"
+#include "selector/detail/selector_operations_detail.h"
+#include "selector/selector_traits.h"
+
+#include "core/branch.h"
+#include "core/neurite.h"
+#include "core/neuron.h"
+
+namespace neurostr {
+namespace selector {
+  
+/**
+ * @brief Recursive template for selector composition
+ * @param f1 First function
+ * @param f2 Second function
+ * @param fns.. Rest..
+ */
+template <typename F1, typename F2, typename... Funcs, std::enable_if_t<sizeof...(Funcs) != 0>* = nullptr>
+constexpr auto compose_selector(const F1& f1, const F2& f2, Funcs... fns) {
+  return compose_selector(detail::compose_selector_pair(f1, f2), fns...);
+};
+
+
+/**
+ * @brief Recursive template for selector composition. Base case.
+ * @param f1 First function
+ * @param f2 Second function
+ * @return f1of2
+ */
+template <typename F1, typename F2, typename... Funcs, std::enable_if_t<sizeof...(Funcs) == 0>* = nullptr>
+constexpr auto compose_selector(const F1& f1, const F2& f2, Funcs... fns) {
+  return detail::compose_selector_pair(f1, f2);
+};
+
+
+// Single output to set output templates. 3 cases
+
+/**
+* @brief Converts a selector with single output in one with set output 
+* Case: selector input is SET Output is SINGLE
+**/
+template <typename F,
+          std::enable_if_t<!selector_func_traits<F>::out_set && 
+                            selector_func_traits<F>::in_set >* = nullptr>
+constexpr auto selector_out_single_to_set(const F& f){
+  
+   using f_traits      = selector_func_traits<F>;
+   
+   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   
+   // Create Function
+   return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
+                   const typename std::vector<reference_in>::iterator& e)
+                    -> std::vector<reference_out> {
+      std::vector<reference_out> ret;
+      ret.push_back(f_(b,e));
+      return ret;
+   };
+}; // End template selector_out_single_to_set
+
+
+/**
+* @brief Converts a selector with single output in one with set output 
+* Case: selector input is SINGLE Output is SINGLE
+**/
+template <typename F,
+          std::enable_if_t<!selector_func_traits<F>::out_set && 
+                           !selector_func_traits<F>::in_set >* = nullptr>
+constexpr auto selector_out_single_to_set(const F& f){
+  
+   using f_traits      = selector_func_traits<F>;
+   
+   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
+   using in  = typename f_traits::in_type;
+   
+   // Create Function
+   return [f_ = f](in& n) -> std::vector<reference_out> {
+      std::vector<reference_out> ret;
+      ret.push_back(f_(n));
+      return ret;
+   };
+}; // End template selector_out_single_to_set
+
+/**
+* @brief Converts a selector with single output in one with set output 
+* Case: Output is already set
+**/
+template <typename F,
+          std::enable_if_t<selector_func_traits<F>::out_set >* = nullptr>
+constexpr auto selector_out_single_to_set(const F& f){
+  return f;
+}; // End template selector_out_single_to_set
+
+// END  Single output to set output templates
+
+
+// Single input to set input (join) templates. 3 cases
+
+/**
+* @brief Converts a selector with single input in one with set input 
+* Case: selector input is SINGLE Output is SET
+**/
+template <typename F,
+          std::enable_if_t<!selector_func_traits<F>::in_set && 
+                            selector_func_traits<F>::out_set >* = nullptr>
+constexpr auto selector_in_single_to_set(const F& f){
+  
+   using f_traits      = selector_func_traits<F>;
+   
+   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   
+   // Create join function
+   return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
+                   const typename std::vector<reference_in>::iterator& e)
+                    -> std::vector<reference_out> {
+      std::vector<reference_out> ret;
+      for (auto it = b; it != e; ++it) {
+        auto sel = f_(it->get());
+        for(auto el = sel.begin() ; el != sel.end() ; ++el){
+          ret.emplace_back(el->get());
+        }
+      }
+      return ret;
+   };    
+}; // End template selector_out_single_to_set
+
+
+/**
+* @brief Converts a selector with single input in one with set input 
+* Case: selector input is SINGLE Output is SINGLE
+**/
+template <typename F,
+          std::enable_if_t<!selector_func_traits<F>::in_set && 
+                           !selector_func_traits<F>::out_set >* = nullptr>
+constexpr auto selector_in_single_to_set(const F& f){
+  
+   using f_traits      = selector_func_traits<F>;
+   
+   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   
+   // Create function
+   return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
+                   const typename std::vector<reference_in>::iterator& e)
+                    -> std::vector<reference_out> {
+      std::vector<reference_out> ret;
+      for (auto it = b; it != e; ++it) {
+        ret.emplace_back(f_(it->get()));
+      }
+      return ret;
+   };
+}; // End template selector_out_single_to_set
+
+/**
+* @brief Converts a selector with single output in one with set output 
+* Case: Output is already set
+**/
+template <typename F,
+          std::enable_if_t<selector_func_traits<F>::in_set >* = nullptr>
+constexpr auto selector_in_single_to_set(const F& f){
+  return f;
+}; 
+
+// Alias for compatibility
+template <typename F>
+constexpr auto join_selector_factory(const F& f){
+  return selector_in_single_to_set(f);
+};
+
+// End template selector_in_single_to_set
+
+// END  Single input to set input templates
+
+
+
+
+
+} // end selector ns
+} // End neurostr ns
+
+#endif

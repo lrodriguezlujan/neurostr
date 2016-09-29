@@ -55,7 +55,25 @@ auto property_exists_factory(const std::string& key, V value){
   };
 };
 
-
+  // Unique selector
+// IN: SET OUT: SET
+template <typename T>
+struct unique_selector{
+  using reference = std::reference_wrapper<T>;
+  std::vector<reference> operator() (const typename std::vector<reference>::iterator & b,
+                                     const typename std::vector<reference>::iterator & e){
+    // Copy vector
+    std::vector<reference> ret(b,e);
+    
+    // unique
+    std::unique(ret.begin(),ret.end(), [](const reference& a, 
+                                          const reference &b){
+      return a.get() == b.get();
+    });
+    
+    return ret;
+  }
+};
 
   
 } // Selector
