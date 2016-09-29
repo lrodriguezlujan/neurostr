@@ -17,16 +17,22 @@ namespace geometry {
     bg::add_point(p,v); 
   }
   
-  void scale(point_type& p, float scale, const point_type&  ref){
+  void scale(point_type& p, float r, const point_type&  ref){
     auto tmp = p ; 
     bg::subtract_point(tmp, ref); // tmp is our "vector to scale"
-    bg::multiply_value(tmp, scale);
+    scale(tmp,r);
     bg::add_point(tmp, ref);
     p = tmp;
   }
   
   void scale(point_type& p, float rx, float ry, float rz){
     bg::multiply_point(p, point_type(rx,ry,rz));
+  }
+  
+  void scale(point_type& p, float r){
+    float factor = r * norm(p);
+    normalize(p);
+    bg::multiply_value(p, factor);
   }
   
   point_type cross_product(const point_type& p, const point_type& q) {

@@ -72,7 +72,8 @@ namespace geometry
   void traslate(point_type& p, const point_type& v );
   
   /**
-   * @brief Modifies the point p scaling it by \code{scale} wrt ref
+   * @brief Modifies the point p scaling it by \code{scale} wrt ref so its norm 
+   * is multiplied by scale
    * @param p Point to be modified
    * @param scale Scale
    * @param ref Referecne point
@@ -87,6 +88,13 @@ namespace geometry
    * @param rz Z scale
    */
   void scale(point_type& p, float rx, float ry, float rz);
+  
+  /**
+   * @brief Modifies \code{p} multiplying its norm by \code{scale}
+   * @param p Point to be modified
+   * @param scale Scale factor
+   */
+  void scale(point_type& p, float scale);
   
   /**
    * @brief Computes the 3D cross product p ^ q
