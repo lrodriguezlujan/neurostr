@@ -382,15 +382,37 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
   
   void Branch::scale(float r){
     
+    // Base case
+    if(size() == 0 || r == 1) return ;
+    
+    // Scaled vectors
+    std::vector<point_type> vecs;
+    point_type v;
+    
     // First node scales wrt to root...if it exists
     if ( has_root() ){
-      begin()->scale(r,root().position()) ;
-    } else {
-      begin()->scale(r,point_type(0,0,0)) ;
-    }
+      v=root().vectorTo(*begin());
       
-    for(auto it  = std::next(begin(),1); it != end() ; ++it){
-      it->scale(r,(it-1)->position());
+    } else {
+      v = begin()->vectorTo(point_type(0,0,0));
+      geometry::negate(v);
+    }
+    
+    // Scale and push
+    geometry::scale(v,r);
+    vecs.push_back(v);
+    
+    for(auto it = std::next(begin(),1); it != end() ; ++it){
+      v = std::prev(it,1)->vectorTo(*it);
+      geometry::scale(v,r);  
+      vecs.push_back(v);
+    }
+    
+    // Reconstruct. Root stays put
+    point_type curr_pos = root().position();
+    for(unsigned int i = 0 ; i < vecs.size() ; ++i){
+      geometry::traslate(curr_pos,vecs[i]);
+      nodes_[i]->position(curr_pos);
     }
   }
   
