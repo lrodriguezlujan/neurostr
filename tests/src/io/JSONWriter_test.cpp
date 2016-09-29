@@ -34,6 +34,6 @@ TEST(real_writer) {
   
   // TEST
   std::ofstream out("output.json");
-  out << s;
+  //out << s;
   out.close();
 }

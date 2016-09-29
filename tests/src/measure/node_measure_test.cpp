@@ -176,11 +176,11 @@ TEST(node_number_desc){
   // Average starting at 0.
   auto avg_fn = nm::aggregate::avg_aggr_factory<unsigned int, float>(0.);
   
-  std::cout << nm::selectorMeasureCompose(
+  /*std::cout << nm::selectorMeasureCompose(
                   ns::neuron_node_selector,
                   nm::measureEachAggregate(nm::desc_count,avg_fn))
                   (neuron) << std::endl ;
-    
+    */
   CHECK_CLOSE(  nm::selectorMeasureCompose(
                   ns::neuron_node_selector,
                   nm::measureEachAggregate(nm::desc_count,avg_fn))
