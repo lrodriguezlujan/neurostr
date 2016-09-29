@@ -158,13 +158,14 @@ Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
   
   namespace bg = boost::geometry;
     
+    float angle = geometry::vector_vector_directed_angle(from,to);
     // Already aligned
-    if( geometry::equal(from,to) ) return  Eigen::Quaternionf::Identity();
+    if( angle == 0 ) return  Eigen::Quaternionf::Identity();
     
     // Rotation axis (normalized)
     auto axis = geometry::cross_product(from, to);
     
-    float angle;
+    
     
     if(geometry::norm(axis) == 0){
         // 180 rotation
@@ -173,8 +174,6 @@ Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
         axis = point_type(-bg::get<1>(from),bg::get<0>(from),0);
     } else {
       normalize(axis);
-      // Angle bw dir and to
-      angle = geometry::vector_vector_directed_angle(from,to);
     }
     
     // Compute angle axis rotation and rotate.
