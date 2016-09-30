@@ -5,7 +5,9 @@
 #include <Eigen/SVD>
 
 #include "core/node.h"
-#include "measure/measure.h"
+
+#include "measure/measure_operations.h"
+
 #include "selector/selector.h"
 #include "selector/node_selector.h"
 #include "selector/neuron_selector.h"

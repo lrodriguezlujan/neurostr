@@ -14,10 +14,5 @@
 #include "selector_operations.h"
 #include "selector_set_operations.h"
 
-namespace neurostr {
-namespace selector {
-
-}
-}
 
 #endif
