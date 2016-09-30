@@ -89,7 +89,7 @@ class Validator {
   // Data
   M measure_;
   C checker_;
-  Neuron* neuron_;
+  const Neuron* neuron_;
   // Validation
   storage_type results_;
  
@@ -103,7 +103,7 @@ class Validator {
   };
 
   // Always validate neurons as a whole. Even if the measure is for nodes, branches...
-  void validate(Neuron& n) {
+  void validate(const Neuron& n) {
 
     // Clear results
     results_.clear();

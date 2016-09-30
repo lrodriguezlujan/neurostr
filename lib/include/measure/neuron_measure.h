@@ -56,7 +56,7 @@ const auto soma_surface = [](const Neuron& n ) -> float {
     point_type c = n.soma_barycenter();
     
     // Avg rad
-    float dist;
+    float dist = 0.;
     for(auto it = n.begin_soma(); it != n.end_soma(); ++it){
       dist+= it->radius() + it->distance(c);
     }

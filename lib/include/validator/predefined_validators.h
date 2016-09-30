@@ -98,3 +98,4 @@ const auto extreme_angles_validator  =
 }  // Validation
 }  // Neurostr
 #endif
+
