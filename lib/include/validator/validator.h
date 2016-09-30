@@ -139,23 +139,23 @@ class Validator {
   // Execute depending on the type
   template <typename T> 
   void run() {
-    run(type<T>());
+    run(type<const T>());
   }
   
   template <typename T> 
-  void run(type<T>) {
+  void run(type<const T>) {
   }
   
   
   
-  void run(type<Neuron>){
+  void run(type<const Neuron>){
     // Just execute the measure and the checker for the neuron
     value_type v = measure_(*neuron_);
     bool pass = checker_(v);
     results_.emplace_back(*neuron_, v, pass);
   };
   
-  void run(type<Neurite>){
+  void run(type<const Neurite>){
     // Select neurites and run
     auto sel = selector::neuron_neurites(*neuron_);
     value_type v ;
@@ -166,7 +166,7 @@ class Validator {
     }
   };
   
-  void run(type<Branch>){
+  void run(type<const Branch>){
     auto sel = selector::compose_selector(
       selector::selector_in_single_to_set(selector::neurite_branch_selector), 
       selector::neuron_neurites)(*neuron_);
@@ -179,7 +179,7 @@ class Validator {
     }
   };
   
-  void run(type<Node>){
+  void run(type<const Node>){
     // Select neurites and run
     auto sel = selector::neuron_node_selector(*neuron_);
     value_type v ;

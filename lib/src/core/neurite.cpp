@@ -166,7 +166,7 @@ void Neurite::simplify(float eps) {
   }
 }
 
-Neurite::branch_iterator Neurite::find(const Branch& b){
+Neurite::branch_iterator Neurite::find(const Branch& b) const{
   for( auto it = tree_.begin(); it != tree_.end() ; ++it ) {
     if(*it == b) return it;
   }

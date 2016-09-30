@@ -61,21 +61,21 @@ struct measure_tuple_ret_type<M> {
 
 template <typename T, typename M, typename... Rest, 
           std::enable_if_t<sizeof...(Rest)!=0>* = nullptr>
-auto apply_measures(T& v, const M& measure, const Rest&... rest){
+auto apply_measures(const T& v, const M& measure, const Rest&... rest){
     return std::tuple_cat( std::make_tuple(measure(v)), 
                            apply_measures(v,rest...));
 };
 
 template <typename T, typename M, typename... Rest,  
           std::enable_if_t<sizeof...(Rest)==0>* = nullptr>
-auto apply_measures(T& v, const M& measure){
+auto apply_measures(const T& v, const M& measure){
     return std::make_tuple(measure(v));
 };
 
 template <typename T, typename M, typename... Rest,
           std::enable_if_t<sizeof...(Rest)!=0>* = nullptr>
-auto apply_measures(const selector::selector_iterator<T>& b, 
-                    const selector::selector_iterator<T>& e, 
+auto apply_measures(const selector::const_selector_iterator<T>& b, 
+                    const selector::const_selector_iterator<T>& e, 
                     const M& measure, 
                     const Rest&... rest){
     return std::tuple_cat( std::make_tuple(measure(b,e)), 
@@ -84,8 +84,8 @@ auto apply_measures(const selector::selector_iterator<T>& b,
 
 template <typename T, typename M, typename... Rest,
           std::enable_if_t<sizeof...(Rest)==0>* = nullptr>
-auto apply_measures(const selector::selector_iterator<T>& b, 
-                    const selector::selector_iterator<T>& e, 
+auto apply_measures(const selector::const_selector_iterator<T>& b, 
+                    const selector::const_selector_iterator<T>& e, 
                     const M& measure){
     return std::make_tuple(measure(b,e));
 };
@@ -110,8 +110,8 @@ auto createMeasureTupleImpl(const Measures&... measures ){
   
   using out_type = typename measure_tuple_ret_type<Measures...>::type;
   
-  return [=]( const selector::selector_iterator<T>& b, 
-              const selector::selector_iterator<T>& e) 
+  return [=]( const selector::const_selector_iterator<T>& b, 
+              const selector::const_selector_iterator<T>& e) 
                                -> out_type {
     return apply_measures(b,e,measures...);
   };

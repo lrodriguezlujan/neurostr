@@ -17,12 +17,12 @@ namespace selector {
  */
 
 // IN: Branch - Out: Neurite
-auto branch_neurite_selector = [](Branch& b) -> Neurite& {
+auto branch_neurite_selector = [](const Branch& b) -> const Neurite& {
   return b.neurite();
 };
 
 // IN: Branch - Out: Branch
-auto branch_parent_selector = [](Branch& b) -> Branch& {
+auto branch_parent_selector = [](const Branch& b) -> const Branch& {
   auto branch_it = b.neurite().find(b);
   if(branch_it.node->parent == nullptr){
     return b;
@@ -32,7 +32,7 @@ auto branch_parent_selector = [](Branch& b) -> Branch& {
 };
 
 // IN: Branch - Out: Branch
-auto branch_sibling_selector = [](Branch& b) -> Branch& {
+auto branch_sibling_selector = [](const Branch& b) -> const Branch& {
   auto branch_it = b.neurite().find(b);
   if (branch_it.node->next_sibling != nullptr){
     return branch_it.node->next_sibling->data;
@@ -44,7 +44,7 @@ auto branch_sibling_selector = [](Branch& b) -> Branch& {
 };
 
 // IN: Branch - Out: Node
-auto branch_last_node_selector = [](Branch& b) -> Node& {
+auto branch_last_node_selector = [](const Branch& b) -> const Node& {
   if (b.size() == 0)
     return b.root();
   else
@@ -52,7 +52,7 @@ auto branch_last_node_selector = [](Branch& b) -> Node& {
 };
 
 // IN: Branch - Out: Node
-auto branch_first_node_selector = [](Branch& b) -> Node& {
+auto branch_first_node_selector = [](const Branch& b) -> const Node& {
   if (b.size() == 0)
     return  b.root();
   else
@@ -60,17 +60,17 @@ auto branch_first_node_selector = [](Branch& b) -> Node& {
 };
 
 // IN: Branch - Out: Node set
-auto branch_node_selector = [](Branch& b) -> std::vector<node_reference> {
-  std::vector<node_reference> selection;
+auto branch_node_selector = [](const Branch& b) -> std::vector<const_node_reference> {
+  std::vector<const_node_reference> selection;
   for (auto it = b.begin(); it != b.end(); ++it) 
     selection.emplace_back(*it);
   return selection;
 };
 
 // IN: Branch - Out: Branch SET
-auto branch_subtree_selector = [](Branch &b) -> std::vector<branch_reference> {
+auto branch_subtree_selector = [](const Branch &b) -> std::vector<const_branch_reference> {
   auto branch_it = b.neurite().find(b);
-  std::vector<branch_reference> st;
+  std::vector<const_branch_reference> st;
   for (auto it =  b.neurite().begin_branch_subtree(branch_it); 
             it != b.neurite().end_branch_subtree(branch_it); 
             ++it) {
@@ -80,8 +80,8 @@ auto branch_subtree_selector = [](Branch &b) -> std::vector<branch_reference> {
 };
 
 // IN: Branch - Out: Branch SET
-auto branch_stem_selector = [](Branch &b) -> std::vector<branch_reference> {
-  std::vector<branch_reference> st;
+auto branch_stem_selector = [](const Branch &b) -> std::vector<const_branch_reference> {
+  std::vector<const_branch_reference> st;
   auto branch_it = b.neurite().find(b);
   for (auto it =  b.neurite().begin_stem(branch_it);
             it != b.neurite().end_stem(branch_it); 
@@ -94,10 +94,10 @@ auto branch_stem_selector = [](Branch &b) -> std::vector<branch_reference> {
 /** Branch - specific factories **/
 // IN: Branch set - Out: Branch set
 static inline auto branch_order_filter_factory(int order){
-  return [o_ = order](const std::vector<branch_reference>::iterator & b,
-                      const std::vector<branch_reference>::iterator & e ) 
-                      -> std::vector<branch_reference> {
-        std::vector<branch_reference> st;
+  return [o_ = order](const std::vector<const_branch_reference>::iterator & b,
+                      const std::vector<const_branch_reference>::iterator & e ) 
+                      -> std::vector<const_branch_reference> {
+        std::vector<const_branch_reference> st;
         for (auto it = b; it != e; ++it) {
           if( it->get().order() == o_)
             st.emplace_back(*it);

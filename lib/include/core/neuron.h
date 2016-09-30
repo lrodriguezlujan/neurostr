@@ -502,7 +502,7 @@ class Neuron : public WithProperties {
    * @brief Computes soma area
    * @return Soma area
    */
-  float somaArea();
+  float somaArea() const;
   
   /**
    * @brief Order all neurites

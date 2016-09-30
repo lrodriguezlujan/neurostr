@@ -18,7 +18,7 @@ namespace neurostr {
 
 namespace measure {
   
-const auto root_is_soma = [](Neurite& n) -> bool {
+const auto root_is_soma = [](const Neurite& n) -> bool {
   return n.root_is_soma();
 };
 

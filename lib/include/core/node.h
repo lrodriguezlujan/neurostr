@@ -184,7 +184,7 @@ class Node : public WithProperties{
    * @param n Parent node pointer
    * @return Updated node refernece
    */  
-  Node& parent(Node* n );
+  void parent(Node* n ) const; // Mutable
   
   /**
    * @brief Constructs the vector form \code{this} to \code{p}
@@ -326,7 +326,7 @@ class Node : public WithProperties{
   
   // Parent branch
   Branch* branch_;
-  Node* parent_; // Parent node
+  mutable Node* parent_; // Parent node
 
   // Node properties
   point_type position_;

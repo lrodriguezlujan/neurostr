@@ -79,10 +79,10 @@ template <typename F1, typename F2,
 constexpr auto diff_selector_factory(const F1& f_1, const F2& f_2){
   using f1_traits      = selector_func_traits<F1>;
   using f2_traits      = selector_func_traits<F2>;
-  using reference_out = std::reference_wrapper<typename f1_traits::out_type>;
+  using reference_out = std::reference_wrapper<const typename f1_traits::out_type>;
   using iterator_in = typename std::vector<
                                 std::reference_wrapper<
-                                  typename f1_traits::in_type>>::iterator;
+                                  const typename f1_traits::in_type>>::iterator;
   
   // Check that both selectors return a set
   static_assert(f1_traits::out_set, "First argument doesnt select a set");
@@ -115,7 +115,7 @@ template <typename F1, typename F2,
 constexpr auto diff_selector_factory(const F1& f_1, const F2& f_2){
   using f1_traits      = selector_func_traits<F1>;
   using f2_traits      = selector_func_traits<F2>;
-  using reference_out = std::reference_wrapper<typename f1_traits::out_type>;
+  using reference_out = std::reference_wrapper<const typename f1_traits::out_type>;
   
   // Check that both selectors return a set
   static_assert(f1_traits::out_set, "First argument doesnt select a set");
@@ -128,7 +128,7 @@ constexpr auto diff_selector_factory(const F1& f_1, const F2& f_2){
                                     typename f2_traits::in_type>::value, "Input type doesnt match");
   
   // Create function
-  return [f1_ = f_1, f2_ = f_2](typename f1_traits::in_type& r)
+  return [f1_ = f_1, f2_ = f_2](const typename f1_traits::in_type& r)
                    -> std::vector<reference_out> {
       return detail::reference_vector_diff(f1_(r),f2_(r));
    };            

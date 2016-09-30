@@ -16,7 +16,7 @@ namespace neurostr {
 namespace methods {
   
   // align branches and computes theri f. dist
-  float oriented_frechet_branch_distance( Branch &a,  Branch &b){
+  float oriented_frechet_branch_distance(const Branch &a,const  Branch &b){
     
     auto root_a = selector::node_parent(a.first()); 
     auto root_b = selector::node_parent(b.first());
@@ -56,7 +56,7 @@ namespace methods {
     return tmp_a.discrete_frechet( b );
   }
   
-  std::vector<float> inter_pair_distance(  Neuron& n, bool restrict_order, bool sided ){
+  std::vector<float> inter_pair_distance(const  Neuron& n, bool restrict_order, bool sided ){
   
     auto v = selector::compose_selector(
               selector::selector_in_single_to_set(selector::neurite_branch_selector), 
@@ -78,7 +78,7 @@ namespace methods {
         if(it->max_centrifugal_order() > maxOrder) maxOrder = it->max_centrifugal_order();
       
       // Compute for each order
-      std::vector<selector::branch_reference> tmp;
+      std::vector<selector::const_branch_reference> tmp;
       
       for(int i = 0; i<= maxOrder ; ++i ){
         // Filter references
@@ -103,7 +103,7 @@ namespace methods {
     return distances;
   }
   
-  std::vector<std::vector<float>> inter_pair_distance_byorder(  Neuron& n, bool sided){
+  std::vector<std::vector<float>> inter_pair_distance_byorder(const Neuron& n, bool sided){
   
     auto v = selector::compose_selector(
               selector::selector_in_single_to_set(selector::neurite_branch_selector), 
@@ -116,7 +116,7 @@ namespace methods {
     std::vector<std::vector<float>> distances(maxOrder+1);
     
     // Compute for each order
-    std::vector<selector::branch_reference> tmp;
+    std::vector<selector::const_branch_reference> tmp;
       
     for(int i = 0; i<= maxOrder ; ++i ){
         distances[i] = std::vector<float>();

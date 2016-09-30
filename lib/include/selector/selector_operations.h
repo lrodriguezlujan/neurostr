@@ -52,8 +52,8 @@ constexpr auto selector_out_single_to_set(const F& f){
   
    using f_traits      = selector_func_traits<F>;
    
-   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
-   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   using reference_out = std::reference_wrapper<const typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<const typename f_traits::in_type>;
    
    // Create Function
    return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
@@ -77,11 +77,11 @@ constexpr auto selector_out_single_to_set(const F& f){
   
    using f_traits      = selector_func_traits<F>;
    
-   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
+   using reference_out = std::reference_wrapper<const typename f_traits::out_type>;
    using in  = typename f_traits::in_type;
    
    // Create Function
-   return [f_ = f](in& n) -> std::vector<reference_out> {
+   return [f_ = f](const in& n) -> std::vector<reference_out> {
       std::vector<reference_out> ret;
       ret.push_back(f_(n));
       return ret;
@@ -114,8 +114,8 @@ constexpr auto selector_in_single_to_set(const F& f){
   
    using f_traits      = selector_func_traits<F>;
    
-   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
-   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   using reference_out = std::reference_wrapper<const typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<const typename f_traits::in_type>;
    
    // Create join function
    return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
@@ -144,8 +144,8 @@ constexpr auto selector_in_single_to_set(const F& f){
   
    using f_traits      = selector_func_traits<F>;
    
-   using reference_out = std::reference_wrapper<typename f_traits::out_type>;
-   using reference_in  = std::reference_wrapper<typename f_traits::in_type>;
+   using reference_out = std::reference_wrapper<const typename f_traits::out_type>;
+   using reference_in  = std::reference_wrapper<const typename f_traits::in_type>;
    
    // Create function
    return [f_ = f](const typename std::vector<reference_in>::iterator& b, 
@@ -184,10 +184,10 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
                   typename f1_traits::out_type,
                   typename f2_traits::in_type>::value, "" );
   
-  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using reference_out = std::reference_wrapper<const typename f2_traits::out_type>;
   using in  = typename f1_traits::in_type;
   
-  return [f1_ = f1, f2_ = f2](in& r) -> std::vector<reference_out> {
+  return [f1_ = f1, f2_ = f2](const in& r) -> std::vector<reference_out> {
       auto sel = f1_(r);
       std::vector<reference_out> ret;
       ret.reserve(size(sel));
@@ -212,10 +212,10 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
                   typename f1_traits::out_type,
                   typename f2_traits::in_type>::value, "" );
   
-  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
+  using reference_out = std::reference_wrapper<const typename f2_traits::out_type>;
   using in  = typename f1_traits::in_type;
   
-  return [f1_ = f1, f2_ = f2](in& r) -> std::vector<reference_out> {
+  return [f1_ = f1, f2_ = f2](const in& r) -> std::vector<reference_out> {
       auto sel = f1_(r);
       std::vector<reference_out> ret;
       for(auto it = sel.beign(); it != sel.end() ; ++it){
@@ -242,8 +242,8 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
                   typename f1_traits::out_type,
                   typename f2_traits::in_type>::value, "" );
   
-  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
-  using reference_in = std::reference_wrapper<typename f1_traits::in_type>;
+  using reference_out = std::reference_wrapper<const typename f2_traits::out_type>;
+  using reference_in = std::reference_wrapper<const typename f1_traits::in_type>;
   
   return [f1_ = f1, f2_ = f2](const reference_in& b, const reference_in& e) -> std::vector<reference_out> {
       auto sel = f1_(b,e);
@@ -270,8 +270,8 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
                   typename f1_traits::out_type,
                   typename f2_traits::in_type>::value, "" );
   
-  using reference_out = std::reference_wrapper<typename f2_traits::out_type>;
-  using reference_in = std::reference_wrapper<typename f1_traits::in_type>;
+  using reference_out = std::reference_wrapper<const typename f2_traits::out_type>;
+  using reference_in = std::reference_wrapper<const typename f1_traits::in_type>;
   
   return [f1_ = f1, f2_ = f2](const reference_in& b, const reference_in& e) -> std::vector<reference_out> {
       auto sel = f1_(b,e);

@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include "selector/selector.h"
+#include "selector/selector_traits.h"
 #include "core/node.h"
 #include "core/branch.h"
 #include "core/neurite.h"
@@ -16,7 +16,7 @@ namespace selector {
 /** STATIC Self selector */
 template <typename T>
 auto self_selector_factory(){
-  return [](T& item) -> T&{ return item;};
+  return [](const T& item) -> const T&{ return item;};
 } 
 
 // Property related selector
@@ -24,9 +24,9 @@ auto self_selector_factory(){
 // IN: Set Out: Set
 template <typename T>
 auto property_exists_factory(const std::string& key){
-  using reference = std::reference_wrapper<T>;
-  return [k_ = key](const typename std::vector<reference>::iterator & b,
-                    const typename std::vector<reference>::iterator & e ) 
+  using reference = const_selector_reference<T>;
+  return [k_ = key](const const_selector_iterator<T>& b,
+                    const const_selector_iterator<T>& e ) 
                     -> std::vector<reference> {
         std::vector<reference> st;
         for (auto it = b; it != e; ++it) {
@@ -40,11 +40,11 @@ auto property_exists_factory(const std::string& key){
 // IN: Set Out: Set
 template <typename T, typename V>
 auto property_exists_factory(const std::string& key, V value){
-  using reference = std::reference_wrapper<T>;
+  using reference = const_selector_reference<T>;
   //using value_type = V;
-  return [k_ = key, v_ = value](const typename std::vector<reference>::iterator& b,
-                               const typename std::vector<reference>::iterator& e ) 
-                               -> std::vector<reference> {
+  return [k_ = key, v_ = value](const const_selector_iterator<T>& b,
+                                const const_selector_iterator<T>& e ) 
+                                -> std::vector<reference> {
         std::vector<reference> st;
         for (auto it = b; it != e; ++it) {
           if( it->get().properties.exists(k_) &&  
@@ -59,9 +59,9 @@ auto property_exists_factory(const std::string& key, V value){
 // IN: SET OUT: SET
 template <typename T>
 struct unique_selector{
-  using reference = std::reference_wrapper<T>;
-  std::vector<reference> operator() (const typename std::vector<reference>::iterator & b,
-                                     const typename std::vector<reference>::iterator & e){
+  using reference = const_selector_reference<T>;
+  std::vector<reference> operator() (const const_selector_iterator<T>& b,
+                                     const const_selector_iterator<T>& e ) {
     // Copy vector
     std::vector<reference> ret(b,e);
     

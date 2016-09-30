@@ -21,21 +21,21 @@ namespace neurostr {
 namespace measure {
   
 
-const auto taper_rate_hillman = [](Branch& b) -> float {
+const auto taper_rate_hillman = [](const Branch& b) -> float {
   if(b.has_root())
     return (b.root().radius() - b.last().radius())/b.root().radius();
   else 
     return (b.first().radius() - b.last().radius())/b.first().radius();
 };
 
-const auto taper_rate_burker = [](Branch& b) -> float {
+const auto taper_rate_burker = [](const Branch& b) -> float {
   if(b.has_root())
     return 2*(b.root().radius() - b.last().radius())/b.root().distance(b.last());
   else 
     return 2*(b.first().radius() - b.last().radius())/b.first().distance(b.last());
 };
 
-const auto tortuosity = [](Branch& b) -> float {
+const auto tortuosity = [](const Branch& b) -> float {
   float total_length = 0;
 
   // Compute length
@@ -55,30 +55,30 @@ const auto tortuosity = [](Branch& b) -> float {
     return total_length / b.first().distance(b.last());
 };
 
-const auto branch_azimuth = [](Branch& b) -> float {
+const auto branch_azimuth = [](const Branch& b) -> float {
   
   return 0.0; // TODO  
 };
 
-const auto branch_size = [](Branch &b) -> int {
+const auto branch_size = [](const Branch &b) -> int {
   return b.size();
 };
 
-const auto branch_director_vector = [](Branch& b) -> point_type {
+const auto branch_director_vector = [](const Branch& b) -> point_type {
   // TODO
   return point_type();
 };
 
-const auto branch_index = [](Branch& b) -> unsigned int {
+const auto branch_index = [](const Branch& b) -> unsigned int {
     auto it = b.neurite().find(b);
     return b.neurite().index(Neurite::sibling_iterator(it));
 };
 
-const auto branch_order = [](Branch &b) -> int {
+const auto branch_order = [](const Branch &b) -> int {
   return b.order();
 };
 
-const auto child_diam_ratio = [](Branch& b) -> float {
+const auto child_diam_ratio = [](const Branch& b) -> float {
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
@@ -91,7 +91,7 @@ const auto child_diam_ratio = [](Branch& b) -> float {
   }
 };
 
-const auto parent_child_diam_ratio = [](Branch& b) -> std::pair<float,float> {
+const auto parent_child_diam_ratio = [](const Branch& b) -> std::pair<float,float> {
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
@@ -104,7 +104,7 @@ const auto parent_child_diam_ratio = [](Branch& b) -> std::pair<float,float> {
   }
 };
 
-const auto partition_asymmetry = [](Branch& b) -> float {
+const auto partition_asymmetry = [](const Branch& b) -> float {
   
   auto it = b.neurite().find(b);
   
@@ -125,7 +125,7 @@ const auto partition_asymmetry = [](Branch& b) -> float {
 };
 
 static inline auto rall_power_fit_factory(float min = 0 , float max = 5){
-  return [min_ = min, max_ = max]( Branch &b) -> float {
+  return [min_ = min, max_ = max](const Branch &b) -> float {
     
      auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
@@ -157,7 +157,7 @@ static inline auto rall_power_fit_factory(float min = 0 , float max = 5){
 };
 
 static inline auto pk_factory(float r){
-  return [r_ = r](Branch &b) -> float {
+  return [r_ = r](const Branch &b) -> float {
     auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
       return -1;
@@ -175,7 +175,7 @@ static inline auto pk_factory(float r){
 };
 
 static inline auto pk_fit_factory(float min = 0 , float max = 5){
-  return [min_ = min, max_ = max](Branch &b) -> float {
+  return [min_ = min, max_ = max](const Branch &b) -> float {
     float r = rall_power_fit_factory(min_,max_)(b);
     auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
@@ -193,7 +193,7 @@ static inline auto pk_fit_factory(float min = 0 , float max = 5){
   };
 };
 
-const auto hillman_threshold = [](Branch &b) -> float {
+const auto hillman_threshold = [](const Branch &b) -> float {
 
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
@@ -214,7 +214,7 @@ const auto hillman_threshold = [](Branch &b) -> float {
   }
 };
 
-const auto local_bifurcation_angle = [](Branch &b) -> float {
+const auto local_bifurcation_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -234,7 +234,7 @@ const auto local_bifurcation_angle = [](Branch &b) -> float {
 };
 
 
-const auto remote_bifurcation_angle = [](Branch &b) -> float {
+const auto remote_bifurcation_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -248,7 +248,7 @@ const auto remote_bifurcation_angle = [](Branch &b) -> float {
   }
 };
 
-const auto local_tilt_angle = [](Branch &b) -> float {
+const auto local_tilt_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -272,7 +272,7 @@ const auto local_tilt_angle = [](Branch &b) -> float {
   }
 };
 
-const auto remote_tilt_angle = [](Branch &b) -> float {
+const auto remote_tilt_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -290,7 +290,7 @@ const auto remote_tilt_angle = [](Branch &b) -> float {
   }
 };
 
-const auto local_plane_vector = [](Branch &b) -> point_type {
+const auto local_plane_vector = [](const Branch &b) -> point_type {
     auto it = b.neurite().find(b);
     
     // Our vector
@@ -310,7 +310,7 @@ const auto local_plane_vector = [](Branch &b) -> point_type {
     }
 };
 
-const auto remote_plane_vector = [](Branch &b) -> point_type {
+const auto remote_plane_vector = [](const Branch &b) -> point_type {
     auto it = b.neurite().find(b);
     
     // Our vector
@@ -330,7 +330,7 @@ const auto remote_plane_vector = [](Branch &b) -> point_type {
     }
 };
 
-const auto local_torque_angle = [](Branch &b) -> float {
+const auto local_torque_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -346,7 +346,7 @@ const auto local_torque_angle = [](Branch &b) -> float {
   }
 };
 
-const auto remote_torque_angle = [](Branch &b) -> float {
+const auto remote_torque_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -362,7 +362,7 @@ const auto remote_torque_angle = [](Branch &b) -> float {
   }
 };
 
-const auto branch_length = [](Branch &b) -> float {
+const auto branch_length = [](const Branch &b) -> float {
   float len = b.has_root()?b.first().distance(b.root()):0.;
   for(auto it = (b.begin()+1) ; it != b.end() ; ++it ){
     len += it->distance( *(it-1) );

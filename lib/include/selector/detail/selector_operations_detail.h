@@ -28,7 +28,7 @@ constexpr bool is_composable =
 template <typename Fn,
             std::enable_if_t<selector_func_traits<Fn>::in_set>* = nullptr >
 using selector_fn_in_reference = std::reference_wrapper<
-                                    typename selector_func_traits<Fn>::in_type>;
+                                    const typename selector_func_traits<Fn>::in_type>;
 
 
 // Compose (Input: single)
@@ -43,10 +43,10 @@ constexpr auto f_comp(const F1& f1, const F2& f2) {
   using in_type = typename f2_traits::base_in_type;
   using out_type =
       std::conditional_t<f1_traits::out_set, 
-                        std::vector<std::reference_wrapper<typename f1_traits::out_type>>,
-                        typename f1_traits::out_type>;
+                        std::vector<std::reference_wrapper<const typename f1_traits::out_type>>,
+                        const typename f1_traits::out_type&>;
 
-  return[=](in_type& r)->out_type {
+  return[=](const in_type& r)->out_type {
     auto sel = f2(r);
     return f1(sel.begin(), sel.end());
   };
@@ -63,10 +63,10 @@ constexpr auto f_comp(const F1& f1, const F2& f2) {
   using in_type = typename f2_traits::base_in_type;
   using out_type =
       std::conditional_t<f1_traits::out_set, 
-            std::vector<std::reference_wrapper<typename f1_traits::out_type>>, 
-            typename f1_traits::out_type>;
+            std::vector<std::reference_wrapper<const typename f1_traits::out_type>>, 
+            const typename f1_traits::out_type&>;
 
-  return[=](in_type& r)->out_type {
+  return[=](const in_type& r)->out_type {
     return f1(f2(r));
   };
 };
@@ -83,10 +83,10 @@ constexpr auto f_comp(const F1& f1, const F2& f2) {
   using in_type = typename f2_traits::base_in_type;
   using out_type =
       std::conditional_t<f1_traits::out_set, 
-        std::vector<std::reference_wrapper<typename f1_traits::out_type>>, 
-        typename f1_traits::out_type>;
+        std::vector<std::reference_wrapper<const typename f1_traits::out_type>>, 
+        const typename f1_traits::out_type&>;
 
-  return[=](in_type & b, in_type& e)->out_type {
+  return[=](const in_type & b,const in_type& e)->out_type {
     auto sel = f2(b, e);
     return f1(sel.begin(), sel.end());
   };
@@ -103,10 +103,10 @@ constexpr auto f_comp(const F1& f1, const F2& f2) {
   using in_type = typename f2_traits::base_in_type;
   using out_type =
       std::conditional_t<f1_traits::out_set, 
-        std::vector<std::reference_wrapper<typename f1_traits::out_type>>, 
-        typename f1_traits::out_type>;
+        std::vector<std::reference_wrapper<const typename f1_traits::out_type>>, 
+        const typename f1_traits::out_type &>;
 
-  return[=](in_type & b, in_type & e)->out_type {
+  return[=](const in_type & b,const in_type & e)->out_type {
     return f1(f2(b, e));
   };
 };

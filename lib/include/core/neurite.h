@@ -643,6 +643,22 @@ class Neurite : public WithProperties  {
     return node_iterator<branch_iterator>(begin_branch(), end_branch()).last();
   }
   
+  /**
+   * @brief Neurite node iterator with DFS strategy
+   * @return Node iterator begin
+   */
+  base_node_iterator begin_node() const {
+    return node_iterator<branch_iterator>(begin_branch(), end_branch());
+  }
+
+   /**
+   * @brief Neurite node iterator with DFS strategy
+   * @return Node iterator end
+   */
+  base_node_iterator end_node() const {
+    return node_iterator<branch_iterator>(begin_branch(), end_branch()).last();
+  }
+  
   /*** Find methods ****/
   
   /**
@@ -650,14 +666,14 @@ class Neurite : public WithProperties  {
    * @param b Branch to find
    * @return Iterator to the branch in the tree. returns end_branch() otherwise
    */
-  branch_iterator find(const Branch& b);
+  branch_iterator find(const Branch& b) const;
   
   /**
    * @brief Looks for a node in the tree that matches \code{n}
    * @param n node to finde
    * @return Iterator to the branch in the tree. returns end_node() otherwise
    */
-  base_node_iterator find(const Node& n) { 
+  base_node_iterator find(const Node& n) const{ 
     return std::find(begin_node(), end_node(), n); 
   }
 

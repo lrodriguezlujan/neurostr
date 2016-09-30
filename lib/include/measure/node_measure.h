@@ -16,6 +16,7 @@ namespace neurostr {
 namespace measure {
 
   using node_iterator = typename std::vector<selector::node_reference>::iterator;
+  using const_node_iterator = typename std::vector<selector::const_node_reference>::iterator;
 /** Get node properties */  
 
 const auto node_x = [](const Node& n) -> float {
@@ -49,15 +50,15 @@ const auto node_order = [](const Node& n) -> int {
 /* Parent-related measures */
 
 // Get node length to parent
-const auto node_length_to_parent = [](Node& n) -> float {
-  Node& parent = selector::node_parent(n);
+const auto node_length_to_parent = [](const Node& n) -> float {
+  const Node& parent = selector::node_parent(n);
   return n.distance(parent);
 };
 
 // Node compartment volume
-const auto node_volume = [](Node& n) -> float {
+const auto node_volume = [](const Node& n) -> float {
   const float pi = boost::math::constants::pi<float>();
-  Node& parent = selector::node_parent(n);
+  const Node& parent = selector::node_parent(n);
   
   float pr = parent.radius();
   float nr = n.radius();
@@ -67,19 +68,19 @@ const auto node_volume = [](Node& n) -> float {
 };
 
 // Hillman tapper rate
-const auto node_segment_taper_rate_hillman = [](Node &n) -> float {
-  Node& parent = selector::node_parent(n);
+const auto node_segment_taper_rate_hillman = [](const Node &n) -> float {
+  const Node& parent = selector::node_parent(n);
   return (parent.radius() - n.radius())/parent.radius();
 };
 
 // Burker taper rate
-const auto node_segment_taper_rate_burker = [](Node &n) -> float {
-  Node& parent = selector::node_parent(n);
+const auto node_segment_taper_rate_burker = [](const Node &n) -> float {
+  const Node& parent = selector::node_parent(n);
   return (parent.radius() - n.radius())/ n.distance(parent);
 };
 
-const auto node_compartment_surface = [](Node &n) -> float {
-  Node& parent = selector::node_parent(n);
+const auto node_compartment_surface = [](const Node &n) -> float {
+  const Node& parent = selector::node_parent(n);
   // Lat. length
   float s = std::sqrt( 
               std::pow(n.distance(parent),2) + 
@@ -89,17 +90,17 @@ const auto node_compartment_surface = [](Node &n) -> float {
 };
 
 // Average section area
-const auto node_compartment_section_area = [](Node &n) -> float {
-  Node& parent = selector::node_parent(n);
+const auto node_compartment_section_area = [](const Node &n) -> float {
+  const Node& parent = selector::node_parent(n);
   return M_PI * std::pow( ((parent.radius()+n.radius())/2.),2);
 };
 
 // Get distance to root
-const auto node_distance_to_root = [](Node& n) -> float {
+const auto node_distance_to_root = [](const Node& n) -> float {
   return n.distance(n.branch().neurite().root());
 };
 
-const auto node_distance_to_soma = [](Node& n) -> float {
+const auto node_distance_to_soma = [](const Node& n) -> float {
   
   Neuron& neuron = n.branch().neurite().neuron();
   
@@ -116,7 +117,7 @@ const auto node_distance_to_soma = [](Node& n) -> float {
 };
 
 // Get path to root
-const auto node_path_to_root = [](Node& n) -> float {
+const auto node_path_to_root = [](const Node& n) -> float {
   
   // Select all nodes in the path to the root
   auto sel = selector::node_stem_selector(n);
@@ -129,13 +130,13 @@ const auto node_path_to_root = [](Node& n) -> float {
 };
 
 // number of descends.
-const auto desc_count = [](Node& n) -> unsigned int {
+const auto desc_count = [](const Node& n) -> unsigned int {
   return selector::node_descendants(n).size();
 };
 
 // Minimum box volume
-const auto box_volume = [](const node_iterator& b,
-                           const node_iterator& e) -> double {
+const auto box_volume = [](const const_node_iterator& b,
+                           const const_node_iterator& e) -> double {
 
   // Create nx3 matrix
   Eigen::Matrix<double, Eigen::Dynamic, 3> m;
@@ -171,9 +172,9 @@ const auto box_volume = [](const node_iterator& b,
   return vol;
 };
 
-const auto node_parent_vector = [](Node& n) -> point_type {
+const auto node_parent_vector = [](const Node& n) -> point_type {
   
-  Node& parent = selector::node_parent(n);
+  const Node& parent = selector::node_parent(n);
   auto v = n.vectorTo(parent);
   
   geometry::normalize(v); 
@@ -182,7 +183,7 @@ const auto node_parent_vector = [](Node& n) -> point_type {
 };
 
 // Bifurcation angle
- const auto node_local_bifurcation_angle = [](Node& n) -> float {
+ const auto node_local_bifurcation_angle = [](const Node& n) -> float {
   auto descs = selector::node_descendants(n);
   if (descs.size() < 2)
     return 0;
@@ -195,12 +196,12 @@ const auto node_parent_vector = [](Node& n) -> point_type {
 };
 
 // Elongation angle
-const auto node_local_elongation_angle = [](Node& n) -> float {
+const auto node_local_elongation_angle = [](const Node& n) -> float {
 
   auto descs = selector::node_descendants(n);
   if (descs.size() != 1) return 0;
 
-  Node& parent = selector::node_parent(n);
+  const Node& parent = selector::node_parent(n);
   if (parent == n) return 0;
 
   auto v0 = parent.vectorTo(n);
@@ -210,12 +211,12 @@ const auto node_local_elongation_angle = [](Node& n) -> float {
 };
 
 // Extreme angle
-const auto extreme_angle = [](Node& n) -> bool {
+const auto extreme_angle = [](const Node& n) -> bool {
 
   auto descs = selector::node_descendants(n);
   if (descs.size() == 0) return false;
 
-  Node& parent = selector::node_parent(n);
+  const Node& parent = selector::node_parent(n);
   if (parent == n) return false;
 
   auto v0 = parent.vectorTo(n);
@@ -235,8 +236,8 @@ const auto extreme_angle = [](Node& n) -> bool {
 };
 
 // Orientation
-const auto node_local_orientation = [](Node& n) -> std::pair<float, float> {
-  Node& parent = selector::node_parent(n);
+const auto node_local_orientation = [](const Node& n) -> std::pair<float, float> {
+  const Node& parent = selector::node_parent(n);
   if (parent == n)
     return std::pair<float, float>(0, 0);
   else {
@@ -250,7 +251,7 @@ const auto node_local_orientation = [](Node& n) -> std::pair<float, float> {
   }
 };
 
-const auto node_in_terminal_segment = [](Node& n) -> bool {
+const auto node_in_terminal_segment = [](const Node& n) -> bool {
   auto it = n.branch().neurite().find(n.branch());
   return it.number_of_children() == 0;
 };
@@ -275,7 +276,7 @@ const auto node_in_terminal_segment = [](Node& n) -> bool {
 */
 
 
-const auto segment_distance_to_closest = [](Node& n) -> float {
+const auto segment_distance_to_closest = [](const Node& n) -> float {
   
   // Get parent and create the segmnet
   auto parent = selector::node_parent(n);
@@ -313,8 +314,8 @@ const auto segment_distance_to_closest = [](Node& n) -> float {
   }
 };
 
-const auto node_set_fractal_dim = [](const node_iterator& b, 
-                                     const node_iterator& e) -> float{
+const auto node_set_fractal_dim = [](const const_node_iterator& b, 
+                                     const const_node_iterator& e) -> float{
   
   float euc,path;
   float top_sum = 0;

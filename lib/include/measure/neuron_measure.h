@@ -20,17 +20,17 @@ namespace neurostr {
 namespace measure {
   
 
-const auto has_soma = [](Neuron& i) -> bool {
+const auto has_soma = [](const Neuron& i) -> bool {
   return i.has_soma();
 };
 
-auto neuron_neurite_count = [](Neuron &n){
+auto neuron_neurite_count = [](const Neuron &n){
   return n.size();
 };
 
 /** Count specific neurite types **/
 template <NeuriteType T>
-auto neurite_type_counter  = [](Neuron& n){
+auto neurite_type_counter  = [](const Neuron& n){
   int count = 0;
     for (auto it = n.begin_neurite(); it != n.end_neurite(); ++it)
       if (it->type() == T) ++count;
@@ -42,11 +42,11 @@ const auto neuron_dendrite_counter = neurite_type_counter<NeuriteType::kDendrite
 const auto neuron_axon_counter = neurite_type_counter<NeuriteType::kAxon>;
 const auto neuron_apical_counter = neurite_type_counter<NeuriteType::kApical>;
 
-const auto soma_section_area = [](Neuron& n ) -> float {
+const auto soma_section_area = [](const Neuron& n ) -> float {
   return n.somaArea();
 };
 
-const auto soma_surface = [](Neuron& n ) -> float {
+const auto soma_surface = [](const Neuron& n ) -> float {
   auto soma_size = std::distance(n.begin_soma(),n.end_soma());
   
   if(soma_size == 1){

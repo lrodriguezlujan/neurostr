@@ -23,7 +23,7 @@ namespace detail {
     using measure_traits = measure_func_traits<M>;
     
     // Single-single
-    return [s_ = selector, m_ = measure]( typename selector_traits::in_type& v ) 
+    return [s_ = selector, m_ = measure]( const typename selector_traits::in_type& v ) 
                   -> typename measure_traits::out_type {
                     return m_(s_(v));
     };
@@ -39,7 +39,7 @@ namespace detail {
     using measure_traits = measure_func_traits<M>;
     
     // Single-single
-    return [s_ = selector, m_ = measure](typename selector_traits::in_type& v ) 
+    return [s_ = selector, m_ = measure](const typename selector_traits::in_type& v ) 
                   -> typename measure_traits::out_type {
                     auto aux = s_(v);
                     return m_(aux.begin(),aux.end());

@@ -265,7 +265,7 @@ namespace neurostr {
   }
   
   // Compute soma planar area
-  float Neuron::somaArea(){
+  float Neuron::somaArea() const{
     return geometry::polygon_area(geometry::as_planar_polygon(soma_positions()));
   }
 
