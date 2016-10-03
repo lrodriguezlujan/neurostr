@@ -375,7 +375,7 @@ const std::string dat_med = "../data/RC6-P1F6C4LVc-cs-Sh.DAT";
 const std::string dat_large = "../data/A090622.DAT";
 
 const std::string asc_small = "../data/02b_pyramidal1aACC.ASC";
-const std::string asc_med = "../data/CzI_2.asc";
+const std::string asc_med = "../data/cZI_2.asc";
 const std::string asc_large = "../data/VPM_1.asc";
 
 const std::string swc_small = "../data/A9-7.CNG.swc";
@@ -533,9 +533,9 @@ int main()
     
     // ASC READ SPEED
     bmk::benchmark<std::chrono::microseconds> bm_asc;
-    //bm_asc.run("asc_read_small",10, load_file_test, "file", {asc_small}); // FIX FAIL #48
+    bm_asc.run("asc_read_small",10, load_file_test, "file", {asc_small});
     bm_asc.run("asc_read_medium",nrep, load_file_test, "file", {asc_med});
-    //bm_asc.run("asc_read_large",10, load_file_test, "file", {asc_large}); // FIX ISSUE #49
+    bm_asc.run("asc_read_large",10, load_file_test, "file", {asc_large}); // FIX ISSUE #49
     bm_asc.print("asc_read", std::cout);
     
     // DAT READ SPEED
@@ -546,11 +546,11 @@ int main()
     bm_dat.print("dat_read", std::cout);
     
     // JSON READ SPEEd
-    //bmk::benchmark<std::chrono::microseconds> bm_json;
-    //bm_json.run("json_read_small",10, load_file_test, "file", {json_small}); // FIX
-    //bm_json.run("json_read_medium",10, load_file_test, "file", {json_med});
-    //bm_json.run("json_read_large",10, load_file_test, "file", {json_large});
-    //bm_json.print("json_read", std::cout);
+    bmk::benchmark<std::chrono::microseconds> bm_json;
+    bm_json.run("json_read_small",10, load_file_test, "file", {json_small});
+    bm_json.run("json_read_medium",10, load_file_test, "file", {json_med});
+    bm_json.run("json_read_large",10, load_file_test, "file", {json_large});
+    bm_json.print("json_read", std::cout);
     
     // Read small, medium and large
     auto r_small = neurostr::io::read_file_by_ext(swc_small);
