@@ -86,7 +86,8 @@ class SWCParser : public Parser{ // Could be templated
   Neuron* neuron_;
   std::set<std::string> property_keys_;
   
-   // Properties management
+  private:
+  mutable Neurite::base_node_iterator last_node_pos_;
   
   
   /**

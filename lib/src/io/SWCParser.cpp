@@ -7,12 +7,16 @@ namespace neurostr {
 namespace io {
 
 
-SWCParser::SWCParser(std::istream& s) : Parser(s), sep_('\0', ' ', '"'), neuron_(nullptr) {
+SWCParser::SWCParser(std::istream& s) 
+  : Parser(s)
+  , sep_('\0', ' ', '"')
+  , neuron_(nullptr)
+  ,last_node_pos_() {
   initialize_property_keys();
 }
 
 SWCParser::SWCParser(std::istream& s, const std::string& separators)
-    : Parser(s), sep_("", separators, "\""), neuron_(nullptr) {
+    : Parser(s), sep_("", separators, "\""), neuron_(nullptr),last_node_pos_() {
   initialize_property_keys();
 };
 
@@ -137,17 +141,22 @@ void SWCParser::process_data_(const std::string& s) {
       Neurite* neurite(new Neurite(neuron_->size() + 1, NeuriteType(type)));
       // Create a branch with root given parent
       neurite->set_root(*soma_pos);
-      neurite->insert_node( neurite->begin_node(), node);
+      last_node_pos_ = neurite->insert_node( neurite->begin_node(), node);
       neuron_->add_neurite(neurite);
       
     } else {
+      Neurite::base_node_iterator pos;
       // Find parent node
-      auto pos = neuron_->find(parent);
+      if(last_node_pos_->id() == parent){
+        pos = last_node_pos_;
+      } else{
+        pos = neuron_->find(parent);
+      }
       if (pos.begin() == pos.end()) {
         throw std::runtime_error("Oprhan node");
       } else {
         // Set branch
-        pos.neurite().insert_node(pos, node);
+        last_node_pos_ = pos.neurite().insert_node(pos, node);
       }
     }
     
@@ -155,7 +164,7 @@ void SWCParser::process_data_(const std::string& s) {
     // New neurite with root not soma
     Neurite* neurite = new Neurite(neuron_->size() + 1, NeuriteType(type));
     neurite->set_root(); // No root
-    neurite->insert_node(-1, node); // Add node
+    last_node_pos_ = neurite->insert_node(-1, node); // Add node
     neuron_->add_neurite(neurite);
   }
 }
