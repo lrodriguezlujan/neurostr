@@ -366,7 +366,15 @@ void ASCParser::process_(Reconstruction & r) {
 
       // And check to which neuron it corresponds if any.
       // Somas are required to be defined before neurites
-      r.add_neurite_to_closest_soma(n);
+      if(r.size() == 0){
+        
+        // We need to create the neuron before
+        Neuron* neuro = new Neuron(r.id() + std::string("_1"));
+        r.addNeuron(neuro);
+      }
+      
+      r.add_neurite_to_closest_soma(n);  
+      
 
       break;
     }

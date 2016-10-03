@@ -361,10 +361,17 @@ Reconstruction::neuron_iterator Reconstruction::closest_soma(const point_type& p
 
 Reconstruction::neuron_iterator Reconstruction::add_neurite_to_closest_soma(Neurite* n) {
         
-    auto closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
+    // Special case - just 1 neuron
+    neuron_iterator closest;
+    
+    if(size() == 1){
+      closest = begin();
+    } else {
+      closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
+    }
     
     if (closest == end()) {
-      throw std::runtime_error("Orphan neurite");
+      throw std::runtime_error("No neuron in reconstruction");
     } else {
       n->id(closest->size() + 1);
       closest->add_neurite(n);
