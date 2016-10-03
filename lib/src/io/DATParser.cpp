@@ -89,7 +89,7 @@ Node DATParser::process_sample() {
   return n;
 }
 
-DATParser::marker_type DATParser::process_markerset() {
+marker_type DATParser::process_markerset() {
   
   marker_type m;
   size_t len;
@@ -101,9 +101,9 @@ DATParser::marker_type DATParser::process_markerset() {
   m.name = process_string(len);
   std::transform(m.name.begin(), m.name.end(), m.name.begin(), ::tolower);  // Keys are lowecase always
   
-  // Copy unknown values
+  // Copy color values (RGBA)
   for(int i = 0; i < 4 ; ++i){
-    m.unknown[i] = buffer_head_[i];
+    m.color[i] = buffer_head_[i];
   }
   buffer_head_ += 4;
   // WTF: these 4 bytes seem to be ...ignored in the block size
@@ -113,6 +113,8 @@ DATParser::marker_type DATParser::process_markerset() {
   len = process_block_header_();
   if (type_in_buffer_ != block_type::PROPERTY_LIST) throw std::runtime_error("Malformed markerset block");  
   m.properties = process_proplist_();
+  
+  // TODO: Should have samples somewhere!!!... Need an example to fix this
     
   return m;
 }
@@ -210,7 +212,7 @@ std::vector<PropertyMap::property_type> DATParser::process_proplist_() {
   return v;
 }
 
-std::vector<DATParser::marker_type> DATParser::process_markersetlist_(){
+std::vector<marker_type> DATParser::process_markersetlist_(){
   std::uint16_t nmarkers;
   std::vector<marker_type> v;
 

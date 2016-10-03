@@ -105,10 +105,21 @@ class ASCParser : public Parser{
   PropertyMap::property_type process_color();  // Special color block
   
   /**
+   * @brief Process markerset type
+   * @return Marker type
+   */
+  marker_type process_marker();
+  
+  /**
    * @brief Skips a comment in the buffer
    * @return true if it skips at least one character
    */
   bool skip_comment();
+  
+  /**
+   * @brief Skip current block
+   */
+  void skip_block();
   
   /**
    * @brief Skips spaces and EOL character in the buffer

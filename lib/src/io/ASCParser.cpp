@@ -125,7 +125,9 @@ PropertyMap::property_type ASCParser::process_color() {
 
   // Print HEX COLOR CHAIN
   sprintf(tmp, "#%02x%02x%02x", rgb[0], rgb[1], rgb[2]);
-  if (!pass_block_end()) throw std::runtime_error("Malformed property block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed property block (Wrong termination)");
+  }
   return property_type("color", std::string(tmp) );
 }
 
@@ -163,7 +165,9 @@ PropertyMap::property_type ASCParser::process_property() {
   }
 
   // End block
-  if (!pass_block_end()) throw std::runtime_error("Malformed property block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed property block (Wrong termination)");
+  }
   return p;
 }
 
@@ -194,9 +198,49 @@ Node ASCParser::process_sample() {
     throw std::runtime_error("Malformed sample (d-value)");
 
   // End block
-  if (!pass_block_end()) throw std::runtime_error("Malformed sample block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed sample block (Wrong termination)");
+  }
 
   return Node(++node_count_, x, y, z, d / 2);
+}
+
+marker_type ASCParser::process_marker(){
+  
+  marker_type m;
+  m.name  = boost::any_cast<std::string>(val_);
+
+  // Name to lower
+  std::transform(m.name.begin(), m.name.end(), m.name.begin(), ::tolower);
+  
+  skip_to_stopper();
+  // Process subblocks
+  while (stream_.peek() != block_end && stream_.peek() != EOF) {
+  
+    if (stream_.peek() == block_start) {
+      stream_.get();
+      // Inside the block
+      block_type btype = next_block_type(true);
+      if (btype == block_type::SAMPLE) {
+        m.samples.push_back(process_sample());
+      } else if (btype == block_type::PROPERTY) {
+        m.properties.push_back(process_property());
+      } else {
+        throw std::runtime_error("Malformed marker block");
+      }
+    } else {
+        throw std::runtime_error("Malformed marker block");
+    }
+    skip_to_stopper();    
+  }
+  
+  // IF PEEK EOF - Malformed block
+  if (pass_block_end() == false) {
+    throw std::runtime_error("Malformed marker block (Wrong termination)");
+  }
+  
+  // Return marker
+  return(m);
 }
 
 void ASCParser::skip_spine() {
@@ -225,6 +269,8 @@ block_type ASCParser::next_block_type(bool inBlock) {
   } else {
     // STRING
     std::string tmp = boost::any_cast<std::string>(val_);
+    std::transform(tmp.begin(),tmp.end(),tmp.begin(),::tolower);
+    
     if (tmp[0] == string_escape)
       return block_type::CONTOUR;
     else if (tmp == marker)
@@ -324,8 +370,22 @@ void ASCParser::process_(Reconstruction & r) {
     case block_type::PROPERTY:
       r.add_property(process_property());
       break;
-    default: {
-      // Skip block
+    case block_type::MARKERSET:
+      // We process and ignore it
+      process_marker();
+      break;
+    // Default just skip
+    default:
+      skip_block();
+      break;
+    } // End switch
+    skip_to_stopper();
+  }
+  return;
+}
+
+void ASCParser::skip_block(){
+   // Skip block
       int depth = 1;
       // We need to skip () until count reaches 0
       while (depth > 0 && stream_.peek() != EOF) {
@@ -334,11 +394,6 @@ void ASCParser::process_(Reconstruction & r) {
         else if (stream_.get() == block_start)
           --depth;
       }
-    }
-    }
-    skip_to_stopper();
-  }
-  return;
 }
 
 Neurite::base_node_iterator ASCParser::process_container_(
@@ -409,7 +464,9 @@ Neurite::base_node_iterator ASCParser::process_container_(
   } else {
     skip_to_stopper();
     // End block
-    if (stream_.peek() != EOF && !pass_block_end()) throw std::runtime_error("Malformed block (Wrong termination)");
+    if (stream_.peek() != EOF && pass_block_end() == false){
+      throw std::runtime_error("Malformed block (Wrong termination)");
+    }
   }
 
   return current_pos;

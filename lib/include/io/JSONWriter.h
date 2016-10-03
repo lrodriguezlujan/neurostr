@@ -52,6 +52,7 @@ namespace io {
     
     // Write  reconstruction
     public:
+    
     void write(const neurostr::Reconstruction& r){
         writer->StartObject();
         

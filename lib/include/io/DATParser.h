@@ -32,11 +32,7 @@ class DATParser : public Parser{
     
 public:
 
-  typedef struct {
-    std::string name;
-    std::uint8_t unknown[4];
-    std::vector<property_type> properties; 
-  } marker_type;
+  
 
   /**
    * @brief Creates a DAT parser
