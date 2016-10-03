@@ -243,11 +243,15 @@ marker_type ASCParser::process_marker(){
   return(m);
 }
 
-void ASCParser::skip_spine() {
+void ASCParser::process_spine() {
 
-  // End block
-  if (stream_.peek() != spine_end)
-    if (skip_to_stopper() != spine_end) throw std::runtime_error("Malformed spine");
+  // Spine is "like" a sample
+  get_value();
+  process_sample();
+  if (stream_.peek() != spine_end){
+    throw std::runtime_error("Malformed spine");
+  }
+  // Skip spine end
   stream_.get();
 }
 
@@ -410,7 +414,7 @@ Neurite::base_node_iterator ASCParser::process_container_(
       if (stream_.get() != block_start) {
         throw std::runtime_error("Malformed spine block");
       } else {
-        skip_spine();
+        process_spine();
       }
     }
     // Process any other block

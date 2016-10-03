@@ -136,7 +136,7 @@ class ASCParser : public Parser{
   /**
    * @brief Skips a spine block (currently they arent processed)
    */
-  void skip_spine();
+  void process_spine();
   
   /**
    * @brief Consumes the block end character from the stream
