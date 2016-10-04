@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <type_traits>
 
+#include "core/log.h"
 #include "core/neuron.h"
 #include "io/parser_dispatcher.h"
 #include "validator/validator.h"
@@ -445,7 +446,8 @@ const auto increasing_radius_validator = [](const Neuron& n){
 };
 
 const auto segment_collision_validator = [](const Neuron& n){
-  auto test = neurostr::validator::segment_collision_validator;
+  //auto test = neurostr::validator::segment_collision_validator;
+  auto test = neurostr::validator::branch_collision_validator;
   test.validate(n);
 };
 
@@ -521,6 +523,8 @@ void lmeasures_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& 
 int main()
 {    
     const int nrep = 5;
+    
+    neurostr::log::init_log_cout(); // Log to cout
 
     /** Read speed test **/
     // SWC READ SPEEd

@@ -121,9 +121,9 @@ int main(int ac, char **av)
   std::cout << "," << std::endl;
 
 
-  auto segment_collision_validator = neurostr::validator::segment_collision_validator;
-  segment_collision_validator.validate(n);
-  segment_collision_validator.toJSON(std::cout,!exhaustive);
+  auto branch_collision_validator = neurostr::validator::branch_collision_validator;
+  branch_collision_validator.validate(n);
+  branch_collision_validator.toJSON(std::cout,!exhaustive);
 
   std::cout << "," << std::endl;
 
