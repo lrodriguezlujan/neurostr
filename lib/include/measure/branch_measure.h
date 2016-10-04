@@ -370,6 +370,30 @@ const auto branch_length = [](const Branch &b) -> float {
   return len;
 };
 
+const auto branch_intersects = [](const Branch &b ) -> std::string {
+ 
+  // First get neuron 
+  if(b.valid_neurite() ){
+    const Neuron& n = b.neurite().neuron();
+    box_type bbox_b = b.boundingBox();
+    
+    for(auto it = n.begin_neurite(); it != n.end_neurite(); ++it){
+      for(auto bit = it->begin_branch(); bit != it->end_branch(); ++bit){
+        if(*bit != b){
+          // If their bounding boxes intersect
+          if( geometry::box_box_intersection(bbox_b,bit->boundingBox()) ){
+            if(b.distance(*bit) == 0){
+              return bit->idString()+"("+std::to_string(bit->neurite().id())+")";
+            }
+          }
+        }
+      }
+    }
+    
+  }
+  return std::string();
+};
+
 } // measure
 } // neurostr
 
