@@ -209,8 +209,10 @@ namespace io {
       writer->StartObject();
       
       // Write the root
-      writer->Key("root");
-      writeNode(b->root());
+      if(b-> has_root()){
+        writer->Key("root");
+        writeNode(b->root());
+      }
       
       // Properties
       if(b->properties.size()>0){
