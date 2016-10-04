@@ -95,9 +95,16 @@ marker_type DATParser::process_markerset() {
   size_t len;
 
   // Process header and get property name
+  if(ensure_buffer_size_(block_header_size)){
+    NSTR_LOG_(warning) << "Expanding buffer in markerset name header";
+  }
   len = process_block_header_();
+  if(ensure_buffer_size_(len)){
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block name";
+  }
 
-  if (type_in_buffer_ != block_type::STRING) throw std::runtime_error("Malformed markerset block");  
+  if (type_in_buffer_ != block_type::STRING) 
+    throw std::runtime_error("Malformed markerset block");  
   m.name = process_string(len);
   std::transform(m.name.begin(), m.name.end(), m.name.begin(), ::tolower);  // Keys are lowecase always
   
@@ -106,15 +113,36 @@ marker_type DATParser::process_markerset() {
     m.color[i] = buffer_head_[i];
   }
   buffer_head_ += 4;
-  // WTF: these 4 bytes seem to be ...ignored in the block size
-  in_buffer_ += 4;
   
   // Process proplist
+  if(empty()){
+    NSTR_LOG_(warning) << "Reading header after block end in markerset block";
+    ensure_buffer_size_(block_header_size);
+  }
+    
   len = process_block_header_();
-  if (type_in_buffer_ != block_type::PROPERTY_LIST) throw std::runtime_error("Malformed markerset block");  
+  if(ensure_buffer_size_(len)){
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block property list ";
+  }
+  
+  if (type_in_buffer_ != block_type::PROPERTY_LIST) 
+    throw std::runtime_error("Malformed markerset block");  
   m.properties = process_proplist_();
   
-  // TODO: Should have samples somewhere!!!... Need an example to fix this
+  // Process sample list
+  if(empty()){
+    NSTR_LOG_(warning) << "Reading block after block end in markerset block";
+    ensure_buffer_size_(block_header_size);
+  }
+    
+  len = process_block_header_();
+  if(ensure_buffer_size_(len)){
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block sample list";
+  }
+  
+  if (type_in_buffer_ != block_type::SAMPLE_LIST) 
+    throw std::runtime_error("Malformed markerset block");  
+  m.samples = process_samplelist_();
     
   return m;
 }
@@ -126,7 +154,15 @@ PropertyMap::property_type DATParser::process_property() {
   size_t len;
 
   // Process header and get property name
+  if(ensure_buffer_size_(block_header_size)){
+    NSTR_LOG_(warning) << "Expanding buffer in property name header";
+  }
   len = process_block_header_();
+  
+  if(ensure_buffer_size_(len)){
+    NSTR_LOG_(warning) << "Expanding buffer in markerset name";
+  }
+  
   if (type_in_buffer_ != block_type::STRING) throw std::runtime_error("Malformed property block");
   key = process_string(len);
   std::transform(key.begin(), key.end(), key.begin(), ::tolower);  // Keys are lowecase always
@@ -145,7 +181,14 @@ PropertyMap::property_type DATParser::process_property() {
   // String property
   if (is_string) {
     // Read property value
+    
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in property value header";
+    }
     len = process_block_header_();
+    if(ensure_buffer_size_(len)){
+      NSTR_LOG_(warning) << "Expanding buffer in property value";
+    }
 
     // Read value string
     if (type_in_buffer_ != block_type::STRING) throw std::runtime_error("Malformed property block");
@@ -174,7 +217,13 @@ std::vector<Node> DATParser::process_samplelist_() {
   // Read samples
   for (int i = 0; i < nsamples && !empty(); i++) {
     // Read header
-    process_block_header_();
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in process samplelist header";
+    }
+    if(ensure_buffer_size_(process_block_header_())){
+      NSTR_LOG_(warning) << "Expanding buffer in process samplelist sample";
+    }
+    
     // Read sample
     if (type_in_buffer_ != block_type::SAMPLE)
       throw std::runtime_error("Unexpected block inside a sample list");
@@ -200,8 +249,13 @@ std::vector<PropertyMap::property_type> DATParser::process_proplist_() {
   // Read samples
   for (int i = 0; i < nprops && !empty(); i++) {
     // Read header
-    process_block_header_();
-    // Read sample
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in process proplist header";
+    }
+    if(ensure_buffer_size_(process_block_header_())){
+      NSTR_LOG_(warning) << "Expanding buffer in process proplist property";
+    }
+    
     if (type_in_buffer_ != block_type::PROPERTY)
       throw std::runtime_error("Unexpected block inside a property list");
     else {
@@ -225,9 +279,14 @@ std::vector<marker_type> DATParser::process_markersetlist_(){
 
   // Read samples
   for (int i = 0; i < nmarkers && !empty(); i++) {
-    // Read header
-    process_block_header_();
-    // Read sample
+    
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in process markerset list header";
+    }
+    if(ensure_buffer_size_(process_block_header_())){
+      NSTR_LOG_(warning) << "Expanding buffer in process markerset list marker";
+    }
+    
     if (type_in_buffer_ != block_type::MARKERSET)
       throw std::runtime_error("Unexpected block inside a MARKERSET list");
     else {
@@ -259,7 +318,15 @@ Neurite::base_node_iterator DATParser::process_container_(
   // Read name (in any)
   if (named(type)) {
     // Read name block header
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in container name header";
+    }
     std::size_t len = process_block_header_();
+    
+    if(ensure_buffer_size_(len)){
+      NSTR_LOG_(warning) << "Expanding buffer in container name value";
+    }
+    
     if (type_in_buffer_ != block_type::STRING)
       throw std::runtime_error("Malformed block");
     else {
@@ -279,10 +346,19 @@ Neurite::base_node_iterator DATParser::process_container_(
   while (!empty()) {
 
     // Read block header
-    in_buffer_ = process_block_header_();
+    if(ensure_buffer_size_(block_header_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in container subblock header";
+    }
+    
+    std::size_t inblock_size = process_block_header_();
+    
+    if(ensure_buffer_size_(inblock_size)){
+      NSTR_LOG_(warning) << "Expanding buffer in container subblock";
+    }
+    
     // Correct head displacement
-    in_buffer_ += (buffer_head_ - buffer_);
-
+    in_buffer_ = inblock_size + (buffer_head_ - buffer_);
+    
     // Single sample or list
     if (type_in_buffer_ == block_type::SAMPLE) {
       Node n = process_sample();
@@ -337,7 +413,8 @@ Neurite::base_node_iterator DATParser::process_container_(
     }
 
     // Restore block size
-    in_buffer_ = current_block_size;
+    in_buffer_ = current_block_size + extended_bytes_;
+    extended_bytes_ = 0;
   }
   return current_pos;
 }
@@ -408,10 +485,55 @@ void DATParser::process_block_(Reconstruction &r) {
 /***** PRIVATE METHODS **/
 
 std::streamsize DATParser::fill_buffer_(int n) {
+  std::streamsize nbytes;
   in_buffer_ = n;
+  in_buffer_real_ = n;
+  
   stream_.read((char *)buffer_, n);
   buffer_head_ = buffer_;
-  return stream_.gcount();
+  
+  nbytes = stream_.gcount();
+  read_bytes_+= nbytes;
+  return nbytes;
+}
+
+std::streamsize DATParser::expand_buffer_(std::size_t nbytes){
+  
+  if( in_buffer_ + nbytes <= in_buffer_real_){
+      // Just expand
+      in_buffer_+=nbytes;
+      extended_bytes_+=nbytes;
+      return nbytes;
+  } else {
+    // read
+    char* last = (char*)(buffer_ + in_buffer_real_);
+    stream_.read(last, nbytes);
+    
+    std::streamsize readbytes = stream_.gcount();
+    
+    in_buffer_ += readbytes;
+    in_buffer_real_ += readbytes;
+    read_bytes_+= readbytes;
+    extended_bytes_+=readbytes;
+    
+    return readbytes;  
+  }
+}
+
+
+bool DATParser::ensure_buffer_size_(std::size_t min_size){
+  
+  int delta = (in_buffer_ - (buffer_head_ - buffer_)) - min_size;
+  
+  if( delta < 0 ){
+    // We need to expand -delta
+    if( std::abs(delta) != expand_buffer_(std::abs(delta)) ){
+      throw std::runtime_error("Unexpected EOF");
+    }
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool DATParser::empty() { return (in_buffer_ == 0 || ((buffer_ + in_buffer_) <= buffer_head_)); }
