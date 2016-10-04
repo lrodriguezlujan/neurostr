@@ -119,6 +119,12 @@ const auto segment_collision_validator =
                          "Fails when the distance between any two segments is too close to zero");
 
 
+const auto branch_collision_validator =
+  nv::create_validator(  nm::branch_intersects,
+                         nv::empty_string,
+                         "Branch collision validator",
+                         "Fails when the distance between any two branches is zero");
+
 const auto extreme_angles_validator  =
     nv::create_validator(nm::extreme_angle,
                          nv::is_false,

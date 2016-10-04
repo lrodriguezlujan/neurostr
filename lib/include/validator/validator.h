@@ -52,7 +52,7 @@ template <typename T, typename V>
     std::ostream& toJSON( std::ostream& os) const {
       os << "{ " <<
         "\"type\" : \"" << element_name(element.get()) << "\", " << std::endl << 
-        "\"id\" : " << element_id_(element.get()) << " ," << std::endl << 
+        "\"id\" : " << escape_string(element_id()) << " ," << std::endl << 
         "\"value\" : " << escape_string(value) << " ," << std::endl;
         if(valid){
           os << "\"pass\" : true" << std::endl << "}";
@@ -97,15 +97,15 @@ template <typename T, typename V>
     }
     
     std::string element_id_str_(const Neurite& n) const{
-      return element_id_(n.neuron()) + std::string(", neurite: ") + std::to_string(n.id());
+      return element_id_str_(n.neuron()) + std::string(", neurite: ") + std::to_string(n.id());
     }
     
     std::string element_id_str_(const Branch& n) const{
-      return element_id_(n.neurite()) + std::string(", branch: ") + n.idString();
+      return element_id_str_(n.neurite()) + std::string(", branch: ") + n.idString();
     }
     
     std::string element_id_str_(const Node& n) const{
-      return element_id_(n.branch()) + std::string(", Node: ") + std::to_string(n.id());
+      return element_id_str_(n.branch()) + std::string(", Node: ") + std::to_string(n.id());
     }
     
     std::string element_name(const Neuron& n) const{

@@ -26,6 +26,8 @@ auto range_check_factory( T min = std::numeric_limits<T>::min(), T max = std::nu
 const auto is_true = []( const bool& i ) -> bool { return i; };
 const auto is_false = []( const bool& i ) -> bool { return !i; };
 
+const auto empty_string = []( const std::string& s ) -> bool { return s.size() == 0; };
+
 }//validation
 }//neurostr
 
