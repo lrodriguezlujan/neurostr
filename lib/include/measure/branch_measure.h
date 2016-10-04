@@ -379,12 +379,25 @@ const auto branch_intersects = [](const Branch &b ) -> std::string {
     
     for(auto it = n.begin_neurite(); it != n.end_neurite(); ++it){
       for(auto bit = it->begin_branch(); bit != it->end_branch(); ++bit){
-        if(*bit != b){
-          // If their bounding boxes intersect
-          if( geometry::box_box_intersection(bbox_b,bit->boundingBox()) ){
-            if(b.distance(*bit) == 0){
-              return bit->idString()+"("+std::to_string(bit->neurite().id())+")";
-            }
+        bool comparable = true;
+        
+        if(bit->neurite() == b.neurite()){
+          // Check that they are not the same branch
+          comparable &= (bit->neurite() != b.neurite() || *bit != b);
+          // b is not parent of bit
+          comparable &= (bit.node->parent == nullptr || bit.node->parent->data !=b);
+          // bit is not parent of b
+          for(auto chit = bit->neurite().begin_children(bit);
+                   chit != bit->neurite().end_children(bit);
+                   ++chit){
+            comparable &= (*chit != b);
+          }
+        }
+        
+        // If their bounding boxes intersect
+        if(comparable &&  geometry::box_box_intersection(bbox_b,bit->boundingBox()) ){
+          if(b.distance(*bit) == 0){
+            return bit->idString()+"("+std::to_string(bit->neurite().id())+")";
           }
         }
       }

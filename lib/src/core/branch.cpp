@@ -293,7 +293,6 @@ namespace neurostr{
         
         float mindist =  std::numeric_limits<float>::max();
         float d;
-        int root_id = -1;
         
         point_type p0 ;
         point_type p1 ;
@@ -306,13 +305,12 @@ namespace neurostr{
         //Root distance
         if(has_root()){
           
-          root_id = root().id();
           p0 = root().position();
           p1 = first().position();
           r = root().radius() + first().radius();
           
           // Agains other root if they are not equal
-          if(other.has_root() && other.root() != root() ){
+          if(other.has_root() && (other.root().id() != root().id()) ){
             // S - S distance
             d=geometry::segment_segment_distance(p0,p1,
                                   other.root().position(),other.first().position());
@@ -327,7 +325,7 @@ namespace neurostr{
           
           // Against other internodes if they are not...
           for(auto otit = std::next(other.begin(),1); otit != other.end(); ++otit){
-            if(otit->id() != root_id && std::prev(otit,1)->id() != root_id ){
+      
               d = geometry::segment_segment_distance(p0,p1,
                                   std::prev(otit,1)->position(),otit->position());
               // radius
@@ -337,7 +335,6 @@ namespace neurostr{
               }else if(d<mindist){
                 mindist = d;
               }
-            }
           }
           
         }
@@ -349,8 +346,7 @@ namespace neurostr{
           r = (std::prev(it,1)->radius() + it->radius());
           
           // Compare against the other root
-          if(other.has_root() && (other.root() != *(std::prev(it,1))) && 
-              (other.root() != *it) ){
+          if (other.has_root() ){
             d=geometry::segment_segment_distance(p0,p1,
                                   other.root().position(),other.first().position());
             // radius
