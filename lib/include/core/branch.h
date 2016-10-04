@@ -464,9 +464,22 @@ class Branch : public WithProperties{
   float discrete_frechet( const Branch& other) const;
   
   /**
+   * @brief Computes the distance between both branches.
+   * Ignores nodes shared by both branches
+   * @param other
+   * @return euclidean distance
+   */
+  float distance(const Branch& other) const;
+  
+  /**
    * @brief Updates branch memeber in all nodes
    */
   void set_nodes_branch();
+  
+  /**
+   * @brief Gets bounding box
+   */
+   box_type boundingBox() const;
   
   private:
   

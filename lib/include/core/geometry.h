@@ -143,7 +143,6 @@ namespace geometry
    */
   float segment_segment_distance(const point_type& p0, const point_type& p1, 
                                  const point_type& q0, const point_type& q1);
-  
 
   /**
    * @brief Returns the quaternion to transform v into u (both unitary)
@@ -328,6 +327,29 @@ namespace geometry
    * @return Angle between a and b  [0,pi]
    */
   float vector_vector_angle(const point_type&a ,const point_type &b);
+  
+  /**
+   * @brief Checks if box a intersects with box b (axis aligned)
+   * @param a 
+   * @param b
+   * @return True if they intersect
+   */
+  bool box_box_intersection(const box_type&a ,const box_type&b);
+  
+  /**
+   * @brief Returns 8 corner points in a axis-aligned box
+   * @param a 
+   * @return Corner points
+   */
+  std::vector<point_type> box_corners(const box_type &b);
+  
+  
+  /**
+   * @brief Computes the bounding box of a node set
+   * @param v node set
+   * @return box
+   */
+  box_type bounding_box(const std::vector<point_type>& v);
   
   /**
    * @brief Computes the planar angle from a to b

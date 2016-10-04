@@ -287,6 +287,111 @@ namespace neurostr{
     }
   }
   
+  float Branch::distance(const Branch& other) const{
+      if(other == *this) return 0.0;
+      else {
+        
+        float mindist =  std::numeric_limits<float>::max();
+        float d;
+        int root_id = -1;
+        
+        point_type p0 ;
+        point_type p1 ;
+        float r;
+        
+        if(size() == 0 || other.size() == 0){
+          return mindist;
+        }
+        
+        //Root distance
+        if(has_root()){
+          
+          root_id = root().id();
+          p0 = root().position();
+          p1 = first().position();
+          r = root().radius() + first().radius();
+          
+          // Agains other root if they are not equal
+          if(other.has_root() && other.root() != root() ){
+            // S - S distance
+            d=geometry::segment_segment_distance(p0,p1,
+                                  other.root().position(),other.first().position());
+            // radius
+            d-= (r + other.root().radius() + other.first().radius())/2.;
+            if( d < 0){
+                return 0.0;
+            }else if(d<mindist){
+                mindist = d;
+            }
+          }
+          
+          // Against other internodes if they are not...
+          for(auto otit = std::next(other.begin(),1); otit != other.end(); ++otit){
+            if(otit->id() != root_id && std::prev(otit,1)->id() != root_id ){
+              d = geometry::segment_segment_distance(p0,p1,
+                                  std::prev(otit,1)->position(),otit->position());
+              // radius
+              d-= (r + std::prev(otit,1)->radius() +otit->radius())/2.;
+              if( d < 0){
+                return 0.0;
+              }else if(d<mindist){
+                mindist = d;
+              }
+            }
+          }
+          
+        }
+        
+        // For each inter node
+        for(auto it = std::next(begin(),1); it != end(); ++it){
+          p0 =  std::prev(it,1)->position();
+          p1 =  it->position();
+          r = (std::prev(it,1)->radius() + it->radius());
+          
+          // Compare against the other root
+          if(other.has_root() && (other.root() != *(std::prev(it,1))) && 
+              (other.root() != *it) ){
+            d=geometry::segment_segment_distance(p0,p1,
+                                  other.root().position(),other.first().position());
+            // radius
+            d-= (r + other.root().radius() + other.first().radius())/2.;
+            if( d < 0){
+                return 0.0;
+            }else if(d<mindist){
+                mindist = d;
+            }
+          }
+          
+          // Distances with other internodes
+          for(auto otit = std::next(other.begin(),1); otit != other.end(); ++otit){
+              d = geometry::segment_segment_distance(p0,p1,
+                                  std::prev(otit,1)->position(),otit->position());
+              // radius
+              d-= (r + std::prev(otit,1)->radius() +otit->radius())/2.;
+              if( d < 0){
+                return 0.0;
+              }else if(d<mindist){
+                mindist = d;
+              }
+          }
+        }
+        return mindist;
+      }
+  }
+  
+  box_type Branch::boundingBox() const {
+    
+    std::vector<point_type> tmp;
+    tmp.reserve(size()+1);
+    
+    if(has_root())
+      tmp.push_back(root().position());
+    
+    for(auto it = begin(); it != end() ; ++it){
+      tmp.push_back(it->position());
+    }
+    return geometry::bounding_box(tmp);
+  }
  
 // Friend output method
 std::ostream& operator<<(std::ostream& os, const Branch& b){

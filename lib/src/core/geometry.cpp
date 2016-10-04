@@ -219,6 +219,59 @@ bool segment_box_intersection( const bg::model::box<point_type>& b,
   }
 }
 
+bool box_box_intersection(const box_type&a ,const box_type&b) {
+  std::vector<point_type> corners = box_corners(b);
+  
+  for(auto it = corners.begin(); it != corners.end() ; ++it) {
+    if(bg::covered_by(*it,a))
+      return true;
+  }
+  return false;
+}
+
+std::vector<point_type> box_corners(const box_type &b){
+  
+  point_type max_corner = b.max_corner();
+  point_type min_corner = b.min_corner();
+  
+  std::vector<point_type> v;
+  v.reserve(8);
+  
+  v.push_back(max_corner); // 1 1 1 
+  v.push_back(min_corner); // 0 0 0
+  bg::set<0>(min_corner, bg::get<0>(max_corner)); 
+  v.push_back(min_corner); // 1 0 0
+  bg::set<1>(min_corner, bg::get<1>(max_corner));
+  v.push_back(min_corner); // 1 1 0
+  bg::set<0>(min_corner, bg::get<0>(min_corner));
+  v.push_back(min_corner); // 0 1 0
+  bg::set<2>(min_corner, bg::get<2>(max_corner));
+  v.push_back(min_corner); // 0 1 1
+  bg::set<1>(min_corner, bg::get<1>(min_corner));
+  v.push_back(min_corner); // 0 0 1
+  bg::set<0>(min_corner, bg::get<0>(max_corner));
+  v.push_back(min_corner); // 1 0 1
+
+  return v;
+}
+
+box_type bounding_box(const std::vector<point_type>& v){
+  point_type min_corner( std::numeric_limits<float>::max(),
+                           std::numeric_limits<float>::max(), 
+                           std::numeric_limits<float>::max());
+    
+  point_type max_corner( std::numeric_limits<float>::min(),
+                           std::numeric_limits<float>::min(), 
+                           std::numeric_limits<float>::min());
+                           
+  for( auto n_it = v.begin(); n_it != v.end(); ++n_it ) {
+    geometry::max_by_component(*n_it,max_corner);
+    geometry::min_by_component(*n_it,min_corner);
+  }
+  
+  return box_type(min_corner,max_corner);
+}
+
 template <>
 float axisLength<Axis::X_POS>( const bg::model::box<point_type>& b){
     return bg::get<0>(b.max_corner());
