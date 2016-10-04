@@ -15,6 +15,7 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
+#include "core/log.h"
 #include "io/parser_dispatcher.h"
 #include "io/SWCWriter.h"
 #include "io/JSONWriter.h"
@@ -23,6 +24,10 @@ namespace po = boost::program_options;
 
 int main(int ac, char **av)
 {
+  
+  neurostr::log::init_log_cerr();
+  neurostr::log::enable_log();
+  
   std::string ifile;
   std::string ofile;
   std::string ext;
