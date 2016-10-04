@@ -23,6 +23,9 @@ namespace log{
 
 using namespace boost::log::trivial;
 
+
+//core->add_global_attribute("Scope", attrs::named_scope());
+
 BOOST_LOG_GLOBAL_LOGGER(logger,  boost::log::sources::severity_logger_mt<severity_level>)
 
 
@@ -54,12 +57,17 @@ void init_log_file(const std::string& path);
  * @param format_string Log format 
  */
 void init_log_cout();
+void init_log_cerr();
 
 /**
  * @brief Sets severity level filter
  * @param lvl lower severity level
  */
 void log_level(severity_level lvl);
+
+
+void disable_log();
+void enable_log();
 
 } // log
 } // neurostr
