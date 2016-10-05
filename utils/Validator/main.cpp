@@ -15,6 +15,7 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
+#include "core/log.h"
 #include "core/neuron.h"
 #include "io/parser_dispatcher.h"
 #include "validator/predefined_validators.h"
@@ -23,6 +24,10 @@ namespace po = boost::program_options;
 
 int main(int ac, char **av)
 {
+  
+  neurostr::log::init_log_cerr();
+  //neurostr::log::log_level(neurostr::log::warning); // emit warning error or critical
+  
   std::string ifile;
   bool exhaustive;
   
@@ -112,6 +117,12 @@ int main(int ac, char **av)
   zero_length_segments_validator.validate(n);
   zero_length_segments_validator.toJSON(std::cout,!exhaustive);
 
+  std::cout << "," << std::endl;
+  
+  auto radius_length_segments_validator = neurostr::validator::radius_length_segments_validator;
+  radius_length_segments_validator.validate(n);
+  radius_length_segments_validator.toJSON(std::cout,!exhaustive);
+  
   std::cout << "," << std::endl;
 
   auto increasing_radius_validator = neurostr::validator::increasing_radius_validator;

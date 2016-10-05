@@ -440,6 +440,11 @@ const auto zero_length_segments_validator = [](const Neuron& n){
   test.validate(n);
 };
 
+const auto radius_length_segments_validator = [](const Neuron& n){
+  auto test = neurostr::validator::radius_length_segments_validator;
+  test.validate(n);
+};
+
 const auto increasing_radius_validator = [](const Neuron& n){
   auto test = neurostr::validator::increasing_radius_validator;
   test.validate(n);
@@ -468,6 +473,7 @@ void validation_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron&
   bm.run("Trifurcations check",nrep, [&](){no_trifurcations_validator(m);});
   bm.run("Linear branches",nrep, [&](){linear_branches_validator(m);});
   bm.run("Zero length segments",nrep, [&](){zero_length_segments_validator(m);});
+  bm.run("Radius length segments",nrep, [&](){radius_length_segments_validator(m);});
   bm.run("Non-decreasing diameter",nrep, [&](){increasing_radius_validator(m);});
   bm.run("Segment collision",nrep, [&](){segment_collision_validator(m);});
   bm.run("Extreme angles",nrep, [&](){extreme_angles_validator(m);});
