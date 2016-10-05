@@ -109,7 +109,7 @@ const auto radius_length_segments_validator =
   nv::create_validator(nm::node_length_to_parent_border,
                        nv::range_check_factory<float>(1E-6),
                        "Length smaller than radius validator",
-                       "Fails when a two consecutive node spheres intersection is not empty");
+                       "Fails when two consecutive node spheres intersection is not empty");
                        
   
 const auto increasing_radius_validator =
