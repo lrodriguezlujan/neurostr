@@ -108,7 +108,10 @@ void Neurite::correct()  {
         ch = it.begin();
 
         // Copy elements in ch except for the root
-        it->insert(it->end(), ch->begin(), ch->end());
+        for(auto chit = ch->begin() ; chit != ch->end() ; ++chit){
+          it->push_back(*chit);
+        }
+        //it->insert(it->end(), ch->begin(), ch->end());
 
         // Reparent nodes
         tree_.reparent(it, ch.begin(), ch.end());
