@@ -134,7 +134,7 @@ class Node : public WithProperties{
    * @brief Checks wether the parent branch referece is valid
    * @return True if the reference is valid
    */
-  bool valid_branch(){ return branch_ != nullptr; }
+  bool valid_branch() const { return branch_ != nullptr; }
   
   /**
    * @brief  Returns parent branch
@@ -184,7 +184,7 @@ class Node : public WithProperties{
    * @param n Parent node pointer
    * @return Updated node refernece
    */  
-  void parent(Node* n ) const; // Mutable
+  void parent(const Node* n ) const; // Mutable
   
   /**
    * @brief Constructs the vector form \code{this} to \code{p}
@@ -233,7 +233,7 @@ class Node : public WithProperties{
    * @throws runtime_exception Attempt to access null parent
    * @return Parent node reference
    */
-  Node& parent() ;
+  //Node& parent() ;
   
   /**
    * @brief Distance to our parent node (given). Alias for distance.
@@ -326,7 +326,7 @@ class Node : public WithProperties{
   
   // Parent branch
   Branch* branch_;
-  mutable Node* parent_; // Parent node
+  mutable const Node* parent_; // Parent node
 
   // Node properties
   point_type position_;

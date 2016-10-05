@@ -20,6 +20,7 @@ const auto node_self = [](const Node& n) -> const Node& {
 const auto node_parent = [](const Node& n) -> const Node& {
   
   if(n.valid_parent()) return n.parent();
+  if(!n.valid_branch()) return n;
   
   // If node is root (if any)
   if(n.branch().has_root() && n == n.branch().root()){
@@ -42,8 +43,12 @@ const auto node_parent = [](const Node& n) -> const Node& {
   } else {
     auto branch_it = n.branch().neurite().find(n.branch());
     if(branch_it.node->parent == nullptr){
-      // No parent branch - no parent (poor node)
-      return n;
+      if(n.branch().has_root()){
+        n.parent(&(n.branch().root()));
+        return n.branch().root();
+      } else {
+        return n;
+      }
     }
     else{
       // Parent branch is the last node

@@ -1,4 +1,5 @@
 #include "core/neuron.h"
+#include "core/log.h"
 
 #include <limits>
 
@@ -97,9 +98,14 @@ namespace neurostr {
   
   void Neuron::correct() {
     for (auto it = begin_neurite(); it != end_neurite(); ++it) {
-      if (!it->has_root()) {
-        auto n = it->begin_node();
-        if (point_in_soma(n->position())) it->set_root(*n);
+      if (!it->root_is_soma()) {
+        auto n = it->begin_branch()->begin();
+        if (point_in_soma(n->position())){
+          NSTR_LOG_(trace) << "Setting first node as root";
+          it->set_root(*n);
+          // Remove it
+          it->begin_branch()->erase( n );
+        }
       }
 
       it->correct();

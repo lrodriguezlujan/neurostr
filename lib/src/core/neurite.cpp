@@ -1,5 +1,6 @@
 #include "core/neurite.h"
 #include "core/neurite_type.h"
+#include "core/log.h"
 
 namespace neurostr {
   
@@ -44,10 +45,8 @@ void Neurite::set_root() {
     tree_.set_head(Branch(std::vector<int>{1}, 0));
     tree_.begin()->neurite(this);
     
-  } else {
-    // Create an empty node in the root branch
-    tree_.begin()->root(Node()); 
   }
+  
   root_is_soma_ = false;
 }
 
@@ -97,10 +96,13 @@ Neurite::base_node_iterator Neurite::insert_node(Node::id_type parent_id, const 
 void Neurite::correct()  {
     bool trigger = false;
     typename tree_type::sibling_iterator ch;
+    
     // Collapse single-child branches
     for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
       if (it.number_of_children() == 1) {
 
+        NSTR_LOG_(info) << "Removing single-childed branch in neurite " << id();
+        
         // Single children nodes -> collapse
         trigger = true;
         ch = it.begin();

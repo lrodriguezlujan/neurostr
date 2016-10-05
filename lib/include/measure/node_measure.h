@@ -52,6 +52,7 @@ const auto node_order = [](const Node& n) -> int {
 // Get node length to parent
 const auto node_length_to_parent = [](const Node& n) -> float {
   const Node& parent = selector::node_parent(n);
+  //if( parent == n ) return NAN;
   return n.distance(parent);
 };
 

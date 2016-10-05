@@ -37,8 +37,7 @@ namespace io {
         writer = std::unique_ptr<writer_type>(new rapidjson::PrettyWriter<OutputStream>(buffer));
       else 
         writer = std::unique_ptr<writer_type>(new rapidjson::Writer<OutputStream>(buffer));
-      
-      writer.SetMaxDecimalPlaces(3);
+      writer->SetMaxDecimalPlaces(3);
     };
       
     

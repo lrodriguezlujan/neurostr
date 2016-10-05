@@ -41,7 +41,7 @@ auto planar_reconstruction_validator_factory(float min) {
                               nm::selectorMeasureCompose(ns::neurite_node_selector, nm::box_volume),
                               nv::range_check_factory(min),
                               "Planar neurite validation",
-                              "Fails if the non-axis aligned box volume of the neurite is under the predefined threshold");
+                              "Fails if the non-axis aligned box volume of the neurite is lower than predefined threshold");
 }
 
 auto dendrite_count_validator_factory(unsigned int min, unsigned int max) {

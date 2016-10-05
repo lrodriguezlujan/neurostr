@@ -79,7 +79,7 @@ namespace neurostr{
     return (*this);
   }
   
-  void Node::parent(Node* n ) const{
+  void Node::parent(const Node* n ) const{
     parent_ = n;
     invalidate_basis();
     invalidate_length();
@@ -90,10 +90,10 @@ namespace neurostr{
     return *parent_;
   }
   
-  Node& Node::parent() { 
+  /*const Node& Node::parent() { 
     _check_null_parent();
     return *parent_;
-  }
+  }*/
 
   // NODE MEHTHODS
   

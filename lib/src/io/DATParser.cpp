@@ -40,7 +40,7 @@ std::unique_ptr<Reconstruction> DATParser::read(const std::string &name) {
   checked_header_ = false;
   valid_header_ = false;
   
-    // Correct neurites
+    // Correct neuron
   for (auto it = r->begin(); it != r->end(); ++it) {
     it->correct();
     //for (auto neur_it = (*it)->begin_neurite(); neur_it != (*it)->end_neurite(); ++neur_it)
