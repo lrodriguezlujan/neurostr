@@ -1,3 +1,4 @@
+#include "core/log.h"
 #include "core/branch.h"
 #include "core/geometry.h"
 #include <iostream>
@@ -287,93 +288,81 @@ namespace neurostr{
     }
   }
   
-  float Branch::distance(const Branch& other) const{
-      if(other == *this) return 0.0;
+  float Branch::distance(const Branch& other, 
+                         bool ignore_radius) const{
+      NSTR_LOG_(trace) << "branch distance function call";
+      if(other == *this){
+        NSTR_LOG_(trace) << "branch distance return on equal branches";
+        return 0.0;
+      }
       else {
         
+        // Distance
         float mindist =  std::numeric_limits<float>::max();
         float d;
         
-        point_type p0 ;
-        point_type p1 ;
-        float r;
-        
         if(size() == 0 || other.size() == 0){
+          NSTR_LOG_(trace) << "branch distance return on empty branches";
           return mindist;
         }
         
-        //Root distance
-        if(has_root()){
-          
-          p0 = root().position();
-          p1 = first().position();
-          r = root().radius() + first().radius();
-          
-          // Agains other root if they are not equal
-          if(other.has_root() && (other.root().id() != root().id()) ){
-            // S - S distance
-            d=geometry::segment_segment_distance(p0,p1,
-                                  other.root().position(),other.first().position());
-            // radius
-            d-= (r + other.root().radius() + other.first().radius())/2.;
-            if( d < 0){
-                return 0.0;
-            }else if(d<mindist){
-                mindist = d;
-            }
+        // Against the other root if they are not equal
+        if(other.has_root() ){
+          // Ignore root condition - we are brothers
+          bool ignore_root = (!has_root() || root() == other.root());
+            
+          // Ignore last condition - Im others father
+          bool ignore_last = (last() == other.root());
+            
+          // Distance to the other root
+          d = _distance_segment(other.root().position(), other.first().position(),
+                                ignore_radius,
+                                ignore_root,
+                                ignore_last);
+            
+          // Substract other segment radius
+          if( !ignore_radius ){
+            d-= std::min(other.root().radius(),other.first().radius());
           }
-          
-          // Against other internodes if they are not...
-          for(auto otit = std::next(other.begin(),1); otit != other.end(); ++otit){
-      
-              d = geometry::segment_segment_distance(p0,p1,
-                                  std::prev(otit,1)->position(),otit->position());
-              // radius
-              d-= (r + std::prev(otit,1)->radius() +otit->radius())/2.;
-              if( d < 0){
-                return 0.0;
-              }else if(d<mindist){
-                mindist = d;
-              }
+            
+          if(d <= 0.0 ){
+            return 0.0;
+          } else {
+            mindist = d;  
           }
+            
+        } // End other root
           
+        // Rest of the other branch segments
+        const_iterator last;
+          
+        // Do not compare the last segment of the other branch if its my parent
+        if(!has_root() || other.last() != root() ){
+          last = other.end();
+        } else{
+          last = std::prev(other.end(),1);
         }
+          
+        for(auto it = std::next(other.begin(),1); it != last; ++it){
+          d = _distance_segment(std::prev(it,1)->position(), it->position(),
+                                  ignore_radius);
+              
+          // radius
+          if( !ignore_radius ){
+            d-= std::min(std::prev(it,1)->radius(), it->radius());
+          }
+            
+          if( d < 0){
+            return 0.0;
+          } else if(d<mindist){
+            mindist = d;
+          }
+        } // End for other nodes
         
-        // For each inter node
-        for(auto it = std::next(begin(),1); it != end(); ++it){
-          p0 =  std::prev(it,1)->position();
-          p1 =  it->position();
-          r = (std::prev(it,1)->radius() + it->radius());
-          
-          // Compare against the other root
-          if (other.has_root() ){
-            d=geometry::segment_segment_distance(p0,p1,
-                                  other.root().position(),other.first().position());
-            // radius
-            d-= (r + other.root().radius() + other.first().radius())/2.;
-            if( d < 0){
-                return 0.0;
-            }else if(d<mindist){
-                mindist = d;
-            }
-          }
-          
-          // Distances with other internodes
-          for(auto otit = std::next(other.begin(),1); otit != other.end(); ++otit){
-              d = geometry::segment_segment_distance(p0,p1,
-                                  std::prev(otit,1)->position(),otit->position());
-              // radius
-              d-= (r + std::prev(otit,1)->radius() +otit->radius())/2.;
-              if( d < 0){
-                return 0.0;
-              }else if(d<mindist){
-                mindist = d;
-              }
-          }
-        }
         return mindist;
       }
-  }
+  } // End distance method
+
   
   box_type Branch::boundingBox() const {
     
@@ -565,6 +554,55 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
           --it;
         }
       }
+  }
+  
+  float Branch::_distance_segment(point_type p0, point_type p1, 
+                                  bool ignore_radius,
+                                  bool ignore_root,
+                                  bool ignore_last) const{
+    NSTR_LOG_(trace) << "distance_segment function call";
+    
+    float mindist =  std::numeric_limits<float>::max();
+    float d;
+    
+    if(size() == 0){
+      NSTR_LOG_(trace) << "distance_segment return on empty branch";
+      return mindist;
+    }
+    
+    // Branch first segment distance (if its possible)
+    if(!ignore_root && has_root() && size()>0 ){
+        mindist = geometry::segment_segment_distance(root().position(),
+                                               first().position(),
+                                               p0,
+                                               p1);
+        if(!ignore_radius){
+          mindist -= std::min(root().radius(),first().radius());
+          if(mindist < 0 ) return 0.0;
+          
+        }
+    }
+    // No nodes to check 
+    if(size() < 2) return mindist;
+    
+    // Loop
+    const_iterator last;
+    if(ignore_last) last = std::prev(end(),1);
+    else last = end();
+    
+    for(auto it = std::next(begin(),1); it != last; ++it) {
+      d = geometry::segment_segment_distance(  std::prev(it,1)->position(),
+                                               it->position(),
+                                               p0,
+                                               p1);
+      if(!ignore_radius){
+        d -= std::min(std::prev(it,1)->radius(),it->radius());
+        if(mindist <= 0.0 ) return 0.0;
+      }
+      
+      if (d < mindist) mindist = d;    }
+    
+    return mindist;
   }
   
   float Branch::discrete_frechet(const Branch& other) const {

@@ -120,7 +120,7 @@ const auto segment_collision_validator =
 
 
 const auto branch_collision_validator =
-  nv::create_validator(  nm::branch_intersects,
+  nv::create_validator(  nm::branch_intersects_factory(false),
                          nv::empty_string,
                          "Branch collision validator",
                          "Fails when the distance between any two branches is zero");

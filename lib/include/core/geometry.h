@@ -343,6 +343,15 @@ namespace geometry
    */
   std::vector<point_type> box_corners(const box_type &b);
   
+  /**
+   * @brief Euclidean distance between two line-segments
+   * @param u
+   * @param v
+   * @return euclidean distance
+   */
+  float lineseg_dist(const std::vector<point_type>& u,
+                     const std::vector<point_type>& v);
+  
   
   /**
    * @brief Computes the bounding box of a node set

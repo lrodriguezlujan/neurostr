@@ -469,7 +469,7 @@ class Branch : public WithProperties{
    * @param other
    * @return euclidean distance
    */
-  float distance(const Branch& other) const;
+  float distance(const Branch& other, bool ignore_radius = false) const;
   
   /**
    * @brief Updates branch memeber in all nodes
@@ -497,6 +497,17 @@ class Branch : public WithProperties{
    * @brief Throw an exception if size is 0
    */
   void _check_size() const;
+  
+  /**
+   * @brief Computes branch distance to segment p0-p1
+   * @param p0 
+   * @param p1 
+   * @return Euclidean distance
+   */
+  float _distance_segment(point_type p0, point_type p1, 
+                          bool ignore_radius = false,
+                          bool ignore_root = false,
+                          bool ignore_last = false) const;
 
   // DATA MEMBERS
 

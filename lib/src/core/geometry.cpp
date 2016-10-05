@@ -229,6 +229,24 @@ bool box_box_intersection(const box_type&a ,const box_type&b) {
   return false;
 }
 
+float lineseg_dist(const std::vector<point_type>& u,
+                     const std::vector<point_type>& v){
+  
+  float mindist =  std::numeric_limits<float>::max();
+  float d;
+  
+  if(u.size() < 2 || v.size() < 2 ) return mindist;
+                       
+  for(auto uit = std::next(u.begin(),1); uit != u.end(); ++uit){
+    for(auto vit = std::next(v.begin(),1); vit != v.end(); ++vit){
+      d= segment_segment_distance(*std::prev(uit,1),*uit,
+                                  *std::prev(vit,1),*vit);
+      if(d<mindist) mindist = d;
+    }
+  }
+  return mindist;
+}
+
 std::vector<point_type> box_corners(const box_type &b){
   
   point_type max_corner = b.max_corner();

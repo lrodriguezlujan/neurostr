@@ -370,42 +370,32 @@ const auto branch_length = [](const Branch &b) -> float {
   return len;
 };
 
-const auto branch_intersects = [](const Branch &b ) -> std::string {
+static inline auto branch_intersects_factory(bool ignore_radius = false){
  
-  // First get neuron 
-  if(b.valid_neurite() ){
-    const Neuron& n = b.neurite().neuron();
-    box_type bbox_b = b.boundingBox();
+  return [_ign = ignore_radius](const Branch &b ) -> std::string {
+ 
+    // First get neuron 
+    if(b.valid_neurite() ){
+      const Neuron& n = b.neurite().neuron();
+      box_type bbox_b = b.boundingBox();
     
-    for(auto it = n.begin_neurite(); it != n.end_neurite(); ++it){
-      for(auto bit = it->begin_branch(); bit != it->end_branch(); ++bit){
-        bool comparable = true;
-        
-        if(bit->neurite() == b.neurite()){
-          // Check that they are not the same branch
-          comparable &= (bit->neurite() != b.neurite() || *bit != b);
-          // b is not parent of bit
-          comparable &= (bit.node->parent == nullptr || bit.node->parent->data !=b);
-          // bit is not parent of b
-          for(auto chit = bit->neurite().begin_children(bit);
-                   chit != bit->neurite().end_children(bit);
-                   ++chit){
-            comparable &= (*chit != b);
-          }
-        }
-        
-        // If their bounding boxes intersect
-        if(comparable &&  geometry::box_box_intersection(bbox_b,bit->boundingBox()) ){
-          if(b.distance(*bit) == 0){
-            return bit->idString()+"("+std::to_string(bit->neurite().id())+")";
+      for(auto it = n.begin_neurite(); it != n.end_neurite(); ++it){
+        for(auto bit = it->begin_branch(); bit != it->end_branch(); ++bit){
+
+          // If their bounding boxes intersect
+          if(*bit != b){
+            if(geometry::box_box_intersection(bbox_b,bit->boundingBox()) ){
+              if(b.distance(*bit,_ign) == 0.0){
+                return bit->idString()+" @ Neurite: "+std::to_string(bit->neurite().id());
+              }
+            }
           }
         }
       }
     }
-    
-  }
-  return std::string();
-};
+    return std::string();
+  };
+}// Factory
 
 } // measure
 } // neurostr
