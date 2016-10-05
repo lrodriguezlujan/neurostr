@@ -45,14 +45,18 @@ template <typename T, typename V>
     bool                      valid;
     
     // Full validation ID
-    std::string element_id() const{
-      return element_id_str_(element.get());
+    std::string element_id_json() const{
+      return "{ " + element_id_json_(element.get()) + " }";
     };
+    
+    std::string element_type() const {
+      return element_name(element);
+    }
     
     std::ostream& toJSON( std::ostream& os) const {
       os << "{ " <<
-        "\"type\" : \"" << element_name(element.get()) << "\", " << std::endl << 
-        "\"id\" : " << escape_string(element_id()) << " ," << std::endl << 
+        "\"type\" : " << escape_string(element_type()) << ", " << std::endl << 
+        "\"id\" : " << element_id_json() << "," << std::endl << 
         "\"value\" : " << escape_string(value) << " ," << std::endl;
         if(valid){
           os << "\"pass\" : true" << std::endl << "}";
@@ -61,6 +65,8 @@ template <typename T, typename V>
         }
       return os;
     }
+    
+    
     
     private:
     
@@ -73,40 +79,27 @@ template <typename T, typename V>
       return "\"" + v + "\"";
     }
     
-    
-    std::string element_id_(const Neuron& el) const{
-      return std::string("\"")  + el.id() + std::string("\"");
+    std::string escape_string(const char* v) const{
+      return "\"" + std::string(v) + "\"";
+    }
+
+    std::string element_id_json_(const Neuron& n) const{
+      return escape_string("neuron") + " : " + escape_string(n.id());
     }
     
-    std::string element_id_(const Neurite& el) const{
-      return std::to_string(el.id());
+    std::string element_id_json_(const Neurite& n) const{
+      return element_id_json_(n.neuron()) + ",\n" + escape_string("neurite") + " : " + std::to_string(n.id());
     }
     
-    std::string element_id_(const Branch& el) const{
-      return std::string("\"")  + el.idString() + std::string("\"");
+    std::string element_id_json_(const Branch& n) const{
+      return element_id_json_(n.neurite()) + ",\n" + escape_string("branch") + " : " + escape_string(n.idString());
     }
     
-    std::string element_id_(const Node& el) const{
-      return std::to_string(el.id());
+    std::string element_id_json_(const Node& n) const{
+      return element_id_json_(n.branch()) + ",\n" + escape_string("node") + " : " + std::to_string(n.id());
     }
     
-    std::string element_name();
-    
-    std::string element_id_str_(const Neuron& n) const{
-      return std::string("Neuron: ") + n.id();
-    }
-    
-    std::string element_id_str_(const Neurite& n) const{
-      return element_id_str_(n.neuron()) + std::string(", neurite: ") + std::to_string(n.id());
-    }
-    
-    std::string element_id_str_(const Branch& n) const{
-      return element_id_str_(n.neurite()) + std::string(", branch: ") + n.idString();
-    }
-    
-    std::string element_id_str_(const Node& n) const{
-      return element_id_str_(n.branch()) + std::string(", Node: ") + std::to_string(n.id());
-    }
+
     
     std::string element_name(const Neuron& n) const{
       return "Neuron";
