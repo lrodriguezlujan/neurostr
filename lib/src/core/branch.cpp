@@ -307,7 +307,8 @@ namespace neurostr{
         }
         
         // Against the other root if they are not equal
-        if(other.has_root() ){
+        if(other.has_root() 
+           && (!has_root() || other.size()>1 || other.first() != root() ) ){
           // Ignore root condition - we are brothers
           bool ignore_root = (!has_root() || root() == other.root());
             
@@ -332,7 +333,11 @@ namespace neurostr{
           }
             
         } // End other root
-          
+        
+        if (other.size() == 1) {
+          return mindist;
+        }
+        
         // Rest of the other branch segments
         const_iterator last;
           
@@ -571,7 +576,7 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     }
     
     // Branch first segment distance (if its possible)
-    if(!ignore_root && has_root() && size()>0 ){
+    if(!ignore_root && has_root() && size()>0 && (size()>1 || !ignore_last)  ){
         mindist = geometry::segment_segment_distance(root().position(),
                                                first().position(),
                                                p0,
