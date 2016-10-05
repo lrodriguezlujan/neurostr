@@ -11,6 +11,7 @@ namespace log{
 BOOST_LOG_GLOBAL_LOGGER_INIT(logger, boost::log::sources::severity_logger_mt<severity_level>){
   boost::log::sources::severity_logger_mt<severity_level> lg;
   boost::log::add_common_attributes();
+  boost::log::core::get()->set_filter( boost::log::trivial::severity >= boost::log::trivial::warning );
   return lg;
 }
 
@@ -34,7 +35,7 @@ void init_log_cerr(){
                                     << "[" << severity << "]\t\t" << expr::smessage);
 }
 
-void log_level(severity_level lvl){
+void log_level(boost::log::trivial::severity_level lvl){
    boost::log::core::get()->set_filter( boost::log::trivial::severity >= lvl );
 }
 

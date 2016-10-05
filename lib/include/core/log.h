@@ -63,7 +63,7 @@ void init_log_cerr();
  * @brief Sets severity level filter
  * @param lvl lower severity level
  */
-void log_level(severity_level lvl);
+void log_level(boost::log::trivial::severity_level lvl);
 
 
 void disable_log();
