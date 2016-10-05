@@ -104,6 +104,13 @@ const auto zero_length_segments_validator =
                        nv::range_check_factory<float>(1E-6),
                        "Zero length segments validator",
                        "Fails when a segment length is close to zero");
+                       
+const auto radius_length_segments_validator =
+  nv::create_validator(nm::node_length_to_parent_border,
+                       nv::range_check_factory<float>(1E-6),
+                       "Length smaller than radius validator",
+                       "Fails when a two consecutive node spheres intersection is not empty");
+                       
   
 const auto increasing_radius_validator =
   nv::create_validator(nm::node_segment_taper_rate_hillman,
