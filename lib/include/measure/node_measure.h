@@ -56,6 +56,12 @@ const auto node_length_to_parent = [](const Node& n) -> float {
   return n.distance(parent);
 };
 
+const auto node_length_to_parent_border = [](const Node& n) -> float {
+  const Node& parent = selector::node_parent(n);
+  //if( parent == n ) return NAN;
+  return n.distance(parent) - (parent.radius() + n.radius());
+};
+
 // Node compartment volume
 const auto node_volume = [](const Node& n) -> float {
   const float pi = boost::math::constants::pi<float>();
