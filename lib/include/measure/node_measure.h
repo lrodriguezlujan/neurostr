@@ -77,7 +77,12 @@ const auto node_volume = [](const Node& n) -> float {
 // Hillman tapper rate
 const auto node_segment_taper_rate_hillman = [](const Node &n) -> float {
   const Node& parent = selector::node_parent(n);
-  return (parent.radius() - n.radius())/parent.radius();
+  if(parent.radius() == 0){
+    if(n.radius() == 0) return 0;
+    else return std::numeric_limits<float>::min();
+  } else {
+    return (parent.radius() - n.radius())/parent.radius();
+  }
 };
 
 // Burker taper rate

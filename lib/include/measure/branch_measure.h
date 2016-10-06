@@ -49,10 +49,15 @@ const auto tortuosity = [](const Branch& b) -> float {
   }
 
   // divided by the shortest length
-  if (b.has_root())
-    return total_length / b.last().distance(b.root());
-  else
-    return total_length / b.first().distance(b.last());
+  float d;
+  if (b.has_root()){
+    d = b.last().distance(b.root());
+  } else {
+    d =  b.first().distance(b.last());
+  }
+  
+  if(d == 0) return 1.;
+  else return total_length / d;
 };
 
 const auto branch_azimuth = [](const Branch& b) -> float {
