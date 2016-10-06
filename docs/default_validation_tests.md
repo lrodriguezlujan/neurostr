@@ -23,31 +23,38 @@
 
 ### Executable
 
-| Name | Flags (short) | Default | Default parameters |  Depends on diameter value? | 3D assumption
+| Name | Flags (short) | Default | Default parameters |  Depends on diameter value? | 3D assumption | Applicable to single neurites
 | :--- | :--- | :--- | :--- | :---: |
-| Neurites attached to soma | attached(-A) noattached(-a)| Active |  | No | No
-| Neuron has soma| soma(-S) noSoma(-s) | Active |  | No | No
-| Planar reconstruction| planar(-P) noplanar(-p) | Active | **threshold** = 1.01 | No | Yes
-| Dendrite count| dendrite(-D) nodendrite(-D)  | Active | **range** = [2,13) | No | No
-| Apical count| apical(-C) noapical(-c)  | Active | **strict** = true | No | No
-| Axon count| axon(-X) noaxon(-x)  | Active | **strict** = true | No | No
-| No trifurcations| trifurcation(-T) notrifurcation(-t) | Active |  | No | No
-| Linear branches| linear(-L) nolinear(-l) | Active |**threshold** = 1.01  | No | Yes (partially)
-| Zero length segments| zero(-Z) nozero(-z) | Active | | No | No
-| Intersecting nodes| intersect(-I) nointersect(-i)  | Active | | Yes | No
-| Non-decreasing diameters| decrease(-D) nodecrease(-d)| Active | | Yes | No
-| Segment collision| segcoll(-V) nosegcoll(-v)| Inactive (deprecated) | | No | Yes
-| Branch collision| branchcoll(-B) nobranchcoll(-b)| Active | | No | Yes (mutable)
-| Extreme angles| extremeang(-M) noextremeang(-m)| Active | | No | No
+| Neurites attached to soma | attached(-A) noattached(-a)| Active |  | No | No | Yes
+| Neuron has soma| soma(-S) noSoma(-s) | Active |  | No | No | No
+| Planar reconstruction| planar(-P) noplanar(-p) | Active | **threshold** = 1.01 | No | Yes | Yes
+| Dendrite count| dendcnt(-D) nodendcnt(-d)  | Active | **range** = [2,13) | No | No | No
+| Apical count| apical(-C) noapical(-c)  | Active | **strict** = true | No | No | No
+| Axon count| axon(-X) noaxon(-x)  | Active | **strict** = true | No | No | No
+| No trifurcations| trifurcation(-T) notrifurcation(-t) | Active |  | No | No | Yes
+| Linear branches| linear(-L) nolinear(-l) | Active |**threshold** = 1.01  | No | Yes (partially) | Yes
+| Zero length segments| zero(-Z) nozero(-z) | Active | | No | No |  Yes
+| Intersecting nodes| intersect(-I) nointersect(-i)  | Active | | Yes | No | Yes
+| Non-decreasing diameters| decrease(-D) nodecrease(-d)| Active | | Yes | No | Yes
+| Segment collision| segcoll(-V) nosegcoll(-v)| Inactive (deprecated) | | No | Yes | Yes
+| Branch collision| branchcoll(-B) nobranchcoll(-b)| Active | | No | Yes (mutable) | Yes
+| Extreme angles| extremeang(-M) noextremeang(-m)| Active | | No | No | Yes
 
 #### Additional flags:
-- **--nodiameters** : disables/mutates all validations that depend on the diameter value
-- **--is2D** : disables all validations that assume a 3D reconstruction
+- **--nodiameters** : Disables/mutates all validations that depend on the diameter value
+- **--is2D** : Disables all validations that assume a 3D reconstruction
+- **--neuron** : Validates the entire neuron
+- **--onlyapical** : Ignore other structures than the apical dendrite
+- **--onlyaxon** : Ignore other structures than the axon
+- **--onlydend** : Ignore other structures than the non-apical dendrites
 
 #### Notes:
 - Activation has priority over deactivation
 
+#### Output
 
+JSON FILE
+TODO
 
 ## Anomaly detection
 TBD
