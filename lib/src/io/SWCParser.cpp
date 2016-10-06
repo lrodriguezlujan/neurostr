@@ -91,9 +91,9 @@ void SWCParser::process_header_(const std::string& s) {
   if ((tok.begin() != tok.end())) {
     auto it = tok.begin();
     //  skip empty tokens
-    while (it->size() == 0) ++it;
+    while (it != tok.end() && it->size() == 0) ++it;
     // Check if the first token is key
-    if (is_key(*it)) {
+    if (it != tok.end() && is_key(*it)) {
       std::string key = *it, val;
       while (++it != tok.end()) val += *it;
       neuron_->add_property(key, val);  // Add metadata :)
@@ -114,18 +114,36 @@ void SWCParser::process_data_(const std::string& s) {
   // Read every field
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
   id = std::stoi(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  type = std::stoi(*(++it));
+  type = std::stoi(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  x = std::stof(*(++it));
+  x = std::stof(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  y = std::stof(*(++it));
+  y = std::stof(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  z = std::stof(*(++it));
+  z = std::stof(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  d = std::stof(*(++it));
+  d = std::stof(*it);
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  parent = std::stoi(*(++it));
+  parent = std::stoi(*it);
 
   // Create node
   Node node{id, x, y, z, d / 2.0};
@@ -164,7 +182,7 @@ void SWCParser::process_data_(const std::string& s) {
     // New neurite with root not soma
     Neurite* neurite = new Neurite(neuron_->size() + 1, NeuriteType(type));
     neurite->set_root(); // No root
-    last_node_pos_ = neurite->insert_node(-1, node); // Add node
+    last_node_pos_ = neurite->insert_node(neurite->begin_node(), node); // Add node
     neuron_->add_neurite(neurite);
   }
 }
