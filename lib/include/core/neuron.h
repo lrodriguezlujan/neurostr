@@ -481,7 +481,28 @@ class Neuron : public WithProperties {
    */
   void center();
   
-
+  /**
+   * @brief Removes a neurite from the neuron
+   * @param n Neurite iterator
+   * @return updated iterator
+   */
+  neurite_iterator erase(const neurite_iterator& n);
+  
+  /**
+   * @brief Removes all axon neurites from the neuron
+   */
+  void erase_axon();
+  
+  /**
+   * @brief Removes all apical dendrties from the neuron
+   */
+  void erase_apical();
+  
+  /**
+   * @brief Removes all non-apical dendrties from the neuron
+   */
+  void erase_dendrites();
+  
   /**
    * @brief Rotates the neuron so the apical towards "up" direction
    */

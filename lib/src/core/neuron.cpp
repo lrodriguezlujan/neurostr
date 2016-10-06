@@ -182,6 +182,48 @@ namespace neurostr {
     }
   }
   
+    /**
+   * @brief Removes a neurite from the neuron
+   * @param n Neurite iterator
+   * @return updated iterator
+   */
+  Neuron::neurite_iterator Neuron::erase(const neurite_iterator& n){
+    return neurites_.erase(n.base());
+  }
+  
+  /**
+   * @brief Removes all axon neurites from the neuron
+   */
+  void Neuron::erase_axon(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kAxon){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
+  /**
+   * @brief Removes all apical dendrties from the neuron
+   */
+  void Neuron::erase_apical(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kApical){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
+  /**
+   * @brief Removes all non-apical dendrties from the neuron
+   */
+  void Neuron::erase_dendrites(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kDendrite){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
   // Orient apical towards "up" direction
   // Todo...all nodes or just terminals?
   void Neuron::set_apical_up(){
