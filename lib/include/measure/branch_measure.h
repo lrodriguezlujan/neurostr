@@ -92,6 +92,8 @@ const auto child_diam_ratio = [](const Branch& b) -> float {
     auto cit = b.neurite().begin_children(it);
     float r1 = cit->first().radius();
     ++it;
+    if(r1 == 0.0 && cit->first().radius() == 0.0)
+      return 0.0;
     return r1/cit->first().radius();
   }
 };
@@ -280,17 +282,20 @@ const auto local_tilt_angle = [](const Branch &b) -> float {
 const auto remote_tilt_angle = [](const Branch &b) -> float {
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return 0;
   } else {
-    
-    point_type v = b.root().vectorTo(b.last());
-    
+    point_type v;
+    if(b.has_root())
+      v=b.root().vectorTo(b.last());
+    else
+      v = b.first().vectorTo(b.last());
+      
     auto cit_a = b.neurite().begin_children(it);
     auto cit_b = cit_a; 
     ++cit_b;
     
     float v_a = geometry::vector_vector_angle(v, b.last().vectorTo(cit_a->last()));
-    float v_b = geometry::vector_vector_angle(v, b.last().vectorTo(cit_a->last()));
+    float v_b = geometry::vector_vector_angle(v, b.last().vectorTo(cit_b->last()));
     return (v_a<v_b)? v_a : v_b;
   }
 };

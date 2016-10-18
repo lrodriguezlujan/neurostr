@@ -109,7 +109,10 @@ const auto node_compartment_section_area = [](const Node &n) -> float {
 
 // Get distance to root
 const auto node_distance_to_root = [](const Node& n) -> float {
-  return n.distance(n.branch().neurite().root());
+  if(n.branch().neurite().has_root())
+    return n.distance(n.branch().neurite().root());
+  else 
+    return n.distance(*(n.branch().neurite().begin_node()));
 };
 
 const auto node_distance_to_soma = [](const Node& n) -> float {
@@ -339,7 +342,8 @@ const auto node_set_fractal_dim = [](const const_node_iterator& b,
     top_sum += std::log(1+euc)*std::log(1+path);
     bot_sum += std::pow(std::log(1+euc),2);
   }
-  return top_sum/bot_sum;
+  if(top_sum == bot_sum) return 1.0;
+  else return top_sum/bot_sum;
                                        
 };
 
