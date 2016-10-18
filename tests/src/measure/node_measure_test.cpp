@@ -119,11 +119,11 @@ TEST(node_radius){
   auto node_sel = ns::compose_selector(ns::selector_in_single_to_set(ns::neurite_node_selector),
                                             ns::neuron_neurites);
                                             
-  CHECK_EQUAL(nm::selectorMeasureCompose(
+  CHECK_CLOSE(0.025,
+              nm::selectorMeasureCompose(
                 node_sel,
                 nm::measureEachAggregate(nm::node_radius, avg_fn))
-                (neuron) , 
-                0.5);  
+                (neuron), 1E-6);  
 }
 
 

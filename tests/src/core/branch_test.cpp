@@ -481,6 +481,18 @@ TEST(scale_half){
   CHECK_CLOSE(0, b.last().distance(point_type(1.5,0.5,1)), 1E-3);
 }
 
+TEST(normalize){
+  Node r(1,0,0,0,1),a(2,1,1,1,1),c(3,2,2,2,1),d(4,3,1,2,1);
+  std::vector<Node> nodes{a,c,d};
+  Branch::id_type id{0,0,1};
+  Branch b{id,1,r,nodes};
+  
+  b.normalize();
+  
+  
+  CHECK_CLOSE(1, b.length(), 1E-3);
+}
+
 TEST(scale_xyz_empty){
   Node r(1,0,0,0,1);
   Branch::id_type id{0,0,1};
