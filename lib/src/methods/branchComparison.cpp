@@ -16,44 +16,58 @@ namespace neurostr {
 namespace methods {
   
   // align branches and computes theri f. dist
-  float oriented_frechet_branch_distance(const Branch &a,const  Branch &b){
+  float oriented_frechet_branch_distance(const Branch &a,const  Branch &b, bool normalize){
     
-    auto root_a = selector::node_parent(a.first()); 
-    auto root_b = selector::node_parent(b.first());
+    Node root_a, root_b;
     
-    // Compute node local basis
-    auto parent_a = selector::node_parent(root_a);
-    auto parent_b = selector::node_parent(root_b);
-    
-    Node ref_a;
-    Node ref_b;
-    
-    if (parent_a == root_a){
-      ref_a = Node(-1, a.neurite().neuron().soma_barycenter(), 0 );
-    } else {
-      ref_a = parent_a;
+    // Copy
+    Branch tmp_a,tmp_b;
+    if(a.has_root()){
+      tmp_a.root(a.root());
     }
-    
-    if (parent_b == root_b){
-      ref_b = Node(-1, b.neurite().neuron().soma_barycenter(), 0 );
-    } else {
-      ref_b = parent_b;
-    }
-    
-    auto local_a = root_a.local_basis( ref_a, root_a.branch().neurite().neuron().up() );
-    // This might seem like an error. Think about it twice before trying to change it.
-    auto local_b = root_b.local_basis( ref_b, root_a.branch().neurite().neuron().up() );
-    
-    // Copy a
-    Branch tmp_a;
-    tmp_a.root(a.root());
     tmp_a.insert(tmp_a.begin(), a.begin(), a.end());
     
+    if(b.has_root()){
+      tmp_b.root(b.root());
+    }
+    tmp_b.insert(tmp_b.begin(), b.begin(), b.end());
+    
+    // normalize
+    if( normalize ){
+      tmp_a.normalize();
+      tmp_b.normalize();
+    }
+    
+    // No alignment needed
+    if(tmp_a.size() == 0 || tmp_b.size() == 0) {
+      return(tmp_a.discrete_frechet(tmp_b));
+    }
+    
+    // Get roots
+    if(tmp_a.has_root()) { root_a = tmp_a.root(); }
+    else { root_a = tmp_a.first();}
+    
+    if(tmp_b.has_root()) { root_b = tmp_b.root(); }
+    else { root_b = tmp_b.first();}
+    
+    // Compute node local basis
+    point_type ref_a = root_a.vectorTo(tmp_a.last());
+    point_type ref_b = root_b.vectorTo(tmp_b.last());
+    
+    // If any ref is 0 -> no alignment
+    if(geometry::norm(ref_a) == 0 || geometry::norm(ref_b) == 0){
+      return(tmp_a.discrete_frechet(tmp_b));
+    }
+    
     // Align branches
-    tmp_a.rotate( geometry::align_vectors(local_a[0], local_b[0]) );
+    tmp_a.rotate( geometry::align_vectors(ref_a, ref_b) );
+    if(tmp_a.has_root()) { tmp_a.traslate(tmp_a.root().vectorTo(root_b)); }
+    else { tmp_a.traslate(tmp_a.first().vectorTo(root_b)); }
+    
+    
     
     // Now compute frechet distance
-    return tmp_a.discrete_frechet( b );
+    return tmp_a.discrete_frechet( tmp_b );
   }
   
   std::vector<float> inter_pair_distance(const  Neuron& n, bool restrict_order, bool sided ){
