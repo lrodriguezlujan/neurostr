@@ -82,7 +82,7 @@ namespace neurostr {
     bool Contour::is_closed() const { return closed_;}
     
     
-    void Contour::contour_properties_from_map(const PropertyMap& p){
+    void Contour::properties_from_map(const PropertyMap& p){
       // Check every property in the map
       for(auto it = p.begin(); it != p.end() ; ++it){
         set_from_property_(*it);

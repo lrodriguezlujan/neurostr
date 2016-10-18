@@ -9,6 +9,7 @@
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "core/property.h"
+#include "core/contour.h"
 #include "core/neurite_type.h"
 #include "core/neurite.h"
 
@@ -570,7 +571,7 @@ class Neuron : public WithProperties {
 class Reconstruction : public WithProperties{
   public:
   
-  typedef polygon_type contour_type;
+  using contour_type = Contour;
   typedef std::string id_type;
   
   using neuron_iterator = boost::indirect_iterator<
@@ -607,7 +608,8 @@ class Reconstruction : public WithProperties{
  private:
   std::string id_;
   std::vector<std::unique_ptr<Neuron>> neurons_;
-  contour_type contour_;
+  
+  std::vector<contour_type> contours_;
 
   public:
   
@@ -621,7 +623,7 @@ class Reconstruction : public WithProperties{
    * @brief Sets a vector of points as reconstruction contour
    * @param v Point vector
    */
-  void addContour(const std::vector<point_type>& v);
+  void addContour(const contour_type& v);
 
   friend std::ostream& operator<<(std::ostream&, const Reconstruction&);
 
@@ -629,7 +631,8 @@ class Reconstruction : public WithProperties{
    * @brief Get reconstruction contour as polygon
    * @return Reconstruction contour
    */
-  const contour_type& contour() const { return contour_; }
+  std::vector<contour_type>::const_iterator contour_begin() const { return contours_.begin(); }
+  std::vector<contour_type>::const_iterator contour_end() const { return contours_.end(); }
   
   /**
    * @brief Get reconstruction ID
@@ -641,7 +644,7 @@ class Reconstruction : public WithProperties{
    * @brief Checks whether the contour is empty
    * @return True if contour is not empty
    */
-  bool has_contour() const { return geometry::num_points(contour_) > 0; }
+  std::size_t n_contours() const { return contours_.size(); }
   
   /**
    * @brief Counts number of neurons in the reconstruction

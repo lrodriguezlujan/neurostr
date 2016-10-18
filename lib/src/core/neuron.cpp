@@ -378,12 +378,12 @@ std::ostream& operator<<(std::ostream& os, const Neuron& n) {
  * 
  *****************/
  
-Reconstruction::Reconstruction() : WithProperties(), id_(), neurons_(), contour_() {};
+Reconstruction::Reconstruction() : WithProperties(), id_(), neurons_(), contours_() {};
   
-Reconstruction::Reconstruction(const std::string& id) : WithProperties(), id_(id), neurons_(), contour_() {};
+Reconstruction::Reconstruction(const std::string& id) : WithProperties(), id_(id), neurons_(), contours_() {};
 
-void Reconstruction::addContour(const std::vector<point_type>& v) {
-    contour_ = geometry::as_planar_polygon(v);
+void Reconstruction::addContour(const contour_type& v) {
+    contours_.push_back(v);
 }
 
 int Reconstruction::node_count() const {

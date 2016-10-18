@@ -142,7 +142,7 @@ class Contour{
      * @brief Set all contour properties getting them from a p. map
      * @param p input Property map
      */
-    void contour_properties_from_map(const PropertyMap& p);
+    void properties_from_map(const PropertyMap& p);
   
   // Private methods
   private:

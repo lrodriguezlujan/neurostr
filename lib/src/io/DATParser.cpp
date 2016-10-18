@@ -454,17 +454,18 @@ void DATParser::process_block_(Reconstruction &r) {
     // If soma -> add it to the reconstruction
     auto it = aux.properties.find("cellbody");
     if (it == aux.end_properties()) {
-      // Is sample contour
-      if (!r.has_contour()) {
-        std::vector<point_type> p;
-        p.reserve(aux.node_count());
-        std::transform(aux.begin_node(),aux.end_node(), p.begin(), [](Node& n){return n.position();});
-        r.addContour(p);
-        //r.addContour(std::vector<node_type>(aux.begin_node(), aux.end_node()));
-      } else {
-        // Ignore? or throw
-        throw std::runtime_error("Only one contour per reconstruction allowd");
+      
+      // Not a soma - Some other contour - Create it
+      std::vector<point_type> p;
+      p.reserve(aux.node_count());
+      for(auto it = aux.begin_node(); it != aux.end_node(); ++it){
+        p.push_back(it->position());
       }
+      
+      Contour c(p);
+      c.properties_from_map(aux.properties);
+      r.addContour(c);
+      
     } else {
       // Create neuron
       Neuron *n = new Neuron(r.id() + std::string("_") + std::to_string(r.size() + 1),
@@ -476,8 +477,17 @@ void DATParser::process_block_(Reconstruction &r) {
         
       r.addNeuron(n);
     }
-  } else
+  /** Add properties to the whole reconstruction / neuron */
+  }  else if (type_in_buffer_ == block_type::PROPERTY ){
+    PropertyMap::property_type p = process_property();
+    r.properties.set(p);
+  } else if (type_in_buffer_ == block_type::PROPERTY_LIST ){
+    std::vector<PropertyMap::property_type> v = process_proplist_();
+    for(auto it = v.begin(); it != v.end() ; ++it) 
+      r.properties.set(*it);
+  } else {
     skip_block();
+  }
 
   return;
 }

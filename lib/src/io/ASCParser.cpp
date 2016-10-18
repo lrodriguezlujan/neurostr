@@ -320,22 +320,20 @@ void ASCParser::process_(Reconstruction & r) {
       // If soma -> add it to the reconstruction
       auto it = aux.properties.find("cellbody");
       if (it == aux.end_properties()) {
-        // Is sample contour
-        if (!r.has_contour()) {
-          std::vector<point_type> p;
-          p.reserve(aux.node_count());
-          
-          //std::transform(aux.begin_node(),aux.end_node(), p.end(), [](Node& n){return n.position();});
-          for(auto it = aux.begin_node() ; it != aux.end_node() ; ++it){
-            p.push_back(it->position());
-          }
-          
-          r.addContour(p);
-        } else {
-          // Ignore? or throw
-          throw std::runtime_error("Only one contour per reconstruction allowd");
+        // Not a soma - Some other contour - Create it
+        std::vector<point_type> p;
+        p.reserve(aux.node_count());
+        for(auto it = aux.begin_node(); it != aux.end_node(); ++it){
+          p.push_back(it->position());
         }
+      
+        Contour c(p);
+        c.properties_from_map(aux.properties);
+        r.addContour(c);
+          
       } else {
+        // ITS A SOMA! - new neuron
+        
         // Create neuron
         Neuron* n = new Neuron(r.id() + std::string("_") + std::to_string(r.size() + 1),
                                std::vector<Node>(aux.begin_node(), aux.end_node()));
