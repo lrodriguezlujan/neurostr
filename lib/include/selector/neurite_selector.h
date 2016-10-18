@@ -73,6 +73,14 @@ const auto neurite_terminal_selector = [](const Neurite& n)
   return selection;
 };
 
+const auto neurite_terminal_branch_selector = [](const Neurite& n)
+    -> std::vector<const_branch_reference> {
+  std::vector<const_branch_reference> selection;
+    for (auto br_it = n.begin_leaf(); br_it != n.end_leaf(); ++br_it)
+      selection.emplace_back(*br_it);
+  return selection;
+};
+
 /** STATIC Factory: Neurite type */
 template<NeuriteType T>
 struct neurite_type_selector{

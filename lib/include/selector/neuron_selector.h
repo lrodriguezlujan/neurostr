@@ -29,6 +29,9 @@ const auto neuron_neurites = [](const Neuron &n) -> std::vector<const_neurite_re
 const auto neuron_node_selector =  compose_selector(selector_in_single_to_set(neurite_node_selector),
                                             neuron_neurites);
 
+const auto neuron_branch_selector =  compose_selector(selector_in_single_to_set(neurite_branch_selector),
+                                            neuron_neurites);
+                                            
 /*
 const auto neuron_branches = [](const neuron_reference& n)
     -> std::vector<branch_reference> {
