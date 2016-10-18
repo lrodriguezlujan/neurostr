@@ -829,6 +829,11 @@ class Neurite : public WithProperties  {
   void scale(float r);
   
   /**
+   * @brief Normalizes all branches in the neurite
+   */
+  void normalize_branches();
+  
+  /**
    * @brief  Scales all branches in the neurite 
    * @param rx x-rate
    * @param ry y-rate

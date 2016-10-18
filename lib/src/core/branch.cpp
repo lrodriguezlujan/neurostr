@@ -487,14 +487,11 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     // First node scales wrt to root...if it exists
     if ( has_root() ){
       v=root().vectorTo(*begin());
+      geometry::scale(v,r);
       
     } else {
-      v = begin()->vectorTo(point_type(0,0,0));
-      geometry::negate(v);
+      v = first().position();
     }
-    
-    // Scale and push
-    geometry::scale(v,r);
     vecs.push_back(v);
     
     for(auto it = std::next(begin(),1); it != end() ; ++it){
@@ -504,7 +501,13 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     }
     
     // Reconstruct. Root stays put
-    point_type curr_pos = root().position();
+    point_type curr_pos;
+    if ( has_root() ){
+      curr_pos = root().position();
+    } else {
+      curr_pos = point_type(0,0,0);
+    }
+    
     for(unsigned int i = 0 ; i < vecs.size() ; ++i){
       geometry::traslate(curr_pos,vecs[i]);
       nodes_[i]->position(curr_pos);
@@ -518,6 +521,26 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     for(auto it  = begin(); it != end() ; ++it){
       it->scale(rx,ry,rz);
     }
+  }
+  
+  void Branch::normalize() {
+    float len = length();
+    if(len == 0.0 || size() == 0) return;
+    else {
+      scale(1.0/len);
+    }
+    
+  }
+  
+  float Branch::length() const{
+    float len = 0.0;
+    if ( has_root() && size() > 0){
+      len+=root().distance(first());
+    }
+    for(auto it = std::next(begin(),1); it != end() ; ++it){
+      len+= std::prev(it,1)->distance(*it);
+    }
+    return len;
   }
   
   void Branch::traslate(const point_type& p){
@@ -615,12 +638,14 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
     using iter_type = std::vector<point_type>::const_iterator;
     
     // Create point_type vectors to include root
-    std::vector<point_type> a(size()+1);
-    std::vector<point_type> b(other.size()+1);
+    std::vector<point_type> a;
+    std::vector<point_type> b;
     
     // Add roots
-    a.push_back(root().position());
-    b.push_back(other.root().position());
+    if(has_root())
+      a.push_back(root().position());
+    if(other.has_root())
+      b.push_back(other.root().position());
     
     // Add nodes
     for(auto it = begin(); it != end() ; ++it ){

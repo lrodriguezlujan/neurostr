@@ -361,7 +361,11 @@ void normalize(point_type& p){
 
 float vector_vector_angle(const point_type&a ,const point_type &b){
   if(equal(a,b)) return 0.;
-  else return std::acos(boost::geometry::dot_product(a,b)/(norm(a)*norm(b)));
+  if(norm(a) == 0 || norm(b) == 0 ) return 0;
+  
+  float ret = std::acos(boost::geometry::dot_product(a,b)/(norm(a)*norm(b)));
+  if(std::isnan(ret)) return 0;
+  else return ret;
 }
 
 float vector_vector_directed_angle(const point_type&v0 ,const point_type &v1){

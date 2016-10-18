@@ -151,6 +151,24 @@ void Neurite::scale(float rx, float ry, float rz){
   }
 }
 
+/**
+   * @brief Normalizes all branches in the neurite
+   */
+void Neurite::normalize_branches(){
+  // Normalize all branches
+  for( auto it = begin_branch(); it != end_branch() ; ++it ) {
+    it->normalize();
+  }
+  
+  // Join roots
+  for( auto it = begin_branch(); it != end_branch() ; ++it ) {
+    for( auto chit = tree_.begin(it); chit != tree_.end(it); ++chit){
+      chit->traslate(chit->root().vectorTo(it->last()));
+    }
+  }
+    
+}
+
 // Traslate
 void Neurite::traslate(const point_type& p){
   for( auto it = tree_.begin(); it != tree_.end() ; ++it ) {

@@ -432,12 +432,24 @@ class Branch : public WithProperties{
   void scale(float r);
   
   /**
+   * @brief Scales the branch so its length is equal to 1
+   */
+  void normalize();
+  
+  
+  /**
    * @brief Scales branch (including root) 
    * @param rx x-axis scale
    * @param ry y-axis scale
    * @param rz z-axis scale
    */
   void scale(float rx, float ry, float rz);
+  
+  /**
+   * @brief Computes branch path length
+   * @return branch length
+   */
+  float length() const;
   
   /**
    * @brief Moves the branch (root included) by the vector p

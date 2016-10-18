@@ -104,7 +104,7 @@ namespace neurostr {
           NSTR_LOG_(trace) << "Setting first node as root";
           it->set_root(*n);
           // Remove it
-          it->begin_branch()->erase( n );
+          //it->begin_branch()->erase( n );
         }
       }
 
