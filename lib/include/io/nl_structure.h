@@ -79,6 +79,8 @@ enum class tree_type_cd : std::uint8_t {
   UNKNOWN = 0xFF
 };
 
+std::string tree_type_tostr(const tree_type_cd& t);
+
 std::ostream& operator<<(std::ostream& os, const tree_type_cd& t);
 
 typedef struct {

@@ -79,7 +79,7 @@ namespace neurostr{
         
         return std::string(buff);
       } else {
-        return std::string();
+        return std::string("PROPERTY TYPE NOT SUPPORTED");
       }
   }
   

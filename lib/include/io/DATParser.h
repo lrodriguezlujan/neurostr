@@ -124,9 +124,9 @@ public:
   /**
    * @brief Process container block in buffer
    * @param parent Insertion position
-   * @return Last insertion position
+   * @return Number of bytes extended
    */
-  Neurite::base_node_iterator process_container_(
+  std::size_t process_container_(
       const Neurite::base_node_iterator& parent);
 
   /**

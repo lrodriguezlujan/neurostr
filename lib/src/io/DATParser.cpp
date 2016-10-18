@@ -9,6 +9,7 @@
  */
 
 #include "io/DATParser.h"
+#include "io/basen.hpp"
 
 #include <stdexcept>
 #include <cstring>
@@ -100,7 +101,7 @@ marker_type DATParser::process_markerset() {
   }
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block name";
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block name " << len;
   }
 
   if (type_in_buffer_ != block_type::STRING) 
@@ -122,7 +123,7 @@ marker_type DATParser::process_markerset() {
     
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block property list ";
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block property list " << len;
   }
   
   if (type_in_buffer_ != block_type::PROPERTY_LIST) 
@@ -137,7 +138,7 @@ marker_type DATParser::process_markerset() {
     
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block sample list";
+    NSTR_LOG_(warning) << "Expanding buffer in markerset block sample list " << len;
   }
   
   if (type_in_buffer_ != block_type::SAMPLE_LIST) 
@@ -160,7 +161,7 @@ PropertyMap::property_type DATParser::process_property() {
   len = process_block_header_();
   
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset name";
+    NSTR_LOG_(warning) << "Expanding buffer in markerset name " << len;
   }
   
   if (type_in_buffer_ != block_type::STRING) throw std::runtime_error("Malformed property block");
@@ -187,7 +188,7 @@ PropertyMap::property_type DATParser::process_property() {
     }
     len = process_block_header_();
     if(ensure_buffer_size_(len)){
-      NSTR_LOG_(warning) << "Expanding buffer in property value";
+      NSTR_LOG_(warning) << "Expanding buffer in property value " << len;
     }
 
     // Read value string
@@ -215,7 +216,7 @@ std::vector<Node> DATParser::process_samplelist_() {
   v.reserve(nsamples);
 
   // Read samples
-  for (int i = 0; i < nsamples && !empty(); i++) {
+  for (int i = 0; i < nsamples; i++) {
     // Read header
     if(ensure_buffer_size_(block_header_size)){
       NSTR_LOG_(warning) << "Expanding buffer in process samplelist header";
@@ -247,7 +248,7 @@ std::vector<PropertyMap::property_type> DATParser::process_proplist_() {
   v.reserve(nprops);  // Ensure capacity
 
   // Read samples
-  for (int i = 0; i < nprops && !empty(); i++) {
+  for (int i = 0; i < nprops; i++) {
     // Read header
     if(ensure_buffer_size_(block_header_size)){
       NSTR_LOG_(warning) << "Expanding buffer in process proplist header";
@@ -278,7 +279,9 @@ std::vector<marker_type> DATParser::process_markersetlist_(){
   v.reserve(nmarkers);  // Ensure capacity
 
   // Read samples
-  for (int i = 0; i < nmarkers && !empty(); i++) {
+  //for (int i = 0; i < nmarkers && !empty(); i++) {
+  // Markers are....ahrg.
+  for (int i = 0; i < nmarkers ; i++) {
     
     if(ensure_buffer_size_(block_header_size)){
       NSTR_LOG_(warning) << "Expanding buffer in process markerset list header";
@@ -297,7 +300,7 @@ std::vector<marker_type> DATParser::process_markersetlist_(){
   return v;
 }
 
-Neurite::base_node_iterator DATParser::process_container_(
+std::size_t DATParser::process_container_(
     const Neurite::base_node_iterator &pos) {
 
   // Block name and properties
@@ -308,9 +311,10 @@ Neurite::base_node_iterator DATParser::process_container_(
 
   // Alloc block
   size_t current_block_size = in_buffer_;
+  size_t total_extended = 0;
 
   // Check for empty blocks
-  if (empty()) return Neurite::base_node_iterator();
+  if (empty()) return 0;
 
   // Get block type
   type = type_in_buffer_;
@@ -324,7 +328,7 @@ Neurite::base_node_iterator DATParser::process_container_(
     std::size_t len = process_block_header_();
     
     if(ensure_buffer_size_(len)){
-      NSTR_LOG_(warning) << "Expanding buffer in container name value";
+      NSTR_LOG_(warning) << "Expanding buffer in container name value " << len;
     }
     
     if (type_in_buffer_ != block_type::STRING)
@@ -353,7 +357,7 @@ Neurite::base_node_iterator DATParser::process_container_(
     std::size_t inblock_size = process_block_header_();
     
     if(ensure_buffer_size_(inblock_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in container subblock";
+      NSTR_LOG_(warning) << "Expanding buffer in container sub-block";
     }
     
     // Correct head displacement
@@ -382,18 +386,24 @@ Neurite::base_node_iterator DATParser::process_container_(
     } else if (type_in_buffer_ == block_type::SUB_TREE) {
       // Create branch
       std::vector<int> id = current_pos.branch()->id();
-      id.push_back(current_pos.branch().number_of_children()+1);
-      
-      ;
-      
+      id.push_back(current_pos.branch().number_of_children()+1);      
       Neurite::branch_iterator inserted = current_pos.neurite()
         .append_branch(current_pos.branch(),
           Branch(id, current_pos.branch()->order()+1, *current_pos.node()));
               
       Neurite::node_iterator<Neurite::branch_iterator> new_pos = current_pos.neurite().begin_node(inserted);
       
+      // !!!!
+      // If the sub container have extended read past the block end... this might be troublesome.
+      // Some subblocks might be ignored.
+      // How can we solve this..
+      
       // Non vanilla blocks
-      process_container_(new_pos);
+      total_extended+=process_container_(new_pos);
+      
+      
+      
+      
       
   } else if (type_in_buffer_ == block_type::MARKERSET_LIST ) {
     // Property list
@@ -413,10 +423,11 @@ Neurite::base_node_iterator DATParser::process_container_(
     }
 
     // Restore block size
-    in_buffer_ = current_block_size + extended_bytes_;
+    total_extended += extended_bytes_;
+    in_buffer_ = current_block_size + total_extended;
     extended_bytes_ = 0;
   }
-  return current_pos;
+  return total_extended;
 }
 
 void DATParser::skip_block() { buffer_head_ = buffer_ + in_buffer_; }
@@ -485,7 +496,21 @@ void DATParser::process_block_(Reconstruction &r) {
     std::vector<PropertyMap::property_type> v = process_proplist_();
     for(auto it = v.begin(); it != v.end() ; ++it) 
       r.properties.set(*it);
-  } else {
+  } else if (type_in_buffer_ == block_type::IMAGE ){
+    
+    // Save it as a property
+    // Vector of bytes
+    std::vector<unsigned char> v;
+    v.reserve(in_buffer_);
+    while(!empty()){
+      v.push_back(*buffer_head_);
+      ++buffer_head_;
+    }
+    std::string s_enc;
+    bn::encode_b64(v.begin(), v.end(), back_inserter(s_enc));
+    r.properties.set("image",s_enc);
+
+  }else {
     skip_block();
   }
 
@@ -509,12 +534,17 @@ std::streamsize DATParser::fill_buffer_(int n) {
 
 std::streamsize DATParser::expand_buffer_(std::size_t nbytes){
   
-  if( in_buffer_ + nbytes <= in_buffer_real_){
+  /*if( in_buffer_ + nbytes <= in_buffer_real_){
       // Just expand
       in_buffer_+=nbytes;
       extended_bytes_+=nbytes;
       return nbytes;
-  } else {
+  } else {*/
+  
+    if ( (in_buffer_real_ + nbytes) > buffer_size) {
+      throw std::runtime_error("Buffer size exceded. Something went wrong.");
+    }
+    
     // read
     char* last = (char*)(buffer_ + in_buffer_real_);
     stream_.read(last, nbytes);
@@ -527,7 +557,7 @@ std::streamsize DATParser::expand_buffer_(std::size_t nbytes){
     extended_bytes_+=readbytes;
     
     return readbytes;  
-  }
+  //}
 }
 
 
@@ -590,7 +620,9 @@ std::streamsize DATParser::read_next_block_() {
   } else {
     // Process header
     in_buffer_ = process_block_header_();
-    if (in_buffer_ > buffer_size) throw std::runtime_error("Buffer size excedeed");
+    if (in_buffer_ > buffer_size){
+      throw std::runtime_error("Buffer size excedeed");
+    }
 
     // Read
     fill_buffer_(in_buffer_);
@@ -630,6 +662,8 @@ std::vector<PropertyMap::property_type> DATParser::process_block_info_(block_typ
     // Set info
     props.push_back(PropertyMap::property_type(
         std::string("type"), boost::any(tree_type_cd(static_cast<std::uint8_t>(((std::uint16_t *)buffer_head_)[0])))));
+    props.push_back(PropertyMap::property_type(
+        std::string("type_name"), boost::any(tree_type_tostr(tree_type_cd(static_cast<std::uint8_t>(((std::uint16_t *)buffer_head_)[0]))))));
     buffer_head_ += sizeof(std::uint16_t);
 
     // Get colors
