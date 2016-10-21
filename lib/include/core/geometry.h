@@ -473,6 +473,20 @@ namespace geometry
   
   
   /**
+   * @brief Computes Triangle-ray intersection with the moller-trumbore algorithm
+   * @param t Triangle
+   * @param ray_o Ray origin
+   * @param ray_v Ray direction
+   * @param intersection Output: intersection point
+   * @return True if the ray intersects the triangle
+   */
+  bool triangle_ray_intersection( const triangle_type& t,
+                                  const point_type& ray_o,
+                                  const point_type& ray_v,
+                                  point_type& intersection );
+  
+  
+  /**
    * @class RDPSimplifier
    * @author luis
    * @date 28/09/16

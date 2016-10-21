@@ -520,5 +520,65 @@ bool within_triangle(const triangle_type& t, const point_type& p){
   
 }
 
+/**
+   * @brief Computes Triangle-ray intersection with the moller-trumbore algorithm
+   * @param t Triangle
+   * @param ray_o Ray origin
+   * @param ray_v Ray direction (Normalized)
+   * @param intersection Output: intersection point
+   * @return True if the ray intersects the triangle
+   */
+  bool triangle_ray_intersection( const triangle_type& t,
+                                  const point_type& ray_o,
+                                  const point_type& ray_v,
+                                  point_type& intersection ){
+  point_type e1 = t[1]; // Vector t0-t1
+  point_type e2 = t[2]; // vector t0-t2
+  
+  bg::subtract_point(e1,t[0]);
+  bg::subtract_point(e2,t[0]);
+
+  // Cross product bw ray vector and E2 (used to compute the determinant and the u param)
+  point_type p = cross_product(ray_v,e2);
+  // Determinat near 0 - ray is in the triangle or parallel
+  float det = bg::dot_product(e1,p);
+  if( det < 1E-6 && det > -(1E-6) ){
+    return false;
+  } else {
+    float inv_det = 1.0/det;
+    
+    // Vector from V0 to Ray origin
+    point_type vec_t = ray_o;
+    bg::subtract_point(vec_t,t[0]);
+    
+    // U param
+    float u = bg::dot_product(vec_t,p) * inv_det;
+    
+    // Intersection outside triangle
+    if(u < 0. || u> 1.) return false;
+    
+    // V parameter
+    point_type q = cross_product(vec_t,e1);
+    float v = bg::dot_product(ray_v,q) * inv_det;
+    
+    // Intersection outside triangle
+    if( v < 0. || (u+v) > 1.) return false;
+    
+    float g = bg::dot_product(e2,q) * inv_det;
+    if(g > 1E-6){
+      // g is the distance 
+      intersection = ray_v;
+      bg::multiply_value(intersection,g);
+      bg::add_point(intersection,ray_o);
+      return true;      
+    }
+    
+    // No hit
+    return false;
+  }
+  
+                                    
+}
+
 }  // namespace geoutils
 }  // namespace neurostr
