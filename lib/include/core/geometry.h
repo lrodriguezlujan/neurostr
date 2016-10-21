@@ -18,12 +18,18 @@ namespace geometry
 {
   
   namespace bg =        boost::geometry;
+  
+  // 3D Types
   using point_type =    bg::model::point<float, 3, bg::cs::cartesian>;
   using box_type =      bg::model::box<point_type>;
   using segment_type =  bg::model::segment<point_type>;
+  using triangle_type = std::array< point_type,3>;
   
+  // 2D Types
   using planar_point = bg::model::point<float, 2, bg::cs::cartesian>;
   using polygon_type =  bg::model::polygon<planar_point>;
+  
+  
   
   
   /**
@@ -376,6 +382,33 @@ namespace geometry
    */
   std::pair<float,float> local_orientation(const point_type& p, const std::array<point_type,3>& basis);
   
+  // Triangle methods
+  
+  /**
+   * @brief Verifies if p is in the border of the triangle t
+   * @param t Triangle
+   * @param p Point
+   * @return  True if p lies in the border of t
+   */
+  bool in_triangle_border(const triangle_type& t, const point_type& p);
+  
+  /**
+   * @brief Verifies if P is one of the vertices of T
+   * @param t Triangle
+   * @param p Point
+   * @return True if p is a vertex of t
+   */
+  bool is_triangle_vertex(const triangle_type& t, const point_type& p);
+  
+  /**
+   * @brief Verifies if p is inside the triangle t
+   * @param t Triangle
+   * @param p Point 
+   * @return True if p is inside t
+   */
+  bool within_triangle(const triangle_type& t, const point_type& p);
+  
+  
   /**
    * @class RDPSimplifier
    * @author luis
@@ -539,6 +572,7 @@ namespace geometry
   using box_type =      geometry::box_type;
   using segment_type =  geometry::segment_type;
   using polygon_type =  geometry::polygon_type;
+  using triangle_type =  geometry::triangle_type;
   
 } // namespace neurostr
 

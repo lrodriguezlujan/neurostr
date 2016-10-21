@@ -444,7 +444,57 @@ point_type barycenter(const std::vector<point_type>& v){
       bg::divide_value(res,v.size());
     }
     return res;
+}
+
+bool in_triangle_border(const triangle_type& t, const point_type& p){
+  segment_type aux;
+  
+  // Check every segment
+  return (bg::within(p, segment_type(t[0],t[1])) ||
+          bg::within(p, segment_type(t[0],t[2])) ||
+          bg::within(p, segment_type(t[1],t[2]))  );
+}
+  
+bool is_triangle_vertex(const triangle_type& t, const point_type& p){
+  for(auto it = t.begin(); it != t.end(); ++it ){
+    if(equal(p,*it)) return true;
   }
+  return false;
+}
+
+bool within_triangle(const triangle_type& t, const point_type& p){
+  // First: Check if the point lies within the same plane
+  point_type u = t[1]; // u will be the vector t0-t1
+  point_type v = t[2]; // v will be the vector t0-t2
+  point_type w = p; // w is t0 - P
+  
+  bg::subtract_point(u,t[0]);
+  //normalize(u);
+  bg::subtract_point(v,t[0]);
+  //normalize(v);
+  bg::subtract_point(w,t[0]);
+  
+  // n is a normal vector
+  point_type n = cross_product(u,v);
+  float n_sqnorm = bg::dot_product(n,n);
+  
+  // If the dot product bw n and w is not 0 -> not in the same plane
+  if(bg::dot_product(p,w) != 0) return false;
+  else {
+    // We are in the same plane - check that we are in the triangle
+    // For that we will use barycentric coordinates 
+    // Check http://math.stackexchange.com/questions/544946/determine-if-projection-of-3d-point-onto-plane-is-within-a-triangle 
+    // for a detailed explanation
+    float gamma = bg::dot_product( cross_product(u,w),n) / n_sqnorm;
+    float beta = bg::dot_product( cross_product(w,v),n) / n_sqnorm;
+    float alpha = 1 - gamma - beta;
+    
+    return (gamma >= 0 && gamma <= 1) &&
+           (beta >= 0 && beta <= 1) &&
+           (alpha >= 0 && alpha <= 1);
+  }
+  
+}
 
 }  // namespace geoutils
 }  // namespace neurostr
