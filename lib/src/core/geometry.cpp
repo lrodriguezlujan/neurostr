@@ -3,6 +3,30 @@
 namespace neurostr {
 namespace geometry {
   
+  template <>
+  planar_point planar_projection<0>(const point_type& p){
+    return planar_point(bg::get<1>(p),bg::get<2>(p));
+  }
+  
+  template <>
+  planar_point planar_projection<1>(const point_type& p){
+    return planar_point(bg::get<0>(p),bg::get<2>(p));
+  }
+  
+  template <>
+  planar_point planar_projection<2>(const point_type& p){
+    return planar_point(bg::get<0>(p),bg::get<1>(p));
+  }
+  
+  planar_point planar_projection(const point_type& p, int i){
+    switch(i){
+      case 0: return planar_projection<0>(p);
+      case 1: return planar_projection<1>(p);
+      case 2: return planar_projection<2>(p);
+      default: return planar_point(NAN,NAN);
+    }
+  }
+  
   float distance(const point_type& a, const point_type& b){ 
     return bg::distance(a,b);
   }

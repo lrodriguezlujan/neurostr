@@ -143,6 +143,55 @@ class Contour{
      * @param p input Property map
      */
     void properties_from_map(const PropertyMap& p);
+    
+    /**
+     * @brief Distance between the last and the first point in the contour
+     * @return Closing gap distance
+     */
+    float closing_gap() const;
+    
+    /**
+     * @brief Mark the contour as closed (add a segment bw the last and the first)
+     */
+     void close();
+     
+     /**
+      * @brief Cehcks if the contour is planar for some axis
+      * @return -1 is not planar, 0,1,2 x,y,z are constant respectively
+      */
+     int planar_axis() const;
+     
+     /**
+      * @brief Computes min and max values for the given componet (0,1,2 x,y,z)
+      * @return Pair (min,max)
+      */
+      std::pair<float,float> range(int component) const;
+      
+      /**
+       * @brief Returns the contour points removing the ith component
+       * @param component Component to remove
+       * @return Planar points
+       */
+      std::vector<geometry::planar_point> planar_projection(int component) const;
+     
+     /**
+      * @brief Checks if the contour points are clockwise ordered (shoelace formula applied)
+      * @return True if clockwise ordered
+      */
+     bool clockwise_oriented(int i) const;
+     
+     /**
+      * @brief Reverses the contour point order
+      */
+     void reverse();
+     
+     /**
+      * @brief Rotates the contour (if it is closed) so the point pointed by new_first
+      * becomes the new first point
+      * @param new_first Point to become the first point
+      */
+      void rotate(iterator new_first);
+     
   
   // Private methods
   private:

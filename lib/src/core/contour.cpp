@@ -139,6 +139,88 @@ namespace neurostr {
           resolution_ = PropertyMap::value<float>(p);
       }
     }
+    
+    
+    float Contour::closing_gap() const {
+      if( closed_ && size() <= 1) {
+        return 0.0;
+      }
+      else {
+        return geometry::distance(positions_.front(), positions_.back());
+      }
+    }
+    
+    void Contour::close(){
+      closed_ = true;
+    }
+     
+    int Contour::planar_axis() const {
+      std::pair<float,float> ax_range;
+      
+      for(int i = 2 ; i >= 0 ; ++i){
+        ax_range = range(i);
+        if(ax_range.first == ax_range.second ) return i;
+      }
+      return -1;
+    }
+     
+    std::pair<float,float> Contour::range(int component) const{
+      float min = std::numeric_limits<float>::max();
+      float max = std::numeric_limits<float>::min();
+      
+      for(auto it = begin(); it != end(); ++it ) {
+        float v = geometry::get(*it,component);
+        if( v < min  ) {
+          min = v;
+        }
+        if( v < max  ) {
+          max = v;
+        }
+      }
+      return std::pair<float,float>(min,max);
+    }
+    
+    std::vector<geometry::planar_point> 
+    Contour::planar_projection(int component) const{
+      // Reserve return
+      std::vector<geometry::planar_point> ret;
+      ret.reserve(positions_.size());
+      
+      for(auto it = begin(); it != end() ; ++it){
+        ret.push_back(geometry::planar_projection(*it,component));
+      }
+      return ret;
+    }
+     
+    bool Contour::clockwise_oriented(int i) const{
+      // Shoelace formula
+      
+      // First: get planar projection
+      std::vector<geometry::planar_point> planar = planar_projection(i);
+      
+      // Then compute "area"
+      float sum = 0.0;
+      for(auto it = std::next(planar.begin(),1); it != planar.end(); ++it){
+        auto prev = std::prev(it,1);
+          sum+= (geometry::get<0>(*it)-geometry::get<0>(*prev)) *
+                (geometry::get<1>(*it)+geometry::get<1>(*prev));
+      }
+      
+      if(closed_){
+        sum+=(geometry::get<0>(planar.back())-geometry::get<0>(planar.front())) *
+             (geometry::get<1>(planar.back())-geometry::get<1>(planar.front()));
+      }
+      
+      return sum > 0;
+    }
+     
+    void Contour::reverse(){
+      std::reverse(positions_.begin(),positions_.end());
+    }
+     
+    void Contour::rotate(iterator new_first){
+      std::rotate(positions_.begin(), new_first, positions_.end());
+    }
 
 
 } // end namespace neurostr

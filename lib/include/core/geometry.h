@@ -54,6 +54,69 @@ namespace geometry
     return bg::get<I>(p);
   }
   
+  // Same for planar points
+  template <int I>
+  inline float get(const planar_point& p){
+    return bg::get<I>(p);
+  }
+  
+  /**
+   * @brief Gets point x coordinate
+   * @param p
+   * @return 
+   */
+  inline float getx(const point_type& p){
+    return get<0>(p);
+  }
+  
+  /**
+   * @brief gets pòint y coordinate
+   * @param p
+   * @return 
+   */
+  inline float gety(const point_type& p){
+    return get<1>(p);
+  }
+  
+  /**
+   * @brief Gets point z coordinate
+   * @param p
+   * @return 
+   */
+  inline float getz(const point_type& p){
+    return get<2>(p);
+  }
+
+  /**
+   * @brief Gets the ith component from a point
+   * @param p Point
+   * @param coord coordinate
+   * @return Ith component (float)
+   */  
+  inline float get(const point_type& p, int coord){
+    switch(coord){
+      case 0: return getx(p);
+      case 1: return gety(p);
+      case 2: return getz(p);
+      default: return NAN;
+    }
+  }
+  
+  /**
+   * @brief Removes the ith component from P
+   * @param p Point to project
+   * @return projected point
+   */
+  template <int I>
+  planar_point planar_projection(const point_type& p);
+  
+  /**
+   * @brief Dynamic planar projection
+   * @param p Point to project
+   * @return projected point
+   */
+   planar_point planar_projection(const point_type& p, int i);
+  
   /**
    * @brief Euclidean distance between a and b
    * @param a First point
