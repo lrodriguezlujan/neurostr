@@ -191,6 +191,12 @@ class Contour{
       * @param new_first Point to become the first point
       */
       void rotate(iterator new_first);
+      
+      /**
+       * @brief Computes contour barycenter
+       * @return Barycenter
+       */
+      point_type barycenter() const;
      
   
   // Private methods

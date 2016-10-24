@@ -221,6 +221,10 @@ namespace neurostr {
     void Contour::rotate(iterator new_first){
       std::rotate(positions_.begin(), new_first, positions_.end());
     }
+    
+    point_type Contour::barycenter() const{
+      return geometry::barycenter(positions_);
+    }
 
 
 } // end namespace neurostr
