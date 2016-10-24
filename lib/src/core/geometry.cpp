@@ -576,8 +576,170 @@ bool within_triangle(const triangle_type& t, const point_type& p){
     // No hit
     return false;
   }
-  
-                                    
+}
+
+// TriangleMesh
+
+
+TriangleMesh::TriangleMesh()
+    : vertices_()
+    , faces_(){};
+
+
+TriangleMesh::TriangleMesh(const face_storage& faces)
+    : vertices_()
+    , faces_(){
+      
+      // Add faces
+      for(auto it = faces.begin(); it!= faces.end() ; ++it){
+        add( (*it)[0],(*it)[1],(*it)[2] );
+      }
+}
+
+TriangleMesh::~TriangleMesh(){};
+
+TriangleMesh::vertex_iterator TriangleMesh::add(const point_type& p){
+  vertex_iterator pos;
+  for(pos = begin_vertex(); pos != end_vertex(); ++pos){
+    if(equal(*pos,p)) return pos;
+  }
+  return vertices_.insert(vertices_.end(),p);
+}
+
+
+void TriangleMesh::remove(const TriangleMesh::vertex_iterator& v_it){
+  // First remove faces
+  for(auto it = begin_face(); it != end_face(); ++it){
+    if(vertex_of_face(*v_it,*it)){
+      it = std::prev( faces_.erase(it), 1);
+    }
+  }
+  // Then remove vertex
+  vertices_.erase(v_it);
+}
+
+
+void TriangleMesh::remove(const TriangleMesh::vertex_iterator& b, const TriangleMesh::vertex_iterator& e){
+  // FIXME: This can be way more efficient
+  for(auto it = b; it != e ; ++it){
+    remove(it);
+  }
+}
+
+void TriangleMesh::clear(){
+  faces_.clear();
+  vertices_.clear();
+}
+
+
+TriangleMesh::vertex_iterator TriangleMesh::begin_vertex(){
+  return vertices_.begin();
+}
+
+
+TriangleMesh::const_vertex_iterator TriangleMesh::begin_vertex() const{
+  return vertices_.begin();
+}
+
+TriangleMesh::vertex_iterator TriangleMesh::end_vertex(){
+  return vertices_.end();
+}
+
+TriangleMesh::const_vertex_iterator TriangleMesh::end_vertex() const{
+  return vertices_.end();
+}
+
+
+std::size_t TriangleMesh::vertex_count() const{
+  return vertices_.size();
+}
+
+/**
+ * @brief Adds a new triangular face to the mesh
+ * @param v0 First vertex
+ * @param v1 Second vertex
+ * @param v2 Third vertex
+ *
+ * @return Iterator to the inserted face
+ */
+TriangleMesh::face_iterator TriangleMesh::add(const TriangleMesh::const_vertex_iterator& v0,
+                                              const TriangleMesh::const_vertex_iterator& v1,
+                                              const TriangleMesh::const_vertex_iterator& v2){
+  vertex_iterator v0_p = add(*v0);
+  vertex_iterator v1_p = add(*v1);
+  vertex_iterator v2_p = add(*v2);
+  faces_.push_back({v0_p,v1_p,v2_p});
+  return std::prev(faces_.end(),1);
+}
+
+TriangleMesh::face_iterator TriangleMesh::add(const point_type& v0, const point_type& v1, const point_type& v2){
+  vertex_iterator v0_p = add(v0);
+  vertex_iterator v1_p = add(v1);
+  vertex_iterator v2_p = add(v2);
+  faces_.push_back({v0_p,v1_p,v2_p});
+  return std::prev(faces_.end(),1);
+}
+
+TriangleMesh::face_iterator TriangleMesh::add(const triangle_type& t){
+  return add(t[0],t[1],t[2]);
+}
+
+void TriangleMesh::remove(const TriangleMesh::face_iterator& it){
+  faces_.erase(it);
+}
+
+void TriangleMesh::remove(const TriangleMesh::face_iterator& b, const TriangleMesh::face_iterator& e){
+  for(auto it = b  ;it != e; ++it){
+    remove(it);
+  }
+}
+
+void TriangleMesh::clear_faces(){
+  faces_.clear();
+}
+
+TriangleMesh::face_iterator TriangleMesh::begin_face(){
+    return faces_.begin();
+}
+
+TriangleMesh::const_face_iterator TriangleMesh::begin_face() const{
+    return faces_.begin();
+}
+
+TriangleMesh::face_iterator TriangleMesh::end_face(){
+    return faces_.end();
+}
+
+TriangleMesh::const_face_iterator TriangleMesh::end_face() const {
+    return faces_.end();
+}
+
+std::size_t TriangleMesh::face_count() const{
+  return faces_.size();
+}
+
+/**
+ * @brief Using ray-tracing method computes if the point p is Inside the
+ * triangular mesh assuming that it is closed
+ * @param p Point
+ * @return  True if the point is within the mesh
+ */
+bool TriangleMesh::point_inside(const point_type& p){
+  //TODO
+  return false;
+}
+
+/**
+ * @brief Aux function that transforms a face to a triangle
+ * @param p Face
+ * @return Triangle
+ */
+triangle_type TriangleMesh::to_triangle(const TriangleMesh::face_type& p){
+  return triangle_type({*(p[0]),*(p[1]),*(p[2])});
+}
+
+bool TriangleMesh::vertex_of_face(const TriangleMesh::vertex_type& v, const TriangleMesh::face_type& f){
+  return ( equal(v,*(f[0])) || equal(v,*(f[1])) || equal(v,*(f[2])));
 }
 
 }  // namespace geoutils

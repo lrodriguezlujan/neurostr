@@ -30,8 +30,6 @@ namespace geometry
   using polygon_type =  bg::model::polygon<planar_point>;
   
   
-  
-  
   /**
   * Axis enum
   */
@@ -486,6 +484,7 @@ namespace geometry
                                   point_type& intersection );
   
   
+  
   /**
    * @class RDPSimplifier
    * @author luis
@@ -641,6 +640,237 @@ namespace geometry
       };
   }; // Discrete frechet class template
 
+/**
+ * @class TriangleMesh
+ * @author luis
+ * @date 24/10/16
+ * @file geometry.h
+ * @brief Simple class for a 3D mesh with triangular faces
+ */
+  class TriangleMesh {
+    
+    public:
+    
+    using vertex_type = point_type;
+    using vertex_storage = std::vector<point_type>;
+    using vertex_iterator = vertex_storage::iterator;
+    using const_vertex_iterator = vertex_storage::const_iterator;
+    
+    
+    using face_type = std::array< vertex_storage::iterator, 3>;
+    using face_storage = std::vector<face_type>;
+    using face_iterator = face_storage::iterator;
+    using const_face_iterator = face_storage::const_iterator;
+    
+    private:
+      
+      vertex_storage vertices_;
+      face_storage faces_;
+    
+    public:
+      
+      /**
+       * @brief Creates an empty (no vertex no faces) mesh
+       */
+      TriangleMesh();
+      
+      /**
+       * @brief Creates a mesh with given faces. Vertices are added automatically
+       */
+      TriangleMesh(const face_storage& faces);
+      
+      /**
+       * @brief Default destructor. Nothign special to do
+       */
+      ~TriangleMesh();
+      
+      // Copy not allowed (we store iterators...)
+      TriangleMesh(const TriangleMesh&) = delete;
+      TriangleMesh& operator=(const TriangleMesh&) = delete;
+      
+      // Move
+      TriangleMesh(TriangleMesh&&) = default;
+      TriangleMesh& operator=(TriangleMesh&&) = default;
+      
+      // VERTICES
+      
+      // Add
+      
+      /**
+       * @brief Adds a vertex to the mesh (if it doesnt exist already)
+       * @param p Vertex to add.
+       */
+      vertex_iterator add(const point_type& p);
+      
+      /**
+       * @brief Copies a range of vertices to the mesh
+       * @param b Range begin iterator
+       * @param e Range end iterator
+       */
+      template <typename Iter>
+      void add(const Iter& b, const Iter& e){
+        for(auto it = b; it != e ; ++it){
+          add(*it);
+        }
+      }
+      
+      /**
+       * @brief Removes the vertex and all its faces from the mesh
+       * @param it Vertex iterator
+       */
+      void remove(const vertex_iterator& it);
+      
+      /**
+       * @brief Removes a range of vertices and their faces from the mesh
+       * @param b Range begin
+       * @param e Range end
+       */
+      void remove(const vertex_iterator& b, const vertex_iterator& e);
+      
+      /**
+       * @brief Removes all vertices and faces
+       */
+      void clear();
+      
+      /**
+       * @brief Creates an iterator to the first vertex in the mesh
+       * @return Begin iterator
+       */
+      vertex_iterator begin_vertex();
+      
+      /**
+       * @brief Creates an iterator to the first vertex in the mesh
+       * @return Begin iterator
+       */
+      const_vertex_iterator begin_vertex() const;
+      
+      /**
+       * @brief Creates an iterator to one-past position of the last vertex in the mesh
+       * @return End iterator
+       */
+      vertex_iterator end_vertex();
+      
+      /**
+       * @brief Creates an iterator to one-past position of the last vertex in the mesh
+       * @return End iterator
+       */
+      const_vertex_iterator end_vertex() const;
+      
+      /**
+       * @brief Number of vertices in the mesh
+       */
+      std::size_t vertex_count() const;
+      
+      // FACES
+      
+      /**
+       * @brief Adds a new triangular face to the mesh
+       * @param v0 First vertex
+       * @param v1 Second vertex
+       * @param v2 Third vertex
+       * 
+       * @return Iterator to the inserted face
+       */
+      face_iterator add(const const_vertex_iterator& v0,
+               const const_vertex_iterator& v1,
+               const const_vertex_iterator& v2);
+      
+      /**
+       * @brief Adds a new triangular face to the mesh. Inserts the vertices
+       * if necessary
+       * @param v0 First vertex
+       * @param v1 Second vertex
+       * @param v2 Third vertex
+       * 
+       * @return Iterator to the inserted face
+       */         
+      face_iterator add(const point_type& v0,
+               const point_type& v1,
+               const point_type& v2);
+      
+      /**
+       * @brief Adds a new triangular face to the mesh. Inserts the vertices
+       * if necessary
+       * @param t face triangle
+       * 
+       * @return Iterator to the inserted face
+       */                  
+      face_iterator add(const triangle_type& t);
+        
+      /**
+       * @brief Removes a face from the mesh
+       * @param it Face iterator
+       */
+      void remove(const face_iterator& it);
+      
+      /**
+       * @brief Removes a set of faces from the mesh
+       * @param b Begin iterator
+       * @param e End iterator
+       */
+      void remove(const face_iterator& b, const face_iterator& e);
+      
+      /**
+       * @brief Removes all faces (but not the vertices)
+       */
+      void clear_faces();
+
+      // Face iterator
+      
+      /**
+       * @brief Returns an iterator to the first face in the mesh
+       * @return Begin iterator
+       */
+      face_iterator begin_face();
+      /**
+       * @brief Returns an iterator to the first face in the mesh
+       * @return Begin iterator
+       */
+      const_face_iterator begin_face() const;
+      
+      /**
+       * @brief Returns an iterator to one-past the last face in the mesh
+       * @return End iterator
+       */
+      face_iterator end_face();
+      
+      /**
+       * @brief Returns an iterator to one-past the last face in the mesh
+       * @return End iterator
+       */
+      const_face_iterator end_face() const;
+      
+      /**
+       * @brief Number of faces in the mesh
+       */
+      std::size_t face_count() const;
+      
+      
+      /**
+       * @brief Using ray-tracing method computes if the point p is Inside the
+       * triangular mesh assuming that it is closed
+       * @param p Point
+       * @return  True if the point is within the mesh
+       */
+      bool point_inside(const point_type& p);
+      
+    private:
+      /**
+       * @brief Aux function that transforms a face to a triangle
+       * @param p Face 
+       * @return Triangle
+      */
+      static triangle_type to_triangle(const face_type& p);
+      
+      /**
+       * @brief Checks if v is a vertex of f
+       * @param v Vertex
+       * @param f face
+       * @return 
+       */
+      static bool vertex_of_face(const vertex_type& v, const face_type& f);
+      
+  };//Triangle mesh
 
 } // namespace geometry
 
@@ -650,6 +880,7 @@ namespace geometry
   using segment_type =  geometry::segment_type;
   using polygon_type =  geometry::polygon_type;
   using triangle_type =  geometry::triangle_type;
+  using triMesh_type = geometry::TriangleMesh;
   
 } // namespace neurostr
 
