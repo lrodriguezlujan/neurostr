@@ -483,6 +483,18 @@ namespace geometry
                                   const point_type& ray_v,
                                   point_type& intersection );
   
+  /**
+   * @brief Returns the volume of the tetrahedron
+   * @param p0 vertex
+   * @param p1 vertex 
+   * @param p2 vertex
+   * @param p3 vertex
+   * @return Tetrahedron voulme
+   */
+  float tetrahedron_volume( const point_type& p0, 
+                            const point_type& p1,
+                            const point_type& p2,
+                            const point_type& p3);
   
   
   /**

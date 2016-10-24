@@ -578,6 +578,22 @@ bool within_triangle(const triangle_type& t, const point_type& p){
   }
 }
 
+float tetrahedron_volume( const point_type& p0, 
+                          const point_type& p1,
+                          const point_type& p2,
+                          const point_type& p3){
+
+  point_type v0 = p0;
+  point_type v1 = p1;
+  point_type v2 = p2;
+  
+  bg::subtract_point(v0,p3);
+  bg::subtract_point(v1,p3);
+  bg::subtract_point(v2,p3);
+  
+  return std::abs(bg::dot_product(cross_product(v0,v1),v2)/3.0);
+}
+
 // TriangleMesh
 
 
