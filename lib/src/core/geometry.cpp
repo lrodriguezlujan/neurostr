@@ -617,7 +617,7 @@ TriangleMesh::~TriangleMesh(){};
 TriangleMesh::vertex_iterator TriangleMesh::add(const point_type& p){
   vertex_iterator pos;
   for(pos = begin_vertex(); pos != end_vertex(); ++pos){
-    if(equal(*pos,p)) return pos;
+    if(distance(*pos,p)<1E-3) return pos;
   }
   return vertices_.insert(vertices_.end(),p);
 }
@@ -770,7 +770,7 @@ bool TriangleMesh::point_inside(const point_type& p) const{
         // Its a new intersection point?
         for(auto ip_it = intersections.begin(); 
             new_point && ip_it != intersections.end(); ++ip_it){
-          if( equal(i_point,*ip_it) )
+          if( distance(i_point,*ip_it) < 1E-3 )
             new_point = false;
         }
         
