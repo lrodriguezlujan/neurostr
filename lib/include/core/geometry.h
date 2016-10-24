@@ -852,7 +852,7 @@ namespace geometry
        * @param p Point
        * @return  True if the point is within the mesh
        */
-      bool point_inside(const point_type& p);
+      bool point_inside(const point_type& p) const;
       
     private:
       /**

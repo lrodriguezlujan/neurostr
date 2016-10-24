@@ -724,9 +724,48 @@ std::size_t TriangleMesh::face_count() const{
  * @param p Point
  * @return  True if the point is within the mesh
  */
-bool TriangleMesh::point_inside(const point_type& p){
-  //TODO
-  return false;
+bool TriangleMesh::point_inside(const point_type& p) const{
+  
+  /** Steps:
+  *
+  *  1. ray with source p and direction 1,0,0 
+  *  2. Check intersections with all mesh faces
+  *  3. Odd number of intersections - Its inside
+  *  
+  *  Special cases: 
+  *   If the intersection is at the border or at a vertex
+  *   of a triangle, only count it once. 
+  *  Easy way to go: Count distinct intersection points instead.
+  */
+  
+  // Intersection points
+  std::vector<point_type> intersections;
+  point_type i_point;
+  bool new_point;
+  
+  for (auto it = begin_face(); it != end_face(); ++it) {
+      if(triangle_ray_intersection( to_triangle(*it),
+                                     p,
+                                     point_type(1,0,0),
+                                     i_point)){
+        // Hit!
+        new_point = true;
+        
+        // Its a new intersection point?
+        for(auto ip_it = intersections.begin(); 
+            new_point && ip_it != intersections.end(); ++ip_it){
+          if( equal(i_point,*ip_it) )
+            new_point = false;
+        }
+        
+        // Add new point
+        if (new_point) {
+          intersections.push_back(i_point);
+        }
+      }
+  }
+  // Return is even
+  return (intersections.size() % 2 == 1);
 }
 
 /**
