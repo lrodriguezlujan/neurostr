@@ -676,7 +676,7 @@ namespace geometry
     using const_vertex_iterator = vertex_storage::const_iterator;
     
     
-    using face_type = std::array< vertex_storage::iterator, 3>;
+    using face_type = triangle_type;
     using face_storage = std::vector<face_type>;
     using face_iterator = face_storage::iterator;
     using const_face_iterator = face_storage::const_iterator;
@@ -783,18 +783,6 @@ namespace geometry
       // FACES
       
       /**
-       * @brief Adds a new triangular face to the mesh
-       * @param v0 First vertex
-       * @param v1 Second vertex
-       * @param v2 Third vertex
-       * 
-       * @return Iterator to the inserted face
-       */
-      face_iterator add(const const_vertex_iterator& v0,
-               const const_vertex_iterator& v1,
-               const const_vertex_iterator& v2);
-      
-      /**
        * @brief Adds a new triangular face to the mesh. Inserts the vertices
        * if necessary
        * @param v0 First vertex
@@ -874,12 +862,6 @@ namespace geometry
       bool point_inside(const point_type& p) const;
       
     private:
-      /**
-       * @brief Aux function that transforms a face to a triangle
-       * @param p Face 
-       * @return Triangle
-      */
-      static triangle_type to_triangle(const face_type& p);
       
       /**
        * @brief Checks if v is a vertex of f

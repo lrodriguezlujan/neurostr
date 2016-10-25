@@ -52,7 +52,7 @@ namespace methods{
     for (auto it = std::next(a.begin(),1); it != a.end(); ++it) {
         trs.push_back( {*std::prev(it,1), *it, b} );
     }
-  trs.push_back( {*a.begin(),*std::prev(a.end(),1), b} );
+
     return trs;
   }
   

@@ -52,6 +52,30 @@ namespace methods{
   }
   
   /**
+   * @brief Auxiliar function. Computes nu_a area
+   * @return 
+   */
+  template <typename IterA, typename IterB>
+  float triangulation_va_area( std::size_t i, std::size_t j,
+                        const IterA& b_a, const IterB& b_b){
+    return geometry::triangle_area( {*std::next(b_a,i), *std::next(b_a,i+1),
+                                          *std::next(b_b,j)});
+  
+  }
+  
+  /**
+   * @brief Auxiliar function. Computes nu_b area
+   * @return 
+   */
+  template <typename IterA, typename IterB>
+  float triangulation_vb_area( std::size_t i, std::size_t j,
+                        const IterA& b_a, const IterB& b_b){
+    return geometry::triangle_area( {*std::next(b_b,j), *std::next(b_b,j+1),
+                                     *std::next(b_a,i)} );
+    
+  }
+  
+  /**
    * @brief Given two contours, joins them to create a triangular-faced mesh
    * Actually this is like doing dijkstra from 0,0 to the last vertex.
    * @param b_a Contour A begin iterator
@@ -65,8 +89,7 @@ namespace methods{
   template <typename IterA, typename IterB>
   std::vector<triangle_type> 
   triangulate_contours( const IterA& b_a, const IterA& e_a,
-                        const IterB& b_b, const IterB& e_b,
-                        const point_type& oa, const point_type& ob){
+                        const IterB& b_b, const IterB& e_b){
     
     // Get number of nodes in each contour                      
     std::size_t m = std::distance(b_a,e_a);
@@ -82,13 +105,13 @@ namespace methods{
     
     // Fill left border
     for(std::size_t i = 1; i < m ; ++i){
-      w[ (i*m) + 0 ] = w[ ((i-1)*m) + 0 ] + triangulation_va_volume(i-1, 0, b_a, b_b, ob);  
+      w[ (i*m) + 0 ] = w[ ((i-1)*m) + 0 ] + triangulation_va_area(i-1, 0, b_a, b_b);  
       p[ (i*m) + 0 ] = true; // Left border always goes up (we cant go left)
     }
     
     // Fill top border
     for(std::size_t j = 1; j < n ; ++j){
-      w[ j ] = w[ j-1 ] + triangulation_vb_volume(0, j-1, b_a, b_b, oa);  
+      w[ j ] = w[ j-1 ] + triangulation_vb_area(0, j-1, b_a, b_b);  
       p[ j ] = false;  // Top border always goes left (we cant go up)
     }
     
@@ -104,13 +127,13 @@ namespace methods{
         if(j < n){
         
           // V_a cost if we create a vertical segment - (Triangle P_i-1, P_i, Q_j)
-          v_a = w[ ((i-1)*m) + j ] + triangulation_va_volume(i-1, j, b_a, b_b, ob);
+          v_a = w[ ((i-1)*m) + j ] + triangulation_va_area(i-1, j, b_a, b_b);
           
           // V_b cost if we create a horizontal segment - (Triangle P_i, Q_j-1, Q_j)
-          v_b = w[ (i*m) + (j-1) ] + triangulation_vb_volume(i, j-1, b_a, b_b, oa);
+          v_b = w[ (i*m) + (j-1) ] + triangulation_vb_area(i, j-1, b_a, b_b);
           
           // Maximize and set p and w
-          if ( v_a >= v_b) {
+          if ( v_a < v_b) {
             p[(i*m) + j ] = true; // We choose the vertical option
             w[(i*m) + j ] = v_a; // Updated path cost at i,j
           } else {
@@ -166,9 +189,7 @@ namespace methods{
                                       std::prev(it,1)->begin(), 
                                       std::prev(it,1)->end(),
                                       it->begin(),
-                                      it->end(),
-                                      std::prev(it,1)->barycenter(),
-                                      it->barycenter());
+                                      it->end());
       // Add to the mesh
       for(auto t_it = t.begin(); t_it != t.end(); ++t_it){
         mesh.add(*t_it);

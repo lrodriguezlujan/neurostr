@@ -691,29 +691,12 @@ std::size_t TriangleMesh::vertex_count() const{
   return vertices_.size();
 }
 
-/**
- * @brief Adds a new triangular face to the mesh
- * @param v0 First vertex
- * @param v1 Second vertex
- * @param v2 Third vertex
- *
- * @return Iterator to the inserted face
- */
-TriangleMesh::face_iterator TriangleMesh::add(const TriangleMesh::const_vertex_iterator& v0,
-                                              const TriangleMesh::const_vertex_iterator& v1,
-                                              const TriangleMesh::const_vertex_iterator& v2){
-  vertex_iterator v0_p = add(*v0);
-  vertex_iterator v1_p = add(*v1);
-  vertex_iterator v2_p = add(*v2);
-  faces_.push_back({v0_p,v1_p,v2_p});
-  return std::prev(faces_.end(),1);
-}
 
 TriangleMesh::face_iterator TriangleMesh::add(const point_type& v0, const point_type& v1, const point_type& v2){
   vertex_iterator v0_p = add(v0);
   vertex_iterator v1_p = add(v1);
   vertex_iterator v2_p = add(v2);
-  faces_.push_back({v0_p,v1_p,v2_p});
+  faces_.push_back({*v0_p,*v1_p,*v2_p});
   return std::prev(faces_.end(),1);
 }
 
@@ -781,7 +764,7 @@ bool TriangleMesh::point_inside(const point_type& p) const{
   bool new_point;
   
   for (auto it = begin_face(); it != end_face(); ++it) {
-      if(triangle_ray_intersection( to_triangle(*it),
+      if(triangle_ray_intersection(*it,
                                      p,
                                      point_type(1,0,0),
                                      i_point)){
@@ -810,12 +793,9 @@ bool TriangleMesh::point_inside(const point_type& p) const{
  * @param p Face
  * @return Triangle
  */
-triangle_type TriangleMesh::to_triangle(const TriangleMesh::face_type& p){
-  return triangle_type({*(p[0]),*(p[1]),*(p[2])});
-}
 
 bool TriangleMesh::vertex_of_face(const TriangleMesh::vertex_type& v, const TriangleMesh::face_type& f){
-  return ( equal(v,*(f[0])) || equal(v,*(f[1])) || equal(v,*(f[2])));
+  return ( equal(v,(f[0])) || equal(v,(f[1])) || equal(v,(f[2])));
 }
 
 
@@ -837,9 +817,9 @@ std::ostream& operator<<(std::ostream& os,const neurostr::geometry::TriangleMesh
   os << "\tFaces: " << std::endl ;
   for(auto it = m.begin_face(); it != m.end_face(); ++it){
     os << "\t\tFace: " << std::endl ;  
-    os << "\t\t\t (" << getx( *(*it)[0] ) << ", " << gety(*(*it)[0]) << ", " << getz(*(*it)[0]) << ")" << std::endl;
-    os << "\t\t\t (" << getx( *(*it)[1] ) << ", " << gety(*(*it)[1]) << ", " << getz(*(*it)[1]) << ")" << std::endl;
-    os << "\t\t\t (" << getx( *(*it)[2] ) << ", " << gety(*(*it)[2]) << ", " << getz(*(*it)[2]) << ")" << std::endl;
+    os << "\t\t\t (" << getx( (*it)[0] ) << ", " << gety((*it)[0]) << ", " << getz((*it)[0]) << ")" << std::endl;
+    os << "\t\t\t (" << getx( (*it)[1] ) << ", " << gety((*it)[1]) << ", " << getz((*it)[1]) << ")" << std::endl;
+    os << "\t\t\t (" << getx( (*it)[2] ) << ", " << gety((*it)[2]) << ", " << getz((*it)[2]) << ")" << std::endl;
   }
   
   os << "--END Mesh--" << std::endl;

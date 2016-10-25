@@ -226,11 +226,30 @@ namespace neurostr {
     }
      
     void Contour::rotate(iterator new_first){
-      std::rotate(positions_.begin(), new_first, positions_.end());
+      if(!closed_){
+        std::rotate(positions_.begin(), new_first, positions_.end());
+      } else {
+        
+        if(new_first == std::prev(positions_.end(),1) )
+          new_first = positions_.begin();
+          
+        // Remove last
+        positions_.erase(std::prev(positions_.end(),1));
+        std::rotate(positions_.begin(), new_first, positions_.end());
+        positions_.push_back(positions_.front());
+      }
     }
     
     point_type Contour::barycenter() const{
-      return geometry::barycenter(positions_);
+      if(closed_){
+        auto cp = positions_;
+        cp.erase(std::prev(cp.end(),1));
+        return geometry::barycenter(cp);
+      } else {
+        return geometry::barycenter(positions_);
+      }
+      
+      
     }
 
 
