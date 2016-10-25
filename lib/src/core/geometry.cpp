@@ -578,6 +578,27 @@ bool within_triangle(const triangle_type& t, const point_type& p){
   }
 }
 
+// Heron's formula
+float triangle_area( const triangle_type& t){
+  point_type v0 = t[1];
+  point_type v1 = t[2];
+  point_type v2 = t[1];
+  
+  bg::subtract_point(v0, t[0]);
+  bg::subtract_point(v1, t[0]);
+  bg::subtract_point(v2, t[2]);
+  
+  // Norms
+  float a = norm(v0);
+  float b = norm(v1);
+  float c = norm(v2);
+  
+  // Perimeter half 
+  float s = (a+b+c) / 2.0;
+  // Area (Heron's formula)
+  return std::sqrt( s * (s-a) * (s-b) * (s-c));
+}
+
 float tetrahedron_volume( const point_type& p0, 
                           const point_type& p1,
                           const point_type& p2,
@@ -797,5 +818,30 @@ bool TriangleMesh::vertex_of_face(const TriangleMesh::vertex_type& v, const Tria
   return ( equal(v,*(f[0])) || equal(v,*(f[1])) || equal(v,*(f[2])));
 }
 
+
+
 }  // namespace geoutils
 }  // namespace neurostr
+
+std::ostream& operator<<(std::ostream& os,const neurostr::geometry::TriangleMesh& m) {
+  
+  using namespace neurostr::geometry;
+  
+  os << "--Mesh--" << std::endl;
+  
+  os << "\tVertices: " << std::endl ;
+  for(auto it = m.begin_vertex(); it != m.end_vertex(); ++it){
+    os << "\t\t (" << getx(*it) << ", " << gety(*it) << ", " << getz(*it) << ")" << std::endl;
+  }
+  
+  os << "\tFaces: " << std::endl ;
+  for(auto it = m.begin_face(); it != m.end_face(); ++it){
+    os << "\t\tFace: " << std::endl ;  
+    os << "\t\t\t (" << getx( *(*it)[0] ) << ", " << gety(*(*it)[0]) << ", " << getz(*(*it)[0]) << ")" << std::endl;
+    os << "\t\t\t (" << getx( *(*it)[1] ) << ", " << gety(*(*it)[1]) << ", " << getz(*(*it)[1]) << ")" << std::endl;
+    os << "\t\t\t (" << getx( *(*it)[2] ) << ", " << gety(*(*it)[2]) << ", " << getz(*(*it)[2]) << ")" << std::endl;
+  }
+  
+  os << "--END Mesh--" << std::endl;
+  return os;
+}

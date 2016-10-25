@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <array>
+#include <iostream>
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point.hpp>
 #include <Eigen/Core>
@@ -498,6 +499,12 @@ namespace geometry
   
   
   /**
+   * @brief Compute the triangle area
+   * @return Triangle area
+   */
+  float triangle_area( const triangle_type& t);
+                            
+  /**
    * @class RDPSimplifier
    * @author luis
    * @date 28/09/16
@@ -627,7 +634,7 @@ namespace geometry
        */
       double recursive_value(int i, int j){
         // Computed already
-        if (buffer(i,j) < 0) {
+        if (buffer(i,j) < 0) {  
           if ( i == 0 ) {
             // I = 0 CASE
             if ( j == 0) {
@@ -894,6 +901,11 @@ namespace geometry
   using triangle_type =  geometry::triangle_type;
   using triMesh_type = geometry::TriangleMesh;
   
+  
+  
 } // namespace neurostr
+
+// Trimesh output
+  std::ostream& operator<<(std::ostream&,  const neurostr::geometry::TriangleMesh&);
 
 #endif

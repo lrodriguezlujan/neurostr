@@ -126,8 +126,12 @@ namespace neurostr {
         if( string_valued_(p) )
           face_color_ = PropertyMap::value<std::string>(p);
       } else if( name == std::string("closed") ){
-        if( bool_valued_(p) )
+        if( bool_valued_(p) ){
           closed_ = PropertyMap::value<bool>(p);
+          if(closed_ && !(geometry::equal(positions_.front(),positions_.back()))){
+            positions_.push_back(positions_.front());
+          }
+        }
       } else if( name == std::string("filldensity") ){
         if( float_valued_(p) )
           fill_ = PropertyMap::value<float>(p);
@@ -152,6 +156,9 @@ namespace neurostr {
     
     void Contour::close(){
       closed_ = true;
+      if(!(geometry::equal(positions_.front(),positions_.back()))){
+            positions_.push_back(positions_.front());
+      }
     }
      
     int Contour::planar_axis() const {
