@@ -59,12 +59,6 @@ void init_log_file(const std::string& path);
 void init_log_cout();
 void init_log_cerr();
 
-/**
- * @brief Sets severity level filter
- * @param lvl lower severity level
- */
-void log_level(boost::log::trivial::severity_level lvl);
-
 
 void disable_log();
 void enable_log();

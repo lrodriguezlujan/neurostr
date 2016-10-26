@@ -1,6 +1,8 @@
 #ifndef NEUROSTR_METHODS_TRICONTOUR_H_
 #define NEUROSTR_METHODS_TRICONTOUR_H_
 
+#include "core/log.h"
+#include "core/neuron.h"
 #include "core/contour.h"
 #include "core/geometry.h"
 
@@ -95,21 +97,23 @@ namespace methods{
     std::size_t m = std::distance(b_a,e_a);
     std::size_t n = std::distance(b_b,e_b);
     
+    NSTR_LOG_(debug) << "Contour sizes: " << m << ", " << n;
     // Matrices w and p as vectors (row-first)
     std::vector<float> w(m*n); // Allocate an n*m vector (0)
+
     std::vector<bool> p(m*n);//  False
-    
-    std::size_t c;
     
     w[0] = 0.0; // Initialize first position
     
     // Fill left border
+    NSTR_LOG_(debug) << "Filling left border";
     for(std::size_t i = 1; i < m ; ++i){
-      w[ (i*m) + 0 ] = w[ ((i-1)*m) + 0 ] + triangulation_va_area(i-1, 0, b_a, b_b);  
-      p[ (i*m) + 0 ] = true; // Left border always goes up (we cant go left)
+      w[ (i*n) + 0 ] = w[ ((i-1)*n) + 0 ] + triangulation_va_area(i-1, 0, b_a, b_b);  
+      p[ (i*n) + 0 ] = true; // Left border always goes up (we cant go left)
     }
     
     // Fill top border
+    NSTR_LOG_(debug) << "Filling top border";
     for(std::size_t j = 1; j < n ; ++j){
       w[ j ] = w[ j-1 ] + triangulation_vb_area(0, j-1, b_a, b_b);  
       p[ j ] = false;  // Top border always goes left (we cant go up)
@@ -119,6 +123,7 @@ namespace methods{
     float v_a,v_b;
     
     // For increments of c..
+    NSTR_LOG_(debug) << "Filling";
     for(std::size_t c = 2; c <= (m-1)+(n-1); ++c){
       // Get index i (Always gt 0 - border case)
       for(std::size_t i = 1 ; i < c && i < m ; ++i ){
@@ -127,18 +132,18 @@ namespace methods{
         if(j < n){
         
           // V_a cost if we create a vertical segment - (Triangle P_i-1, P_i, Q_j)
-          v_a = w[ ((i-1)*m) + j ] + triangulation_va_area(i-1, j, b_a, b_b);
+          v_a = w[ ((i-1)*n) + j ] + triangulation_va_area(i-1, j, b_a, b_b);
           
           // V_b cost if we create a horizontal segment - (Triangle P_i, Q_j-1, Q_j)
-          v_b = w[ (i*m) + (j-1) ] + triangulation_vb_area(i, j-1, b_a, b_b);
+          v_b = w[ (i*n) + (j-1) ] + triangulation_vb_area(i, j-1, b_a, b_b);
           
           // Maximize and set p and w
           if ( v_a < v_b) {
-            p[(i*m) + j ] = true; // We choose the vertical option
-            w[(i*m) + j ] = v_a; // Updated path cost at i,j
+            p[(i*n) + j ] = true; // We choose the vertical option
+            w[(i*n) + j ] = v_a; // Updated path cost at i,j
           } else {
-            p[(i*m) + j ] = false; // We choose the hz option
-            w[(i*m) + j ] = v_b; // Update path cost at i,j
+            p[(i*n) + j ] = false; // We choose the hz option
+            w[(i*n) + j ] = v_b; // Update path cost at i,j
           }
         }
       } // End for I
@@ -146,22 +151,27 @@ namespace methods{
     
     // At this point we should have stopped at m,n and onle need to go backwards
     // to get the triangulation
+    NSTR_LOG_(debug) << "Extracting triangulation";
     std::vector<triangle_type> triangles;
+    triangles.reserve(m+n);
     
     std::size_t i,j;
     i = m-1;
     j = n-1;
+    triangle_type t;
     while( i != 0 || j != 0){ // If we have done right the previous step this shouldnt fail
       // Add triangles while we can
-      if( p[(i*m) + j ] ){
+      
+      if( p[(i*n) + j ] ){
         // Vertical segment - Create (P_i-1,P_i,Q_j)
-        triangles.push_back( {*std::next(b_a,i-1), *std::next(b_a,i), *std::next(b_b,j)});
+        t = {*std::next(b_a,i-1), *std::next(b_a,i), *std::next(b_b,j)};
         --i;
       } else {
         // Horizontal - The triangulation is  (P(i), Q(j-1), Q(j))
-        triangles.push_back( {*std::next(b_a,i), *std::next(b_b,j-1), *std::next(b_b,j)});
+        t = {*std::next(b_a,i), *std::next(b_b,j-1), *std::next(b_b,j)};
         --j;
       }
+      triangles.push_back(t);
     } // end while
     
     return triangles;
@@ -209,6 +219,45 @@ namespace methods{
     
     return mesh;
   }
+  
+  /**
+   * @brief 
+   * @param r
+   * @param name
+   * @param component
+   */
+  void reconstructionContourProcess( Reconstruction& r, const std::string& name, int component = 2);
+  
+  /**
+   * @brief 
+   * @param n
+   * @param name
+   * @param contour
+   */
+  void neuronContourProcess( Neuron& n, const std::string& name, const triMesh_type& contour);
+  
+  /**
+   * @brief 
+   * @param n
+   * @param name
+   * @param contour
+   */
+  void neuriteContourProcess( Neurite& n, const std::string& name, const triMesh_type& contour);
+  
+  /**
+   * @brief 
+   * @param b
+   * @param name
+   * @param contour
+   * @return 
+   */
+  void branchContourProcess( Branch& b, const std::string& name, const triMesh_type& contour);
+  
+  /**
+   * @brief 
+   * @param r
+   */
+  void removeContourVirtualNodes( Reconstruction& r );
   
 
 

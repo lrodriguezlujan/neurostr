@@ -859,7 +859,15 @@ namespace geometry
        * @param p Point
        * @return  True if the point is within the mesh
        */
-      bool point_inside(const point_type& p) const;
+      bool point_inside(const point_type& p, const point_type& ray_direction = point_type(1,0,0)) const;
+      
+      /**
+       * @brief 
+       * @param p
+       * @param ray_direction
+       * @return 
+       */
+      point_type ray_intersection(const point_type& p, const point_type& ray_direction = point_type(1,0,0)) const;
       
     private:
       

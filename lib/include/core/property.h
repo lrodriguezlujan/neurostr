@@ -82,6 +82,14 @@ class PropertyMap {
     std::pair<iterator,bool> set(const std::string& k, int v);
     
     /**
+     * @brief Adds a new bool valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k, bool v);
+    
+    /**
      * @brief Adds a new float valued property to the map
      * @param k Property key
      * @param v Property value

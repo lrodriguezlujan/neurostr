@@ -23,6 +23,11 @@ namespace neurostr{
   }
   
   std::pair<PropertyMap::iterator,bool> 
+    PropertyMap::set(const std::string& k, bool v) {
+    return storage_.emplace(k, v);
+  }
+  
+  std::pair<PropertyMap::iterator,bool> 
   PropertyMap::set(const std::string& k, float v) {
       return storage_.emplace(k, v);
   }
@@ -70,6 +75,7 @@ namespace neurostr{
       else if (is<std::string>(p)) return value<std::string>(p);
       else if (is<int>(p)) return std::to_string(value<int>(p));
       else if (is<float>(p)) return std::to_string(value<float>(p));
+      else if (is<bool>(p)) if(value<bool>(p)) return std::string("true"); else return std::string("false");
       else if (is<point_type>(p)){
         char buff[30];
         snprintf(buff, sizeof(buff), "%.3f %.3f %.3f",  

@@ -148,6 +148,8 @@ namespace io {
           writer->Double(PropertyMap::value<float>(*p));
       } else if (PropertyMap::is<int>(*p)){
           writer->Int(PropertyMap::value<int>(*p));
+      } else if (PropertyMap::is<bool>(*p)){
+          writer->Bool(PropertyMap::value<bool>(*p));
       } else if (PropertyMap::is<point_type>(*p)){
         point_type point = PropertyMap::value<point_type>(*p);
         writePoint(point);

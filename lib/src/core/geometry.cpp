@@ -640,7 +640,9 @@ TriangleMesh::vertex_iterator TriangleMesh::add(const point_type& p){
   for(pos = begin_vertex(); pos != end_vertex(); ++pos){
     if(distance(*pos,p)<1E-3) return pos;
   }
-  return vertices_.insert(vertices_.end(),p);
+  
+  vertices_.push_back(p);
+  return std::prev(vertices_.end(),1);
 }
 
 
@@ -693,10 +695,13 @@ std::size_t TriangleMesh::vertex_count() const{
 
 
 TriangleMesh::face_iterator TriangleMesh::add(const point_type& v0, const point_type& v1, const point_type& v2){
-  vertex_iterator v0_p = add(v0);
-  vertex_iterator v1_p = add(v1);
-  vertex_iterator v2_p = add(v2);
-  faces_.push_back({*v0_p,*v1_p,*v2_p});
+  point_type v0_p = *add(v0);
+  point_type v1_p = *add(v1);
+  point_type v2_p = *add(v2);
+  // This is a reminder: Adding a element to a vector MAY invalidate other iterators since
+  // IT could BE REALLOCATED!!!!
+  triangle_type t = {v0_p,v1_p,v2_p};
+  faces_.push_back(t);
   return std::prev(faces_.end(),1);
 }
 
@@ -744,7 +749,7 @@ std::size_t TriangleMesh::face_count() const{
  * @param p Point
  * @return  True if the point is within the mesh
  */
-bool TriangleMesh::point_inside(const point_type& p) const{
+bool TriangleMesh::point_inside(const point_type& p, const point_type& ray_direction) const{
   
   /** Steps:
   *
@@ -766,7 +771,7 @@ bool TriangleMesh::point_inside(const point_type& p) const{
   for (auto it = begin_face(); it != end_face(); ++it) {
       if(triangle_ray_intersection(*it,
                                      p,
-                                     point_type(1,0,0),
+                                     ray_direction,
                                      i_point)){
         // Hit!
         new_point = true;
@@ -786,6 +791,20 @@ bool TriangleMesh::point_inside(const point_type& p) const{
   }
   // Return is even
   return (intersections.size() % 2 == 1);
+}
+
+point_type TriangleMesh::ray_intersection(const point_type& p, 
+                                          const point_type& ray_direction) const {
+  point_type i_point;
+  for (auto it = begin_face(); it != end_face(); ++it) {
+      if(triangle_ray_intersection(*it,
+                                     p,
+                                     ray_direction,
+                                     i_point)){
+        return i_point;
+      }
+  }
+  return i_point;
 }
 
 /**
