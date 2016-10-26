@@ -298,6 +298,11 @@ std::vector<point_type> box_corners(const box_type &b){
 }
 
 box_type bounding_box(const std::vector<point_type>& v){
+  
+  if(v.size() == 0){
+      return box_type(point_type(0,0,0),point_type(0,0,0));
+  }
+  
   point_type min_corner( std::numeric_limits<float>::max(),
                            std::numeric_limits<float>::max(), 
                            std::numeric_limits<float>::max());
@@ -470,13 +475,30 @@ point_type barycenter(const std::vector<point_type>& v){
     return res;
 }
 
+// Auxiliar function Point in segment
+bool point_in_segment(const point_type & p,const segment_type& s){
+  point_type v = s.second;
+  point_type w = p;
+  
+  bg::subtract_point(v,s.first);
+  bg::subtract_point(w,s.first);
+  
+  // Same direction and shorter distance
+  return (bg::dot_product(v,w) == (norm(v)*norm(w))) && 
+         norm(v) >= norm(w);
+}
+
 bool in_triangle_border(const triangle_type& t, const point_type& p){
   segment_type aux;
   
   // Check every segment
-  return (bg::within(p, segment_type(t[0],t[1])) ||
-          bg::within(p, segment_type(t[0],t[2])) ||
-          bg::within(p, segment_type(t[1],t[2]))  );
+  
+  // BG::within is 2D ignores the third component!
+  
+  return (point_in_segment(p, segment_type(t[0],t[1])) ||
+          point_in_segment(p, segment_type(t[0],t[2])) ||
+          point_in_segment(p, segment_type(t[1],t[2])) ||
+          equal(p,t[0]) || equal(p,t[1]) || equal(p,t[2]));
 }
   
 bool is_triangle_vertex(const triangle_type& t, const point_type& p){
@@ -503,7 +525,7 @@ bool within_triangle(const triangle_type& t, const point_type& p){
   float n_sqnorm = bg::dot_product(n,n);
   
   // If the dot product bw n and w is not 0 -> not in the same plane
-  if(bg::dot_product(p,w) != 0) return false;
+  if(bg::dot_product(n,w) != 0) return false;
   else {
     // We are in the same plane - check that we are in the triangle
     // For that we will use barycentric coordinates 
