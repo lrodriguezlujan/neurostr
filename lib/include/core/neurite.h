@@ -836,7 +836,7 @@ class Neurite : public WithProperties  {
   /**
    * @brief Fixes errors in the Neurite TODO: Which ones?
    */
-  void correct();
+  void correct(const point_type up = point_type(0,0,1));
   
   /**
    * @brief Updates branch ids to match its order in the neurite
@@ -914,7 +914,7 @@ class Neurite : public WithProperties  {
   /**
    * @brief Order child branches by azimuth in ascending order
    */
-  void childOrder();
+  void childOrder(const point_type up = point_type(0,0,1));
 
   
   /**

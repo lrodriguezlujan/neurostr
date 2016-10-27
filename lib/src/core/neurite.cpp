@@ -101,7 +101,7 @@ Neurite::base_node_iterator Neurite::insert_node(Node::id_type parent_id, const 
     return insert_node(it, node);
 }
 
-void Neurite::correct()  {
+void Neurite::correct(const point_type up)  {
   // First: remove null segments
   remove_null_segments();
   // Remove single b
@@ -111,7 +111,7 @@ void Neurite::correct()  {
   // Reassign roots
   reassign_branch_roots();
   // Order descs
-  childOrder();
+  childOrder(up);
   // Reassign ids
   reassign_branch_ids();
 };
@@ -188,26 +188,30 @@ Neurite::branch_iterator Neurite::find(const Branch& b) const{
   return tree_.end();
 }
 
-void Neurite::childOrder(){
+void Neurite::childOrder(const point_type up){
+  // TODO: TESTS!!!
   
-}
-
-/* TODO
- * void Neurite::childOrder(){
-  for( auto it = tree_.begin(); it != tree_.end() ; ++it ) {
-    // Order its children (only standard 2ch case)
+  if(size() <= 1) return;
+  
+  
+  for( auto it = begin_branch(); it != end_branch() ; ++it ){
+    // only for bifurcations
     if(it.number_of_children() == 2){
-      auto ch1 = begin_children(it);
-      auto ch2 = ch1; ++ch2;
-      // IF azimuth of ch1 is > azimuth of ch2 .. swap
-      if( measures::branch::branch_azimuth( branch_reference(this, ch1) ) > 
-          measures::branch::branch_azimuth( branch_reference(this, ch2) ) )
-            tree_.swap(ch1,ch2);
+      
+      auto ch = begin_children(it);
+      
+      // v0 is our "vector"
+      point_type v0 = it->director_vector();
+      point_type v1 = ch->director_vector();
+      point_type v2 = std::next(ch,1)->director_vector();
+      // swap
+      if( geometry::vector_vector_directed_angle(v0,v1,up) > 
+          geometry::vector_vector_directed_angle(v0,v2,up)){
+        tree_.swap(ch,std::next(ch,1));
+      }
     }
   }
-}*/
-
-
+}
 
 int Neurite::max_centrifugal_order() const{
   
