@@ -325,6 +325,22 @@ void Neurite::reassign_branch_roots(){
   }
 }
 
+void Neurite::invalidate_node_cached_values(){
+  // nodes
+  for(auto it = begin_node(); it != end_node(); ++it){
+    it->invalidate_basis();
+    it->invalidate_length();
+  }
+  
+  // Then root
+  for(auto it = begin_branch(); it != end_branch(); ++it){
+    if(it->has_root()){
+      it->root().invalidate_basis();
+      it->root().invalidate_length();  
+    }
+  }
+  
+}
 
 std::ostream& operator<<(std::ostream& os, const Neurite& n) {
 

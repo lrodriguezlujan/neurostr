@@ -871,6 +871,10 @@ class Neurite : public WithProperties  {
   void reassign_branch_roots();
 
   /**
+  * @brief Invalidates all cached values in every node in the neurite
+  */
+  void invalidate_node_cached_values();
+  /**
    * @brief Scales all branches in the neurite wrt root or 0,0,0
    * @param r Scale rate
    */
