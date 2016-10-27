@@ -191,6 +191,17 @@ namespace geometry
            ( bg::get<1>(a) == bg::get<1>(b)) &&
            ( bg::get<2>(a) == bg::get<2>(b));
   }
+  
+  /**
+   * @brief Checks whether two point a and b are equal
+   * @param a First point
+   * @param b Second point
+   * @return  True if every component in a is equal to b
+   */
+  inline bool equal(const planar_point& a, const planar_point& b){
+    return ( bg::get<0>(a) == bg::get<0>(b)) &&
+           ( bg::get<1>(a) == bg::get<1>(b));
+  }
 
   /**
    * @brief Retunrs a orthonormal right-oriented basis where vx is 
