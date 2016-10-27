@@ -161,6 +161,7 @@ class Neuron : public WithProperties {
    * @brief Add node set to soma
    * @param v Vector of nodes to add to the soma
    */
+   // This should be templated and done with iterators
   void add_soma(const std::vector<Node>& v);
   
   /**
