@@ -1,50 +1,71 @@
 #ifndef NEUROSTR_LOG_H_
 #define NEUROSTR_LOG_H_
 
-//#include <boost/logging/format/named_write_fwd.hpp>
-#include <boost/log/core.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/expressions.hpp>
-#include <boost/log/sinks/text_file_backend.hpp>
-#include <boost/log/utility/setup/file.hpp>
-#include <boost/log/utility/setup/common_attributes.hpp>
-#include <boost/log/utility/setup/console.hpp>
-#include <boost/log/sources/severity_logger.hpp>
-#include <boost/log/sources/record_ostream.hpp>
-#include <boost/log/sources/global_logger_storage.hpp>
-
-
-#ifdef DEDICATED_LOG_THREAD
-  #include <boost/logging/writer/on_dedicated_thread.hpp>
-#endif
+#include <spdlog/spdlog.h>
 
 namespace neurostr{
 namespace log{
 
-using namespace boost::log::trivial;
-
-
-//core->add_global_attribute("Scope", attrs::named_scope());
-
-BOOST_LOG_GLOBAL_LOGGER(logger,  boost::log::sources::severity_logger_mt<severity_level>)
-
-
-
-// Less verbosity
-#define NSTR_LOG_(lvl) \
-        BOOST_LOG_SEV(neurostr::log::logger::get(), boost::log::trivial::lvl)
 
 /**
- *  expose severity levels
- */
-const severity_level trace = boost::log::trivial::trace;
-const severity_level debug = boost::log::trivial::debug;
-const severity_level info = boost::log::trivial::info;
-const severity_level warning = boost::log::trivial::warning;
-const severity_level error = boost::log::trivial::error;
-const severity_level fatal = boost::log::trivial::fatal;
+*  expose severity levels
+*/
+using severity_level = spdlog::level::level_enum;
 
+// Unique logger
+class _logger_storage {
 
+private:
+  std::shared_ptr<spdlog::logger> ptr_;
+  bool enabled = false;
+  
+  std::string format = "[%l]   %v";
+  severity_level level = severity_level::warn;
+
+public:
+  
+  void set(std::shared_ptr<spdlog::logger>&& l){
+      ptr_ = l;
+      ptr_->set_level(level);
+      ptr_->set_pattern(format);
+  }
+  
+  void set_level(severity_level l){
+    level = l;
+    ptr_->set_level(level);
+  }
+  
+  void set_format(const std::string& fmt){
+    format = fmt;
+    ptr_->set_pattern(format);
+  }
+  
+  void enable() {
+    enabled = true;
+  }
+  
+  void disable() {
+    enabled = false;
+  }
+  
+  bool status() const {
+    return enabled;
+  }
+  
+  spdlog::logger& get(){
+    return *ptr_;
+  }
+};
+
+extern _logger_storage _nstr_logger_;
+
+// Less verbosity
+#ifndef NSTR_NOLOG
+#define NSTR_LOG_(lvl, msg) \
+  if(neurostr::log::_nstr_logger_.status()){neurostr::log::_nstr_logger_.get().lvl(msg+std::string("\t(@")+std::string(__FUNCTION__)+")\t" );}
+#else
+#define NSTR_LOG_(lvl, msg) 
+#endif
 /**
  * @brief Inits file logger
  * @param path Log file path
@@ -62,6 +83,9 @@ void init_log_cerr();
 
 void disable_log();
 void enable_log();
+
+void set_format(const std::string& s);
+void set_level(severity_level l);
 
 } // log
 } // neurostr

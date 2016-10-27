@@ -105,7 +105,7 @@ namespace neurostr {
       if (!it->root_is_soma()) {
         auto n = it->begin_branch()->begin();
         if (point_in_soma(n->position())){
-          NSTR_LOG_(trace) << "Setting first node as root";
+          NSTR_LOG_(trace, "Setting first node as root");
           it->set_root(*n);
           // Remove it
           //it->begin_branch()->erase( n );

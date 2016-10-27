@@ -3,44 +3,41 @@
 namespace neurostr{
 namespace log{
 
-  using namespace boost::log::trivial;
-  namespace expr = boost::log::expressions;
+ _logger_storage _nstr_logger_;
 
-
-
-BOOST_LOG_GLOBAL_LOGGER_INIT(logger, boost::log::sources::severity_logger_mt<severity_level>){
-  boost::log::sources::severity_logger_mt<severity_level> lg;
-  boost::log::add_common_attributes();
-  boost::log::core::get()->set_filter( boost::log::trivial::severity >= boost::log::trivial::info );
-  return lg;
-}
 
 void init_log_file(const std::string& path) {
-                     boost::log::add_file_log(path,
-                                boost::log::keywords::format = expr::stream
-                                     <<  "[" << severity << "]\t\t" << expr::smessage);
+  spdlog::drop("global");
+  _nstr_logger_.set(spdlog::basic_logger_mt("global",path));
                     
   
 }
 
 void init_log_cout(){
-  boost::log::add_console_log(std::cout,  
-                              boost::log::keywords::format = expr::stream
-                                    << "[" << severity << "]\t\t" << expr::smessage);
+  spdlog::drop("global");
+  _nstr_logger_.set(spdlog::stdout_color_mt("global"));
 }
 
 void init_log_cerr(){
-  boost::log::add_console_log(std::cerr,  
-                              boost::log::keywords::format = expr::stream
-                                    << "[" << severity << "]\t\t" << expr::smessage);
+  spdlog::drop("global");
+  _nstr_logger_.set(spdlog::stderr_color_mt("global"));
 }
 
 void disable_log(){
-  boost::log::core::get()->set_logging_enabled(false);
+  _nstr_logger_.disable();
 }
 
 void enable_log(){
-  boost::log::core::get()->set_logging_enabled(true);
+  _nstr_logger_.enable();
+}
+
+void set_format(const std::string& s){
+  _nstr_logger_.set_format(s);
+}
+
+
+void set_level(severity_level l){
+  _nstr_logger_.set_level(l);
 }
 
 } // log

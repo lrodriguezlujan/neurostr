@@ -253,10 +253,10 @@ bool Neurite::remove_empty_branches(){
         // Single children nodes -> collapse
         if(it.node->parent == nullptr){
           // we are the first branch
-          NSTR_LOG_(warning) << "Cannot remove empty root branch in neurite " << id();
+          NSTR_LOG_(warn, "Cannot remove empty root branch in neurite " + std::to_string(id()) );
         } else {
           trigger = true;  
-          NSTR_LOG_(info) << "Removing empty branch" << it->idString() <<" in neurite " << id();
+          NSTR_LOG_(info, std::string("Removing empty branch") + it->idString() + " in neurite " + std::to_string(id()) );
           // We assing our children to the parent node.
           if(it.number_of_children()>0){
             tree_.reparent(tree_type::parent(it), it.begin(), it.end());
@@ -277,7 +277,7 @@ bool Neurite::collapse_single_branches(){
   for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
     if (it.number_of_children() == 1) {
 
-        NSTR_LOG_(info) << "Removing single-childed branch" << it->idString() <<" in neurite " << id();
+        NSTR_LOG_(info, "Removing single-childed branch" + it->idString()  +" in neurite " + std::to_string(id()) );
         
         // Single children nodes -> collapse
         trigger = true;
@@ -312,7 +312,7 @@ void Neurite::reassign_branch_roots(){
     } else if (tree_type::parent(it)->has_root()){
       it->root(tree_type::parent(it)->root());
     } else {
-      NSTR_LOG_(warning) << "Can't find a suitable root for branch " << it->idString();
+      NSTR_LOG_(warn, "Can't find a suitable root for branch " + it->idString());
     }
   }
 }

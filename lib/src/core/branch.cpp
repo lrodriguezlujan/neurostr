@@ -306,9 +306,9 @@ namespace neurostr{
   
   float Branch::distance(const Branch& other, 
                          bool ignore_radius) const{
-      NSTR_LOG_(trace) << "branch distance function call";
+      NSTR_LOG_(trace, "branch distance function call");
       if(other == *this){
-        NSTR_LOG_(trace) << "branch distance return on equal branches";
+        NSTR_LOG_(trace, "branch distance return on equal branches");
         return 0.0;
       }
       else {
@@ -318,7 +318,7 @@ namespace neurostr{
         float d;
         
         if(size() == 0 || other.size() == 0){
-          NSTR_LOG_(trace) << "branch distance return on empty branches";
+          NSTR_LOG_(trace, "branch distance return on empty branches");
           return mindist;
         }
         
@@ -604,13 +604,13 @@ std::ostream& operator<<(std::ostream& os, const Branch& b){
                                   bool ignore_radius,
                                   bool ignore_root,
                                   bool ignore_last) const{
-    NSTR_LOG_(trace) << "distance_segment function call";
+    NSTR_LOG_(trace, "distance_segment function call");
     
     float mindist =  std::numeric_limits<float>::max();
     float d;
     
     if(size() == 0){
-      NSTR_LOG_(trace) << "distance_segment return on empty branch";
+      NSTR_LOG_(trace, "distance_segment return on empty branch");
       return mindist;
     }
     

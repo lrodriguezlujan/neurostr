@@ -92,7 +92,7 @@ namespace methods{
     // Check that they are closed (and close them)
     for(auto it = selected.begin(); it != selected.end(); ++it){
       if(!it->is_closed()){
-        NSTR_LOG_(warning) << " Open contour - Please check that given contours are closed";
+        NSTR_LOG_(warn, " Open contour - Please check that given contours are closed");
         it->close();
       }
     }

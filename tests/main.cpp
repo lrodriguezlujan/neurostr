@@ -1,5 +1,5 @@
 #include <unittest++/UnitTest++.h> 
-
+#include <core/log.h>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // To add a test, simply put the following code in the a .cpp file of your choice:
@@ -60,5 +60,10 @@
 
 int main(int argc, char **argv)
 {
+  // Enable log
+  neurostr::log::init_log_cerr();
+  neurostr::log::set_level(neurostr::log::severity_level::warn);
+  neurostr::log::enable_log();
+  
 	return UnitTest::RunAllTests();
 }

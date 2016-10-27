@@ -97,7 +97,7 @@ namespace methods{
     std::size_t m = std::distance(b_a,e_a);
     std::size_t n = std::distance(b_b,e_b);
     
-    NSTR_LOG_(debug) << "Contour sizes: " << m << ", " << n;
+    NSTR_LOG_(debug, "Contour sizes: " + std::to_string(m) + ", " + std::to_string(n) );
     // Matrices w and p as vectors (row-first)
     std::vector<float> w(m*n); // Allocate an n*m vector (0)
 
@@ -106,14 +106,14 @@ namespace methods{
     w[0] = 0.0; // Initialize first position
     
     // Fill left border
-    NSTR_LOG_(debug) << "Filling left border";
+    NSTR_LOG_(debug, "Filling left border");
     for(std::size_t i = 1; i < m ; ++i){
       w[ (i*n) + 0 ] = w[ ((i-1)*n) + 0 ] + triangulation_va_area(i-1, 0, b_a, b_b);  
       p[ (i*n) + 0 ] = true; // Left border always goes up (we cant go left)
     }
     
     // Fill top border
-    NSTR_LOG_(debug) << "Filling top border";
+    NSTR_LOG_(debug, "Filling top border");
     for(std::size_t j = 1; j < n ; ++j){
       w[ j ] = w[ j-1 ] + triangulation_vb_area(0, j-1, b_a, b_b);  
       p[ j ] = false;  // Top border always goes left (we cant go up)
@@ -123,7 +123,7 @@ namespace methods{
     float v_a,v_b;
     
     // For increments of c..
-    NSTR_LOG_(debug) << "Filling";
+    NSTR_LOG_(debug, "Filling");
     for(std::size_t c = 2; c <= (m-1)+(n-1); ++c){
       // Get index i (Always gt 0 - border case)
       for(std::size_t i = 1 ; i < c && i < m ; ++i ){
@@ -151,7 +151,7 @@ namespace methods{
     
     // At this point we should have stopped at m,n and onle need to go backwards
     // to get the triangulation
-    NSTR_LOG_(debug) << "Extracting triangulation";
+    NSTR_LOG_(debug, "Extracting triangulation");
     std::vector<triangle_type> triangles;
     triangles.reserve(m+n);
     

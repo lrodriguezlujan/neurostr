@@ -97,11 +97,11 @@ marker_type DATParser::process_markerset() {
 
   // Process header and get property name
   if(ensure_buffer_size_(block_header_size)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset name header";
+    NSTR_LOG_(warn,"Expanding buffer in markerset name header");
   }
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block name " << len;
+    NSTR_LOG_(warn,"Expanding buffer in markerset block name");
   }
 
   if (type_in_buffer_ != block_type::STRING) 
@@ -117,13 +117,13 @@ marker_type DATParser::process_markerset() {
   
   // Process proplist
   if(empty()){
-    NSTR_LOG_(warning) << "Reading header after block end in markerset block";
+    NSTR_LOG_(warn,"Reading header after block end in markerset block");
     ensure_buffer_size_(block_header_size);
   }
     
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block property list " << len;
+    NSTR_LOG_(warn, "Expanding buffer in markerset block property list ");
   }
   
   if (type_in_buffer_ != block_type::PROPERTY_LIST) 
@@ -132,13 +132,13 @@ marker_type DATParser::process_markerset() {
   
   // Process sample list
   if(empty()){
-    NSTR_LOG_(warning) << "Reading block after block end in markerset block";
+    NSTR_LOG_(warn,"Reading block after block end in markerset block");
     ensure_buffer_size_(block_header_size);
   }
     
   len = process_block_header_();
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset block sample list " << len;
+    NSTR_LOG_(warn, "Expanding buffer in markerset block sample list ");
   }
   
   if (type_in_buffer_ != block_type::SAMPLE_LIST) 
@@ -156,12 +156,12 @@ PropertyMap::property_type DATParser::process_property() {
 
   // Process header and get property name
   if(ensure_buffer_size_(block_header_size)){
-    NSTR_LOG_(warning) << "Expanding buffer in property name header";
+    NSTR_LOG_(warn, "Expanding buffer in property name header");
   }
   len = process_block_header_();
   
   if(ensure_buffer_size_(len)){
-    NSTR_LOG_(warning) << "Expanding buffer in markerset name " << len;
+    NSTR_LOG_(warn, "Expanding buffer in markerset name ");
   }
   
   if (type_in_buffer_ != block_type::STRING) throw std::runtime_error("Malformed property block");
@@ -184,11 +184,11 @@ PropertyMap::property_type DATParser::process_property() {
     // Read property value
     
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in property value header";
+      NSTR_LOG_(warn, "Expanding buffer in property value header");
     }
     len = process_block_header_();
     if(ensure_buffer_size_(len)){
-      NSTR_LOG_(warning) << "Expanding buffer in property value " << len;
+      NSTR_LOG_(warn, "Expanding buffer in property value ");
     }
 
     // Read value string
@@ -219,10 +219,10 @@ std::vector<Node> DATParser::process_samplelist_() {
   for (int i = 0; i < nsamples; i++) {
     // Read header
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in process samplelist header";
+      NSTR_LOG_(warn, "Expanding buffer in process samplelist header");
     }
     if(ensure_buffer_size_(process_block_header_())){
-      NSTR_LOG_(warning) << "Expanding buffer in process samplelist sample";
+      NSTR_LOG_(warn, "Expanding buffer in process samplelist sample");
     }
     
     // Read sample
@@ -251,10 +251,10 @@ std::vector<PropertyMap::property_type> DATParser::process_proplist_() {
   for (int i = 0; i < nprops; i++) {
     // Read header
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in process proplist header";
+      NSTR_LOG_(warn, "Expanding buffer in process proplist header");
     }
     if(ensure_buffer_size_(process_block_header_())){
-      NSTR_LOG_(warning) << "Expanding buffer in process proplist property";
+      NSTR_LOG_(warn, "Expanding buffer in process proplist property");
     }
     
     if (type_in_buffer_ != block_type::PROPERTY)
@@ -284,10 +284,10 @@ std::vector<marker_type> DATParser::process_markersetlist_(){
   for (int i = 0; i < nmarkers ; i++) {
     
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in process markerset list header";
+      NSTR_LOG_(warn, "Expanding buffer in process markerset list header");
     }
     if(ensure_buffer_size_(process_block_header_())){
-      NSTR_LOG_(warning) << "Expanding buffer in process markerset list marker";
+      NSTR_LOG_(warn, "Expanding buffer in process markerset list marker");
     }
     
     if (type_in_buffer_ != block_type::MARKERSET)
@@ -323,12 +323,12 @@ std::size_t DATParser::process_container_(
   if (named(type)) {
     // Read name block header
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in container name header";
+      NSTR_LOG_(warn,"Expanding buffer in container name header");
     }
     std::size_t len = process_block_header_();
     
     if(ensure_buffer_size_(len)){
-      NSTR_LOG_(warning) << "Expanding buffer in container name value " << len;
+      NSTR_LOG_(warn, "Expanding buffer in container name");
     }
     
     if (type_in_buffer_ != block_type::STRING)
@@ -351,13 +351,13 @@ std::size_t DATParser::process_container_(
 
     // Read block header
     if(ensure_buffer_size_(block_header_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in container subblock header";
+      NSTR_LOG_(warn, "Expanding buffer in container subblock header");
     }
     
     std::size_t inblock_size = process_block_header_();
     
     if(ensure_buffer_size_(inblock_size)){
-      NSTR_LOG_(warning) << "Expanding buffer in container sub-block";
+      NSTR_LOG_(warn, "Expanding buffer in container sub-block");
     }
     
     // Correct head displacement
