@@ -135,7 +135,10 @@ class Neurite : public WithProperties  {
    * @brief Return neurite parent neuron reference
    * @return  Neuron reference
    */
-  Neuron&  neuron() const { return *neuron_; }
+  Neuron&  neuron() const { 
+    if(neuron_ == nullptr) throw(std::logic_error("Attempt to access null neuron"));
+    return *neuron_; 
+  }
   
   //
   // SET
@@ -164,13 +167,15 @@ class Neurite : public WithProperties  {
    * @brief Checks if the root branch of the neurite has root
    * @return True if the neurite is rooted (i.e. attached to soma)
    */
-  bool has_root() const { return begin_branch()->has_root(); }
+  bool has_root() const { return size()!=0 && begin_branch()->has_root(); }
   
   /**
    * @brief Get root reference
    * @return Root reference
    */
-  const Node& root() const { return begin_branch()->root(); }
+  const Node& root() const { 
+    if (size() == 0) throw(std::logic_error("Attempt to access empty neurite"));
+    return begin_branch()->root(); }
   
   // ROOT BRANCH SET
   
@@ -714,30 +719,20 @@ class Neurite : public WithProperties  {
    */
   template <typename iter>
   node_iterator<iter> insert_node(const node_iterator<iter>& pos, const Node& node){
-      if( pos.branch().node == tree_.feet){
-        set_root();  // Empty root
-        tree_.begin()->push_back(node);
-        
-        // Return an iterator
-        return node_iterator<iter>( tree_.begin(), tree_.end(), tree_.begin(), tree_.begin()->begin());
-        
-      } else if (pos.branch()->size() == 0) {
-        // Empty branch
-        pos.branch()->push_back(node);
-        return node_iterator<iter>(pos.begin(),pos.end(),pos.branch(), pos.branch()->begin() );
+      if( pos.branch().node == tree_.feet || pos.branch().node == tree_.head){
+          return insert_node(pos.branch(),node);
       }
+      
       // Check if pos is the last one
-      else if (pos.node() < (pos.branch()->end() - 1)) {
-        // Split if we are not inserting in the last position split - pos is
-        // still valid in this case
+      if (pos.node() < (pos.branch()->end() - 1)) {
+        // Split if we are not inserting in the last position split
         split(pos);  
       }
 
       // At this point: We are always inserting in the last pos
       // If theres no more nodes just append
       if (pos.branch().number_of_children() == 0) {
-        pos.branch()->push_back(node);
-        return node_iterator<iter>(pos.begin(),pos.end(),pos.branch(), --(pos.branch()->end()) );
+        return insert_node(pos.branch(),node);
       } else {
         // Create new branch id
         std::vector<int> id{pos.branch()->id()};
@@ -745,12 +740,33 @@ class Neurite : public WithProperties  {
 
         // Create branch - pos node will be the root        
         auto aux = tree_.append_child(pos.branch(), Branch(id, pos.branch()->order() + 1, *pos) );
-        aux->neurite(this);
-        aux->push_back(node);
+        aux->neurite(this); // Set branch neurite
         
-        // POST INSERT
-        return node_iterator<iter>(pos.begin(),pos.end(), aux, aux->begin());
+        // Insert in aux
+        return insert_node(aux,node);
       }      
+  }
+  
+  /**
+   * @brief Inserts a node at the end of the given branch.
+   * @param branch_pos branch iterator
+   * @param node Node to insert
+   * @return Insert position
+   */
+  template <typename iter>
+  node_iterator<iter> insert_node(const iter& branch_pos, const Node& node) {
+    if(branch_pos.node == tree_.feet || branch_pos.node == tree_.head) {
+      // Check if theres a branch somewhere
+      if(size() == 0){
+        set_root(); // Create root branch
+      }
+      
+      tree_.begin()->push_back(node);
+      return node_iterator<iter>( tree_.begin(), tree_.end(), tree_.begin(), tree_.begin()->begin());
+    } else {
+      branch_pos->push_back(node);
+      return node_iterator<iter>( tree_.begin(), tree_.end(), branch_pos, std::prev(branch_pos->end(),1));
+    }
   }
   
   // Node - based function
@@ -894,28 +910,41 @@ Neurite::node_iterator<iter>::node_iterator()
       : begin_()
       , current_()
       , end_()
-      , node_current_(){};
+      , node_current_(){
+        // Skip empty branches
+        while( current_ != end_ && current_->size() == 0 )
+          increment();
+};
 
 template <typename iter> 
 Neurite::node_iterator<iter>::node_iterator(const iter& b, const iter& e)
         : begin_(b)
         , current_(b)
         , end_(e)
-        , node_current_(b->begin()){};
+        , node_current_(b->begin()){
+          while( current_ != end_ && current_->size() == 0 )
+          increment();
+};
 
 template <typename iter> 
 Neurite::node_iterator<iter>::node_iterator(const iter& b, const iter& e, const iter& c)
         : begin_(b)
         , current_(c)
         , end_(e)
-        , node_current_(c->begin()){};
+        , node_current_(c->begin()){
+          while( current_ != end_ && current_->size() == 0 )
+          increment();
+};
 
 template <typename iter> 
 Neurite::node_iterator<iter>::node_iterator(const iter& b,
                   const iter& e,
                   const iter& c,
                   const typename Branch::iterator& nodeit)
-        : begin_(b), current_(c), end_(e), node_current_(nodeit){};
+        : begin_(b), current_(c), end_(e), node_current_(nodeit){
+          while( current_ != end_ && current_->size() == 0 )
+          increment();
+};
         
     
 template <typename iter>
@@ -970,10 +999,15 @@ bool Neurite::node_iterator<iter>::equal(const node_iterator<OtherIter>& other) 
 template <typename iter>
 void Neurite::node_iterator<iter>::increment() {
       if (current_ != end_) {
-        ++node_current_;
-        if (node_current_ == current_->end()) {
+        if (node_current_ == current_->end()){
           ++current_;
-          node_current_ = current_->begin();
+            node_current_ = current_->begin();
+        } else {
+          ++node_current_;
+          if (node_current_ == current_->end()) {
+            ++current_;
+            node_current_ = current_->begin();
+          }
         }
       }
     }
