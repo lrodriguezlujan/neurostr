@@ -180,6 +180,11 @@ class Branch : public WithProperties{
   void root(const Node& n) { root_.reset(new Node(n)); }
   
   /**
+   * @brief Removes the current root
+   */
+  void remove_root() { root_.reset(nullptr); }
+  
+  /**
    * @brief Move a node as new root
    * @param n node to move
    */
