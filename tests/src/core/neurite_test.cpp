@@ -24,8 +24,6 @@ struct SampleNeurite {
     neurite_example.insert_node(3,Node(6));
     neurite_example.insert_node(5,Node(7));
     neurite_example.insert_node(5,Node(8));
-    
-    neurite_example.correct();
   }
   
   ~SampleNeurite(){};
