@@ -161,6 +161,7 @@ class Neuron : public WithProperties {
    * @brief Add node set to soma
    * @param v Vector of nodes to add to the soma
    */
+   // This should be templated and done with iterators
   void add_soma(const std::vector<Node>& v);
   
   /**
@@ -617,7 +618,10 @@ class Reconstruction : public WithProperties{
    * @brief Adds a neuron to the reconstruction
    * @param n Neuron pointer
    */
-  void addNeuron(Neuron* const n) { neurons_.emplace_back(n); };
+  void addNeuron(Neuron* const n) { 
+    if(n!=nullptr)
+      neurons_.emplace_back(n); 
+  };
 
   /**
    * @brief Sets a vector of points as reconstruction contour

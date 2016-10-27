@@ -159,7 +159,7 @@ void SWCParser::process_data_(const std::string& s) {
       Neurite* neurite(new Neurite(neuron_->size() + 1, NeuriteType(type)));
       // Create a branch with root given parent
       neurite->set_root(*soma_pos);
-      last_node_pos_ = neurite->insert_node( neurite->begin_node(), node);
+      last_node_pos_ = neurite->insert_node( neurite->begin_branch(), node);
       neuron_->add_neurite(neurite);
       
     } else {

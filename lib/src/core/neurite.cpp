@@ -13,6 +13,8 @@ Neurite::Neurite()
       , type_(NeuriteType::kUndefined)
       , root_is_soma_(false)
       , neuron_(){
+        tree_.head->data.neurite(this);
+        tree_.feet->data.neurite(this);
         //set_root();
   };
   
@@ -24,6 +26,8 @@ Neurite::Neurite(int id)
       , root_is_soma_(false)
       , neuron_(){
         //set_root();
+        tree_.head->data.neurite(this);
+        tree_.feet->data.neurite(this);
   };
   
 Neurite::Neurite(int id, const NeuriteType& t)
@@ -33,6 +37,8 @@ Neurite::Neurite(int id, const NeuriteType& t)
       , type_(t)
       , root_is_soma_(false)
       , neuron_(){
+        tree_.head->data.neurite(this);
+        tree_.feet->data.neurite(this);
         //set_root();
   };
   
@@ -44,7 +50,9 @@ void Neurite::set_root() {
     // Set branch neurite
     tree_.set_head(Branch(std::vector<int>{1}, 0));
     tree_.begin()->neurite(this);
-    
+  } else {
+    tree_.begin()->remove_root();
+    tree_.begin()->neurite(this);
   }
   
   root_is_soma_ = false;

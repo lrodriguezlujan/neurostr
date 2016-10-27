@@ -49,6 +49,12 @@ class PropertyMap {
      */
     const_iterator find(const std::string& k) const;
     
+    // Default copy and move
+    PropertyMap(const PropertyMap&) = default;
+    PropertyMap& operator=(const PropertyMap&) = default;
+    PropertyMap(PropertyMap&&) = default;
+    PropertyMap& operator=(PropertyMap&&) = default;
+    
     /**
      * @brief Returns the value of the poperty with key k
      * @param k Key
@@ -152,12 +158,14 @@ class PropertyMap {
      * @return iterator
      */
     const_iterator begin() const ;
+    iterator begin() ;
     
     /**
      * @brief Property end iterator
      * @return iterator
      */
     const_iterator end() const ;
+    iterator end() ;
   
   /**
    * @brief Property value as string

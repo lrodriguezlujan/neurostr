@@ -301,7 +301,7 @@ std::vector<marker_type> DATParser::process_markersetlist_(){
 }
 
 std::size_t DATParser::process_container_(
-    const Neurite::base_node_iterator &pos) {
+    const Neurite::branch_iterator &pos) {
 
   // Block name and properties
   std::string block_name;
@@ -341,10 +341,10 @@ std::size_t DATParser::process_container_(
 
   // Process container info
   std::vector<PropertyMap::property_type> tmp = process_block_info_(type);
-  for(auto it = tmp.begin(); it != tmp.end(); ++it ) pos.neurite().properties.set(*it);
+  for(auto it = tmp.begin(); it != tmp.end(); ++it ) pos->neurite().properties.set(*it);
   
   // Add name if not empty
-  if (block_name.size() > 0) pos.neurite().properties.set(PropertyMap::property_type(std::string("name"), block_name));
+  if (block_name.size() > 0) pos->neurite().properties.set(PropertyMap::property_type(std::string("name"), block_name));
 
   // Read child blocks
   while (!empty()) {
@@ -366,32 +366,30 @@ std::size_t DATParser::process_container_(
     // Single sample or list
     if (type_in_buffer_ == block_type::SAMPLE) {
       Node n = process_sample();
-      current_pos = current_pos.neurite().insert_node(current_pos, n);
+      current_pos->neurite().insert_node(current_pos, n);
     } else if (type_in_buffer_ == block_type::SAMPLE_LIST) {
       // Sample list
       std::vector<Node> v = process_samplelist_();
       for (auto it = v.begin(); it != v.end(); it++) {
-        current_pos = current_pos.neurite().insert_node(current_pos, *it);
+        current_pos->neurite().insert_node(current_pos, *it);
       }
     } else if (type_in_buffer_ == block_type::PROPERTY) {
       // Single property
       PropertyMap::property_type p = process_property();
-      current_pos.neurite().properties.set(p);
+      current_pos->neurite().properties.set(p);
     } else if (type_in_buffer_ == block_type::PROPERTY_LIST) {
       // Property list
       std::vector<PropertyMap::property_type> v = process_proplist_();
       for(auto it = v.begin(); it != v.end() ; ++it) 
-        pos.neurite().properties.set(*it);
+        current_pos->neurite().properties.set(*it);
 
     } else if (type_in_buffer_ == block_type::SUB_TREE) {
       // Create branch
-      std::vector<int> id = current_pos.branch()->id();
-      id.push_back(current_pos.branch().number_of_children()+1);      
-      Neurite::branch_iterator inserted = current_pos.neurite()
-        .append_branch(current_pos.branch(),
-          Branch(id, current_pos.branch()->order()+1, *current_pos.node()));
-              
-      Neurite::node_iterator<Neurite::branch_iterator> new_pos = current_pos.neurite().begin_node(inserted);
+      std::vector<int> id = current_pos->id();
+      id.push_back(current_pos.number_of_children()+1);      
+      Neurite::branch_iterator inserted = current_pos->neurite()
+        .append_branch(current_pos,
+          Branch(id, current_pos->order()+1, current_pos->last()));
       
       // !!!!
       // If the sub container have extended read past the block end... this might be troublesome.
@@ -399,7 +397,7 @@ std::size_t DATParser::process_container_(
       // How can we solve this..
       
       // Non vanilla blocks
-      total_extended+=process_container_(new_pos);
+      total_extended+=process_container_(inserted);
       
       
       
@@ -440,7 +438,7 @@ void DATParser::process_block_(Reconstruction &r) {
     n->set_root();
 
     // Process
-    process_container_(n->begin_node());
+    process_container_(n->begin_branch());
 
     set_neurite_type_by_nlproperties(*n);
     
@@ -460,7 +458,7 @@ void DATParser::process_block_(Reconstruction &r) {
     aux.set_root();
 
     // Read container
-    process_container_(aux.begin_node());
+    process_container_(aux.begin_branch());
 
     // If soma -> add it to the reconstruction
     auto it = aux.properties.find("cellbody");

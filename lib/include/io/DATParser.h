@@ -123,11 +123,11 @@ public:
 
   /**
    * @brief Process container block in buffer
-   * @param parent Insertion position
+   * @param pos Insertion position
    * @return Number of bytes extended
    */
   std::size_t process_container_(
-      const Neurite::base_node_iterator& parent);
+      const Neurite::branch_iterator& pos);
 
   /**
    * @brief Process block in buffer

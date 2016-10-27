@@ -52,9 +52,13 @@ namespace neurostr {
   }
   
   Neuron::neurite_iterator Neuron::add_neurite(Neurite* const n) {
-    n->neuron(this);
-    neurites_.emplace_back(n);
-    return neurite_iterator(std::prev(neurites_.end(),1));
+    if(n != nullptr){
+      n->neuron(this);
+      neurites_.emplace_back(n);
+      return neurite_iterator(std::prev(neurites_.end(),1));
+    } else {
+      return end_neurite();
+    }
   }
   
   void  Neuron::add_soma(const std::vector<Node>& v) { 
@@ -114,7 +118,8 @@ namespace neurostr {
 
   
   std::vector<point_type> Neuron::soma_positions() const {
-    std::vector<point_type> v(soma_.size());
+    std::vector<point_type> v;
+    v.reserve(soma_.size());
     for(auto it = soma_.begin(); it != soma_.end(); ++it)
       v.push_back(it->position());
     return v;
@@ -188,7 +193,10 @@ namespace neurostr {
    * @return updated iterator
    */
   Neuron::neurite_iterator Neuron::erase(const neurite_iterator& n){
-    return neurites_.erase(n.base());
+    if(n != end_neurite())
+      return neurites_.erase(n.base());
+    else
+      return n;
   }
   
   /**
@@ -286,6 +294,10 @@ namespace neurostr {
   
   // Axis aligned bounding box
   box_type Neuron::boundingBox(){
+    
+    if(node_count() == 0 && soma_.size() == 0){
+      return box_type(point_type(0,0,0),point_type(0,0,0));
+    }
     
     // Initialize limits
     point_type min_corner( std::numeric_limits<float>::max(),
@@ -411,6 +423,10 @@ Reconstruction::neuron_iterator Reconstruction::add_neurite_to_closest_soma(Neur
         
     // Special case - just 1 neuron
     neuron_iterator closest;
+    
+    if(n == nullptr){
+      return end();
+    }
     
     if(size() == 1){
       closest = begin();

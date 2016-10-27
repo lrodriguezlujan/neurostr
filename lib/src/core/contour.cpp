@@ -62,7 +62,7 @@ namespace neurostr {
     
     float Contour::area() const {
        if(size() <= 1) return 0;
-       else return NAN; // TODO: NOT IMPLEMENTED YET
+       else return 0; // TODO: NOT IMPLEMENTED YET
     }
     
     const std::string& Contour::name() const { return name_; }
@@ -146,7 +146,7 @@ namespace neurostr {
     
     
     float Contour::closing_gap() const {
-      if( closed_ && size() <= 1) {
+      if( closed_ || size() <= 1) {
         return 0.0;
       }
       else {
@@ -156,15 +156,20 @@ namespace neurostr {
     
     void Contour::close(){
       closed_ = true;
-      if(!(geometry::equal(positions_.front(),positions_.back()))){
-            positions_.push_back(positions_.front());
+      if(size() > 1){
+        if(!(geometry::equal(positions_.front(),positions_.back()))){
+              positions_.push_back(positions_.front());
+        }
       }
     }
      
     int Contour::planar_axis() const {
       std::pair<float,float> ax_range;
       
-      for(int i = 2 ; i >= 0 ; ++i){
+      if(size() == 0) return -1;
+      else if(size() == 1) return 0;
+      
+      for(int i = 2 ; i >= 0 ; --i){
         ax_range = range(i);
         if(ax_range.first == ax_range.second ) return i;
       }
@@ -172,6 +177,11 @@ namespace neurostr {
     }
      
     std::pair<float,float> Contour::range(int component) const{
+      
+      if(size() == 0){
+        return std::pair<float,float>(0,0);
+      }
+      
       float min = std::numeric_limits<float>::max();
       float max = std::numeric_limits<float>::min();
       
@@ -180,7 +190,7 @@ namespace neurostr {
         if( v < min  ) {
           min = v;
         }
-        if( v < max  ) {
+        if( v > max  ) {
           max = v;
         }
       }
@@ -200,6 +210,10 @@ namespace neurostr {
     }
      
     bool Contour::clockwise_oriented(int i) const{
+      
+      if(!closed_)
+        return false;
+        
       // Shoelace formula
       
       // First: get planar projection
@@ -226,9 +240,7 @@ namespace neurostr {
     }
      
     void Contour::rotate(iterator new_first){
-      if(!closed_){
-        std::rotate(positions_.begin(), new_first, positions_.end());
-      } else {
+      if(closed_ && size() > 1 && new_first != end()){
         
         if(new_first == std::prev(positions_.end(),1) )
           new_first = positions_.begin();

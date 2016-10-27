@@ -605,8 +605,6 @@ TEST(null_segments_set){
   CHECK_EQUAL(b.first(),a);
 }
 
-//TODO: Discrete frechet - need to test the geometry part first
-
-
+// Frechet distance is part of geometry module
 
 } // Branch tests

@@ -55,6 +55,7 @@ namespace neurostr{
   }
   
   void PropertyMap::remove(const iterator& i){
+    if(i!=end())
       storage_.erase(i);
   }
   
@@ -66,7 +67,15 @@ namespace neurostr{
       return storage_.begin();
   }
   
+  PropertyMap::iterator PropertyMap::begin(){
+      return storage_.begin();
+  }
+  
   PropertyMap::const_iterator PropertyMap::end() const {
+      return storage_.end();
+  }
+  
+  PropertyMap::iterator PropertyMap::end(){
       return storage_.end();
   }
   

@@ -94,7 +94,7 @@ class ASCParser : public Parser{
    * @param parent Point of insertion
    * @return Last point of insertion
    */
-  Neurite::base_node_iterator process_container_(const Neurite::base_node_iterator& parent);
+  Neurite::branch_iterator process_container_(const Neurite::branch_iterator& pos);
 
     private:
   
