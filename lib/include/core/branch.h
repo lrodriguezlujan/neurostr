@@ -194,7 +194,13 @@ class Branch : public WithProperties{
    * @brief Move a node as new root
    * @param n node to move
    */
-  void root(Node&& n) { root_.reset(new Node(n)); }
+  void root(Node&& n) { 
+    root_.reset(new Node(n)); 
+    if(size() > 0){
+      begin()->invalidate_basis();
+      begin()->invalidate_length();
+    }
+  }
 
   /**
    * @brief Compares two branches by ID
