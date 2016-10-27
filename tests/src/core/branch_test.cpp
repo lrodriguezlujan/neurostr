@@ -605,6 +605,37 @@ TEST(null_segments_set){
   CHECK_EQUAL(b.first(),a);
 }
 
+TEST(director_empty){
+  Branch b;
+  CHECK_EQUAL(0.0,geometry::norm(b.director_vector()));
+}
+
+TEST(director_singlenode){
+  Node r(1,1,1,1,1),a(1,1,1,1,0);
+  std::vector<Node> nodes{a};
+  Branch::id_type id{0,0,1};
+  Branch b{id,1,r,nodes};
+  b.remove_root();
+  CHECK(geometry::equal(b.director_vector(),a.position()));
+}
+
+TEST(director_root){
+  Node r(1,1,1,1,1),a(2,1,2,1,1);
+  std::vector<Node> nodes{a};
+  Branch::id_type id{0,0,1};
+  Branch b{id,1,r,nodes};
+  CHECK_CLOSE(0.0,geometry::distance(b.director_vector(),point_type(0,1,0)),1E-3);
+}
+
+TEST(director_noroot){
+  Node r(1,0,0,0,1),a(2,1,1,1,1),c(3,1,2,1,1);
+  std::vector<Node> nodes{a,c};
+  Branch::id_type id{0,0,1};
+  Branch b{id,1,r,nodes};
+  b.remove_root();
+  CHECK_CLOSE(0.0,geometry::distance(b.director_vector(),point_type(0,1,0)),1E-3);
+}
+
 // Frechet distance is part of geometry module
 
 } // Branch tests

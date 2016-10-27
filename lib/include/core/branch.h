@@ -262,6 +262,13 @@ class Branch : public WithProperties{
    */
   Node& last();
   
+  
+  /**
+   * @brief Returns vector from the first node of the branch to the last
+   * @return Vector
+   */
+  point_type director_vector() const;
+  
   /**
    * @brief Adds a property to the branch and optionally to its nodes
    * @param key Property name
