@@ -177,7 +177,13 @@ class Branch : public WithProperties{
    * @brief Copy a node as new root
    * @param n node to copy
    */
-  void root(const Node& n) { root_.reset(new Node(n)); }
+  void root(const Node& n) { 
+    root_.reset(new Node(n)); 
+    if(size() > 0){
+      begin()->invalidate_basis();
+      begin()->invalidate_length();
+    }
+  }
   
   /**
    * @brief Removes the current root
@@ -255,6 +261,13 @@ class Branch : public WithProperties{
    * @return Node reference
    */
   Node& last();
+  
+  
+  /**
+   * @brief Returns vector from the first node of the branch to the last
+   * @return Vector
+   */
+  point_type director_vector() const;
   
   /**
    * @brief Adds a property to the branch and optionally to its nodes
