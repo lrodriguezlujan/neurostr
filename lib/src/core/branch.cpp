@@ -184,6 +184,22 @@ namespace neurostr{
     return *(nodes_.back());
   };
   
+  point_type Branch::director_vector() const{
+    if( size() > 0){
+      if(has_root()){
+          return root().vectorTo(last());
+      } else {
+        if( size() == 1 ){
+          return last().position();
+        } else {
+          return first().vectorTo(last());
+        }
+      }
+    } else {
+      return point_type(0,0,0);
+    }
+  }
+  
   /**
    * @brief Copy a node to the end of the branch
    * @param n Node to copy

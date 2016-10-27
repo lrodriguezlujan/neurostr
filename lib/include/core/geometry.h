@@ -29,6 +29,7 @@ namespace geometry
   // 2D Types
   using planar_point = bg::model::point<float, 2, bg::cs::cartesian>;
   using polygon_type =  bg::model::polygon<planar_point>;
+  using ring_type    = bg::model::ring<planar_point>;
   
   
   /**
@@ -380,6 +381,25 @@ namespace geometry
    * @return Area
    */
   float polygon_area(const polygon_type& p);
+  
+  
+  /**
+   * @brief Computes the closed polygon area
+   * @param begin
+   * @param end
+   * @return Area
+   */
+   template<typename Iter>
+   float polygon_area(const Iter& begin, const Iter& end){
+     // Create ring
+     ring_type r(begin,end);
+     
+     // Correct
+     bg::correct(r);
+     
+     // Return area
+     return bg::area(r);
+   };
   
   /**
    * @brief Multiplies every component by -1

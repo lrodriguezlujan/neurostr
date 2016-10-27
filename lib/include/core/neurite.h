@@ -699,7 +699,7 @@ class Neurite : public WithProperties  {
    * sibling returns an iterator to itself 
    */
   template <typename iter> 
-  iter sibling(iter position) {
+  iter sibling(iter position) const {
     assert(position.node != nullptr);
     iter ret(position);  // Copy
     if (position.node->next_sibling != nullptr)
@@ -786,7 +786,13 @@ class Neurite : public WithProperties  {
    */
   template <typename iter> 
   iter append_branch(iter pos, Branch&& b) { 
+    
     b.neurite(this);
+    
+    // Set root
+    if(pos->size()>0)
+      b.root(pos->last());
+      
     return tree_.append_child(pos, std::move(b)); 
   }
   
@@ -828,16 +834,46 @@ class Neurite : public WithProperties  {
   }
 
   /**
-   * @brief Fixes errors in the Neurite TODO: Which ones?
+   * @brief Fixes errors in the Neurite
    */
-  void correct();
+  void correct(const point_type up = point_type(0,0,1));
+  
+  /**
+   * @brief Updates branch ids to match its order in the neurite
+   */
+  void reassign_branch_ids();
+  
+  /**
+   * @brief Deletes all branches with size zero.
+   * This may generate trifurcations in the neurite.
+   * @return True if at least one branch has been deleted
+   */
+  bool remove_empty_branches();
+  
+  /**
+   * @brief Collapses single-child branches
+   * @return true if at least one branch has been collapsed
+   */
+  bool collapse_single_branches();
+  
   
   /**
    * @brief Removes zero-length segments in the neurite
    */
   void remove_null_segments();
+  
+  /**
+   * @brief Reassigns root of every branch corresponds to the 
+   * last node of its parent (if it exists) or to its root
+   * In theory root-incoherence should never happen.
+   * In practice...theory doesnt match real world
+   */
+  void reassign_branch_roots();
 
-
+  /**
+  * @brief Invalidates all cached values in every node in the neurite
+  */
+  void invalidate_node_cached_values();
   /**
    * @brief Scales all branches in the neurite wrt root or 0,0,0
    * @param r Scale rate
@@ -878,7 +914,7 @@ class Neurite : public WithProperties  {
   /**
    * @brief Order child branches by azimuth in ascending order
    */
-  void childOrder();
+  void childOrder(const point_type up = point_type(0,0,1));
 
   
   /**
@@ -892,10 +928,7 @@ class Neurite : public WithProperties  {
 
   private:
 
-  /**
-   * @brief Updates branch ids to match its order in the neurite
-   */
-  void reassign_branch_ids();
+
   
 };  // Class Neurite
 

@@ -101,35 +101,19 @@ Neurite::base_node_iterator Neurite::insert_node(Node::id_type parent_id, const 
     return insert_node(it, node);
 }
 
-void Neurite::correct()  {
-    bool trigger = false;
-    typename tree_type::sibling_iterator ch;
-    
-    // Collapse single-child branches
-    for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
-      if (it.number_of_children() == 1) {
-
-        NSTR_LOG_(info) << "Removing single-childed branch in neurite " << id();
-        
-        // Single children nodes -> collapse
-        trigger = true;
-        ch = it.begin();
-
-        // Copy elements in ch except for the root
-        for(auto chit = ch->begin() ; chit != ch->end() ; ++chit){
-          it->push_back(*chit);
-        }
-        //it->insert(it->end(), ch->begin(), ch->end());
-
-        // Reparent nodes
-        tree_.reparent(it, ch.begin(), ch.end());
-
-        // Remove ch
-        tree_.erase(ch);
-      }
-    }
-    // Reassign branch ids + order
-    if (trigger) reassign_branch_ids();
+void Neurite::correct(const point_type up)  {
+  // First: remove null segments
+  remove_null_segments();
+  // Remove single b
+  collapse_single_branches();
+  // Remove empty
+  remove_empty_branches();
+  // Reassign roots
+  reassign_branch_roots();
+  // Order descs
+  childOrder(up);
+  // Reassign ids
+  reassign_branch_ids();
 };
 
 void Neurite::remove_null_segments() {
@@ -204,22 +188,30 @@ Neurite::branch_iterator Neurite::find(const Branch& b) const{
   return tree_.end();
 }
 
-/* TODO
- * void Neurite::childOrder(){
-  for( auto it = tree_.begin(); it != tree_.end() ; ++it ) {
-    // Order its children (only standard 2ch case)
+void Neurite::childOrder(const point_type up){
+  // TODO: TESTS!!!
+  
+  if(size() <= 1) return;
+  
+  
+  for( auto it = begin_branch(); it != end_branch() ; ++it ){
+    // only for bifurcations
     if(it.number_of_children() == 2){
-      auto ch1 = begin_children(it);
-      auto ch2 = ch1; ++ch2;
-      // IF azimuth of ch1 is > azimuth of ch2 .. swap
-      if( measures::branch::branch_azimuth( branch_reference(this, ch1) ) > 
-          measures::branch::branch_azimuth( branch_reference(this, ch2) ) )
-            tree_.swap(ch1,ch2);
+      
+      auto ch = begin_children(it);
+      
+      // v0 is our "vector"
+      point_type v0 = it->director_vector();
+      point_type v1 = ch->director_vector();
+      point_type v2 = std::next(ch,1)->director_vector();
+      // swap
+      if( geometry::vector_vector_directed_angle(v0,v1,up) > 
+          geometry::vector_vector_directed_angle(v0,v2,up)){
+        tree_.swap(ch,std::next(ch,1));
+      }
     }
   }
-}*/
-
-
+}
 
 int Neurite::max_centrifugal_order() const{
   
@@ -248,9 +240,99 @@ void Neurite::reassign_branch_ids() {
       it->id(tmp);                                                               // set id
       it->order(tree_type::parent(it)->order() + 1);                             // set order
     }
-  };
+};
 
+bool Neurite::remove_empty_branches(){
+  
+  bool trigger = false;
+  typename tree_type::sibling_iterator ch;
+    
+  // Collapse single-child branches
+  for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
+    if (it->size() == 0) {
+        // Single children nodes -> collapse
+        if(it.node->parent == nullptr){
+          // we are the first branch
+          NSTR_LOG_(warning) << "Cannot remove empty root branch in neurite " << id();
+        } else {
+          trigger = true;  
+          NSTR_LOG_(info) << "Removing empty branch" << it->idString() <<" in neurite " << id();
+          // We assing our children to the parent node.
+          if(it.number_of_children()>0){
+            tree_.reparent(tree_type::parent(it), it.begin(), it.end());
+          }
+          // Erase branch
+          it = std::prev(tree_.erase(it),1);
+        }
+      }
+  }
+  return trigger;
+}
 
+bool Neurite::collapse_single_branches(){
+  bool trigger = false;
+  typename tree_type::sibling_iterator ch;
+    
+  // Collapse single-child branches
+  for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
+    if (it.number_of_children() == 1) {
+
+        NSTR_LOG_(info) << "Removing single-childed branch" << it->idString() <<" in neurite " << id();
+        
+        // Single children nodes -> collapse
+        trigger = true;
+        ch = it.begin();
+
+        // Copy elements in ch except for the root
+        for(auto chit = ch->begin() ; chit != ch->end() ; ++chit){
+          it->push_back(*chit);
+        }
+        //it->insert(it->end(), ch->begin(), ch->end());
+
+        // Reparent nodes
+        tree_.reparent(it, ch.begin(), ch.end());
+
+        // Remove ch
+        tree_.erase(ch);
+        
+        // Update it so we check it again
+        it = std::prev(it,1);
+      }
+    }
+    return trigger;
+}
+
+void Neurite::reassign_branch_roots(){
+  
+  if(size() <= 1) return;
+  
+  for( auto it = std::next(begin_branch(),1); it != end_branch(); ++it){
+    if(tree_type::parent(it)->size() > 0){
+      it->root(tree_type::parent(it)->last());
+    } else if (tree_type::parent(it)->has_root()){
+      it->root(tree_type::parent(it)->root());
+    } else {
+      NSTR_LOG_(warning) << "Can't find a suitable root for branch " << it->idString();
+    }
+  }
+}
+
+void Neurite::invalidate_node_cached_values(){
+  // nodes
+  for(auto it = begin_node(); it != end_node(); ++it){
+    it->invalidate_basis();
+    it->invalidate_length();
+  }
+  
+  // Then root
+  for(auto it = begin_branch(); it != end_branch(); ++it){
+    if(it->has_root()){
+      it->root().invalidate_basis();
+      it->root().invalidate_length();  
+    }
+  }
+  
+}
 
 std::ostream& operator<<(std::ostream& os, const Neurite& n) {
 

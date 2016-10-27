@@ -60,9 +60,12 @@ namespace neurostr {
       }
     }
     
-    float Contour::area() const {
-       if(size() <= 1) return 0;
-       else return 0; // TODO: NOT IMPLEMENTED YET
+    float Contour::area(int component) const {
+       if(size() <= 1 || !is_closed()) return 0;
+       else {
+         auto v = planar_projection(component);
+         return geometry::polygon_area(v.begin(),v.end());
+       }
     }
     
     const std::string& Contour::name() const { return name_; }

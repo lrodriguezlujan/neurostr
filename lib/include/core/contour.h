@@ -99,10 +99,10 @@ class Contour{
     float length() const;
     
     /**
-     * @brief Contour planar area as 2D projection
+     * @brief Contour planar area as 2D projection in the given component
      * @return Contour planar area
      */
-    float area() const;
+    float area(int component) const;
     
     // Accessors
     
