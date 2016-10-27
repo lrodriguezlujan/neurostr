@@ -79,7 +79,9 @@ TEST(area_open){
   TestContour test_data;
   Contour& open = test_data.open;
   
-  // NOt implemented - should be 0
+  CHECK_EQUAL(0.0,open.area(0));
+  CHECK_EQUAL(0.0,open.area(1));
+  CHECK_EQUAL(0.0,open.area(2));
 }
 
 TEST(area_closed){
@@ -87,6 +89,7 @@ TEST(area_closed){
   Contour& closed = test_data.closed;
   
   // Not implemented
+  CHECK_CLOSE(0.5,closed.area(2),1E-3);
   
 }
 
@@ -95,7 +98,9 @@ TEST(area_empty){
   Contour& empty = test_data.empty;
   
   // NOt implemented - should be 0
-  
+  CHECK_EQUAL(0.0,empty.area(0));
+  CHECK_EQUAL(0.0,empty.area(1));
+  CHECK_EQUAL(0.0,empty.area(2));
 }
 
 TEST(closing_gap_empty){
