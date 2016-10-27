@@ -479,7 +479,70 @@ TEST(remove_empty_branch_multiple){
   CHECK_EQUAL(1,n.size());
 }
 
+// Collapse single
+TEST(collapse_single_branch_empty){
+  Neurite n(1);
+  CHECK(!n.collapse_single_branches());
+}
 
+TEST(collapse_single_branch){
+  Neurite n(1);
+  n.set_root();
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),1),Node(2));
+  n.insert_node(std::next(n.begin_branch(),1),Node(3));
+  
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(2,n.size());
+  CHECK(n.collapse_single_branches());
+  CHECK_EQUAL(1,n.size());
+  
+  auto f = n.find(2);
+  CHECK(f.begin() != f.end());
+  
+  f = n.find(3);
+  CHECK(f.begin() != f.end());
+}
+
+
+TEST(collapse_single_branch_none){
+  Neurite n(1);
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),1),Node(2)); // This branch (1-1)  stays
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),2),Node(3)); // This branch (1-2)  stays
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(!n.collapse_single_branches());
+  CHECK_EQUAL(3,n.size());
+}
+
+TEST(collapse_single_branch_multiple){
+   Neurite n(1);
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch()); 
+  n.insert_node(std::next(n.begin_branch(),1), Node(2));
+  n.append_branch(std::next(n.begin_branch(),1),Branch());
+  n.insert_node(std::next(n.begin_branch(),2), Node(3));
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(n.collapse_single_branches());
+  CHECK_EQUAL(1,n.size());
+  
+  auto f = n.find(2);
+  CHECK(f.begin() != f.end());
+  
+  f = n.find(3);
+  CHECK(f.begin() != f.end());
+}
 
 // TODO correct
 } // End neurite suite

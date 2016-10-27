@@ -850,6 +850,12 @@ class Neurite : public WithProperties  {
    */
   bool remove_empty_branches();
   
+  /**
+   * @brief Collapses single-child branches
+   * @return true if at least one branch has been collapsed
+   */
+  bool collapse_single_branches();
+  
   
   /**
    * @brief Removes zero-length segments in the neurite

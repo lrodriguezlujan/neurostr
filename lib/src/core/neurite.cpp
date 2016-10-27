@@ -277,6 +277,39 @@ bool Neurite::remove_empty_branches(){
   return trigger;
 }
 
+bool Neurite::collapse_single_branches(){
+  bool trigger = false;
+  typename tree_type::sibling_iterator ch;
+    
+  // Collapse single-child branches
+  for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
+    if (it.number_of_children() == 1) {
+
+        NSTR_LOG_(info) << "Removing single-childed branch" << it->idString() <<" in neurite " << id();
+        
+        // Single children nodes -> collapse
+        trigger = true;
+        ch = it.begin();
+
+        // Copy elements in ch except for the root
+        for(auto chit = ch->begin() ; chit != ch->end() ; ++chit){
+          it->push_back(*chit);
+        }
+        //it->insert(it->end(), ch->begin(), ch->end());
+
+        // Reparent nodes
+        tree_.reparent(it, ch.begin(), ch.end());
+
+        // Remove ch
+        tree_.erase(ch);
+        
+        // Update it so we check it again
+        it = std::prev(it,1);
+      }
+    }
+    return trigger;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Neurite& n) {
 
