@@ -857,6 +857,18 @@ TEST(triangle_area_zero){
   CHECK_CLOSE(0.0, triangle_area(t), 1E-6);
 }
 
+TEST(polygon_area){
+  std::vector<planar_point> ps = {
+    planar_point(0,0),
+    planar_point(1,0),
+    planar_point(1,1),
+    planar_point(0,1),
+    planar_point(0,0)
+  };
+  
+  CHECK_CLOSE(1,polygon_area(ps.begin(),ps.end()),1E-6);
+}
+
 // NOTE: RDP simplifier, Discrete Frechet and TriangleMesh (will) have their own
 // test suites. (TODO)
 
