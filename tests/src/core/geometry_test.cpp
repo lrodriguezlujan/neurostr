@@ -643,7 +643,7 @@ TEST(v_v_directed_angle_reg){
   point_type r(std::cos(-M_PI/4),std::sin(-M_PI/4),0);
   
   CHECK_CLOSE(M_PI/4,vector_vector_directed_angle(p,q),1E-6);
-  CHECK_CLOSE(M_PI/4,vector_vector_directed_angle(p,r),1E-6);
+  CHECK_CLOSE(-M_PI/4,vector_vector_directed_angle(p,r),1E-6);
 }
 
 TEST(v_v_directed_angle_same){

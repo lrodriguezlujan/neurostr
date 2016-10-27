@@ -187,11 +187,15 @@ float segment_segment_distance(const point_type& p0, const point_type& p1,
 }
 
 // Computes the quaternion to transform v into u
-Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
+Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to, const point_type up){
   
   namespace bg = boost::geometry;
     
-    float angle = geometry::vector_vector_directed_angle(from,to);
+    if(norm(from) == 0 || norm(to) == 0)
+      return  Eigen::Quaternionf::Identity();
+    
+    float angle = geometry::vector_vector_directed_angle(from,to,up);
+    
     // Already aligned
     if( angle == 0 ) return  Eigen::Quaternionf::Identity();
     
@@ -207,6 +211,8 @@ Eigen::Quaternionf align_vectors(const point_type& from, const point_type& to){
         axis = point_type(-bg::get<1>(from),bg::get<0>(from),0);
     } else {
       normalize(axis);
+      if(boost::geometry::dot_product(up,axis) < 0)
+        angle *= -1;;
     }
     
     // Compute angle axis rotation and rotate.
@@ -390,19 +396,40 @@ void normalize(point_type& p){
 
 float vector_vector_angle(const point_type&a ,const point_type &b){
   if(equal(a,b)) return 0.;
+  
   if(norm(a) == 0 || norm(b) == 0 ) return 0;
   
-  float ret = std::acos(boost::geometry::dot_product(a,b)/(norm(a)*norm(b)));
-  if(std::isnan(ret)) return 0;
-  else return ret;
+  point_type norm_v0 = a;
+  point_type norm_v1 = b;
+  normalize(norm_v0);
+  normalize(norm_v1);
+  
+  float angle = std::atan2(geometry::norm(geometry::cross_product(norm_v0, norm_v1)), boost::geometry::dot_product(norm_v0, norm_v1));
+  if(std::isnan(angle)) return 0;
+  else return angle;
 }
 
-float vector_vector_directed_angle(const point_type&v0 ,const point_type &v1){
+float vector_vector_directed_angle(const point_type&v0 ,const point_type &v1, const point_type up){
+  
   point_type norm_v0 = v0;
   point_type norm_v1 = v1;
   normalize(norm_v0);
   normalize(norm_v1);
-  return std::atan2(geometry::norm(geometry::cross_product(norm_v0, norm_v1)), boost::geometry::dot_product(norm_v0, norm_v1));
+  
+  // They are in the same direction
+  if(equal(norm_v0,norm_v1))
+    return 0.0;
+  
+  // This is more precise than acos 
+  float angle = std::atan2(geometry::norm(geometry::cross_product(norm_v0, norm_v1)), boost::geometry::dot_product(norm_v0, norm_v1));
+  
+  // Check sign
+  if( boost::geometry::dot_product(up,geometry::cross_product(norm_v0, norm_v1)) < 0){
+    return -angle;
+  } else {
+    return angle;
+  }
+  //return std::atan2(geometry::norm(geometry::cross_product(norm_v0, norm_v1)), boost::geometry::dot_product(norm_v0, norm_v1));
 }
 std::pair<float,float> local_orientation(const point_type& p, const std::array<point_type,3>& basis){
   point_type norm_p = p;
