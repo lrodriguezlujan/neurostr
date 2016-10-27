@@ -52,9 +52,13 @@ namespace neurostr {
   }
   
   Neuron::neurite_iterator Neuron::add_neurite(Neurite* const n) {
-    n->neuron(this);
-    neurites_.emplace_back(n);
-    return neurite_iterator(std::prev(neurites_.end(),1));
+    if(n != nullptr){
+      n->neuron(this);
+      neurites_.emplace_back(n);
+      return neurite_iterator(std::prev(neurites_.end(),1));
+    } else {
+      return end_neurite();
+    }
   }
   
   void  Neuron::add_soma(const std::vector<Node>& v) { 
@@ -419,6 +423,10 @@ Reconstruction::neuron_iterator Reconstruction::add_neurite_to_closest_soma(Neur
         
     // Special case - just 1 neuron
     neuron_iterator closest;
+    
+    if(n == nullptr){
+      return end();
+    }
     
     if(size() == 1){
       closest = begin();

@@ -618,7 +618,10 @@ class Reconstruction : public WithProperties{
    * @brief Adds a neuron to the reconstruction
    * @param n Neuron pointer
    */
-  void addNeuron(Neuron* const n) { neurons_.emplace_back(n); };
+  void addNeuron(Neuron* const n) { 
+    if(n!=nullptr)
+      neurons_.emplace_back(n); 
+  };
 
   /**
    * @brief Sets a vector of points as reconstruction contour
