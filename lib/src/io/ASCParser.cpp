@@ -125,7 +125,9 @@ PropertyMap::property_type ASCParser::process_color() {
 
   // Print HEX COLOR CHAIN
   sprintf(tmp, "#%02x%02x%02x", rgb[0], rgb[1], rgb[2]);
-  if (!pass_block_end()) throw std::runtime_error("Malformed property block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed property block (Wrong termination)");
+  }
   return property_type("color", std::string(tmp) );
 }
 
@@ -163,7 +165,9 @@ PropertyMap::property_type ASCParser::process_property() {
   }
 
   // End block
-  if (!pass_block_end()) throw std::runtime_error("Malformed property block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed property block (Wrong termination)");
+  }
   return p;
 }
 
@@ -194,16 +198,60 @@ Node ASCParser::process_sample() {
     throw std::runtime_error("Malformed sample (d-value)");
 
   // End block
-  if (!pass_block_end()) throw std::runtime_error("Malformed sample block (Wrong termination)");
+  if (pass_block_end() == false){
+    throw std::runtime_error("Malformed sample block (Wrong termination)");
+  }
 
   return Node(++node_count_, x, y, z, d / 2);
 }
 
-void ASCParser::skip_spine() {
+marker_type ASCParser::process_marker(){
+  
+  marker_type m;
+  m.name  = boost::any_cast<std::string>(val_);
 
-  // End block
-  if (stream_.peek() != spine_end)
-    if (skip_to_stopper() != spine_end) throw std::runtime_error("Malformed spine");
+  // Name to lower
+  std::transform(m.name.begin(), m.name.end(), m.name.begin(), ::tolower);
+  
+  skip_to_stopper();
+  // Process subblocks
+  while (stream_.peek() != block_end && stream_.peek() != EOF) {
+  
+    if (stream_.peek() == block_start) {
+      stream_.get();
+      // Inside the block
+      block_type btype = next_block_type(true);
+      if (btype == block_type::SAMPLE) {
+        m.samples.push_back(process_sample());
+      } else if (btype == block_type::PROPERTY) {
+        m.properties.push_back(process_property());
+      } else {
+        throw std::runtime_error("Malformed marker block");
+      }
+    } else {
+        throw std::runtime_error("Malformed marker block");
+    }
+    skip_to_stopper();    
+  }
+  
+  // IF PEEK EOF - Malformed block
+  if (pass_block_end() == false) {
+    throw std::runtime_error("Malformed marker block (Wrong termination)");
+  }
+  
+  // Return marker
+  return(m);
+}
+
+void ASCParser::process_spine() {
+
+  // Spine is "like" a sample
+  get_value();
+  process_sample();
+  if (stream_.peek() != spine_end){
+    throw std::runtime_error("Malformed spine");
+  }
+  // Skip spine end
   stream_.get();
 }
 
@@ -225,6 +273,8 @@ block_type ASCParser::next_block_type(bool inBlock) {
   } else {
     // STRING
     std::string tmp = boost::any_cast<std::string>(val_);
+    std::transform(tmp.begin(),tmp.end(),tmp.begin(),::tolower);
+    
     if (tmp[0] == string_escape)
       return block_type::CONTOUR;
     else if (tmp == marker)
@@ -265,30 +315,34 @@ void ASCParser::process_(Reconstruction & r) {
       aux.add_property("name", val_);
 
       // Process container
-      process_container_(aux.begin_node());
+      process_container_(aux.begin_branch());
 
       // If soma -> add it to the reconstruction
       auto it = aux.properties.find("cellbody");
       if (it == aux.end_properties()) {
-        // Is sample contour
-        if (!r.has_contour()) {
-          std::vector<point_type> p;
-          p.reserve(aux.node_count());
-          
-          //std::transform(aux.begin_node(),aux.end_node(), p.end(), [](Node& n){return n.position();});
-          for(auto it = aux.begin_node() ; it != aux.end_node() ; ++it){
-            p.push_back(it->position());
-          }
-          
-          r.addContour(p);
-        } else {
-          // Ignore? or throw
-          throw std::runtime_error("Only one contour per reconstruction allowd");
+        // Not a soma - Some other contour - Create it
+        std::vector<point_type> p;
+        p.reserve(aux.node_count());
+        for(auto it = aux.begin_node(); it != aux.end_node(); ++it){
+          p.push_back(it->position());
         }
+      
+        Contour c(p);
+        c.properties_from_map(aux.properties);
+        r.addContour(c);
+          
       } else {
+        // ITS A SOMA! - new neuron
+        
         // Create neuron
         Neuron* n = new Neuron(r.id() + std::string("_") + std::to_string(r.size() + 1),
                                std::vector<Node>(aux.begin_node(), aux.end_node()));
+        // Invalidate all branches and parent int soma nodes!
+        for(auto it = n->begin_soma(); it != n->end_soma(); ++it){
+          it->parent(nullptr);
+          it->branch(nullptr);
+        }
+        
         r.addNeuron(n);
       }
 
@@ -304,13 +358,21 @@ void ASCParser::process_(Reconstruction & r) {
       n->set_root();
       
       // Process container
-      process_container_(n->begin_node());
+      process_container_(n->begin_branch());
 
       set_neurite_type_by_nlproperties(*n);
 
       // And check to which neuron it corresponds if any.
       // Somas are required to be defined before neurites
-      r.add_neurite_to_closest_soma(n);
+      if(r.size() == 0){
+        
+        // We need to create the neuron before
+        Neuron* neuro = new Neuron(r.id() + std::string("_1"));
+        r.addNeuron(neuro);
+      }
+      
+      r.add_neurite_to_closest_soma(n);  
+      
 
       break;
     }
@@ -318,8 +380,22 @@ void ASCParser::process_(Reconstruction & r) {
     case block_type::PROPERTY:
       r.add_property(process_property());
       break;
-    default: {
-      // Skip block
+    case block_type::MARKERSET:
+      // We process and ignore it
+      process_marker();
+      break;
+    // Default just skip
+    default:
+      skip_block();
+      break;
+    } // End switch
+    skip_to_stopper();
+  }
+  return;
+}
+
+void ASCParser::skip_block(){
+   // Skip block
       int depth = 1;
       // We need to skip () until count reaches 0
       while (depth > 0 && stream_.peek() != EOF) {
@@ -328,15 +404,10 @@ void ASCParser::process_(Reconstruction & r) {
         else if (stream_.get() == block_start)
           --depth;
       }
-    }
-    }
-    skip_to_stopper();
-  }
-  return;
 }
 
-Neurite::base_node_iterator ASCParser::process_container_(
-    const Neurite::base_node_iterator& pos) {
+Neurite::branch_iterator ASCParser::process_container_(
+    const Neurite::branch_iterator& pos) {
 
   auto current_pos = pos;
 
@@ -349,7 +420,7 @@ Neurite::base_node_iterator ASCParser::process_container_(
       if (stream_.get() != block_start) {
         throw std::runtime_error("Malformed spine block");
       } else {
-        skip_spine();
+        process_spine();
       }
     }
     // Process any other block
@@ -358,21 +429,21 @@ Neurite::base_node_iterator ASCParser::process_container_(
       // Inside the block
       block_type btype = next_block_type(true);
       if (btype == block_type::SAMPLE) {
-        current_pos = current_pos.neurite().insert_node(current_pos, process_sample());
+        current_pos->neurite().insert_node(current_pos, process_sample());
       } else if (btype == block_type::PROPERTY) {
-        current_pos.neurite().properties.set(process_property());
+        current_pos->neurite().properties.set(process_property());
       } else if (btype == block_type::SUB_TREE) {
         // Create branch
-        std::vector<int> id = current_pos.branch()->id();
-        id.push_back(current_pos.branch().number_of_children()+1);
-        Branch b{id, current_pos.branch()->order()+1, *current_pos };
+        std::vector<int> id = current_pos->id();
+        id.push_back(current_pos.number_of_children()+1);
+        
         
         // Insert branch at current posititon with last node as root
-        Neurite::branch_iterator inserted = current_pos.neurite().append_branch(current_pos.branch(),b);
-        Neurite::base_node_iterator new_pos = 
-        Neurite::base_node_iterator(current_pos.begin(),current_pos.end(),inserted);
+        Neurite::branch_iterator inserted = current_pos->neurite()
+          .append_branch(current_pos,
+          Branch(id, current_pos->order()+1, current_pos->last() ));
         
-        process_container_(new_pos);
+        process_container_(inserted);
         
       } else {
         throw std::runtime_error("Malformed block");
@@ -381,11 +452,11 @@ Neurite::base_node_iterator ASCParser::process_container_(
       throw std::runtime_error("Malformed block");
     }
 
-    // Look for any word like.. incomplete...that we will ignore
+    // Look for any word like.. incomplete or normal...that we ignore it
     get_value();
     if (!val_.empty()) {
-      if ((current_pos.begin() != current_pos.end())  && val_.type() != typeid(float)) {
-        // String value
+      if ( val_.type() != typeid(float) ) {
+        // String value (we do not ignore numbers...
         if (stream_.peek() != branch_start && stream_.peek() != block_end) {
           get_value();  // Move fwd - lazy
           if (!val_.empty()) throw std::runtime_error("Malformed block");
@@ -401,7 +472,9 @@ Neurite::base_node_iterator ASCParser::process_container_(
   } else {
     skip_to_stopper();
     // End block
-    if (stream_.peek() != EOF && !pass_block_end()) throw std::runtime_error("Malformed block (Wrong termination)");
+    if (stream_.peek() != EOF && pass_block_end() == false){
+      throw std::runtime_error("Malformed block (Wrong termination)");
+    }
   }
 
   return current_pos;

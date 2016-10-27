@@ -79,6 +79,8 @@ enum class tree_type_cd : std::uint8_t {
   UNKNOWN = 0xFF
 };
 
+std::string tree_type_tostr(const tree_type_cd& t);
+
 std::ostream& operator<<(std::ostream& os, const tree_type_cd& t);
 
 typedef struct {
@@ -98,6 +100,14 @@ typedef struct {
 const int k_subtree_info_len = sizeof(subtree_info);
 
 NeuriteType set_neurite_type_by_nlproperties(Neurite& n);
+
+// MArkerset
+typedef struct {
+    std::string name;
+    std::uint8_t color[4];
+    std::vector<property_type> properties; 
+    std::vector<Node> samples;
+} marker_type;
 
 } // namespace io
 } // namespace neurostr

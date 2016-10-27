@@ -13,16 +13,17 @@ namespace neurostr {
 namespace selector {
 
 // Node self selector (Actually this is useless)
-const auto node_self = [](Node& n) -> Node& {
+const auto node_self = [](const Node& n) -> const Node& {
   return n;
 };
 
-const auto node_parent = [](Node& n) -> Node& {
+const auto node_parent = [](const Node& n) -> const Node& {
   
   if(n.valid_parent()) return n.parent();
+  if(!n.valid_branch()) return n;
   
-  // If node is root
-  if(n == n.branch().root()){
+  // If node is root (if any)
+  if(n.branch().has_root() && n == n.branch().root()){
     // Find branch
     auto branch_it = n.branch().neurite().find(n.branch());
     if(branch_it.node->parent == nullptr){
@@ -42,8 +43,12 @@ const auto node_parent = [](Node& n) -> Node& {
   } else {
     auto branch_it = n.branch().neurite().find(n.branch());
     if(branch_it.node->parent == nullptr){
-      // No parent branch - no parent (poor node)
-      return n;
+      if(n.branch().has_root()){
+        n.parent(&(n.branch().root()));
+        return n.branch().root();
+      } else {
+        return n;
+      }
     }
     else{
       // Parent branch is the last node
@@ -55,22 +60,22 @@ const auto node_parent = [](Node& n) -> Node& {
 };
 
 // IN: Node - Out: Branch
-const auto node_branch_selector = [](Node& n) -> Branch& {
+const auto node_branch_selector = [](const Node& n) -> const Branch& {
   return n.branch();
 };
 
 // IN: Node SET - Out: Node SET
 const auto node_bifurcation_selector = [](
-  const std::vector<node_reference>::iterator & b,
-  const std::vector<node_reference>::iterator & e) 
-    -> std::vector<node_reference> {
+  const std::vector<const_node_reference>::iterator & b,
+  const std::vector<const_node_reference>::iterator & e) 
+    -> std::vector<const_node_reference> {
       
       
-  std::vector<node_reference> selection;
+  std::vector<const_node_reference> selection;
   for (auto it = b; it != e; ++it){
     
     // Copy reference
-    Branch& branch = it->get().branch();
+    const Branch& branch = it->get().branch();
     
     // Check that we are the last element of the branch
     if( branch.last() == it->get() ){
@@ -86,16 +91,16 @@ const auto node_bifurcation_selector = [](
 
 // IN: Node SET - Out: Node SET
 const auto node_terminal_selector = [](
-  const std::vector<node_reference>::iterator & b,
-  const std::vector<node_reference>::iterator & e) 
-    -> std::vector<node_reference> {
+  const std::vector<const_node_reference>::iterator & b,
+  const std::vector<const_node_reference>::iterator & e) 
+    -> std::vector<const_node_reference> {
       
       
-  std::vector<node_reference> selection;
+  std::vector<const_node_reference> selection;
   for (auto it = b; it != e; ++it){
     
     // Copy reference
-    Branch& branch = it->get().branch();
+    const Branch& branch = it->get().branch();
     
     // Check that we are the last element of the branch
     if( branch.last() == it->get() ){
@@ -110,13 +115,13 @@ const auto node_terminal_selector = [](
 
 
 // IN: Node - Out: Node SET
-const auto node_subtree_selector = [](  Node& n) 
-  -> std::vector<node_reference> {
+const auto node_subtree_selector = [](const Node& n) 
+  -> std::vector<const_node_reference> {
 
   // Copy reference
-  Branch& branch = n.branch();
+  const Branch& branch = n.branch();
   
-  std::vector<node_reference> selection;
+  std::vector<const_node_reference> selection;
   
   // Remaining nodes in the branch
   auto it = branch.begin();
@@ -140,14 +145,14 @@ const auto node_subtree_selector = [](  Node& n)
 
 
 // IN: Node - Out: Node SET
-const auto node_subtree_terminals = [](Node& n) 
-  -> std::vector<node_reference> {
+const auto node_subtree_terminals = [](const Node& n) 
+  -> std::vector<const_node_reference> {
 
   // Copy reference
-  Branch& branch = n.branch();
+  const Branch& branch = n.branch();
   auto branch_it = branch.neurite().find( branch );
   
-  std::vector<node_reference> selection;
+  std::vector<const_node_reference> selection;
   
   for(auto it = branch.neurite().begin_leaf(branch_it); 
       it != branch.neurite().end_leaf(branch_it); 
@@ -158,10 +163,10 @@ const auto node_subtree_terminals = [](Node& n)
 };
 
 // IN: Node - Out: Nodeset
-const auto node_stem_selector = [](Node& n) -> std::vector<node_reference> {
+const auto node_stem_selector = [](const Node& n) -> std::vector<const_node_reference> {
 
-  std::vector<node_reference> selection;  
-  Branch& branch = n.branch();
+  std::vector<const_node_reference> selection;  
+  const Branch& branch = n.branch();
   
   // Copy remaining nodes
   auto it = branch.rbegin();
@@ -184,13 +189,13 @@ const auto node_stem_selector = [](Node& n) -> std::vector<node_reference> {
 };
 
 // IN: Node - OUT: Nodeset
-const auto node_descendants = [](Node& n ) -> std::vector<node_reference> {
+const auto node_descendants = [](const Node& n ) -> std::vector<const_node_reference> {
   
   // Last node in the branch
-  std::vector<node_reference> selection;
+  std::vector<const_node_reference> selection;
   
   // Copy reference
-  Branch& branch = n.branch();
+  const Branch& branch = n.branch();
     
   // Check that we are the last element of the branch
   if( branch.last() == n ){

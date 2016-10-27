@@ -4,6 +4,8 @@
 #include <iostream>
 #include <functional>
 
+//#include <boost/format.hpp>
+
 #include "selector/selector.h"
 #include "selector/neuron_selector.h"
 #include "selector/neurite_selector.h"
@@ -43,29 +45,78 @@ template <typename T, typename V>
     bool                      valid;
     
     // Full validation ID
-    std::string element_id() const{
-      return element_id_(element.get());
+    std::string element_id_json() const{
+      return "{ " + element_id_json_(element.get()) + " }";
     };
+    
+    std::string element_type() const {
+      return element_name(element);
+    }
+    
+    std::ostream& toJSON( std::ostream& os) const {
+      os << "{ " <<
+        "\"type\" : " << escape_string(element_type()) << ", " << std::endl << 
+        "\"id\" : " << element_id_json() << "," << std::endl << 
+        "\"value\" : " << escape_string(value) << " ," << std::endl;
+        if(valid){
+          os << "\"pass\" : true" << std::endl << "}";
+        } else {
+          os << "\"pass\" : false" << std::endl << "}";
+        }
+      return os;
+    }
+    
+    
     
     private:
     
+    template <typename U>
+    std::string escape_string(const U& v) const{
+      return std::to_string(v);
+    }
+    
+    std::string escape_string(const std::string& v) const{
+      return "\"" + v + "\"";
+    }
+    
+    std::string escape_string(const char* v) const{
+      return "\"" + std::string(v) + "\"";
+    }
 
-    std::string element_id_(Neuron& n) const{
-      return std::string("Neuron: ") + n.id();
+    std::string element_id_json_(const Neuron& n) const{
+      return escape_string("neuron") + " : " + escape_string(n.id());
     }
     
-    std::string element_id_(Neurite& n) const{
-      return element_id_(n.neuron()) + std::string(", neurite: ") + std::to_string(n.id());
+    std::string element_id_json_(const Neurite& n) const{
+      return element_id_json_(n.neuron()) + ",\n" + escape_string("neurite") + " : " + std::to_string(n.id());
     }
     
-    std::string element_id_(Branch& n) const{
-      return element_id_(n.neurite()) + std::string(", branch: ") + n.idString();
+    std::string element_id_json_(const Branch& n) const{
+      return element_id_json_(n.neurite()) + ",\n" + escape_string("branch") + " : " + escape_string(n.idString());
     }
     
-    std::string element_id_(Node& n) const{
-      return element_id_(n.branch()) + std::string(", Node: ") + std::to_string(n.id());
+    std::string element_id_json_(const Node& n) const{
+      return element_id_json_(n.branch()) + ",\n" + escape_string("node") + " : " + std::to_string(n.id());
     }
-  };
+    
+
+    
+    std::string element_name(const Neuron& n) const{
+      return "Neuron";
+    }
+    
+    std::string element_name(const Neurite& n) const{
+      return "Neurite";
+    }
+    
+    std::string element_name(const Branch& n) const{
+      return "Branch";
+    }
+    
+    std::string element_name(const Node& n) const{
+      return "Node";
+    }
+};
 
 
 
@@ -89,9 +140,12 @@ class Validator {
   // Data
   M measure_;
   C checker_;
-  Neuron* neuron_;
+  const Neuron* neuron_;
   // Validation
   storage_type results_;
+  
+  std::string name_;
+  std::string desc_;
  
   public:
   // Constructor
@@ -103,7 +157,7 @@ class Validator {
   };
 
   // Always validate neurons as a whole. Even if the measure is for nodes, branches...
-  void validate(Neuron& n) {
+  void validate(const Neuron& n) {
 
     // Clear results
     results_.clear();
@@ -129,33 +183,90 @@ class Validator {
   typename storage_type::size_type size() const {
     return results_.size();
   }
+  
+  void set_name(const std::string& s) {
+    name_ = s;
+  }
+  
+  void set_description(const std::string& s) {
+    desc_ = s;
+  }
 
   bool pass() const {
     return std::all_of(results_.begin(), results_.end(), [](const auto& i) -> bool { return i.valid; });
   };
+  
+  std::ostream& toJSON( std::ostream& os, 
+                       bool failuresOnly = true) const {
+    return toJSON(os,name_,desc_,failuresOnly);
+  }
+                       
+  
+  std::ostream& toJSON( std::ostream& os, 
+                       const std::string& name, 
+                       const std::string& desc,
+                       bool failuresOnly = true) const {
+    
+     os << "{ ";
+     
+     if(name.size() > 0) {
+          os << "\"name\" : \"" << name << "\", " << std::endl;
+     }
+     
+     if(desc.size() > 0) {
+          os << "\"description\" : \"" << desc << "\", " << std::endl;
+     }
+     
+     os << "\"neuron_id\" : \"" << neuron_->id() << "\" ," << std::endl;
+     
+     if(pass()) {
+       os << "\"pass\" : true , " << std::endl;
+     } else {
+       os << "\"pass\" : false , " << std::endl;
+     }
+     
+     os << "\"results\" : [";
+       
+    bool first = true;
+     for(auto it = results_.begin(); it != results_.end() ; ++it){
+       if(!failuresOnly || !it->valid){
+         if(!first){
+          os << ", " << std::endl;
+          
+         }
+         it->toJSON(os);
+         first = false;
+          
+       }
+     }
+     os << "]" << std::endl << "}";
+
+     return os;
+  }
+  
 
  private:
   
   // Execute depending on the type
   template <typename T> 
   void run() {
-    run(type<T>());
+    run(type<const T>());
   }
   
   template <typename T> 
-  void run(type<T>) {
+  void run(type<const T>) {
   }
   
   
   
-  void run(type<Neuron>){
+  void run(type<const Neuron>){
     // Just execute the measure and the checker for the neuron
     value_type v = measure_(*neuron_);
     bool pass = checker_(v);
     results_.emplace_back(*neuron_, v, pass);
   };
   
-  void run(type<Neurite>){
+  void run(type<const Neurite>){
     // Select neurites and run
     auto sel = selector::neuron_neurites(*neuron_);
     value_type v ;
@@ -166,9 +277,9 @@ class Validator {
     }
   };
   
-  void run(type<Branch>){
-    auto sel = selector::compose(
-      selector::join_selector_factory(selector::neurite_branch_selector), 
+  void run(type<const Branch>){
+    auto sel = selector::compose_selector(
+      selector::selector_in_single_to_set(selector::neurite_branch_selector), 
       selector::neuron_neurites)(*neuron_);
     
     value_type v ;
@@ -179,7 +290,7 @@ class Validator {
     }
   };
   
-  void run(type<Node>){
+  void run(type<const Node>){
     // Select neurites and run
     auto sel = selector::neuron_node_selector(*neuron_);
     value_type v ;
@@ -205,6 +316,15 @@ std::ostream& operator<<(std::ostream& os, const ValidatorItem<T,V>& it){
 template <typename M, typename C>
 constexpr Validator<M,C> create_validator(const M& measure, const C& check) {
   return Validator<M,C>(measure, check);
+};
+
+// So we can use auto and skip all that typing.
+template <typename M, typename C>
+constexpr Validator<M,C> create_validator(const M& measure, const C& check,const std::string& name,const std::string& desc) {
+  Validator<M,C> v(measure, check);
+  v.set_name(name);
+  v.set_description(desc);
+  return v;
 };
 
 // Examples

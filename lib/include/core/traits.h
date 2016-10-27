@@ -6,28 +6,34 @@
 
 namespace neurostr {
 namespace traits {
-  
+
+  /**
+   * @brief Check if template C is base of Ts..
+   * @return True type is is base
+   */
 template <template <typename...> class C, typename... Ts> std::true_type is_base_of_template_impl(const C<Ts...>*);
-
 template <template <typename...> class C> std::false_type is_base_of_template_impl(...);
-
 template <typename T, template <typename...> class C>
 using is_base_of_template = decltype(is_base_of_template_impl<C>(std::declval<T*>()));
 
 
-
+/**
+ * @brief Value is true if T is a vector instance
+ */
 template <typename T, typename _ = void> struct is_vector {
   static const bool value = false;
 };
-
 template <class T> struct is_vector<std::vector<T>> {
   static bool const value = true;
 };
 
-// For overloaded function
+
+/**
+ * @class function_traits
+ * @brief Extract basic information from a fuctor like out type, arg type, arity...
+ */
 template <typename T> struct function_traits : public function_traits<decltype(&T::operator())> {};
 // For generic types, directly use the result of the signature of its 'operator()'
-
 template <typename ClassType, typename ReturnType, typename... Args>
 struct function_traits<ReturnType (ClassType::*)(Args...) const>
     // we specialize for pointers to member function

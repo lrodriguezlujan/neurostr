@@ -1,4 +1,5 @@
 #include "core/neuron.h"
+#include "core/log.h"
 
 #include <limits>
 
@@ -9,8 +10,116 @@
 
 namespace neurostr {
 
+ /****************
+ * 
+ * Neuron
+ * 
+ *****************/
+ 
+  // Constructors
+  Neuron::Neuron() 
+    : WithProperties()
+    , id_()
+    , neurites_()
+    , soma_()
+    , up_(0,0,1) {};
+  
+
+  Neuron::Neuron(const std::string& id) 
+    : WithProperties()
+    , id_(id)
+    , neurites_()
+    , soma_()
+    , up_(0,0,1) {};
+  
+  Neuron::Neuron(const std::string& id, const std::vector<Node>& soma)
+      : WithProperties()
+      , id_(id)
+      , neurites_()
+      , soma_(soma)
+      , up_(0,0,1) {};
+      
+  void Neuron::up(const point_type& up) {
+    up_ = up;
+    geometry::normalize(up_);
+  }
+  
+  int Neuron::node_count() const {
+    int accum = 0;
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) 
+      accum += it->node_count();
+    return accum;
+  }
+  
+  Neuron::neurite_iterator Neuron::add_neurite(Neurite* const n) {
+    if(n != nullptr){
+      n->neuron(this);
+      neurites_.emplace_back(n);
+      return neurite_iterator(std::prev(neurites_.end(),1));
+    } else {
+      return end_neurite();
+    }
+  }
+  
+  void  Neuron::add_soma(const std::vector<Node>& v) { 
+    soma_.insert(soma_.end(), v.begin(), v.end()); 
+  }
+  
+  Neurite::base_node_iterator Neuron::find(const Node& n) {
+
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
+      auto nodeit = it->find(n);
+      if (nodeit != it->end_node()) return nodeit;
+    }
+
+    // Not valid
+    return Neurite::base_node_iterator();
+  }
+  
+  Neuron::soma_iterator Neuron::find_soma(const Node& n) {
+    auto it = std::find(soma_.begin(), soma_.end(), n);
+    if (it != soma_.end())
+      return soma_iterator(it);
+    else
+      return soma_iterator(soma_.end());
+  }
+  
+  bool Neuron::point_in_soma(const point_type& p) const {
+
+    // Criteria: point is in soma if
+    // It is closer to the soma baricenter than at least one point of the soma contour
+    point_type b = soma_barycenter();
+
+    
+    float dist = geometry::distance(p, b);
+
+    for (auto it = soma_.begin(); it != soma_.end(); ++it) {
+      if (geometry::distance(it->position(), b) < dist) 
+        return true;
+    }
+    return false;
+  }
+  
+  void Neuron::correct() {
+    for (auto it = begin_neurite(); it != end_neurite(); ++it) {
+      if (!it->root_is_soma()) {
+        auto n = it->begin_branch()->begin();
+        if (point_in_soma(n->position())){
+          NSTR_LOG_(trace) << "Setting first node as root";
+          it->set_root(*n);
+          // Remove it
+          //it->begin_branch()->erase( n );
+        }
+      }
+
+      it->correct();
+    }
+  }
+
+  
   std::vector<point_type> Neuron::soma_positions() const {
-    std::vector<point_type> v(soma_.size());
+    std::vector<point_type> v;
+    v.reserve(soma_.size());
     for(auto it = soma_.begin(); it != soma_.end(); ++it)
       v.push_back(it->position());
     return v;
@@ -78,6 +187,51 @@ namespace neurostr {
     }
   }
   
+    /**
+   * @brief Removes a neurite from the neuron
+   * @param n Neurite iterator
+   * @return updated iterator
+   */
+  Neuron::neurite_iterator Neuron::erase(const neurite_iterator& n){
+    if(n != end_neurite())
+      return neurites_.erase(n.base());
+    else
+      return n;
+  }
+  
+  /**
+   * @brief Removes all axon neurites from the neuron
+   */
+  void Neuron::erase_axon(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kAxon){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
+  /**
+   * @brief Removes all apical dendrties from the neuron
+   */
+  void Neuron::erase_apical(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kApical){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
+  /**
+   * @brief Removes all non-apical dendrties from the neuron
+   */
+  void Neuron::erase_dendrites(){
+    for(auto it = begin_neurite(); it != end_neurite(); ++it){
+      if(it->type() == NeuriteType::kDendrite){
+        it = std::prev(erase(it),1);
+      }
+    }
+  }
+  
   // Orient apical towards "up" direction
   // Todo...all nodes or just terminals?
   void Neuron::set_apical_up(){
@@ -141,6 +295,10 @@ namespace neurostr {
   // Axis aligned bounding box
   box_type Neuron::boundingBox(){
     
+    if(node_count() == 0 && soma_.size() == 0){
+      return box_type(point_type(0,0,0),point_type(0,0,0));
+    }
+    
     // Initialize limits
     point_type min_corner( std::numeric_limits<float>::max(),
                            std::numeric_limits<float>::max(), 
@@ -167,7 +325,7 @@ namespace neurostr {
   }
   
   // Compute soma planar area
-  float Neuron::somaArea(){
+  float Neuron::somaArea() const{
     return geometry::polygon_area(geometry::as_planar_polygon(soma_positions()));
   }
 
@@ -225,7 +383,66 @@ std::ostream& operator<<(std::ostream& os, const Neuron& n) {
   return os;
 };
 
-// Print Reconstruction
+
+/****************
+ * 
+ * Reconstruction
+ * 
+ *****************/
+ 
+Reconstruction::Reconstruction() : WithProperties(), id_(), neurons_(), contours_() {};
+  
+Reconstruction::Reconstruction(const std::string& id) : WithProperties(), id_(id), neurons_(), contours_() {};
+
+void Reconstruction::addContour(const contour_type& v) {
+    contours_.push_back(v);
+}
+
+int Reconstruction::node_count() const {
+    int accum = 0;
+    for (auto it = begin(); it != end(); ++it) accum += it->node_count();
+    return accum;
+}
+
+Reconstruction::neuron_iterator Reconstruction::closest_soma(const point_type& p) {
+    auto ret = end();
+    float tmp, min_dist = std::numeric_limits<float>().max();
+    for (auto it = begin(); it != end(); ++it) {
+      for (auto s_it = it->begin_soma(); s_it != it->end_soma() && ret != it; ++s_it) {
+        tmp = s_it->distance(p);
+        if (tmp < min_dist) {
+          ret = it;
+          min_dist = tmp;
+        }
+      }
+    }
+    return ret;
+}
+
+Reconstruction::neuron_iterator Reconstruction::add_neurite_to_closest_soma(Neurite* n) {
+        
+    // Special case - just 1 neuron
+    neuron_iterator closest;
+    
+    if(n == nullptr){
+      return end();
+    }
+    
+    if(size() == 1){
+      closest = begin();
+    } else {
+      closest = closest_soma(n->has_root()?(n->root().position()):(n->begin_node()->position()));
+    }
+    
+    if (closest == end()) {
+      throw std::runtime_error("No neuron in reconstruction");
+    } else {
+      n->id(closest->size() + 1);
+      closest->add_neurite(n);
+    }
+    return closest;
+}
+ 
 std::ostream& operator<<(std::ostream& os, const Reconstruction& r) {
   // Print * line
   os << std::string(50, '*') << std::endl;

@@ -4,7 +4,8 @@
 #include <iostream>
 
 namespace neurostr{
-// C++11 strong typed enum
+
+  // C++11 strong typed enum
 // Neurite type enum  - Note: They match standarized SWC types for convenience
 enum class NeuriteType : int {
   kUndefined = 0,

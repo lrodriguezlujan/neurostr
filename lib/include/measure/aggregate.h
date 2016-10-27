@@ -61,7 +61,8 @@ const auto mean_sd_factory(T zero){
   return [z_ = zero](const detail::iterator_type<U>& b, 
                      const detail::iterator_type<U>& e) -> std::array<T,2> {
     auto size = std::distance(b,e);
-    T mean = std::accumulate(b,e,z_)/size;
+    T mean = std::accumulate(b,e,z_);
+    mean/=size;
     
     std::vector<T> diff(size);
     std::transform(b, e, diff.begin(), [m_=mean](double x) { return x - m_; });

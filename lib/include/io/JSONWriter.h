@@ -17,7 +17,9 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/prettywriter.h"
 #include "rapidjson/stringbuffer.h"
+#include "core/contour.h"
 #include "core/neuron.h"
+
 
 
 
@@ -37,6 +39,7 @@ namespace io {
         writer = std::unique_ptr<writer_type>(new rapidjson::PrettyWriter<OutputStream>(buffer));
       else 
         writer = std::unique_ptr<writer_type>(new rapidjson::Writer<OutputStream>(buffer));
+      writer->SetMaxDecimalPlaces(3);
     };
       
     
@@ -52,22 +55,32 @@ namespace io {
     
     // Write  reconstruction
     public:
+    
     void write(const neurostr::Reconstruction& r){
         writer->StartObject();
         
         writer->Key("neurons");
+        
         writer->StartArray();
         for(auto it = r.begin(); it != r.end(); ++it)
           writeNeuron(*it);
+        writer->EndArray();
         
         if(r.properties.size()>0){
           writer->Key("properties");  
           writePropertyMap(r.properties);
         }
         
-        // TODO: Write contour
+        // Contours        
+        if(r.n_contours() > 0){
+          writer->Key("contours");  
+          writer->StartArray();
+          for(auto it = r.contour_begin(); it != r.contour_end(); ++it){
+            writeContour(*it);
+          }
+          writer->EndArray();
+        }
         
-        writer->EndArray();
         writer->EndObject();
     }
     
@@ -110,7 +123,17 @@ namespace io {
     
     
     protected:
-    
+
+    void writePoint(const neurostr::point_type& point){
+      writer->StartObject();
+          writer->Key("x");
+          writer->Double(geometry::get<0>(point));
+          writer->Key("y");
+          writer->Double(geometry::get<1>(point));
+          writer->Key("z");
+          writer->Double(geometry::get<2>(point));
+      writer->EndObject();
+    }
 
     void writeProperty(const neurostr::PropertyMap::const_iterator& p){
       
@@ -125,16 +148,11 @@ namespace io {
           writer->Double(PropertyMap::value<float>(*p));
       } else if (PropertyMap::is<int>(*p)){
           writer->Int(PropertyMap::value<int>(*p));
+      } else if (PropertyMap::is<bool>(*p)){
+          writer->Bool(PropertyMap::value<bool>(*p));
       } else if (PropertyMap::is<point_type>(*p)){
         point_type point = PropertyMap::value<point_type>(*p);
-          writer->StartObject();
-          writer->Key("x");
-          writer->Double(geometry::get<0>(point));
-          writer->Key("y");
-          writer->Double(geometry::get<1>(point));
-          writer->Key("z");
-          writer->Double(geometry::get<2>(point));
-          writer->EndObject();
+        writePoint(point);
       } else {
           writer->String(PropertyMap::value_as_string(*p).c_str());
       }
@@ -157,6 +175,41 @@ namespace io {
       // Close
       writer->EndObject();
     };
+    
+    void writeContour(const neurostr::Contour& c){
+      // Write contour:: several properties and a point array
+      writer->StartObject();
+      
+      // Write props
+      
+      writer->Key("name");
+      writer->String(c.name().c_str());
+      
+      writer->Key("face_color");
+      writer->String(c.face_color().c_str());
+      
+      writer->Key("back_color");
+      writer->String(c.back_color().c_str());      
+      
+      writer->Key("closed");
+      writer->Bool(c.is_closed());      
+      
+      writer->Key("fill");
+      writer->Double(c.fill_density());      
+      
+      writer->Key("resolution");
+      writer->Double(c.resolution());      
+      
+      // Write points
+      writer->Key("points");
+      writer->StartArray();
+      for(auto it = c.begin(); it != c.end(); ++it){
+        writePoint(*it);
+      }
+      writer->EndArray();
+      
+      writer->EndObject();
+    }
     
     void writePropertyMap(const neurostr::PropertyMap& pm){
       writer->StartObject();
@@ -208,8 +261,10 @@ namespace io {
       writer->StartObject();
       
       // Write the root
-      writer->Key("root");
-      writeNode(b->root());
+      if(b-> has_root()){
+        writer->Key("root");
+        writeNode(b->root());
+      }
       
       // Properties
       if(b->properties.size()>0){

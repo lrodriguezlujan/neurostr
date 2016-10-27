@@ -7,7 +7,7 @@
 #include "core/node.h"
 #include "core/neurite.h"
 
-#include "measure/measure.h"
+#include "measure/measure_operations.h"
 #include "measure/node_measure.h"
 
 #include "selector/selector.h"
@@ -18,7 +18,7 @@ namespace neurostr {
 
 namespace measure {
   
-const auto root_is_soma = [](Neurite& n) -> bool {
+const auto root_is_soma = [](const Neurite& n) -> bool {
   return n.root_is_soma();
 };
 

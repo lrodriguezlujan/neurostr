@@ -8,31 +8,30 @@
 
 namespace neurostr {
 namespace io {
+
+std::string tree_type_tostr(const tree_type_cd& t){
+  switch (t) {
+    case tree_type_cd::AXON:
+      return "axon";
+    case tree_type_cd::DENDRITE:
+      return "dendrite";
+    case tree_type_cd::APICAL:
+      return "apical";
+    case tree_type_cd::SOMA:
+      return "soma";
+    case tree_type_cd::NONE:
+      return "none";
+    case tree_type_cd::SAMPLE_CONTOUR:
+      return "sample_contour";
+    case tree_type_cd::UNKNOWN:
+      return "unknown";
+    default:
+      return "unknown";
+  }
+}
   
 std::ostream& operator<<(std::ostream& os, const tree_type_cd& t) {
-  switch (t) {
-  case tree_type_cd::AXON:
-    os << "axon";
-    break;
-  case tree_type_cd::DENDRITE:
-    os << "dendrite";
-    break;
-  case tree_type_cd::APICAL:
-    os << "apical";
-    break;
-  case tree_type_cd::SOMA:
-    os << "soma";
-    break;
-  case tree_type_cd::NONE:
-    os << "none";
-    break;
-  case tree_type_cd::SAMPLE_CONTOUR:
-    os << "sample_contour";
-    break;
-  case tree_type_cd::UNKNOWN:
-    os << "unknwon";
-    break;
-  }
+  os << tree_type_tostr(t);
   return os;
 }
 

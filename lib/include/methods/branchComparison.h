@@ -7,10 +7,10 @@
 #include "core/neuron.h"
 
 namespace neurostr {
-namespace method {
+namespace methods {
   
   // align branches and computes theri f. dist
-  float oriented_frechet_branch_distance( Branch &a,  Branch &b);
+  float oriented_frechet_branch_distance(const Branch &a, const  Branch &b, bool normalize = false);
   
   std::vector<float> inter_pair_distance( Neuron& n , bool restrict_order = false, bool sided = false  );
   std::vector<std::vector<float>> inter_pair_distance_byorder( Neuron& n, bool sided = false);

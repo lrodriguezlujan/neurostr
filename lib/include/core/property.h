@@ -9,130 +9,223 @@
 
 namespace neurostr{
  
-// Could template this...not really needed
-// Base on property map
+/**
+ * @class PropertyMap
+ * @author luis
+ * @date 28/09/16
+ * @file property.h
+ * @brief Propert map auxiliar clase. stores properties for node,branch, neurite... etc
+ */
 class PropertyMap {
   
   public:
     using property_type = std::pair<std::string, boost::any>;
     using map_type      = std::map<std::string, boost::any>;
     using iterator      = map_type::iterator;
-    using const_iterator      = map_type::const_iterator;
+    using const_iterator= map_type::const_iterator;
   
   private:
     map_type storage_;
   
   public:
     
-    PropertyMap() : storage_(){};
+    /**
+     * @brief Initializes an empty property map
+     */
+    PropertyMap();
     
+    /**
+     * @brief Initializes a property map with the content in the range
+     * @param begin property begin iterator
+     * @param end property end iterator
+     */
     template <typename Iter>
     PropertyMap(const Iter& begin, const Iter& end) : storage_(begin,end) {};
     
-    const_iterator find(const std::string& k) const {
-      return storage_.find(k);
-    }
+    /**
+     * @brief Returns the property with key k
+     * @param k Property key
+     * @return Const iterator. End() if no property with key k exists
+     */
+    const_iterator find(const std::string& k) const;
     
+    // Default copy and move
+    PropertyMap(const PropertyMap&) = default;
+    PropertyMap& operator=(const PropertyMap&) = default;
+    PropertyMap(PropertyMap&&) = default;
+    PropertyMap& operator=(PropertyMap&&) = default;
+    
+    /**
+     * @brief Returns the value of the poperty with key k
+     * @param k Key
+     * @return Property value
+     */
     template <typename T>
     T get(const std::string& k) const {
       return value<T>(*(storage_.find(k)));
     }
     
-        // Restrict accepted types
-    std::pair<iterator,bool> set(const property_type& p) {
-      return storage_.insert(p);
-    }
+    /**
+     * @brief Adds a new property to the map
+     * @param p Property to add 
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const property_type& p);
     
-    std::pair<iterator,bool> set(const std::string& k) {
-      return storage_.insert(property_type(k, boost::any()));
-    }
+    /**
+     * @brief Adds an empty property to the map
+     * @param k Property key
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k);
     
-    // Restrict accepted types
-    std::pair<iterator,bool> set(const std::string& k,const int v) {
-      return storage_.emplace(k, v);
-    }
+     /**
+     * @brief Adds a new int valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k, int v);
     
-    std::pair<iterator,bool> set(const std::string& k,const float v) {
-      return storage_.emplace(k, v);
-    }
+    /**
+     * @brief Adds a new bool valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k, bool v);
     
-    std::pair<iterator,bool> set(const std::string& k,const std::string v) {
-      return storage_.emplace(k, v);
-    }
+    /**
+     * @brief Adds a new float valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k, float v);
     
-    std::pair<iterator,bool> set(const std::string& k,const point_type v) {
-      return storage_.emplace(k, v);
-    }
+    /**
+     * @brief Adds a new string valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k,const std::string v);
     
-    std::pair<iterator,bool> set(const std::string& k,boost::any v) {
-      return storage_.emplace(k, v);
-    }
+    /**
+     * @brief Adds a new point valued property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k,const point_type v);
     
-    bool exists(const std::string& k) const {
-      return storage_.count(k) > 0;
-    }
+    /**
+     * @brief Adds a property to the map
+     * @param k Property key
+     * @param v Property value
+     * @return pair(iterator, T/F property added)
+     */
+    std::pair<iterator,bool> set(const std::string& k,boost::any v);
     
-    void remove(const std::string& k){
-      storage_.erase(k);
-    }
+    /**
+     * @brief Property exists
+     * @param k Property name
+     * @return True if the property exists
+     */
+    bool exists(const std::string& k) const ;
     
-    void remove(const iterator& i){
-      storage_.erase(i);
-    }
+    /**
+     * @brief Deletes a property
+     * @param k Poperty key
+     */
+    void remove(const std::string& k);
     
-    map_type::size_type size() const{
-      return storage_.size();
-    }
     
-    const_iterator begin() const {
-      return storage_.begin();
-    }
+    /**
+     * @brief Deletes a property
+     * @param i property iterator
+     */
+    void remove(const iterator& i);
     
-    const_iterator end() const {
-      return storage_.end();
-    }
-  // Static common functions
-  static std::string value_as_string(const property_type& p){
-      if (empty(p)) return std::string();
-      else if (is<std::string>(p)) return value<std::string>(p);
-      else if (is<int>(p)) return std::to_string(value<int>(p));
-      else if (is<float>(p)) return std::to_string(value<float>(p));
-      else if (is<point_type>(p)){
-        char buff[30];
-        snprintf(buff, sizeof(buff), "%.3f %.3f %.3f",  
-          geometry::get<0>(value<point_type>(p)), 
-          geometry::get<1>(value<point_type>(p)), 
-          geometry::get<2>(value<point_type>(p)));
-        
-        return std::string(buff);
-      }
-      else return std::string();
-  };
+    /**
+     * @brief Property map size
+     * @return  Number of properties in the map
+     */
+    map_type::size_type size() const;
+    
+    /**
+     * @brief Property begin iterator
+     * @return iterator
+     */
+    const_iterator begin() const ;
+    iterator begin() ;
+    
+    /**
+     * @brief Property end iterator
+     * @return iterator
+     */
+    const_iterator end() const ;
+    iterator end() ;
   
+  /**
+   * @brief Property value as string
+   * @param p Property
+   * @return value as string
+   */
+  static std::string value_as_string(const property_type& p);
+  
+  /**
+   * @brief Checks if a property value is of some type
+   * @param p Property type
+   * @return True if the property value is of type T
+   */
   template <typename T>
   static bool is(const property_type& p){
     return p.second.type() == typeid(T);
   };
   
+  /**
+   * @brief Returns the property value casted to T
+   * @param p Property
+   * @return  Property value
+   */
   template <typename T>
   static T value(const property_type& p){
     return boost::any_cast<T>(p.second);
   };
   
-  static bool empty(const property_type& p){
-    return p.second.empty();
-  }
+  /**
+   * @brief Checks whether a property is empty 
+   * @param p property
+   * @return  True if p is empty
+   */
+  static bool empty(const property_type& p);
   
-  static const std::string& key(const property_type& p){
-    return p.first;
-  }
+  /**
+   * @brief Gets property key
+   * @param p Property
+   * @return Property key
+   */
+  static const std::string& key(const property_type& p);
 };
 
+/**
+ * @class WithProperties
+ * @author luis
+ * @date 28/09/16
+ * @file property.h
+ * @brief Base class for neuron , neurite ... to have a property map
+ */
 class WithProperties{
   
   public:    
-    WithProperties() : properties() {};
+  
+    /**
+     * @brief create an empty property map
+     */
+    WithProperties() ;
     
+    // Copy
     WithProperties(const WithProperties& other) = default;
     WithProperties& operator=(const WithProperties& b) = default;
 
@@ -140,28 +233,53 @@ class WithProperties{
     WithProperties(WithProperties&& b) = default;
     WithProperties& operator=(WithProperties&& b) = default;
 
-  
+    // Store
     PropertyMap properties;
+    
+    /**
+     * @brief Proprerty begin iterator
+     * @return property iterator
+     */
     auto begin_properties() const { return properties.begin(); }
+    
+    /**
+     * @brief Property end iterator
+     * @return property iterator
+     */
     auto end_properties() const { return properties.end(); }
     
+    /**
+     * @brief Adds a property
+     * @param key Property key
+     * @param v Property value
+     * @return property iterator
+     */
     template <typename T> 
     auto add_property(const std::string& key, const T& v) {
       return properties.set(std::pair<std::string, boost::any>(key, v));
     }
 
-    auto add_property(const std::string& key) {
-      return properties.set(
-        std::pair<std::string, boost::any>(key, boost::any()));
-    }
+    /**
+     * @brief Adds an empty property
+     * @param key Property key
+     * @return property iterator 
+     */
+    std::pair<PropertyMap::iterator,bool> add_property(const std::string& key);
 
-    auto add_property(const std::pair<std::string, boost::any>& v) {
-      return properties.set(v);
-    }
+    /**
+     * @brief Adds a property
+     * @param v Propery
+     * @return property iterator
+    */
+    std::pair<PropertyMap::iterator,bool> 
+    add_property(const std::pair<std::string, boost::any>& v);
     
-    auto get_property(const std::string& key) const { 
-      return properties.find(key); 
-    }
+    /**
+     * @brief Get property
+     * @param key Property key
+     * @return property iterator
+     */
+    PropertyMap::const_iterator  get_property(const std::string& key) const;
 };
 
 using property_type  = PropertyMap::property_type;

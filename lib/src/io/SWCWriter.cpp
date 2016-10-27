@@ -35,15 +35,24 @@ void SWCWriter::writeHeader(Neuron& n) const {
 
 void SWCWriter::writeData(Neuron& n) const {
   // Write soma
-  for(auto it = n.begin_soma(); it != n.end_soma(); ++it){
-    writeNode(*it, convertNeuriteType(NeuriteType::kSoma));
+  if(n.begin_soma() != n.end_soma()){
+    writeNode(*n.begin_soma(), convertNeuriteType(NeuriteType::kSoma),no_parent_id);
+  }
+  
+  for(auto it = std::next(n.begin_soma(),1); it != n.end_soma(); ++it){
+    writeNode(*it, convertNeuriteType(NeuriteType::kSoma),std::prev(it,1)->id());
   }
     
   // Write Neurites
   for(auto it = n.begin_neurite(); it != n.end_neurite(); ++it){
     unsigned int type = convertNeuriteType(it->type());
     for(auto node = it->begin_node(); node != it->end_node(); ++node){
-      writeNode(*node, type);
+      auto parent = selector::node_parent(*node);
+      unsigned int parent_id;
+  
+      if (parent == *node) parent_id = no_parent_id;
+      else parent_id = parent.id();
+      writeNode(*node, type, parent_id);
    }
   }
   
@@ -75,21 +84,16 @@ void SWCWriter::writeProperty(const PropertyMap::property_type& p) const{
 }
       
 // Data management
-void SWCWriter::writeNode(Node& n, unsigned int type) const {
+void SWCWriter::writeNode(Node& n, unsigned int type, int parent_id) const {
   
-  auto parent = selector::node_parent(n);
-  unsigned int parent_id;
   
-  if (parent == n) parent_id = no_parent_id;
-  else parent_id = parent.id();
-  
-  stream_ << boost::format("%u %u %.3f %.3f %.3f %.3f %ud\n")
+  stream_ << boost::format("%u %u %.3f %.3f %.3f %.3f %u\n")
       % n.id() 
       % type
       % n.x()
       % n.y()
       % n.z()
-      % (n.radius()/2.0)
+      % (n.radius()*2.0)
       % parent_id;
 }
 

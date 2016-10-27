@@ -18,17 +18,20 @@ namespace selector {
   /**
 * Neuron selector
 */
-const auto neuron_neurites = [](Neuron &n) -> std::vector<neurite_reference> {
-  std::vector<neurite_reference> sel;
+const auto neuron_neurites = [](const Neuron &n) -> std::vector<const_neurite_reference> {
+  std::vector<const_neurite_reference> sel;
   for(auto it = n.begin_neurite(); it!=n.end_neurite(); ++it)
     sel.emplace_back(*it);
   return sel;
 };
 
 // Im using this all the time
-const auto neuron_node_selector =  compose(join_selector_factory(neurite_node_selector),
+const auto neuron_node_selector =  compose_selector(selector_in_single_to_set(neurite_node_selector),
                                             neuron_neurites);
 
+const auto neuron_branch_selector =  compose_selector(selector_in_single_to_set(neurite_branch_selector),
+                                            neuron_neurites);
+                                            
 /*
 const auto neuron_branches = [](const neuron_reference& n)
     -> std::vector<branch_reference> {

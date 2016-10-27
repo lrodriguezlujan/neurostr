@@ -9,3 +9,7 @@
 *.a
 build_debug/
 build_release/
+**/debug/
+**/Debug/
+**/release/
+**/Release/

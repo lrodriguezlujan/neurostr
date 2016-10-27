@@ -94,7 +94,7 @@ class ASCParser : public Parser{
    * @param parent Point of insertion
    * @return Last point of insertion
    */
-  Neurite::base_node_iterator process_container_(const Neurite::base_node_iterator& parent);
+  Neurite::branch_iterator process_container_(const Neurite::branch_iterator& pos);
 
     private:
   
@@ -105,10 +105,21 @@ class ASCParser : public Parser{
   PropertyMap::property_type process_color();  // Special color block
   
   /**
+   * @brief Process markerset type
+   * @return Marker type
+   */
+  marker_type process_marker();
+  
+  /**
    * @brief Skips a comment in the buffer
    * @return true if it skips at least one character
    */
   bool skip_comment();
+  
+  /**
+   * @brief Skip current block
+   */
+  void skip_block();
   
   /**
    * @brief Skips spaces and EOL character in the buffer
@@ -125,7 +136,7 @@ class ASCParser : public Parser{
   /**
    * @brief Skips a spine block (currently they arent processed)
    */
-  void skip_spine();
+  void process_spine();
   
   /**
    * @brief Consumes the block end character from the stream
