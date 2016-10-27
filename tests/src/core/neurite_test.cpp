@@ -4,10 +4,35 @@
 #include "core/node.h"
 #include "core/branch.h"
 #include "core/neurite.h"
+#include "core/neuron.h"
 
 
-using namespace neurostr;
 
+SUITE(neurite_tests){
+  
+  using namespace neurostr;
+
+// Test neurite structure
+struct SampleNeurite {
+  SampleNeurite() : neurite_example(1,NeuriteType::kDendrite) {
+    // Remember - root node is not part of the neurite
+    neurite_example.insert_node(neurite_example.begin_node(),Node(1));
+    neurite_example.insert_node(1,Node(2));
+    neurite_example.insert_node(2,Node(3));
+    neurite_example.insert_node(3,Node(4));
+    neurite_example.insert_node(4,Node(5));
+    neurite_example.insert_node(3,Node(6));
+    neurite_example.insert_node(5,Node(7));
+    neurite_example.insert_node(5,Node(8));
+    
+    neurite_example.correct();
+  }
+  
+  ~SampleNeurite(){};
+  
+  Neurite neurite_example;
+};
+  
 TEST(neurite_empty_constructor) {
   Neurite n;
   CHECK_EQUAL(n.size(),0);
@@ -29,7 +54,7 @@ TEST(neurite_id_constructor) {
 }
 
 
-TEST(neurite_typed_constructor) {
+TEST(typed_constructor) {
   Neurite n(1, NeuriteType::kDendrite);
   CHECK_EQUAL(n.size(),0);
   CHECK_EQUAL(n.id(),1);
@@ -39,27 +64,322 @@ TEST(neurite_typed_constructor) {
   CHECK_EQUAL(std::distance(bp,ep), 0);
 }
 
-TEST(neurite_type_set) {
+
+TEST(type){
+  Neurite n1(1, NeuriteType::kDendrite);
+  CHECK_EQUAL(n1.type(), NeuriteType::kDendrite);
+  
+  Neurite n2(1);
+  CHECK_EQUAL(n2.type(), NeuriteType::kUndefined);
+}
+
+TEST(id){
+  Neurite n1(1, NeuriteType::kDendrite);
+  CHECK_EQUAL(n1.id(),1);
+}
+
+TEST(neuron_exists){
+  Neurite n(1, NeuriteType::kDendrite);
+  Neuron neuron("TEST");
+  
+  n.neuron(&neuron);
+  CHECK_EQUAL(neuron.id(),n.neuron().id());
+}
+
+TEST(neuron_fails){
+  Neurite n(1, NeuriteType::kDendrite);
+  CHECK_THROW(n.neuron(),std::logic_error);
+}
+
+TEST(has_root_no_branch){
+  Neurite n(1, NeuriteType::kDendrite);
+  CHECK(!n.has_root());
+}
+
+TEST(has_root_true){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK(n.has_root());
+}
+
+TEST(has_root_false){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root();
+  CHECK(!n.has_root());
+}
+
+TEST(overwrite_empty_root){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK(n.has_root());
+  n.set_root();
+  CHECK(!n.has_root());
+}
+
+TEST(overwrite_nonempty_root){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK(n.has_root());
+  n.set_root(Node(2));
+  CHECK(n.has_root());
+}
+
+TEST(order_empty){
+  Neurite n(1, NeuriteType::kDendrite);
+  CHECK_EQUAL(-1,n.max_centrifugal_order());
+}
+
+TEST(order_single){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK_EQUAL(0,n.max_centrifugal_order());
+}
+
+TEST(order_reg){
+  SampleNeurite test_data;
+  CHECK_EQUAL(2,test_data.neurite_example.max_centrifugal_order());
+}
+
+TEST(size_empty){
+  Neurite n(1, NeuriteType::kDendrite);
+  CHECK_EQUAL(0,n.size());
+}
+
+TEST(size_reg){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK_EQUAL(1,n.size());
+  n.append_branch(n.begin_branch(),Branch());
+  CHECK_EQUAL(2,n.size());
+}
+
+TEST(size_testdata){
+  SampleNeurite test_data;
+  CHECK_EQUAL(5,test_data.neurite_example.size());
+}
+
+TEST(node_count_empty){
+  Neurite n(1, NeuriteType::kDendrite);
+  CHECK_EQUAL(0,n.node_count());
+}
+
+TEST(node_count_only_root){
+  Neurite n(1, NeuriteType::kDendrite);
+  n.set_root(Node(1));
+  CHECK_EQUAL(0,n.node_count());
+}
+
+TEST(node_count){
+  SampleNeurite test_data;
+  CHECK_EQUAL(8,test_data.neurite_example.node_count());
+}
+
+TEST(type_set) {
   Neurite n;
   CHECK_EQUAL(n.type(), NeuriteType::kUndefined);
   n.type(NeuriteType::kApical);
   CHECK_EQUAL(n.type(), NeuriteType::kApical);
 }
 
-TEST(neurite_id_set) {
+TEST(id_set) {
   Neurite n;
   CHECK_EQUAL(n.id(),-1);
   n.id(22);
   CHECK_EQUAL(n.id(),22);
 }
 
-TEST(neurite_equality_operator) {
+TEST(branch_iterator_dfs){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_EQUAL(5,std::distance(n.begin_branch(), n.end_branch()));
+  CHECK_EQUAL("1",n.begin_branch()->idString());
+  CHECK_EQUAL("1-1",std::next(n.begin_branch(),1)->idString());
+  CHECK_EQUAL("1-1-1",std::next(n.begin_branch(),2)->idString());
+  CHECK_EQUAL("1-1-2",std::next(n.begin_branch(),3)->idString());
+  CHECK_EQUAL("1-2",std::next(n.begin_branch(),4)->idString());
+}
+
+TEST(branch_iterator_dfs_subtree){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_EQUAL(3,std::distance(n.begin_branch_subtree(std::next(n.begin_branch(),1)), 
+                              n.end_branch_subtree(std::next(n.begin_branch(),1))));
+  
+  auto it = n.begin_branch_subtree(std::next(n.begin_branch(),1));
+  CHECK_EQUAL("1-1",it->idString());
+  CHECK_EQUAL("1-1-1",std::next(it,1)->idString());
+  CHECK_EQUAL("1-1-2",std::next(it,2)->idString());
+}
+
+// Need to fix Tree.hh
+/*
+TEST(branch_order_iterator){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_EQUAL(2, std::distance(n.begin_fixed_order(2),n.end_fixed_order(2)));
+  auto it = n.begin_fixed_order(2);
+  CHECK_EQUAL("1-1-1",std::next(it,0)->idString());
+  CHECK_EQUAL("1-1-2",std::next(it,2)->idString());
+}
+*/
+
+TEST(leaf_iterator){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_EQUAL(3, std::distance(n.begin_leaf(),n.end_leaf()));
+}
+
+TEST(stem_iterator){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_EQUAL(3, std::distance(n.begin_stem(std::next(n.begin_branch(),2)),n.end_stem(std::next(n.begin_branch(),2))));
+}
+
+TEST(find_branch_exists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  auto f = n.find( *std::next(n.begin_branch(),2) );
+  CHECK(f == std::next(n.begin_branch(),2) );
+}
+
+TEST(find_branch_noexists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  auto f = n.find( Branch() );
+  CHECK(f == n.end_branch() );
+}
+
+TEST(find_node_exists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  auto f = n.find(3);
+  CHECK(f->id() == 3);
+}
+
+TEST(find_node_noexists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  auto f = n.find(13);
+  CHECK(f == n.end_node());
+}
+
+TEST(branch_sibling_exists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+}
+
+TEST(branch_sibling_noexists){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+}
+
+TEST(insert_node_empty){
+ // Insert in empty tree 
+ Neurite n_a(1);
+ n_a.insert_node(n_a.begin_node(), Node(1) );
+ CHECK_EQUAL(1, n_a.size());
+ CHECK_EQUAL(1, n_a.node_count());
+ CHECK_EQUAL(Node(1), *n_a.begin_node());  
+}
+
+TEST(insert_empty_branch){
+  // Insert in an empty branch
+ Neurite n_b(2);
+ n_b.insert_node(n_b.begin_node(), Node(1) );
+ CHECK_EQUAL(1, n_b.size());
+ CHECK_EQUAL(1, n_b.node_count());
+ CHECK_EQUAL(Node(1), *n_b.begin_node());
+}
+
+TEST(insert_node_pos_end){
+  // Insert in the last position of a terminal branch
+  Neurite n_b(2);
+ n_b.insert_node(n_b.begin_node(), Node(1) );
+ n_b.insert_node(n_b.begin_node(), Node(2) );
+ CHECK_EQUAL(1, n_b.size());
+ CHECK_EQUAL(2, n_b.node_count());
+ CHECK_EQUAL(Node(2), *(--n_b.end_node()) );
+  
+}
+
+TEST(insert_node_pos_middle){
+ // Force split
+  Neurite n_b(2);
+ n_b.insert_node(n_b.begin_node(), Node(1) );
+ n_b.insert_node(n_b.begin_node(), Node(2) );
+ n_b.insert_node(n_b.begin_node(), Node(3) );
+ CHECK_EQUAL(3, n_b.size());
+ CHECK_EQUAL(3, n_b.node_count()); 
+}
+
+TEST(insert_node_parent_sp){
+  Neurite n_a(1);
+ 
+ // Insert with parent -1
+ n_a.insert_node(-1, Node(1));
+ CHECK_EQUAL(1, n_a.size());
+ CHECK_EQUAL(1, n_a.node_count());
+ CHECK_EQUAL(Node(1), *n_a.begin_node());  
+}
+
+TEST(insert_node_parent_notfound){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  CHECK_THROW(n.insert_node(13,Node(14)),std::runtime_error);
+  
+}
+
+TEST(insert_node_parent_last){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  n.insert_node(8,Node(9));
+  auto f = n.find(9);
+  CHECK(f != n.end_node());
+  CHECK(f->id() == 9);
+  --f;
+  CHECK(f->id() == 8);
+}
+
+TEST(insert_node_parent_split){
+  SampleNeurite test_data;
+  Neurite& n = test_data.neurite_example;
+  
+  n.insert_node(4,Node(9));
+  auto f = n.find(9);
+  CHECK(f != n.end_node());
+  CHECK(f->id() == 9);
+}
+
+
+// Split correct in different ops
+TEST(correct){
+  //TODO - 
+}
+
+// Scale, normalize branches etc etc just apply a function to each branch
+
+TEST(child_order){
+  //TODO
+}
+
+
+TEST(equality_operator) {
   Neurite n_a(1), n_b(2), n_c(1);
   CHECK(n_a != n_b);
   CHECK(n_a == n_c);
 }
 
-TEST(neurite_properties){
+TEST(properties){
   Neurite n;
   
   // Add values
@@ -76,103 +396,7 @@ TEST(neurite_properties){
   CHECK_EQUAL( n.properties.get<int>(std::string("KEY3")),5);
 }
 
-TEST(neurite_add_root){
-  
-  Neurite n_a(1);
-  
-  CHECK_EQUAL(0, n_a.size());
-  CHECK_EQUAL(0, n_a.node_count());
-  
-  // Add empty root node
-  n_a.set_root();
-  
-  // root branch
-  CHECK_EQUAL(1, n_a.size());
-  CHECK_EQUAL(0, n_a.node_count());
-  
-}
-
-TEST(neurite_set_root){
-  
-  Neurite n_a(1);
-  
-  // Add empty root node
-  n_a.set_root();
-  
-  // root branch
-  CHECK_EQUAL(1, n_a.size());
-  CHECK_EQUAL(0, n_a.node_count());
-  CHECK_EQUAL(false, n_a.has_root());
-  
-  // Change root
-  n_a.set_root(Node(1));
-  CHECK_EQUAL(1, n_a.size());
-  CHECK_EQUAL(0, n_a.node_count());
-  CHECK_EQUAL(true, n_a.has_root());
-  CHECK_EQUAL(Node(1), n_a.root());
-  
-  // Set root not empty
-  Neurite n_b(1);
-  n_b.set_root(Node(1));
-  CHECK_EQUAL(1, n_b.size());
-  CHECK_EQUAL(0, n_b.node_count());
-  CHECK_EQUAL(true, n_b.has_root());
-  CHECK_EQUAL(Node(1), n_b.root());
-}
-
-TEST(neurite_insert_node_pos) {
-  
- // Insert in empty tree 
- Neurite n_a(1);
- n_a.insert_node(n_a.begin_node(), Node(1) );
- CHECK_EQUAL(1, n_a.size());
- CHECK_EQUAL(1, n_a.node_count());
- CHECK_EQUAL(Node(1), *n_a.begin_node());
- 
- // Insert in an empty branch
- Neurite n_b(2);
- n_b.set_root();
- n_b.insert_node(n_b.begin_node(), Node(1) );
- CHECK_EQUAL(1, n_b.size());
- CHECK_EQUAL(1, n_b.node_count());
- CHECK_EQUAL(Node(1), *n_b.begin_node());
- 
- // Insert in the last position of a terminal branch
- n_b.insert_node(n_b.begin_node(), Node(2) );
- CHECK_EQUAL(1, n_b.size());
- CHECK_EQUAL(2, n_b.node_count());
- CHECK_EQUAL(Node(2), *(--n_b.end_node()) );
- 
- // Force split
- n_b.insert_node(n_b.begin_node(), Node(3) );
- CHECK_EQUAL(3, n_b.size());
- CHECK_EQUAL(3, n_b.node_count()); 
-}
-
-TEST(neurite_insert_node_id) {
- // Create base neurite
- Neurite n_a(1);
- 
- // Insert with parent -1
- n_a.insert_node(-1, Node(1));
- CHECK_EQUAL(1, n_a.size());
- CHECK_EQUAL(1, n_a.node_count());
- CHECK_EQUAL(Node(1), *n_a.begin_node());
- 
- // Try to insert again (should fail)
- CHECK_THROW(n_a.insert_node(-1, Node(2)),std::runtime_error);
- // Insert to a nonexisting node
- CHECK_THROW(n_a.insert_node(3, Node(2)),std::runtime_error);
-
- // Do it right
- n_a.insert_node(1, Node(2));
- CHECK_EQUAL(1, n_a.size());
- CHECK_EQUAL(2, n_a.node_count());
- CHECK_EQUAL(Node(2), *(--n_a.end_node()));
- 
-}
-
-TEST(neurite_append_branch){
+TEST(append_branch){
   Neurite n_a(1);
   
   CHECK_EQUAL(0, n_a.size());
@@ -193,3 +417,4 @@ TEST(neurite_append_branch){
 
 
 // TODO correct
+} // End neurite suite
