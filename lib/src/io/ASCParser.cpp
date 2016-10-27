@@ -315,7 +315,7 @@ void ASCParser::process_(Reconstruction & r) {
       aux.add_property("name", val_);
 
       // Process container
-      process_container_(aux.begin_node());
+      process_container_(aux.begin_branch());
 
       // If soma -> add it to the reconstruction
       auto it = aux.properties.find("cellbody");
@@ -358,7 +358,7 @@ void ASCParser::process_(Reconstruction & r) {
       n->set_root();
       
       // Process container
-      process_container_(n->begin_node());
+      process_container_(n->begin_branch());
 
       set_neurite_type_by_nlproperties(*n);
 
@@ -406,8 +406,8 @@ void ASCParser::skip_block(){
       }
 }
 
-Neurite::base_node_iterator ASCParser::process_container_(
-    const Neurite::base_node_iterator& pos) {
+Neurite::branch_iterator ASCParser::process_container_(
+    const Neurite::branch_iterator& pos) {
 
   auto current_pos = pos;
 
@@ -429,23 +429,21 @@ Neurite::base_node_iterator ASCParser::process_container_(
       // Inside the block
       block_type btype = next_block_type(true);
       if (btype == block_type::SAMPLE) {
-        current_pos = current_pos.neurite().insert_node(current_pos, process_sample());
+        current_pos->neurite().insert_node(current_pos, process_sample());
       } else if (btype == block_type::PROPERTY) {
-        current_pos.neurite().properties.set(process_property());
+        current_pos->neurite().properties.set(process_property());
       } else if (btype == block_type::SUB_TREE) {
         // Create branch
-        std::vector<int> id = current_pos.branch()->id();
-        id.push_back(current_pos.branch().number_of_children()+1);
+        std::vector<int> id = current_pos->id();
+        id.push_back(current_pos.number_of_children()+1);
         
         
         // Insert branch at current posititon with last node as root
-        Neurite::branch_iterator inserted = current_pos.neurite()
-          .append_branch(current_pos.branch(),
-          Branch(id, current_pos.branch()->order()+1, *current_pos ));
-        Neurite::base_node_iterator new_pos = 
-        Neurite::base_node_iterator(current_pos.begin(),current_pos.end(),inserted);
+        Neurite::branch_iterator inserted = current_pos->neurite()
+          .append_branch(current_pos,
+          Branch(id, current_pos->order()+1, current_pos->last() ));
         
-        process_container_(new_pos);
+        process_container_(inserted);
         
       } else {
         throw std::runtime_error("Malformed block");
@@ -454,11 +452,11 @@ Neurite::base_node_iterator ASCParser::process_container_(
       throw std::runtime_error("Malformed block");
     }
 
-    // Look for any word like.. incomplete...that we will ignore
+    // Look for any word like.. incomplete or normal...that we ignore it
     get_value();
     if (!val_.empty()) {
-      if ((current_pos.begin() != current_pos.end())  && val_.type() != typeid(float)) {
-        // String value
+      if ( val_.type() != typeid(float) ) {
+        // String value (we do not ignore numbers...
         if (stream_.peek() != branch_start && stream_.peek() != block_end) {
           get_value();  // Move fwd - lazy
           if (!val_.empty()) throw std::runtime_error("Malformed block");
