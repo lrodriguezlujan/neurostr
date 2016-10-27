@@ -786,7 +786,13 @@ class Neurite : public WithProperties  {
    */
   template <typename iter> 
   iter append_branch(iter pos, Branch&& b) { 
+    
     b.neurite(this);
+    
+    // Set root
+    if(pos->size()>0)
+      b.root(pos->last());
+      
     return tree_.append_child(pos, std::move(b)); 
   }
   
