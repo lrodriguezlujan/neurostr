@@ -699,7 +699,7 @@ class Neurite : public WithProperties  {
    * sibling returns an iterator to itself 
    */
   template <typename iter> 
-  iter sibling(iter position) {
+  iter sibling(iter position) const {
     assert(position.node != nullptr);
     iter ret(position);  // Copy
     if (position.node->next_sibling != nullptr)
@@ -834,7 +834,7 @@ class Neurite : public WithProperties  {
   }
 
   /**
-   * @brief Fixes errors in the Neurite TODO: Which ones?
+   * @brief Fixes errors in the Neurite
    */
   void correct(const point_type up = point_type(0,0,1));
   
