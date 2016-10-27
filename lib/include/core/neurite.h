@@ -861,7 +861,14 @@ class Neurite : public WithProperties  {
    * @brief Removes zero-length segments in the neurite
    */
   void remove_null_segments();
-
+  
+  /**
+   * @brief Reassigns root of every branch corresponds to the 
+   * last node of its parent (if it exists) or to its root
+   * In theory root-incoherence should never happen.
+   * In practice...theory doesnt match real world
+   */
+  void reassign_branch_roots();
 
   /**
    * @brief Scales all branches in the neurite wrt root or 0,0,0

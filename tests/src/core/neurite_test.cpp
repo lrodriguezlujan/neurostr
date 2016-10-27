@@ -544,5 +544,41 @@ TEST(collapse_single_branch_multiple){
   CHECK(f.begin() != f.end());
 }
 
+TEST(reassign_roots_empty){
+  Neurite n(1);
+  
+  n.reassign_branch_roots();
+  CHECK(!n.has_root());
+}
+
+TEST(reassign_roots_single){
+  Neurite n(1);
+  n.set_root(Node(1));
+  
+  n.reassign_branch_roots();
+  CHECK_EQUAL(1,n.root().id());
+}
+
+TEST(reassign_roots){
+  Neurite n(1);
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch()); 
+  n.insert_node(std::next(n.begin_branch(),1), Node(2));
+  n.append_branch(std::next(n.begin_branch(),1),Branch());
+  n.insert_node(std::next(n.begin_branch(),2), Node(3));
+  
+  // Mess up the roots and let the method fix it
+  std::next(n.begin_branch(),1)->root(Node(13));
+  std::next(n.begin_branch(),2)->root(Node(13));
+  
+  CHECK_EQUAL(13,std::next(n.begin_branch(),1)->root().id());
+  CHECK_EQUAL(13,std::next(n.begin_branch(),2)->root().id());
+  n.reassign_branch_roots();
+  CHECK_EQUAL(1,std::next(n.begin_branch(),1)->root().id());
+  CHECK_EQUAL(2,std::next(n.begin_branch(),2)->root().id());
+  
+}
+
+
 // TODO correct
 } // End neurite suite

@@ -310,6 +310,21 @@ bool Neurite::collapse_single_branches(){
     return trigger;
 }
 
+void Neurite::reassign_branch_roots(){
+  
+  if(size() <= 1) return;
+  
+  for( auto it = std::next(begin_branch(),1); it != end_branch(); ++it){
+    if(tree_type::parent(it)->size() > 0){
+      it->root(tree_type::parent(it)->last());
+    } else if (tree_type::parent(it)->has_root()){
+      it->root(tree_type::parent(it)->root());
+    } else {
+      NSTR_LOG_(warning) << "Can't find a suitable root for branch " << it->idString();
+    }
+  }
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Neurite& n) {
 
