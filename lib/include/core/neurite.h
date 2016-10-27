@@ -833,6 +833,11 @@ class Neurite : public WithProperties  {
   void correct();
   
   /**
+   * @brief Updates branch ids to match its order in the neurite
+   */
+  void reassign_branch_ids();
+  
+  /**
    * @brief Removes zero-length segments in the neurite
    */
   void remove_null_segments();
@@ -892,10 +897,7 @@ class Neurite : public WithProperties  {
 
   private:
 
-  /**
-   * @brief Updates branch ids to match its order in the neurite
-   */
-  void reassign_branch_ids();
+
   
 };  // Class Neurite
 
