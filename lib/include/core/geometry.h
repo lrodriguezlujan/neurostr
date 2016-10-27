@@ -227,9 +227,10 @@ namespace geometry
    * @brief Returns the quaternion to transform v into u (both unitary)
    * @param v Unitary vector
    * @param u Unitary vector
+   * @param up Reference vector to determine sign in 3D angles
    * @return Quaternion
    */
-  Eigen::Quaternionf align_vectors(const point_type& v, const point_type& u);
+  Eigen::Quaternionf align_vectors(const point_type& v, const point_type& u, const point_type up = point_type(0,0,1));
 
 
   /**
@@ -443,9 +444,10 @@ namespace geometry
    * @brief Computes the planar angle from a to b
    * @param a First vector
    * @param b Second vector
+   * @param up Reference vector to determine sign in 3D angles
    * @return Angle from a to b  [0,wpi)
    */
-  float vector_vector_directed_angle(const point_type&a ,const point_type &b);
+  float vector_vector_directed_angle(const point_type&a ,const point_type &b, const point_type up = point_type(0,0,1));
   
   /**
    * @brief Computes the local orientation (Azimuth and elevation) of p wrt basis
