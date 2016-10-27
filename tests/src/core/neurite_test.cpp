@@ -414,6 +414,71 @@ TEST(append_branch){
   CHECK_EQUAL(3, n_a.size());
 }
 
+TEST(remove_empty_branch_empty){
+  Neurite n(1);
+  CHECK(!n.remove_empty_branches());
+}
+
+TEST(remove_empty_branch){
+  Neurite n(1);
+  n.set_root();
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),1),Node(2)); // This branch (1-1)  stays
+  n.append_branch(n.begin_branch(),Branch()); //  This branch (1-2 should be deleted)
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(n.remove_empty_branches());
+  CHECK_EQUAL(2,n.size());
+  auto f = n.find(2); // Check that branch 2 is still there
+  CHECK(f.begin() != f.end());
+}
+
+TEST(remove_empty_branch_root){
+  Neurite n(1);
+  n.set_root(); // Empty root, cant remove it
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),1),Node(1)); // This branch (1-1)  stays
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),2),Node(2)); // This branch (1-2)  stays
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(!n.remove_empty_branches());
+  CHECK_EQUAL(3,n.size());
+}
+
+TEST(remove_empty_branch_none){
+  Neurite n(1);
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),1),Node(2)); // This branch (1-1)  stays
+  n.append_branch(n.begin_branch(),Branch());
+  n.insert_node(std::next(n.begin_branch(),2),Node(3)); // This branch (1-2)  stays
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(!n.remove_empty_branches());
+  CHECK_EQUAL(3,n.size());
+}
+
+TEST(remove_empty_branch_multiple){
+   Neurite n(1);
+  n.insert_node(n.begin_branch(),Node(1)); // Root with one node
+  n.append_branch(n.begin_branch(),Branch()); // Empty branch
+  n.append_branch(std::next(n.begin_branch(),1),Branch()); // Empty branch
+  
+  n.reassign_branch_ids();
+  
+  CHECK_EQUAL(3,n.size());
+  CHECK(n.remove_empty_branches());
+  CHECK_EQUAL(1,n.size());
+}
+
 
 
 // TODO correct

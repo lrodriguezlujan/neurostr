@@ -248,8 +248,34 @@ void Neurite::reassign_branch_ids() {
       it->id(tmp);                                                               // set id
       it->order(tree_type::parent(it)->order() + 1);                             // set order
     }
-  };
+};
 
+bool Neurite::remove_empty_branches(){
+  
+  bool trigger = false;
+  typename tree_type::sibling_iterator ch;
+    
+  // Collapse single-child branches
+  for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
+    if (it->size() == 0) {
+        // Single children nodes -> collapse
+        if(it.node->parent == nullptr){
+          // we are the first branch
+          NSTR_LOG_(warning) << "Cannot remove empty root branch in neurite " << id();
+        } else {
+          trigger = true;  
+          NSTR_LOG_(info) << "Removing empty branch" << it->idString() <<" in neurite " << id();
+          // We assing our children to the parent node.
+          if(it.number_of_children()>0){
+            tree_.reparent(tree_type::parent(it), it.begin(), it.end());
+          }
+          // Erase branch
+          it = std::prev(tree_.erase(it),1);
+        }
+      }
+  }
+  return trigger;
+}
 
 
 std::ostream& operator<<(std::ostream& os, const Neurite& n) {

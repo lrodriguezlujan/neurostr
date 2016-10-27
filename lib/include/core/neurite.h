@@ -838,6 +838,14 @@ class Neurite : public WithProperties  {
   void reassign_branch_ids();
   
   /**
+   * @brief Deletes all branches with size zero.
+   * This may generate trifurcations in the neurite.
+   * @return True if at least one branch has been deleted
+   */
+  bool remove_empty_branches();
+  
+  
+  /**
    * @brief Removes zero-length segments in the neurite
    */
   void remove_null_segments();
