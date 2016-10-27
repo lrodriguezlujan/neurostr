@@ -758,7 +758,7 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_al
 template <class T, class tree_node_allocator>
 typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_allocator>::end_fixed(const iterator_base& pos, unsigned int dp) const
 	{
-	assert(1==0); // FIXME: not correct yet: use is_valid() as a temporary workaround 
+	//assert(1==0); // FIXME: not correct yet: use is_valid() as a temporary workaround 
 	tree_node *tmp=pos.node;
 	unsigned int curdepth=1;
 	while(curdepth<dp) { // go down one level

@@ -1,167 +1,167 @@
 library(jsonlite)
 
-benchmark_results <- "[{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.CNG.swc ], 'timings' : [ 522 ] } 
-{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.CNG.swc ], 'timings' : [ 2290 ] } 
-{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.CNG.swc ], 'timings' : [ 5259 ] } 
-{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/02b_pyramidal1aACC.ASC ], 'timings' : [ 930 ] } 
-{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.asc ], 'timings' : [ 3304 ] } 
-{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.asc ], 'timings' : [ 7149 ] } 
-{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.DAT ], 'timings' : [ 33 ] } 
-{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/RC6-P1F6C4LVc-cs-Sh.DAT ], 'timings' : [ 381 ] } 
-{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A090622.DAT ], 'timings' : [ 609 ] } 
-{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.json ], 'timings' : [ 1106 ] } 
-{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.json ], 'timings' : [ 4427 ] } 
-{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.json ], 'timings' : [ 9929 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Attached to soma', 'time_type' : 'microseconds', 'timings' : [ 1, 0, 0, 0, 0 ] } 
+benchmark_results <- "[{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.CNG.swc ], 'timings' : [ 550 ] } 
+{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.CNG.swc ], 'timings' : [ 2502 ] } 
+{ 'benchmark_name' : 'swc_read', 'experiment_name' : 'swc_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.CNG.swc ], 'timings' : [ 6811 ] } 
+{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/02b_pyramidal1aACC.ASC ], 'timings' : [ 1240 ] } 
+{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.asc ], 'timings' : [ 4190 ] } 
+{ 'benchmark_name' : 'asc_read', 'experiment_name' : 'asc_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.asc ], 'timings' : [ 9665 ] } 
+{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.DAT ], 'timings' : [ 54 ] } 
+{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/RC6-P1F6C4LVc-cs-Sh.DAT ], 'timings' : [ 442 ] } 
+{ 'benchmark_name' : 'dat_read', 'experiment_name' : 'dat_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A090622.DAT ], 'timings' : [ 1249 ] } 
+{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_small', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/A9-7.json ], 'timings' : [ 1426 ] } 
+{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_medium', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/cZI_2.json ], 'timings' : [ 5950 ] } 
+{ 'benchmark_name' : 'json_read', 'experiment_name' : 'json_read_large', 'time_type' : 'microseconds', 'factor_name' : 'file', 'factors' : [ ../data/VPM_1.json ], 'timings' : [ 12048 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Attached to soma', 'time_type' : 'microseconds', 'timings' : [ 2, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Has soma', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 45, 23, 22, 33, 32 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 91, 32, 26, 35, 34 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 2, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Has apical', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Has axon', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 28, 23, 22, 21, 20 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 7, 5, 5, 4, 4 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 20, 9, 9, 8, 8 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 7, 7, 6, 6, 6 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 7100, 6862, 7040, 6827, 7098 ] } 
-{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 83, 65, 63, 63, 62 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Attached to soma', 'time_type' : 'microseconds', 'timings' : [ 1, 0, 0, 0, 11 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 31, 24, 22, 20, 27 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 18, 10, 7, 5, 4 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 20, 9, 8, 8, 8 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 6, 6, 6 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 1037, 1135, 1150, 947, 1031 ] } 
+{ 'benchmark_name' : 'Validation - small size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 91, 69, 67, 66, 66 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Attached to soma', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Has soma', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 109, 67, 66, 65, 65 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 139, 85, 75, 72, 71 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 1, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Has apical', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Has axon', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 136, 131, 129, 129, 156 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 25, 13, 12, 12, 12 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 111, 35, 34, 34, 34 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 30, 29, 28, 27, 27 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 129345, 127578, 127601, 127764, 127903 ] } 
-{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 335, 341, 339, 331, 348 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 147, 135, 131, 131, 128 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 20, 15, 25, 29, 13 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 139, 33, 32, 32, 33 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 29, 59, 27, 25, 26 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 6475, 7069, 6822, 7385, 6783 ] } 
+{ 'benchmark_name' : 'Validation - med size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 365, 351, 349, 379, 368 ] } 
 { 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Attached to soma', 'time_type' : 'microseconds', 'timings' : [ 1, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Has soma', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 209, 147, 141, 140, 140 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Planar reconstruction', 'time_type' : 'microseconds', 'timings' : [ 223, 168, 160, 153, 150 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Dendrite count', 'time_type' : 'microseconds', 'timings' : [ 2, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Has apical', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Has axon', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 240, 212, 216, 213, 209 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 36, 54, 33, 51, 33 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 245, 87, 72, 71, 71 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 53, 52, 52, 52, 52 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 552686, 547418, 548886, 550026, 549609 ] } 
-{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 750, 676, 682, 732, 639 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'soma_surface', 'time_type' : 'microseconds', 'timings' : [ 3, 0, 0, 0, 0 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Trifurcations check', 'time_type' : 'microseconds', 'timings' : [ 236, 215, 217, 221, 217 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Linear branches', 'time_type' : 'microseconds', 'timings' : [ 44, 39, 37, 36, 47 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Zero length segments', 'time_type' : 'microseconds', 'timings' : [ 185, 71, 69, 67, 66 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Non-decreasing diameter', 'time_type' : 'microseconds', 'timings' : [ 52, 52, 50, 50, 64 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Segment collision', 'time_type' : 'microseconds', 'timings' : [ 40122, 38012, 38761, 36962, 36067 ] } 
+{ 'benchmark_name' : 'Validation - large size neuron', 'experiment_name' : 'Extreme angles', 'time_type' : 'microseconds', 'timings' : [ 713, 702, 690, 692, 677 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'soma_surface', 'time_type' : 'microseconds', 'timings' : [ 17, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_stems', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 24, 4, 3, 2, 2 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_branch', 'time_type' : 'microseconds', 'timings' : [ 2, 2, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 13, 5, 3, 4, 3 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_branch', 'time_type' : 'microseconds', 'timings' : [ 3, 1, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'n_tips', 'time_type' : 'microseconds', 'timings' : [ 2, 1, 1, 1, 0 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 5, 5, 4, 5, 4 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 4, 4 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 8, 7, 7, 7, 7 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 33, 27, 27, 27, 27 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 12, 11, 10, 9, 9 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 11, 9, 8, 6, 5 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 6, 6, 5, 5, 5 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 8, 8, 7, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 35, 28, 27, 27, 27 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 13, 11, 10, 10, 9 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'surface', 'time_type' : 'microseconds', 'timings' : [ 13, 13, 13, 13, 13 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 9, 8, 8, 8, 8 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 9, 8, 8, 8, 7 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'volume', 'time_type' : 'microseconds', 'timings' : [ 12, 11, 11, 10, 10 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 12, 11, 11, 10, 10 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 337, 289, 288, 288, 320 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 2, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 69, 65, 64, 63, 62 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'taper_1', 'time_type' : 'microseconds', 'timings' : [ 4, 5, 14, 2, 2 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'taper_2', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 2, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 15, 5, 4, 4, 4 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 5, 5, 4, 4, 4 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'fragmentation', 'time_type' : 'microseconds', 'timings' : [ 2, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'daughter_ratio', 'time_type' : 'microseconds', 'timings' : [ 7, 5, 3, 3, 3 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'partition_asymmetry', 'time_type' : 'microseconds', 'timings' : [ 5, 4, 3, 3, 3 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 38, 36, 35, 35, 35 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 40, 40, 39, 39, 39 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 7, 7, 7, 6, 6 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk_2', 'time_type' : 'microseconds', 'timings' : [ 4, 4, 3, 3, 3 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 4, 4, 4 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 11, 10, 10, 22, 24 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 344, 462, 343, 365, 383 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 6, 3, 2, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 96, 87, 71, 82, 97 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'taper_1', 'time_type' : 'microseconds', 'timings' : [ 16, 2, 3, 3, 3 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'taper_2', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 2, 2, 1 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 11, 6, 5, 5, 14 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 4, 4 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'fragmentation', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'daughter_ratio', 'time_type' : 'microseconds', 'timings' : [ 8, 5, 4, 16, 3 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'partition_asymmetry', 'time_type' : 'microseconds', 'timings' : [ 6, 4, 4, 3, 3 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 71, 67, 35, 36, 35 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 40, 39, 40, 39, 39 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 7, 7, 7, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'pk_2', 'time_type' : 'microseconds', 'timings' : [ 4, 4, 4, 3, 3 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 8, 5, 4, 4, 4 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_ampl_remote', 'time_type' : 'microseconds', 'timings' : [ 5, 4, 4, 4, 4 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_tilt_local', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_tilt_remote', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 8, 7, 6, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_torque_remote', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 6, 6, 5 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'last_parent_diam', 'time_type' : 'microseconds', 'timings' : [ 4, 3, 2, 2, 2 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 9, 7, 6, 5, 5 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'bif_torque_remote', 'time_type' : 'microseconds', 'timings' : [ 8, 7, 6, 6, 5 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'last_parent_diam', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 2, 2, 2 ] } 
 { 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'hillman_threshold', 'time_type' : 'microseconds', 'timings' : [ 4, 3, 2, 2, 2 ] } 
-{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 314, 307, 306, 305, 305 ] } 
+{ 'benchmark_name' : 'Measure - small size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 432, 330, 363, 329, 322 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'soma_surface', 'time_type' : 'microseconds', 'timings' : [ 1, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_stems', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 8, 4, 4, 4, 4 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_branch', 'time_type' : 'microseconds', 'timings' : [ 1, 1, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 12, 7, 6, 6, 6 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_branch', 'time_type' : 'microseconds', 'timings' : [ 2, 1, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'n_tips', 'time_type' : 'microseconds', 'timings' : [ 1, 1, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 21, 18, 17, 17, 17 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 18, 17, 17, 17, 17 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 18, 17, 17, 17, 16 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 40, 38, 37, 36, 36 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 137, 134, 145, 142, 152 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 53, 50, 48, 47, 46 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'surface', 'time_type' : 'microseconds', 'timings' : [ 70, 71, 66, 65, 64 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 44, 51, 40, 39, 38 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'volume', 'time_type' : 'microseconds', 'timings' : [ 59, 57, 56, 54, 54 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 48, 47, 46, 46, 45 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 3588, 3962, 3699, 3641, 3557 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 359, 396, 384, 365, 441 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'taper_1', 'time_type' : 'microseconds', 'timings' : [ 3, 1, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 29, 24, 21, 32, 22 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 21, 21, 20, 20, 18 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 19, 18, 19, 18, 18 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 42, 40, 39, 38, 37 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 145, 145, 143, 143, 149 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 56, 52, 50, 48, 47 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'surface', 'time_type' : 'microseconds', 'timings' : [ 83, 67, 66, 64, 63 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 45, 42, 41, 40, 39 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'volume', 'time_type' : 'microseconds', 'timings' : [ 61, 60, 60, 67, 56 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 46, 44, 44, 60, 56 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 4233, 4053, 3626, 3561, 3848 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 12, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 434, 382, 424, 381, 381 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'taper_1', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'taper_2', 'time_type' : 'microseconds', 'timings' : [ 3, 1, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 14, 13, 12, 12, 12 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 13, 13, 24, 23, 12 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 17, 14, 13, 13, 13 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 26, 14, 34, 13, 13 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'fragmentation', 'time_type' : 'microseconds', 'timings' : [ 2, 1, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'daughter_ratio', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 5, 5, 5 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'partition_asymmetry', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 31, 29, 28, 39, 38 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 31, 30, 30, 29, 29 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 8, 7, 7, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 33, 30, 28, 28, 27 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 32, 32, 31, 30, 31 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 8, 8, 8, 8, 8 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'pk_2', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_ampl_remote', 'time_type' : 'microseconds', 'timings' : [ 6, 6, 6, 5, 5 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 6, 6, 6 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_ampl_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 5, 6, 6 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_tilt_local', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 6, 6, 6 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_tilt_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 6, 6, 6 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 10, 8, 7, 7, 7 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_torque_remote', 'time_type' : 'microseconds', 'timings' : [ 9, 8, 8, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 11, 9, 8, 8, 8 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'bif_torque_remote', 'time_type' : 'microseconds', 'timings' : [ 9, 20, 8, 8, 18 ] } 
 { 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'last_parent_diam', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'hillman_threshold', 'time_type' : 'microseconds', 'timings' : [ 4, 3, 2, 2, 2 ] } 
-{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 3667, 3583, 3495, 3549, 3429 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'hillman_threshold', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 2, 2, 2 ] } 
+{ 'benchmark_name' : 'Measure - medium size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 3638, 4317, 3919, 3853, 3601 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'soma_surface', 'time_type' : 'microseconds', 'timings' : [ 2, 0, 0, 0, 0 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'n_stems', 'time_type' : 'microseconds', 'timings' : [ 0, 0, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 16, 4, 3, 3, 3 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'n_bifs', 'time_type' : 'microseconds', 'timings' : [ 9, 5, 4, 3, 3 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'n_branch', 'time_type' : 'microseconds', 'timings' : [ 2, 1, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'n_tips', 'time_type' : 'microseconds', 'timings' : [ 1, 1, 0, 0, 0 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 20, 18, 17, 17, 16 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 17, 17, 16, 16, 16 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 28, 26, 16, 16, 26 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 50, 49, 37, 37, 55 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 137, 134, 184, 159, 157 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 54, 50, 49, 90, 63 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'surface', 'time_type' : 'microseconds', 'timings' : [ 80, 66, 64, 64, 63 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 45, 42, 40, 39, 51 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'volume', 'time_type' : 'microseconds', 'timings' : [ 89, 59, 57, 56, 55 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 59, 47, 46, 46, 45 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 3772, 3659, 3807, 3705, 3543 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 362, 357, 486, 354, 353 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'width', 'time_type' : 'microseconds', 'timings' : [ 26, 20, 18, 18, 17 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'height', 'time_type' : 'microseconds', 'timings' : [ 18, 17, 17, 17, 16 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'depth', 'time_type' : 'microseconds', 'timings' : [ 18, 17, 16, 16, 16 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'diameter', 'time_type' : 'microseconds', 'timings' : [ 39, 41, 41, 40, 40 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'diameter_pow', 'time_type' : 'microseconds', 'timings' : [ 152, 145, 144, 137, 148 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'length', 'time_type' : 'microseconds', 'timings' : [ 55, 51, 49, 47, 46 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'surface', 'time_type' : 'microseconds', 'timings' : [ 71, 78, 81, 80, 66 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'section_area', 'time_type' : 'microseconds', 'timings' : [ 46, 43, 41, 40, 41 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'volume', 'time_type' : 'microseconds', 'timings' : [ 63, 60, 59, 57, 58 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'euc_distance', 'time_type' : 'microseconds', 'timings' : [ 48, 45, 54, 43, 43 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'path_distance', 'time_type' : 'microseconds', 'timings' : [ 3551, 3694, 3838, 3909, 3480 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'branch_order', 'time_type' : 'microseconds', 'timings' : [ 3, 1, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'terminal_degree', 'time_type' : 'microseconds', 'timings' : [ 382, 381, 375, 479, 374 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'taper_1', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'taper_2', 'time_type' : 'microseconds', 'timings' : [ 3, 1, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 14, 13, 25, 23, 12 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 13, 13, 12, 12, 12 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'taper_2', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'branch_pathlength', 'time_type' : 'microseconds', 'timings' : [ 16, 13, 13, 12, 12 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'contraction', 'time_type' : 'microseconds', 'timings' : [ 13, 13, 13, 12, 12 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'fragmentation', 'time_type' : 'microseconds', 'timings' : [ 2, 1, 1, 1, 1 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'daughter_ratio', 'time_type' : 'microseconds', 'timings' : [ 8, 6, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'partition_asymmetry', 'time_type' : 'microseconds', 'timings' : [ 7, 5, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 31, 28, 39, 38, 27 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 30, 30, 29, 29, 29 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 8, 7, 7, 7, 7 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk_2', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 5, 5, 6 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_ampl_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 5, 5, 5 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_tilt_local', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 6, 6, 22 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_tilt_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 22, 6, 6, 6 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 10, 8, 7, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'partition_asymmetry', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 5, 5, 5 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'rall_power', 'time_type' : 'microseconds', 'timings' : [ 31, 28, 27, 27, 27 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk', 'time_type' : 'microseconds', 'timings' : [ 31, 30, 31, 31, 31 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk_classic', 'time_type' : 'microseconds', 'timings' : [ 8, 8, 9, 7, 7 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'pk_2', 'time_type' : 'microseconds', 'timings' : [ 6, 5, 6, 5, 6 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_ampl_local', 'time_type' : 'microseconds', 'timings' : [ 9, 6, 5, 6, 6 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_ampl_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 7, 6, 6, 7 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_tilt_local', 'time_type' : 'microseconds', 'timings' : [ 9, 6, 6, 6, 6 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_tilt_remote', 'time_type' : 'microseconds', 'timings' : [ 7, 6, 6, 6, 6 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_torque_local', 'time_type' : 'microseconds', 'timings' : [ 11, 8, 8, 7, 7 ] } 
 { 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'bif_torque_remote', 'time_type' : 'microseconds', 'timings' : [ 9, 8, 7, 7, 7 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'last_parent_diam', 'time_type' : 'microseconds', 'timings' : [ 3, 2, 1, 1, 1 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'hillman_threshold', 'time_type' : 'microseconds', 'timings' : [ 4, 3, 2, 2, 2 ] } 
-{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 3442, 3475, 3536, 3602, 3439 ] }]"
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'last_parent_diam', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 1, 1, 1 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'hillman_threshold', 'time_type' : 'microseconds', 'timings' : [ 4, 2, 2, 2, 2 ] } 
+{ 'benchmark_name' : 'Measure - large size neuron', 'experiment_name' : 'fractal_dim', 'time_type' : 'microseconds', 'timings' : [ 3694, 3805, 3771, 4275, 3756 ] }]"
 
 # string ""
 benchmark_results <- gsub("'","\"",benchmark_results,fixed = T)
@@ -219,7 +219,7 @@ res <- cbind.data.frame(res,timings_sd = sapply(res$timings,sd))
 # OUTPUT
 library(ggplot2)
 
-version <- "6abd284"
+version <- "f940432"
 basefolder <- "/home/luis/github/NeuroStr/c/utils/benchmark/Results"
 basepath <- file.path(basefolder, version)
 
