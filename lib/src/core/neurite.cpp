@@ -102,34 +102,18 @@ Neurite::base_node_iterator Neurite::insert_node(Node::id_type parent_id, const 
 }
 
 void Neurite::correct()  {
-    bool trigger = false;
-    typename tree_type::sibling_iterator ch;
-    
-    // Collapse single-child branches
-    for (branch_iterator it = begin_branch(); it != end_branch(); ++it) {
-      if (it.number_of_children() == 1) {
-
-        NSTR_LOG_(info) << "Removing single-childed branch in neurite " << id();
-        
-        // Single children nodes -> collapse
-        trigger = true;
-        ch = it.begin();
-
-        // Copy elements in ch except for the root
-        for(auto chit = ch->begin() ; chit != ch->end() ; ++chit){
-          it->push_back(*chit);
-        }
-        //it->insert(it->end(), ch->begin(), ch->end());
-
-        // Reparent nodes
-        tree_.reparent(it, ch.begin(), ch.end());
-
-        // Remove ch
-        tree_.erase(ch);
-      }
-    }
-    // Reassign branch ids + order
-    if (trigger) reassign_branch_ids();
+  // First: remove null segments
+  remove_null_segments();
+  // Remove single b
+  collapse_single_branches();
+  // Remove empty
+  remove_empty_branches();
+  // Reassign roots
+  reassign_branch_roots();
+  // Order descs
+  childOrder();
+  // Reassign ids
+  reassign_branch_ids();
 };
 
 void Neurite::remove_null_segments() {
@@ -202,6 +186,10 @@ Neurite::branch_iterator Neurite::find(const Branch& b) const{
     if(*it == b) return it;
   }
   return tree_.end();
+}
+
+void Neurite::childOrder(){
+  
 }
 
 /* TODO
