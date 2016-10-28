@@ -120,6 +120,8 @@ void SWCParser::process_data_(const std::string& s) {
   auto it = tok.begin();
   int id, type, parent;
   float x, y, z, d;
+  
+  std::size_t num_chars;
 
   // Skip initial empty fields
   while (it->size() == 0) ++it;
@@ -128,7 +130,9 @@ void SWCParser::process_data_(const std::string& s) {
   if (it == tok.end()) 
     throw std::logic_error("Missing fields in line " + s);
   try{
-    id = std::stoi(*it);
+    id = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() || id < 0 )
+      throw std::logic_error("Id is not a non-negative integer in line "+ s +". Type: " + *it);
   } catch(std::invalid_argument e){
     throw std::logic_error("Id is not numeric in line "+ s +". ID: " + *it);
   }
@@ -139,7 +143,9 @@ void SWCParser::process_data_(const std::string& s) {
     throw std::logic_error("Missing fields in line " + s);
   }
   try{
-    type = std::stoi(*it);
+    type = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() )
+      throw std::logic_error("Type is not integer in line "+ s +". Type: " + *it);
   } catch(std::invalid_argument e){
     throw std::logic_error("Type is not numeric in line "+ s +". Type: " + *it);
   }
@@ -187,15 +193,30 @@ void SWCParser::process_data_(const std::string& s) {
   } catch(std::invalid_argument e){
     throw std::logic_error("Diameter is not numeric in line "+ s +". Diameter: " + *it);
   }
+  
+  if(d<0){
+    throw std::logic_error("Negative diameter value " + std::to_string(d));
+  }
+  
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
   try{
-    parent = std::stoi(*it);
+    parent = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() )
+      throw std::logic_error("Type is not integer in line "+ s +". Type: " + *it);
   } catch(std::invalid_argument e){
     throw std::logic_error("Parent is not numeric in line "+ s +". Parent: " + *it);
+  }
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
+  // Warn if there are extra fields
+  if(it != tok.end()){
+    ++warn_count;
+    NSTR_LOG_(warn,std::string("Extra fields in line ") + s);
   }
 
   // Create node
