@@ -40,6 +40,11 @@ std::unique_ptr<Reconstruction> SWCParser::read(const std::string& name) {
   Reconstruction *rec = new Reconstruction(name);
   rec->addNeuron(neuron_) ;
   
+  if(error_count > 0){
+    NSTR_LOG_(warn, std::to_string(error_count) + 
+    " were detected while processing the file. Please, check the file and correct the errors.")
+  }
+  
   // Transfer rec. ownership
   return std::unique_ptr<Reconstruction>(rec);
 }
@@ -78,8 +83,15 @@ void SWCParser::process_line_(const std::string& s) {
   // Decide bw header and data
   if (is_headerline(s))
     process_header_(s);
-  else
-    process_data_(s);
+  else{
+    try{
+      process_data_(s);
+    } catch(std::logic_error e){
+      process_error(e);
+      // Just ignore the line
+    }
+  }
+    
 }
 
 void SWCParser::process_header_(const std::string& s) {
@@ -112,37 +124,50 @@ void SWCParser::process_data_(const std::string& s) {
   while (it->size() == 0) ++it;
 
   // Read every field
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()) 
+    throw std::logic_error("Missing fields in line " + s);
   id = std::stoi(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   type = std::stoi(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   x = std::stof(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   y = std::stof(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   z = std::stof(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   d = std::stof(*it);
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
   parent = std::stoi(*it);
 
   // Create node
@@ -171,7 +196,7 @@ void SWCParser::process_data_(const std::string& s) {
         pos = neuron_->find(parent);
       }
       if (pos.begin() == pos.end()) {
-        throw std::runtime_error("Oprhan node");
+        throw std::logic_error("Oprhan node "+ std::to_string(id) + "- Can't find parent node " + std::to_string(parent) );
       } else {
         // Set branch
         last_node_pos_ = pos.neurite().insert_node(pos, node);
