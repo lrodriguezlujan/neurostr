@@ -500,7 +500,7 @@ namespace io {
     
     if(error_count > 0){
       NSTR_LOG_(warn, std::to_string(error_count) + 
-      " were detected while processing the file. Please, check the file and correct the errors.")
+      " errors were detected while processing the file. Please, check the file and correct the errors.")
     }
     
     return ret;
