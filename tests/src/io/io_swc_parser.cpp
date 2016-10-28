@@ -149,26 +149,79 @@ SUITE(swc_parser_tests){
   
   // ERROR CASES
   TEST(missing_fields){
-    
+    swc_parser_data test_data("missing_fields.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      // We ignore empty lines without considering it an error
+      basic_swcparser_checks(p,n,false,2,true,1,5);
+    }
   }
   
   TEST(extra_fields){
-    
+    swc_parser_data test_data("extra_fields.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      
+      // Extra fields are ignored - but we emit a warning
+      basic_swcparser_checks(p,n,false,0,true,1,7);
+      // We have the extra fields warning
+      CHECK_EQUAL(1,p.warn());
+    }
   }
   
   TEST(wrong_id){
-    
+    swc_parser_data test_data("wrong_id_type.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,2,true,1,5);
+    }
   }
   
   TEST(wrong_num){
-    
+    swc_parser_data test_data("wrong_numeric_fields.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,2,true,1,5);
+    }
   }
   
   TEST(wrong_parent){
-    
+    swc_parser_data test_data("wrong_parent_type.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,2,true,1,5);
+    }
   }
   
   TEST(orphan){
-    
+    swc_parser_data test_data("orphan_node.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,1,true,1,6);
+    }
   }
 }
