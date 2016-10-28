@@ -127,49 +127,76 @@ void SWCParser::process_data_(const std::string& s) {
   // Read every field
   if (it == tok.end()) 
     throw std::logic_error("Missing fields in line " + s);
-  id = std::stoi(*it);
+  try{
+    id = std::stoi(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Id is not numeric in line "+ s +". ID: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  type = std::stoi(*it);
+  try{
+    type = std::stoi(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Type is not numeric in line "+ s +". Type: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  x = std::stof(*it);
+  try{
+    x = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("X value is not numeric in line "+ s +". X: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  y = std::stof(*it);
+  try{
+    y = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Y value is not numeric in line "+ s +". Y: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  z = std::stof(*it);
+  try{
+    z = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Z value is not numeric in line "+ s +". Z: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  d = std::stof(*it);
-  
+  try{
+    d = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Diameter is not numeric in line "+ s +". Diameter: " + *it);
+  }
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
   if (it == tok.end()){
     throw std::logic_error("Missing fields in line " + s);
   }
-  parent = std::stoi(*it);
+  try{
+    parent = std::stoi(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Parent is not numeric in line "+ s +". Parent: " + *it);
+  }
 
   // Create node
   Node node{id, x, y, z, d / 2.0};
