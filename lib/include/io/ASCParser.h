@@ -30,6 +30,13 @@
 namespace neurostr {
 namespace io {
 
+  /**
+   * @class ASCParser
+   * @author luis
+   * @date 28/10/16
+   * @file ASCParser.h
+   * @brief Parser especialization for ASCII neurolucida files. 
+   */
 class ASCParser : public Parser{
     public:
 

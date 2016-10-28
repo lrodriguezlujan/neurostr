@@ -15,6 +15,14 @@
 
 namespace neurostr {
 namespace io {
+  
+  /**
+   * @class SWCParser
+   * @author luis
+   * @date 28/10/16
+   * @file SWCParser.h
+   * @brief Parser specialization to read standard SWC files
+   */
 class SWCParser : public Parser{ // Could be templated
     public:
   

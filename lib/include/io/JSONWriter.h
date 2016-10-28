@@ -26,6 +26,13 @@
 namespace neurostr {
 namespace io {
   
+  /**
+   * @class JSONWriter
+   * @author luis
+   * @date 28/10/16
+   * @file JSONWriter.h
+   * @brief Writes a reconstruction in our JSON format
+   */
   class JSONWriter {
     public:
     /*rapidjson::Document doc;
@@ -34,6 +41,11 @@ namespace io {
     using OutputStream = rapidjson::OStreamWrapper;
     using writer_type = rapidjson::Writer<OutputStream>;
     
+    /**
+     * @brief Creates a writer over the given output stream
+     * @param s Stream
+     * @param pretty If true, ouptut is prettyfied
+     */
     JSONWriter(std::ostream& s,bool pretty = false) : buffer(s) {
       if(pretty)
         writer = std::unique_ptr<writer_type>(new rapidjson::PrettyWriter<OutputStream>(buffer));
@@ -56,6 +68,10 @@ namespace io {
     // Write  reconstruction
     public:
     
+    /**
+     * @brief Writes a reconstruction 
+     * @param r Reconstruction
+     */
     void write(const neurostr::Reconstruction& r){
         writer->StartObject();
         
@@ -84,6 +100,10 @@ namespace io {
         writer->EndObject();
     }
     
+    /**
+     * @brief Writes a single neuron (wo rec. contours)
+     * @param n Neuron
+     */
     void writeNeuron(const neurostr::Neuron& n){
         
       // buffer.Clear();
@@ -124,6 +144,10 @@ namespace io {
     
     protected:
 
+    /**
+     * @brief Writes a point object as {x,y,z}
+     * @param point 3D Point
+     */
     void writePoint(const neurostr::point_type& point){
       writer->StartObject();
           writer->Key("x");
@@ -134,7 +158,11 @@ namespace io {
           writer->Double(geometry::get<2>(point));
       writer->EndObject();
     }
-
+    
+    /**
+     * @brief Writes the given property as key:value
+     * @param p Property iterator
+     */
     void writeProperty(const neurostr::PropertyMap::const_iterator& p){
       
       // Write property name
@@ -158,6 +186,10 @@ namespace io {
       }
     }
     
+    /**
+     * @brief Writes the neuron soma as {nodes:[nodes]}
+     * @param n Neuron
+     */
     void writeSoma(const neurostr::Neuron& n){  
       // ATM is quite simple.. just the nodes attribute
       //nodes : Array< Array<number> >,
@@ -176,6 +208,11 @@ namespace io {
       writer->EndObject();
     };
     
+    /**
+     * @brief Writes the given contour as an object. Contour points are
+     * in a array
+     * @param c Contour
+     */
     void writeContour(const neurostr::Contour& c){
       // Write contour:: several properties and a point array
       writer->StartObject();
@@ -211,6 +248,10 @@ namespace io {
       writer->EndObject();
     }
     
+    /**
+     * @brief Writes the property map as an object {}
+     * @param pm Property map
+     */
     void writePropertyMap(const neurostr::PropertyMap& pm){
       writer->StartObject();
       for(auto it = pm.begin(); it != pm.end(); ++it){
@@ -219,7 +260,10 @@ namespace io {
       writer->EndObject();
     }
     
-    // Write Neurite
+    /**
+     * @brief Writes the neurite as an object { id:, type: , tree:}
+     * @param n Neurite
+     */
     void writeNeurite(const neurostr::Neurite& n){
       // Neurite is an object with following elements
       // id : number, uint
@@ -251,7 +295,11 @@ namespace io {
       writer->EndObject();
     };
     
-    // Write branch
+    /**
+     * @brief Writes the given branch (member of n) as {root: node, properties: , nodes:[], children:[] }
+     * @param b Branch iterator
+     * @param n Neurite
+     */
     void writeBranch(const neurostr::Neurite::tree_type::iterator_base& b, const neurostr::Neurite& n){
       // Branch is an object with following elements
       // root : Array<number>, // This is a NODE
@@ -295,7 +343,10 @@ namespace io {
       writer->EndObject();
     };
     
-    // Write node
+    /**
+     * @brief Writes a single node as {id,x,y,z,r,properties:{}}
+     * @param n Node
+     */
     void writeNode(const neurostr::Node& n){
       // Node JSON format is just [id, x, y ,z, r]
       writer->StartObject();

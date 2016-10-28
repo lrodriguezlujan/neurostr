@@ -51,6 +51,11 @@ enum class block_type : std::uint16_t {
   UNKNOWN = 0xCAFE
 };
 
+/**
+ * @brief Returns true if the given block type its named
+ * @param b Block type
+ * @return True if the block type is named
+ */
 inline bool named(block_type& b) {
   switch (b) {
   case block_type::CONTOUR:
@@ -79,6 +84,11 @@ enum class tree_type_cd : std::uint8_t {
   UNKNOWN = 0xFF
 };
 
+/**
+ * @brief Converts the given tree type code to string
+ * @param t Tree type code
+ * @return  String
+ */
 std::string tree_type_tostr(const tree_type_cd& t);
 
 std::ostream& operator<<(std::ostream& os, const tree_type_cd& t);
@@ -99,6 +109,11 @@ typedef struct {
 } subtree_info;
 const int k_subtree_info_len = sizeof(subtree_info);
 
+/**
+ * @brief Given a neurite. Set its type looking at its properties
+ * @param n Neurite
+ * @return Neurite Type
+ */
 NeuriteType set_neurite_type_by_nlproperties(Neurite& n);
 
 // MArkerset

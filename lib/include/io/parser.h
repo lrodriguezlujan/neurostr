@@ -9,7 +9,13 @@
 namespace neurostr {
 namespace io {
   
-
+/**
+ * @class Parser
+ * @author luis
+ * @date 28/10/16
+ * @file parser.h
+ * @brief Base virutal class for reconstruction parsers
+ */
 class Parser {
 
 public:
@@ -37,9 +43,28 @@ public:
    */
   Parser& operator=(const Parser&) = delete;
   
+  /**
+   * @brief Set the error count to the default state
+   */
   void reset_errors() { error_count = warn_count = 0; critical_error=false; }
+  
+  /**
+   * @brief Get number of errors
+   * @return Error count
+   */
   int error() const { return error_count; };
+  
+  /**
+   * @brief Get number of warnigs
+   * @return  Warning count
+   */
   int warn() const { return warn_count; };
+  
+  
+  /**
+   * @brief Critical error flag
+   * @return  True if a critical error has happened.
+   */
   bool critical() const { return critical_error; };
   
   /**
@@ -64,7 +89,10 @@ protected:
   int warn_count;
   bool critical_error;
   
-  // Process exception
+  /**
+   * @brief Processes the error, log it and increments the error count
+   * @param e Error
+   */
   void process_error(const std::exception& e){
     NSTR_LOG_(error, e.what());
     ++error_count;

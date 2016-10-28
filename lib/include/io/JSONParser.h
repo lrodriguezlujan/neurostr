@@ -31,6 +31,13 @@
 namespace neurostr {
 namespace io {
 
+  /**
+   * @class JSONParser
+   * @author luis
+   * @date 28/10/16
+   * @file JSONParser.h
+   * @brief Parser specialization for JSON files (custom definition)
+   */
 class JSONParser : public Parser{
   
   
@@ -67,19 +74,70 @@ class JSONParser : public Parser{
 
   private:
   
-  // Single parsers
+  /**
+   * @brief Processes a 3D point JSON object
+   * @param v Point object
+   * @return  3D Point
+   */
   point_type parsePoint(const rapidjson::Value::ConstObject& v);
   
+  /**
+   * @brief Processes the value of a given property and creates the property
+   * @param v Member of a property map 
+   * @return Property
+   */
   PropertyMap::property_type parsePropertyValue(const rapidjson::Value::Member& v );
+  
+  /**
+   * @brief Parses a JSON property map (Objects where member are props)
+   * @param v Property Map object
+   * @return Property map
+   */
   PropertyMap parseProperties(const rapidjson::Value::ConstObject& v );
   
+  /**
+   * @brief Processes a JSON node
+   * @param v JSON node
+   * @return  Node object
+   */
   Node parseNode(const rapidjson::Value::ConstObject& v );
+  
+  /**
+   * @brief Parses a single neuron object
+   * @param v Single neuron object
+   * @return Neuron
+   */
   Neuron* parseNeuron(const rapidjson::Value::ConstObject& v );
+  
+  /**
+   * @brief Processes a single neurite object 
+   * @param v Neurite object
+   * @return  Neurite
+   */
   Neurite* parseNeurite(const rapidjson::Value::ConstObject& v );
+  
+  /**
+   * @brief Parses a single branch and interts its content in the Branch
+   * pointed by pos
+   * @param v JSON BRanch object
+   * @param pos Branch position
+   */
   void parseBranch(const rapidjson::Value::ConstObject& v,
                      const Neurite::branch_iterator& pos);
-  Contour parseContour(const rapidjson::Value::ConstObject& v);
                      
+  /**
+   * @brief Processes a contour JSON object
+   * @param v JOSN Object
+   * @return Contour
+   */
+  Contour parseContour(const rapidjson::Value::ConstObject& v);
+                    
+  /**
+   * @brief Reads a JSON document and produces a Reconstruction.
+   *  It supports single-neuron documents and reconstruction objects
+   * @param name Reconstruction name
+   * @param doc Parsed JSON document
+   */
   std::unique_ptr<Reconstruction> 
     parse_document(const std::string& name, const rapidjson::Document& doc);
 
