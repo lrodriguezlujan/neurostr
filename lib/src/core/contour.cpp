@@ -69,17 +69,30 @@ namespace neurostr {
     }
     
     const std::string& Contour::name() const { return name_; }
+    void Contour::name(const std::string& n) { name_ = n; }
     
 
     const std::string& Contour::face_color() const { return face_color_; }
     const std::string& Contour::back_color() const { return back_color_; }
     
+    void Contour::face_color( const std::string& s) { 
+      if(check_color_format_(s))
+      face_color_ = s; 
+    }
+    
+    void Contour::back_color( const std::string& s) { 
+      if(check_color_format_(s))
+      back_color_ = s; 
+    }
+    
     
 
     float Contour::fill_density() const {return fill_; }
+    void Contour::fill_density(float f) {fill_ = f; }
 
    
     float Contour::resolution() const { return resolution_;}
+    void Contour::resolution(float f) { resolution_=f;}
     
    
     bool Contour::is_closed() const { return closed_;}
