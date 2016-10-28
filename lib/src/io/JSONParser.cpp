@@ -1,4 +1,5 @@
 #include "io/JSONParser.h"
+#include "rapidjson/error/en.h"
 
 namespace neurostr {
 namespace io {
@@ -192,8 +193,17 @@ namespace io {
     
     // Create and open doc
     rapidjson::Document doc;
+    
+    reset_errors();
+    
     rapidjson::IStreamWrapper isw(stream_);
     doc.ParseStream(isw);
+    
+    if(doc.HasParseError()){
+      critical_error = true;
+      NSTR_LOG_(critical, rapidjson::GetParseError_En(doc.GetParseError()));
+      return std::unique_ptr<Reconstruction>( new Reconstruction(name) );
+    }
     //assert(doc.IsObject());
 
     

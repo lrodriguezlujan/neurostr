@@ -27,6 +27,7 @@ std::unique_ptr<Reconstruction> SWCParser::read(const std::string& name) {
 
   std::string line;
 
+  reset_errors();
   neuron_ = new Neuron(name);
 
   while (getline(stream_, line)) {

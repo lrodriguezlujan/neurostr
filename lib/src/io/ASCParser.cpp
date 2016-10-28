@@ -588,6 +588,7 @@ void ASCParser::recover_from_error(){
   Reconstruction* r = new Reconstruction(name);
 
   node_count_ = 0;
+  reset_errors();
   try{
     process_(*r);
   } catch (std::exception e){

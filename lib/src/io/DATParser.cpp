@@ -29,6 +29,7 @@ std::unique_ptr<Reconstruction> DATParser::read(const std::string &name) {
   if (!valid_header()) throw std::runtime_error("Stream header is not valid");
 
   node_count_ = 0;
+  reset_errors();
 
   // Root block
   Reconstruction *r = new Reconstruction(name);
