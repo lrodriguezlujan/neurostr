@@ -157,6 +157,11 @@ class ASCParser : public Parser{
    * @return True if is a stop sequence
    */
   static bool is_stopper(std::string& s, char next);
+  
+  /**
+   * @brief Auxiliar function that tries to recover from an error skipping the current block
+   */
+  void recover_from_error();
 
   boost::any val_;
   int node_count_;
