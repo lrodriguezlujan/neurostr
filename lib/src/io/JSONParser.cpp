@@ -84,6 +84,10 @@ namespace io {
       throw std::logic_error("Node radius is not numeric");
     }
     
+    float r = v["r"].GetFloat();
+    if(r<0){
+      std::logic_error("Negative node radius value " + std::to_string(r) );
+    }
     // Parse
     
     // We Dont catch parse point error - Propagate them 
