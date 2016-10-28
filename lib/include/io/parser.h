@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "core/log.h"
 #include "core/neuron.h"
 
 namespace neurostr {
@@ -20,7 +21,8 @@ public:
   Parser( std::istream& s) 
     : stream_(s)
     , error_count(0)
-    , warn_count(0) {};
+    , warn_count(0)
+    , critical_error(false){};
   
   
   virtual ~Parser(){};
@@ -35,9 +37,10 @@ public:
    */
   Parser& operator=(const Parser&) = delete;
   
-  void reset_errors() { error_count = warn_count = 0; }
+  void reset_errors() { error_count = warn_count = 0; critical_error=false; }
   int error() const { return error_count; };
   int warn() const { return warn_count; };
+  bool critical() const { return critical_error; };
   
   /**
    * @brief Reads a reconstruction from the stream and returns a unique_ptr
@@ -59,6 +62,13 @@ protected:
    */
   int error_count;
   int warn_count;
+  bool critical_error;
+  
+  // Process exception
+  void process_error(const std::exception& e){
+    NSTR_LOG_(error, e.what());
+    ++error_count;
+  }
    
 };
 
