@@ -4,38 +4,171 @@
 #include <stdexcept>
 #include "io/SWCParser.h"
 
-TEST(SWC_Parser_simple)
-{
-  // Open file
-  std::ifstream is("../data/simple_tree.swc");
-  if(!is){
-    std::cerr << "FILE NOT FOUND" << std::endl;
-    throw std::runtime_error("FILE NOT FOUND");
+SUITE(swc_parser_tests){
+  
+  using namespace neurostr::io;
+  
+  const std::string test_files_folder = std::string("../data/test_data/swc/");
+  
+  struct swc_parser_data {
+    swc_parser_data(const std::string& s) 
+      : is( test_files_folder + s)
+      , parser(is)
+      , rec(nullptr) {
+        if(!is) CHECK(false);
+        else {
+          rec=parser.read("test");
+          
+        }
+    }
+      
+    ~swc_parser_data(){};
+    
+    std::ifstream is;
+    SWCParser  parser;
+    std::unique_ptr<neurostr::Reconstruction> rec;
+  };
+  
+  // Basic checks
+  void basic_swcparser_checks(const SWCParser& p, const neurostr::Neuron& n, 
+                          bool crit, 
+                          int err_count, 
+                          bool has_soma,
+                          int neurite_count, 
+                          int node_count){
+    // Critical flag
+    CHECK_EQUAL(crit,p.critical());
+    
+    // Error count
+    CHECK_EQUAL(err_count,p.error());
+    
+    // HAS SOMA
+    CHECK_EQUAL(n.has_soma(),has_soma);
+    
+    // Number of neurites
+    CHECK_EQUAL(n.size(),neurite_count);
+    
+    // Number of nodes
+    CHECK_EQUAL(n.node_count(),node_count);
+
   }
-  else{
-    // Call read
-    neurostr::io::SWCParser parser(is);
-    auto r = parser.read("simple_tree");
-    //std::cout << *r;
-    is.close();
+  
+  // OK CASES
+  TEST(empty){
+    swc_parser_data test_data("empty.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit - empty
+      basic_swcparser_checks(p,n,false,0,false,0,0);
+    }
     
   }
-}
-
-
-TEST(SWC_Parser_real)
-{
-  // Open file
-  std::ifstream is("../data/g0435P1.CNG.swc");
-  if(!is){
-    std::cerr << "FILE NOT FOUND" << std::endl;
-    throw std::runtime_error("FILE NOT FOUND");
+  
+  TEST(header_only){
+    swc_parser_data test_data("header_only.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit - empty
+      basic_swcparser_checks(p,n,false,0,false,0,0);
+    }
   }
-  else{
-    // Call read
-    neurostr::io::SWCParser parser(is);
-    auto r = parser.read("g0435P1");
-    //std::cout << *r;
-    is.close();
+  
+  TEST(simple_dendrite){
+    swc_parser_data test_data("simple_dendrite.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit 
+      basic_swcparser_checks(p,n,false,0,true,1,3);
+      CHECK_EQUAL(1,n.dendrite_count());
+    }
+  }
+  
+  TEST(simple_axon){
+    swc_parser_data test_data("simple_axon.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit 
+      basic_swcparser_checks(p,n,false,0,true,1,3);
+      CHECK_EQUAL(1,n.axon_count());
+    }
+  }
+  
+  TEST(simple_apical){
+    swc_parser_data test_data("simple_apical.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit 
+      basic_swcparser_checks(p,n,false,0,true,1,3);
+      CHECK_EQUAL(1,n.apical_count());
+    }
+  }
+  
+  TEST(simple_tree){
+    swc_parser_data test_data("simple_tree.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,0,true,1,7);
+      CHECK_EQUAL(1,n.dendrite_count());
+      
+      // Check structure
+      CHECK_EQUAL(5,n.begin_dendrite()->size());
+      CHECK_EQUAL(2,n.begin_dendrite()->max_centrifugal_order());
+    }
+  }
+  
+  TEST(real){
+    swc_parser_data test_data("real.swc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      SWCParser&p = test_data.parser;
+      
+      // No errors - no crit
+      basic_swcparser_checks(p,n,false,0,true,8,2026);
+    }
+  }
+  
+  // ERROR CASES
+  TEST(missing_fields){
+    
+  }
+  
+  TEST(extra_fields){
+    
+  }
+  
+  TEST(wrong_id){
+    
+  }
+  
+  TEST(wrong_num){
+    
+  }
+  
+  TEST(wrong_parent){
+    
+  }
+  
+  TEST(orphan){
+    
   }
 }
