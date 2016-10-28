@@ -414,10 +414,41 @@ namespace io {
           process_error(e);
           NSTR_LOG_(info, "Erroneous neurons are ignored");
         }
-      } 
+      }
       
       // Read contour
-      // TODO
+      if(doc.HasMember("contours")){
+        if(!doc["contours"].IsArray()){
+          NSTR_LOG_(warn,"Contours field is not an array - skipping");
+          ++warn_count;
+        } else {
+          auto tmp = doc["contours"].GetArray();
+          for(auto it = tmp.Begin() ; it != tmp.End() ; ++it){
+            try{
+              if(!it->IsObject()){
+                throw std::logic_error("Unexpected non object contour");
+              }
+              r->addContour(parseContour(it->GetObject()));
+            } catch (std::logic_error e){
+              process_error(e);
+              NSTR_LOG_(info, "Erroneous contours are ignored");
+            }
+          }
+        }
+      }
+      
+      // Read properties
+      if(doc.HasMember("properties")){
+        if(!doc["properties"].IsObject() ){
+          NSTR_LOG_(warn,"Reconstruction properties field is not an object - Skipping");
+          ++warn_count;
+        } else {
+          r->properties = parseProperties(doc["properties"].GetObject());
+        }
+      }
+      
+      
+    
     } else {
       // Single
       
