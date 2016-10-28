@@ -138,6 +138,9 @@ namespace io {
     pos->clear();
     for(auto it = tmp.begin() ; it != tmp.end() ; ++it){
       try{
+        if(!it->IsObject()){
+          throw std::logic_error("Unexpected non object node");
+        }
         pos->push_back( parseNode(it->GetObject()));
       } catch( std::logic_error e){
         process_error(e);
@@ -170,6 +173,9 @@ namespace io {
          
          // Parse recursive
          try{
+          if(!it->IsObject()){
+            throw std::logic_error("Unexpected non object branch");
+          }
           parseBranch(it->GetObject(), newpos);
          } catch(std::logic_error e){
            process_error(e);
@@ -257,6 +263,9 @@ namespace io {
         // Parse each node
         for( auto it = tmp.begin(); it != tmp.end() ; ++it){
           try{
+            if(!it->IsObject()){
+              throw std::logic_error("Unexpected non object node");
+            }
             soma.push_back(parseNode(it->GetObject()));
           } catch (std::logic_error e){
             process_error(e);
@@ -287,6 +296,9 @@ namespace io {
     auto tmp = v["neurites"].GetArray();
     for(auto it = tmp.begin() ; it != tmp.end() ; ++it){
       try{
+        if(!it->IsObject()){
+          throw std::logic_error("Unexpected non object neurite");
+        }
         n->add_neurite(parseNeurite(it->GetObject()));
       } catch (std::logic_error e){
         process_error(e);
@@ -295,6 +307,86 @@ namespace io {
     }
     
     return n;
+  }
+  
+  Contour JSONParser::parseContour(const rapidjson::Value::ConstObject& v){
+    
+    std::vector<point_type> points;
+    
+    
+    if(!v.HasMember("name")){
+      throw std::logic_error("Missing contour name");
+    } else if(!v["name"].IsString()){
+      throw std::logic_error("Contour name is not a string");
+    }
+    
+    
+    if(!v.HasMember("face_color")){
+      throw std::logic_error("Missing contour face_color");
+    } else if(!v["face_color"].IsString()){
+      throw std::logic_error("Contour face_color is not a string");
+    }
+    
+    
+    if(!v.HasMember("back_color")){
+      throw std::logic_error("Missing contour back_color");
+    } else if(!v["back_color"].IsString()){
+      throw std::logic_error("Contour back_color is not a string");
+    }
+    
+    
+    if(!v.HasMember("closed")){
+      throw std::logic_error("Missing contour closed field");
+    } else if(!v["closed"].IsBool()){
+      throw std::logic_error("Contour closed is not boolean");
+    }
+    
+    
+    if(!v.HasMember("fill")){
+      throw std::logic_error("Missing contour fill field");
+    } else if(!v["fill"].IsNumber()){
+      throw std::logic_error("Contour fill is not numeric");
+    }
+    
+    
+    if(!v.HasMember("resolution")){
+      throw std::logic_error("Missing contour resolution field");
+    } else if(!v["resolution"].IsNumber()){
+      throw std::logic_error("Contour resolution is not numeric");
+    }
+    
+    
+    if(!v.HasMember("points")){
+      throw std::logic_error("Missing contour points field");
+    } else if(!v["points"].IsArray()){
+      throw std::logic_error("Contour points is not an array");
+    }
+    
+    auto tmp = v["points"].GetArray();
+    for(auto it = tmp.begin() ; it != tmp.end() ; ++it){
+      try{
+        if(!it->IsObject()){
+          throw std::logic_error("Unexpected non object point");
+        }
+        points.push_back( parsePoint(it->GetObject()));
+      } catch( std::logic_error e){
+        process_error(e);
+        NSTR_LOG_(info, "Erroneous contour points are omitted");  
+      }
+    }
+    
+    Contour c(points);
+    
+    c.name(v["name"].GetString());
+    c.face_color(v["face_color"].GetString());
+    c.back_color(v["back_color"].GetString());
+    c.fill_density(v["fill"].GetFloat());
+    c.resolution(v["resolution"].GetFloat());
+    
+    if(v["closed"].GetBool())
+      c.close();
+    
+    return c;
   }
   
   std::unique_ptr<Reconstruction> JSONParser::parse_document(const std::string& name ,
@@ -314,6 +406,9 @@ namespace io {
       auto tmp = doc["neurons"].GetArray();
       for(auto it = tmp.Begin() ; it != tmp.End() ; ++it){
         try{
+          if(!it->IsObject()){
+            throw std::logic_error("Unexpected non object neuron");
+          }
           r->addNeuron(parseNeuron(it->GetObject()));
         } catch (std::logic_error e){
           process_error(e);

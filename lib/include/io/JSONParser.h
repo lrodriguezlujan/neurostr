@@ -78,6 +78,7 @@ class JSONParser : public Parser{
   Neurite* parseNeurite(const rapidjson::Value::ConstObject& v );
   void parseBranch(const rapidjson::Value::ConstObject& v,
                      const Neurite::branch_iterator& pos);
+  Contour parseContour(const rapidjson::Value::ConstObject& v);
                      
   std::unique_ptr<Reconstruction> 
     parse_document(const std::string& name, const rapidjson::Document& doc);
