@@ -217,6 +217,10 @@ Node ASCParser::process_sample() {
   else {
     throw std::logic_error("Malformed sample block (diameter value) - Expected float value");
   }
+  
+  if(d < 0){
+    throw std::logic_error("Negative diameter value: " + std::to_string(d));
+  }
 
   // End block
   if (pass_block_end() == false){
@@ -250,13 +254,15 @@ marker_type ASCParser::process_marker(){
       } else if (btype == block_type::PROPERTY) {
         m.properties.push_back(process_property());
       } else {
-        throw std::logic_error("Malformed marker block - Unexpected inner block type");
+        process_error(std::logic_error("Malformed marker block - Unexpected inner block type"));
+        recover_from_error();
       }
     } else {
         throw std::logic_error( std::string("Malformed marker block - Expected: ") + 
                                 std::to_string(block_start) + 
                                 ", got: " + 
                                 std::to_string(stream_.peek()) );
+        
     }
     skip_to_stopper();    
   }
@@ -466,12 +472,18 @@ void ASCParser::process_(Reconstruction & r) {
 void ASCParser::skip_block(){
    // Skip block
       int depth = 1;
+      int c;
       // We need to skip () until count reaches 0
       while (depth > 0 && stream_.peek() != EOF) {
-        if (stream_.get() == block_start)
+        c= stream_.get();
+        if (c == block_start)
           ++depth;
-        else if (stream_.get() == block_start)
+        else if (c == block_end)
           --depth;
+        else if (c == branch_start){
+          stream_.putback(block_end);
+          stream_.putback(block_start);
+        }
       }
 }
 
@@ -534,7 +546,8 @@ Neurite::branch_iterator ASCParser::process_container_(
         }
         
       } else {
-        throw std::logic_error("Malformed block - Unexpected block type inside a generic block");
+        process_error(std::logic_error("Malformed block - Unexpected block type inside a generic block"));
+        skip_block();
       }
     } else {
       throw std::logic_error( std::string("Malformed block - Expected: ") + 
@@ -577,7 +590,8 @@ Neurite::branch_iterator ASCParser::process_container_(
 }
 
 void ASCParser::recover_from_error(){
-  while (stream_.get() != block_end && !stream_.eof());
+  //while (stream_.get() != block_end && !stream_.eof());
+  skip_block();
   if(stream_.eof()){
     throw std::runtime_error("EOF Reached while recovering form the error");
   }
