@@ -12,7 +12,8 @@ namespace neurostr {
 namespace io {
 
 // Consts
-const std::string ASCParser::marker = "doublecircle";
+const std::string ASCParser::marker_dc = "doublecircle";
+const std::string ASCParser::marker_fc = "filledcircle";
 
 // Static
 bool ASCParser::is_stopper(std::string& s, char next) {
@@ -316,7 +317,7 @@ block_type ASCParser::next_block_type(bool inBlock) {
     
     if (tmp[0] == string_escape)
       return block_type::CONTOUR;
-    else if (tmp == marker)
+    else if (tmp == marker_dc || tmp == marker_fc)
       return block_type::MARKERSET;
     else
       return block_type::PROPERTY;
