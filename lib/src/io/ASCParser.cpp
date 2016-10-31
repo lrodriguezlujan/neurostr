@@ -601,11 +601,11 @@ void ASCParser::recover_from_error(){
   }
   
   // Correct neurites
-  for (auto it = r->begin(); it != r->end(); ++it) {
+  /*for (auto it = r->begin(); it != r->end(); ++it) {
     it->correct();
     //for (auto neur_it = (*it)->begin_neurite(); neur_it != (*it)->end_neurite(); ++neur_it)
     //  (*neur_it)->correct();
-  }
+  }*/
 
   // root->tree_type_by_properties();
   // root->block_color_by_properties();
