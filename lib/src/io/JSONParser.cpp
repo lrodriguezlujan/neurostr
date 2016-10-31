@@ -11,8 +11,8 @@ namespace io {
       throw std::logic_error("Missing field 'x' in point");
     } else if( !v.HasMember("y") ){
       throw std::logic_error("Missing field 'y' in point");
-    } else if( !v.HasMember("y") ){
-      throw std::logic_error("Missing field 'y' in point");
+    } else if( !v.HasMember("z") ){
+      throw std::logic_error("Missing field 'z' in point");
     }
     
     // Check types
@@ -80,13 +80,13 @@ namespace io {
     
     if(!v.HasMember("r")){
       throw std::logic_error("Missing node radius");
-    } else if( !v["id"].IsNumber() ){
+    } else if( !v["r"].IsNumber() ){
       throw std::logic_error("Node radius is not numeric");
     }
     
     float r = v["r"].GetFloat();
     if(r<0){
-      std::logic_error("Negative node radius value " + std::to_string(r) );
+      throw std::logic_error("Negative node radius value " + std::to_string(r) );
     }
     // Parse
     
@@ -166,7 +166,7 @@ namespace io {
     
     // Children
      if(v.HasMember("children")){
-      if(!v["nodes"].IsArray()){
+      if(!v["children"].IsArray()){
           throw std::logic_error("Branch children field is not an array");
       }
        //assert(v["children"].IsArray());
