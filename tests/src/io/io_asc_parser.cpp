@@ -208,6 +208,130 @@ SUITE(NL_ASC_parser_tests){
       basic_ascparser_checks(p,n,false,0,0,true,7,914);
     }
   }
+  
+  //////////////
+  // ERROR CASES
+  //////////////
+  
+  TEST(malformed){
+    asc_parser_data test_data("malformed.asc");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(true,test_data.parser.critical());
+  }
+  
+  TEST(truncated){
+    asc_parser_data test_data("truncated.asc");
+    CHECK(test_data.rec->size() == 1); // Partial reconstruction
+    CHECK_EQUAL(2,test_data.parser.error());
+    CHECK_EQUAL(true,test_data.parser.critical());
+    CHECK_EQUAL(0,test_data.parser.warn());
+  }
+  
+  TEST(missing_fields){
+    asc_parser_data test_data("missing_fields.asc");  
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+    
+      basic_ascparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(non_numeric){
+    asc_parser_data test_data("non_numeric.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      basic_ascparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(negative_radius){
+    asc_parser_data test_data("negative_radius.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      basic_ascparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(extra_field){
+    asc_parser_data test_data("extra_field.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      basic_ascparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(non_numeric_rgb){
+    asc_parser_data test_data("non_numeric_rgb.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      basic_ascparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(extra_field_property){
+    asc_parser_data test_data("extra_field_property.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      basic_ascparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(unexpected_block_marker){
+    asc_parser_data test_data("unexpected_block_marker.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      // errors - no warns - no crit - empty
+      basic_ascparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(malformed_spine){
+    asc_parser_data test_data("malformed_spine.asc");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      // No errors - no warns - no crit - empty
+      basic_ascparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(unexpected_block_in_tree){
+    asc_parser_data test_data("unexpected_block_tree.asc");
+    CHECK(test_data.rec->size() == 1); 
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      ASCParser&p = test_data.parser;
+      
+      // No errors - no warns - no crit - empty
+      basic_ascparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  
+  
+  
 
 
 } // END SUITE
