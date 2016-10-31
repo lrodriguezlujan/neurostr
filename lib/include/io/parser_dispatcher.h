@@ -19,10 +19,21 @@
 
 namespace neurostr {
 namespace io{
+  
+  /**
+   * @brief Given a string with the file extension, returns a pointer to the adequate parser
+   * @param ext File extension
+   * @return Parser pointer
+   */
   Parser* get_parser_by_ext(const std::string& ext);
 
   void open_filestream(const std::string& path, const std::string& s, std::ifstream& ret) ;
-  
+
+  /**
+   * @brief Given a file path, selects the parser by the file extension and processes its content
+   * @param path File path
+   * @return Reconstruction
+   */
   std::unique_ptr<Reconstruction> read_file_by_ext(const std::string& path);
 }
 }

@@ -113,24 +113,44 @@ class Contour{
     const std::string& name() const;
     
     /**
+     * @brief Set contour name
+     */
+    void name(const std::string&);
+    
+    /**
      * @brief Returns contour face and back color
      * @return Color as hex string #RRGGBB
      */
     const std::string& face_color() const;
     const std::string& back_color() const;
     
+    /**
+     * @brief Set face and back contour colors
+     */
+    void face_color(const std::string&);
+    void back_color(const std::string&);
     
     /**
      * @brief Return contour fill density (alpha channel)
      * @return Alpha (opacity) value
      */
     float fill_density() const;
+    
+    /**
+     * @brief Set fill density value
+     */
+    void fill_density(float);
 
     /**
      * @brief Contour resolution (im not sure what this actually is..like a ratio?)
      * @return Resolution as float
      */
     float resolution() const;
+    
+    /**
+     * @brief Set resolution value
+     */
+    void resolution(float);
     
     /**
      * @brief True if the contour is defined as closed

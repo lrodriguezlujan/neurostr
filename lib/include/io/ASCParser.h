@@ -30,6 +30,13 @@
 namespace neurostr {
 namespace io {
 
+  /**
+   * @class ASCParser
+   * @author luis
+   * @date 28/10/16
+   * @file ASCParser.h
+   * @brief Parser especialization for ASCII neurolucida files. 
+   */
 class ASCParser : public Parser{
     public:
 
@@ -50,7 +57,8 @@ class ASCParser : public Parser{
   const static char spine_start = '<';
   const static char spine_end = '>';
   const static char string_escape = '"';
-  const static std::string marker;
+  const static std::string marker_dc;
+  const static std::string marker_fc;
 
   /**
    * @brief Reads a reconstruction from the stream
@@ -157,6 +165,11 @@ class ASCParser : public Parser{
    * @return True if is a stop sequence
    */
   static bool is_stopper(std::string& s, char next);
+  
+  /**
+   * @brief Auxiliar function that tries to recover from an error skipping the current block
+   */
+  void recover_from_error();
 
   boost::any val_;
   int node_count_;

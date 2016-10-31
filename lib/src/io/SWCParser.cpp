@@ -27,6 +27,7 @@ std::unique_ptr<Reconstruction> SWCParser::read(const std::string& name) {
 
   std::string line;
 
+  reset_errors();
   neuron_ = new Neuron(name);
 
   while (getline(stream_, line)) {
@@ -39,6 +40,11 @@ std::unique_ptr<Reconstruction> SWCParser::read(const std::string& name) {
   // Create reconstruction
   Reconstruction *rec = new Reconstruction(name);
   rec->addNeuron(neuron_) ;
+  
+  if(error_count > 0){
+    NSTR_LOG_(warn, std::to_string(error_count) + 
+    " errors were detected while processing the file. Please, check the file and correct the errors.")
+  }
   
   // Transfer rec. ownership
   return std::unique_ptr<Reconstruction>(rec);
@@ -78,8 +84,15 @@ void SWCParser::process_line_(const std::string& s) {
   // Decide bw header and data
   if (is_headerline(s))
     process_header_(s);
-  else
-    process_data_(s);
+  else{
+    try{
+      process_data_(s);
+    } catch(std::logic_error e){
+      process_error(e);
+      // Just ignore the line
+    }
+  }
+    
 }
 
 void SWCParser::process_header_(const std::string& s) {
@@ -107,43 +120,104 @@ void SWCParser::process_data_(const std::string& s) {
   auto it = tok.begin();
   int id, type, parent;
   float x, y, z, d;
+  
+  std::size_t num_chars;
 
   // Skip initial empty fields
   while (it->size() == 0) ++it;
 
   // Read every field
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  id = std::stoi(*it);
+  if (it == tok.end()) 
+    throw std::logic_error("Missing fields in line " + s);
+  try{
+    id = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() || id < 0 )
+      throw std::logic_error("Id is not a non-negative integer in line "+ s +". Type: " + *it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Id is not numeric in line "+ s +". ID: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  type = std::stoi(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    type = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() )
+      throw std::logic_error("Type is not integer in line "+ s +". Type: " + *it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Type is not numeric in line "+ s +". Type: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  x = std::stof(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    x = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("X value is not numeric in line "+ s +". X: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  y = std::stof(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    y = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Y value is not numeric in line "+ s +". Y: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  z = std::stof(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    z = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Z value is not numeric in line "+ s +". Z: " + *it);
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  d = std::stof(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    d = std::stof(*it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Diameter is not numeric in line "+ s +". Diameter: " + *it);
+  }
+  
+  if(d<0){
+    throw std::logic_error("Negative diameter value " + std::to_string(d));
+  }
   
   // Skip empty fields
   while ( (++it)!=tok.end() && it->size() == 0 );
-  if (it == tok.end()) throw std::runtime_error("Missing data fields");
-  parent = std::stoi(*it);
+  if (it == tok.end()){
+    throw std::logic_error("Missing fields in line " + s);
+  }
+  try{
+    parent = std::stoi(*it,&num_chars);
+    if(num_chars != it->size() )
+      throw std::logic_error("Type is not integer in line "+ s +". Type: " + *it);
+  } catch(std::invalid_argument e){
+    throw std::logic_error("Parent is not numeric in line "+ s +". Parent: " + *it);
+  }
+  
+  // Skip empty fields
+  while ( (++it)!=tok.end() && it->size() == 0 );
+  // Warn if there are extra fields
+  if(it != tok.end()){
+    ++warn_count;
+    NSTR_LOG_(warn,std::string("Extra fields in line ") + s);
+  }
 
   // Create node
   Node node{id, x, y, z, d / 2.0};
@@ -171,7 +245,7 @@ void SWCParser::process_data_(const std::string& s) {
         pos = neuron_->find(parent);
       }
       if (pos.begin() == pos.end()) {
-        throw std::runtime_error("Oprhan node");
+        throw std::logic_error("Oprhan node "+ std::to_string(id) + "- Can't find parent node " + std::to_string(parent) );
       } else {
         // Set branch
         last_node_pos_ = pos.neurite().insert_node(pos, node);
