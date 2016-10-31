@@ -144,9 +144,11 @@ namespace neurostr {
       } else if( name == std::string("closed") ){
         if( bool_valued_(p) ){
           closed_ = PropertyMap::value<bool>(p);
-          if(closed_ && !(geometry::equal(positions_.front(),positions_.back()))){
-            positions_.push_back(positions_.front());
+          if(closed_){
+            close();
           }
+        } else {
+          close();
         }
       } else if( name == std::string("filldensity") ){
         if( float_valued_(p) )

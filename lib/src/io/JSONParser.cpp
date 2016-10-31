@@ -11,8 +11,8 @@ namespace io {
       throw std::logic_error("Missing field 'x' in point");
     } else if( !v.HasMember("y") ){
       throw std::logic_error("Missing field 'y' in point");
-    } else if( !v.HasMember("y") ){
-      throw std::logic_error("Missing field 'y' in point");
+    } else if( !v.HasMember("z") ){
+      throw std::logic_error("Missing field 'z' in point");
     }
     
     // Check types
@@ -41,9 +41,11 @@ namespace io {
     } else if (m.value.IsNumber()) {
       return PropertyMap::property_type(name, boost::any(m.value.GetFloat()));
     } else if (m.value.IsString()) {
-      return PropertyMap::property_type(name, boost::any(m.value.GetString()));
+      return PropertyMap::property_type(name, boost::any(std::string(m.value.GetString())));
     } else if (m.value.IsObject()) {
       return PropertyMap::property_type(name, boost::any(parsePoint(m.value.GetObject())));
+    } else if (m.value.IsBool()) {
+      return PropertyMap::property_type(name, boost::any(m.value.GetBool()));
     } else {
       NSTR_LOG_(warn, std::string("Unrecognized property type for ") + name);
       ++warn_count;
@@ -78,10 +80,14 @@ namespace io {
     
     if(!v.HasMember("r")){
       throw std::logic_error("Missing node radius");
-    } else if( !v["id"].IsNumber() ){
+    } else if( !v["r"].IsNumber() ){
       throw std::logic_error("Node radius is not numeric");
     }
     
+    float r = v["r"].GetFloat();
+    if(r<0){
+      throw std::logic_error("Negative node radius value " + std::to_string(r) );
+    }
     // Parse
     
     // We Dont catch parse point error - Propagate them 
@@ -160,7 +166,7 @@ namespace io {
     
     // Children
      if(v.HasMember("children")){
-      if(!v["nodes"].IsArray()){
+      if(!v["children"].IsArray()){
           throw std::logic_error("Branch children field is not an array");
       }
        //assert(v["children"].IsArray());
@@ -170,6 +176,7 @@ namespace io {
          // Add temporal branch
          auto newpos = pos->neurite()
                         .append_branch(pos,Branch()); // This copies neurite in b.
+         newpos->order(pos->order()+1);
          
          // Parse recursive
          try{
@@ -223,6 +230,7 @@ namespace io {
     
     // Tree
     n->set_root(); // Create empty root
+    n->begin_branch()->order(0);
     parseBranch(v["tree"].GetObject(), n->begin_branch());
     
     return n;
@@ -288,7 +296,7 @@ namespace io {
     
     if(!v.HasMember("neurites")){
       throw std::logic_error("Missing neurites field in Neuron");
-    } else if ( !v["id"].IsArray()){
+    } else if ( !v["neurites"].IsArray()){
       throw std::logic_error("Neuron neurites field is not an array");
     }
     
@@ -476,6 +484,7 @@ namespace io {
     if(doc.HasParseError()){
       critical_error = true;
       NSTR_LOG_(critical, rapidjson::GetParseError_En(doc.GetParseError()));
+      ++error_count;
       return std::unique_ptr<Reconstruction>( new Reconstruction(name) );
     }
     //assert(doc.IsObject());
@@ -491,7 +500,7 @@ namespace io {
     
     if(error_count > 0){
       NSTR_LOG_(warn, std::to_string(error_count) + 
-      " were detected while processing the file. Please, check the file and correct the errors.")
+      " errors were detected while processing the file. Please, check the file and correct the errors.")
     }
     
     return ret;

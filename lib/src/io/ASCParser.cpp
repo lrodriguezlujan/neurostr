@@ -12,7 +12,8 @@ namespace neurostr {
 namespace io {
 
 // Consts
-const std::string ASCParser::marker = "doublecircle";
+const std::string ASCParser::marker_dc = "doublecircle";
+const std::string ASCParser::marker_fc = "filledcircle";
 
 // Static
 bool ASCParser::is_stopper(std::string& s, char next) {
@@ -216,6 +217,10 @@ Node ASCParser::process_sample() {
   else {
     throw std::logic_error("Malformed sample block (diameter value) - Expected float value");
   }
+  
+  if(d < 0){
+    throw std::logic_error("Negative diameter value: " + std::to_string(d));
+  }
 
   // End block
   if (pass_block_end() == false){
@@ -249,13 +254,15 @@ marker_type ASCParser::process_marker(){
       } else if (btype == block_type::PROPERTY) {
         m.properties.push_back(process_property());
       } else {
-        throw std::logic_error("Malformed marker block - Unexpected inner block type");
+        process_error(std::logic_error("Malformed marker block - Unexpected inner block type"));
+        recover_from_error();
       }
     } else {
         throw std::logic_error( std::string("Malformed marker block - Expected: ") + 
                                 std::to_string(block_start) + 
                                 ", got: " + 
                                 std::to_string(stream_.peek()) );
+        
     }
     skip_to_stopper();    
   }
@@ -316,7 +323,7 @@ block_type ASCParser::next_block_type(bool inBlock) {
     
     if (tmp[0] == string_escape)
       return block_type::CONTOUR;
-    else if (tmp == marker)
+    else if (tmp == marker_dc || tmp == marker_fc)
       return block_type::MARKERSET;
     else
       return block_type::PROPERTY;
@@ -465,12 +472,18 @@ void ASCParser::process_(Reconstruction & r) {
 void ASCParser::skip_block(){
    // Skip block
       int depth = 1;
+      int c;
       // We need to skip () until count reaches 0
       while (depth > 0 && stream_.peek() != EOF) {
-        if (stream_.get() == block_start)
+        c= stream_.get();
+        if (c == block_start)
           ++depth;
-        else if (stream_.get() == block_start)
+        else if (c == block_end)
           --depth;
+        else if (c == branch_start){
+          stream_.putback(block_end);
+          stream_.putback(block_start);
+        }
       }
 }
 
@@ -533,7 +546,8 @@ Neurite::branch_iterator ASCParser::process_container_(
         }
         
       } else {
-        throw std::logic_error("Malformed block - Unexpected block type inside a generic block");
+        process_error(std::logic_error("Malformed block - Unexpected block type inside a generic block"));
+        skip_block();
       }
     } else {
       throw std::logic_error( std::string("Malformed block - Expected: ") + 
@@ -576,7 +590,8 @@ Neurite::branch_iterator ASCParser::process_container_(
 }
 
 void ASCParser::recover_from_error(){
-  while (stream_.get() != block_end && !stream_.eof());
+  //while (stream_.get() != block_end && !stream_.eof());
+  skip_block();
   if(stream_.eof()){
     throw std::runtime_error("EOF Reached while recovering form the error");
   }
@@ -600,17 +615,17 @@ void ASCParser::recover_from_error(){
   }
   
   // Correct neurites
-  for (auto it = r->begin(); it != r->end(); ++it) {
+  /*for (auto it = r->begin(); it != r->end(); ++it) {
     it->correct();
     //for (auto neur_it = (*it)->begin_neurite(); neur_it != (*it)->end_neurite(); ++neur_it)
     //  (*neur_it)->correct();
-  }
+  }*/
 
   // root->tree_type_by_properties();
   // root->block_color_by_properties();
   
   if(error_count > 0){
-    NSTR_LOG_(warn, std::to_string(error_count) + " were detected while processing the file. Please, send us an email with the conflicting file attached to solve the issue ASAP.")
+    NSTR_LOG_(warn, std::to_string(error_count) + " errors were detected while processing the file. Please, send us an email with the conflicting file attached to solve the issue ASAP.")
   }
 
   return std::unique_ptr<Reconstruction>(r);

@@ -50,14 +50,14 @@ std::unique_ptr<Reconstruction> DATParser::read(const std::string &name) {
   valid_header_ = false;
   
     // Correct neuron
-  for (auto it = r->begin(); it != r->end(); ++it) {
+  /*for (auto it = r->begin(); it != r->end(); ++it) {
     it->correct();
     //for (auto neur_it = (*it)->begin_neurite(); neur_it != (*it)->end_neurite(); ++neur_it)
     //  (*neur_it)->correct();
-  }
+  }*/
   
   if(error_count > 0){
-    NSTR_LOG_(warn, std::to_string(error_count) + " were detected while processing the file. Please, send us an email with the conflicting file attached to solve the issue ASAP.")
+    NSTR_LOG_(warn, std::to_string(error_count) + " errors were detected while processing the file. Please, send us an email with the conflicting file attached to solve the issue ASAP.")
   }
 
   return std::unique_ptr<Reconstruction>(r);

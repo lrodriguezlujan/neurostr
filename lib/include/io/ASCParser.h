@@ -57,7 +57,8 @@ class ASCParser : public Parser{
   const static char spine_start = '<';
   const static char spine_end = '>';
   const static char string_escape = '"';
-  const static std::string marker;
+  const static std::string marker_dc;
+  const static std::string marker_fc;
 
   /**
    * @brief Reads a reconstruction from the stream
