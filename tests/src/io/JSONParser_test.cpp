@@ -195,5 +195,250 @@ SUITE(json_parser_tests){
       basic_jsonparser_checks(p,n,false,0,0,true,8,2026);
     }
   }
+  
+  /*******************
+  * ERROR
+  ******************/
+  TEST(malformed){
+    json_parser_data test_data("malformed.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(1,test_data.parser.error());
+    CHECK_EQUAL(true,test_data.parser.critical());
+    CHECK_EQUAL(0,test_data.parser.warn());
+  }
+  
+  TEST(missing_xyz){
+    json_parser_data test_data("missing_xyz.json"); 
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 2 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,2,0,true,1,5);
+    }
+  }
+  
+  TEST(non_numeric_xyz){
+    json_parser_data test_data("wrong_xyz.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 2 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,2,0,true,1,5);
+    }
+    
+  }
+  
+  TEST(missing_node_id){
+    json_parser_data test_data("missing_node_id.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(node_id_not_integer){
+    json_parser_data test_data("node_id_not_integer.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 2 errors - no warns - no crit - empty
+      basic_jsonparser_checks(p,n,false,2,0,true,1,5);
+    }
+  }
+  
+  TEST(missing_node_radius){
+    json_parser_data test_data("missing_node_radius.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(node_raidus_not_numeric_negative){
+    json_parser_data test_data("node_raidus_not_numeric_negative.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // No errors - no warns - no crit 
+      basic_jsonparser_checks(p,n,false,2,0,true,1,5);
+    }
+  }
+  
+  TEST(properties_notobj){
+    json_parser_data test_data("properties_notobj.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // No errors - 1 warn - no crit
+      basic_jsonparser_checks(p,n,false,0,1,true,1,7);
+    }
+  }
+  
+  TEST(branch_no_nodes){
+    json_parser_data test_data("branch_no_nodes.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,1,6);
+    }
+  }
+  
+  TEST(malformed_branch_root){
+    json_parser_data test_data("malformed_branch_root.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors -  warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(branch_child_notarray){
+    json_parser_data test_data("branch_child_notarray.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // No errors - 1 warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,1,7);
+    }
+  }
+  
+  TEST(neurite_no_id){
+    json_parser_data test_data("neurite_no_id.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,0,0);
+    }
+  }
+  
+  TEST(neurite_noniteger_id){
+    json_parser_data test_data("neurite_noniteger_id.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,0,0);
+    }
+  }
+  
+  TEST(neurite_missing_type){
+    json_parser_data test_data("neurite_missing_type.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,0,0);
+    }
+  }
+  
+  TEST(neurite_type_no_uint){
+    json_parser_data test_data("neurite_type_no_uint.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 1 errors - no warns - no crit
+      basic_jsonparser_checks(p,n,false,1,0,true,0,0);
+    }
+  }
+  
+  TEST(neuron_missing_id){
+    json_parser_data test_data("neuron_missing_id.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(1,test_data.parser.error());
+  }
+  
+  TEST(neuron_id_nostring){
+    json_parser_data test_data("neuron_id_nostring.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(1,test_data.parser.error());
+  }
+  
+  TEST(neuron_neurites_noarray){
+    json_parser_data test_data("neuron_neurites_noarray.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(1,test_data.parser.error());
+  }
+  
+  TEST(neuron_no_neurites){
+    json_parser_data test_data("neuron_no_neurites.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(1,test_data.parser.error());
+  }
+  
+  TEST(neruon_soma_notobj){
+    json_parser_data test_data("neruon_soma_notobj.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      // 0 errors - 1 warns - no crit - empty
+      basic_jsonparser_checks(p,n,false,0,1,false,1,7);
+    }
+  }
+  
+  TEST(neuron_soma_no_nodes){
+    json_parser_data test_data("neuron_soma_no_nodes.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      basic_jsonparser_checks(p,n,false,0,1,false,1,7);
+    }
+  }
+  
+  TEST(neuron_soma_nodes_noarray){
+    json_parser_data test_data("neuron_soma_nodes_noarray.json");
+    CHECK(test_data.rec->size() == 1);
+    if(test_data.rec->size() == 1){
+      neurostr::Neuron&n = *(test_data.rec->begin());
+      JSONParser&p = test_data.parser;
+      
+      basic_jsonparser_checks(p,n,false,0,1,false,1,7);
+    }
+  }
+  
+  TEST(contour_missing_fields){
+    json_parser_data test_data("contour_missing_fields.json");
+    CHECK(test_data.rec->size() == 0);
+    CHECK_EQUAL(2,test_data.parser.error());
+  }
+  
 }
 
