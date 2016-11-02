@@ -1,0 +1,209 @@
+template:
+    #Custom
+    # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs.git
+
+    # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs/tree/toc-levels
+    #url: https://github.com/CouscousPHP/Template-ReadTheDocs
+    directory: /home/luis/github/Template-ReadTheDocs-custom
+    index: index.md
+include:
+exclude:
+scripts:
+    before:
+    after:
+branch: gh-pages
+
+github:
+    user: lrodriguezlujan
+    repo: neurostr
+
+title: NeuroSTR
+subTitle: C++ Neuroanatomy library
+version: alpha
+menu:
+    sections:
+      goals:
+          text: "Goals and Library Architecture"
+          relativeUrl: "goals_architecture.html"
+          subsections:
+            highlvl:
+              text: "High level goals"
+              relativeUrl: "goals_architecture.html#highlvl"
+            arch:
+              text: "Architecture"
+              relativeUrl: "goals_architecture.html#arch"
+            features:
+              text: "Features"
+              relativeUrl: "goals_architecture.html#features"
+            roadmap:
+              text: "Roadmap"
+              relativeUrl: "goals_architecture.html#roadmap"
+      install:
+        text: "Installation"
+        relativeUrl: "install.html"
+        subsections:
+          reqs:
+            text: "Requirements"
+            relativeUrl: "install.html#reqs"
+          compilation:
+            text: "Compilation"
+            relativeUrl: "install.html#compilation"
+          test:
+            text: "Testing"
+            relativeUrl: "install.html#test"
+          troubleshooting:
+            text: "troubleshooting"
+            relativeUrl: "install.html#troubleshooting"
+          binaries:
+            text: "Bundled utilities"
+            relativeUrl: "utils.html"
+            items:
+              converter:
+                text: "Format converter"
+                relativeUrl: "utils.html#converter"
+              validator:
+                text: "Reconstruction validator"
+                relativeUrl: "utils.html#validator"
+              feature:
+                text: "Feature extractor"
+                relativeUrl: "utils.html#feature"
+      tutorial:
+        text: "Tutorial"
+        relativeUrl: "tutorial.html"
+        subsections:
+          basics:
+            text: "Basics"
+            relativeUrl: "tutorial/basics.html"
+            items:
+              basics_a:
+                text: "TO-DO"
+                relativeUrl: "tutorial/basics.html#todo"
+          selectors:
+            text: "Using selectors"
+            relativeUrl: "tutorial/selectors.html"
+            items:
+              selectors_a:
+                text: "TO-DO"
+                relativeUrl: "tutorial/selectors.html#todo"
+          measures:
+            text: "Measures"
+            relativeUrl: "tutorial/measures.html"
+            items:
+              measures_a:
+                text: "TO-DO"
+                relativeUrl: "tutorial/measures.html#todo"
+      io:
+        text: "Input/Output"
+        relativeUrl: "io.html"
+        subsections:
+          input:
+            text: "Accepted input formats"
+            relativeUrl: "io/input.html"
+            items:
+              in_swc:
+                text: "Standard SWC"
+                relativeUrl: "io/input.html#SWC"
+              in_asc:
+                text: "Neurolucida ASCII"
+                relativeUrl: "io/input.html#ASC"
+              in_dat:
+                text: "Neurolucida binary DAT"
+                relativeUrl: "io/input.html#DAT"
+              in_json:
+                text: "JSON"
+                relativeUrl: "io/input.html#JSON"
+          output:
+            text: "Output formats"
+            relativeUrl: "io/output.html"
+            items:
+              out_swc:
+                text: "Standard SWC"
+                relativeUrl: "io/output.html#SWC"
+              out_json:
+                text: "JSON"
+                relativeUrl: "io/output.html#JSON"
+      selectors:
+        text: "Selectors"
+        relativeUrl: "selectors.html"
+        subsections:
+          basics:
+            text: "Selector basics"
+            relativeUrl: "selectors.html#basics"
+          predef:
+            text: "Predefined selectors"
+            relativeUrl: "selectors.html#predef"
+            alwaysVisible: true
+            items:
+              neuron:
+                text: "Neuron selectors"
+                relativeUrl: "selectors/neuron.html"
+              neurite:
+                text: "Neurite selectors"
+                relativeUrl: "selectors/neurite.html"
+              branch:
+                text: "Branch selectors"
+                relativeUrl: "selectors/branch.html"
+              node:
+                text: "Node selectors"
+                relativeUrl: "selectors/node.html"
+          create:
+            text: "Create selectors"
+            relativeUrl: "selectors.html#create"
+          operators:
+            text: "Selector operations"
+            relativeUrl: "selectors.html#operations"
+            alwaysVisible: true
+            items:
+              overview:
+                text: "Operations overview"
+                relativeUrl: "selectors/operations.html"
+              composition:
+                text: "Composition"
+                relativeUrl: "selectors/operations.html#composition"
+      measures:
+        text: "Measures"
+        relativeUrl: "measures.html"
+        subsections:
+          basics:
+            text: "Measure basics"
+            relativeUrl: "measures.html#basics"
+          predef:
+            text: "Predefined Measures"
+            relativeUrl: "measures.html#predef"
+            alwaysVisible: true
+            items:
+              neuron:
+                text: "Neuron measures"
+                relativeUrl: "measures/neuron.html"
+              neurite:
+                text: "Neurite measures"
+                relativeUrl: "measures/neurite.html"
+              branch:
+                text: "Branch measures"
+                relativeUrl: "measures/branch.html"
+              node:
+                text: "Node measures"
+                relativeUrl: "measures/node.html"
+          aggregators:
+            text: "Aggregators"
+            relativeUrl: "measures.html#aggregators"
+          create:
+            text: "Create a measure"
+            relativeUrl: "measures.html#create"
+          operators:
+            text: "Measure operations"
+            relativeUrl: "measures.html#operations"
+            alwaysVisible: true
+            items:
+              overview:
+                text: "Operations overview"
+                relativeUrl: "measures/operations.html"
+      validation:
+        text: "Reconstruction validation"
+        relativeUrl: "validation.html"
+      advanced:
+        text: "Advanced methods"
+        relativeUrl: "advanced.html"
+      faq:
+        text: "Frequently Asked Questions"
+        relativeUrl: "faq.html"
