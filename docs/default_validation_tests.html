@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/goals_architecture.html">
+                         Goals and Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tutorial.html">
+                         Tutorial
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Reconstruction validation
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/advanced.html">
+                         Advanced methods
+                                               </a>
+
+
+                                        </li>
+                                        <li class="toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/faq.html">
+                         Frequently Asked Questions
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="reconstruction-validation">Reconstruction Validation</h1>
+<h2 id="predefined-validations">Predefined validations</h2>
+<h3 id="definition">Definition</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Parameters</th>
+<th style="text-align: left;">Can be fixed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Neurites attached to soma</td>
+<td style="text-align: left;">Checks if the root of the neurites is in the soma</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Yes. Create a new node in the soma and set it as root</td>
+</tr>
+<tr>
+<td style="text-align: left;">Neuron has soma</td>
+<td style="text-align: left;">Checks if the neuron has at least one soma node</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Yes. Create a soma node in (0,0,0) or any other logic position.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Planar reconstruction</td>
+<td style="text-align: left;">Checks if the neurite reconstruction is planar by computing its non axis-aligned box volume</td>
+<td style="text-align: left;"><em>float</em> <strong>threshold</strong>  (e.g. 1E-3)</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dendrite count</td>
+<td style="text-align: left;">Checks that the number of dendrites in the neurons is withing a given range [a,b)</td>
+<td style="text-align: left;"><em>float</em> <strong>a,b</strong> Interval values(e.g. [2,9) )</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Apical count</td>
+<td style="text-align: left;">Checks that the number of apical dendrites is either 1 or 0</td>
+<td style="text-align: left;"><em>bool</em> <strong>strict</strong> if true, fails if no apical dendrite is present</td>
+<td style="text-align: left;">TBD</td>
+</tr>
+<tr>
+<td style="text-align: left;">Axon count</td>
+<td style="text-align: left;">Checks that the number of axons is either 1 or 0</td>
+<td style="text-align: left;"><em>bool</em> <strong>strict</strong> if true, fails if no axon is present</td>
+<td style="text-align: left;">TBD</td>
+</tr>
+<tr>
+<td style="text-align: left;">No Trifurcations</td>
+<td style="text-align: left;">Checks that every node has less than 3 descendants</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">TBD</td>
+</tr>
+<tr>
+<td style="text-align: left;">Linear branches</td>
+<td style="text-align: left;">Checks that the branch tortuosity is greater than a given value</td>
+<td style="text-align: left;"><em>float</em> <strong>threshold</strong> (e.g. 1.01)</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Zero length segments</td>
+<td style="text-align: left;">Fails on those nodes on the same position as its parent</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Yes. Remove duplicated node</td>
+</tr>
+<tr>
+<td style="text-align: left;">Intersecting nodes</td>
+<td style="text-align: left;">Fails when two consecutive node's spheres intersection is not empty</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Yes. Remove one of the nodes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Non-decreasing diameters</td>
+<td style="text-align: left;">Fails when diameter increases between two consecutive nodes</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Segment collision (deprecated)</td>
+<td style="text-align: left;">Fails whenever the distance between any two segments in the reconstruction is zero</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Branch collision</td>
+<td style="text-align: left;">Fails whenever the distance between any two branches in the reconstruction is zero</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Extreme angles</td>
+<td style="text-align: left;">Fails when the elongation or bifurcation angle at a given node is too high to be plausible</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="executable">Executable</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Flags (short)</th>
+<th style="text-align: left;">Default</th>
+<th style="text-align: left;">Default parameters</th>
+<th style="text-align: center;">Depends on diameter value?</th>
+<th>3D assumption</th>
+<th>Applicable to single neurites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Neurites attached to soma</td>
+<td style="text-align: left;">attached(-A) noattached(-a)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Neuron has soma</td>
+<td style="text-align: left;">soma(-S) noSoma(-s)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Planar reconstruction</td>
+<td style="text-align: left;">planar(-P) noplanar(-p)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"><strong>threshold</strong> = 1.01</td>
+<td style="text-align: center;">No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dendrite count</td>
+<td style="text-align: left;">dendcnt(-D) nodendcnt(-d)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"><strong>range</strong> = [2,13)</td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Apical count</td>
+<td style="text-align: left;">apical(-C) noapical(-c)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"><strong>strict</strong> = true</td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td style="text-align: left;">Axon count</td>
+<td style="text-align: left;">axon(-X) noaxon(-x)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"><strong>strict</strong> = true</td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td style="text-align: left;">No trifurcations</td>
+<td style="text-align: left;">trifurcation(-T) notrifurcation(-t)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Linear branches</td>
+<td style="text-align: left;">linear(-L) nolinear(-l)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"><strong>threshold</strong> = 1.01</td>
+<td style="text-align: center;">No</td>
+<td>Yes (partially)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Zero length segments</td>
+<td style="text-align: left;">zero(-Z) nozero(-z)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Intersecting nodes</td>
+<td style="text-align: left;">intersect(-I) nointersect(-i)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Non-decreasing diameters</td>
+<td style="text-align: left;">decrease(-D) nodecrease(-d)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Segment collision</td>
+<td style="text-align: left;">segcoll(-V) nosegcoll(-v)</td>
+<td style="text-align: left;">Inactive (deprecated)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Branch collision</td>
+<td style="text-align: left;">branchcoll(-B) nobranchcoll(-b)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>Yes (mutable)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Extreme angles</td>
+<td style="text-align: left;">extremeang(-M) noextremeang(-m)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;">No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="additional-flags">Additional flags:</h4>
+<ul>
+<li><strong>--nodiameters</strong> : Disables/mutates all validations that depend on the diameter value</li>
+<li><strong>--is2D</strong> : Disables all validations that assume a 3D reconstruction</li>
+<li><strong>--neuron</strong> : Validates the entire neuron</li>
+<li><strong>--onlyapical</strong> : Ignore other structures than the apical dendrite</li>
+<li><strong>--onlyaxon</strong> : Ignore other structures than the axon</li>
+<li><strong>--onlydend</strong> : Ignore other structures than the non-apical dendrites</li>
+</ul>
+<h4 id="notes">Notes:</h4>
+<ul>
+<li>Activation has priority over deactivation</li>
+</ul>
+<h4 id="output">Output</h4>
+<p>JSON FILE
+TODO</p>
+<h2 id="anomaly-detection">Anomaly detection</h2>
+<p>TBD</p>
+<h2 id="novelty-detection">Novelty detection</h2>
+<p>TBD</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>
