@@ -5,7 +5,6 @@ template:
     # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs/tree/toc-levels
     #url: https://github.com/CouscousPHP/Template-ReadTheDocs
     directory: /home/luis/github/Template-ReadTheDocs-custom
-    index: index.md
 include:
 exclude:
     - lib
@@ -164,12 +163,12 @@ menu:
             relativeUrl: "doc/selectors.html#operations"
             alwaysVisible: true
             items:
-              overview:
-                text: "Operations overview"
-                relativeUrl: "doc/selectors/operations.html"
-              composition:
-                text: "Composition"
-                relativeUrl: "doc/selectors/operations.html#composition"
+              inner:
+                text: "Inner operations"
+                relativeUrl: "doc/selectors/operations.html#inner"
+              set:
+                text: "Set operations"
+                relativeUrl: "doc/selectors/operations.html#set"
       measures:
         text: "Measures"
         relativeUrl: "doc/measures.html"

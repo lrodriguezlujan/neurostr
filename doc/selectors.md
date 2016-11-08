@@ -70,13 +70,13 @@ Here is the list of available selectors, you can find more information about wha
 - [All nodes selector](selectors/branch.html#nodes)
 - [Subtree selector](selectors/branch.html#subtree)
 - [Stem selector](selectors/branch.html#stem)
-- [Centrifugal order filter)](selectors/branch.html#order)
+- [Centrifugal order filter](selectors/branch.html#order)
 
 ---
 
 ### [Neurite Selectors](selectors/neurite.html)
 
-- [Parent neuron selector](selectors/neurite.html#neuron)
+- [Neuron selector](selectors/neurite.html#neuron)
 - [Node set selector](selectors/neurite.html#nodes)
 - [Branch set selector](selectors/neurite.html#branches)
 - [First branch selector](selectors/neurite.html#first_branch)
