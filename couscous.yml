@@ -153,6 +153,9 @@ menu:
               node:
                 text: "Node selectors"
                 relativeUrl: "doc/selectors/node.html"
+              generic:
+                text: "Generic selectors"
+                relativeUrl: "doc/selectors/generic.html"
           create:
             text: "Create selectors"
             relativeUrl: "doc/selectors.html#create"
