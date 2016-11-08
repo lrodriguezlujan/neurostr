@@ -173,9 +173,6 @@ menu:
         text: "Measures"
         relativeUrl: "doc/measures.html"
         subsections:
-          basics:
-            text: "Measure basics"
-            relativeUrl: "doc/measures.html#basics"
           predef:
             text: "Predefined Measures"
             relativeUrl: "doc/measures.html#predef"

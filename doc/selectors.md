@@ -4,14 +4,14 @@ currentSubsection:
 currentItem:
 ---
 # Selectors
-This section reviews what are selector functions in NeuroSTR and how to use them. Selectors are a key component in the NeuroSTR architecture. All classes, functions, etc. related to selectors are defined in the `neurostr::selector` namespace. You can include their headers individually or take them all by adding the header file `selector.h`
+This section reviews what are NeuroSTR selector functions and how to use them. Selectors are a key component in the NeuroSTR architecture. All classes, functions, etc. related to selectors are defined in the `neurostr::selector` namespace. You can include their headers individually or take them all by adding the header file `selector.h`
 
 ## Basics  <a id="basics"></a>
 The selector concept is quite simple: A selector is a function that takes one or more references to [elements of a neuron](goals_architecture.html) (or the neuron itself) as input, and returns one or more elements as output. Easy, isn't it?
 
 ![Selector basics][selector_basics]
 
-Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`. So, looking at the input and output cardinality we distinguish four selector function types:
+Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`. So, looking at the input and output arity we distinguish four selector function types:
 1. Single input - single output
 ```
   [](const ElementA& n) => const ElementB& {}
@@ -44,7 +44,7 @@ std::vector<std::reference_wrapper<Element>>::iterator
 
 NeuroSTR includes a relatively large set of predefined selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the *Node* category.
 
-Here is the list of available selectors, you can find more information about what each selector does by clicking on their name:
+Here is the list of available selectors, you can find more details about each selector by clicking on their name:
 
 ### [Node Selectors](selectors/node.html)
 
@@ -113,7 +113,7 @@ Here is the list of available selectors, you can find more information about wha
 
 So far, we have a (large) set of selector functions that might cover our needs. But, imagine that we need a essential selector that, unfortunately, we forgot to implement. Wouldn't be nice to be able to reuse other selectors?. That's where selector operations become really useful. Now we proceed to describe the operations available, but in the [next section](#create) we show you how to use the selector operations to create a new useful selector. At the moment all operations are templated operations, in other words they are done in compile time, in the close future neuroSTR will support execution time operations.
 
-There are two classes of selector operations: selector functions inner operations and selection set operations. The latter, are operations that combine the output of two or more selection functions, whereas the first are regular function operation over selectors.
+There are two classes of selector operations: selector functions inner operations and selection set operations. The latter, are operations that combine the output of two selectors, whereas the first are regular function operation over selectors.
 
 ### [Inner operations](selectors/operations.html#inner)
 
@@ -148,7 +148,7 @@ So far you have read all about selectors but you still feel like a fish out of w
                        ns::branch_parent_selector);
 ```
 
-1. That's it! we're done...Nope! What if the neurite has only one branch? We should select and empty set (and the parent selector don't work that way). We need to remove the first branch from the terminal branches selection first. We can select the first branch with the [First branch selector](selectors/neurite.html#first_branch), but the [Asymmetric Difference](selectors/operations.html#diff) operator requires both arguments to output a set (and to have the same input type), so first we convert the [First branch selector](selectors/neurite.html#first_branch) to an output set selector:
+1. That's it, we're done!...Nope!, we don't. What if the neurite has only one branch? We should select and empty set (and the parent selector don't work that way). We need to remove the first branch from the terminal branches selection first. We can select the first branch with the [First branch selector](selectors/neurite.html#first_branch), but the [Asymmetric Difference](selectors/operations.html#diff) operator requires both arguments to output a set (and to have the same input type), so first we convert the [First branch selector](selectors/neurite.html#first_branch) to an output set selector:
 ```
   ns::selector_out_single_to_set(ns::neurite_first_branch_selector);
 ```
@@ -162,6 +162,7 @@ So far you have read all about selectors but you still feel like a fish out of w
 1. Finally, we can create our selector in one (really long) line. Of course, for the sake of code readability, you ought to store intermediate results in auxiliar variables:
 ```
   auto preterminal_selector = ns::selector_foreach(
+
                                 ns::diff_selector_factory(ns::neurite_terminal_branches,
                                                           ns::selector_out_single_to_set(ns::neurite_first_branch_selector)),
                                 ns::branch_parent_selector);
