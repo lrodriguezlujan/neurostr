@@ -85,7 +85,7 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 
 - [Has soma](measures/neuron.html#hassoma)
 - [Neurite count](measures/neuron.html#neurite_count)
-- [Soma section area](measures/neuron.html#soma_secarea)
+- [Neurite type count](measures/neuron.html#neurite_type_count)
 - [Soma surface](measures/neuron.html#soma_surface)
 
 ---
@@ -93,6 +93,50 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 ### [Generic Measures](measures/generic.html)
 
 - [Set size](measures/generic.html#set)
+
+---
+
+###[L-measure Measures](measures/lmeasure.html)
+
+- [Soma surface](measures/lmeasure.html#somasurface)
+- [Number of stems](measures/lmeasure.html#nstems)
+- [Number of bifurcations](measures/lmeasure.html#nbifs)
+- [Number of branches](measures/lmeasure.html#nbranches)
+- [Number of terminal tips](measures/lmeasure.html#nterminals)
+- [Width, Height and Depth](measures/lmeasure.html#width)
+- [Diameter](measures/lmeasure.html#diameter)
+- [Diameter power](measures/lmeasure.html#diameterpow)
+- [Compartment length](measures/lmeasure.html#length)
+- [Branch length](measures/lmeasure.html#branchlength)
+- [Compartment surface](measures/lmeasure.html#surface)
+- [Branch surface](measures/lmeasure.html#branchsurface)
+- [Compartment section area](measures/lmeasure.html#section_area)
+- [Compartment volume](measures/lmeasure.html#volume)
+- [Branch volume](measures/lmeasure.html#branch_volume)
+- [Distance to root](measures/lmeasure.html#rootdist)
+- [Path length to root](measures/lmeasure.html#rootpath)
+- [Branch centrifugal order](measures/lmeasure.html#branchorder)
+- [Node terminal degree](measures/lmeasure.html#terminaldegree)
+- [Branch terminal degree](measures/lmeasure.html#branch_terminaldegree)
+- [Taper 1: Burker taper rate](measures/lmeasure.html#burker)
+- [Taper 2: Hillman taper rate](measures/lmeasure.html#hillman)
+- [Contraction](measures/lmeasure.html#contraction)
+- [Fragmentation](measures/lmeasure.html#fragmentation)
+- [Partition asymmetry](measures/lmeasure.html#partition_asymmetry)
+- [Rall's power](measures/lmeasure.html#rall)
+- [Pk fitted value](measures/lmeasure.html#pkfit)
+- [Pk classic and squared](measures/lmeasure.html#pkclassic)
+- [Local bifurcation amplitude](measures/lmeasure.html#local_bif)
+- [Remote bifurcation amplitude](measures/lmeasure.html#remote_bif)
+- [Local bifurcation tilt](measures/lmeasure.html#local_tilt)
+- [Remote bifurcation tilt](measures/lmeasure.html#remote_tilt)
+- [Local bifurcation torque](measures/lmeasure.html#local_torque)
+- [Remote bifurcation_torque](measures/lmeasure.html#remote_torque)
+- [Terminal bifurcation diameter](measures/lmeasure.html#terminaldiam)
+- [Hillman threshold](measures/lmeasure.html#hillman_threshold)
+- [Fractal dimension](measures/lmeasure.html#fractal_dimension)
+
+---
 
 
 ## Aggregators <a id="aggregators"></a>

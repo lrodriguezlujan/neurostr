@@ -190,6 +190,9 @@ menu:
               node:
                 text: "Node measures"
                 relativeUrl: "doc/measures/node.html"
+              lmeasure:
+                  text: "L-measure measures"
+                  relativeUrl: "doc/measures/lmeasure.html"
           aggregators:
             text: "Aggregators"
             relativeUrl: "doc/measures.html#aggregators"
