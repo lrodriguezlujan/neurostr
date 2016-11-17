@@ -54,7 +54,6 @@ text
 **Output:** Non-negative real value. The computed soma surface area.
 
 **Details:** If there are several soma points, the computed area is the surface of the sphere centered at the soma barycenter with radius the average distance from the barycenter to the external border of the sphere. Otherwise, for a sigle-point [Soma], the sphere surface area is computed.
-
 ---
 
 [Node]: ../goals_architecture.html#node

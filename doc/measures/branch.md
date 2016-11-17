@@ -65,8 +65,6 @@ ADD IMAGE
 
 **Details:** This returns the number of nodes that are part of the Branch excluding the root. In our data model, the branch's root node belongs to the parent branch (or to the soma) and not to the branch itself.
 
-ADD IMAGE
-
 ---
 
 ### Branch index <a id="index"> </a>
@@ -78,8 +76,6 @@ ADD IMAGE
 **Output:** Non-negative integer
 
 **Details:** This returns 0 for the first branch, 1 for the second and so on. If the [Neurite] has been sorted, the first and last branches are ordered by they azimuth, in other words the rightmost and leftmost branches correspond to the first and last position respectively.
-
-ADD IMAGE
 
 ---
 
@@ -109,8 +105,6 @@ ADD IMAGE
 
 ` branch.child[0].first.diameter /  branch.child[1].first.diameter `
 
-ADD IMAGE
-
 ---
 
 ### Parent-Child diameter ratio <a id="childdimratio"> </a>
@@ -125,8 +119,6 @@ ADD IMAGE
 
 ` (branch.child[0].first.diameter/branch.last.diameter, branch.child[1].first.diameter/branch.last.diameter) `
 
-
-ADD IMAGE
 
 ---
 
@@ -160,8 +152,6 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2, the measure always returns -1.
 
-ADD IMAGE
-
 ---
 
 ### Pk measure <a id="pk"> </a>
@@ -180,8 +170,6 @@ ADD IMAGE
 
 **Note:** `pk_fit_factory(float min = 0 , float max = 5)` just applies this same measure where *r* is computed using [Rall's power fit](#rall).
 
-ADD IMAGE
-
 ---
 
 ### Hillman threshold <a id="hillman_threshold"> </a>
@@ -195,8 +183,6 @@ ADD IMAGE
 **Output:** Real number
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2 or it is not a pre-terminal branch the measure returns -1.
-
-ADD IMAGE
 
 ---
 
@@ -284,29 +270,61 @@ ADD IMAGE
 
 ---
 
-### Local torque angle <a id="localtoruqe"> </a>
-
-TODO CONTINUE HERE!
+### Local torque angle <a id="localtorque"> </a>
 
 **Function:** `local_plane_vector = [](const Branch &b) -> point_type `
 
-**Description:** Computes the normal vector to the plane defined by the vectors from the root to the first node of the daughter branches.
+**Description:** Computes the angle between the branch local plane vector  and the daughter branches plane vector.
 
-**Output:** Plane normal vector
+**Output:** Angle in radians [0,pi)]
 
-**Details:** If the branch don't have a sibling branch, it returns the null vector.
+**Details:** If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See [Local plane vector](#localplane) function.
 
 ADD IMAGE
 
 ---
 
-- [Local tilt angle](measures/branch.html#localtilt)
-- [Remote tilt angle](measures/branch.html#remotetilt)
-- [Local torque angle](measures/branch.html#localtoruqe)
-- [Remote torque angle](measures/branch.html#remotetorque)
-- [Length](measures/branch.html#length)
-- [Intersects](measures/branch.html#intersects)
+### Remote torque angle <a id="remotetorque"> </a>
 
+**Function:** `local_plane_vector = [](const Branch &b) -> point_type `
+
+**Description:** Computes the angle between the branch local plane vector  and the daughter branches plane vector.
+
+**Output:** Angle in radians [0,pi)]
+
+**Details:** If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See [Local plane vector](#localplane) function.
+
+ADD IMAGE
+
+---
+
+### Length <a id="length"> </a>
+
+**Function:** `branch_length = [](const Branch &b) -> float `
+
+**Description:** Computes the branch total length.
+
+**Output:** Non negative real number - branch length.
+
+ADD IMAGE
+
+---
+
+### Intersects <a id="intersects"></a>
+
+**Factory:**  `branch_intersects_factory(bool ignore_radius = false)`
+
+**Function:** `(const Branch &b ) -> std::string`
+
+**Description:** Checks if the given [Branch] intersects with any other [Branch] in the [Neuron], and returns its id in that case. If *ignore_radius* flag is set to true, the radius of each compartment is taken into account when checking intersections.
+
+**Output:** Id of the intersecting [branch] + "@ Neurite: id". An empty string otherwise.
+
+**Details:** The function pre-checks the possible intersection by checking the bounding box of each pair of [Branches]. If the boxes intersect, then computes the branch-branch distance (that is, the segment-segment distance for each pair of segments).
+
+ADD IMAGE
+
+---
 
 [Node]: ../goals_architecture.html#node
 [Branch]: ../goals_architecture.html#branch

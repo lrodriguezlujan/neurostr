@@ -5,7 +5,7 @@ currentItem:
 ---
 # Measures
 
-Measures are simply functions that take a single reference to an [element of a neuron](goals_architecture.html) or a set of them and computes some output value, the measure itself. We can distinguish between single and set measures, depending on whether they take one or more references as input. Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`.
+Measures are functions that take a single reference to an [element of a neuron](goals_architecture.html) or a set of them and compute some output value, the measure. We can distinguish between single and set measures, depending on whether they take one or more references as input. Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`.
 
 All classes, functions, etc. related to selectors are defined in the `neurostr::measure` namespace. You can include their headers individually or take them all by adding the header file `measure.h`
 
@@ -42,7 +42,7 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 - [Local orientation](measures/node.html#localorientation)
 - [In terminal branch](measures/node.html#interminalbranch)
 - [Distance to closest segment](measures/node.html#distclosest)
-- [Fractal dimension](measures/node.html#distclosest)
+- [Fractal dimension](measures/node.html#fractal)
 
  ---
 
@@ -68,7 +68,7 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 - [Remote tilt angle](measures/branch.html#remotetilt)
 - [Local plane vector](measures/branch.html#localplane)
 - [Remote plane vector](measures/branch.html#remoteplane)
-- [Local torque angle](measures/branch.html#localtoruqe)
+- [Local torque angle](measures/branch.html#localtorque)
 - [Remote torque angle](measures/branch.html#remotetorque)
 - [Length](measures/branch.html#length)
 - [Intersects](measures/branch.html#intersects)

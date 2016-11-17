@@ -28,22 +28,38 @@ menu:
       main:
         text: "NeuroSTR"
         relativeUrl: "index.html"
-      goals:
-          text: "Goals and Library Architecture"
-          relativeUrl: "doc/goals_architecture.html"
+      arch:
+          text: "Library Architecture"
+          relativeUrl: "doc/arch.html"
           subsections:
-            highlvl:
-              text: "High level goals"
-              relativeUrl: "doc/goals_architecture.html#highlvl"
-            arch:
-              text: "Architecture"
-              relativeUrl: "doc/goals_architecture.html#arch"
-            features:
-              text: "Features"
-              relativeUrl: "doc/goals_architecture.html#features"
-            roadmap:
-              text: "Roadmap"
-              relativeUrl: "doc/goals_architecture.html#roadmap"
+            modules:
+              text: "Library modules"
+              relativeUrl: "doc/arch.html"
+            data_model:
+              text: "Data model"
+              relativeUrl: "doc/data_model.html"
+              items:
+                node:
+                  text: "Node"
+                  relativeUrl: "doc/data_model.html#node"
+                branch:
+                  text: "Branch"
+                  relativeUrl: "doc/data_model.html#branch"
+                neurite:
+                  text: "Neurite"
+                  relativeUrl: "doc/data_model.html#neurite"
+                soma:
+                  text: "Soma"
+                  relativeUrl: "doc/data_model.html#soma"
+                neuron:
+                  text: "Neuron"
+                  relativeUrl: "doc/data_model.html#neuron"
+                contour:
+                  text: "Contour"
+                  relativeUrl: "doc/data_model.html#contour"
+                reconstruction:
+                  text: "Reconstruction"
+                  relativeUrl: "doc/data_model.html#reconstruction"
       install:
         text: "Installation"
         relativeUrl: "doc/install.html"
@@ -102,32 +118,28 @@ menu:
         text: "Input/Output"
         relativeUrl: "doc/io.html"
         subsections:
-          input:
-            text: "Accepted input formats"
-            relativeUrl: "doc/io/input.html"
+          parsers:
+            text: "Parsers"
+            relativeUrl: "doc/io.html#parsers"
+          writers:
+            text: "Writers"
+            relativeUrl: "doc/io.html#writers"
+          formats:
+            text: "Format specifications"
+            relativeUrl: "doc/io/format.html"
             items:
-              in_swc:
+              swc:
                 text: "Standard SWC"
-                relativeUrl: "doc/io/input.html#SWC"
-              in_asc:
+                relativeUrl: "doc/io/format.html#SWC"
+              asc:
                 text: "Neurolucida ASCII"
-                relativeUrl: "doc/io/input.html#ASC"
-              in_dat:
+                relativeUrl: "doc/io/format.html#ASC"
+              dat:
                 text: "Neurolucida binary DAT"
-                relativeUrl: "doc/io/input.html#DAT"
-              in_json:
+                relativeUrl: "doc/io/format.html#DAT"
+              json:
                 text: "JSON"
-                relativeUrl: "doc/io/input.html#JSON"
-          output:
-            text: "Output formats"
-            relativeUrl: "doc/io/output.html"
-            items:
-              out_swc:
-                text: "Standard SWC"
-                relativeUrl: "doc/io/output.html#SWC"
-              out_json:
-                text: "JSON"
-                relativeUrl: "doc/io/output.html#JSON"
+                relativeUrl: "doc/io/format.html#JSON"
       selectors:
         text: "Selectors"
         relativeUrl: "doc/selectors.html"
@@ -137,31 +149,29 @@ menu:
             relativeUrl: "doc/selectors.html#basics"
           predef:
             text: "Predefined selectors"
-            relativeUrl: "doc/selectors.html#predef"
-            alwaysVisible: true
+            relativeUrl: "doc/selectors/predefined.html"
             items:
               neuron:
                 text: "Neuron selectors"
-                relativeUrl: "doc/selectors/neuron.html"
+                relativeUrl: "doc/selectors/predefined.html#neuron_selectors"
               neurite:
                 text: "Neurite selectors"
-                relativeUrl: "doc/selectors/neurite.html"
+                relativeUrl: "doc/selectors/predefined.html#neurite_selectors"
               branch:
                 text: "Branch selectors"
-                relativeUrl: "doc/selectors/branch.html"
+                relativeUrl: "doc/selectors/predefined.html#branch_selectors"
               node:
                 text: "Node selectors"
-                relativeUrl: "doc/selectors/node.html"
+                relativeUrl: "doc/selectors/predefined.html#node_selectors"
               generic:
                 text: "Generic selectors"
-                relativeUrl: "doc/selectors/generic.html"
+                relativeUrl: "doc/selectors/predefined.html#generic_selectors"
           create:
             text: "Create selectors"
             relativeUrl: "doc/selectors.html#create"
           operators:
             text: "Selector operations"
-            relativeUrl: "doc/selectors.html#operations"
-            alwaysVisible: true
+            relativeUrl: "doc/selectors/operations.html"
             items:
               inner:
                 text: "Inner operations"
@@ -210,9 +220,13 @@ menu:
       validation:
         text: "Reconstruction validation"
         relativeUrl: "doc/validation.html"
-      advanced:
-        text: "Advanced methods"
-        relativeUrl: "doc/advanced.html"
       faq:
         text: "Frequently Asked Questions"
         relativeUrl: "doc/faq.html"
+      clases:
+        text: "Classes"
+        relativeUrl: "doc/classes/classes.html"
+        subsections:
+          core:
+            text: "Core classes"
+            relativeUrl: "doc/classes/core.html"
