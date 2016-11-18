@@ -261,12 +261,7 @@ const auto local_tilt_angle = [](const Branch &b) -> float {
     return -1;
   } else {
     
-    point_type v;
-    if(b.size() == 1) {
-      v = b.root().vectorTo(b.last());
-    } else {
-      v = (b.end()-2)->vectorTo(b.last());
-    }
+    point_type v = b.director_vector();
 
     auto cit_a = b.neurite().begin_children(it);
     auto cit_b = cit_a; 

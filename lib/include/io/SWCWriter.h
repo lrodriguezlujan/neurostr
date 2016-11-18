@@ -19,8 +19,6 @@ namespace io {
   
   /**
    * @class SWCWriter
-   * @author luis
-   * @date 28/10/16
    * @file SWCWriter.h
    * @brief Writes a reconstruction in standard SWC format
    */

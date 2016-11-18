@@ -9,20 +9,34 @@ namespace traits {
 
   /**
    * @brief Check if template C is base of Ts..
-   * @return True type is is base
+   * @return True type if C is base of T
    */
 template <template <typename...> class C, typename... Ts> std::true_type is_base_of_template_impl(const C<Ts...>*);
+
+/**
+* @brief Base false case for the template
+* @return False type if C is base of T
+*/
 template <template <typename...> class C> std::false_type is_base_of_template_impl(...);
+
+/**
+ * @brief Check if template C is base of T
+ * @return true o false type
+ */
 template <typename T, template <typename...> class C>
 using is_base_of_template = decltype(is_base_of_template_impl<C>(std::declval<T*>()));
 
 
 /**
- * @brief Value is true if T is a vector instance
+ * @brief Base false trait is vector
  */
 template <typename T, typename _ = void> struct is_vector {
   static const bool value = false;
 };
+
+/**
+ * @brief Traits that checks if T is a vector instance
+ */
 template <class T> struct is_vector<std::vector<T>> {
   static bool const value = true;
 };

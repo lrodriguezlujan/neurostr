@@ -19,8 +19,6 @@ namespace neurostr {
 
   /**
    * @class Node
-   * @author luis
-   * @date 27/09/16
    * @file node.h
    * @brief Node concept class. stores a numeric ID, x,y,z coordinates and point radius
    * Also stores references to its branch and parent node if they exist and
@@ -39,14 +37,14 @@ class Node : public WithProperties{
   Node();
   
   /**
-   * @brief Creates a node with ID \param{id} at 0,0,0 with radius 0
+   * @brief Creates a node with ID id at 0,0,0 with radius 0
    * @param id Node id
    * @return Node
    */
   Node(int id);
       
   /**
-   * @brief Creates a node with ID \param{id} at \param{p} with radius \param{r}
+   * @brief Creates a node with ID id at position p with radius r
    * @param id Node id
    * @param p Node position (3D point)
    * @param r Node radius
@@ -66,10 +64,23 @@ class Node : public WithProperties{
    */
   Node(int id, double x, double y, double z, double r); 
 
-  // Default copy/move ops (we allow both, move and copy)
+  /**
+   * @brief Default
+   */
   Node(const Node& n) = default;
+  /**
+   * @brief Default
+   */
   Node(Node&& n) = default;
+  
+  /**
+   * @brief Default
+   */
   Node& operator=(const Node& n) = default;
+  
+  /**
+   * @brief Default
+   */
   Node& operator=(Node&& n) = default;
 
   /**

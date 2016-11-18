@@ -27,6 +27,12 @@ namespace io{
    */
   Parser* get_parser_by_ext(const std::string& ext);
 
+  /**
+   * @brief Opens a filestream. If the extension is DAT the file is open with the binary flag activated
+   * @param path File path
+   * @param s File extension
+   * @param ret Stream to be opened
+   */
   void open_filestream(const std::string& path, const std::string& s, std::ifstream& ret) ;
 
   /**

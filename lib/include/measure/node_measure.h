@@ -222,7 +222,7 @@ const auto node_local_elongation_angle = [](const Node& n) -> float {
   auto v0 = parent.vectorTo(n);
   auto v1 = n.vectorTo(descs[0].get());
 
-  return geometry::vector_vector_directed_angle(v0,v1);
+  return geometry::vector_vector_directed_angle(v0,v1, n.branch().neurite().neuron().up());
 };
 
 // Extreme angle

@@ -13,7 +13,9 @@ namespace neurostr
 {
   
 /**
-* This namespace hides geometry implementation to the rest of the library
+* @brief Geometry namespace hides geometry specific implementation details
+* from the rest of the library.
+* 
 */
 namespace geometry
 {
@@ -21,12 +23,22 @@ namespace geometry
   namespace bg =        boost::geometry;
   
   // 3D Types
+  
+  /**
+  * @brief 3D point definition
+  **/
   using point_type =    bg::model::point<float, 3, bg::cs::cartesian>;
+  
+  
   using box_type =      bg::model::box<point_type>;
   using segment_type =  bg::model::segment<point_type>;
   using triangle_type = std::array< point_type,3>;
   
   // 2D Types
+  
+  /**
+  * @brief 2D point definition
+  **/
   using planar_point = bg::model::point<float, 2, bg::cs::cartesian>;
   using polygon_type =  bg::model::polygon<planar_point>;
   using ring_type    = bg::model::ring<planar_point>;
@@ -54,7 +66,11 @@ namespace geometry
     return bg::get<I>(p);
   }
   
-  // Same for planar points
+  /**
+   * @brief Gets the ith component from a 2D point
+   * @param p 2D Point
+   * @return I-th component (float)
+   */
   template <int I>
   inline float get(const planar_point& p){
     return bg::get<I>(p);
@@ -126,7 +142,7 @@ namespace geometry
   float distance(const point_type& a, const point_type& b);
   
   /**
-   * @brief Vector with origin in \code{from} and end in \code{to}
+   * @brief Vector with origin in from and end in to
    * @param from Vector origin
    * @param to Vector end
    * @return Vector (point type)
@@ -141,7 +157,7 @@ namespace geometry
   void traslate(point_type& p, const point_type& v );
   
   /**
-   * @brief Modifies the point p scaling it by \code{scale} wrt ref so its norm 
+   * @brief Modifies the point p scaling it by scale wrt ref so its norm 
    * is multiplied by scale
    * @param p Point to be modified
    * @param scale Scale
@@ -150,7 +166,7 @@ namespace geometry
   void scale(point_type& p, float scale, const point_type&  ref);
   
   /**
-   * @brief  Modifies the point \code{p} scaling it by (rx,ry,rz)
+   * @brief  Modifies the point p scaling it by (rx,ry,rz)
    * @param p Point to be modified
    * @param rx X scale
    * @param ry Y Scale
@@ -159,7 +175,7 @@ namespace geometry
   void scale(point_type& p, float rx, float ry, float rz);
   
   /**
-   * @brief Modifies \code{p} multiplying its norm by \code{scale}
+   * @brief Modifies p multiplying its norm by scale
    * @param p Point to be modified
    * @param scale Scale factor
    */

@@ -33,8 +33,6 @@ namespace io {
 
   /**
    * @class JSONParser
-   * @author luis
-   * @date 28/10/16
    * @file JSONParser.h
    * @brief Parser specialization for JSON files (custom definition)
    */
@@ -51,6 +49,9 @@ class JSONParser : public Parser{
   JSONParser(std::istream& stream) 
     : Parser(stream){};
 
+  /**
+   * @brief Default
+   */
   ~JSONParser() {};
   
   // Data members

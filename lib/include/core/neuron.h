@@ -41,10 +41,9 @@ const auto apical_neurite_filter = [](const auto & p) -> bool {
 
 /**
  * @class Neuron
- * @author luis
- * @date 28/09/16
  * @file neuron.h
- * @brief 
+ * @brief Class that represents a single neuron, its soma and neurites, in the 
+ * reconstruction.
  */
 class Neuron : public WithProperties {
     
@@ -106,25 +105,41 @@ class Neuron : public WithProperties {
   
   public:
 
-  // Empy destr.
+  /**
+   * @brief Default destructor
+   */
   ~Neuron() {};
 
-  // Dont allow copy
+  /**
+   * @brief Deleted
+   * @warning DELETED
+   */
   Neuron(const Neuron&) = delete;
+  
+  /**
+   * @brief Deleted
+   * @warning DELETED
+   */
   Neuron& operator=(const Neuron&) = delete;
   
-  // Move
+  /**
+   * @brief Default implementation
+   */
   Neuron(Neuron&&) = default;
+  
+  /**
+   * @brief Default implementation
+   */
   Neuron& operator=(Neuron&&) = default;
 
   /**
-   * @brief Get neruon id
-   * @return Node id string
+   * @brief Get neuron id string
+   * @return Neuron id string
    */
   const std::string& id() const { return id_; };
   
   /**
-   * @brief Get neuron Up vector
+   * @brief Get neuron Up vector. Up vector allows us to orient angles in 3D space
    * @return Point
    */
   const point_type& up() const {return up_;}
@@ -437,7 +452,8 @@ class Neuron : public WithProperties {
   bool point_in_soma(const point_type& p) const ;
 
   /**
-   * @brief  TODO
+   * @brief Correct function calls the correct function over each. Additionaly
+   * checks if the neurite root is part of the soma and set is as such if necessary.
    */
   void correct();
   
@@ -516,7 +532,7 @@ class Neuron : public WithProperties {
   void set_basal_roots_xz();
   
   /**
-   * @brief Computes the axis-aligned bounding box
+   * @brief Computes the axis-aligned bounding box of the neuron
    * @return bounding box
    */
   box_type boundingBox();
@@ -563,11 +579,8 @@ class Neuron : public WithProperties {
 
 /**
  * @class Reconstruction
- * @author luis
- * @date 28/09/16
  * @file neuron.h
- * @brief Reconstruction stores several neuron reconstructions as well as a common
- * contour
+ * @brief Reconstruction stores several neuron as well as common contours
  */
 class Reconstruction : public WithProperties{
   public:
@@ -595,14 +608,31 @@ class Reconstruction : public WithProperties{
    */
   Reconstruction(const std::string& id);
   
+  /**
+   * @brief Default
+   */
   ~Reconstruction() {} 
 
-  // DO NOT ALLOW COPY (UNIQUE_PTR)
+  /**
+   * @brief Not allowed
+   * @warning DELETED
+   */
   Reconstruction(const Reconstruction&) = delete;
+  
+  /**
+   * @brief Not allowed
+   * @warning DELETED
+   */
   Reconstruction& operator=(const Reconstruction&) = delete;
 
-  // Move is ok
+  /**
+   * @brief Default
+   */
   Reconstruction(Reconstruction&&) = default;
+  
+  /**
+   * @brief Default
+   */
   Reconstruction& operator=(Reconstruction&&) = default;
 
   // Data members

@@ -620,7 +620,7 @@ std::streamsize DATParser::expand_buffer_(std::size_t nbytes){
   } else {*/
   
     if ( (in_buffer_real_ + nbytes) > buffer_size) {
-      throw std::runtime_error("Buffer size exceded. Something went wrong.");
+      throw std::runtime_error("Buffer size exceeded. Something went wrong.");
     }
     
     // read

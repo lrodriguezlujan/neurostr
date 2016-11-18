@@ -22,6 +22,12 @@
 
 namespace neurostr {
 
+/**
+ * @class Neurite
+ * @file neurite.h
+ * @brief Class that represents a single neurite (dendrite, apical dend. or axon)
+ * in the reconstruction.
+ */
 class Neurite : public WithProperties  {
  public:
   
@@ -72,13 +78,29 @@ class Neurite : public WithProperties  {
    */
   Neurite(int id, const NeuriteType& t);
 
-  // Copy and assign (Default)
+  /**
+  * @brief Default copy constructor
+  **/
   Neurite(const Neurite& n) = default;
+  
+  /**
+  * @brief Default move constructor
+  **/
   Neurite(Neurite&& n) = default;
+  
+  /**
+  * @brief Default copy assign
+  **/
   Neurite& operator=(const Neurite& n) = default;
+  
+  /**
+  * @brief Default move assign
+  **/
   Neurite& operator=(Neurite&& n) = default;
 
-  // Empty destructor
+  /**
+   * @brief Empty destructor (Default)
+   */
   ~Neurite() {};
 
   // Data members
@@ -239,8 +261,6 @@ class Neurite : public WithProperties  {
   
   /**
    * @class stem_iterator
-   * @author Luis
-   * @date 28/06/16
    * @file neurite.h
    * @brief Tree iterator (fwd) that ascends from the given tree node till the root.
    */
@@ -267,9 +287,18 @@ class Neurite : public WithProperties  {
      */
     stem_iterator(const typename tree_type::iterator_base& other) ;
 
-
+    /**
+     * @brief Equality operator (compares two iterators)
+     * @param other The other stem iterator
+     * @return True if they both point to the same node
+     */
     bool operator==(const stem_iterator& other) const ;
     
+    /**
+     * @brief Inequality operator (compares two iterators)
+     * @param other The other stem iterator
+     * @return True if they both dont point to the same node
+     */
     bool operator!=(const stem_iterator& other) const ;
 
     /**
@@ -297,8 +326,6 @@ class Neurite : public WithProperties  {
 
   /**
    * @class node_iterator
-   * @author Luis
-   * @date 28/06/16
    * @file neurite.h
    * @brief Templated iterator. Iter parameter determines 
    *        tree-visitor strategy. References to Node.
@@ -350,11 +377,24 @@ class Neurite : public WithProperties  {
                   const iter& c,
                   const typename Branch::iterator& nodeit);
 
-    // Copy and move
+    /**
+     * @brief Default copy constructor
+     */
     node_iterator(const node_iterator<iter>&) = default;
+    
+    /**
+     * @brief Default copy assign
+     */
     node_iterator& operator=(const node_iterator<iter>&) = default;
 
+    /**
+     * @brief Default move constructor
+     */
     node_iterator(node_iterator<iter>&&) = default;
+    
+    /**
+     * @brief Default move assign
+     */
     node_iterator& operator=(node_iterator<iter>&&) = default;
 
     // DATA

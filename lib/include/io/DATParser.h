@@ -30,8 +30,6 @@ namespace io {
   
 /**
  * @class DATParser
- * @author luis
- * @date 28/10/16
  * @file DATParser.h
  * @brief Parser specialization for neurolucida Binary files. Initial specification
  * taken from neuronland.
@@ -59,6 +57,9 @@ public:
       , checked_header_(false)
       , valid_header_(false) {};
 
+  /**
+   * @brief Default
+   */
   ~DATParser() {};
 
   // Consts

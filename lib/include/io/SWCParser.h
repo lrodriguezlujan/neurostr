@@ -52,6 +52,9 @@ class SWCParser : public Parser{ // Could be templated
    */
   SWCParser(std::istream& s, const std::string& sep);
   
+  /**
+  * @brief Default
+  */ 
   ~SWCParser();
   
   /**

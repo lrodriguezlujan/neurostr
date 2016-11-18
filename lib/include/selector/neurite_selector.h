@@ -44,7 +44,7 @@ const auto neurite_branch_selector = [](const Neurite& n)
 
 // IN: Neurite - Out: Branch set
 const auto neurite_first_branch_selector = [](const Neurite& n)
-    -> Branch& {
+    -> const Branch& {
   std::vector<const_branch_reference> selection;
 
   return *(n.begin_branch());

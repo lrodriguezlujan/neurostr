@@ -11,10 +11,8 @@ namespace neurostr{
  
 /**
  * @class PropertyMap
- * @author luis
- * @date 28/09/16
  * @file property.h
- * @brief Propert map auxiliar clase. stores properties for node,branch, neurite... etc
+ * @brief Propert map auxiliar class. Stores key-value properties
  */
 class PropertyMap {
   
@@ -49,10 +47,24 @@ class PropertyMap {
      */
     const_iterator find(const std::string& k) const;
     
-    // Default copy and move
+    /**
+     * @brief Default
+     */
     PropertyMap(const PropertyMap&) = default;
+    
+    /**
+     * @brief Default
+     */
     PropertyMap& operator=(const PropertyMap&) = default;
+    
+    /**
+     * @brief Default
+     */
     PropertyMap(PropertyMap&&) = default;
+    
+    /**
+     * @brief Default
+     */
     PropertyMap& operator=(PropertyMap&&) = default;
     
     /**
@@ -155,16 +167,26 @@ class PropertyMap {
     
     /**
      * @brief Property begin iterator
-     * @return iterator
+     * @return const iterator
      */
     const_iterator begin() const ;
+    
+    /**
+     * @brief Property begin iterator
+     * @return iterator
+     */
     iterator begin() ;
+    
+    /**
+     * @brief Property end iterator
+     * @return const iterator
+     */
+    const_iterator end() const ;
     
     /**
      * @brief Property end iterator
      * @return iterator
      */
-    const_iterator end() const ;
     iterator end() ;
   
   /**
@@ -225,12 +247,24 @@ class WithProperties{
      */
     WithProperties() ;
     
-    // Copy
+    /**
+     * @brief Default
+     */
     WithProperties(const WithProperties& other) = default;
+    
+    /**
+     * @brief Default
+     */
     WithProperties& operator=(const WithProperties& b) = default;
 
-    // Move
+    /**
+     * @brief Default
+     */
     WithProperties(WithProperties&& b) = default;
+    
+    /**
+     * @brief Default
+     */
     WithProperties& operator=(WithProperties&& b) = default;
 
     // Store

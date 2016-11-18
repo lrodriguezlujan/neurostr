@@ -7,12 +7,14 @@
 #include "core/neuron.h"
 
 namespace neurostr {
+  
+/**
+*@brief IO namespace contains write/read functionality for most common file formats
+*/
 namespace io {
   
 /**
  * @class Parser
- * @author luis
- * @date 28/10/16
  * @file parser.h
  * @brief Base virutal class for reconstruction parsers
  */

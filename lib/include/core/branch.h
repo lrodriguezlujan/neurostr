@@ -17,10 +17,19 @@
 #include "core/definitions.h"
 #include "core/node.h"
 
+/**
+* @brief Neurostr namespace contains all other namespaces in the library as well
+* as the data model classes.
+* 
+**/
 namespace neurostr {
 
-// Branch node template
-
+/**
+ * @class Branch
+ * @file branch.h
+ * @brief Branch class in the data model representation of a single branch in a 
+ * reconstruction. Conceptually is an ordered sequence of nodes. 
+ */
 class Branch : public WithProperties{
   
  public:
@@ -107,12 +116,26 @@ class Branch : public WithProperties{
    */
   ~Branch() {};
 
-  // Delete copy
+  /**
+  * @brief Copy constructor is not allowed
+  * @warning DELETED
+  **/
   Branch(const Branch& b)  = delete;
+  
+  /**
+  * @brief Copy assign is not allowed
+  * @warning DELETED
+  **/
   Branch& operator=(const Branch& b) = delete;
 
-  // Default 
+  /**
+  * @brief Default move constructor
+  **/
   Branch(Branch&& b) = default;
+  
+  /**
+  * @brief Defaul move assign
+  **/
   Branch& operator=(Branch&& b) = default;
 
   /**
@@ -203,7 +226,7 @@ class Branch : public WithProperties{
   }
 
   /**
-   * @brief Compares two branches by ID
+   * @brief Compares two branches by their ID
    * @param b Branch
    * @return True if two ids are equal
    */
@@ -212,6 +235,12 @@ class Branch : public WithProperties{
            std::equal(id_.cbegin(), id_.cend(), b.id_.cbegin()) && (root_ == b.root_) && 
            std::equal(begin(), end(), b.begin());
   }
+  
+  /**
+   * @brief Compares two branches by their ID
+   * @param b Branch
+   * @return True if two ids are NOT equal
+   */
   bool operator!=(const Branch& b) const { return !(b == (*this)); }
 
   /**

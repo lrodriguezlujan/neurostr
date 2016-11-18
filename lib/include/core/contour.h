@@ -14,7 +14,10 @@ namespace neurostr {
  * @author luis
  * @date 18/10/16
  * @file neuron.h
- * @brief 
+ * @brief Class that represents a 3D contour in the reconstruction. It is an ordered
+ * sequence of 3D points (not nodes). Contours are usually closed but it is not 
+ * mandatory.
+ * 
  */
 class Contour{
   
@@ -38,11 +41,24 @@ class Contour{
      */
     Contour( const std::vector<point_type>& v);
     
-    // copy and move
+    /**
+     * @brief Copy constructor
+     */
     Contour(const Contour&) = default;
+    
+    /**
+     * @brief Copy assign
+     */
     Contour& operator=(const Contour&) = default;
     
+    /**
+     * @brief Move constructor
+     */
     Contour(Contour&&) = default;
+    
+    /**
+     * @brief Move assign
+     */
     Contour& operator=(Contour&&) = default;
   
   // Data members
@@ -75,6 +91,11 @@ class Contour{
      * @return point iterator
      */
     iterator begin();
+    
+    /**
+     * @brief Returns an iterator to the first point in the contour
+     * @return const point iterator
+     */
     const_iterator begin() const;
     
     /**
@@ -83,6 +104,12 @@ class Contour{
      * @return point iterator
      */
     iterator end();
+    
+    /**
+     * @brief Returns an iterator to the next position after the last 
+     * point in the contour
+     * @return const point iterator
+     */
     const_iterator end() const;
     
     
@@ -100,6 +127,7 @@ class Contour{
     
     /**
      * @brief Contour planar area as 2D projection in the given component
+     * @param component Component that is ignored to compute the area
      * @return Contour planar area
      */
     float area(int component) const;
@@ -114,21 +142,33 @@ class Contour{
     
     /**
      * @brief Set contour name
+     * @param n The new contour name
      */
-    void name(const std::string&);
+    void name(const std::string& n);
     
     /**
-     * @brief Returns contour face and back color
+     * @brief Returns contour face color
      * @return Color as hex string #RRGGBB
      */
     const std::string& face_color() const;
+    
+    /**
+     * @brief Returns contour back color
+     * @return Color as hex string #RRGGBB
+     */
     const std::string& back_color() const;
     
     /**
-     * @brief Set face and back contour colors
+     * @brief Set contour face color
+     * @param s Hex-string color. e.g. #FFFFFF
      */
-    void face_color(const std::string&);
-    void back_color(const std::string&);
+    void face_color(const std::string& s);
+    
+    /**
+     * @brief Set contour back color
+     * @param s Hex-string color. e.g. #FFFFFF
+     */
+    void back_color(const std::string& s);
     
     /**
      * @brief Return contour fill density (alpha channel)
@@ -138,8 +178,9 @@ class Contour{
     
     /**
      * @brief Set fill density value
+     * @param f Contour fill opacity. Between 0 and 1.
      */
-    void fill_density(float);
+    void fill_density(float f);
 
     /**
      * @brief Contour resolution (im not sure what this actually is..like a ratio?)
@@ -149,8 +190,10 @@ class Contour{
     
     /**
      * @brief Set resolution value
+     * @param f resolution value. Actual meaning is unknown.
+     * 
      */
-    void resolution(float);
+    void resolution(float f);
     
     /**
      * @brief True if the contour is defined as closed
@@ -182,20 +225,22 @@ class Contour{
      int planar_axis() const;
      
      /**
-      * @brief Computes min and max values for the given componet (0,1,2 x,y,z)
+      * @brief Computes min and max values for the given component (0,1,2 x,y,z)
+      * @param component Contour component index (0,1,2 <-> x,y,z)
       * @return Pair (min,max)
       */
       std::pair<float,float> range(int component) const;
       
       /**
        * @brief Returns the contour points removing the ith component
-       * @param component Component to remove
+       * @param component Index of component to remove
        * @return Planar points
        */
       std::vector<geometry::planar_point> planar_projection(int component) const;
      
      /**
       * @brief Checks if the contour points are clockwise ordered (shoelace formula applied)
+      * @param i component index (0,1,2 <-> x,y,z) that is ignored to compute the orientation
       * @return True if clockwise ordered
       */
      bool clockwise_oriented(int i) const;
@@ -225,18 +270,36 @@ class Contour{
     /**
      * @brief Check the value type of the property
      * @param p Property to check
+     * @return true if the property is a float
      */
     static bool float_valued_( const PropertyMap::property_type& p);
+    
+    /**
+     * @brief Check the value type of the property
+     * @param p Property to check
+     * @return true if the property is a string
+     */
     static bool string_valued_( const PropertyMap::property_type& p);
+    
+    /**
+     * @brief Check the value type of the property
+     * @param p Property to check
+     * @return true if the property is boolean
+     */
     static bool bool_valued_( const PropertyMap::property_type& p);
     
     
     /**
      * @brief Verify that the color string is correcty
      * @param s Color string
+     * @return true if the color string is an hex color string
      */
     static bool check_color_format_(const std::string& s);
     
+    /**
+     * @brief Sets a contour value from a single property (by name)
+     * @param p Property to evaluate
+     */
     void set_from_property_(const PropertyMap::property_type& p);
 
 }; // End class contour

@@ -28,10 +28,8 @@ namespace io {
   
   /**
    * @class JSONWriter
-   * @author luis
-   * @date 28/10/16
    * @file JSONWriter.h
-   * @brief Writes a reconstruction in our JSON format
+   * @brief Writes a reconstruction in JSON format in the given output stream
    */
   class JSONWriter {
     public:
@@ -49,7 +47,9 @@ namespace io {
     JSONWriter(std::ostream& s,bool pretty = false);
       
     
-    // Destructor
+    /**
+     * @brief Default
+     */
     ~JSONWriter(){};
     
     // DATA ELEMENTS

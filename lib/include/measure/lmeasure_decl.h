@@ -121,6 +121,19 @@ namespace lmeasure{
                                                     aggregate::all_aggr_factory<float,float>(0.)
                                                 )
                                               );
+                                              
+  
+  const auto branch_surface = selectorMeasureCompose( ns::neuron_branch_selector,
+                                                measureEachAggregate(
+                                                    selectorMeasureCompose(
+                                                      ns::branch_node_selector,
+                                                      measureEachAggregate(
+                                                        node_compartment_surface,
+                                                        aggregate::sum_aggr_factory<float,float>(0.)
+                                                    )),
+                                                    aggregate::all_aggr_factory<float,float>(0.)
+                                                )
+                                              );                                            
                                             
   const auto section_area = selectorMeasureCompose( ns::neuron_node_selector,
                                                   measureEachAggregate(
@@ -133,7 +146,19 @@ namespace lmeasure{
                                               node_volume, 
                                               aggregate::all_aggr_factory<float,float>(0.)
                                             ));
-                                            
+  
+  const auto branch_volume = selectorMeasureCompose( ns::neuron_branch_selector,
+                                                measureEachAggregate(
+                                                  selectorMeasureCompose(
+                                                    ns::branch_node_selector,
+                                                      measureEachAggregate(
+                                                        node_volume, 
+                                                        aggregate::sum_aggr_factory<float,float>(0.)
+                                                      )
+                                                  ),
+                                              aggregate::all_aggr_factory<float,float>(0.)
+                                            ));
+                                          
   const auto euc_distance = selectorMeasureCompose( ns::neuron_node_selector,
                                                   measureEachAggregate(
                                                     node_distance_to_root, 
@@ -157,6 +182,19 @@ namespace lmeasure{
                                                       selectorMeasureCompose( 
                                                         ns::node_subtree_terminals,
                                                         detail::node_counter
+                                                      ), 
+                                                      aggregate::all_aggr_factory<int,float>(0.)
+                                                    )); 
+                                                    
+  const auto branch_terminal_degree = selectorMeasureCompose( ns::neuron_branch_selector,
+                                                      measureEachAggregate(
+                                                      selectorMeasureCompose(
+                                                        ns::intersection_selector(
+                                                          ns::compose_selector( ns::neurite_terminal_branch_selector,
+                                                                                ns::branch_neurite_selector),
+                                                          ns::branch_subtree_selector
+                                                        ),
+                                                        set_size
                                                       ), 
                                                       aggregate::all_aggr_factory<int,float>(0.)
                                                     )); 
