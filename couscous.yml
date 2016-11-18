@@ -223,10 +223,79 @@ menu:
       faq:
         text: "Frequently Asked Questions"
         relativeUrl: "doc/faq.html"
-      clases:
+      class:
         text: "Classes"
-        relativeUrl: "doc/classes/classes.html"
+        relativeUrl: "doc/classes.html"
         subsections:
           core:
-            text: "Core classes"
+            text: "Core"
             relativeUrl: "doc/classes/core.html"
+            items:
+              branch:
+                text: "Branch"
+                relativeUrl: "doc/classes/core.html#class_branch"
+              neurite:
+                text: "Neurite"
+                relativeUrl: "doc/classes/core.html#class_neurite"
+              contour:
+                text: "Contour"
+                relativeUrl: "doc/classes/core.html#class_contour"
+              neuron:
+                text: "Neuron"
+                relativeUrl: "doc/classes/core.html#class_neuron"
+              node:
+                text: "Node"
+                relativeUrl: "doc/classes/core.html#class_node"
+              property_map:
+                text: "Property Map"
+                relativeUrl: "doc/classes/core.html#class_property_map"
+              reconstruction:
+                text: "Reconstruction"
+                relativeUrl: "doc/classes/core.html#class_reconstruction"
+              with_props:
+                text: "With Properties"
+                relativeUrl: "doc/classes/core.html#class_with_properties"
+          geometry:
+            text: "Geometry"
+            relativeUrl: "doc/classes/geometry.html"
+            items:
+              discreteFrechet:
+                text: "Discrete Frechet Distance"
+                relativeUrl: "doc/classes/geometry.html#class_geometry__discrete_frechet"
+              rdp:
+                text: "RDP turning point detection"
+                relativeUrl: "doc/classes/geometry.html#class_geometry__r_d_p_simplifier"
+              trimesh:
+                text: "Triangular faced mesh"
+                relativeUrl: "doc/classes/geometry.html#class_geometry__triangle_mesh"
+          traits:
+            text: "Traits"
+            relativeUrl: "doc/classes/traits.html"
+          log:
+            text: "Log"
+            relativeUrl: "doc/classes/log.html"
+          io:
+            text: "I/O"
+            relativeUrl: "doc/classes/io.html"
+            items:
+              parser:
+                text: "Base Parser Concept"
+                relativeUrl: "doc/classes/io.html#class_io__parser"
+              swcparser:
+                text: "Standard SWC Parser"
+                relativeUrl: "doc/classes/io.html#class_io__s_w_c_parser"
+              ascparser:
+                text: "Neurolucida ASCII Parser"
+                relativeUrl: "doc/classes/io.html#class_io__a_s_c_parser"
+              datparser:
+                text: "Neurolucida DAT Parser"
+                relativeUrl: "doc/classes/io.html#class_io__d_a_t_parser"
+              jsonparser:
+                text: "JSON Parser"
+                relativeUrl: "doc/classes/io.html#class_io__j_s_o_n_parser"
+              swcwriter:
+                text: "Standard SWC Writer"
+                relativeUrl: "doc/classes/io.html#class_io__s_w_c_writer"
+              jsonwriter:
+                text: "JSON Writer"
+                relativeUrl: "doc/classes/io.html#class_io__j_s_o_n_writer"
