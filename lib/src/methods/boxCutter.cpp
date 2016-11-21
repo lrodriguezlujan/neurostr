@@ -84,6 +84,12 @@ namespace methods{
                     insert_it->properties.set("cut");
                 }
           } else {
+            
+              // Parent node is the intersection point
+              if(geometry::equal(cutpoint, parent.position())){
+                it->properties.set("cut");
+              }
+              
               // Node is the intersection point
               for(++it ; it != b.end(); ++it){
                     it->properties.set("cut");

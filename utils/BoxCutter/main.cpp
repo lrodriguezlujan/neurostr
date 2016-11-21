@@ -94,13 +94,13 @@ int main(int ac, char **av)
     neurostr::point_type original_max_corner = box.max_corner();
     
     // Set given positions
-    if(!vm.count("minx")) min_corner[0] = neurostr::geometry::getx(original_min_corner);
-    if(!vm.count("miny")) min_corner[1] = neurostr::geometry::gety(original_min_corner);
-    if(!vm.count("minz")) min_corner[2] = neurostr::geometry::getz(original_min_corner);
+    if(!vm.count("minx")) min_corner[0] = neurostr::geometry::getx(original_min_corner)-1;
+    if(!vm.count("miny")) min_corner[1] = neurostr::geometry::gety(original_min_corner)-1;
+    if(!vm.count("minz")) min_corner[2] = neurostr::geometry::getz(original_min_corner)-1;
     
-    if(!vm.count("maxx")) max_corner[0] = neurostr::geometry::getx(original_max_corner);
-    if(!vm.count("maxy")) max_corner[1] = neurostr::geometry::gety(original_max_corner);
-    if(!vm.count("maxz")) max_corner[2] = neurostr::geometry::getz(original_max_corner);
+    if(!vm.count("maxx")) max_corner[0] = neurostr::geometry::getx(original_max_corner)+1;
+    if(!vm.count("maxy")) max_corner[1] = neurostr::geometry::gety(original_max_corner)+1;
+    if(!vm.count("maxz")) max_corner[2] = neurostr::geometry::getz(original_max_corner)+1;
     
     // Cut neuron
     neurostr::methods::neuronBoxCutter(n, 

@@ -317,6 +317,9 @@ class Branch : public WithProperties{
       for(auto it = begin(); it != end(); ++it){
         it->properties.set(key,value);
       }
+      if(has_root()){
+        root().properties.set(key,value);
+      }
     }
     return properties.set(key,value);
   }
@@ -331,6 +334,9 @@ class Branch : public WithProperties{
     if(recursive){
       for(auto it = begin(); it != end(); ++it){
         it->properties.set(key);
+      }
+      if(has_root()){
+        root().properties.set(key);
       }
     }
     return properties.set(key);
