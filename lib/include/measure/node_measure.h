@@ -342,6 +342,7 @@ const auto node_set_fractal_dim = [](const const_node_iterator& b,
     top_sum += std::log(1+euc)*std::log(1+path);
     bot_sum += std::pow(std::log(1+euc),2);
   }
+  
   if(top_sum == bot_sum) return 1.0;
   else return top_sum/bot_sum;
                                        

@@ -53,8 +53,7 @@ class Node : public WithProperties{
   Node( int id, const point_type& p, double r);
   
   /**
-   * @brief Creates a node with ID \param{id} at (\param{x},\param{y},\param{z})
-   * and radius \param{r}
+   * @brief Creates a node with ID id at position (x,y,z) with radius r
    * @param node_id Node id
    * @param x Node x coordinate
    * @param y Node y coordinate

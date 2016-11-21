@@ -7,6 +7,11 @@ namespace neurostr {
 namespace measure {
 namespace aggregate {
   
+/**
+* @struct aggr_func_traits
+* @file aggregator_traits.h
+* @brief Aggregator function traits. Extracts input and output types
+*/
 template <typename F> struct aggr_func_traits {
   
   using base_traits = neurostr::traits::function_traits<F>;

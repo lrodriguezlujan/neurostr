@@ -7,8 +7,12 @@
 namespace neurostr {
 namespace measure {
 namespace detail{
-
-  template <bool, typename T>
+  
+/**
+* @struct type_chooser
+* @brief Extracts the measure type. The first template parameter is a set indicator. If true, T is assumed to be an iterator
+*/
+template <bool, typename T>
   struct type_chooser {
     using type = T; // False, is a reference
   };
@@ -20,7 +24,12 @@ namespace detail{
 
 } // Namepsace detail
 
-  
+
+/**
+ * @struct measure_func_traits
+ * @file measure_traits.h
+ * @brief Measure function traits. Extracts input type, input arity and output type.
+ */
 template <typename F> struct measure_func_traits {  
   using base_traits = neurostr::traits::function_traits<F>;
 

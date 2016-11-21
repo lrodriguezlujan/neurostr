@@ -4,6 +4,7 @@
 // Function minimization
 #include <boost/math/tools/minima.hpp>
 
+#include "core/log.h"
 #include "core/node.h"
 #include "core/branch.h"
 #include "core/neurite.h"
@@ -22,6 +23,12 @@ namespace measure {
   
 
 const auto taper_rate_hillman = [](const Branch& b) -> float {
+  
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   if(b.has_root())
     return (b.root().radius() - b.last().radius())/b.root().radius();
   else 
@@ -29,13 +36,35 @@ const auto taper_rate_hillman = [](const Branch& b) -> float {
 };
 
 const auto taper_rate_burker = [](const Branch& b) -> float {
-  if(b.has_root())
-    return 2*(b.root().radius() - b.last().radius())/b.root().distance(b.last());
-  else 
-    return 2*(b.first().radius() - b.last().radius())/b.first().distance(b.last());
+  
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
+  float dist ;
+  if(b.has_root()){
+    
+    dist = b.root().distance(b.last());
+    if(dist == 0.0) return 0;
+    else return 2*(b.root().radius() - b.last().radius())/dist;
+    
+  } else {
+    
+    dist = b.first().distance(b.last());
+    if(dist == 0.0) return 0;
+    else return 2*(b.first().radius() - b.last().radius())/b.first().distance(b.last());
+  }
 };
 
 const auto tortuosity = [](const Branch& b) -> float {
+  
+  // Check empty branch
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   float total_length = 0;
 
   // Compute length
@@ -84,6 +113,11 @@ const auto branch_order = [](const Branch &b) -> int {
 };
 
 const auto child_diam_ratio = [](const Branch& b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
@@ -222,6 +256,11 @@ const auto hillman_threshold = [](const Branch &b) -> float {
 };
 
 const auto local_bifurcation_angle = [](const Branch &b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -242,6 +281,12 @@ const auto local_bifurcation_angle = [](const Branch &b) -> float {
 
 
 const auto remote_bifurcation_angle = [](const Branch &b) -> float {
+  
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -256,6 +301,12 @@ const auto remote_bifurcation_angle = [](const Branch &b) -> float {
 };
 
 const auto local_tilt_angle = [](const Branch &b) -> float {
+  
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -275,6 +326,12 @@ const auto local_tilt_angle = [](const Branch &b) -> float {
 };
 
 const auto remote_tilt_angle = [](const Branch &b) -> float {
+  
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return 0;
@@ -296,6 +353,15 @@ const auto remote_tilt_angle = [](const Branch &b) -> float {
 };
 
 const auto local_plane_vector = [](const Branch &b) -> point_type {
+    
+    if(b.size() == 0 ){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return point_type();
+    } else if (!b.has_root()){
+      NSTR_LOG_(warn, std::string("Unrooted branch ") + b.idString() );
+      return point_type();
+    }
+  
     auto it = b.neurite().find(b);
     
     // Our vector
@@ -306,16 +372,42 @@ const auto local_plane_vector = [](const Branch &b) -> point_type {
       if(it.node->next_sibling == nullptr){
         return point_type();
       } else {
+        
+        if( !it.node->next_sibling->data.has_root() ){
+          NSTR_LOG_(warn, std::string("Unrooted sibling branch ") + b.idString() );
+          return point_type();
+        } else if (it.node->next_sibling->data.size() == 0){
+          NSTR_LOG_(warn, std::string("Empty sibling branch ") + b.idString() );
+          return point_type();
+        }
+        
         return geometry::cross_product(v,
         it.node->next_sibling->data.root().vectorTo(it.node->next_sibling->data.first()));
       }
     } else {
+      
+      if( !it.node->prev_sibling->data.has_root() ){
+          NSTR_LOG_(warn, std::string("Unrooted sibling branch ") + b.idString() );
+          return point_type();
+      } else if (it.node->prev_sibling->data.size() == 0){
+          NSTR_LOG_(warn, std::string("Empty sibling branch ") + b.idString() );
+          return point_type();
+      }
+      
       return geometry::cross_product(v,
         it.node->prev_sibling->data.root().vectorTo(it.node->prev_sibling->data.first()));
     }
 };
 
 const auto remote_plane_vector = [](const Branch &b) -> point_type {
+    if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return point_type();
+    } else if (!b.has_root()){
+      NSTR_LOG_(warn, std::string("Unrooted branch ") + b.idString() );
+      return point_type();
+    }
+  
     auto it = b.neurite().find(b);
     
     // Our vector
@@ -326,16 +418,43 @@ const auto remote_plane_vector = [](const Branch &b) -> point_type {
       if(it.node->next_sibling == nullptr){
         return point_type();
       } else {
+        
+        if( !it.node->next_sibling->data.has_root() ){
+          NSTR_LOG_(warn, std::string("Unrooted sibling branch ") + b.idString() );
+          return point_type();
+        } else if (it.node->next_sibling->data.size() == 0){
+          NSTR_LOG_(warn, std::string("Empty sibling branch ") + b.idString() );
+          return point_type();
+        }
+        
         return geometry::cross_product(v,
         it.node->next_sibling->data.root().vectorTo(it.node->next_sibling->data.last()));
       }
     } else {
+      
+      if( !it.node->prev_sibling->data.has_root() ){
+          NSTR_LOG_(warn, std::string("Unrooted sibling branch ") + b.idString() );
+          return point_type();
+        } else if (it.node->prev_sibling->data.size() == 0){
+          NSTR_LOG_(warn, std::string("Empty sibling branch ") + b.idString() );
+          return point_type();
+        }
+      
       return geometry::cross_product(v,
         it.node->prev_sibling->data.root().vectorTo(it.node->prev_sibling->data.last()));
     }
 };
 
 const auto local_torque_angle = [](const Branch &b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  } else if(b.order() == 0){
+    // Cannot be computed for the root branch
+    NSTR_LOG_(info, "Torque angle cannot be computed for the root branch");
+    return 0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -352,6 +471,14 @@ const auto local_torque_angle = [](const Branch &b) -> float {
 };
 
 const auto remote_torque_angle = [](const Branch &b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  } else if(b.order() == 0){
+    NSTR_LOG_(info, "Torque angle cannot be computed for the root branch");
+    return 0;
+  }
+  
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
     return -1;
@@ -368,6 +495,11 @@ const auto remote_torque_angle = [](const Branch &b) -> float {
 };
 
 const auto branch_length = [](const Branch &b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return 0.0;
+  }
+  
   float len = b.has_root()?b.first().distance(b.root()):0.;
   for(auto it = (b.begin()+1) ; it != b.end() ; ++it ){
     len += it->distance( *(it-1) );

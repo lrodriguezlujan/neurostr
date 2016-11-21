@@ -11,7 +11,11 @@ namespace neurostr {
 namespace measure {
   
 /**
- * @brief Convert a single-input measure into a set measure (returns a vector)
+ * @brief Convert a single-input measure into a set measure that applies the
+ * original measure to each element of the input set
+ * 
+ * @param f Original single-input measure
+ * 
 **/
 template <typename Fn>
 auto measureEach(const Fn& f){
@@ -33,8 +37,12 @@ auto measureEach(const Fn& f){
 };
 
 /**
- * @brief Convert a single-input measure into a set-input measure that aggregates
- * its output
+ * @brief Convert a single-input measure into a set measure that applies the
+ * original measure to each element of the input set and then aggregates the 
+ * output.
+ * 
+ * @param f Original single-input measure
+ * @param aggr Aggregator function
 **/
 template <typename Fn, typename Aggr>
 auto measureEachAggregate(const Fn& f, const Aggr& aggr){
@@ -66,7 +74,7 @@ auto measureEachAggregate(const Fn& f, const Aggr& aggr){
 
 /**
  * @brief Creates a new measure as result of the composition of the selector
- * and the measure (MoS). Types and arity must be compatible
+ * and the measure (M o S). Types and arity must match
  * @param selector Selector 
  * @param measure Measure
  */
@@ -90,6 +98,8 @@ auto selectorMeasureCompose(const S& selector, const M& measure){
 /**
  * @brief Creates a measure that applies several measures to the same
  * input and returns their result in a tuple
+ * 
+ * @param measures Measures to combine in the tuple
  */
 template <typename... Measures>
 auto createMeasureTuple(const Measures&... measures ) {

@@ -31,7 +31,7 @@ constexpr auto compose_selector(const F1& f1, const F2& f2, Funcs... fns) {
  * @brief Recursive template for selector composition. Base case.
  * @param f1 First function
  * @param f2 Second function
- * @return f1of2
+ * @return f1 o f2
  */
 template <typename F1, typename F2, typename... Funcs, std::enable_if_t<sizeof...(Funcs) == 0>* = nullptr>
 constexpr auto compose_selector(const F1& f1, const F2& f2, Funcs... fns) {
@@ -169,7 +169,12 @@ constexpr auto selector_in_single_to_set(const F& f){
   return f;
 }; 
 
-/** Foreach - F1 input single  - F2 output single **/
+/**
+ * @brief Creates a new selector that applies the selector f2 to each selected element of f1
+ * @param f1 First selector (that selects a set)
+ * @param f2 Secpmd selector (input a single element)
+ * @note Template for f1 single input and f2 single output
+ */
 template <typename F1, typename F2,
           std::enable_if_t<!selector_func_traits<F1>::in_set >* = nullptr,
           std::enable_if_t<!selector_func_traits<F2>::out_set >* = nullptr>
@@ -191,13 +196,19 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
       auto sel = f1_(r);
       std::vector<reference_out> ret;
       ret.reserve(size(sel));
-      for(auto it = sel.beign(); it != sel.end() ; ++it){
+      for(auto it = sel.begin(); it != sel.end() ; ++it){
         ret.emplace_back(f2_(it->get()));
       }
+      return ret;
   };
 };
 
-/** Foreach - F1 input single  - F2 output set **/
+/**
+ * @brief Creates a new selector that applies the selector f2 to each selected element of f1
+ * @param f1 First selector (that selects a set)
+ * @param f2 Secpmd selector (input a single element)
+ * @note Template for f1 single input and f2 set output
+ */
 template <typename F1, typename F2,
           std::enable_if_t<!selector_func_traits<F1>::in_set >* = nullptr,
           std::enable_if_t<selector_func_traits<F2>::out_set >* = nullptr>
@@ -218,16 +229,22 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
   return [f1_ = f1, f2_ = f2](const in& r) -> std::vector<reference_out> {
       auto sel = f1_(r);
       std::vector<reference_out> ret;
-      for(auto it = sel.beign(); it != sel.end() ; ++it){
+      for(auto it = sel.begin(); it != sel.end() ; ++it){
         auto aux =  f2_(it->get());
-        for(auto it2 = aux.beign(); it2 != aux.end() ; ++it2){
+        for(auto it2 = aux.begin(); it2 != aux.end() ; ++it2){
           ret.emplace_back(*it2);
         }
       }
+      return ret;
   };
 };
 
-/** Foreach - F1 input set  - F2 output single **/
+/**
+ * @brief Creates a new selector that applies the selector f2 to each selected element of f1
+ * @param f1 First selector (that selects a set)
+ * @param f2 Secpmd selector (input a single element)
+ * @note Template for f1 set input and f2 single output
+ */
 template <typename F1, typename F2,
           std::enable_if_t<selector_func_traits<F1>::in_set >* = nullptr,
           std::enable_if_t<!selector_func_traits<F2>::out_set >* = nullptr>
@@ -249,13 +266,19 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
       auto sel = f1_(b,e);
       std::vector<reference_out> ret;
       ret.reserve(size(sel));
-      for(auto it = sel.beign(); it != sel.end() ; ++it){
+      for(auto it = sel.begin(); it != sel.end() ; ++it){
         ret.emplace_back(f2_(it->get()));
       }
+      return ret;
   };
 };
 
-/** Foreach - F1 input set  - F2 output set **/
+/**
+ * @brief Creates a new selector that applies the selector f2 to each selected element of f1
+ * @param f1 First selector (that selects a set)
+ * @param f2 Secpmd selector (input a single element)
+ * @note Template for f1 set input and f2 set output
+ */
 template <typename F1, typename F2,
           std::enable_if_t<selector_func_traits<F1>::in_set >* = nullptr,
           std::enable_if_t<selector_func_traits<F2>::out_set >* = nullptr>
@@ -276,17 +299,15 @@ constexpr auto selector_foreach(const F1& f1, const F2& f2){
   return [f1_ = f1, f2_ = f2](const reference_in& b, const reference_in& e) -> std::vector<reference_out> {
       auto sel = f1_(b,e);
       std::vector<reference_out> ret;
-      for(auto it = sel.beign(); it != sel.end() ; ++it){
+      for(auto it = sel.begin(); it != sel.end() ; ++it){
         auto aux =  f2_(it->get());
-        for(auto it2 = aux.beign(); it2 != aux.end() ; ++it2){
+        for(auto it2 = aux.begin(); it2 != aux.end() ; ++it2){
           ret.emplace_back(*it2);
         }
       }
+      return ret;
   };
 };
-
-// End template selector_in_single_to_set
-
 // END  Single input to set input templates
 
 
