@@ -76,19 +76,6 @@ menu:
           troubleshooting:
             text: "troubleshooting"
             relativeUrl: "doc/install.html#troubleshooting"
-          binaries:
-            text: "Bundled utilities"
-            relativeUrl: "doc/utils.html"
-            items:
-              converter:
-                text: "Format converter"
-                relativeUrl: "doc/utils.html#converter"
-              validator:
-                text: "Reconstruction validator"
-                relativeUrl: "doc/utils.html#validator"
-              feature:
-                text: "Feature extractor"
-                relativeUrl: "doc/utils.html#feature"
       tutorial:
         text: "Tutorial"
         relativeUrl: "doc/tutorial.html"
@@ -212,7 +199,6 @@ menu:
           operators:
             text: "Measure operations"
             relativeUrl: "doc/measures.html#operations"
-            alwaysVisible: true
             items:
               overview:
                 text: "Operations overview"
@@ -220,9 +206,28 @@ menu:
       validation:
         text: "Reconstruction validation"
         relativeUrl: "doc/validation.html"
-      faq:
-        text: "Frequently Asked Questions"
-        relativeUrl: "doc/faq.html"
+      tools:
+        text: "Bundled tools"
+        relativeUrl: "doc/tools.html"
+        subsections:
+          converter:
+            text: "Format converter"
+            relativeUrl: "doc/tools.html#converter"
+          neuritefeature:
+            text: "Neurite Feature Extractor"
+            relativeUrl: "doc/tools.html#neuirtefeature"
+          branchfeature:
+            text: "Branch Feature Extractor"
+            relativeUrl: "doc/tools.html#branchfeature"
+          validator:
+            text: "Neuron Validator"
+            relativeUrl: "doc/tools.html#validator"
+          scholl:
+            text: "Scholl analysis"
+            relativeUrl: "doc/tools.html#scholl"
+          cutter:
+            text: "Neuron Box Cutter"
+            relativeUrl: "doc/tools.html#boxcut"
       class:
         text: "Classes"
         relativeUrl: "doc/classes.html"
@@ -299,3 +304,9 @@ menu:
               jsonwriter:
                 text: "JSON Writer"
                 relativeUrl: "doc/classes/io.html#class_io__j_s_o_n_writer"
+          selector:
+            text: "Selector"
+            relativeUrl: "doc/classes/selector.html"
+          measure:
+            text: "Measure"
+            relativeUrl: "doc/classes/measure.html"

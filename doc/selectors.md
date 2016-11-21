@@ -12,30 +12,12 @@ The selector concept is quite simple: A selector is a function that takes one or
 ![Selector basics][selector_basics]
 
 Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`. So, looking at the input and output arity we distinguish four selector function types:
-1. Single input - single output
-```
-  [](const ElementA& n) => const ElementB& {}
-```
-1. Single input - set output
-```
-  [](const ElementA& n) => std::vector<std::reference_wrapper<ElementB>> {}
-```
+1. Single input - single output: `[](const ElementA& n) => const ElementB& {}`
+1. Single input - set output: ` [](const ElementA& n) => std::vector<std::reference_wrapper<ElementB>> {}`
+1. Set input - single output:  ` [](const reference_iter& beg, const reference_iter& end) => const ElementB& {} `
+1. Set input - set output:  ` [](const reference_iter<A>& beg, const reference_iter<A>& end) => std::vector<std::reference_wrapper<ElementB>> {} `
 
-1. Set input - single output
-```
-  [](const reference_iter& beg, const reference_iter& end) => const ElementB& {}
-```
-
-1. Set input - set output
-```
-  [](const reference_iter<A>& beg, const reference_iter<A>& end)
-          => std::vector<std::reference_wrapper<ElementB>> {}
-```
-
-Here we use `reference_iter<Element>` as shorthand for
-```
-std::vector<std::reference_wrapper<Element>>::iterator
-```
+Here we use `reference_iter<Element>` as shorthand for ` std::vector<std::reference_wrapper<Element>>::iterator `
  Any function with signature equal to one of these, can be used as selector in *NeuroSTR* and it is compatible with all selector functionality in the library. Along the documentation, we might mention **filter functions** which are just *Set input - set output (type 4)* selectors that return a subset of a given set of elements.
 
 ---

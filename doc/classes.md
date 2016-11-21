@@ -26,7 +26,7 @@ Neurostr namespace contains all other namespaces in the library as well as the d
 
 ---
 
-# namespace `geometry` {#namespace_geometry}
+# namespace [`geometry`](classes/geometry.html) {#namespace_geometry}
 
 Geometry namespace hides geometry specific implementation details from the rest of the library.
 
@@ -88,19 +88,20 @@ Geometry namespace hides geometry specific implementation details from the rest 
 `public float tetrahedron_volume(const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p0,const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p1,const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p2,const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p3)` | Returns the volume of the tetrahedron.
 `public float triangle_area(const `[`triangle_type`](classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74)` & t)` | Compute the triangle area.
 
-# namespace `traits` {#namespace_traits}
+# namespace [`traits`](classes/traits.html) {#namespace_traits}
 
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[``function_traits``](classes/traits.html#struct_traits_function__traits)    | Extract basic information from a fuctor like out type, arg type, arity...
-`struct `[``is_vector``](classes/traits.html#struct_traits_is__vector)    | Base false trait is vector.
+`Trait `[``function_traits``](classes/traits.html#struct_traits_function__traits)    | Extract basic information from a fuctor like out type, arg type, arity...
+`Trait `[``is_vector``](classes/traits.html#struct_traits_is__vector)    | Base false trait is vector.
+`Trait `[``is_base_of_template``](#struct_traits_is_base_of_template)    | Is base of template base trait.
 
 ---
 
 
-# namespace `log` {#namespace_log}
+# namespace [`log`](classes/log.html) {#namespace_log}
 
 Log namespace contains logger functions.
 
@@ -120,7 +121,7 @@ Log namespace contains logger functions.
 
 ---
 
-# namespace `io` {#namespace_io}
+# namespace [`io`](classes/io.html) {#namespace_io}
 
 IO namespace contains write/read functionality for most common file formats.
 
@@ -139,3 +140,36 @@ IO namespace contains write/read functionality for most common file formats.
 `struct `[``marker_type``](classes/io.html#struct_io_marker__type)    | Markerset structure for NL files.
 `struct `[``subtree_info``](classes/io.html#struct_io_subtree__info)    | SubTree header in DAT files.
 `struct `[``tree_info``](classes/io.html#struct_io_tree__info)    | Tree header in DAT files.
+
+
+---
+# namespace [`selector`](classes/selector.html#namespace_selector) {#namespace_selector}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`struct `[``selector_func_traits``](classes/selectors.html#struct_selector__func__traits)        | Selector function traits.
+`struct `[``type_chooser``](classes/selectors.html#struct_type__chooser)        | Trait that extracts the selector i/o type.
+`struct `[``type_chooser< true, T >``](classes/selectors.html#struct_type__chooser_3_01true_00_01_t_01_4)        |
+`public template<typename F1,typename F2,typename... Funcs,std::enable_if_t< sizeof...(Funcs)==0 > *>`  <br/>`inline constexpr auto compose_selector(const F1 & f1,const F2 & f2,Funcs... fns)` | Recursive template for selector composition.
+`public template<typename F,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F >::out_set > *>`  <br/>`inline constexpr auto selector_out_single_to_set(const F & f)` | Converts a selector with single output in one with set output Case: Output is already set.
+`public template<typename F,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F >::in_set > *>`  <br/>`inline constexpr auto selector_in_single_to_set(const F & f)` | Converts a selector with single output in one with set output Case: Output is already set.
+`public template<typename F1,typename F2,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F1 >::in_set > *,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F2 >::out_set > *>`  <br/>`inline constexpr auto selector_foreach(const F1 & f1,const F2 & f2)` | Creates a new selector that applies the selector f2 to each selected element of f1.
+`public template<typename F1,typename F2,typename... Funcs,std::enable_if_t< sizeof...(Funcs)==0 > *>`  <br/>`inline constexpr auto union_selector(const F1 & f1,const F2 & f2,Funcs... fns)` | Recursive template for selector union.
+`public template<typename F1,typename F2,typename... Funcs,std::enable_if_t< sizeof...(Funcs)==0 > *>`  <br/>`inline constexpr auto intersection_selector(const F1 & f1,const F2 & f2,Funcs... fns)` | Recursive template for selector intersection.
+`public template<typename F1,typename F2,std::enable_if_t<!`[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F1 >::in_set > *>`  <br/>`inline constexpr auto diff_selector_factory(const F1 & f_1,const F2 & f_2)` | Assymetric difference.
+
+
+# namespace [`measure`](classes/measure.html#namespace_measure) {#namespace_measure}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`namespace `[``aggregate``](classes/measure.html#namespace_aggregate)    | Namespace that contains aggregate-related functions and traits
+`template <typename Fn> auto measureEach(const Fn& f)` | Converts a single-input measure into a set measure that applies the original measure to each element of the input set
+`template <typename Fn, typename Aggr> auto measureEachAggregate(const Fn& f, const Aggr& aggr)` | Converts a single-input measure into a set measure that applies the original measure to each element of the input set and then aggregates the  output.
+`template <typename S, typename M> auto selectorMeasureCompose(const S& selector, const M& measure)` | Creates a new measure as result of the composition of the selector and the measure (M o S). Types and arity must match
+`template <typename... Measures> auto createMeasureTuple(const Measures&... measures )` | Creates a measure that applies several measures to the same input and returns their result in a tuple
+`template <typename F> struct measure_func_traits` |Measure function traits. Extracts input type, input arity and output type.
