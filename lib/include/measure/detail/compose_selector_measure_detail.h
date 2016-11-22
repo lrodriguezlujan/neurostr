@@ -4,7 +4,6 @@
 #include <iterator>
 #include <vector>
 
-#include <boost/type_traits.hpp>
 #include "core/traits.h"
 #include "selector/selector.h"
 #include "measure/measure_traits.h"

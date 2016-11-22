@@ -12,7 +12,6 @@
 #include <boost/iterator.hpp>
 #include <boost/any.hpp>
 #include <boost/geometry.hpp>
-#include <boost/utility/enable_if.hpp>
 
 #include "core/definitions.h"
 #include "core/property.h"
