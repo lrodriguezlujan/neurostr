@@ -3,10 +3,9 @@ currentSection: measures
 currentSubsection: predef
 currentItem: neurite
 ---
-# Neurite selectors
-text
+# Neurite selectors {#neurite}
 
-### Root is soma <a id="rootsoma"> </a>
+### Root is soma <a id="neurite_rootsoma"> </a>
 
 **Function:** `root_is_soma`
 

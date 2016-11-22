@@ -3,10 +3,10 @@ currentSection: measures
 currentSubsection: predef
 currentItem: branch
 ---
-# Branch measures
+# Branch measures {#branch}
 text
 
-### Hillman taper rate<a id="hillman"> </a>
+### Hillman taper rate<a id="branch_hillman"> </a>
 
 **Function:** `taper_rate_hillman = [](const Branch& b) -> float`
 
@@ -23,7 +23,7 @@ ADD IMAGE
 
 ---
 
-### Burker taper rate <a id="burker"> </a>
+### Burker taper rate <a id="branch_burker"> </a>
 
 **Function:** `taper_rate_burker = [](const Branch& b) -> float`
 
@@ -39,7 +39,7 @@ ADD IMAGE
 
 ---
 
-### Tortuosity <a id="tortuosity"> </a>
+### Tortuosity <a id="branch_tortuosity"> </a>
 
 **Function:** `tortuosity = [](const Branch& b) -> float`
 
@@ -55,7 +55,7 @@ ADD IMAGE
 
 ---
 
-### Node count <a id="size"> </a>
+### Node count <a id="branch_size"> </a>
 
 **Function:** `branch_size = [](const Branch &b) -> int`
 
@@ -67,7 +67,7 @@ ADD IMAGE
 
 ---
 
-### Branch index <a id="index"> </a>
+### Branch index <a id="branch_index"> </a>
 
 **Function:** `branch_index = [](const Branch &b) -> unsigned int`
 
@@ -79,7 +79,7 @@ ADD IMAGE
 
 ---
 
-### Centrifugal order <a id="order"> </a>
+### Centrifugal order <a id="branch_order"> </a>
 
 **Function:** `branch_order = [](const Branch &b) -> int`
 
@@ -93,7 +93,7 @@ ADD IMAGE
 
 ---
 
-### Child diameter ratio <a id="childdimratio"> </a>
+### Child diameter ratio <a id="branch_childdimratio"> </a>
 
 **Function:** `child_diam_ratio = [](const Branch& b) -> float`
 
@@ -107,7 +107,7 @@ ADD IMAGE
 
 ---
 
-### Parent-Child diameter ratio <a id="childdimratio"> </a>
+### Parent-Child diameter ratio <a id="branch_childdimratio"> </a>
 
 **Function:** `parent_child_diam_ratio = [](const Branch& b) -> std::pair<float,float>`
 
@@ -122,7 +122,7 @@ ADD IMAGE
 
 ---
 
-### Partition asymmetry <a id="partition"> </a>
+### Partition asymmetry <a id="branch_partition"> </a>
 
 **Function:** `partition_asymmetry = [](const Branch& b) -> float`
 
@@ -138,7 +138,7 @@ ADD IMAGE
 
 ---
 
-### Rall's power fit <a id="rall"> </a>
+### Rall's power fit <a id="branch_rall"> </a>
 
 **Factory function:** `auto rall_power_fit_factory(float min = 0 , float max = 5)`
 
@@ -154,7 +154,7 @@ ADD IMAGE
 
 ---
 
-### Pk measure <a id="pk"> </a>
+### Pk measure <a id="branch_pk"> </a>
 
 **Factory function:** `auto pk_factory(float r)`
 
@@ -172,7 +172,7 @@ ADD IMAGE
 
 ---
 
-### Hillman threshold <a id="hillman_threshold"> </a>
+### Hillman threshold <a id="branch_hillman_threshold"> </a>
 
 **Function:** `hillman_threshold = [](const Branch &b) -> float`
 
@@ -186,7 +186,7 @@ ADD IMAGE
 
 ---
 
-### Local bifurcation angle <a id="localbif"> </a>
+### Local bifurcation angle <a id="branch_localbif"> </a>
 
 **Function:** `local_bifurcation_angle = [](const Branch &b) -> float`
 
@@ -200,7 +200,7 @@ ADD IMAGE
 
 ---
 
-### Remote bifurcation angle <a id="remotebif"> </a>
+### Remote bifurcation angle <a id="branch_remotebif"> </a>
 
 **Function:** `remote_bifurcation_angle = [](const Branch &b) -> float`
 
@@ -214,7 +214,7 @@ ADD IMAGE
 
 ---
 
-### Local tilt angle <a id="localtilt"> </a>
+### Local tilt angle <a id="branch_localtilt"> </a>
 
 **Function:** `local_tilt_angle = [](const Branch &b) -> float`
 
@@ -228,7 +228,7 @@ ADD IMAGE
 
 ---
 
-### Remote tilt angle <a id="remotetilt"> </a>
+### Remote tilt angle <a id="branch_remotetilt"> </a>
 
 **Function:** `remote_tilt_angle = [](const Branch &b) -> float`
 
@@ -242,7 +242,7 @@ ADD IMAGE
 
 ---
 
-### Local plane vector <a id="localplane"> </a>
+### Local plane vector <a id="branch_localplane"> </a>
 
 **Function:** `local_plane_vector = [](const Branch &b) -> point_type `
 
@@ -256,7 +256,7 @@ ADD IMAGE
 
 ---
 
-### Remote plane vector <a id="remoteplane"> </a>
+### Remote plane vector <a id="branch_remoteplane"> </a>
 
 **Function:** `remote_plane_vector = [](const Branch &b) -> point_type `
 
@@ -270,7 +270,7 @@ ADD IMAGE
 
 ---
 
-### Local torque angle <a id="localtorque"> </a>
+### Local torque angle <a id="branch_localtorque"> </a>
 
 **Function:** `local_plane_vector = [](const Branch &b) -> point_type `
 
@@ -284,7 +284,7 @@ ADD IMAGE
 
 ---
 
-### Remote torque angle <a id="remotetorque"> </a>
+### Remote torque angle <a id="branch_remotetorque"> </a>
 
 **Function:** `local_plane_vector = [](const Branch &b) -> point_type `
 
@@ -298,7 +298,7 @@ ADD IMAGE
 
 ---
 
-### Length <a id="length"> </a>
+### Length <a id="branch_length"> </a>
 
 **Function:** `branch_length = [](const Branch &b) -> float `
 
@@ -310,7 +310,7 @@ ADD IMAGE
 
 ---
 
-### Intersects <a id="intersects"></a>
+### Intersects <a id="branch_intersects"></a>
 
 **Factory:**  `branch_intersects_factory(bool ignore_radius = false)`
 

@@ -3,10 +3,10 @@ currentSection: measures
 currentSubsection: predef
 currentItem: node
 ---
-# Node measures
+# Node measures {#node}
 text
 
-### X, Y, Z components<a id="component"> </a>
+### X, Y, Z components<a id="node_component"> </a>
 
 **Function:** `node_x, node_y, node_z = [](const Node& n) -> float`
 
@@ -18,7 +18,7 @@ ADD IMAGE
 
 ---
 
-### Radius, diameter<a id="radius"> </a>
+### Radius, diameter<a id="node_radius"> </a>
 
 **Function:** `node_radius,node_diameter = [](const Node& n) -> float`
 
@@ -33,7 +33,7 @@ ADD IMAGE
 
 ---
 
-### Centrifugal order<a id="order"> </a>
+### Centrifugal order<a id="node_order"> </a>
 
 **Function:** `node_order = [](const Node& n) -> int`
 
@@ -47,7 +47,7 @@ ADD IMAGE
 
 ---
 
-### Distance to parent<a id="parent_length"> </a>
+### Distance to parent<a id="node_parent_length"> </a>
 
 **Function:** `node_length_to_parent,node_length_to_parent_border = [](const Node& n) -> float`
 
@@ -61,7 +61,7 @@ ADD IMAGE
 
 ---
 
-### Distance to root<a id="rootdist"> </a>
+### Distance to root<a id="node_rootdist"> </a>
 
 **Function:** `node_distance_to_root = [](const Node& n) -> float`
 
@@ -75,7 +75,7 @@ ADD IMAGE
 
 ---
 
-### Distance to soma<a id="somadist"> </a>
+### Distance to soma<a id="node_somadist"> </a>
 
 **Function:** `node_distance_to_soma = [](const Node& n) -> float`
 
@@ -89,7 +89,7 @@ ADD IMAGE
 
 ---
 
-### Path length to root<a id="rootpath"> </a>
+### Path length to root<a id="node_rootpath"> </a>
 
 **Function:** `node_path_to_root = [](const Node& n) -> float`
 
@@ -102,7 +102,7 @@ ADD IMAGE
 ---
 
 
-### Compartment volume<a id="volume"> </a>
+### Compartment volume<a id="node_volume"> </a>
 
 **Function:** `node_volume = [](const Node& n) -> float`
 
@@ -116,7 +116,7 @@ ADD IMAGE
 
 ---
 
-### Compartment surface<a id="surface"> </a>
+### Compartment surface<a id="node_surface"> </a>
 
 **Function:** `node_compartment_surface = [](const Node& n) -> float`
 
@@ -130,7 +130,7 @@ ADD IMAGE
 
 ---
 
-### Compartment section area<a id="section"> </a>
+### Compartment section area<a id="node_section"> </a>
 
 **Function:** `node_compartment_section_area = [](const Node& n) -> float`
 
@@ -144,7 +144,7 @@ ADD IMAGE
 
 ---
 
-### Local Hillman taper rate<a id="hillman"> </a>
+### Local Hillman taper rate<a id="node_hillman"> </a>
 
 **Function:** `node_segment_taper_rate_hillman = [](const Node& n) -> float`
 
@@ -159,7 +159,7 @@ ADD IMAGE
 
 ---
 
-### Local Burker taper rate<a id="burker"> </a>
+### Local Burker taper rate<a id="node_burker"> </a>
 
 **Function:** `node_segment_taper_rate_burker = [](const Node& n) -> float`
 
@@ -174,7 +174,7 @@ ADD IMAGE
 
 ---
 
-### Non axis aligned minimum box volume<a id="boxvol"> </a>
+### Non axis aligned minimum box volume<a id="node_boxvol"> </a>
 
 **Function:** `box_volume = [](const const_node_iterator& b,
                            const const_node_iterator& e) -> double`
@@ -189,7 +189,7 @@ ADD IMAGE
 
 ---
 
-### Vector to parent<a id="parentvector"> </a>
+### Vector to parent<a id="node_parentvector"> </a>
 
 **Function:** `node_parent_vector = [](const Node& n) -> point_type`
 
@@ -203,7 +203,7 @@ ADD IMAGE
 
 ---
 
-### Local bifurcation angle<a id="localbif"> </a>
+### Local bifurcation angle<a id="node_localbif"> </a>
 
 **Function:** `node_local_bifurcation_angle = [](const Node& n) -> float`
 
@@ -217,7 +217,7 @@ ADD IMAGE
 
 ---
 
-### Local elongation angle<a id="localelong"> </a>
+### Local elongation angle<a id="node_localelong"> </a>
 
 **Function:** `node_local_elongation_angle = [](const Node& n) -> float`
 
@@ -231,7 +231,7 @@ ADD IMAGE
 
 ---
 
-### Local orientation<a id="localorientation"> </a>
+### Local orientation<a id="node_localorientation"> </a>
 
 **Function:** `node_local_orientation = [](const Node& n) -> std::pair<float, float>`
 
@@ -243,7 +243,7 @@ ADD IMAGE
 
 ---
 
-### In terminal branch<a id="interminalbranch"> </a>
+### In terminal branch<a id="node_interminalbranch"> </a>
 
 **Function:** `node_in_terminal_segment = [](const Node& n) -> bool`
 
@@ -255,7 +255,7 @@ ADD IMAGE
 
 ---
 
-### Distance to closest segment<a id="distclosest"> </a>
+### Distance to closest segment<a id="node_distclosest"> </a>
 
 **Function:** `segment_distance_to_closest = [](const Node& n) -> bool`
 
@@ -267,7 +267,7 @@ ADD IMAGE
 
 ---
 
-### Distance to closest segment<a id="distclosest"> </a>
+### Distance to closest segment<a id="node_distclosest"> </a>
 
 **Function:** `segment_distance_to_closest = [](const Node& n) -> bool`
 
@@ -279,7 +279,7 @@ ADD IMAGE
 
 ---
 
-### Fractal dimension<a id="fractal"> </a>
+### Fractal dimension<a id="node_fractal"> </a>
 
 **Function:** ` node_set_fractal_dim = [](const const_node_iterator& b,
                                      const const_node_iterator& e) -> float`

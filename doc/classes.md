@@ -173,3 +173,34 @@ IO namespace contains write/read functionality for most common file formats.
 `template <typename S, typename M> auto selectorMeasureCompose(const S& selector, const M& measure)` | Creates a new measure as result of the composition of the selector and the measure (M o S). Types and arity must match
 `template <typename... Measures> auto createMeasureTuple(const Measures&... measures )` | Creates a measure that applies several measures to the same input and returns their result in a tuple
 `template <typename F> struct measure_func_traits` |Measure function traits. Extracts input type, input arity and output type.
+
+
+# namespace [`validator`](classes/validator.html#namespace_validator) {#namespace_validator}
+
+Validator namespace contains the validator template class and the predefined validators and check functions.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`class `[``Validator``](classes/validator.html#class_validator)    |
+`class `[``ValidatorItem``](classes/validator.html#class_validator_item)    |
+`class `[``check_func_traits``](classes/validator.html#struct_check__func__traits)        |
+`public const auto is_true` | Dummy. Checks that a given boolean is true
+`public const auto is_false` | Dummy. Checks that a given boolean is false
+`public const auto empty_string` | Dummy. Checks that a given string is empty
+`public template<typename T>`  <br/>`inline auto range_check_factory(T min,T max)` | Range check factory. Checks that a given value is in the range [min, max)
+`public const auto neurites_attached_to_soma` | Neurite validator. Checks that neurites are attached to the soma
+`public const auto neuron_has_soma` | Neuron validator. Checks that neuron soma is defined
+`public const auto no_trifurcations_validator` | Node validator. Checks that the number of descendants of a node is at most 2.
+`public const auto zero_length_segments_validator` | Node validator. Checks that the length of the compartment associated to each node is not zero.
+`public const auto radius_length_segments_validator` | Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.
+`public const auto increasing_radius_validator` | Node validator. Checks that the node radius is not increasing.
+`public const auto segment_collision_validator` | Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction
+`public const auto extreme_angles_validator` | Node validator. Check that the elongation/bifurcation angle are not too high to be plausible
+`public inline auto planar_reconstruction_validator_factory(float min)` | Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)
+`public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)` | Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)
+`public inline auto apical_count_validator_factory(bool strict)` | Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2
+`public inline auto axon_count_validator_factory(bool strict)` | Neuron validator. Checks that the number of axons in the neuron is not greater than 2
+`public inline auto linear_branches_validator_factory(float min)` | Branch validator. Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1
+`public inline auto branch_collision_validator_factory(bool ignore_diams)` | Branch validator. Check that the Branch dont collide with any other branch in the neuron

@@ -3,10 +3,10 @@ currentSection: measures
 currentSubsection: predef
 currentItem: neuron
 ---
-# Neuron selectors
+# Neuron selectors {#neuron}
 text
 
-### Neuron has soma <a id="hassoma"> </a>
+### Neuron has soma <a id="neuron_hassoma"> </a>
 
 **Function:** `has_soma`
 
@@ -18,7 +18,7 @@ text
 
 ---
 
-### Neurite count <a id="neurite_count"> </a>
+### Neurite count <a id="neuron_neurite_count"> </a>
 
 **Function:** `neuron_neurite_count`
 
@@ -28,7 +28,7 @@ text
 
 ---
 
-### Neurite type count <a id="neurite__type_count"> </a>
+### Neurite type count <a id="neuron_neurite__type_count"> </a>
 
 **Function:** `neuron_type_counter` (factory method)
 
@@ -45,7 +45,7 @@ text
 
 ---
 
-### Soma surface area <a id="soma_surface"> </a>
+### Soma surface area <a id="neuron_soma_surface"> </a>
 
 **Function:** `soma_surface`
 

@@ -19,125 +19,124 @@ Predefined measures are organized in the same way as [Selectors](selectors.html)
 
 You might notice (and it seems odd) that there are very few Neurite and Neuron measures, but it is on purpose. Since we can use [Selectors](selectors.html) and [Aggregators](#aggregators) along with measures to create new measures, we focus on defining "low level" measures, that can be use to create "high level measures". Check the [Create a measure](#create) to see a simple example of this.
 
-### [Node Measures](measures/node.html)
+### [Node Measures](measures/predefined.html#node)
 
-- [X,Y,Z component](measures/node.html#component)
-- [Radius, Diameter](measures/node.html#radius)
-- [Centrifugal order](measures/node.html#order)
-- [Distance to parent](measures/node.html#parent_length)
-- [Compartment volume](measures/node.html#volume)
-- [Compartment surface](measures/node.html#surface)
-- [Compartment section area](measures/node.html#section)
-- [Local Hillman taper rate](measures/node.html#hillman)
-- [Local Burker taper rate](measures/node.html#burker)
-- [Distance to root](measures/node.html#rootdist)
-- [Distance to soma](measures/node.html#somadist)
-- [Path length to root](measures/node.html#rootpath)
-- [Number of descendants](measures/node.html#desccount)
-- [Non-aligned minimum box volume](measures/node.html#boxvol)
-- [Vector to parent](measures/node.html#parentvector)
-- [Local bifurcation angle](measures/node.html#localbif)
-- [Local elongation angle](measures/node.html#localelong)
-- [Extreme angle](measures/node.html#extreme)
-- [Local orientation](measures/node.html#localorientation)
-- [In terminal branch](measures/node.html#interminalbranch)
-- [Distance to closest segment](measures/node.html#distclosest)
-- [Fractal dimension](measures/node.html#fractal)
+- [X,Y,Z component](measures/predefined.html#node_component)
+- [Radius, Diameter](measures/predefined.html#node_radius)
+- [Centrifugal order](measures/predefined.html#node_order)
+- [Distance to parent](measures/predefined.html#node_parent_length)
+- [Compartment volume](measures/predefined.html#node_volume)
+- [Compartment surface](measures/predefined.html#node_surface)
+- [Compartment section area](measures/predefined.html#node_section)
+- [Local Hillman taper rate](measures/predefined.html#node_hillman)
+- [Local Burker taper rate](measures/predefined.html#node_burker)
+- [Distance to root](measures/predefined.html#node_rootdist)
+- [Distance to soma](measures/predefined.html#node_somadist)
+- [Path length to root](measures/predefined.html#node_rootpath)
+- [Number of descendants](measures/predefined.html#node_desccount)
+- [Non-aligned minimum box volume](measures/predefined.html#node_boxvol)
+- [Vector to parent](measures/predefined.html#node_parentvector)
+- [Local bifurcation angle](measures/predefined.html#node_localbif)
+- [Local elongation angle](measures/predefined.html#node_localelong)
+- [Extreme angle](measures/predefined.html#node_extreme)
+- [Local orientation](measures/predefined.html#node_localorientation)
+- [In terminal branch](measures/predefined.html#node_interminalbranch)
+- [Distance to closest segment](measures/predefined.html#node_distclosest)
+- [Fractal dimension](measures/predefined.html#node_fractal)
 
  ---
 
-### [Branch Measures](measures/branch.html)
+### [Branch Measures](measures/predefined.html#branch)
 
-- [Hillman taper rate](measures/branch.html#hillman)
-- [Burker taper rate](measures/branch.html#burker)
-- [Tortuosity](measures/branch.html#tortuosity)
-- [Node count](measures/branch.html#size)
-- [Branch index](measures/branch.html#index)
-- [Centrifugal order](measures/branch.html#order)
-- [Child diameter ratio](measures/branch.html#childdimratio)
-- [Parent-Child diameter ratio](measures/branch.html#parentchildiamratio)
-- [Partition asymmetry](measures/branch.html#partition)
-- [Rall power fit](measures/branch.html#rall)
-- [Pk](measures/branch.html#pk)
-- [Hillman threshold](measures/branch.html#hillman_threshold)
-- [Local bifurcation angle](measures/branch.html#localbif)
-- [Remote bifurcation angle](measures/branch.html#remotebif)
-- [Local bifurcation angle](measures/branch.html#localbif)
-- [Remote bifurcation angle](measures/branch.html#remotebif)
-- [Local tilt angle](measures/branch.html#localtilt)
-- [Remote tilt angle](measures/branch.html#remotetilt)
-- [Local plane vector](measures/branch.html#localplane)
-- [Remote plane vector](measures/branch.html#remoteplane)
-- [Local torque angle](measures/branch.html#localtorque)
-- [Remote torque angle](measures/branch.html#remotetorque)
-- [Length](measures/branch.html#length)
-- [Intersects](measures/branch.html#intersects)
+- [Hillman taper rate](measures/predefined.html#branch_hillman)
+- [Burker taper rate](measures/predefined.html#branch_burker)
+- [Tortuosity](measures/predefined.html#branch_tortuosity)
+- [Node count](measures/predefined.html#branch_size)
+- [Branch index](measures/predefined.html#branch_index)
+- [Centrifugal order](measures/predefined.html#branch_order)
+- [Child diameter ratio](measures/predefined.html#branch_childdimratio)
+- [Parent-Child diameter ratio](measures/predefined.html#branch_parentchildiamratio)
+- [Partition asymmetry](measures/predefined.html#branch_partition)
+- [Rall power fit](measures/predefined.html#branch_rall)
+- [Pk](measures/predefined.html#branch_pk)
+- [Hillman threshold](measures/predefined.html#branch_hillman_threshold)
+- [Local bifurcation angle](measures/predefined.html#branch_localbif)
+- [Remote bifurcation angle](measures/predefined.html#branch_remotebif)
+- [Local bifurcation angle](measures/predefined.html#branch_localbif)
+- [Remote bifurcation angle](measures/predefined.html#branch_remotebif)
+- [Local tilt angle](measures/predefined.html#branch_localtilt)
+- [Remote tilt angle](measures/predefined.html#branch_remotetilt)
+- [Local plane vector](measures/predefined.html#branch_localplane)
+- [Remote plane vector](measures/predefined.html#branch_remoteplane)
+- [Local torque angle](measures/predefined.html#branch_localtorque)
+- [Remote torque angle](measures/predefined.html#branch_remotetorque)
+- [Length](measures/predefined.html#branch_length)
+- [Intersects](measures/predefined.html#branch_intersects)
 
 ---
 
-### [Neurite Measures](measures/neurite.html)
+### [Neurite Measures](measures/predefined.html#neurite)
 
 - [Root is soma](measures/neurite.html#rootsoma)
 
 ---
 
-### [Neuron Measures](measures/neuron.html)
+### [Neuron Measures](measures/predefined.html#neuron)
 
-- [Has soma](measures/neuron.html#hassoma)
-- [Neurite count](measures/neuron.html#neurite_count)
-- [Neurite type count](measures/neuron.html#neurite_type_count)
-- [Soma surface](measures/neuron.html#soma_surface)
-
----
-
-### [Generic Measures](measures/generic.html)
-
-- [Set size](measures/generic.html#set)
+- [Has soma](measures/predefined.html#neuron_hassoma)
+- [Neurite count](measures/predefined.html#neuron_neurite_count)
+- [Neurite type count](measures/predefined.html#neuron_neurite_type_count)
+- [Soma surface](measures/predefined.html#neuron_soma_surface)
 
 ---
 
-###[L-measure Measures](measures/lmeasure.html)
+### [Generic Measures](measures/predefined.html#generic)
 
-- [Soma surface](measures/lmeasure.html#somasurface)
-- [Number of stems](measures/lmeasure.html#nstems)
-- [Number of bifurcations](measures/lmeasure.html#nbifs)
-- [Number of branches](measures/lmeasure.html#nbranches)
-- [Number of terminal tips](measures/lmeasure.html#nterminals)
-- [Width, Height and Depth](measures/lmeasure.html#width)
-- [Diameter](measures/lmeasure.html#diameter)
-- [Diameter power](measures/lmeasure.html#diameterpow)
-- [Compartment length](measures/lmeasure.html#length)
-- [Branch length](measures/lmeasure.html#branchlength)
-- [Compartment surface](measures/lmeasure.html#surface)
-- [Branch surface](measures/lmeasure.html#branchsurface)
-- [Compartment section area](measures/lmeasure.html#section_area)
-- [Compartment volume](measures/lmeasure.html#volume)
-- [Branch volume](measures/lmeasure.html#branch_volume)
-- [Distance to root](measures/lmeasure.html#rootdist)
-- [Path length to root](measures/lmeasure.html#rootpath)
-- [Branch centrifugal order](measures/lmeasure.html#branchorder)
-- [Node terminal degree](measures/lmeasure.html#terminaldegree)
-- [Branch terminal degree](measures/lmeasure.html#branch_terminaldegree)
-- [Taper 1: Burker taper rate](measures/lmeasure.html#burker)
-- [Taper 2: Hillman taper rate](measures/lmeasure.html#hillman)
-- [Contraction](measures/lmeasure.html#contraction)
-- [Fragmentation](measures/lmeasure.html#fragmentation)
-- [Partition asymmetry](measures/lmeasure.html#partition_asymmetry)
-- [Rall's power](measures/lmeasure.html#rall)
-- [Pk fitted value](measures/lmeasure.html#pkfit)
-- [Pk classic and squared](measures/lmeasure.html#pkclassic)
-- [Local bifurcation amplitude](measures/lmeasure.html#local_bif)
-- [Remote bifurcation amplitude](measures/lmeasure.html#remote_bif)
-- [Local bifurcation tilt](measures/lmeasure.html#local_tilt)
-- [Remote bifurcation tilt](measures/lmeasure.html#remote_tilt)
-- [Local bifurcation torque](measures/lmeasure.html#local_torque)
-- [Remote bifurcation_torque](measures/lmeasure.html#remote_torque)
-- [Terminal bifurcation diameter](measures/lmeasure.html#terminaldiam)
-- [Hillman threshold](measures/lmeasure.html#hillman_threshold)
-- [Fractal dimension](measures/lmeasure.html#fractal_dimension)
+- [Set size](measures/predefined.html#generic_setsize)
 
 ---
 
+###[L-measure Measures](measures/predefined.html#lmeasure)
+
+- [Soma surface](measures/predefined.html#lmeasure_somasurface)
+- [Number of stems](measures/predefined.html#lmeasure_nstems)
+- [Number of bifurcations](measures/predefined.html#lmeasure_nbifs)
+- [Number of branches](measures/predefined.html#lmeasure_nbranches)
+- [Number of terminal tips](measures/predefined.html#lmeasure_nterminals)
+- [Width, Height and Depth](measures/predefined.html#lmeasure_width)
+- [Diameter](measures/predefined.html#lmeasure_diameter)
+- [Diameter power](measures/predefined.html#lmeasure_diameterpow)
+- [Compartment length](measures/predefined.html#lmeasure_length)
+- [Branch length](measures/predefined.html#lmeasure_branchlength)
+- [Compartment surface](measures/predefined.html#lmeasure_surface)
+- [Branch surface](measures/predefined.html#lmeasure_branchsurface)
+- [Compartment section area](measures/predefined.html#lmeasure_section_area)
+- [Compartment volume](measures/predefined.html#lmeasure_volume)
+- [Branch volume](measures/predefined.html#lmeasure_branch_volume)
+- [Distance to root](measures/predefined.html#lmeasure_rootdist)
+- [Path length to root](measures/predefined.html#lmeasure_rootpath)
+- [Branch centrifugal order](measures/predefined.html#lmeasure_branchorder)
+- [Node terminal degree](measures/predefined.html#lmeasure_terminaldegree)
+- [Branch terminal degree](measures/predefined.html#lmeasure_branch_terminaldegree)
+- [Taper 1: Burker taper rate](measures/predefined.html#lmeasure_burker)
+- [Taper 2: Hillman taper rate](measures/predefined.html#lmeasure_hillman)
+- [Contraction](measures/predefined.html#lmeasure_contraction)
+- [Fragmentation](measures/predefined.html#lmeasure_fragmentation)
+- [Partition asymmetry](measures/predefined.html#lmeasure_partition_asymmetry)
+- [Rall's power](measures/predefined.html#lmeasure_rall)
+- [Pk fitted value](measures/predefined.html#lmeasure_pkfit)
+- [Pk classic and squared](measures/predefined.html#lmeasure_pkclassic)
+- [Local bifurcation amplitude](measures/predefined.html#lmeasure_local_bif)
+- [Remote bifurcation amplitude](measures/predefined.html#lmeasure_remote_bif)
+- [Local bifurcation tilt](measures/predefined.html#lmeasure_local_tilt)
+- [Remote bifurcation tilt](measures/predefined.html#lmeasure_remote_tilt)
+- [Local bifurcation torque](measures/predefined.html#lmeasure_local_torque)
+- [Remote bifurcation_torque](measures/predefined.html#lmeasure_remote_torque)
+- [Terminal bifurcation diameter](measures/predefined.html#lmeasure_terminaldiam)
+- [Hillman threshold](measures/predefined.html#lmeasure_hillman_threshold)
+- [Fractal dimension](measures/predefined.html#lmeasure_fractal_dimension)
+
+---
 
 ## Aggregators <a id="aggregators"></a>
 
@@ -236,7 +235,7 @@ These are the aggregator functions and factory functions included in the library
 
 **Restrictions:**
   - The given measure *f* must take a single element as input
-  - The aggregation function *aggr* must be compatible with the measure outut type
+  - The aggregation function *aggr* must be compatible with the measure output type
 
 **Function signature:** `measureEachAggregate(const Fn& f, const Aggr& aggr)`
 
@@ -258,14 +257,40 @@ These are the aggregator functions and factory functions included in the library
 
 **Function signature:** `createMeasureTuple(const Measures&... measures )`
 
-## [L-measure](http://cng.gmu.edu:8080/Lm/) measures <a id="create"></a>
+## Create a measure {#create}
 
-## Create a measure <a id="create"></a>
+This section will show you how to define new measure functions using already existing selector and measures with little code. Although the selector/measure structure is designed to ease the process of creating new measures, it may seem a bit...hard to use at first. We will introduce the concept with a very simple measure, the average branch length in a neuron.
 
-### Easy level: Neuron average branch length
+Additionally to the two examples shown below, you can find more examples of selector/measure usage in the source code of the [feature extractor utils](utils.html#neuritefeature) and in the [L-measure definitions](measures/lmeasure.html).
 
-TO-DO
+### Neuron average branch length
 
-### Intermediate level: Neuron average branch fractal dimension
+First of all, we should define the measure we want to create. Specifically, we need to point out the input, output and what does it measure. In this example, our measure is pretty simple:
 
-TO-DO
+| Input | Output | Description
+|:--|:--|:--
+|Single neuron | Float number | Average branch length in the neuron
+
+Then, we should find the selectors and measures that will build up our new measure.
+
+- To measure the [Branch] length, the [`branch_length`](measures/predefined.html#branch_length) is the obvious choice.
+- Since we want to find the average value for every branch in the neuron. To select all branches in a neuron we have the [`neuron_branch_selector`](selectors/predefined.html#neuron_branch).
+
+Let's stop here to plan our next step. We want to combine the [`branch_length`](measures/predefined.html#branch_length) measure with the [`neuron_branch_selector`](selectors/predefined.html#neuron_branch) in some specific way to create the measure. Since the selector already has the input that we want (a single neuron), we need to transform the measure to take a set of branches and output the average length, so it can be combined with the selector. In plain words, we want to measure the length of every [Branch] in a set and average the results. If you go back to the [measure operations](#operations) section you will find the [`measureEachAggregate`](#eachaggr) function, which does exactly what we need:
+
+- The *f* argument is the [`branch_length`](measures/predefined.html#branch_length) measure.
+- The *aggr* argument is the aggregate function [`avg_aggr_factory`](#mean) for floats, that is `avg_aggr_factory<float,float>(0)`
+
+Then, our intermediate measure will look like this:
+
+```cpp
+measureEachAggregate(branch_length, avg_aggr_factory<float,float>(0));
+```
+
+Now, we can use the [`selectorMeasureCompose`](#composition) function to join the neuron branch selector with our intermediate measure. This will output the measure that we have defined at the beginning:
+
+```cpp
+  selectorMeasureCompose(
+    neuron_branch_selector,
+    measureEachAggregate(branch_length, avg_aggr_factory<float,float>(0)));
+```

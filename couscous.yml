@@ -172,24 +172,23 @@ menu:
         subsections:
           predef:
             text: "Predefined Measures"
-            relativeUrl: "doc/measures.html#predef"
-            alwaysVisible: true
+            relativeUrl: "doc/measures/predefined.html"
             items:
-              neuron:
-                text: "Neuron measures"
-                relativeUrl: "doc/measures/neuron.html"
-              neurite:
-                text: "Neurite measures"
-                relativeUrl: "doc/measures/neurite.html"
-              branch:
-                text: "Branch measures"
-                relativeUrl: "doc/measures/branch.html"
               node:
                 text: "Node measures"
-                relativeUrl: "doc/measures/node.html"
+                relativeUrl: "doc/measures/predefined.html#node"
+              branch:
+                text: "Branch measures"
+                relativeUrl: "doc/measures/predefined.html#branch"
+              neurite:
+                text: "Neurite measures"
+                relativeUrl: "doc/measures/predefined.html#neurite"
+              neuron:
+                text: "Neuron measures"
+                relativeUrl: "doc/measures/predefined.html#neuron"
               lmeasure:
                   text: "L-measure measures"
-                  relativeUrl: "doc/measures/lmeasure.html"
+                  relativeUrl: "doc/measures/predefined.html#lmeasure"
           aggregators:
             text: "Aggregators"
             relativeUrl: "doc/measures.html#aggregators"
@@ -199,13 +198,22 @@ menu:
           operators:
             text: "Measure operations"
             relativeUrl: "doc/measures.html#operations"
-            items:
-              overview:
-                text: "Operations overview"
-                relativeUrl: "doc/measures/operations.html"
       validation:
-        text: "Reconstruction validation"
+        text: "Neuron validation"
         relativeUrl: "doc/validation.html"
+        subsections:
+          validator:
+            text: "Validator"
+            relativeUrl: "doc/validation.html#validator"
+          output:
+            text: "JSON Output"
+            relativeUrl: "doc/validation.html#output"
+          checks:
+            text: "Checks"
+            relativeUrl: "doc/classes/validator.html#checks"
+          predefined:
+            text: "Predefined validations"
+            relativeUrl: "doc/classes/validator.html#predefined"
       tools:
         text: "Bundled tools"
         relativeUrl: "doc/tools.html"
@@ -310,3 +318,16 @@ menu:
           measure:
             text: "Measure"
             relativeUrl: "doc/classes/measure.html"
+          validator:
+            text: "Validator"
+            relativeUrl: "doc/classes/validator.html"
+            items:
+              validator:
+                text: "Validator class"
+                relativeUrl: "doc/classes/validator.html#class_validator"
+              check:
+                text: "Checks"
+                relativeUrl: "doc/classes/validator.html#checks"
+              predef:
+                text: "Predefined validators"
+                relativeUrl: "doc/classes/validator.html#predefined"

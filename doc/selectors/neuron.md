@@ -21,9 +21,9 @@ Neuron selectors are implemented in the header file `selector/neuron_selector.h`
 
 ## Branch selector <a id="branch"></a>
 
-**Function**:  `neuron_neurites = [](const Neuron &n) -> std::vector<const_branch_reference>`
+**Function**:  `neuron_branch_selector = [](const Neuron &n) -> std::vector<const_branch_reference>`
 
-**Description**: Selects all branches in every neurite in the neuron
+**Description**: Selects all branches in the neuron
 
 **Types**:
 

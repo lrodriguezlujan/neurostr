@@ -3,10 +3,9 @@ currentSection: measures
 currentSubsection: predef
 currentItem: lmeasure
 ---
-# L-measure measures
-text
+# L-measure measures {#lmeasure}
 
-### Soma surface <a id="somasurface"> </a>
+### Soma surface <a id="lmeasure_somasurface"> </a>
 
 **Function:** `soma_surface`
 
@@ -20,7 +19,7 @@ ADD IMAGE HERE
 
 ---
 
-### Number of stems <a id="nstems"> </a>
+### Number of stems <a id="lmeasure_nstems"> </a>
 
 **Function:** `n_stems`
 
@@ -32,7 +31,7 @@ ADD IMAGE HERE
 
 ---
 
-### Number of bifurcations <a id="nbifs"> </a>
+### Number of bifurcations <a id="lmeasure_nbifs"> </a>
 
 **Function:** `n_bifs`
 
@@ -42,7 +41,7 @@ ADD IMAGE HERE
 
 ---
 
-### Number of branches <a id="nbranches"> </a>
+### Number of branches <a id="lmeasure_nbranches"> </a>
 
 **Function:** `n_branch`
 
@@ -52,7 +51,7 @@ ADD IMAGE HERE
 
 ---
 
-### Number of terminal tips <a id="nterminals"> </a>
+### Number of terminal tips <a id="lmeasure_nterminals"> </a>
 
 **Function:** `n_tips`
 
@@ -62,7 +61,7 @@ ADD IMAGE HERE
 
 ---
 
-### Width, Height and Depth <a id="width"> </a>
+### Width, Height and Depth <a id="lmeasure_width"> </a>
 
 **Function:** `width`, `height`, `depth`
 
@@ -74,7 +73,7 @@ ADD IMAGE HERE
 
 ---
 
-### Diameter <a id="diameter"> </a>
+### Diameter <a id="lmeasure_diameter"> </a>
 
 **Function:** `diameter`
 
@@ -86,7 +85,7 @@ ADD IMAGE HERE
 
 ---
 
-### Diameter power <a id="diameterpow"> </a>
+### Diameter power <a id="lmeasure_diameterpow"> </a>
 
 **Function:** `diameter_pow`
 
@@ -98,7 +97,7 @@ ADD IMAGE HERE
 
 ---
 
-### Length <a id="length"> </a>
+### Length <a id="lmeasure_length"> </a>
 
 **Function:** `length`
 
@@ -112,7 +111,7 @@ ADD IMAGE HERE
 
 ---
 
-### Branch length <a id="branchlength"> </a>
+### Branch length <a id="lmeasure_branchlength"> </a>
 
 **Function:** `branch_pathlength`
 
@@ -126,7 +125,7 @@ ADD IMAGE HERE
 
 ---
 
-### Surface <a id="surface"> </a>
+### Surface <a id="lmeasure_surface"> </a>
 
 **Function:** `surface`
 
@@ -140,7 +139,7 @@ ADD IMAGE HERE
 
 ---
 
-### Branch surface <a id="branchsurface"> </a>
+### Branch surface <a id="lmeasure_branchsurface"> </a>
 
 **Function:** `branch_surface`
 
@@ -154,7 +153,7 @@ ADD IMAGE HERE
 
 ---
 
-### Compartment section area <a id="section_area"> </a>
+### Compartment section area <a id="lmeasure_section_area"> </a>
 
 **Function:** `section_area`
 
@@ -169,7 +168,7 @@ ADD IMAGE HERE
 ---
 
 
-### Compartment volume <a id="volume"> </a>
+### Compartment volume <a id="lmeasure_volume"> </a>
 
 **Function:** `volume`
 
@@ -183,7 +182,7 @@ ADD IMAGE HERE
 
 ---
 
-### Branch Volume <a id="branch_volume"> </a>
+### Branch Volume <a id="lmeasure_branch_volume"> </a>
 
 **Function:** `branch_volume`
 
@@ -197,7 +196,7 @@ ADD IMAGE HERE
 
 ---
 
-### Distance to root <a id="rootdist"> </a>
+### Distance to root <a id="lmeasure_rootdist"> </a>
 
 **Function:** `euc_distance`
 
@@ -211,7 +210,7 @@ ADD IMAGE HERE
 
 ---
 
-### Path length to root <a id="rootpath"> </a>
+### Path length to root <a id="lmeasure_rootpath"> </a>
 
 **Function:** `path_distance`
 
@@ -225,7 +224,7 @@ ADD IMAGE HERE
 
 ---
 
-### Branch centrifugal order <a id="branchorder"> </a>
+### Branch centrifugal order <a id="lmeasure_branchorder"> </a>
 
 **Function:** `branch_order`
 
@@ -239,7 +238,7 @@ ADD IMAGE HERE
 
 ---
 
-### Node Terminal degree <a id="terminaldegree"> </a>
+### Node Terminal degree <a id="lmeasure_terminaldegree"> </a>
 
 **Function:** `terminal_degree`
 
@@ -251,7 +250,7 @@ ADD IMAGE HERE
 
 ---
 
-### Branch Terminal degree <a id="branch_terminaldegree"> </a>
+### Branch Terminal degree <a id="lmeasure_branch_terminaldegree"> </a>
 
 **Function:** `branch_terminal_degree`
 
@@ -264,7 +263,7 @@ ADD IMAGE HERE
 ---
 
 
-### Taper 1: Burker taper rate <a id="burker"> </a>
+### Taper 1: Burker taper rate <a id="lmeasure_burker"> </a>
 
 **Function:** `taper_1`
 
@@ -278,7 +277,7 @@ ADD IMAGE HERE
 
 ---
 
-### Taper 2: Hillman taper rate <a id="hillman"> </a>
+### Taper 2: Hillman taper rate <a id="lmeasure_hillman"> </a>
 
 **Function:** `taper_2`
 
@@ -292,7 +291,7 @@ ADD IMAGE HERE
 
 ---
 
-### Contraction <a id="contraction"> </a>
+### Contraction <a id="lmeasure_contraction"> </a>
 
 **Function:** `contraction`
 
@@ -306,7 +305,7 @@ ADD IMAGE HERE
 
 ---
 
-### Fragmentation <a id="fragmentation"> </a>
+### Fragmentation <a id="lmeasure_fragmentation"> </a>
 
 **Function:** `fragmentation`
 
@@ -320,7 +319,7 @@ ADD IMAGE HERE
 
 ---
 
-### Daughter ratio <a id="daughter_ratio"> </a>
+### Daughter ratio <a id="lmeasure_daughter_ratio"> </a>
 
 **Function:** `daughter_ratio`
 
@@ -334,7 +333,7 @@ ADD IMAGE HERE
 
 ---
 
-### Partition asymmetry <a id="partition_asymmetry"> </a>
+### Partition asymmetry <a id="lmeasure_partition_asymmetry"> </a>
 
 **Function:** `partition_asymmetry`
 
@@ -348,7 +347,7 @@ ADD IMAGE HERE
 
 ---
 
-### Rall's power <a id="rall"> </a>
+### Rall's power <a id="lmeasure_rall"> </a>
 
 **Function:** `rall_power`
 
@@ -362,7 +361,7 @@ ADD IMAGE HERE
 
 ---
 
-### Pk fitted value <a id="pkfit"> </a>
+### Pk fitted value <a id="lmeasure_pkfit"> </a>
 
 **Function:** `pk`
 
@@ -376,7 +375,7 @@ ADD IMAGE HERE
 
 ---
 
-### Pk classic and squared <a id="pkclassic"> </a>
+### Pk classic and squared <a id="lmeasure_pkclassic"> </a>
 
 **Function:** `pk_classic`, `pk2`
 
@@ -390,7 +389,7 @@ ADD IMAGE HERE
 
 ---
 
-### Local bifurcation amplitude <a id="local_bif"> </a>
+### Local bifurcation amplitude <a id="lmeasure_local_bif"> </a>
 
 **Function:** `bif_ampl_local`
 
@@ -404,7 +403,7 @@ ADD IMAGE HERE
 
 ---
 
-### Remote bifurcation amplitude <a id="remote_bif"> </a>
+### Remote bifurcation amplitude <a id="lmeasure_remote_bif"> </a>
 
 **Function:** `bif_ampl_remote`
 
@@ -418,7 +417,7 @@ ADD IMAGE HERE
 
 ---
 
-### Local bifurcation tilt <a id="local_tilt"> </a>
+### Local bifurcation tilt <a id="lmeasure_local_tilt"> </a>
 
 **Function:** `bif_tilt_local`
 
@@ -432,7 +431,7 @@ ADD IMAGE HERE
 
 ---
 
-### Remote bifurcation tilt <a id="remote_tilt"> </a>
+### Remote bifurcation tilt <a id="lmeasure_remote_tilt"> </a>
 
 **Function:** `bif_tilt_remote`
 
@@ -446,7 +445,7 @@ ADD IMAGE HERE
 
 ---
 
-### Local bifurcation torque <a id="local_torque"> </a>
+### Local bifurcation torque <a id="lmeasure_local_torque"> </a>
 
 **Function:** `bif_torque_local`
 
@@ -460,7 +459,7 @@ ADD IMAGE HERE
 
 ---
 
-### Remote bifurcation tilt <a id="remote_torque"> </a>
+### Remote bifurcation tilt <a id="lmeasure_remote_torque"> </a>
 
 **Function:** `bif_torque_remote`
 
@@ -474,7 +473,7 @@ ADD IMAGE HERE
 
 ---
 
-### Terminal bifurcation diameter <a id="terminaldiam"> </a>
+### Terminal bifurcation diameter <a id="lmeasure_terminaldiam"> </a>
 
 **Function:** `last_parent_diam`
 
@@ -486,7 +485,7 @@ ADD IMAGE HERE
 
 ---
 
-### Hillman threshold <a id="hillman_threshold"> </a>
+### Hillman threshold <a id="lmeasure_hillman_threshold"> </a>
 
 **Function:** `hillman_threshold`
 
@@ -500,7 +499,7 @@ ADD IMAGE HERE
 
 ---
 
-### Fractal dimension <a id="fractal_dimension"> </a>
+### Fractal dimension <a id="lmeasure_fractal_dimension"> </a>
 
 **Function:** `fractal_dim`
 
