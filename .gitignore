@@ -13,3 +13,5 @@ build_release/
 **/Debug/
 **/release/
 **/Release/
+cmake-build-Debug
+cmake-build-Release
