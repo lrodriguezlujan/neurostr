@@ -166,3 +166,11 @@ add_dependencies(Scholl neurostr)
 
 add_executable(Validator ${CMAKE_SOURCE_DIR}/tools/Validator.cpp)
 target_link_libraries(Validator -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+
+add_custom_target(tools DEPENDS 
+                    BoxCutter 
+                    BranchFeatureExtractor
+                    NeuriteFeatureExtractor
+                    NeuroConverter
+                    Scholl
+                    Validator)
