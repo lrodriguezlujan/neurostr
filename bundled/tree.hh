@@ -3098,7 +3098,6 @@ typename tree<T, tree_node_allocator>::leaf_iterator& tree<T, tree_node_allocato
       }
    return (*this);
    }
-}
 #endif
 
 // Local variables:

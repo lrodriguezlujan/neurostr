@@ -28,7 +28,7 @@
 // WARNING: If the log pattern contains any date/time while this flag is on, the result is undefined.
 //          You must set new pattern(spdlog::set_pattern(..") without any date/time in it
 //
-// #define SPDLOG_NO_DATETIME
+#define SPDLOG_NO_DATETIME
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -38,7 +38,7 @@
 //
 // WARNING: If the log pattern contains thread id (i.e, %t) while this flag is on, the result is undefined.
 //
-// #define SPDLOG_NO_THREAD_ID
+#define SPDLOG_NO_THREAD_ID
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -46,7 +46,7 @@
 // Uncomment if logger name logging is not needed.
 // This will prevent spdlog from copying the logger name  on each log call.
 //
-// #define SPDLOG_NO_NAME
+#define SPDLOG_NO_NAME
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@
 // Uncomment to avoid spdlog's usage of atomic log levels
 // Use only if your code never modifies a logger's log levels concurrently by different threads.
 //
-// #define SPDLOG_NO_ATOMIC_LEVELS
+#define SPDLOG_NO_ATOMIC_LEVELS
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
