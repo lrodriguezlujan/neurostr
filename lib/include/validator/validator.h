@@ -23,36 +23,70 @@ namespace validator {
   
 // TODO:: Validator traits
   
-// Auxiliar structs
 
-// Auxiliar class
+/**
+ * @class ValidatorItem
+ * @file validator.h
+ * @brief Auxiliar class for the validator class. It contains a reference
+ * to a validated element, the measure value and the check function result.
+ */
 template <typename T, typename V>
   class ValidatorItem {
     
     
     public:
+    
+    // Element type (Neuron, neurite, branch or node)
     using type = T;
+    
+    // Measure value type
     using value_type = V;
     
+    /**
+     * @brief Default empty constructor
+     */
     ValidatorItem() :
       element(), value(), valid(false) {};
     
+    /**
+     * @brief Creates an item with the given parameters
+     * @param el Validated element reference
+     * @param val Measure value
+     * @param is_valid Check function value
+     */
     ValidatorItem(T& el, value_type val, bool is_valid) :
       element(el), value(val), valid(is_valid) {};
     
+    /** Validated element **/
     std::reference_wrapper<T> element;
+    
+    /** Measure value **/
     V                         value;
+    
+    /** Check function value **/
     bool                      valid;
     
-    // Full validation ID
+    /**
+     * @brief Creates a JSON object with the full ID for the given element
+     * @return JSON ID Object string
+     */
     std::string element_id_json() const{
       return "{ " + element_id_json_(element.get()) + " }";
     };
     
+    /**
+     * @brief Returns an string with the element name (Neuron, Neurite, Branch or Node)
+     * @return Element type string
+     */
     std::string element_type() const {
       return element_name(element);
     }
     
+    /**
+     * @brief Writes the Item to the given stream as a JSON object
+     * @param os Output stream
+     * @return JSON Object with type, id, value and pass result.
+     */
     std::ostream& toJSON( std::ostream& os) const {
       os << "{ " <<
         "\"type\" : " << escape_string(element_type()) << ", " << std::endl << 
@@ -70,85 +104,169 @@ template <typename T, typename V>
     
     private:
     
+    /**
+     * @brief Generic template that writes the v parameter as a string
+     * @param v Element to be written as string
+     * @return String
+     */
     template <typename U>
     std::string escape_string(const U& v) const{
       return std::to_string(v);
     }
     
+    /**
+     * @brief Escapes a string using double quotes
+     * @param v String to escape
+     * @return String
+     */
     std::string escape_string(const std::string& v) const{
       return "\"" + v + "\"";
     }
     
+    /**
+     * @brief Escapes a string using double quotes
+     * @param v String to escape
+     * @return String
+     */
     std::string escape_string(const char* v) const{
       return "\"" + std::string(v) + "\"";
     }
 
+    /**
+     * @brief Writes the Neuron id as json field
+     * @param n Neuron
+     * @return JSON field string
+     */
     std::string element_id_json_(const Neuron& n) const{
       return escape_string("neuron") + " : " + escape_string(n.id());
     }
     
+    /**
+     * @brief Writes the Neurite and neuron Id as json field
+     * @param n Neurite
+     * @return JSON field string
+     */
     std::string element_id_json_(const Neurite& n) const{
       return element_id_json_(n.neuron()) + ",\n" + escape_string("neurite") + " : " + std::to_string(n.id());
     }
     
+    /**
+     * @brief Writes the Branch, Neurite and neuron Id as json field
+     * @param n Branch
+     * @return JSON field string
+     */
     std::string element_id_json_(const Branch& n) const{
       return element_id_json_(n.neurite()) + ",\n" + escape_string("branch") + " : " + escape_string(n.idString());
     }
     
+    /**
+     * @brief Writes the Node, Branch, Neurite and neuron Id as json field
+     * @param n Node
+     * @return JSON field string
+     */
     std::string element_id_json_(const Node& n) const{
       return element_id_json_(n.branch()) + ",\n" + escape_string("node") + " : " + std::to_string(n.id());
     }
     
 
-    
+    /**
+     * @brief Returns Name type for neuron
+     * @param n Neuron
+     * @return Neuron String
+     */
     std::string element_name(const Neuron& n) const{
       return "Neuron";
     }
     
+    /**
+     * @brief Returns Name type for neurite
+     * @param n Neurite
+     * @return Neurite String
+     */
     std::string element_name(const Neurite& n) const{
       return "Neurite";
     }
     
+    /**
+     * @brief Returns Name type for branch
+     * @param n Branch
+     * @return Branch String
+     */
     std::string element_name(const Branch& n) const{
       return "Branch";
     }
     
+    /**
+     * @brief Returns Name type for node
+     * @param n Node
+     * @return Node String
+     */
     std::string element_name(const Node& n) const{
       return "Node";
     }
 };
 
 
-
+/**
+ * @class Validator
+ * @file validator.h
+ * @brief Validator class template build up from a Measure and a Check function
+ */
 template <typename M, typename C> 
 class Validator {
   
   public:
   
-  // Typedefs
+  // MEasure function traits
   using measure_traits = measure::measure_func_traits<M>;
+  
+  // Measure input type
   using in_type = typename measure_traits::in_type;
+  
+  // Measure value type
   using value_type = typename measure_traits::out_type;
+  
+  // Check function traits
   using check_traits = check_func_traits<C>;
+  
+  // Shorthand for vector of ValidatorItems
   using storage_type = std::vector<ValidatorItem<in_type,value_type> >;
   
   // Data elements
-  private:
+    private:
   
-  template<typename T> struct type { }; // Auxiliar
+  // Auxiliar type structure for template resolution
+  template<typename T> struct type { };
   
   // Data
+  
+  // Validator Measure function
   M measure_;
+  
+  // Validator Check function
   C checker_;
+  
+  // Validated neuron pointer
   const Neuron* neuron_;
-  // Validation
+  
+  
+  // Validation result vector
   storage_type results_;
   
+  // Validation short name
   std::string name_;
+  
+  // Validation description
   std::string desc_;
  
-  public:
-  // Constructor
+    public:
+  
+  /**
+   * @brief Creates a validator with given measure and check functions
+   * @param measure Measure function. Should take a single element as imput
+   * @param check Check function. Should take a single measure value as input
+   * @return Validator
+   */
   Validator(M measure, C check)
       : measure_(measure), checker_(check), neuron_(nullptr), results_() {
         
@@ -156,7 +274,10 @@ class Validator {
     static_assert(std::is_convertible<value_type,typename check_traits::in_type>::value,"");
   };
 
-  // Always validate neurons as a whole. Even if the measure is for nodes, branches...
+  /**
+   * @brief Runs the validation for the given Neuron
+   * @param n  Neuron to be validated
+   */
   void validate(const Neuron& n) {
 
     // Clear results
@@ -168,40 +289,76 @@ class Validator {
     // Run!
     run<in_type>();
   }
-  
-  template <typename T>
-  void run(type<T>());
-  
+
+  /**
+   * @brief Begin const bidirectional iterator to the validation results
+   * @return Bidirectional iterator to ValidatorItem
+   */
   typename storage_type::const_iterator begin() const {
     return results_.begin();
   }
   
+  /**
+   * @brief End const bidirectional iterator to the validation results
+   * @return Bidirectional iterator to ValidatorItem
+   */
   typename storage_type::const_iterator end() const {
     return results_.end();
   }
   
+  /**
+   * @brief Returns the number of validated items
+   * @return Number of validated items
+   */
   typename storage_type::size_type size() const {
     return results_.size();
   }
   
+  /**
+   * @brief Sets the validation name
+   * @param s Validation shortname
+   */
   void set_name(const std::string& s) {
     name_ = s;
   }
   
+  /**
+   * @brief Sets the validation description string
+   * @param s Validation description
+   */
   void set_description(const std::string& s) {
     desc_ = s;
   }
 
+  /**
+   * @brief Check if all validated elements passed the check function
+   * @return True if all elements passed
+   */
   bool pass() const {
     return std::all_of(results_.begin(), results_.end(), [](const auto& i) -> bool { return i.valid; });
   };
   
+  /**
+   * @brief Writes the validator (name and description), the neuron id and the
+   * results as a JSON string in the given stream
+   * @param os Output stream
+   * @param failuresOnly Write only failing ValidatorItem
+   * @return Stream
+   */
   std::ostream& toJSON( std::ostream& os, 
                        bool failuresOnly = true) const {
     return toJSON(os,name_,desc_,failuresOnly);
   }
                        
-  
+  /**
+   * @brief Writes the validator, the neuron id and the
+   * results as a JSON string in the given stream
+   * @param os Output stream
+   * @param name Validation shortname
+   * @param desc Validation description
+   * @param failuresOnly Write only failing ValidatorItem
+   * @return 
+   */
   std::ostream& toJSON( std::ostream& os, 
                        const std::string& name, 
                        const std::string& desc,
@@ -245,9 +402,15 @@ class Validator {
   }
   
 
- private:
+  private:
+ 
+   /**
+    * @brief Runs the validation for the given element type.
+    */
+  template <typename T>
+  void run(type<T>());
   
-  // Execute depending on the type
+
   template <typename T> 
   void run() {
     run(type<const T>());
@@ -256,8 +419,6 @@ class Validator {
   template <typename T> 
   void run(type<const T>) {
   }
-  
-  
   
   void run(type<const Neuron>){
     // Just execute the measure and the checker for the neuron
