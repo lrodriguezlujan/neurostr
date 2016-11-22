@@ -7,7 +7,7 @@
  *
  */
 
-#include "io/JSONWriter.h"
+#include <neurostr/io/JSONWriter.h>
 
 namespace neurostr {
 namespace io {

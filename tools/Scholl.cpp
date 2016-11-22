@@ -15,12 +15,12 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
-#include "core/log.h"
-#include "core/neuron.h"
+#include <neurostr/core/log.h>
+#include <neurostr/core/neuron.h>
 
-#include "io/parser_dispatcher.h"
+#include <neurostr/io/parser_dispatcher.h>
 
-#include "methods/scholl.h"
+#include <neurostr/methods/scholl.h>
 
 namespace po = boost::program_options;
 

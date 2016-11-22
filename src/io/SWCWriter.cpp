@@ -1,4 +1,4 @@
-#include "io/SWCWriter.h"
+#include <neurostr/io/SWCWriter.h>
 
 
 namespace neurostr {

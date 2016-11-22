@@ -1,6 +1,4 @@
-#include "core/log.h"
-#include "core/branch.h"
-#include "core/geometry.h"
+#include <neurostr/core/branch.h>
 #include <iostream>
 #include <ios>
 

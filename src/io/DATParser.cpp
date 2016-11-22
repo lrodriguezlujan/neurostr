@@ -8,8 +8,7 @@
  *
  */
 
-#include "io/DATParser.h"
-#include "io/basen.hpp"
+#include <neurostr/io/DATParser.h>
 
 #include <stdexcept>
 #include <cstring>

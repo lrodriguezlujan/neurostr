@@ -1,4 +1,4 @@
-#include "methods/boxCutter.h"
+#include <neurostr/methods/boxCutter.h>
 #include <deque>
 
 namespace neurostr{

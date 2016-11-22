@@ -1,9 +1,6 @@
-#include "core/neuron.h"
-#include "core/log.h"
+#include <neurostr/core/neuron.h>
 
 #include <limits>
-
-
 #include <boost/any.hpp>
 #include <boost/geometry/geometry.hpp>
 

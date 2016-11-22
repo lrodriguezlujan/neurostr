@@ -1,4 +1,4 @@
-#include "core/property.h"
+#include <neurostr/core/property.h>
 
 namespace neurostr{
   

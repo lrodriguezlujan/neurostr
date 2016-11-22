@@ -1,14 +1,4 @@
-#include "methods/branchComparison.h"
-
-#include "selector/selector.h"
-#include "selector/node_selector.h"
-#include "selector/universal_selector.h"
-#include "selector/branch_selector.h"
-#include "selector/neurite_selector.h"
-#include "selector/neuron_selector.h"
-
-
-#include "measure/branch_measure.h"
+#include <neurostr/methods/branchComparison.h>
 
 // FIXME: This shouldnt be in the library. Create an indep. project for it 
 

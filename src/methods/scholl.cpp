@@ -1,7 +1,4 @@
-#include "methods/scholl.h"
-
-#include "measure/node_measure.h"
-#include "measure/neurite_measure.h"
+#include <neurostr/methods/scholl.h>
 
 namespace neurostr{
 namespace methods{

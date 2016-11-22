@@ -1,6 +1,4 @@
-#include "io/JSONParser.h"
-#include "rapidjson/error/en.h"
-#include "core/log.h"
+#include <neurostr/io/JSONParser.h>
 
 namespace neurostr {
 namespace io {

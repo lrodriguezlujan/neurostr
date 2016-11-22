@@ -15,19 +15,19 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
-#include "core/log.h"
-#include "core/neuron.h"
+#include <neurostr/core/log.h>
+#include <neurostr/core/neuron.h>
 
-#include "measure/universal_measure.h"
-#include "measure/branch_measure.h"
-#include "measure/neurite_measure.h"
-#include "measure/node_measure.h"
-#include "measure/aggregate.h"
-#include "measure/measure_operations.h"
+#include <neurostr/measure/universal_measure.h>
+#include <neurostr/measure/branch_measure.h>
+#include <neurostr/measure/neurite_measure.h>
+#include <neurostr/measure/node_measure.h>
+#include <neurostr/measure/aggregate.h>
+#include <neurostr/measure/measure_operations.h>
 
-#include "selector/neurite_selector.h"
+#include <neurostr/selector/neurite_selector.h>
 
-#include "io/parser_dispatcher.h"
+#include <neurostr/io/parser_dispatcher.h>
 
 namespace po = boost::program_options;
 namespace ns = neurostr::selector;

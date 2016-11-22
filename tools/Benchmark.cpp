@@ -13,12 +13,12 @@
 #include <algorithm>
 #include <type_traits>
 
-#include "core/log.h"
-#include "core/neuron.h"
-#include "io/parser_dispatcher.h"
-#include "validator/validator.h"
-#include "validator/predefined_validators.h"
-#include "measure/lmeasure_decl.h"
+#include <neurostr/core/log.h>
+#include <neurostr/core/neuron.h>
+#include <neurostr/io/parser_dispatcher.h>
+#include <neurostr/validator/validator.h>
+#include <neurostr/validator/predefined_validators.h>
+#include <neurostr/measure/lmeasure_decl.h>
 
 using Neuron = neurostr::Neuron;
 

@@ -12,17 +12,14 @@
 #include <boost/program_options/variables_map.hpp>
 #include <boost/format.hpp>
 
-//#define BOOST_FILESYSTEM_NO_DEPRECATED 
+#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
-#include "core/log.h"
-#include "core/neuron.h"
-
-#include "io/parser_dispatcher.h"
-
-#include "methods/boxCutter.h"
-
-#include "io/JSONWriter.h"
+#include <neurostr/core/log.h>
+#include <neurostr/core/neuron.h>
+#include <neurostr/io/parser_dispatcher.h>
+#include <neurostr/methods/boxCutter.h>
+#include <neurostr/io/JSONWriter.h>
 
 namespace po = boost::program_options;
 

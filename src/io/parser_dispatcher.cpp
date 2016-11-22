@@ -1,4 +1,4 @@
-#include "io/parser_dispatcher.h"
+#include <neurostr/io/parser_dispatcher.h>
 
 namespace neurostr {
 namespace io{

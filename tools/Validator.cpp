@@ -15,10 +15,10 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
-#include "core/log.h"
-#include "core/neuron.h"
-#include "io/parser_dispatcher.h"
-#include "validator/predefined_validators.h"
+#include <neurostr/core/log.h>
+#include <neurostr/core/neuron.h>
+#include <neurostr/io/parser_dispatcher.h>
+#include <neurostr/validator/predefined_validators.h>
 
 namespace po = boost::program_options;
 namespace nv = neurostr::validator;

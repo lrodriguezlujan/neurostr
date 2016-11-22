@@ -1,10 +1,5 @@
-#include "methods/triContour.h"
-
+#include <neurostr/methods/triContour.h>
 #include <algorithm>
-
-#include "core/log.h"
-
-
 namespace neurostr{
 namespace methods{
   

@@ -13,10 +13,10 @@
 //#define BOOST_FILESYSTEM_NO_DEPRECATED 
 #include <boost/filesystem.hpp>
 
-#include "core/log.h"
-#include "io/parser_dispatcher.h"
-#include "io/SWCWriter.h"
-#include "io/JSONWriter.h"
+#include <neurostr/core/log.h>
+#include <neurostr/io/parser_dispatcher.h>
+#include <neurostr/io/SWCWriter.h>
+#include <neurostr/io/JSONWriter.h>
 
 namespace po = boost::program_options;
 

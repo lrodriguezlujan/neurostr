@@ -5,7 +5,7 @@
  *
  */
 
-#include "io/ASCParser.h"
+#include <neurostr/io/ASCParser.h>
 
 
 namespace neurostr {
