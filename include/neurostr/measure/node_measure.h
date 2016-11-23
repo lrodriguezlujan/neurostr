@@ -332,14 +332,15 @@ const auto segment_distance_to_closest = [](const Node& n) -> float {
 const auto node_set_fractal_dim = [](const const_node_iterator& b, 
                                      const const_node_iterator& e) -> float{
   
-  float euc,path;
+  float euc;
   float top_sum = 0;
   float bot_sum = 0;
+  float acum_path = 0;
   
-  for(auto it = b ; it != e ; ++it){
-    euc = node_distance_to_root(it->get());
-    path = node_path_to_root(it->get());
-    top_sum += std::log(1+euc)*std::log(1+path);
+  for(auto it = std::next(b,1) ; it != e ; ++it){
+    euc = b->get().distance(it->get());
+    acum_path += euc;
+    top_sum += std::log(1+euc)*std::log(1+acum_path);
     bot_sum += std::pow(std::log(1+euc),2);
   }
   

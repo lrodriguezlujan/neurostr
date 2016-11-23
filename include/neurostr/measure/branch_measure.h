@@ -29,10 +29,22 @@ const auto taper_rate_hillman = [](const Branch& b) -> float {
       return 0.0;
   }
   
-  if(b.has_root())
-    return (b.root().radius() - b.last().radius())/b.root().radius();
-  else 
-    return (b.first().radius() - b.last().radius())/b.first().radius();
+  if(b.has_root()){
+    if(b.root().radius() == 0.0){
+      NSTR_LOG_(warn, std::string("Node with diameter equal to 0 - Node ID:") + std::to_string(b.root().id()) );
+      return 0.0;
+    } else {
+      return (b.root().radius() - b.last().radius())/b.root().radius();
+    }
+  } else {
+    if(b.first().radius() == 0.0){
+      NSTR_LOG_(warn, std::string("Node with diameter equal to 0 - Node ID:") + std::to_string(b.first().id()) );
+      return 0.0;
+    } else {
+      return (b.first().radius() - b.last().radius())/b.first().radius();
+    }
+    
+  }
 };
 
 const auto taper_rate_burker = [](const Branch& b) -> float {
