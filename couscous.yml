@@ -2,8 +2,7 @@ template:
     #Custom
     # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs.git
 
-    # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs/tree/toc-levels
-    #url: https://github.com/CouscousPHP/Template-ReadTheDocs
+    # url: https://github.com/lrodriguezlujan/Template-ReadTheDocs
     directory: /home/luis/github/Template-ReadTheDocs-custom
 include:
 exclude:
@@ -23,6 +22,7 @@ github:
 title: NeuroSTR
 subTitle: C++ Neuroanatomy library
 version: alpha
+
 menu:
     sections:
       main:
