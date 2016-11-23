@@ -31,8 +31,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # Copy headers and stuff
-file(COPY ./include DESTINATION ${CMAKE_BINARY_DIR}/)
-file(COPY ./bundled/ DESTINATION ${CMAKE_BINARY_DIR}/include)
+#file(COPY ./include DESTINATION ${CMAKE_BINARY_DIR}/)
+#file(COPY ./bundled/ DESTINATION ${CMAKE_BINARY_DIR}/include)
 
 # Find boost
 find_package(Boost 1.62.0 REQUIRED 
@@ -96,6 +96,7 @@ set ( LIB_CXX_SRCS
     ${CMAKE_SOURCE_DIR}/src/methods/scholl.cpp
     ${CMAKE_SOURCE_DIR}/src/methods/triContour.cpp
     ${CMAKE_SOURCE_DIR}/src/validator/validator.cpp
+    ${CMAKE_SOURCE_DIR}/src/measure/measure_operations.cpp
 )
 
 
@@ -139,43 +140,44 @@ set ( TOOLS_CXX_SRCS
 )
 
 # Define the Tools compile flags
-if(${CONFIGURATION_NAME} STREQUAL "Release")
-set_source_files_properties(
-    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -O3 -std=c++14")
-else()
+if(${CONFIGURATION_NAME} STREQUAL "Debug")
 set_source_files_properties(
     ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
     " -O0 -std=c++14 -Wall")
+    
+else()
+set_source_files_properties(
+    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    " -O3 -std=c++14")
 endif()
 
 link_directories( ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
 
-add_executable(BoxCutter EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/BoxCutter.cpp)
+add_executable(BoxCutter ${CMAKE_SOURCE_DIR}/tools/BoxCutter.cpp)
 target_link_libraries(BoxCutter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(BoxCutter neurostr)
 
-add_executable(BranchFeatureExtractor EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/BranchFeatureExtractor.cpp)
+add_executable(BranchFeatureExtractor ${CMAKE_SOURCE_DIR}/tools/BranchFeatureExtractor.cpp)
 target_link_libraries(BranchFeatureExtractor -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(BranchFeatureExtractor neurostr)
 
-add_executable(NeuriteFeatureExtractor EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/NeuriteFeatureExtractor.cpp)
+add_executable(NeuriteFeatureExtractor ${CMAKE_SOURCE_DIR}/tools/NeuriteFeatureExtractor.cpp)
 target_link_libraries(NeuriteFeatureExtractor -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(NeuriteFeatureExtractor neurostr)
 
-add_executable(NeuroConverter EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/NeuroConverter.cpp)
+add_executable(NeuroConverter ${CMAKE_SOURCE_DIR}/tools/NeuroConverter.cpp)
 target_link_libraries(NeuroConverter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(NeuroConverter neurostr)
 
-add_executable(Scholl EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/Scholl.cpp)
+add_executable(Scholl ${CMAKE_SOURCE_DIR}/tools/Scholl.cpp)
 target_link_libraries(Scholl -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(Scholl neurostr)
 
-add_executable(Validator EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/Validator.cpp)
+add_executable(Validator ${CMAKE_SOURCE_DIR}/tools/Validator.cpp)
 target_link_libraries(Validator -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(Validator neurostr)
 
-add_custom_target(tools ALL DEPENDS make c
+add_custom_target(tools DEPENDS
                     BoxCutter 
                     BranchFeatureExtractor
                     NeuriteFeatureExtractor
@@ -254,4 +256,50 @@ else()
                        DEPENDS neurostr_test
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test )
   
+endif()
+
+
+
+### INSTALL TARGET
+
+
+
+# Install bundeld libs - !!!!
+if(NOT NO_INSTALL_BUNDLED)
+
+# Rapidjson
+if(NOT NO_INSTALL_RAPIDJSON)
+  install(DIRECTORY ${PROJECT_PATH}bundled/rapidjson DESTINATION include/rapidjson )
+endif()
+
+# SPDLOG
+if(NOT NO_INSTALL_SPDLOG)
+  install(DIRECTORY ${PROJECT_PATH}bundled/spdlog DESTINATION include/spdlog )
+endif()
+
+# tree
+if(NOT NO_INSTALL_TREE)
+  install(FILES ${PROJECT_PATH}bundled/tree.hh DESTINATION include/ )
+endif()
+
+# basen.hpp
+if(NOT NO_INSTALL_BASEN)
+  install(FILES ${PROJECT_PATH}bundled/basen.hpp DESTINATION include/ )
+endif()
+
+endif()
+
+# INSTALL LIB
+# Headers
+install(DIRECTORY ${PROJECT_PATH}include/ DESTINATION include )
+# LIB
+install(TARGETS neurostr
+        LIBRARY DESTINATION lib/neurostr
+        ARCHIVE DESTINATION lib/neurostr
+        RUNTIME DESTINATION bin/ )
+
+# basen.hpp
+if(NOT NO_INSTALL_TOOLS)
+  install(TARGETS BoxCutter BranchFeatureExtractor NeuriteFeatureExtractor NeuroConverter Scholl Validator
+        RUNTIME DESTINATION bin/ )
 endif()
