@@ -1,6 +1,6 @@
 #include <unittest++/UnitTest++.h>
-#include "core/node.h"
-#include "core/branch.h"
+#include <neurostr/core/node.h>
+#include <neurostr/core/branch.h>
 
 SUITE(Node_tests){
 

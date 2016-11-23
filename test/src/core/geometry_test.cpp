@@ -1,8 +1,8 @@
 #include <unittest++/UnitTest++.h>
-#include "core/geometry.h"
-#include "core/node.h"
-#include "core/branch.h"
-#include "core/neurite.h"
+#include <neurostr/core/geometry.h>
+#include <neurostr/core/node.h>
+#include <neurostr/core/branch.h>
+#include <neurostr/core/neurite.h>
 
 SUITE(geometry_tests){
 using namespace neurostr::geometry;

@@ -2,15 +2,17 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
-#include "io/nl_structure.h"
-#include "io/ASCParser.h"
+#include <neurostr/io/nl_structure.h>
+#include <neurostr/io/ASCParser.h>
 
+#define ASC_TEST_DATA_SUBDIR "test_data/asc/"
 
 SUITE(NL_ASC_parser_tests){
   
   using namespace neurostr::io;
   
-  const std::string test_files_folder = std::string("../data/test_data/asc/"); 
+  const char* env_test_data_dir = std::getenv("NSTR_TEST_DIR");
+  const std::string test_files_folder = env_test_data_dir?std::string(env_test_data_dir) +  ASC_TEST_DATA_SUBDIR : ASC_TEST_DATA_SUBDIR; 
   
   struct asc_parser_data {
     asc_parser_data(const std::string& s) 

@@ -1,5 +1,5 @@
 #include <unittest++/UnitTest++.h>
-#include "core/contour.h"
+#include <neurostr/core/contour.h>
 
 SUITE(contour_tests){
 

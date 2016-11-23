@@ -1,5 +1,5 @@
 #include <unittest++/UnitTest++.h>
-#include "core/property.h"
+#include <neurostr/core/property.h>
 
 SUITE(property_tests){
 using namespace neurostr;

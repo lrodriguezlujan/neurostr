@@ -2,13 +2,16 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
-#include "io/SWCParser.h"
+#include <neurostr/io/SWCParser.h>
+
+#define SWC_TEST_DATA_SUBDIR "test_data/swc/"
 
 SUITE(swc_parser_tests){
   
   using namespace neurostr::io;
   
-  const std::string test_files_folder = std::string("../data/test_data/swc/");
+  const char* env_test_data_dir = std::getenv("NSTR_TEST_DIR");
+  const std::string test_files_folder = env_test_data_dir?std::string(env_test_data_dir) +  SWC_TEST_DATA_SUBDIR : SWC_TEST_DATA_SUBDIR; 
   
   struct swc_parser_data {
     swc_parser_data(const std::string& s) 

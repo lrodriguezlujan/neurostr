@@ -2,13 +2,16 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
-#include "io/JSONParser.h"
+#include <neurostr/io/JSONParser.h>
+
+#define JSON_TEST_DATA_SUBDIR "test_data/json/"
 
 SUITE(json_parser_tests){
   
   using namespace neurostr::io;
   
-  const std::string test_files_folder = std::string("../data/test_data/json/"); 
+  const char* env_test_data_dir = std::getenv("NSTR_TEST_DIR");
+  const std::string test_files_folder = env_test_data_dir?std::string(env_test_data_dir) +  JSON_TEST_DATA_SUBDIR : JSON_TEST_DATA_SUBDIR; 
   
   struct json_parser_data {
     json_parser_data(const std::string& s) 

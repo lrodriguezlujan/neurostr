@@ -1,10 +1,10 @@
 #include <unittest++/UnitTest++.h>
 #include <boost/iterator/filter_iterator.hpp>
-#include "core/neurite_type.h"
-#include "core/node.h"
-#include "core/branch.h"
-#include "core/neurite.h"
-#include "core/neuron.h"
+#include <neurostr/core/neurite_type.h>
+#include <neurostr/core/node.h>
+#include <neurostr/core/branch.h>
+#include <neurostr/core/neurite.h>
+#include <neurostr/core/neuron.h>
 
 
 

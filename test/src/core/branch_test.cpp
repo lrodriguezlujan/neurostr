@@ -1,7 +1,7 @@
 #include <unittest++/UnitTest++.h>
-#include "core/node.h"
-#include "core/branch.h"
-#include "core/neurite.h"
+#include <neurostr/core/node.h>
+#include <neurostr/core/branch.h>
+#include <neurostr/core/neurite.h>
 
 SUITE(branch_tests){
 using namespace neurostr;
