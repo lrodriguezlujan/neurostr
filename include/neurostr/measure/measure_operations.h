@@ -7,6 +7,8 @@
 #include <neurostr/measure/detail/compose_selector_measure_detail.h>
 #include <neurostr/measure/detail/measure_combine_tuple_detail.h>
 
+//#include <neurostr/selector/selector_traits.h>
+
 namespace neurostr {
 namespace measure {
   
@@ -37,15 +39,60 @@ auto measureEach(const Fn& f){
 };
 
 /**
+ * @brief Removes nan values of the given value range if there is a isnan function
+ * for that type
+ * @param b Range begin
+ * @param e Range end
+ */
+template <typename T>
+std::vector<T> 
+  remove_nan_values( typename std::vector<T>::iterator b,  
+                     typename std::vector<T>::iterator e){
+  return; // Default - do nothing
+};
+
+// Internal function to be called by the float double ..instances
+template <typename T>
+std::vector<T>
+  remove_nan_values_detail_( typename  std::vector<T>::iterator b,  
+                             typename  std::vector<T>::iterator e){
+  // We dont want to modify the original vector so we create a new one and insert
+  // only not nan values
+  std::vector<T>  ret;
+  for(auto it = b; it != e; ++it){
+    if(!std::isnan(*it)){
+      ret.push_back(*it);
+    }
+  }
+  return ret;
+};
+
+template <>
+std::vector<float>
+  remove_nan_values<float>( typename  std::vector<float>::iterator b,  
+                     typename  std::vector<float>::iterator e);
+
+template <>
+std::vector<double>
+  remove_nan_values<double>( typename  std::vector<double>::iterator b,  
+                     typename  std::vector<double>::iterator e);
+
+template <>
+std::vector<long double>
+  remove_nan_values<long double>( typename  std::vector<long double>::iterator b,  
+                     typename  std::vector<long double>::iterator e);
+
+/**
  * @brief Convert a single-input measure into a set measure that applies the
  * original measure to each element of the input set and then aggregates the 
  * output.
  * 
  * @param f Original single-input measure
  * @param aggr Aggregator function
+ * @param removeNaN Remove nan values before calling aggregate function
 **/
 template <typename Fn, typename Aggr>
-auto measureEachAggregate(const Fn& f, const Aggr& aggr){
+auto measureEachAggregate(const Fn& f, const Aggr& aggr, bool removeNaN = true){
   using measure_traits = measure_func_traits<Fn>;
   using aggr_traits = aggregate::aggr_func_traits<Aggr>;
   
@@ -60,7 +107,7 @@ auto measureEachAggregate(const Fn& f, const Aggr& aggr){
   using iterator_type = typename std::vector< detail::measure_fn_reference<Fn> >::iterator;
                           
   // Return (create) function
-  return [f_ = f, a_ = aggr](const iterator_type& b, const iterator_type& e ) 
+  return [f_ = f, a_ = aggr, nan_ = removeNaN](const iterator_type& b, const iterator_type& e ) 
                             ->  typename aggr_traits::out_type {
     
     std::vector<typename measure_traits::out_type> ret;
@@ -68,6 +115,12 @@ auto measureEachAggregate(const Fn& f, const Aggr& aggr){
     for (auto it = b ; it != e ; ++it) {
       ret.emplace_back( f_(it->get()) );
     }
+    
+    // Remove NAN values before aggregate
+    if(nan_){
+      ret = remove_nan_values<typename measure_traits::out_type>(ret.begin(),ret.end());
+    }
+        
     return a_(ret.begin(), ret.end());
   };
 };

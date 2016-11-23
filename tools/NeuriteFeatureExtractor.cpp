@@ -214,7 +214,7 @@ void print_vector_measures(std::map<std::string, std::vector<float>>& m ,
     for(auto val = v.begin(); val != v.end(); ++val){
       if( std::isnan(*val) ){
         val = v.erase(val)-1;
-        NSTR_LOG_(warn, std::string("Nan value removed in measure ") + it->first );
+        NSTR_LOG_(info, std::string("Nan value removed in measure ") + it->first );
       }
     }
     

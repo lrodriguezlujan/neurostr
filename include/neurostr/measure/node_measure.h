@@ -78,8 +78,9 @@ const auto node_volume = [](const Node& n) -> float {
 const auto node_segment_taper_rate_hillman = [](const Node &n) -> float {
   const Node& parent = selector::node_parent(n);
   if(parent.radius() == 0){
-    if(n.radius() == 0) return 0;
-    else return std::numeric_limits<float>::min();
+    if(n.radius() == 0) return 0.0; // FIXME! How to solve this
+    //else return std::numeric_limits<float>::min();
+    else return NAN;
   } else {
     return (parent.radius() - n.radius())/parent.radius();
   }
@@ -88,7 +89,8 @@ const auto node_segment_taper_rate_hillman = [](const Node &n) -> float {
 // Burker taper rate
 const auto node_segment_taper_rate_burker = [](const Node &n) -> float {
   const Node& parent = selector::node_parent(n);
-  return (parent.radius() - n.radius())/ n.distance(parent);
+  if(n.distance(parent) == 0 ) return 0;
+  else return (parent.radius() - n.radius())/ n.distance(parent);
 };
 
 const auto node_compartment_surface = [](const Node &n) -> float {
@@ -201,7 +203,7 @@ const auto node_parent_vector = [](const Node& n) -> point_type {
  const auto node_local_bifurcation_angle = [](const Node& n) -> float {
   auto descs = selector::node_descendants(n);
   if (descs.size() < 2)
-    return 0;
+    return NAN;
   else {
     point_type v1 = descs[0].get().position();
     point_type v2 = descs[1].get().position();
@@ -214,10 +216,10 @@ const auto node_parent_vector = [](const Node& n) -> point_type {
 const auto node_local_elongation_angle = [](const Node& n) -> float {
 
   auto descs = selector::node_descendants(n);
-  if (descs.size() != 1) return 0;
+  if (descs.size() != 1) return NAN;
 
   const Node& parent = selector::node_parent(n);
-  if (parent == n) return 0;
+  if (parent == n) return NAN;
 
   auto v0 = parent.vectorTo(n);
   auto v1 = n.vectorTo(descs[0].get());

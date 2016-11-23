@@ -114,6 +114,16 @@ template <typename T, typename V>
       return std::to_string(v);
     }
     
+    std::string escape_string(const float& v) const{
+      if(std::isnan(v)) return escape_string("nan");
+      else return std::to_string(v);
+    }
+    
+    std::string escape_string(const double& v) const{
+      if(std::isnan(v)) return escape_string("nan");
+      else return std::to_string(v);
+    }
+    
     /**
      * @brief Escapes a string using double quotes
      * @param v String to escape

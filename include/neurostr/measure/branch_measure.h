@@ -26,20 +26,23 @@ const auto taper_rate_hillman = [](const Branch& b) -> float {
   
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   if(b.has_root()){
-    if(b.root().radius() == 0.0){
+    if(b.root().radius() == b.last().radius()){
+      return 0.0; // FIXME! How to solve this
+    } else if(b.root().radius() == 0.0){
       NSTR_LOG_(warn, std::string("Node with diameter equal to 0 - Node ID:") + std::to_string(b.root().id()) );
-      return 0.0;
+      return NAN;
     } else {
       return (b.root().radius() - b.last().radius())/b.root().radius();
     }
   } else {
-    if(b.first().radius() == 0.0){
+    if(b.first().radius() == b.last().radius()){
+    } else if(b.first().radius() == 0.0){
       NSTR_LOG_(warn, std::string("Node with diameter equal to 0 - Node ID:") + std::to_string(b.first().id()) );
-      return 0.0;
+      return NAN;
     } else {
       return (b.first().radius() - b.last().radius())/b.first().radius();
     }
@@ -51,20 +54,20 @@ const auto taper_rate_burker = [](const Branch& b) -> float {
   
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   float dist ;
   if(b.has_root()){
     
     dist = b.root().distance(b.last());
-    if(dist == 0.0) return 0;
+    if(dist == 0.0) return NAN;
     else return 2*(b.root().radius() - b.last().radius())/dist;
     
   } else {
     
     dist = b.first().distance(b.last());
-    if(dist == 0.0) return 0;
+    if(dist == 0.0) return NAN;
     else return 2*(b.first().radius() - b.last().radius())/b.first().distance(b.last());
   }
 };
@@ -74,7 +77,7 @@ const auto tortuosity = [](const Branch& b) -> float {
   // Check empty branch
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   float total_length = 0;
@@ -103,7 +106,7 @@ const auto tortuosity = [](const Branch& b) -> float {
 
 const auto branch_azimuth = [](const Branch& b) -> float {
   
-  return 0.0; // TODO  
+  return NAN; // TODO  
 };
 
 const auto branch_size = [](const Branch &b) -> int {
@@ -127,19 +130,19 @@ const auto branch_order = [](const Branch &b) -> int {
 const auto child_diam_ratio = [](const Branch& b) -> float {
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
-    return 0;
+    return NAN;
   } else {
     auto cit = b.neurite().begin_children(it);
     float r1 = cit->first().radius();
     ++it;
     if(r1 == 0.0 && cit->first().radius() == 0.0)
-      return 0.0;
+      return 1.0;
     return r1/cit->first().radius();
   }
 };
@@ -148,7 +151,7 @@ const auto parent_child_diam_ratio = [](const Branch& b) -> std::pair<float,floa
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
-    return std::pair<float,float>(0,0);
+    return std::pair<float,float>(NAN,NAN);
   } else {
     auto cit = b.neurite().begin_children(it);
     float r1 = cit->first().radius()/b.last().radius();
@@ -162,7 +165,7 @@ const auto partition_asymmetry = [](const Branch& b) -> float {
   auto it = b.neurite().find(b);
   
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     auto cit = b.neurite().begin_children(it);
     auto n1 = std::distance(b.neurite().begin_leaf(cit),b.neurite().end_leaf(cit));
@@ -182,7 +185,7 @@ static inline auto rall_power_fit_factory(float min = 0 , float max = 5){
     
      auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
-      return -1;
+      return NAN;
     } else {
       
       // Get diams
@@ -213,7 +216,7 @@ static inline auto pk_factory(float r){
   return [r_ = r](const Branch &b) -> float {
     auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
-      return -1;
+      return NAN;
     } else {
       
       // Get diams
@@ -232,7 +235,7 @@ static inline auto pk_fit_factory(float min = 0 , float max = 5){
     float r = rall_power_fit_factory(min_,max_)(b);
     auto it = b.neurite().find(b);
     if(it.number_of_children() < 2){
-      return -1;
+      return NAN;
     } else {
       
       // Get diams
@@ -250,7 +253,7 @@ const auto hillman_threshold = [](const Branch &b) -> float {
 
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     
     auto cit_a = b.neurite().begin_children(it);
@@ -259,7 +262,7 @@ const auto hillman_threshold = [](const Branch &b) -> float {
     
     // Not a terminal branch
     if(cit_a.number_of_children() != 0 && cit_b.number_of_children() != 0 ){
-      return -1;
+      return NAN;
     } else {
       // 50% of father rad + 25% of daught. radius
       return b.last().radius() + (cit_a->first().radius() + cit_b->first().radius())/2.;
@@ -270,12 +273,12 @@ const auto hillman_threshold = [](const Branch &b) -> float {
 const auto local_bifurcation_angle = [](const Branch &b) -> float {
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     auto cit_a = b.neurite().begin_children(it);
     auto cit_b = cit_a; 
@@ -296,12 +299,12 @@ const auto remote_bifurcation_angle = [](const Branch &b) -> float {
   
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     auto cit_a = b.neurite().begin_children(it);
     auto cit_b = cit_a; 
@@ -316,12 +319,12 @@ const auto local_tilt_angle = [](const Branch &b) -> float {
   
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     
     point_type v = b.director_vector();
@@ -341,12 +344,12 @@ const auto remote_tilt_angle = [](const Branch &b) -> float {
   
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return 0;
+    return NAN;
   } else {
     point_type v;
     if(b.has_root())
@@ -460,16 +463,16 @@ const auto remote_plane_vector = [](const Branch &b) -> point_type {
 const auto local_torque_angle = [](const Branch &b) -> float {
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   } else if(b.order() == 0){
     // Cannot be computed for the root branch
     NSTR_LOG_(info, "Torque angle cannot be computed for the root branch");
-    return 0;
+    return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     
     // Our vector
@@ -485,15 +488,15 @@ const auto local_torque_angle = [](const Branch &b) -> float {
 const auto remote_torque_angle = [](const Branch &b) -> float {
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   } else if(b.order() == 0){
     NSTR_LOG_(info, "Torque angle cannot be computed for the root branch");
-    return 0;
+    return NAN;
   }
   
   auto it = b.neurite().find(b);
   if(it.number_of_children() < 2){
-    return -1;
+    return NAN;
   } else {
     
     // Our vector
@@ -509,7 +512,7 @@ const auto remote_torque_angle = [](const Branch &b) -> float {
 const auto branch_length = [](const Branch &b) -> float {
   if(b.size() == 0){
       NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
-      return 0.0;
+      return NAN;
   }
   
   float len = b.has_root()?b.first().distance(b.root()):0.;
