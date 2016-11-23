@@ -65,17 +65,14 @@ menu:
         relativeUrl: "doc/install.html"
         subsections:
           reqs:
-            text: "Requirements"
+            text: "Requisites and dependencies"
             relativeUrl: "doc/install.html#reqs"
           compilation:
-            text: "Compilation"
-            relativeUrl: "doc/install.html#compilation"
+            text: "Compile and Install"
+            relativeUrl: "doc/install.html#compile"
           test:
             text: "Testing"
             relativeUrl: "doc/install.html#test"
-          troubleshooting:
-            text: "troubleshooting"
-            relativeUrl: "doc/install.html#troubleshooting"
       tutorial:
         text: "Tutorial"
         relativeUrl: "doc/tutorial.html"
