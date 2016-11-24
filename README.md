@@ -61,15 +61,13 @@ The `make install` command will copy the library headers, binaries and their bun
 
 There are several variables that you can set while running the `cmake` command to change the default install directory (`/usr/local`) or to avoid installing the bundled libraries or the executables:
 
-| Flag | Default value | What it does...
-|:--| :--: |:-
-|`CMAKE_INSTALL_PREFIX` | `/usr/local` | Default install directory |
-|`NO_INSTALL_BUNDLED` | `false` | If true, bundled headers are not installed |
-|`NO_INSTALL_RAPIDJSON` | `false` | If true, rapidjson headers are not installed |
-|`NO_INSTALL_SPDLOG` | `false` | If true, spdlog headers are not installed |
-|`NO_INSTALL_TREE` | `false` | If true, tree.hh header is not installed |
-|`NO_INSTALL_BASEN` | `false` | If true, basen.hhp header is not installed |
-|`NO_INSTALL_TOOLS` | `false` | If true, executables are not installed |
+- `CMAKE_INSTALL_PREFIX` Default install directory
+- `NO_INSTALL_BUNDLED` If true, bundled headers are not installed
+- `NO_INSTALL_RAPIDJSON` If true, rapidjson headers are not installed
+- `NO_INSTALL_SPDLOG` If true, spdlog headers are not installed
+- `NO_INSTALL_TREE` If true, tree.hh header is not installed
+- `NO_INSTALL_BASEN` If true, basen.hhp header is not installed
+- `NO_INSTALL_TOOLS` If true, executables are not installed
 
 For example, this will install the library but not the tools at `/home/cig/local`:
 
