@@ -23,8 +23,10 @@ The library uses some of the C++14 standard features, so it needs a compiler wit
 NeuroSTR also uses the following software depèndencies, some of them are header libraries bundled in the package:
 
 | Library | Version | License |  Bundled | What for?
-| :-- | :--: | :--: | :--: 
+| :-- | :--: | :--: | :--:
 | [Boost](http://www.boost.org/) | >1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything... |
+
+
 | [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | 3.X | [MPL-2](https://www.mozilla.org/en-US/MPL/2.0/) | No | Singular value decomposition and quaternion calculation |
 | [tree.hh](http://tree.phi-sci.com/) | 3.1 | [GPL2/3](https://www.gnu.org/licenses/) | Yes | Neurite tree structure container |
 | [rapidJSON](http://rapidjson.org/) | 1.1.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | JSON file read/write |
