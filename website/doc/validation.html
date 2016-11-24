@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/validation.html#validator">
+                               Validator
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/validation.html#output">
+                               JSON Output
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html#checks">
+                               Checks
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html#prebuilt">
+                               prebuilt validations
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="neuron-validation">Neuron validation</h1>
+<hr />
+<h2 id="validator">Validator</h2>
+<p>The <a href="classes/validator.html#class_validator">validator class template</a> in the key component to validate a reconstruction. The validator works at neuron level, that is, it validates a neuron or its sub-components. To create a new validator you just need a <a href="measures.html">Measure</a> that takes a single element (Neuron, Neurite, Branch or Node) as input and a <a href="#checks">Check</a> function that accepts the measure output value.</p>
+<pre><code class="language-cpp">template &lt;typename M, typename C&gt;
+class Validator {
+  Validator(M measure, C check){}
+}</code></pre>
+<p>The measure is applied to every Neurite/Branch/Node in the Neuron or to the neuron itself, and then the output value is given to the check function, that determines whether the value pass the check (returning a true boolean value) or not. This is stored in a <a href="classes/validator.html#class_validator_item">ValidatorItem</a> structure within the validator.</p>
+<pre><code class="language-cpp">template &lt;typename M, typename C&gt;
+void Validator&lt;M,C&gt;::validate(const Neuron&amp; n)</code></pre>
+<p>The <a href="classes/validator.html#class_validator_item">ValidatorItem</a> is basically a container with:</p>
+<ul>
+<li><em>element</em>: A reference to the validated element</li>
+<li><em>value</em>: The measure value</li>
+<li><em>valid</em>: The check function evaluated over <em>value</em></li>
+</ul>
+<p>There are a bunch of <a href="classes/validator.html#checks">predefined check functions</a> and <a href="classes/validator.html#predefined">validators</a> included in the library. All validations described in the <a href="classes/validator.html#predefined">Predefined validations</a> sections are included in the <a href="tools.html#validator">Validator tool</a> bundled with the library. Details about the <a href="classes/validator.html#class_validator">validator class template</a> and the <a href="classes/validator.html#class_validator_item">ValidatorItem</a> are available in the <a href="classes/validator.html">validator namespace</a> documentation.</p>
+<p>The Validator class and the ValidatorItem class as well have a <code>toJSON</code> method that writes the validation results in a easily readable JSON format (the <a href="tools.html#validator">Validator tool</a> output uses this function). The output specifications are detailed <a href="#output">at the end of this section</a>.</p>
+<hr />
+<h2 id="checks">Checks</h2>
+<p>Any function that takes a single value as input and outputs a boolean qualifies as check. The only restriction is that the check function input must match the measure function output. There are a couple of <a href="classes/validator.html#checks">simple check functions</a> already implemented in the library:</p>
+<h3 id="validator_1a128a16765e070295d35571f6d10b0742"><code>public const auto is_true</code></h3>
+<p>Checks that a given boolean is true</p>
+<hr />
+<h3 id="validator_1afacaa9569f94681110397b10b978e131"><code>public const auto is_false</code></h3>
+<p>Checks that a given boolean is false</p>
+<hr />
+<h3 id="validator_1acb1df86eff8e9f3ad364e1b3c077695b"><code>public const auto empty_string</code></h3>
+<p>Checks that a given string is empty</p>
+<hr />
+<h3 id="validator_1aed93cdcdc407542ac556b3a69c62ce3e"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto range_check_factory(T min,T max)</code></h3>
+<p>Range check factory. Checks that a given value is in the range [min, max)</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li>
+<p><code>min</code> Range minimum</p>
+</li>
+<li><code>max</code> Range maximum</li>
+</ul>
+<hr />
+<h2 id="output">JSON Output</h2>
+<p>The <code>toJSON</code> method in the <a href="classes/validator.html#class_validator">validator class template</a> writes the results into an output stream as a JSON Object with the following fields:</p>
+<ul>
+<li><em>name</em>: The name given to the validator. Usually a short test name. e.g. &quot;Planar neurite validation&quot;</li>
+<li><em>description</em>: Test description. e.g. &quot;Fails if the non-axis aligned box volume of the neurite is lower than predefined threshold&quot;</li>
+<li><em>neuron_id</em>: The validated neuron ID</li>
+<li><em>pass</em>: Boolean. True if the neuron (or all its sub-elements) passed the test</li>
+<li><em>results</em>: An array of Validation Items</li>
+</ul>
+<pre><code class="language-json">{
+        "description": "Fails when the branch tortuosity falls below 1.010000",
+        "name": "Linear branch validator",
+        "neuron_id": "simple_tree",
+        "pass": false,
+        "results": [ ]
+}</code></pre>
+<p>In turn, a Validation Item is also written as a JSON Objects with:</p>
+<ul>
+<li><em>id</em>: A JSON object that identifies the tested element.</li>
+<li><em>type</em>: A string that identifies the type of the tested element. It can be &quot;Neuron&quot;, &quot;Neurite&quot;, &quot;Branch&quot; or &quot;Node&quot;</li>
+<li><em>value</em>: The measure value.</li>
+<li><em>pass</em>: The result of the check function over the measure value.</li>
+</ul>
+<p>And the ID object has:</p>
+<ul>
+<li><em>neuron</em>: The Neuron name string.</li>
+<li><em>neurite</em>: The Neurite ID (int). Present when the element type is Node, Branch or Neurite.</li>
+<li><em>branch</em>: The Branch ID as a string. Present when the element type is Node or Branch.</li>
+<li><em>node</em>: The Node ID (int). Present only if the element type is Node</li>
+</ul>
+<pre><code class="language-json">{
+                "id": {
+                    "branch": "1-2",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

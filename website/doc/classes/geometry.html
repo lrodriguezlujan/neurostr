@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/core.html">
+                               Core
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/classes/geometry.html">
+                               Geometry
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/geometry.html#class_geometry__discrete_frechet"> Discrete Frechet Distance </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/geometry.html#class_geometry__r_d_p_simplifier"> RDP turning point detection </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/geometry.html#class_geometry__triangle_mesh"> Triangular faced mesh </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/traits.html">
+                               Traits
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/log.html">
+                               Log
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/io.html">
+                               I/O
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/selector.html">
+                               Selector
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/measure.html">
+                               Measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html">
+                               Validator
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="namespace_geometry">namespace <code>geometry</code></h1>
+<p>Geometry namespace hides geometry specific implementation details from the rest of the library.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="#class_geometry__discrete_frechet"><code>DiscreteFrechet</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_geometry__r_d_p_simplifier"><code>RDPSimplifier</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a></td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets the ith component from a point.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; p)</code></td>
+<td>Gets the ith component from a 2D point.</td>
+</tr>
+<tr>
+<td><code>public inline float getx(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets point x coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float gety(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>gets pòint y coordinate</td>
+</tr>
+<tr>
+<td><code>public inline float getz(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets point z coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float get(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int coord)</code></td>
+<td>Gets the ith component from a point.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Removes the ith component from P.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int i)</code></td>
+<td>Dynamic planar projection.</td>
+</tr>
+<tr>
+<td><code>public float distance(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Euclidean distance between a and b.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>vectorFromTo(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; from,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; to)</code></td>
+<td>Vector with origin in from and end in to.</td>
+</tr>
+<tr>
+<td><code>public void traslate(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v)</code></td>
+<td>Adds v to p.</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ref)</code></td>
+<td>Modifies the point p scaling it by scale wrt ref so its norm is multiplied by scale.</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float rx,float ry,float rz)</code></td>
+<td>Modifies the point p scaling it by (rx,ry,rz)</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale)</code></td>
+<td>Modifies p multiplying its norm by scale.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>cross_product(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q)</code></td>
+<td>Computes the 3D cross product p ^ q.</td>
+</tr>
+<tr>
+<td><code>public float norm(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Returns de 2-norm of p as vector.</td>
+</tr>
+<tr>
+<td><code>public inline bool equal(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Checks whether two point a and b are equal.</td>
+</tr>
+<tr>
+<td><code>public inline bool equal(const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; a,const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; b)</code></td>
+<td>Checks whether two point a and b are equal.</td>
+</tr>
+<tr>
+<td><code>public std::array&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; get_basis(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; vx,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; up)</code></td>
+<td>Retunrs a orthonormal right-oriented basis where vx is the first vector.</td>
+</tr>
+<tr>
+<td><code>public float segment_segment_distance(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q1)</code></td>
+<td>Computes the distance between two line-segments p and q.</td>
+</tr>
+<tr>
+<td><code>public Eigen::Quaternionf align_vectors(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; u,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></td>
+<td>Returns the quaternion to transform v into u (both unitary)</td>
+</tr>
+<tr>
+<td><code>public bool segment_box_intersection(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,const</code><a href="#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; inter)</code></td>
+<td>Computes the box-segment intersection of b and s.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename G1,typename G2&gt;</code>  <br/><code>inline bool covered_by(const G1 &amp; g1,const G2 &amp; g2)</code></td>
+<td>Checks if first geometry is covered by the second.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline bool segment_cross_plane(const</code><a href="#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,const Point &amp; v,Point &amp; inter)</code></td>
+<td>Segment-axis plane intersection.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void min_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Set the ith component in res to the minimim betweeen the ith components in p and res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void max_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Set the ith component in res to the maximum betweeen the ith components in p and res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void max_by_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Computes the component-wise maximum between p and res and stores it in res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void min_by_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Computes the component-wise minimum between p and res and stores it in res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;</code><a href="#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>float axisLength(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Return box axis length.</td>
+</tr>
+<tr>
+<td><code>public template&lt;</code><a href="#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>void setAxis(</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,float v)</code></td>
+<td>Set box axis to given value.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>as_planar_polygon(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+</tr>
+<tr>
+<td><code>public template&lt;typename G&gt;</code>  <br/><code>inline std::size_t num_points(const G &amp; geom)</code></td>
+<td>Number of points in the geometry.</td>
+</tr>
+<tr>
+<td><code>public float polygon_area(const</code><a href="#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>&amp; p)</code></td>
+<td>Computes the pclosed polygon area.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline float polygon_area(const Iter &amp; begin,const Iter &amp; end)</code></td>
+<td>Computes the closed polygon area.</td>
+</tr>
+<tr>
+<td><code>public void negate(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Multiplies every component by -1.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>barycenter(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Computes the barycenter of a pointset.</td>
+</tr>
+<tr>
+<td><code>public void normalize(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Modifies p so its norm is equal to 1.</td>
+</tr>
+<tr>
+<td><code>public float vector_vector_angle(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Computes the planar vector-vector shortest angle.</td>
+</tr>
+<tr>
+<td><code>public bool box_box_intersection(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Checks if box a intersects with box b (axis aligned)</td>
+</tr>
+<tr>
+<td><code>public std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; box_corners(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Returns 8 corner points in a axis-aligned box.</td>
+</tr>
+<tr>
+<td><code>public float lineseg_dist(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; u,const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Euclidean distance between two line-segments.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>bounding_box(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Computes the bounding box of a node set.</td>
+</tr>
+<tr>
+<td><code>public float vector_vector_directed_angle(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></td>
+<td>Computes the planar angle from a to b.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; float, float &gt; local_orientation(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const std::array&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; &amp; basis)</code></td>
+<td>Computes the local orientation (Azimuth and elevation) of p wrt basis.</td>
+</tr>
+<tr>
+<td><code>public bool in_triangle_border(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if p is in the border of the triangle t.</td>
+</tr>
+<tr>
+<td><code>public bool is_triangle_vertex(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if P is one of the vertices of T.</td>
+</tr>
+<tr>
+<td><code>public bool within_triangle(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if p is inside the triangle t.</td>
+</tr>
+<tr>
+<td><code>public bool triangle_ray_intersection(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_o,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_v,</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; intersection)</code></td>
+<td>Computes Triangle-ray intersection with the moller-trumbore algorithm.</td>
+</tr>
+<tr>
+<td><code>public float tetrahedron_volume(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p2,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p3)</code></td>
+<td>Returns the volume of the tetrahedron.</td>
+</tr>
+<tr>
+<td><code>public float triangle_area(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t)</code></td>
+<td>Compute the triangle area.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members">Members</h2>
+<h3 id="class_geometry_1a5c9dd191b8139a29ce36d56164661cd2"><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Gets the ith component from a point.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>Ith component (float)</p>
+<hr />
+<h3 id="class_geometry_1a000b76bdf48b2b60337c68cdb004f724"><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; p)</code></h3>
+<p>Gets the ith component from a 2D point.</p>
+<h4 id="parameters-1">Parameters</h4>
+<ul>
+<li><code>p</code> 2D Point</li>
+</ul>
+<h4 id="returns-1">Returns</h4>
+<p>I-th component (float)</p>
+<hr />
+<h3 id="class_geometry_1a3edf50991dd6e40d5a71c96adc381d54"><code>public inline float getx(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Gets point x coordinate.</p>
+<h4 id="parameters-2">Parameters</h4>
+<ul>
+<li><code>p</code></li>
+</ul>
+<h4 id="returns-2">Returns</h4>
+<hr />
+<h3 id="class_geometry_1add3f1347fce6f4160581d2ff977209f9"><code>public inline float gety(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>gets pòint y coordinate</p>
+<h4 id="parameters-3">Parameters</h4>
+<ul>
+<li><code>p</code></li>
+</ul>
+<h4 id="returns-3">Returns</h4>
+<hr />
+<h3 id="class_geometry_1a38d7aebfd527fd2ad5eaa50635353901"><code>public inline float getz(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Gets point z coordinate.</p>
+<h4 id="parameters-4">Parameters</h4>
+<ul>
+<li><code>p</code></li>
+</ul>
+<h4 id="returns-4">Returns</h4>
+<hr />
+<h3 id="class_geometry_1a5953a1ba26ac8c38205bfd7f7c2f327e"><code>public inline float get(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int coord)</code></h3>
+<p>Gets the ith component from a point.</p>
+<h4 id="parameters-5">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Point</p>
+</li>
+<li><code>coord</code> coordinate</li>
+</ul>
+<h4 id="returns-5">Returns</h4>
+<p>Ith component (float)</p>
+<hr />
+<h3 id="class_geometry_1aa46043e30d626a7b62911b3cf07ee3cb"><code>public template&lt;int I&gt;</code>  <br/><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Removes the ith component from P.</p>
+<h4 id="parameters-6">Parameters</h4>
+<ul>
+<li><code>p</code> Point to project</li>
+</ul>
+<h4 id="returns-6">Returns</h4>
+<p>projected point</p>
+<hr />
+<h3 id="class_geometry_1a4106fe68a377bf3601c3d7ef9a3fc9ce"><code>public</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int i)</code></h3>
+<p>Dynamic planar projection.</p>
+<h4 id="parameters-7">Parameters</h4>
+<ul>
+<li><code>p</code> Point to project</li>
+</ul>
+<h4 id="returns-7">Returns</h4>
+<p>projected point</p>
+<hr />
+<h3 id="class_geometry_1a425f07466c99261739829ce216660984"><code>public float distance(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></h3>
+<p>Euclidean distance between a and b.</p>
+<h4 id="parameters-8">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code> First point</p>
+</li>
+<li><code>b</code> Second point</li>
+</ul>
+<h4 id="returns-8">Returns</h4>
+<p>Eculidean distance (Float)</p>
+<hr />
+<h3 id="class_geometry_1a758a7f209d7d71571aaca90afecca528"><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>vectorFromTo(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; from,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; to)</code></h3>
+<p>Vector with origin in from and end in to.</p>
+<h4 id="parameters-9">Parameters</h4>
+<ul>
+<li>
+<p><code>from</code> Vector origin</p>
+</li>
+<li><code>to</code> Vector end</li>
+</ul>
+<h4 id="returns-9">Returns</h4>
+<p>Vector (point type)</p>
+<hr />
+<h3 id="class_geometry_1acfc56fc2debf57c21b655206b63ae820"><code>public void traslate(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v)</code></h3>
+<p>Adds v to p.</p>
+<h4 id="parameters-10">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> point to be modified</p>
+</li>
+<li><code>v</code> traslation vector</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a0c1f837fc4512ecba0019b9cc3bdbd53"><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ref)</code></h3>
+<p>Modifies the point p scaling it by scale wrt ref so its norm is multiplied by scale.</p>
+<h4 id="parameters-11">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Point to be modified</p>
+</li>
+<li>
+<p><code>scale</code> Scale</p>
+</li>
+<li><code>ref</code> Referecne point</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a9ea6a3c252e07bd7a4816b9ba410884c"><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float rx,float ry,float rz)</code></h3>
+<p>Modifies the point p scaling it by (rx,ry,rz)</p>
+<h4 id="parameters-12">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Point to be modified</p>
+</li>
+<li>
+<p><code>rx</code> X scale</p>
+</li>
+<li>
+<p><code>ry</code> Y Scale</p>
+</li>
+<li><code>rz</code> Z scale</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1ad54b17f6012e19b1d5cff90435822a90"><code>public void scale(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale)</code></h3>
+<p>Modifies p multiplying its norm by scale.</p>
+<h4 id="parameters-13">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Point to be modified</p>
+</li>
+<li><code>scale</code> Scale factor</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a7c4804c8f5ffeb40b2a7bb5cd4f2e2d5"><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>cross_product(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q)</code></h3>
+<p>Computes the 3D cross product p ^ q.</p>
+<h4 id="parameters-14">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> First 3D vector</p>
+</li>
+<li><code>q</code> Second 3D Vector</li>
+</ul>
+<h4 id="returns-10">Returns</h4>
+<p>Cross product p^q</p>
+<hr />
+<h3 id="class_geometry_1a763424be476267a7b481b7923bea152b"><code>public float norm(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Returns de 2-norm of p as vector.</p>
+<h4 id="parameters-15">Parameters</h4>
+<ul>
+<li><code>p</code> 3D Vector</li>
+</ul>
+<h4 id="returns-11">Returns</h4>
+<p>P 2-Norm</p>
+<hr />
+<h3 id="class_geometry_1a0c3175466cc0855117f68d2fb031c1b9"><code>public inline bool equal(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></h3>
+<p>Checks whether two point a and b are equal.</p>
+<h4 id="parameters-16">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code> First point</p>
+</li>
+<li><code>b</code> Second point</li>
+</ul>
+<h4 id="returns-12">Returns</h4>
+<p>True if every component in a is equal to b</p>
+<hr />
+<h3 id="class_geometry_1a71f47a7b8f3958eeda4f875735afe686"><code>public inline bool equal(const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; a,const</code><a href="#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; b)</code></h3>
+<p>Checks whether two point a and b are equal.</p>
+<h4 id="parameters-17">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code> First point</p>
+</li>
+<li><code>b</code> Second point</li>
+</ul>
+<h4 id="returns-13">Returns</h4>
+<p>True if every component in a is equal to b</p>
+<hr />
+<h3 id="class_geometry_1aef7646de6023672dd1297e4037bb4041"><code>public std::array&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; get_basis(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; vx,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; up)</code></h3>
+<p>Retunrs a orthonormal right-oriented basis where vx is the first vector.</p>
+<h4 id="parameters-18">Parameters</h4>
+<ul>
+<li>
+<p><code>vx</code> First vector in the basis</p>
+</li>
+<li><code>up</code> Up reference position (to be z)</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1add05db8394b6c1f50cee76454e5a7081"><code>public float segment_segment_distance(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q1)</code></h3>
+<p>Computes the distance between two line-segments p and q.</p>
+<h4 id="parameters-19">Parameters</h4>
+<ul>
+<li>
+<p><code>p0</code> P start point</p>
+</li>
+<li>
+<p><code>p1</code> P end point</p>
+</li>
+<li>
+<p><code>q0</code> Q start point</p>
+</li>
+<li><code>q1</code> Q end point</li>
+</ul>
+<h4 id="returns-14">Returns</h4>
+<p>Distance between p and q</p>
+<hr />
+<h3 id="class_geometry_1ac668e00659be395573d83d77a3c6be80"><code>public Eigen::Quaternionf align_vectors(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; u,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></h3>
+<p>Returns the quaternion to transform v into u (both unitary)</p>
+<h4 id="parameters-20">Parameters</h4>
+<ul>
+<li>
+<p><code>v</code> Unitary vector</p>
+</li>
+<li>
+<p><code>u</code> Unitary vector</p>
+</li>
+<li><code>up</code> Reference vector to determine sign in 3D angles</li>
+</ul>
+<h4 id="returns-15">Returns</h4>
+<p>Quaternion</p>
+<hr />
+<h3 id="class_geometry_1a6a174cbb708d30e36efde47ed335bc5e"><code>public bool segment_box_intersection(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,const</code><a href="#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; inter)</code></h3>
+<p>Computes the box-segment intersection of b and s.</p>
+<h4 id="parameters-21">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> Box</p>
+</li>
+<li>
+<p><code>s</code> Segment</p>
+</li>
+<li><code>inter</code> (Return) Intersection point</li>
+</ul>
+<h4 id="returns-16">Returns</h4>
+<p>True if b intersects with s</p>
+<hr />
+<h3 id="class_geometry_1a856c7aefc6cf96b8d9bf32780a52c312"><code>public template&lt;typename G1,typename G2&gt;</code>  <br/><code>inline bool covered_by(const G1 &amp; g1,const G2 &amp; g2)</code></h3>
+<p>Checks if first geometry is covered by the second.</p>
+<h4 id="parameters-22">Parameters</h4>
+<ul>
+<li>
+<p><code>g1</code> First geometry</p>
+</li>
+<li><code>g2</code> Second geometry</li>
+</ul>
+<h4 id="returns-17">Returns</h4>
+<p>True if g1 is covered by g2</p>
+<hr />
+<h3 id="class_geometry_1ad4c775966434b0ab02419c8c79428102"><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline bool segment_cross_plane(const</code><a href="#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,const Point &amp; v,Point &amp; inter)</code></h3>
+<p>Segment-axis plane intersection.</p>
+<h4 id="parameters-23">Parameters</h4>
+<ul>
+<li>
+<p><code>s</code> Segment</p>
+</li>
+<li>
+<p><code>v</code> Point that marks the Ith plane position</p>
+</li>
+<li><code>inter</code> Intersection point</li>
+</ul>
+<h4 id="returns-18">Returns</h4>
+<p>True if they intersect</p>
+<hr />
+<h3 id="class_geometry_1a539630ef30926e9db9c11b643ad5e4e8"><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void min_component(const Point &amp; p,Point &amp; res)</code></h3>
+<p>Set the ith component in res to the minimim betweeen the ith components in p and res.</p>
+<h4 id="parameters-24">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Base point. unmodified</p>
+</li>
+<li><code>res</code> Point to be modified</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a0d88840770c3a1d4c29c5c369928f36d"><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void max_component(const Point &amp; p,Point &amp; res)</code></h3>
+<p>Set the ith component in res to the maximum betweeen the ith components in p and res.</p>
+<h4 id="parameters-25">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Base point. unmodified</p>
+</li>
+<li><code>res</code> Point to be modified</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a810d8b548213869ad4cde3394e537d19"><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void max_by_component(const Point &amp; p,Point &amp; res)</code></h3>
+<p>Computes the component-wise maximum between p and res and stores it in res.</p>
+<h4 id="parameters-26">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Base point</p>
+</li>
+<li><code>res</code> Return point</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1afd47ecb0bcbfa1ef6814a01cf90adacf"><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void min_by_component(const Point &amp; p,Point &amp; res)</code></h3>
+<p>Computes the component-wise minimum between p and res and stores it in res.</p>
+<h4 id="parameters-27">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Base point</p>
+</li>
+<li><code>res</code> Return point</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a055aad21d75f9c388ad7ab0fbb3135b5"><code>public template&lt;</code><a href="#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>float axisLength(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></h3>
+<p>Return box axis length.</p>
+<h4 id="parameters-28">Parameters</h4>
+<ul>
+<li><code>box</code></li>
+</ul>
+<h4 id="returns-19">Returns</h4>
+<p>Axis length (value)</p>
+<hr />
+<h3 id="class_geometry_1a8030806c1704b568e0d2d2b456d3eb4c"><code>public template&lt;</code><a href="#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>void setAxis(</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,float v)</code></h3>
+<p>Set box axis to given value.</p>
+<h4 id="parameters-29">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> Box</p>
+</li>
+<li><code>v</code> Value</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a49117c56f2b2ad0db93f64b0d37186bf"><code>public</code><a href="#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>as_planar_polygon(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></h3>
+<hr />
+<h3 id="class_geometry_1adb2025754d346acc91a87794ef33a7b6"><code>public template&lt;typename G&gt;</code>  <br/><code>inline std::size_t num_points(const G &amp; geom)</code></h3>
+<p>Number of points in the geometry.</p>
+<h4 id="parameters-30">Parameters</h4>
+<ul>
+<li><code>geom</code> Geoemtry object</li>
+</ul>
+<h4 id="returns-20">Returns</h4>
+<p>Number of point</p>
+<hr />
+<h3 id="class_geometry_1a15469947e00ae6e594c59b790fae229c"><code>public float polygon_area(const</code><a href="#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>&amp; p)</code></h3>
+<p>Computes the pclosed polygon area.</p>
+<h4 id="parameters-31">Parameters</h4>
+<ul>
+<li><code>p</code> Polygon object</li>
+</ul>
+<h4 id="returns-21">Returns</h4>
+<p>Area</p>
+<hr />
+<h3 id="class_geometry_1a3f0feb2d89c9919db89e3c1a90817cfa"><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline float polygon_area(const Iter &amp; begin,const Iter &amp; end)</code></h3>
+<p>Computes the closed polygon area.</p>
+<h4 id="parameters-32">Parameters</h4>
+<ul>
+<li>
+<p><code>begin</code></p>
+</li>
+<li><code>end</code></li>
+</ul>
+<h4 id="returns-22">Returns</h4>
+<p>Area</p>
+<hr />
+<h3 id="class_geometry_1ad7068ed3422fe5f7055e167ec3a83ac8"><code>public void negate(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Multiplies every component by -1.</p>
+<h4 id="parameters-33">Parameters</h4>
+<ul>
+<li><code>p</code> Point to negate</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1aa2773e6094e625fd13bccf34068d6025"><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>barycenter(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></h3>
+<p>Computes the barycenter of a pointset.</p>
+<h4 id="parameters-34">Parameters</h4>
+<ul>
+<li><code>v</code> Vector of points</li>
+</ul>
+<h4 id="returns-23">Returns</h4>
+<p>Barycenter</p>
+<hr />
+<h3 id="class_geometry_1ac4fb11cf9cd69ec69ce30d7c09698685"><code>public void normalize(</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Modifies p so its norm is equal to 1.</p>
+<h4 id="parameters-35">Parameters</h4>
+<ul>
+<li><code>p</code> Point to normalize</li>
+</ul>
+<hr />
+<h3 id="class_geometry_1a6fd68bd6b871bd0844495b55a1b04c3b"><code>public float vector_vector_angle(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></h3>
+<p>Computes the planar vector-vector shortest angle.</p>
+<h4 id="parameters-36">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code> First vector</p>
+</li>
+<li><code>b</code> Second vector</li>
+</ul>
+<h4 id="returns-24">Returns</h4>
+<p>Angle between a and b [0,pi]</p>
+<hr />
+<h3 id="class_geometry_1a9fa16a1974220e5952a2a6110e532bce"><code>public bool box_box_intersection(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></h3>
+<p>Checks if box a intersects with box b (axis aligned)</p>
+<h4 id="parameters-37">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code></p>
+</li>
+<li><code>b</code></li>
+</ul>
+<h4 id="returns-25">Returns</h4>
+<p>True if they intersect</p>
+<hr />
+<h3 id="class_geometry_1a6e54ab08140b5c0a6fb192efd02f6a00"><code>public std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; box_corners(const</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></h3>
+<p>Returns 8 corner points in a axis-aligned box.</p>
+<h4 id="parameters-38">Parameters</h4>
+<ul>
+<li><code>a</code></li>
+</ul>
+<h4 id="returns-26">Returns</h4>
+<p>Corner points</p>
+<hr />
+<h3 id="class_geometry_1a250678f8728d101c8e8a93d54985fa78"><code>public float lineseg_dist(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; u,const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></h3>
+<p>Euclidean distance between two line-segments.</p>
+<h4 id="parameters-39">Parameters</h4>
+<ul>
+<li>
+<p><code>u</code></p>
+</li>
+<li><code>v</code></li>
+</ul>
+<h4 id="returns-27">Returns</h4>
+<p>euclidean distance</p>
+<hr />
+<h3 id="class_geometry_1a7eb12026135a4b6e7ad8334d2cad94f6"><code>public</code><a href="#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>bounding_box(const std::vector&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></h3>
+<p>Computes the bounding box of a node set.</p>
+<h4 id="parameters-40">Parameters</h4>
+<ul>
+<li><code>v</code> node set</li>
+</ul>
+<h4 id="returns-28">Returns</h4>
+<p>box</p>
+<hr />
+<h3 id="class_geometry_1af1063d7641369b4475a6407dc834c5c7"><code>public float vector_vector_directed_angle(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></h3>
+<p>Computes the planar angle from a to b.</p>
+<h4 id="parameters-41">Parameters</h4>
+<ul>
+<li>
+<p><code>a</code> First vector</p>
+</li>
+<li>
+<p><code>b</code> Second vector</p>
+</li>
+<li><code>up</code> Reference vector to determine sign in 3D angles</li>
+</ul>
+<h4 id="returns-29">Returns</h4>
+<p>Angle from a to b [0,wpi)</p>
+<hr />
+<h3 id="class_geometry_1a08a3df2d6f0d1b201bf7c9c4a65b79b6"><code>public std::pair&lt; float, float &gt; local_orientation(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const std::array&lt;</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; &amp; basis)</code></h3>
+<p>Computes the local orientation (Azimuth and elevation) of p wrt basis.</p>
+<h4 id="parameters-42">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code> Point</p>
+</li>
+<li><code>basis</code> local basis</li>
+</ul>
+<h4 id="returns-30">Returns</h4>
+<p>pair (azimuth, elevation)</p>
+<hr />
+<h3 id="class_geometry_1a06d3ecbced989835f8033c2932c1ac2a"><code>public bool in_triangle_border(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Verifies if p is in the border of the triangle t.</p>
+<h4 id="parameters-43">Parameters</h4>
+<ul>
+<li>
+<p><code>t</code> Triangle</p>
+</li>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-31">Returns</h4>
+<p>True if p lies in the border of t</p>
+<hr />
+<h3 id="class_geometry_1ab51f7b1fdadc94a491d6975168dca49b"><code>public bool is_triangle_vertex(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Verifies if P is one of the vertices of T.</p>
+<h4 id="parameters-44">Parameters</h4>
+<ul>
+<li>
+<p><code>t</code> Triangle</p>
+</li>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-32">Returns</h4>
+<p>True if p is a vertex of t</p>
+<hr />
+<h3 id="class_geometry_1a2275f60e542ee0f195cc245c0b6da7ef"><code>public bool within_triangle(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Verifies if p is inside the triangle t.</p>
+<h4 id="parameters-45">Parameters</h4>
+<ul>
+<li>
+<p><code>t</code> Triangle</p>
+</li>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-33">Returns</h4>
+<p>True if p is inside t</p>
+<hr />
+<h3 id="class_geometry_1afe2e75728ed9c4249ad12c46f0dc9735"><code>public bool triangle_ray_intersection(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_o,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_v,</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; intersection)</code></h3>
+<p>Computes Triangle-ray intersection with the moller-trumbore algorithm.</p>
+<h4 id="parameters-46">Parameters</h4>
+<ul>
+<li>
+<p><code>t</code> Triangle</p>
+</li>
+<li>
+<p><code>ray_o</code> Ray origin</p>
+</li>
+<li>
+<p><code>ray_v</code> Ray direction</p>
+</li>
+<li><code>intersection</code> Output: intersection point</li>
+</ul>
+<h4 id="returns-34">Returns</h4>
+<p>True if the ray intersects the triangle</p>
+<hr />
+<h3 id="class_geometry_1a1095d93da892dfbe8affd95c89a99c81"><code>public float tetrahedron_volume(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p2,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p3)</code></h3>
+<p>Returns the volume of the tetrahedron.</p>
+<h4 id="parameters-47">Parameters</h4>
+<ul>
+<li>
+<p><code>p0</code> vertex</p>
+</li>
+<li>
+<p><code>p1</code> vertex</p>
+</li>
+<li>
+<p><code>p2</code> vertex</p>
+</li>
+<li><code>p3</code> vertex</li>
+</ul>
+<h4 id="returns-35">Returns</h4>
+<p>Tetrahedron voulme</p>
+<hr />
+<h3 id="class_geometry_1ad0fe13d86c4971b48ae637402cfe78b1"><code>public float triangle_area(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t)</code></h3>
+<p>Compute the triangle area.</p>
+<h4 id="returns-36">Returns</h4>
+<p>Triangle area</p>
+<hr />
+<hr />
+<h1 id="class_geometry__discrete_frechet">class <code>DiscreteFrechet</code></h1>
+<h2 id="summary-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  DiscreteFrechet(IterA ini_a,IterA end_a,IterB ini_b,IterB end_b)</code></td>
+<td>Base constructor.</td>
+</tr>
+<tr>
+<td><code>public inline double value()</code></td>
+<td>Computes de discrete frechet distance recursively.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-1">Members</h2>
+<h3 id="class_geometry__discrete_frechet_1a8717c0d6b6c96be62ea368798548f7f8"><code>public inline  DiscreteFrechet(IterA ini_a,IterA end_a,IterB ini_b,IterB end_b)</code></h3>
+<p>Base constructor.</p>
+<p>Initializes the class with the tow line-segment</p>
+<h4 id="parameters-48">Parameters</h4>
+<ul>
+<li>
+<p><code>ini_a</code> First branch line-segment begin iterator</p>
+</li>
+<li>
+<p><code>end_a</code> First branch line-segment end iterator</p>
+</li>
+<li>
+<p><code>ini_b</code> Second branch line-segment begin iterator</p>
+</li>
+<li><code>end_b</code> Secondbranch line-segment end iterator</li>
+</ul>
+<h4 id="returns-37">Returns</h4>
+<p><a href="#class_geometry__discrete_frechet">DiscreteFrechet</a> class</p>
+<hr />
+<h3 id="class_geometry__discrete_frechet_1af18f8cd3a240be7f4432068e1b29a0cb"><code>public inline double value()</code></h3>
+<p>Computes de discrete frechet distance recursively.</p>
+<h4 id="returns-38">Returns</h4>
+<p>Discrete frechet distance</p>
+<hr />
+<h1 id="class_geometry__r_d_p_simplifier">class <code>RDPSimplifier</code></h1>
+<h2 id="summary-2">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  RDPSimplifier(float eps,std::vector&lt; Node &gt; &amp; v)</code></td>
+<td>Base constructor, sets toleracne and the line-segment.</td>
+</tr>
+<tr>
+<td><code>public inline void simplify()</code></td>
+<td>Applies the simplification to the line-segment.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-2">Members</h2>
+<h3 id="class_geometry__r_d_p_simplifier_1ad6e66bac56315350bbc973682f3746d4"><code>public inline  RDPSimplifier(float eps,std::vector&lt; Node &gt; &amp; v)</code></h3>
+<p>Base constructor, sets toleracne and the line-segment.</p>
+<h4 id="parameters-49">Parameters</h4>
+<ul>
+<li>
+<p><code>eps</code> Tolerance</p>
+</li>
+<li><code>v</code> Node set (vector)</li>
+</ul>
+<hr />
+<h3 id="class_geometry__r_d_p_simplifier_1a13251746e72851e5047bbeae0ba506e9"><code>public inline void simplify()</code></h3>
+<p>Applies the simplification to the line-segment.</p>
+<hr />
+<h1 id="class_geometry__triangle_mesh">class <code>TriangleMesh</code></h1>
+<h2 id="summary-3">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  TriangleMesh()</code></td>
+<td>Creates an empty (no vertex no faces) mesh.</td>
+</tr>
+<tr>
+<td><code>public  TriangleMesh(const</code><a href="#class_geometry__triangle_mesh_1a7e90f358c0167e1f17463c7ee3e3291a"><code>face_storage</code></a><code>&amp; faces)</code></td>
+<td>Creates a mesh with given faces.</td>
+</tr>
+<tr>
+<td><code>public  ~TriangleMesh()</code></td>
+<td>Default destructor.</td>
+</tr>
+<tr>
+<td><code>public  TriangleMesh(const</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;) = delete</code></td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp; operator=(const</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;) = delete</code></td>
+</tr>
+<tr>
+<td><code>public  TriangleMesh(</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;&amp;) = default</code></td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp; operator=(</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;&amp;) = default</code></td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>add(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Adds a vertex to the mesh (if it doesnt exist already)</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline void add(const Iter &amp; b,const Iter &amp; e)</code></td>
+<td>Copies a range of vertices to the mesh.</td>
+</tr>
+<tr>
+<td><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; it)</code></td>
+<td>Removes the vertex and all its faces from the mesh.</td>
+</tr>
+<tr>
+<td><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; b,const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; e)</code></td>
+<td>Removes a range of vertices and their faces from the mesh.</td>
+</tr>
+<tr>
+<td><code>public void clear()</code></td>
+<td>Removes all vertices and faces.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>begin_vertex()</code></td>
+<td>Creates an iterator to the first vertex in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1aae2cbf2520f3c3a99730e550bb93e285"><code>const_vertex_iterator</code></a><code>begin_vertex() const</code></td>
+<td>Creates an iterator to the first vertex in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>end_vertex()</code></td>
+<td>Creates an iterator to one-past position of the last vertex in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1aae2cbf2520f3c3a99730e550bb93e285"><code>const_vertex_iterator</code></a><code>end_vertex() const</code></td>
+<td>Creates an iterator to one-past position of the last vertex in the mesh.</td>
+</tr>
+<tr>
+<td><code>public std::size_t vertex_count() const</code></td>
+<td>Number of vertices in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>add(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v2)</code></td>
+<td>Adds a new triangular face to the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>add(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t)</code></td>
+<td>Adds a new triangular face to the mesh.</td>
+</tr>
+<tr>
+<td><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; it)</code></td>
+<td>Removes a face from the mesh.</td>
+</tr>
+<tr>
+<td><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; b,const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; e)</code></td>
+<td>Removes a set of faces from the mesh.</td>
+</tr>
+<tr>
+<td><code>public void clear_faces()</code></td>
+<td>Removes all faces (but not the vertices)</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>begin_face()</code></td>
+<td>Returns an iterator to the first face in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a37ecd5335b26115f2f73810616ddd08a"><code>const_face_iterator</code></a><code>begin_face() const</code></td>
+<td>Returns an iterator to the first face in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>end_face()</code></td>
+<td>Returns an iterator to one-past the last face in the mesh.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry__triangle_mesh_1a37ecd5335b26115f2f73810616ddd08a"><code>const_face_iterator</code></a><code>end_face() const</code></td>
+<td>Returns an iterator to one-past the last face in the mesh.</td>
+</tr>
+<tr>
+<td><code>public std::size_t face_count() const</code></td>
+<td>Number of faces in the mesh.</td>
+</tr>
+<tr>
+<td><code>public bool point_inside(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_direction) const</code></td>
+<td>Using ray-tracing method computes if the point p is Inside the triangular mesh assuming that it is closed.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>ray_intersection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_direction) const</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-3">Members</h2>
+<h3 id="class_geometry__triangle_mesh_1a8aa5a4c1b0309e19e9e92517c14c960c"><code>public  TriangleMesh()</code></h3>
+<p>Creates an empty (no vertex no faces) mesh.</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a14fb195a7ffa66ba305943b369eacbd6"><code>public  TriangleMesh(const</code><a href="#class_geometry__triangle_mesh_1a7e90f358c0167e1f17463c7ee3e3291a"><code>face_storage</code></a><code>&amp; faces)</code></h3>
+<p>Creates a mesh with given faces.</p>
+<p>Vertices are added automatically</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a6dad4bf2288f7365cb2d4475eeac58c6"><code>public  ~TriangleMesh()</code></h3>
+<p>Default destructor.</p>
+<p>Nothign special to do</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a83d41af7f2ee3279425f242d8601e10c"><code>public  TriangleMesh(const</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;) = delete</code></h3>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1aa89f8859f770385605668fef7095b14f"><code>public</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp; operator=(const</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;) = delete</code></h3>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1ae52c6947674d6f3df370e571a291d194"><code>public  TriangleMesh(</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;&amp;) = default</code></h3>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1ac32047a0380e2dd3dffcdb02cad59378"><code>public</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp; operator=(</code><a href="#class_geometry__triangle_mesh"><code>TriangleMesh</code></a><code>&amp;&amp;) = default</code></h3>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1abc058abeae38218015fc3c312c677bce"><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>add(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></h3>
+<p>Adds a vertex to the mesh (if it doesnt exist already)</p>
+<h4 id="parameters-50">Parameters</h4>
+<ul>
+<li><code>p</code> Vertex to add.</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1acef238219d90f04901547e29ce260f48"><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline void add(const Iter &amp; b,const Iter &amp; e)</code></h3>
+<p>Copies a range of vertices to the mesh.</p>
+<h4 id="parameters-51">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> Range begin iterator</p>
+</li>
+<li><code>e</code> Range end iterator</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a9b9bc41134f7849ea02b8c9e074fc7de"><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; it)</code></h3>
+<p>Removes the vertex and all its faces from the mesh.</p>
+<h4 id="parameters-52">Parameters</h4>
+<ul>
+<li><code>it</code> Vertex iterator</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a931c4a01a5dc9e69118dc8fbcce1d8be"><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; b,const</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>&amp; e)</code></h3>
+<p>Removes a range of vertices and their faces from the mesh.</p>
+<h4 id="parameters-53">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> Range begin</p>
+</li>
+<li><code>e</code> Range end</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1abda4696d6b0054a7cccb20a1016b504f"><code>public void clear()</code></h3>
+<p>Removes all vertices and faces.</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a85cdc2ccd504fa1b30d4f44320521c68"><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>begin_vertex()</code></h3>
+<p>Creates an iterator to the first vertex in the mesh.</p>
+<h4 id="returns-39">Returns</h4>
+<p>Begin iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a1b4910f1830a4bbf2b52b541578bacfe"><code>public</code><a href="#class_geometry__triangle_mesh_1aae2cbf2520f3c3a99730e550bb93e285"><code>const_vertex_iterator</code></a><code>begin_vertex() const</code></h3>
+<p>Creates an iterator to the first vertex in the mesh.</p>
+<h4 id="returns-40">Returns</h4>
+<p>Begin iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a0fec27ba2d8b20c9b7d0b9ee91d301a8"><code>public</code><a href="#class_geometry__triangle_mesh_1aeb55dfc74ba99d733cc50c18db03cb1c"><code>vertex_iterator</code></a><code>end_vertex()</code></h3>
+<p>Creates an iterator to one-past position of the last vertex in the mesh.</p>
+<h4 id="returns-41">Returns</h4>
+<p>End iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1afeb89f464e92e27b809e80a7fdfa8392"><code>public</code><a href="#class_geometry__triangle_mesh_1aae2cbf2520f3c3a99730e550bb93e285"><code>const_vertex_iterator</code></a><code>end_vertex() const</code></h3>
+<p>Creates an iterator to one-past position of the last vertex in the mesh.</p>
+<h4 id="returns-42">Returns</h4>
+<p>End iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a0a56d84d88c038db4bce31751074e34a"><code>public std::size_t vertex_count() const</code></h3>
+<p>Number of vertices in the mesh.</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a1859b1ef3d0163851b4590cffa4f398b"><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>add(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v0,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v1,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v2)</code></h3>
+<p>Adds a new triangular face to the mesh.</p>
+<p>Inserts the vertices if necessary</p>
+<h4 id="parameters-54">Parameters</h4>
+<ul>
+<li>
+<p><code>v0</code> First vertex</p>
+</li>
+<li>
+<p><code>v1</code> Second vertex</p>
+</li>
+<li><code>v2</code> Third vertex</li>
+</ul>
+<h4 id="returns-43">Returns</h4>
+<p>Iterator to the inserted face</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1adec299b7a8cb182114305e15417e6104"><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>add(const</code><a href="#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t)</code></h3>
+<p>Adds a new triangular face to the mesh.</p>
+<p>Inserts the vertices if necessary</p>
+<h4 id="parameters-55">Parameters</h4>
+<ul>
+<li><code>t</code> face triangle</li>
+</ul>
+<h4 id="returns-44">Returns</h4>
+<p>Iterator to the inserted face</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a258853e64662d75fe1822c3901520e0e"><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; it)</code></h3>
+<p>Removes a face from the mesh.</p>
+<h4 id="parameters-56">Parameters</h4>
+<ul>
+<li><code>it</code> Face iterator</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1ad1f4e15a135aa4d2f54acc075148d6f5"><code>public void remove(const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; b,const</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>&amp; e)</code></h3>
+<p>Removes a set of faces from the mesh.</p>
+<h4 id="parameters-57">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> Begin iterator</p>
+</li>
+<li><code>e</code> End iterator</li>
+</ul>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a214a55072e5395ce4d7061eafb9f2f2e"><code>public void clear_faces()</code></h3>
+<p>Removes all faces (but not the vertices)</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a0e0fe5e7abe494b0499fa43e51f1273c"><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>begin_face()</code></h3>
+<p>Returns an iterator to the first face in the mesh.</p>
+<h4 id="returns-45">Returns</h4>
+<p>Begin iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a80888c4042622b02fd302baa4c5a4f5e"><code>public</code><a href="#class_geometry__triangle_mesh_1a37ecd5335b26115f2f73810616ddd08a"><code>const_face_iterator</code></a><code>begin_face() const</code></h3>
+<p>Returns an iterator to the first face in the mesh.</p>
+<h4 id="returns-46">Returns</h4>
+<p>Begin iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1aa734b2afefcf5dbbf6bfebff21ee1556"><code>public</code><a href="#class_geometry__triangle_mesh_1a6a46624a4c4e8f4fb2ef0f7281cebf34"><code>face_iterator</code></a><code>end_face()</code></h3>
+<p>Returns an iterator to one-past the last face in the mesh.</p>
+<h4 id="returns-47">Returns</h4>
+<p>End iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a3e8214fb83067990b3a588398bb08d95"><code>public</code><a href="#class_geometry__triangle_mesh_1a37ecd5335b26115f2f73810616ddd08a"><code>const_face_iterator</code></a><code>end_face() const</code></h3>
+<p>Returns an iterator to one-past the last face in the mesh.</p>
+<h4 id="returns-48">Returns</h4>
+<p>End iterator</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a41aef587c0242cb42a647ac4d5b7d177"><code>public std::size_t face_count() const</code></h3>
+<p>Number of faces in the mesh.</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a573ec14f9b4602e0d975a6380bc52cfc"><code>public bool point_inside(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_direction) const</code></h3>
+<p>Using ray-tracing method computes if the point p is Inside the triangular mesh assuming that it is closed.</p>
+<h4 id="parameters-58">Parameters</h4>
+<ul>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-49">Returns</h4>
+<p>True if the point is within the mesh</p>
+<hr />
+<h3 id="class_geometry__triangle_mesh_1a0bbd6a2f50150d2ef4e12c6f41666fa6"><code>public</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>ray_intersection(const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_direction) const</code></h3>
+<h4 id="parameters-59">Parameters</h4>
+<ul>
+<li>
+<p><code>p</code></p>
+</li>
+<li><code>ray_direction</code></li>
+</ul>
+<h4 id="returns-50">Returns</h4>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

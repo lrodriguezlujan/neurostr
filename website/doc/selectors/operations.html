@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#basics">
+                               Selector basics
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/prebuilt.html">
+                               Prebuilt selectors
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#create">
+                               Create selectors
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/operations.html">
+                               Selector operations
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/operations.html#inner"> Inner operations </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/operations.html#set"> Set operations </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="selector-operations">Selector operations</h1>
+<h2 id="inner-operations">Inner Operations  <a id="inner"></a></h2>
+<h3 id="composition">Composition <a id="compose"></a></h3>
+<p>intuitively, to compose two or more selector functions is to apply them sequentially. In order to make composition feasible intermediate selector input and output signatures must completely match. Following the standard notation, function composition is processed starting from the rightmost function, that is, the last function is the first to be applied.</p>
+<p><img src="composition_text.png" alt=" Function composition" title=" Function composition" /></p>
+<p>Therefore, the composed selector will have the same input signature as the rightmost selector and the output signature of the leftmost selector.</p>
+<p><strong>Function signature:</strong> <code>compose_selector(const F1&amp; f1, const F2&amp; f2, Funcs... fns</code></p>
+<p><img src="operator_composition.png" alt=" Composition" title=" Composition" /></p>
+<h3 id="single-output-to-set">Single Output to Set<a id="out_to_set"></a></h3>
+<p>This operator converts any single-output selector into a set-output selector. Given a single-output selector creates a new one with the same input signature that outputs a set of size 1.</p>
+<p>This operator is handy when you want to use other operators (e.g. set operators) that require the output to be a set without rewriting the selector.</p>
+<p><strong>Function signature:</strong> <code>selector_out_single_to_set(const F&amp; f)</code></p>
+<h3 id="single-input-to-set">Single Input to Set <a id="in_to_set"></a></h3>
+<p>This operator takes a single-input selector and creates a set-input selector. The new selector just applies the original selector to each element of the input set and joins the output using the <a href="#union">Union set operator</a>. Please note that all selectors created using this operator are set-input set-ouput selectors.</p>
+<p><strong>Function signature:</strong> <code>selector_in_single_to_set(const F&amp; f)</code></p>
+<p><img src="operator_outset.png" alt=" Single Input to Set" title=" Single Input to Set" /></p>
+<h3 id="combined-foreach">Combined Foreach  <a id="composition"></a></h3>
+<p>The combined foreach operator applies the second selector to each one of the elements selected by the first selector. There are some obvious restrictions over the types and cardinality of both selectors in order to apply this operator:</p>
+<ul>
+<li>The first operator output must be a <strong>set</strong></li>
+<li>The second operator input must be a <strong>single element</strong></li>
+<li>Output - Input types must <strong>match</strong></li>
+</ul>
+<p>The resultant selector will have the input signature of the first selector and it will output a set of the same type as the second selector. The output set is constructed by joining all single outputs using the <a href="#union">Union set operator</a>.</p>
+<p><strong>Function signature:</strong> <code>selector_foreach(const F1&amp; f1, const F2&amp; f2)</code></p>
+<p><img src="operator_foreach.png" alt=" Combined Foreach" title=" Combined Foreach" /></p>
+<hr />
+<h2 id="set-operations">Set Operations  <a id="set"></a></h2>
+<p>Set operations combine the selected set of two selector functions, creating a new operator to perform that selection. In order to do so, they impose two restrictions for both selectors involved:</p>
+<ul>
+<li>They have the <strong>same input type</strong> and cardinality</li>
+<li>They both output a <strong>set</strong> of the <strong>same type</strong></li>
+</ul>
+<p>The result selector, as expected, will have this same signature. Set operations are implemented in <code>selector/selector_set_operations.h</code> and they belong to the namespace <code>neurostr::selector</code>.</p>
+<h3 id="union">Union<a id="union"></a></h3>
+<p>The union operator takes two or more selectors that output sets and joins them creating a new set with the elements of each one of the original sets. Please note that the union might contain duplicated entities. You can delete copies by composing the resultant selector with the <a href="selectors/generic.html#unique">Unique filter</a>. Set union is a symmetric operation, therefore the order of the operands doesn't affect the result.</p>
+<p><strong>Function signature:</strong> <code>union_selector(const F1&amp; f1, const F2&amp; f2, Funcs... fns)</code></p>
+<p><img src="selector_union.png" alt="Selector union" title="Selector union" /></p>
+<h3 id="intersection">Intersection <a id="intersection"></a></h3>
+<p>The union operator takes two or more selectors that output sets and joins them creating a new set with the elements that are present in every original sets. Please note that the intersection cannot contain duplicated entities unless they are already duplicated in at least one of the original sets. Set intersection is a symmetric operation, therefore the order of the operands doesn't affect the result.</p>
+<p><strong>Function signature:</strong> <code>intersection_selector(const F1&amp; f1, const F2&amp; f2, Funcs... fns)</code></p>
+<p><img src="selector_intersection.png" alt="Selector intersection" title="Selector intersection" /></p>
+<h3 id="asymmetric-difference">Asymmetric difference  <a id="diff"></a></h3>
+<p>The asymmetric difference operator takes two selectors that output sets and selects the elements of the first set that are not in the second one. This is obviously a asymmetric operation so the selectors order is relevant. Please note that the intersection cannot contain duplicated entities unless they are already duplicated in the first set.</p>
+<p><strong>Function signature:</strong> <code>diff_selector_factory(const F1&amp; f_1, const F2&amp; f_2)</code></p>
+<p><img src="selector_diff.png" alt="Selector asymmetric difference" title="Selector asymmetric difference" /></p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

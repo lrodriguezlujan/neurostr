@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/measures/prebuilt.html">
+                               Prebuilt Measures
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/measures/prebuilt.html#node"> Node measures </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/measures/prebuilt.html#branch"> Branch measures </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/measures/prebuilt.html#neurite"> Neurite measures </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/measures/prebuilt.html#neuron"> Neuron measures </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/measures/prebuilt.html#lmeasure"> L-measure measures </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#aggregators">
+                               Aggregators
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#create">
+                               Create a measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#operations">
+                               Measure operations
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="prebuilt-measures">Prebuilt measures</h1>
+<p>NeuroSTR includes a huge library of prebuilt measures some new, others already presented in the scientific literature or implemented in existing neuroanatomy tools.</p>
+<p>Prebuilt measures are organized in the same way as <a href="../selectors.html">Selectors</a>, by their input element type: all measure functions that take either a single node or a node set as input fall into the <em>Node</em> category. You can find more details about each measure by clicking on their name.</p>
+<p>You might notice (and it seems odd) that there are very few Neurite and Neuron measures, but it is on purpose. Since we can use <a href="../selectors.html">Selectors</a> and <a href="../measures.html#aggregators">Aggregators</a> along with measures to create new measures, we focus on defining &quot;low level&quot; measures, that can be use to create &quot;high level measures&quot;. Check the <a href="../measures.html#create">Create a measure</a> to see a simple example of this.</p>
+<h3><a href="measures/prebuilt.html#node">Node Measures</a></h3>
+<ul>
+<li><a href="measures/prebuilt.html#node_component">X,Y,Z component</a></li>
+<li><a href="measures/prebuilt.html#node_radius">Radius, Diameter</a></li>
+<li><a href="measures/prebuilt.html#node_order">Centrifugal order</a></li>
+<li><a href="measures/prebuilt.html#node_parent_length">Distance to parent</a></li>
+<li><a href="measures/prebuilt.html#node_volume">Compartment volume</a></li>
+<li><a href="measures/prebuilt.html#node_surface">Compartment surface</a></li>
+<li><a href="measures/prebuilt.html#node_section">Compartment section area</a></li>
+<li><a href="measures/prebuilt.html#node_hillman">Local Hillman taper rate</a></li>
+<li><a href="measures/prebuilt.html#node_burker">Local Burker taper rate</a></li>
+<li><a href="measures/prebuilt.html#node_rootdist">Distance to root</a></li>
+<li><a href="measures/prebuilt.html#node_somadist">Distance to soma</a></li>
+<li><a href="measures/prebuilt.html#node_rootpath">Path length to root</a></li>
+<li><a href="measures/prebuilt.html#node_desccount">Number of descendants</a></li>
+<li><a href="measures/prebuilt.html#node_boxvol">Non-aligned minimum box volume</a></li>
+<li><a href="measures/prebuilt.html#node_parentvector">Vector to parent</a></li>
+<li><a href="measures/prebuilt.html#node_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/prebuilt.html#node_localelong">Local elongation angle</a></li>
+<li><a href="measures/prebuilt.html#node_extreme">Extreme angle</a></li>
+<li><a href="measures/prebuilt.html#node_localorientation">Local orientation</a></li>
+<li><a href="measures/prebuilt.html#node_interminalbranch">In terminal branch</a></li>
+<li><a href="measures/prebuilt.html#node_distclosest">Distance to closest segment</a></li>
+<li>
+<p><a href="measures/prebuilt.html#node_fractal">Fractal dimension</a></p>
+<hr />
+</li>
+</ul>
+<h3><a href="measures/prebuilt.html#branch">Branch Measures</a></h3>
+<ul>
+<li><a href="measures/prebuilt.html#branch_hillman">Hillman taper rate</a></li>
+<li><a href="measures/prebuilt.html#branch_burker">Burker taper rate</a></li>
+<li><a href="measures/prebuilt.html#branch_tortuosity">Tortuosity</a></li>
+<li><a href="measures/prebuilt.html#branch_size">Node count</a></li>
+<li><a href="measures/prebuilt.html#branch_index">Branch index</a></li>
+<li><a href="measures/prebuilt.html#branch_order">Centrifugal order</a></li>
+<li><a href="measures/prebuilt.html#branch_childdimratio">Child diameter ratio</a></li>
+<li><a href="measures/prebuilt.html#branch_parentchildiamratio">Parent-Child diameter ratio</a></li>
+<li><a href="measures/prebuilt.html#branch_partition">Partition asymmetry</a></li>
+<li><a href="measures/prebuilt.html#branch_rall">Rall power fit</a></li>
+<li><a href="measures/prebuilt.html#branch_pk">Pk</a></li>
+<li><a href="measures/prebuilt.html#branch_hillman_threshold">Hillman threshold</a></li>
+<li><a href="measures/prebuilt.html#branch_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/prebuilt.html#branch_remotebif">Remote bifurcation angle</a></li>
+<li><a href="measures/prebuilt.html#branch_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/prebuilt.html#branch_remotebif">Remote bifurcation angle</a></li>
+<li><a href="measures/prebuilt.html#branch_localtilt">Local tilt angle</a></li>
+<li><a href="measures/prebuilt.html#branch_remotetilt">Remote tilt angle</a></li>
+<li><a href="measures/prebuilt.html#branch_localplane">Local plane vector</a></li>
+<li><a href="measures/prebuilt.html#branch_remoteplane">Remote plane vector</a></li>
+<li><a href="measures/prebuilt.html#branch_localtorque">Local torque angle</a></li>
+<li><a href="measures/prebuilt.html#branch_remotetorque">Remote torque angle</a></li>
+<li><a href="measures/prebuilt.html#branch_length">Length</a></li>
+<li><a href="measures/prebuilt.html#branch_intersects">Intersects</a></li>
+</ul>
+<hr />
+<h3><a href="measures/prebuilt.html#neurite">Neurite Measures</a></h3>
+<ul>
+<li><a href="measures/neurite.html#rootsoma">Root is soma</a></li>
+</ul>
+<hr />
+<h3><a href="measures/prebuilt.html#neuron">Neuron Measures</a></h3>
+<ul>
+<li><a href="measures/prebuilt.html#neuron_hassoma">Has soma</a></li>
+<li><a href="measures/prebuilt.html#neuron_neurite_count">Neurite count</a></li>
+<li><a href="measures/prebuilt.html#neuron_neurite_type_count">Neurite type count</a></li>
+<li><a href="measures/prebuilt.html#neuron_soma_surface">Soma surface</a></li>
+</ul>
+<hr />
+<h3><a href="measures/prebuilt.html#generic">Generic Measures</a></h3>
+<ul>
+<li><a href="measures/prebuilt.html#generic_setsize">Set size</a></li>
+</ul>
+<hr />
+<h3><a href="measures/prebuilt.html#lmeasure">L-measure Measures</a></h3>
+<ul>
+<li><a href="measures/prebuilt.html#lmeasure_somasurface">Soma surface</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_nstems">Number of stems</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_nbifs">Number of bifurcations</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_nbranches">Number of branches</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_nterminals">Number of terminal tips</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_width">Width, Height and Depth</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_diameter">Diameter</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_diameterpow">Diameter power</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_length">Compartment length</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_branchlength">Branch length</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_surface">Compartment surface</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_branchsurface">Branch surface</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_section_area">Compartment section area</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_volume">Compartment volume</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_branch_volume">Branch volume</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_rootdist">Distance to root</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_rootpath">Path length to root</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_branchorder">Branch centrifugal order</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_terminaldegree">Node terminal degree</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_branch_terminaldegree">Branch terminal degree</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_burker">Taper 1: Burker taper rate</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_hillman">Taper 2: Hillman taper rate</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_contraction">Contraction</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_fragmentation">Fragmentation</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_partition_asymmetry">Partition asymmetry</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_rall">Rall's power</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_pkfit">Pk fitted value</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_pkclassic">Pk classic and squared</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_local_bif">Local bifurcation amplitude</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_remote_bif">Remote bifurcation amplitude</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_local_tilt">Local bifurcation tilt</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_remote_tilt">Remote bifurcation tilt</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_local_torque">Local bifurcation torque</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_remote_torque">Remote bifurcation_torque</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_terminaldiam">Terminal bifurcation diameter</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_hillman_threshold">Hillman threshold</a></li>
+<li><a href="measures/prebuilt.html#lmeasure_fractal_dimension">Fractal dimension</a></li>
+</ul>
+<hr />
+<h1 id="node">Node measures</h1>
+<h3 id="x-y-z-components">X, Y, Z components<a id="node_component"> </a></h3>
+<p><strong>Function:</strong> <code>node_x, node_y, node_z = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Returns the x, y, z component of the given <a href="../data_model.html#node">Node</a> position.</p>
+<p><strong>Output:</strong> Real number.</p>
+<hr />
+<h3 id="radius-diameter">Radius, diameter<a id="node_radius"> </a></h3>
+<p><strong>Function:</strong> <code>node_radius,node_diameter = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Returns the radius/diameter of the given <a href="../data_model.html#node">Node</a>.</p>
+<p><strong>Output:</strong> Real number.</p>
+<p><strong>Details:</strong> The Hillman taper rate defined as the ratio of the difference between first and last node diameters and the first node diameter. If the branch's root exists, it is taken as the first node. If we assume non-decreasing diameters, the hillman taper rate should be non-negative. Note that it will throw an
+exception for a <a href="../data_model.html#branch">Branch</a> with no nodes.</p>
+<hr />
+<h3 id="centrifugal-order">Centrifugal order<a id="node_order"> </a></h3>
+<p><strong>Function:</strong> <code>node_order = [](const Node&amp; n) -&gt; int</code></p>
+<p><strong>Description:</strong> Returns the centrifugal order of the <a href="../data_model.html#branch">Branch</a> that the <a href="../data_model.html#node">Node</a> belongs to.</p>
+<p><strong>Output:</strong> Integer. Centrifugal order</p>
+<p><strong>Details:</strong> See <a href="branch.html#order">Branch order</a></p>
+<hr />
+<h3 id="distance-to-parent">Distance to parent<a id="node_parent_length"> </a></h3>
+<p><strong>Function:</strong> <code>node_length_to_parent,node_length_to_parent_border = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Returns the euclidean distance between the given <a href="../data_model.html#node">Node</a> and its parent. the <em>border</em> variant subtract the radius of both nodes to the distance.</p>
+<p><strong>Output:</strong> Real Number.</p>
+<p><strong>Details:</strong> Please note that the border variant might return negative values if the sum of radius is greater than the distance</p>
+<hr />
+<h3 id="distance-to-root">Distance to root<a id="node_rootdist"> </a></h3>
+<p><strong>Function:</strong> <code>node_distance_to_root = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the euclidean distance between the given <a href="../data_model.html#node">Node</a> and the root of the <a href="../data_model.html#neurite">Neurite</a> that the node belongs to.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> If the <a href="../data_model.html#neurite">Neurite</a> doesn't have a root node, the distance is computed to its first <a href="../data_model.html#node">Node</a></p>
+<hr />
+<h3 id="distance-to-soma">Distance to soma<a id="node_somadist"> </a></h3>
+<p><strong>Function:</strong> <code>node_distance_to_soma = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the euclidean distance between the given <a href="../data_model.html#node">Node</a> and the closest [Soma] point in the neuron.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> If the <a href="../data_model.html#neuron">Neuron</a> doesn't have a [Soma], the the method returns the distance between the given node and the point (0,0,0).</p>
+<hr />
+<h3 id="path-length-to-root">Path length to root<a id="node_rootpath"> </a></h3>
+<p><strong>Function:</strong> <code>node_path_to_root = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the length of the path from the given <a href="../data_model.html#node">Node</a> to the root of the <a href="../data_model.html#neurite">Neurite</a> that the node belongs to.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<hr />
+<h3 id="compartment-volume">Compartment volume<a id="node_volume"> </a></h3>
+<p><strong>Function:</strong> <code>node_volume = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the volume of the truncated cone from the given <a href="../data_model.html#node">Node</a> to its parent.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> The aforementioned cone has the radius of the parent at one end and the radius of the given <a href="../data_model.html#node">Node</a> at the other. If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, it returns 0.</p>
+<hr />
+<h3 id="compartment-surface">Compartment surface<a id="node_surface"> </a></h3>
+<p><strong>Function:</strong> <code>node_compartment_surface = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the surface of the truncated open cone from the given <a href="../data_model.html#node">Node</a> to its parent.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> The aforementioned cone has the radius of the parent at one end and the radius of the given <a href="../data_model.html#node">Node</a> at the other. If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, it returns 0.</p>
+<hr />
+<h3 id="compartment-section-area">Compartment section area<a id="node_section"> </a></h3>
+<p><strong>Function:</strong> <code>node_compartment_section_area = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes section area as the area of the circle with radius the average of the given <a href="../data_model.html#node">Node</a> and its parent radius.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the circle radius is just the given node radius.</p>
+<hr />
+<h3 id="local-hillman-taper-rate">Local Hillman taper rate<a id="node_hillman"> </a></h3>
+<p><strong>Function:</strong> <code>node_segment_taper_rate_hillman = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the Hillman taper rate between the given <a href="../data_model.html#node">Node</a> and its parent</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the taper rate is 0. The Hillman taper rate is given by:
+<code>(parent.radius-node.radius)/parent.radius</code></p>
+<hr />
+<h3 id="local-burker-taper-rate">Local Burker taper rate<a id="node_burker"> </a></h3>
+<p><strong>Function:</strong> <code>node_segment_taper_rate_burker = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the Burker taper rate between the given <a href="../data_model.html#node">Node</a> and its parent</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the taper rate is 0. The Burker taper rate is given by:
+<code>(parent.radius-node.radius)/distance(parent,node)</code></p>
+<hr />
+<h3 id="non-axis-aligned-minimum-box-volume">Non axis aligned minimum box volume<a id="node_boxvol"> </a></h3>
+<p><strong>Function:</strong> <code>box_volume = [](const const_node_iterator&amp; b, const const_node_iterator&amp; e) -&gt; double</code></p>
+<p><strong>Description:</strong> Computes the minimum box volume for the given <a href="../data_model.html#node">Node</a> set. The box is not restricted to be axis-aligned.</p>
+<p><strong>Output:</strong> Non negative real Number.</p>
+<p><strong>Details:</strong> The box volume is computed by applying a PCA over the position of the nodes, and then computing the axis-aligned box volume on the rotated positions.</p>
+<hr />
+<h3 id="vector-to-parent">Vector to parent<a id="node_parentvector"> </a></h3>
+<p><strong>Function:</strong> <code>node_parent_vector = [](const Node&amp; n) -&gt; point_type</code></p>
+<p><strong>Description:</strong> Computes the vector from the given <a href="../data_model.html#node">Node</a> to its parent.</p>
+<p><strong>Output:</strong> 3D Vector</p>
+<p><strong>Details:</strong> If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the method returns the null vector.</p>
+<hr />
+<h3 id="local-bifurcation-angle">Local bifurcation angle<a id="node_localbif"> </a></h3>
+<p><strong>Function:</strong> <code>node_local_bifurcation_angle = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> If the given node is a bifurcation, it returns the local bifurcation angle.</p>
+<p><strong>Output:</strong> Angle in radians [0,pi)</p>
+<p><strong>Details:</strong> If the node is not a bifurcation node it returns 0. See <a href="branch.html#localbif">Branch local bifurcation angle</a></p>
+<hr />
+<h3 id="local-elongation-angle">Local elongation angle<a id="node_localelong"> </a></h3>
+<p><strong>Function:</strong> <code>node_local_elongation_angle = [](const Node&amp; n) -&gt; float</code></p>
+<p><strong>Description:</strong> If the given <a href="../data_model.html#node">Node</a> is an elongation, i.e. it only has one descendant, returns the oriented angle between the vector form the parent to the given <a href="../data_model.html#node">Node</a> and the vector from the <a href="../data_model.html#node">Node</a> to its descendant.</p>
+<p><strong>Output:</strong> Angle in radians</p>
+<p><strong>Details:</strong> If the node is not an elongation node it returns 0. The reference vector for 3D angle orientation is the <a href="../data_model.html#neuron">Neuron</a> up vector (by default it is the (0,0,1) vector)</p>
+<hr />
+<h3 id="local-orientation">Local orientation<a id="node_localorientation"> </a></h3>
+<p><strong>Function:</strong> <code>node_local_orientation = [](const Node&amp; n) -&gt; std::pair&lt;float, float&gt;</code></p>
+<p><strong>Description:</strong> It computes the values of azimuth and elevation for the given <a href="../data_model.html#node">Node</a> using the orthonormal basis span by the vector from the parent and the neuron up vector as reference.</p>
+<p><strong>Output:</strong> Pair of angles in radians (-pi,pi). Azimuth and elevation</p>
+<hr />
+<h3 id="in-terminal-branch">In terminal branch<a id="node_interminalbranch"> </a></h3>
+<p><strong>Function:</strong> <code>node_in_terminal_segment = [](const Node&amp; n) -&gt; bool</code></p>
+<p><strong>Description:</strong> Returns true if the <a href="../data_model.html#branch">Branch</a> that the node belongs to is a terminal branch</p>
+<p><strong>Output:</strong> Boolean value. True if the node's branch is terminal.</p>
+<hr />
+<h3 id="distance-to-closest-segment">Distance to closest segment<a id="node_distclosest"> </a></h3>
+<p><strong>Function:</strong> <code>segment_distance_to_closest = [](const Node&amp; n) -&gt; bool</code></p>
+<p><strong>Description:</strong> Returns the minimum distance between the segment [parent,node] to any other segment in the neuron.</p>
+<p><strong>Output:</strong> Non negative value. If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the method returns the highest value representable in a float.</p>
+<hr />
+<h3 id="distance-to-closest-segment-1">Distance to closest segment<a id="node_distclosest"> </a></h3>
+<p><strong>Function:</strong> <code>segment_distance_to_closest = [](const Node&amp; n) -&gt; bool</code></p>
+<p><strong>Description:</strong> Returns the minimum distance between the segment [parent,node] to any other segment in the neuron.</p>
+<p><strong>Output:</strong> Non negative value. If the parent of the given <a href="../data_model.html#node">Node</a> cannot be determined, the method returns the highest value representable in a float.</p>
+<hr />
+<h3 id="fractal-dimension">Fractal dimension<a id="node_fractal"> </a></h3>
+<p><strong>Function:</strong> <code>node_set_fractal_dim = [](const const_node_iterator&amp; b, const const_node_iterator&amp; e) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the fractal dimension of the given set of nodes (assuming that they are a sequence).</p>
+<p><strong>Output:</strong> Fractal dimension, real value between 1 (straight line) and 2 (random walk)</p>
+<p><strong>Details:</strong> See <a href="http://cng.gmu.edu:8080/Lm/help/Fractal_Dim.htm">L-measure fractal dimension documentation</a>.</p>
+<hr />
+<h1 id="branch">Branch measures</h1>
+<h3 id="hillman-taper-rate">Hillman taper rate<a id="branch_hillman"> </a></h3>
+<p><strong>Function:</strong> <code>taper_rate_hillman = [](const Branch&amp; b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the Hillman taper rate for the given <a href="../data_model.html#branch">Branch</a></p>
+<p><strong>Output:</strong> real number. Hillman taper rate.</p>
+<p><strong>Details:</strong> The Hillman taper rate defined as the ratio of the difference between first and last node diameters and the first node diameter. If the branch's root exists, it is taken as the first node. If we assume non-decreasing diameters, the hillman taper rate should be non-negative. Note that it will throw an
+exception for a <a href="../data_model.html#branch">Branch</a> with no nodes.</p>
+<p><code>(first.diameter - last.diameter) / first.diameter</code></p>
+<hr />
+<h3 id="burker-taper-rate">Burker taper rate <a id="branch_burker"> </a></h3>
+<p><strong>Function:</strong> <code>taper_rate_burker = [](const Branch&amp; b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the Burker taper rate for the given <a href="../data_model.html#branch">Branch</a></p>
+<p><strong>Output:</strong> real number. Burker taper rate.</p>
+<p><strong>Details:</strong> The Burker taper rate defined as the ratio of the difference between the first and last node diameters and the euclidean distance between these two same nodes. If the branch's root exists, it is taken as the first node. If we assume non-decreasing diameters, the hillman taper rate should be non-negative. Note that it will throw an exception for a <a href="../data_model.html#branch">Branch</a> with no nodes.</p>
+<p><code>(first.diameter - last.diameter) / distance(first,last)</code></p>
+<hr />
+<h3 id="tortuosity">Tortuosity <a id="branch_tortuosity"> </a></h3>
+<p><strong>Function:</strong> <code>tortuosity = [](const Branch&amp; b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the branch tortuosity value.</p>
+<p><strong>Output:</strong> Non-negative real number. Greater or equal than 1.</p>
+<p><strong>Details:</strong> The tortuosity value is defined as the ratio of the total length of the branch and  the euclidean distance between the first and the last nodes. If the branch's root exists, it is taken as the first node.</p>
+<p><code>branch.length / distance(first,last)</code></p>
+<hr />
+<h3 id="node-count">Node count <a id="branch_size"> </a></h3>
+<p><strong>Function:</strong> <code>branch_size = [](const Branch &amp;b) -&gt; int</code></p>
+<p><strong>Description:</strong> Returns the number of nodes in the <a href="../data_model.html#branch">Branch</a>.</p>
+<p><strong>Output:</strong> Non-negative integer</p>
+<p><strong>Details:</strong> This returns the number of nodes that are part of the Branch excluding the root. In our data model, the branch's root node belongs to the parent branch (or to the soma) and not to the branch itself.</p>
+<hr />
+<h3 id="branch-index">Branch index <a id="branch_index"> </a></h3>
+<p><strong>Function:</strong> <code>branch_index = [](const Branch &amp;b) -&gt; unsigned int</code></p>
+<p><strong>Description:</strong> Returns the index of the given branch as daughter of the parent branch.</p>
+<p><strong>Output:</strong> Non-negative integer</p>
+<p><strong>Details:</strong> This returns 0 for the first branch, 1 for the second and so on. If the <a href="../data_model.html#neurite">Neurite</a> has been sorted, the first and last branches are ordered by they azimuth, in other words the rightmost and leftmost branches correspond to the first and last position respectively.</p>
+<hr />
+<h3 id="centrifugal-order-1">Centrifugal order <a id="branch_order"> </a></h3>
+<p><strong>Function:</strong> <code>branch_order = [](const Branch &amp;b) -&gt; int</code></p>
+<p><strong>Description:</strong> Returns the centrifugal order of the given <a href="../data_model.html#branch">Branch</a></p>
+<p><strong>Output:</strong> Non-negative integer</p>
+<p><strong>Details:</strong> Branch orders counts the number of bifurcations in the path from the given <a href="../data_model.html#branch">Branch</a> to the root of the <a href="../data_model.html#neurite">Neurite</a>. That is, the root <a href="../data_model.html#branch">Branch</a> has a centrifugal order of 0, it's daughters have a centrifugal order of 1, and so on.</p>
+<hr />
+<h3 id="child-diameter-ratio">Child diameter ratio <a id="branch_childdimratio"> </a></h3>
+<p><strong>Function:</strong> <code>child_diam_ratio = [](const Branch&amp; b) -&gt; float</code></p>
+<p><strong>Description:</strong> Returns the child-diameter ratio of the daughters of the given <a href="../data_model.html#branch">Branch</a>], the ratio of the daughter branches first node's diameters.</p>
+<p><strong>Output:</strong> Real number</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2, the measure always return 0.</p>
+<p><code>branch.child[0].first.diameter /  branch.child[1].first.diameter</code></p>
+<hr />
+<h3 id="parent-child-diameter-ratio">Parent-Child diameter ratio <a id="branch_childdimratio"> </a></h3>
+<p><strong>Function:</strong> <code>parent_child_diam_ratio = [](const Branch&amp; b) -&gt; std::pair&lt;float,float&gt;</code></p>
+<p><strong>Description:</strong> Returns the ratio between the diameter of the last node of the given branch and the first nodes of the daughter branches.</p>
+<p><strong>Output:</strong> Real number pair</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2, the measure always return the pair (0,0).</p>
+<p><code>(branch.child[0].first.diameter/branch.last.diameter, branch.child[1].first.diameter/branch.last.diameter)</code></p>
+<hr />
+<h3 id="partition-asymmetry">Partition asymmetry <a id="branch_partition"> </a></h3>
+<p><strong>Function:</strong> <code>partition_asymmetry = [](const Branch&amp; b) -&gt; float</code></p>
+<p><strong>Description:</strong> The partition asymmetry first computes the number of terminal points in the left/right subtrees, <em>n1</em> and <em>n2</em> respectively. Then computes the following quantity as the partition asymmetry value:</p>
+<p><code>|n1-n2| / (n1 + n2 - 2)|</code></p>
+<p><strong>Output:</strong> Non negative real number</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2, the measure always returns -1.</p>
+<hr />
+<h3 id="ralls-power-fit">Rall's power fit <a id="branch_rall"> </a></h3>
+<p><strong>Factory function:</strong> <code>auto rall_power_fit_factory(float min = 0 , float max = 5)</code></p>
+<p><strong>Function:</strong> <code>(const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the best value for the parameter <em>r</em> in the range [<em>min</em>,<em>max</em>] that minimizes the following quantity:</p>
+<p><code>(branch.diameter^r - branch.child[0].diameter^r - branch.child[1].diameter^r)^2</code></p>
+<p><strong>Output:</strong> Real number - best fit value</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2, the measure always returns -1.</p>
+<hr />
+<h3 id="pk-measure">Pk measure <a id="branch_pk"> </a></h3>
+<p><strong>Factory function:</strong> <code>auto pk_factory(float r)</code></p>
+<p><strong>Function:</strong> <code>(const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Given the parameter <em>r</em>, computes the quantity:</p>
+<p><code>(branch.child[0].diameter^r - branch.child[1].diameter^r)/branch.diameter^r</code></p>
+<p><strong>Output:</strong> Real number</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2, the measure always returns -1.</p>
+<p><strong>Note:</strong> <code>pk_fit_factory(float min = 0 , float max = 5)</code> just applies this same measure where <em>r</em> is computed using <a href="#rall">Rall's power fit</a>.</p>
+<hr />
+<h3 id="hillman-threshold">Hillman threshold <a id="branch_hillman_threshold"> </a></h3>
+<p><strong>Function:</strong> <code>hillman_threshold = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the Hillman threshold value for the given <a href="../data_model.html#branch">Branch</a> bifurcation. The Hillman threshold is the weighted sum of parent and daugther diameters (0.5,0.25,0.25). Hillman threshold only applies to pre-terminal branches (i.e to terminal bifurcation nodes).</p>
+<p><code>0.25*(branch.child[0].diameter + branch.child[1].diameter) + 0.5*branch.diameter</code></p>
+<p><strong>Output:</strong> Real number</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2 or it is not a pre-terminal branch the measure returns -1.</p>
+<hr />
+<h3 id="local-bifurcation-angle-1">Local bifurcation angle <a id="branch_localbif"> </a></h3>
+<p><strong>Function:</strong> <code>local_bifurcation_angle = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the bifurcation amplitude, measured as the shortest planar angle between the vectors from the bifurcation node (the last node of the given branch) to the first nodes of the daughter branches.</p>
+<p><strong>Output:</strong> Real number. Angle in radians [0,pi]</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2 it returns -1. NAN values might appear if null segments are present.</p>
+<hr />
+<h3 id="remote-bifurcation-angle">Remote bifurcation angle <a id="branch_remotebif"> </a></h3>
+<p><strong>Function:</strong> <code>remote_bifurcation_angle = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the bifurcation amplitude, measured as the shortest planar angle between the vectors from the bifurcation node (the last node of the given branch) to the last nodes of the daughter branches.</p>
+<p><strong>Output:</strong> Real number. Angle in radians [0,pi]</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2 it returns -1. NAN values might appear if null segments are present.</p>
+<hr />
+<h3 id="local-tilt-angle">Local tilt angle <a id="branch_localtilt"> </a></h3>
+<p><strong>Function:</strong> <code>local_tilt_angle = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the tilt angle at the last node bifurcation point. Tilt angle is the smallest angle between the branch director vector and the vectors form the bifurcation point to the first node of the daughter branches.</p>
+<p><strong>Output:</strong> Real number. Angle in radians [0,pi]</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2 it returns -1. NAN values might appear if null segments are present.</p>
+<hr />
+<h3 id="remote-tilt-angle">Remote tilt angle <a id="branch_remotetilt"> </a></h3>
+<p><strong>Function:</strong> <code>remote_tilt_angle = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the tilt angle at the last node bifurcation point. Tilt angle is the smallest angle between the branch director vector and the vectors form the bifurcation point to the last node of the daughter branches.</p>
+<p><strong>Output:</strong> Real number. Angle in radians [0,pi]</p>
+<p><strong>Details:</strong> If the number of descendants of the given <a href="../data_model.html#branch">Branch</a> is not equal to 2 it returns -1. NAN values might appear if null segments are present.</p>
+<hr />
+<h3 id="local-plane-vector">Local plane vector <a id="branch_localplane"> </a></h3>
+<p><strong>Function:</strong> <code>local_plane_vector = [](const Branch &amp;b) -&gt; point_type</code></p>
+<p><strong>Description:</strong> Computes the normal vector to the plane defined by the vectors from the root to the first node of the daughter branches.</p>
+<p><strong>Output:</strong> Plane normal vector</p>
+<p><strong>Details:</strong> If the branch don't have a sibling branch, it returns the null vector.</p>
+<hr />
+<h3 id="remote-plane-vector">Remote plane vector <a id="branch_remoteplane"> </a></h3>
+<p><strong>Function:</strong> <code>remote_plane_vector = [](const Branch &amp;b) -&gt; point_type</code></p>
+<p><strong>Description:</strong> Computes the normal vector to the plane defined by the vectors from the branch root and the last node of the daughter branches.</p>
+<p><strong>Output:</strong> Plane normal vector</p>
+<p><strong>Details:</strong> If the branch don't have a sibling branch, it returns the null vector.</p>
+<hr />
+<h3 id="local-torque-angle">Local torque angle <a id="branch_localtorque"> </a></h3>
+<p><strong>Function:</strong> <code>local_plane_vector = [](const Branch &amp;b) -&gt; point_type</code></p>
+<p><strong>Description:</strong> Computes the angle between the branch local plane vector  and the daughter branches plane vector.</p>
+<p><strong>Output:</strong> Angle in radians [0,pi)]</p>
+<p><strong>Details:</strong> If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See <a href="#localplane">Local plane vector</a> function.</p>
+<hr />
+<h3 id="remote-torque-angle">Remote torque angle <a id="branch_remotetorque"> </a></h3>
+<p><strong>Function:</strong> <code>local_plane_vector = [](const Branch &amp;b) -&gt; point_type</code></p>
+<p><strong>Description:</strong> Computes the angle between the branch local plane vector  and the daughter branches plane vector.</p>
+<p><strong>Output:</strong> Angle in radians [0,pi)]</p>
+<p><strong>Details:</strong> If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See <a href="#localplane">Local plane vector</a> function.</p>
+<hr />
+<h3 id="length">Length <a id="branch_length"> </a></h3>
+<p><strong>Function:</strong> <code>branch_length = [](const Branch &amp;b) -&gt; float</code></p>
+<p><strong>Description:</strong> Computes the branch total length.</p>
+<p><strong>Output:</strong> Non negative real number - branch length.</p>
+<hr />
+<h3 id="intersects">Intersects <a id="branch_intersects"></a></h3>
+<p><strong>Factory:</strong>  <code>branch_intersects_factory(bool ignore_radius = false)</code></p>
+<p><strong>Function:</strong> <code>(const Branch &amp;b ) -&gt; std::string</code></p>
+<p><strong>Description:</strong> Checks if the given <a href="../data_model.html#branch">Branch</a> intersects with any other <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>, and returns its id in that case. If <em>ignore_radius</em> flag is set to true, the radius of each compartment is taken into account when checking intersections.</p>
+<p><strong>Output:</strong> Id of the intersecting <a href="../data_model.html#branch">branch</a> + &quot;@ Neurite: id&quot;. An empty string otherwise.</p>
+<p><strong>Details:</strong> The function pre-checks the possible intersection by checking the bounding box of each pair of [Branches]. If the boxes intersect, then computes the branch-branch distance (that is, the segment-segment distance for each pair of segments).</p>
+<hr />
+<h1 id="neurite">Neurite measures</h1>
+<h3 id="root-is-soma">Root is soma <a id="neurite_rootsoma"> </a></h3>
+<p><strong>Function:</strong> <code>root_is_soma</code></p>
+<p><strong>Description:</strong> Returns true if the <a href="../data_model.html#neurite">Neurite</a> is attached to the soma</p>
+<p><strong>Output:</strong> Boolean flag. True if the <a href="../data_model.html#neurite">Neurite</a> root is a soma point (or it is inside the soma)</p>
+<p><strong>Details:</strong> <code>root_is_soma</code> measure just calls the <code>Neurite.root_is_soma()</code> member function which checks if the root branch of the neurite has a root node.</p>
+<hr />
+<h1 id="neuron">Neuron measures</h1>
+<h3 id="neuron-has-soma">Neuron has soma <a id="neuron_hassoma"> </a></h3>
+<p><strong>Function:</strong> <code>has_soma</code></p>
+<p><strong>Description:</strong> Returns true if the neuron has at least one soma node.</p>
+<p><strong>Output:</strong> Boolean flag. True if the [Soma] is defined in the <a href="../data_model.html#neuron">Neuron</a></p>
+<p><strong>Details:</strong> <code>has_soma</code> measure just calls the <code>Neuron.has_soma()</code> member function which checks if the number of soma points in the neuron is greater than 0.</p>
+<hr />
+<h3 id="neurite-count">Neurite count <a id="neuron_neurite_count"> </a></h3>
+<p><strong>Function:</strong> <code>neuron_neurite_count</code></p>
+<p><strong>Description:</strong> Returns the number of <a href="../data_model.html#neurite">Neurite</a>s in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Non-negative integer value. The number of <a href="../data_model.html#neurite">Neurite</a>s (of any type) in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<hr />
+<h3 id="neurite-type-count">Neurite type count <a id="neuron_neurite__type_count"> </a></h3>
+<p><strong>Function:</strong> <code>neuron_type_counter</code> (factory method)</p>
+<p><strong>Parameters:</strong> <strong>type</strong> - <em>NeuriteType</em> - Neurite type.</p>
+<p><strong>Description:</strong> Returns the number of <a href="../data_model.html#neurite">Neurite</a>s in the <a href="../data_model.html#neuron">Neuron</a> of certain type.</p>
+<p><strong>Instances:</strong></p>
+<ul>
+<li><code>neuron_dendrite_counter</code> Counts the number of dendrites in the <a href="../data_model.html#neuron">Neuron</a></li>
+<li><code>neuron_axon_counter</code> Counts the number of axons in the <a href="../data_model.html#neuron">Neuron</a></li>
+<li><code>neuron_apical_counter</code> Counts the number of apical dendrites in the <a href="../data_model.html#neuron">Neuron</a></li>
+</ul>
+<p><strong>Output:</strong> Non-negative integer value. The number of <a href="../data_model.html#neurite">Neurite</a>s of type <em>type</em> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<hr />
+<h3 id="soma-surface-area">Soma surface area <a id="neuron_soma_surface"> </a></h3>
+<p><strong>Function:</strong> <code>soma_surface</code></p>
+<p><strong>Description:</strong> Returns the [Soma] surface area under spherical shape assumption.</p>
+<p><strong>Output:</strong> Non-negative real value. The computed soma surface area.</p>
+<p><strong>Details:</strong> If there are several soma points, the computed area is the surface of the sphere centered at the soma barycenter with radius the average distance from the barycenter to the external border of the sphere. Otherwise, for a sigle-point [Soma], the sphere surface area is computed.</p>
+<hr />
+<h1 id="lmeasure">L-measure measures</h1>
+<h3 id="soma-surface">Soma surface <a id="lmeasure_somasurface"> </a></h3>
+<p><strong>Function:</strong> <code>soma_surface</code></p>
+<p><strong>Description:</strong> Computes the soma surface area under spherical shape assumption.</p>
+<p><strong>Output:</strong> Non-negative real number. Soma surface area. Zero if the neuron don't have soma points.</p>
+<p><strong>Details:</strong> If there are several soma points, the computed area is the surface of the sphere centered at the soma barycenter with radius the average distance from the barycenter to the external border of the sphere. See <a href="neuron.html#soma_surface">soma_surface</a> measure.</p>
+<hr />
+<h3 id="number-of-stems">Number of stems <a id="lmeasure_nstems"> </a></h3>
+<p><strong>Function:</strong> <code>n_stems</code></p>
+<p><strong>Description:</strong> Returns the number of stems (what we call neurites) in the neuron.</p>
+<p><strong>Output:</strong> Non-negative integer. Number of stems/neurites.</p>
+<p><strong>Details:</strong>  See <a href="neuron.html#neurite_count">neuron_neurite_count</a> measure.</p>
+<hr />
+<h3 id="number-of-bifurcations">Number of bifurcations <a id="lmeasure_nbifs"> </a></h3>
+<p><strong>Function:</strong> <code>n_bifs</code></p>
+<p><strong>Description:</strong> Returns the number of bifurcation points in the neuron.</p>
+<p><strong>Output:</strong> Non-negative integer. Number of bifurcations.</p>
+<hr />
+<h3 id="number-of-branches">Number of branches <a id="lmeasure_nbranches"> </a></h3>
+<p><strong>Function:</strong> <code>n_branch</code></p>
+<p><strong>Description:</strong> Counts the number of branches in the neuron.</p>
+<p><strong>Output:</strong> Non-negative integer. Number of branches.</p>
+<hr />
+<h3 id="number-of-terminal-tips">Number of terminal tips <a id="lmeasure_nterminals"> </a></h3>
+<p><strong>Function:</strong> <code>n_tips</code></p>
+<p><strong>Description:</strong> Counts the number of terminal tips in the neuron.</p>
+<p><strong>Output:</strong> Non-negative integer. Terminal tips count.</p>
+<hr />
+<h3 id="width-height-and-depth">Width, Height and Depth <a id="lmeasure_width"> </a></h3>
+<p><strong>Function:</strong> <code>width</code>, <code>height</code>, <code>depth</code></p>
+<p><strong>Description:</strong> Computes the neuron <a href="../measures.html#range">range length</a> for the x,y and z axis respectively.</p>
+<p><strong>Output:</strong> Non-negative real number.</p>
+<hr />
+<h3 id="diameter">Diameter <a id="lmeasure_diameter"> </a></h3>
+<p><strong>Function:</strong> <code>diameter</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#node">Node</a> diameter value.</p>
+<p><strong>Output:</strong> Diameter <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#diameter">Node diameter</a> measure.</p>
+<hr />
+<h3 id="diameter-power">Diameter power <a id="lmeasure_diameterpow"> </a></h3>
+<p><strong>Function:</strong> <code>diameter_pow</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#node">Node</a> diameter value power to 1.5.</p>
+<p><strong>Output:</strong> Diameter power <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#diameterpow">Node diameter pow</a> measure.</p>
+<hr />
+<h3 id="length-1">Length <a id="lmeasure_length"> </a></h3>
+<p><strong>Function:</strong> <code>length</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for compartment lengths.</p>
+<p><strong>Output:</strong> Compartment length <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#length">Node length to parent</a> measure.</p>
+<hr />
+<h3 id="branch-length">Branch length <a id="lmeasure_branchlength"> </a></h3>
+<p><strong>Function:</strong> <code>branch_pathlength</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for branch lengths.</p>
+<p><strong>Output:</strong> Branch length <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#length">Branch length</a> measure.</p>
+<hr />
+<h3 id="surface">Surface <a id="lmeasure_surface"> </a></h3>
+<p><strong>Function:</strong> <code>surface</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for compartment surface area.</p>
+<p><strong>Output:</strong> Compartment surface <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#surface">Node compartment surface</a> measure.</p>
+<hr />
+<h3 id="branch-surface">Branch surface <a id="lmeasure_branchsurface"> </a></h3>
+<p><strong>Function:</strong> <code>branch_surface</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for branch surface area.</p>
+<p><strong>Output:</strong> Branch surface area <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> Branch surface is computed as the sum of compartment surfaces. See <a href="node.html#surface">Node compartment surface</a> measure.</p>
+<hr />
+<h3 id="compartment-section-area-1">Compartment section area <a id="lmeasure_section_area"> </a></h3>
+<p><strong>Function:</strong> <code>section_area</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for compartment section area.</p>
+<p><strong>Output:</strong> Compartment section area <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#section_area">Node compartment section area</a> measure.</p>
+<hr />
+<h3 id="compartment-volume-1">Compartment volume <a id="lmeasure_volume"> </a></h3>
+<p><strong>Function:</strong> <code>volume</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for compartment volume.</p>
+<p><strong>Output:</strong> Compartment volume <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#volume">Node compartment volume</a> measure.</p>
+<hr />
+<h3 id="branch-volume">Branch Volume <a id="lmeasure_branch_volume"> </a></h3>
+<p><strong>Function:</strong> <code>branch_volume</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for branch compartment volume.</p>
+<p><strong>Output:</strong> Branch volume <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> Branch volume is computed as the sum of compartment surfaces. See <a href="node.html#volume">Node compartment volume</a> measure.</p>
+<hr />
+<h3 id="distance-to-root-1">Distance to root <a id="lmeasure_rootdist"> </a></h3>
+<p><strong>Function:</strong> <code>euc_distance</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the euclidean distance of each <a href="../data_model.html#node">Node</a> to the <a href="../data_model.html#neurite">Neurite</a> root.</p>
+<p><strong>Output:</strong> Distance <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#rootdist">Node root distance</a> measure.</p>
+<hr />
+<h3 id="path-length-to-root-1">Path length to root <a id="lmeasure_rootpath"> </a></h3>
+<p><strong>Function:</strong> <code>path_distance</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the path distance of each <a href="../data_model.html#node">Node</a> to the <a href="../data_model.html#neurite">Neurite</a> root.</p>
+<p><strong>Output:</strong> Distance <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#rootpath">Node path distance</a> measure.</p>
+<hr />
+<h3 id="branch-centrifugal-order">Branch centrifugal order <a id="lmeasure_branchorder"> </a></h3>
+<p><strong>Function:</strong> <code>branch_order</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the branch centrifugal order of each <a href="../data_model.html#branch">Branch</a> in the neuron.</p>
+<p><strong>Output:</strong> Centrifugal order <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#order">Branch centrifugal order</a> measure.</p>
+<hr />
+<h3 id="node-terminal-degree">Node Terminal degree <a id="lmeasure_terminaldegree"> </a></h3>
+<p><strong>Function:</strong> <code>terminal_degree</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the terminal degree centrifugal order of each <a href="../data_model.html#node">Node</a> in the neuron. The terminal degree is the number of terminal tips in the subtree of the given <a href="../data_model.html#node">Node</a>.</p>
+<p><strong>Output:</strong> Terminal degree <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<hr />
+<h3 id="branch-terminal-degree">Branch Terminal degree <a id="lmeasure_branch_terminaldegree"> </a></h3>
+<p><strong>Function:</strong> <code>branch_terminal_degree</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the terminal degree centrifugal order of each <a href="../data_model.html#branch">Branch</a> in the neuron. The terminal degree is the number of terminal tips in the subtree of the given <a href="../data_model.html#branch">Branch</a>.</p>
+<p><strong>Output:</strong> Terminal degree <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<hr />
+<h3 id="taper-1-burker-taper-rate">Taper 1: Burker taper rate <a id="lmeasure_burker"> </a></h3>
+<p><strong>Function:</strong> <code>taper_1</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the branch Burker taper rate <a href="../data_model.html#branch">Branch</a> in the neuron for every <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Taper rate <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#burker">Burker taper rate</a> measure.</p>
+<hr />
+<h3 id="taper-2-hillman-taper-rate">Taper 2: Hillman taper rate <a id="lmeasure_hillman"> </a></h3>
+<p><strong>Function:</strong> <code>taper_2</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the branch Hillman taper rate <a href="../data_model.html#branch">Branch</a> in the neuron for every <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Taper rate <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#hillman">Hillman taper rate</a> measure.</p>
+<hr />
+<h3 id="contraction">Contraction <a id="lmeasure_contraction"> </a></h3>
+<p><strong>Function:</strong> <code>contraction</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#branch">Branch</a> contraction, i.e. its tortuosity for every <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Contraction <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#tortuosity">Tortuosity</a> measure.</p>
+<hr />
+<h3 id="fragmentation">Fragmentation <a id="lmeasure_fragmentation"> </a></h3>
+<p><strong>Function:</strong> <code>fragmentation</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#branch">Branch</a> fragmentation, i.e. its number of nodes for every <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Fragmentation <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#size">Branch size</a> measure.</p>
+<hr />
+<h3 id="daughter-ratio">Daughter ratio <a id="lmeasure_daughter_ratio"> </a></h3>
+<p><strong>Function:</strong> <code>daughter_ratio</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#branch">Branch</a> daughter ratio, i.e. the ratio of the diameters of its daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Daughter ratio <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#chid_diam">Child diameter ratio</a> measure.</p>
+<hr />
+<h3 id="partition-asymmetry-1">Partition asymmetry <a id="lmeasure_partition_asymmetry"> </a></h3>
+<p><strong>Function:</strong> <code>partition_asymmetry</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the <a href="../data_model.html#branch">Branch</a> partition asymmetry value, i.e. the ratio between the number of terminals in the left-subtree and the right-subtree , for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Partition asymmetry <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#partition_asymmetry">Partition asymmetry</a> measure.</p>
+<hr />
+<h3 id="ralls-power">Rall's power <a id="lmeasure_rall"> </a></h3>
+<p><strong>Function:</strong> <code>rall_power</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the Rall's power fitted value for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Rall's power fitted value <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#rall">Rall's power fit </a> measure.</p>
+<hr />
+<h3 id="pk-fitted-value">Pk fitted value <a id="lmeasure_pkfit"> </a></h3>
+<p><strong>Function:</strong> <code>pk</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the Pk with factor given by the fitted value returned by the <a href="branch.html#rall">Rall's power fit </a> measure for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Pk value <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#rall">Rall's power fit </a> and <a href="branch.html#pk">Pk factory</a> measures.</p>
+<hr />
+<h3 id="pk-classic-and-squared">Pk classic and squared <a id="lmeasure_pkclassic"> </a></h3>
+<p><strong>Function:</strong> <code>pk_classic</code>, <code>pk2</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the Pk with factors 1.5 and 2 respectively for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Pk value <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#pk">Pk factory</a> measure.</p>
+<hr />
+<h3 id="local-bifurcation-amplitude">Local bifurcation amplitude <a id="lmeasure_local_bif"> </a></h3>
+<p><strong>Function:</strong> <code>bif_ampl_local</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation angle computed w.r.t. the  firs node in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Bifurcation amplitude (angle in radians) <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#local_bif">Local bifurcation angle</a> measure.</p>
+<hr />
+<h3 id="remote-bifurcation-amplitude">Remote bifurcation amplitude <a id="lmeasure_remote_bif"> </a></h3>
+<p><strong>Function:</strong> <code>bif_ampl_remote</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation angle computed w.r.t. the last nodes in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Bifurcation amplitude (angle in radians) <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#remote_bif">Remote bifurcation angle</a> measure.</p>
+<hr />
+<h3 id="local-bifurcation-tilt">Local bifurcation tilt <a id="lmeasure_local_tilt"> </a></h3>
+<p><strong>Function:</strong> <code>bif_tilt_local</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation tilt angle computed w.r.t. the first nodes in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Tilt angle in radians <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#local_tilt">Local tilt angle</a> measure.</p>
+<hr />
+<h3 id="remote-bifurcation-tilt">Remote bifurcation tilt <a id="lmeasure_remote_tilt"> </a></h3>
+<p><strong>Function:</strong> <code>bif_tilt_remote</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation tilt angle computed w.r.t. the last nodes in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Bifurcation tilt angle in radians <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#remote_tilt">Remote tilt angle</a> measure.</p>
+<hr />
+<h3 id="local-bifurcation-torque">Local bifurcation torque <a id="lmeasure_local_torque"> </a></h3>
+<p><strong>Function:</strong> <code>bif_torque_local</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation torque angle computed w.r.t. the first nodes in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Torque angle in radians <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#local_torque">Local torque angle</a> measure.</p>
+<hr />
+<h3 id="remote-bifurcation-tilt-1">Remote bifurcation tilt <a id="lmeasure_remote_torque"> </a></h3>
+<p><strong>Function:</strong> <code>bif_torque_remote</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the bifurcation torque angle computed w.r.t. the last nodes in the daughter branches for every non-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Bifurcation torque angle in radians <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#remote_torque">Remote torque angle</a> measure.</p>
+<hr />
+<h3 id="terminal-bifurcation-diameter">Terminal bifurcation diameter <a id="lmeasure_terminaldiam"> </a></h3>
+<p><strong>Function:</strong> <code>last_parent_diam</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the diameter of every terminal bifurcation (see <a href="../selectors/neurite.html#terminal_bif">Terminal bifurcation selector</a>) <a href="../data_model.html#node">Node</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> <a href="../data_model.html#node">Node</a> diameter <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<hr />
+<h3 id="hillman-threshold-1">Hillman threshold <a id="lmeasure_hillman_threshold"> </a></h3>
+<p><strong>Function:</strong> <code>hillman_threshold</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the Hillman threshold value (see <a href="branch.html#hillman_threshold">Hillman threshold measure</a>) for every pre-terminal <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Hillman threshold value <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="branch.html#hillman_threshold">Hillman threshold</a> measure.</p>
+<hr />
+<h3 id="fractal-dimension-1">Fractal dimension <a id="lmeasure_fractal_dimension"> </a></h3>
+<p><strong>Function:</strong> <code>fractal_dim</code></p>
+<p><strong>Description:</strong> Computes the <a href="(../measures.html#summary)">Summary</a> statistics for the Fractal dimension of every <a href="../data_model.html#branch">Branch</a> in the <a href="../data_model.html#neuron">Neuron</a>.</p>
+<p><strong>Output:</strong> Fractal dimension <a href="(../measures.html#summary)">Summary</a> stats (sum, max, min, median, mean and sd).</p>
+<p><strong>Details:</strong> See <a href="node.html#fractal_dimension">Fractal dimension</a> measure.</p>
+<hr />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

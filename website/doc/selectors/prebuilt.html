@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#basics">
+                               Selector basics
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/prebuilt.html">
+                               Prebuilt selectors
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/prebuilt.html#neuron_selectors"> Neuron selectors </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/prebuilt.html#neurite_selectors"> Neurite selectors </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/prebuilt.html#branch_selectors"> Branch selectors </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/prebuilt.html#node_selectors"> Node selectors </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/selectors/prebuilt.html#generic_selectors"> Generic selectors </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#create">
+                               Create selectors
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/operations.html">
+                               Selector operations
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="prebuilt-selectors">Prebuilt selectors</h1>
+<h1 id="node">Node selectors</h1>
+<p>All node selectors are implemented in the file <code>selector/node_selector.h</code>. They belong to the namespace  <code>neurostr::selector</code>.</p>
+<h2 id="self-selector">Self selector <a id="node_self"></a></h2>
+<p><strong>Function</strong>:  <code>node_self</code></p>
+<p><strong>Description</strong>: Dummy function. Returns the given node.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parent-node-selector">Parent node selector <a id="node_parent"></a></h2>
+<p><strong>Function</strong>: <code>node_parent</code></p>
+<p><strong>Description</strong>: Select the parent node of the given node. If it doesn't exists, returns the node itself.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parent-branch-selector">Parent branch selector <a id="node_branch"></a></h2>
+<p><strong>Function</strong>: <code>node_branch_selector</code></p>
+<p><strong>Description</strong>: Selects the branch that the node belongs to.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="subtree-selector">Subtree selector <a id="node_subtree"></a></h2>
+<p><strong>Function</strong>: <code>node_subtree_selector</code></p>
+<p><strong>Description</strong>: Selects all nodes that are descendants of the given node.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="subtree-terminals-selector">Subtree terminals selector <a id="node_subtree_terminals"></a></h2>
+<p><strong>Function</strong>: <code>node_subtree_terminals</code></p>
+<p><strong>Description</strong>: Selects all terminal tips in the subtree of the given node.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stem-selector">Stem selector <a id="node_stem"></a></h2>
+<p><strong>Function</strong>: <code>node_stem_selector</code></p>
+<p><strong>Description</strong>: Selects all nodes in the path from the given node to the neurite root.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="descendant-selector">Descendant selector <a id="node_descendants"></a></h2>
+<p><strong>Function</strong>: <code>node_descendants</code></p>
+<p><strong>Description</strong>: Selects all nodes that have the given node as parent</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bifurcation-nodes-filter">Bifurcation nodes filter <a id="node_bifurcation"></a></h2>
+<p><strong>Function</strong>: <code>node_bifurcation_selector</code></p>
+<p><strong>Description</strong>: Given a set of nodes select those which are bifurcations</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminals-nodes-filter">Terminals nodes filter <a id="node_terminal"></a></h2>
+<p><strong>Function</strong>: <code>node_terminal_selector</code></p>
+<p><strong>Description</strong>: Given a set of nodes select those which are terminal tips</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="branch">Branch selectors</h1>
+<p>All branch selectors are implemented in the file <code>selector/branch_selector.h</code>. They belong to the namespace  <code>neurostr::selector</code>.</p>
+<h2 id="neurite-selector">Neurite selector <a id="branch_neurite"></a></h2>
+<p><strong>Function</strong>:  <code>branch_neurite_selector</code></p>
+<p><strong>Description</strong>: Selects the neurite that the given branch belongs to</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parent-branch-selector-1">Parent branch selector <a id="branch_parent"></a></h2>
+<p><strong>Function</strong>:  <code>branch_parent_selector</code></p>
+<p><strong>Description</strong>: Selects the parent branch of the given branch. If the given branch doesn't have a parent branch (it is the root), returns it.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sibling-branch-selector">Sibling branch selector <a id="branch_sibling"></a></h2>
+<p><strong>Function</strong>:  <code>branch_parent_selector</code></p>
+<p><strong>Description</strong>: Selects the sibling branch of the given branch. If the given branch doesn't have a sibling branch (it is the root or the tree is ill defined), returns it. If the branch has more than one sibling selects the first one.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="last-node-selector">Last node selector <a id="branch_last_node"></a></h2>
+<p><strong>Function</strong>:  <code>branch_last_node_selector</code></p>
+<p><strong>Description</strong>: Selects the last node in the branch. If the branch is empty returns the root node.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="first-node-selector">First node selector <a id="branch_first_node"></a></h2>
+<p><strong>Function</strong>:  <code>branch_first_node_selector</code></p>
+<p><strong>Description</strong>: Selects the first node in the branch. If the branch is empty returns the root node.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="all-nodes-selector">All nodes selector <a id="branch_nodes"></a></h2>
+<p><strong>Function</strong>:  <code>branch_node_selector</code></p>
+<p><strong>Description</strong>: Select all nodes in the branch (excluded the root)</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="subtree-selector-1">Subtree selector <a id="branch_subtree"></a></h2>
+<p><strong>Function</strong>:  <code>branch_subtree_selector</code></p>
+<p><strong>Description</strong>: Selects the given branch and all its descendants.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stem-selector-1">Stem selector <a id="branch_stem"></a></h2>
+<p><strong>Function</strong>:  <code>branch_stem_selector</code></p>
+<p><strong>Description</strong>: Selects the given branch and all the branches in the path to the neurite's root.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="centrifugal-order-filter">Centrifugal order filter <a id="branch_order"></a></h2>
+<p><strong>NOTE</strong>: This is a selector factory function. Selector factories create selector functions given some parameters.</p>
+<p><strong>Function</strong>:  <code>branch_order_filter_factory</code></p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>order <em>integer</em> : The Centrifugal order to select</li>
+</ul>
+<p><strong>Description</strong>: Selects all branches in the set with given centrifugal order <em>order</em></p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="neurite">Neurite selectors</h1>
+<p>Neurite selectors are implemented in the header file <code>selector/neurite_selector.h</code>. They belong to the namespace  <code>neurostr::selector</code>.</p>
+<h2 id="neuron-selector">Neuron selector <a id="neurite_neuron"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_neuron_selector = [](const Neurite&amp; n) -&gt; const Neuron&amp;</code></p>
+<p><strong>Description</strong>: Selects the neuron that the given neurite belongs to</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#neuron">Neuron</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="node-set-selector">Node set selector <a id="neurite_nodes"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_node_selector = [](const Neurite&amp; n) -&gt;  std::vector&lt;const_node_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all nodes in the neurite.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="branch-set-selector">Branch set selector <a id="neurite_branches"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_branch_selector = [](const Neurite&amp; n) -&gt; std::vector&lt;const_branch_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all branches in the neurite.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="first-branch-selector">First branch selector <a id="neurite_first_branch"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_first_branch_selector = [](const Neurite&amp; n) -&gt; const Branch&amp;</code></p>
+<p><strong>Description</strong>:Selects the neurite's first branch (root branch)</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Single</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bifurcation-nodes-selector">Bifurcation nodes selector <a id="neurite_bifurcation_nodes"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_bifurcation_selector = [](const Neurite&amp; n) -&gt; std::vector&lt;const_node_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all bifurcation nodes in the neurite.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminal-nodes-selector">Terminal nodes selector <a id="neurite_terminal_nodes"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_terminal_selector = [](const Neurite&amp; n) -&gt; std::vector&lt;const_node_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all terminal nodes in the neurite.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminal-branches-selector">Terminal branches selector <a id="neurite_terminal_branches"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_terminal_branches = [](const Neurite&amp; n) -&gt; std::vector&lt;const_branch_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects terminal branches in the neurite.</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="non-terminal-branches-selector">Non terminal branches selector <a id="neurite_nonterminal"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_non_terminal_branches = [](const Neurite&amp; n) -&gt; std::vector&lt;const_branch_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all branches in the neurite but the terminal ones</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pre-terminal-branches-selector">Pre-terminal branches selector <a id="neurite_preterminal"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_pre_terminal_branches = [](const Neurite &amp;n) -&gt; std::vector&lt;const_branch_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all branches in the neurite that have at least one daughter branch that is terminal</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminal-bifurcation-node-selector">Terminal bifurcation node selector <a id="neurite_terminal_bif"></a></h2>
+<p><strong>Function</strong>:  <code>neurite_terminal_bifurcations = [](const Neurite &amp;n) -&gt; std::vector&lt;const_node_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all bifurcations in the neurite where at least one of their descendants is a terminal branch</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Set</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="neurite-type-filter">Neurite type filter <a id="neurite_type"></a></h2>
+<p><strong>NOTE</strong>: This is a selector factory function. Selector factories create selector functions given some parameters.</p>
+<p><strong>Function</strong>:  <code>neurite_type_selector</code></p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><strong>type</strong> - <em>NeuriteType</em> : The type to select</li>
+</ul>
+<p><strong>Description</strong>: Selects all neurites of given type</p>
+<p><strong>Aliases</strong>:</p>
+<ul>
+<li><code>dendrite_selector</code> Selects dendrite neurites</li>
+<li><code>axon_selector</code> Selects axon neurites</li>
+<li><code>apical_selector</code> Selects apical neurites</li>
+</ul>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Set</td>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="neuron">Neuron selectors</h1>
+<p>Neuron selectors are implemented in the header file <code>selector/neuron_selector.h</code>. They belong to the namespace  <code>neurostr::selector</code>.</p>
+<h2 id="neurites-selector">Neurites selector <a id="neuron_neurites"></a></h2>
+<p><strong>Function</strong>:  <code>neuron_neurites = [](const Neuron &amp;n) -&gt; std::vector&lt;const_neurite_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects neurites in the neuron</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neuron">Neuron</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#neurite">Neurite</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="branch-selector">Branch selector <a id="neuron_branch"></a></h2>
+<p><strong>Function</strong>:  <code>neuron_neurites = [](const Neuron &amp;n) -&gt; std::vector&lt;const_branch_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all branches in every neurite in the neuron</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neuron">Neuron</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#branch">Branch</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nodes-selector">Nodes selector <a id="neuron_nodes"></a></h2>
+<p><strong>Function</strong>:  <code>neuron_node_selector = [](const Neuron &amp;n) -&gt; std::vector&lt;const_node_reference&gt;</code></p>
+<p><strong>Description</strong>: Selects all nodes in every neurite in the neuron</p>
+<p><strong>Types</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input type</th>
+<th style="text-align: left;">Input cardinality</th>
+<th style="text-align: left;">Output type</th>
+<th style="text-align: left;">Output cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../data_model.html#neuron">Neuron</a></td>
+<td style="text-align: left;">Single</td>
+<td style="text-align: left;"><a href="../data_model.html#node">Node</a></td>
+<td style="text-align: left;">Set</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a id="generic_selectors"></a></p>
+<h1 id="generic-selectors">Generic selectors</h1>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

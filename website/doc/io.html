@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/io.html#parsers">
+                               Parsers
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/io.html#writers">
+                               Writers
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/io/format.html">
+                               Format specifications
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="inputoutput">Input/Output</h1>
+<p><a id="parsers"></a></p>
+<h2 id="parsers">Parsers</h2>
+<p>Parsers are classes that read a <a href="data_model.html#reconstruction">Reconstruction</a> from an input stream <code>std::istream</code>. All parsers inherit from a common virtual class <code>Parser</code> in the <code>neurostr::io</code> namespace. This virtual class (it can be seen as an interface) defines the functions that you, as user, will use in any parser, and a public constructor that take an <code>istream</code> as parameter. The functions of the common interface are:</p>
+<h4 id="read">Read</h4>
+<p>The pure virtual read function imposes a common signature for the parser read functionality. It reads the data from the stream given in the parser constructor and output an <code>std::unique_ptr</code> (pointer that involves data ownership) to a <a href="data_model.html#reconstruction">Reconstruction</a> object. The name string parameter is used to give a name to the reconstruction and, in some cases, to name also the neurons inside the reconstruction if no other name is given. Read function implementations are supposed to register the incidences (count) during the reading process using the error and warning management described in the next section. Also, expect them to make use of the <code>NSTR_LOG</code> macro to register errors and warnings in the log.</p>
+<pre><code class="language-cpp">std::unique_ptr&lt;Reconstruction&gt; read(const std::string&amp; name)</code></pre>
+<p>There are 4 parsers implemented in NeuroSTR:</p>
+<ul>
+<li>The <code>SWCParser</code>, that reads <a href="io/format.html#SWC">SWC files</a>.</li>
+<li>The <code>ASCParser</code>, that reads <a href="io/format.html#ASC">Neurolucida ASCII files</a>.</li>
+<li>The <code>DATParser</code>, that reads <a href="io/format.html#DAT">Neurolucida DAT files</a>. Please remember that DAT files are binary when opening the input stream.</li>
+<li>The <code>JSONParser</code>, that reads <a href="io/format.html#JSON">JSON files</a> (with some specific format restrictions).</li>
+</ul>
+<p>Please, check the <a href="#">Parser class</a> documentation for further details.</p>
+<h4 id="error-and-warning-management">Error and Warning management</h4>
+<p>Parsers are expected to be error tolerant (up to some extent). Although detailed error messages are supposed to be registered by the log (<code>NSTR_LOG</code>) function, parser class included some basic functions to keep track of how many errors occur and their type. These functions are:</p>
+<ul>
+<li><code>error</code> Returns the error count</li>
+<li><code>warn</code> Returns the warning count</li>
+<li><code>critical</code> Returns true if the last error has been critical</li>
+<li><code>reset_errors</code> Sets all counts to 0 and critical flag to false.</li>
+</ul>
+<p>If you plan to develop your own parser, please check the <a href="classes/io.html#class_io__parser">Parser class</a> documentation for further details.</p>
+<hr />
+<h4 id="auxiliary-functions">Auxiliary functions</h4>
+<p>Parser dispatchers are a pair of auxiliary functions to ease the task to read a reconstruction from a file. Both functions, defined in <code>neurostr::io</code> namespace are:</p>
+<ul>
+<li><code>Parser* get_parser_by_ext(const std::string&amp; ext)</code> Given a file extension, returns a pointer to the parser that should be use to read the file.</li>
+<li><code>std::unique_ptr&lt;Reconstruction&gt; read_file_by_ext(const std::string&amp; path)</code> Given a file path. Picks a parser based on its extension, read the file and returns a pointer to the reconstruction.</li>
+</ul>
+<p><a id="writers"></a></p>
+<h2 id="writers">Writers</h2>
+<p>Parsers are classes that write a given <a href="data_model.html#reconstruction">Reconstruction</a> into a output stream <code>std::ostream</code> following some predefined format. At the moment, just <a href="io/format.html#SWC">SWC</a> and <a href="io/format.html#JSON">JSON</a> file formats are supported by the <code>SWCWriter</code> and <code>JSONWriter</code> respectively. Check the data format specification and the writers documentation for further details about how to use them.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures/prebuilt.html">
+                               Prebuilt Measures
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#aggregators">
+                               Aggregators
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#create">
+                               Create a measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/measures.html#operations">
+                               Measure operations
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="measures">Measures</h1>
+<p>Measures are functions that take a single reference to an <a href="data_model.html">element of a neuron</a> or a set of them and compute some output value, the measure. We can distinguish between single and set measures, depending on whether they take one or more references as input. Single elements references (e.g. a single Node) are simply C++ references, whereas sets are <code>std::vector</code> of <code>std::reference_wrapper</code>.</p>
+<p>All classes, functions, etc. related to selectors are defined in the <code>neurostr::measure</code> namespace. You can include their headers individually or take them all by adding the header file <code>measure.h</code></p>
+<p>Measures are intended to be combined with <a href="selectors.html">Selectors</a> and <a href="#aggregators">Aggregators</a> to create complex and meaningful measures with low coding effort. You can implement your own measures and, if they have the adequate signature, use them as any other predefined measure.</p>
+<h2 id="prebuilt-measures">Prebuilt measures <a id="predef"></a></h2>
+<p>NeuroSTR includes a huge library of predefined measures some new, others already presented in the scientific literature or implemented in existing neuroanatomy tools.</p>
+<p>Predefined measures are organized in the same way as <a href="selectors.html">Selectors</a>, by their input element type: all measure functions that take either a single node or a node set as input fall into the <em>Node</em> category. You can find more details about each measure by clicking on their name.</p>
+<p>You might notice (and it seems odd) that there are very few Neurite and Neuron measures, but it is on purpose. Since we can use <a href="selectors.html">Selectors</a> and <a href="#aggregators">Aggregators</a> along with measures to create new measures, we focus on defining &quot;low level&quot; measures, that can be use to create &quot;high level measures&quot;. Check the <a href="#create">Create a measure</a> to see a simple example of this.</p>
+<h3><a href="measures/predefined.html#node">Node Measures</a></h3>
+<ul>
+<li><a href="measures/predefined.html#node_component">X,Y,Z component</a></li>
+<li><a href="measures/predefined.html#node_radius">Radius, Diameter</a></li>
+<li><a href="measures/predefined.html#node_order">Centrifugal order</a></li>
+<li><a href="measures/predefined.html#node_parent_length">Distance to parent</a></li>
+<li><a href="measures/predefined.html#node_volume">Compartment volume</a></li>
+<li><a href="measures/predefined.html#node_surface">Compartment surface</a></li>
+<li><a href="measures/predefined.html#node_section">Compartment section area</a></li>
+<li><a href="measures/predefined.html#node_hillman">Local Hillman taper rate</a></li>
+<li><a href="measures/predefined.html#node_burker">Local Burker taper rate</a></li>
+<li><a href="measures/predefined.html#node_rootdist">Distance to root</a></li>
+<li><a href="measures/predefined.html#node_somadist">Distance to soma</a></li>
+<li><a href="measures/predefined.html#node_rootpath">Path length to root</a></li>
+<li><a href="measures/predefined.html#node_desccount">Number of descendants</a></li>
+<li><a href="measures/predefined.html#node_boxvol">Non-aligned minimum box volume</a></li>
+<li><a href="measures/predefined.html#node_parentvector">Vector to parent</a></li>
+<li><a href="measures/predefined.html#node_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/predefined.html#node_localelong">Local elongation angle</a></li>
+<li><a href="measures/predefined.html#node_extreme">Extreme angle</a></li>
+<li><a href="measures/predefined.html#node_localorientation">Local orientation</a></li>
+<li><a href="measures/predefined.html#node_interminalbranch">In terminal branch</a></li>
+<li><a href="measures/predefined.html#node_distclosest">Distance to closest segment</a></li>
+<li>
+<p><a href="measures/predefined.html#node_fractal">Fractal dimension</a></p>
+<hr />
+</li>
+</ul>
+<h3><a href="measures/predefined.html#branch">Branch Measures</a></h3>
+<ul>
+<li><a href="measures/predefined.html#branch_hillman">Hillman taper rate</a></li>
+<li><a href="measures/predefined.html#branch_burker">Burker taper rate</a></li>
+<li><a href="measures/predefined.html#branch_tortuosity">Tortuosity</a></li>
+<li><a href="measures/predefined.html#branch_size">Node count</a></li>
+<li><a href="measures/predefined.html#branch_index">Branch index</a></li>
+<li><a href="measures/predefined.html#branch_order">Centrifugal order</a></li>
+<li><a href="measures/predefined.html#branch_childdimratio">Child diameter ratio</a></li>
+<li><a href="measures/predefined.html#branch_parentchildiamratio">Parent-Child diameter ratio</a></li>
+<li><a href="measures/predefined.html#branch_partition">Partition asymmetry</a></li>
+<li><a href="measures/predefined.html#branch_rall">Rall power fit</a></li>
+<li><a href="measures/predefined.html#branch_pk">Pk</a></li>
+<li><a href="measures/predefined.html#branch_hillman_threshold">Hillman threshold</a></li>
+<li><a href="measures/predefined.html#branch_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/predefined.html#branch_remotebif">Remote bifurcation angle</a></li>
+<li><a href="measures/predefined.html#branch_localbif">Local bifurcation angle</a></li>
+<li><a href="measures/predefined.html#branch_remotebif">Remote bifurcation angle</a></li>
+<li><a href="measures/predefined.html#branch_localtilt">Local tilt angle</a></li>
+<li><a href="measures/predefined.html#branch_remotetilt">Remote tilt angle</a></li>
+<li><a href="measures/predefined.html#branch_localplane">Local plane vector</a></li>
+<li><a href="measures/predefined.html#branch_remoteplane">Remote plane vector</a></li>
+<li><a href="measures/predefined.html#branch_localtorque">Local torque angle</a></li>
+<li><a href="measures/predefined.html#branch_remotetorque">Remote torque angle</a></li>
+<li><a href="measures/predefined.html#branch_length">Length</a></li>
+<li><a href="measures/predefined.html#branch_intersects">Intersects</a></li>
+</ul>
+<hr />
+<h3><a href="measures/predefined.html#neurite">Neurite Measures</a></h3>
+<ul>
+<li><a href="measures/neurite.html#rootsoma">Root is soma</a></li>
+</ul>
+<hr />
+<h3><a href="measures/predefined.html#neuron">Neuron Measures</a></h3>
+<ul>
+<li><a href="measures/predefined.html#neuron_hassoma">Has soma</a></li>
+<li><a href="measures/predefined.html#neuron_neurite_count">Neurite count</a></li>
+<li><a href="measures/predefined.html#neuron_neurite_type_count">Neurite type count</a></li>
+<li><a href="measures/predefined.html#neuron_soma_surface">Soma surface</a></li>
+</ul>
+<hr />
+<h3><a href="measures/predefined.html#generic">Generic Measures</a></h3>
+<ul>
+<li><a href="measures/predefined.html#generic_setsize">Set size</a></li>
+</ul>
+<hr />
+<h3><a href="measures/predefined.html#lmeasure">L-measure Measures</a></h3>
+<ul>
+<li><a href="measures/predefined.html#lmeasure_somasurface">Soma surface</a></li>
+<li><a href="measures/predefined.html#lmeasure_nstems">Number of stems</a></li>
+<li><a href="measures/predefined.html#lmeasure_nbifs">Number of bifurcations</a></li>
+<li><a href="measures/predefined.html#lmeasure_nbranches">Number of branches</a></li>
+<li><a href="measures/predefined.html#lmeasure_nterminals">Number of terminal tips</a></li>
+<li><a href="measures/predefined.html#lmeasure_width">Width, Height and Depth</a></li>
+<li><a href="measures/predefined.html#lmeasure_diameter">Diameter</a></li>
+<li><a href="measures/predefined.html#lmeasure_diameterpow">Diameter power</a></li>
+<li><a href="measures/predefined.html#lmeasure_length">Compartment length</a></li>
+<li><a href="measures/predefined.html#lmeasure_branchlength">Branch length</a></li>
+<li><a href="measures/predefined.html#lmeasure_surface">Compartment surface</a></li>
+<li><a href="measures/predefined.html#lmeasure_branchsurface">Branch surface</a></li>
+<li><a href="measures/predefined.html#lmeasure_section_area">Compartment section area</a></li>
+<li><a href="measures/predefined.html#lmeasure_volume">Compartment volume</a></li>
+<li><a href="measures/predefined.html#lmeasure_branch_volume">Branch volume</a></li>
+<li><a href="measures/predefined.html#lmeasure_rootdist">Distance to root</a></li>
+<li><a href="measures/predefined.html#lmeasure_rootpath">Path length to root</a></li>
+<li><a href="measures/predefined.html#lmeasure_branchorder">Branch centrifugal order</a></li>
+<li><a href="measures/predefined.html#lmeasure_terminaldegree">Node terminal degree</a></li>
+<li><a href="measures/predefined.html#lmeasure_branch_terminaldegree">Branch terminal degree</a></li>
+<li><a href="measures/predefined.html#lmeasure_burker">Taper 1: Burker taper rate</a></li>
+<li><a href="measures/predefined.html#lmeasure_hillman">Taper 2: Hillman taper rate</a></li>
+<li><a href="measures/predefined.html#lmeasure_contraction">Contraction</a></li>
+<li><a href="measures/predefined.html#lmeasure_fragmentation">Fragmentation</a></li>
+<li><a href="measures/predefined.html#lmeasure_partition_asymmetry">Partition asymmetry</a></li>
+<li><a href="measures/predefined.html#lmeasure_rall">Rall's power</a></li>
+<li><a href="measures/predefined.html#lmeasure_pkfit">Pk fitted value</a></li>
+<li><a href="measures/predefined.html#lmeasure_pkclassic">Pk classic and squared</a></li>
+<li><a href="measures/predefined.html#lmeasure_local_bif">Local bifurcation amplitude</a></li>
+<li><a href="measures/predefined.html#lmeasure_remote_bif">Remote bifurcation amplitude</a></li>
+<li><a href="measures/predefined.html#lmeasure_local_tilt">Local bifurcation tilt</a></li>
+<li><a href="measures/predefined.html#lmeasure_remote_tilt">Remote bifurcation tilt</a></li>
+<li><a href="measures/predefined.html#lmeasure_local_torque">Local bifurcation torque</a></li>
+<li><a href="measures/predefined.html#lmeasure_remote_torque">Remote bifurcation_torque</a></li>
+<li><a href="measures/predefined.html#lmeasure_terminaldiam">Terminal bifurcation diameter</a></li>
+<li><a href="measures/predefined.html#lmeasure_hillman_threshold">Hillman threshold</a></li>
+<li><a href="measures/predefined.html#lmeasure_fractal_dimension">Fractal dimension</a></li>
+</ul>
+<hr />
+<h2 id="aggregators">Aggregators <a id="aggregators"></a></h2>
+<p>Aggregators are just functions that compute an aggregate value (e.g the mean) from a set of measures. They are an easy way to get summary values for certain &quot;low level&quot; measures at &quot;high level&quot; elements (Neuron and Neurite). For example, we might want to compute the average branch length in a neurite or neuron, that can be done easily with aggregator functions. Of course aggregators are simple wrappers over well known standard library functions, but they allow us to detect coding errors early in compile time instead of provoking runtime errors.</p>
+<p>These are the aggregator functions and factory functions included in the library:</p>
+<h3 id="sum">Sum  <a id="sum"></a></h3>
+<p><strong>What it does:</strong> Adds up all the values in the given set starting at <em>zero</em>.</p>
+<p><strong>Parameters:</strong> <em>zero</em> - Starting value</p>
+<p><strong>Function signature:</strong> <code>(const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<p><strong>Factory function signature:</strong> <code>sum_aggr_factory(T zero)</code></p>
+<hr />
+<h3 id="average-and-standard-deviation">Average and Standard deviation <a id="mean"></a></h3>
+<p><strong>What it does:</strong> Computes the average and optionally the standard deviation of the given set of values.</p>
+<p><strong>Parameters:</strong> <em>zero</em> - Zero value</p>
+<h4 id="mean-only">Mean only</h4>
+<p><strong>Factory function signature:</strong> <code>avg_aggr_factory(T zero)</code></p>
+<p><strong>Function signature:</strong> <code>(const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<h4 id="with-standard-deviation">With standard deviation</h4>
+<p><strong>Factory function signature:</strong> <code>mean_sd_factory(T zero)</code></p>
+<p><strong>Function signature:</strong> <code>(const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; std::array&lt;T,2&gt;</code></p>
+<hr />
+<h3 id="maximum-and-minimum">Maximum and Minimum <a id="max"></a></h3>
+<p><strong>What it does:</strong> Returns the maximum/minimum value in the given set</p>
+<h4 id="maximum">Maximum</h4>
+<p><strong>Function signature:</strong> <code>max = [](const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<h4 id="minimum">Minimum</h4>
+<p><strong>Function signature:</strong> <code>min = [](const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<hr />
+<h3 id="median">Median <a id="range"></a></h3>
+<p><strong>What it does:</strong> Computes the median of the given set</p>
+<p><strong>Function signature:</strong> <code>median = [](const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<hr />
+<h3 id="range">Range <a id="range"></a></h3>
+<p><strong>What it does:</strong> Computes the value difference between the set maximum and minimum values</p>
+<p><strong>Function signature:</strong> <code>range_length = [](const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; T</code></p>
+<hr />
+<h3 id="summary">Summary <a id="summary"></a></h3>
+<p><strong>What it does:</strong> Computes sum, min, max, median, mean and standard deviation for the given set of values. It returns them in a structure <em>aggr_pack</em> that contains those fields.</p>
+<p><strong>Parameters:</strong> <em>zero</em> - Zero value</p>
+<p><strong>Function signature:</strong> <code>(const detail::iterator_type&lt;U&gt;&amp; b, const detail::iterator_type&lt;U&gt;&amp; e) -&gt; aggr_pack&lt;U,T&gt;</code></p>
+<p><strong>Factory function signature:</strong> <code>all_aggr_factory(T zero)</code></p>
+<hr />
+<h2 id="operations">Operations <a id="operations"></a></h2>
+<h3 id="measure-each">Measure each <a id="each"></a></h3>
+<p><strong>What it does:</strong> Transforms a measure that that takes a single element in one that takes an element set. As consequence the resultant measure outputs a vector of values.</p>
+<p><strong>Restrictions:</strong> The given measure <em>f</em> must take a single element as input</p>
+<p><strong>Function signature:</strong> <code>measureEach(const Fn&amp; f)</code></p>
+<h3 id="measure-each-and-aggregate">Measure each and aggregate <a id="eachaggr"></a></h3>
+<p><strong>What it does:</strong> Transforms a measure that that takes a single element in one that takes an element set and then applies an aggregator function over the resultant set of values.</p>
+<p><strong>Restrictions:</strong></p>
+<ul>
+<li>The given measure <em>f</em> must take a single element as input</li>
+<li>The aggregation function <em>aggr</em> must be compatible with the measure output type</li>
+</ul>
+<p><strong>Function signature:</strong> <code>measureEachAggregate(const Fn&amp; f, const Aggr&amp; aggr)</code></p>
+<h3 id="selector-composition">Selector composition <a id="composition"></a></h3>
+<p><strong>What it does:</strong> Applies the given measure to the selector output, creating a new measure with different input (actually, the selector's input) but same output.</p>
+<p><strong>Restrictions:</strong></p>
+<ul>
+<li>The given measure <em>measure</em> input signature must match selector's output</li>
+</ul>
+<p><strong>Function signature:</strong> <code>selectorMeasureCompose(const S&amp; selector, const M&amp; measure)</code></p>
+<h3 id="measure-tuple">Measure tuple <a id="tuple"></a></h3>
+<p><strong>What it does:</strong> Applies several measures to the same element(s) and returns the result in a tuple. This saves computation time if the element selection procedure is time consuming.</p>
+<p><strong>Restrictions:</strong></p>
+<ul>
+<li>The given measures <em>measures</em> must have the same input signature</li>
+</ul>
+<p><strong>Function signature:</strong> <code>createMeasureTuple(const Measures&amp;... measures )</code></p>
+<h2 id="create">Create a measure</h2>
+<p>This section will show you how to define new measure functions using already existing selector and measures with little code. Although the selector/measure structure is designed to ease the process of creating new measures, it may seem a bit...hard to use at first. We will introduce the concept with a very simple measure, the average branch length in a neuron.</p>
+<p>Additionally to the two examples shown below, you can find more examples of selector/measure usage in the source code of the <a href="utils.html#neuritefeature">feature extractor utils</a> and in the <a href="measures/lmeasure.html">L-measure definitions</a>.</p>
+<h3 id="neuron-average-branch-length">Neuron average branch length</h3>
+<p>First of all, we should define the measure we want to create. Specifically, we need to point out the input, output and what does it measure. In this example, our measure is pretty simple:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Output</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Single neuron</td>
+<td style="text-align: left;">Float number</td>
+<td style="text-align: left;">Average branch length in the neuron</td>
+</tr>
+</tbody>
+</table>
+<p>Then, we should find the selectors and measures that will build up our new measure.</p>
+<ul>
+<li>To measure the [Branch] length, the <a href="measures/predefined.html#branch_length"><code>branch_length</code></a> is the obvious choice.</li>
+<li>Since we want to find the average value for every branch in the neuron. To select all branches in a neuron we have the <a href="selectors/predefined.html#neuron_branch"><code>neuron_branch_selector</code></a>.</li>
+</ul>
+<p>Let's stop here to plan our next step. We want to combine the <a href="measures/predefined.html#branch_length"><code>branch_length</code></a> measure with the <a href="selectors/predefined.html#neuron_branch"><code>neuron_branch_selector</code></a> in some specific way to create the measure. Since the selector already has the input that we want (a single neuron), we need to transform the measure to take a set of branches and output the average length, so it can be combined with the selector. In plain words, we want to measure the length of every [Branch] in a set and average the results. If you go back to the <a href="#operations">measure operations</a> section you will find the <a href="#eachaggr"><code>measureEachAggregate</code></a> function, which does exactly what we need:</p>
+<ul>
+<li>The <em>f</em> argument is the <a href="measures/predefined.html#branch_length"><code>branch_length</code></a> measure.</li>
+<li>The <em>aggr</em> argument is the aggregate function <a href="#mean"><code>avg_aggr_factory</code></a> for floats, that is <code>avg_aggr_factory&lt;float,float&gt;(0)</code></li>
+</ul>
+<p>Then, our intermediate measure will look like this:</p>
+<pre><code class="language-cpp">measureEachAggregate(branch_length, avg_aggr_factory&lt;float,float&gt;(0));</code></pre>
+<p>Now, we can use the <a href="#composition"><code>selectorMeasureCompose</code></a> function to join the neuron branch selector with our intermediate measure. This will output the measure that we have defined at the beginning:</p>
+<pre><code class="language-cpp">  selectorMeasureCompose(
+    neuron_branch_selector,
+    measureEachAggregate(branch_length, avg_aggr_factory&lt;float,float&gt;(0)));</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/install.html#reqs">
+                               Requisites and dependencies
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/install.html#compile">
+                               Compile and Install
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/install.html#test">
+                               Testing
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="installation">Installation</h1>
+<h2 id="requisites-and-dependencies">Requisites and dependencies  <a id="reqs"></a></h2>
+<p>NeuroSTR uses <a href="http://cmake.org">CMake</a> as a general build tool. It requires <strong>CMake 3.2.0 or superior</strong>.</p>
+<p>The library uses some of the C++14 standard features, so it needs a compiler with C++14 support.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Compiler</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Tested</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://gcc.gnu.org/">g++</a></td>
+<td style="text-align: left;">&gt;5</td>
+<td style="text-align: left;">Tested: 5.4.1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="http://clang.llvm.org/">clang</a></td>
+<td style="text-align: left;">&gt;3.4</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://www.visualstudio.com/">Microsoft Visual Studio</a></td>
+<td style="text-align: left;">&gt;2015</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+<p>NeuroSTR also uses the following software depèndencies, some of them are header libraries bundled in the package:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Library</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Bundled</th>
+<th>What for?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="http://www.boost.org/">Boost</a></td>
+<td style="text-align: center;">&gt;1.62.0</td>
+<td style="text-align: center;"><a href="http://www.boost.org/users/license.html">BSL-1</a></td>
+<td style="text-align: center;">No</td>
+<td>Everything...</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="http://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen3</a></td>
+<td style="text-align: center;">3.X</td>
+<td style="text-align: center;"><a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL-2</a></td>
+<td style="text-align: center;">No</td>
+<td>Singular value decomposition and quaternion calculation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="http://tree.phi-sci.com/">tree.hh</a></td>
+<td style="text-align: center;">3.1</td>
+<td style="text-align: center;"><a href="https://www.gnu.org/licenses/">GPL2/3</a></td>
+<td style="text-align: center;">Yes</td>
+<td>Neurite tree structure container</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="http://rapidjson.org/">rapidJSON</a></td>
+<td style="text-align: center;">1.1.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/MIT">MIT</a></td>
+<td style="text-align: center;">Yes</td>
+<td>JSON file read/write</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/gabime/spdlog">spdlog</a></td>
+<td style="text-align: center;">0.11.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/MIT">MIT</a></td>
+<td style="text-align: center;">Yes</td>
+<td><a href="classes/log.html">Logging</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/azawadzki/base-n">base-n</a></td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/MIT">MIT</a></td>
+<td style="text-align: center;">Yes</td>
+<td>Write binary data (image) as base64 string</td>
+</tr>
+<tr>
+<td style="text-align: left;">(optional) <a href="https://github.com/unittest-cpp/unittest-cpp">UnitTest++</a></td>
+<td style="text-align: center;">1.6.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/MIT">MIT</a></td>
+<td style="text-align: center;">No</td>
+<td>Unit tests</td>
+</tr>
+</tbody>
+</table>
+<p>Specifically, these are the boost libraries used in NeuroSTR:</p>
+<ul>
+<li><a href="http://www.boost.org/doc/libs/release/libs/geometry/">Geometry</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/iterator/">Iterator</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/any/">Any</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/tokenizer/">Tokenizer</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/format/">Format</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/math/">Math</a> (header only)</li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/filesystem/">Filesystem</a></li>
+<li><a href="http://www.boost.org/doc/libs/release/libs/program_options/">Program options</a></li>
+</ul>
+<h2 id="compile">Compile and Install</h2>
+<h3 id="lib">Library</h3>
+<ol>
+<li>Create a directory called <code>build</code> in the NeuroSTR source directory</li>
+<li>Change to <code>build</code> directory and run the <code>cmake ..</code> command to configure your build and generate the <em>Makefile</em>. On Windows you can do the same with the <em>cmake-gui</em> app.</li>
+<li>Run <code>make neurostr</code> from the <code>build</code> directory to compile the library.</li>
+</ol>
+<p>If the build is successful, you will fin the library binary <code>libneurostr</code> in the <code>lib</code> folder and the header files in the <code>include</code> folder.</p>
+<p><strong>Note:</strong> To speed up the compilation process you can parallelize it using the <code>-j</code> flag in the <code>make</code> command. For example, to use 8 parallel threads the command will be <code>make -j 8 neurostr</code></p>
+<h3 id="tools">Tools</h3>
+<ol>
+<li>Create a directory called <code>build</code> in the NeuroSTR source directory</li>
+<li>Change to <code>build</code> directory and run the <code>cmake ..</code> command to configure your build and generate the <em>Makefile</em>. On Windows you can do the same with the <em>cmake-gui</em> app.</li>
+<li>Run <code>make tools</code> from the <code>build</code> directory to compile the library. If you haven't compiled the library yet, it will do it.</li>
+</ol>
+<p>If the build is successful, you will fin the library binary <code>libneurostr</code> in the <code>lib</code> folder , the header files in the <code>include</code> folder and the executable binaries, the tools, in the <code>bin</code> folder.</p>
+<p>To build specific tools, just use their name as target. For example, <code>make Validator</code> will only build the <code>Validator</code> executable.</p>
+<p><strong>Note:</strong> To speed up the compilation process you can parallelize it using the <code>-j</code> flag in the <code>make</code> command. For example, to use 8 parallel threads the command will be <code>make -j 8 tools</code></p>
+<h3 id="install">Install</h3>
+<p>The <code>make install</code> command will copy the library headers, binaries and their bundled dependencies to the following directories in the install directory:</p>
+<ul>
+<li><code>lib/neurostr/</code> for the library binary</li>
+<li><code>bin/</code> for the executables</li>
+<li><code>include/neurostr</code> for the library headers</li>
+<li><code>include/</code> for the bundled headers</li>
+</ul>
+<p>There are several variables that you can set while running the <code>cmake</code> command to change the default install directory (<code>/usr/local</code>) or to avoid installing the bundled libraries or the executables:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Flag</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">What it does...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>CMAKE_INSTALL_PREFIX</code></td>
+<td style="text-align: center;"><code>/usr/local</code></td>
+<td style="text-align: left;">Default install directory</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_BUNDLED</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, bundled headers are not installed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_RAPIDJSON</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, rapidjson headers are not installed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_SPDLOG</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, spdlog headers are not installed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_TREE</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, tree.hh header is not installed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_BASEN</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, basen.hhp header is not installed</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NO_INSTALL_TOOLS</code></td>
+<td style="text-align: center;"><code>false</code></td>
+<td style="text-align: left;">If true, executables are not installed</td>
+</tr>
+</tbody>
+</table>
+<p>For example, this will install the library but not the tools at <code>/home/cig/local</code>:</p>
+<p><code>cmake -DCMAKE_INSTALL_PREFIX="/home/cig/local" -DNO_INSTALL_TOOLS=true ..</code></p>
+<p><strong>Warning:</strong> You will probably need super user privileges to install the library in the default install directory.</p>
+<h2 id="test">Testing</h2>
+<ol>
+<li>Got to the <a href="#lib">Library</a> section and compile the library.</li>
+<li>Still in the <code>build</code> directory, run <code>make neurostr_test</code> to compile the tests. This will generate a executable called <code>neurostr_test</code> in the <code>test</code> folder</li>
+<li>Run <code>make run_test</code> to execute the tests. Don't worry about the warning and errors messages in the console as they are the expected output in some error test cases.</li>
+<li>In case all tests pass, the line <code>Success: 415 tests passed.</code> should appear on the console.</li>
+</ol>
+<p><strong>Warning:</strong> In case that CMake wasn't able to find the UnitTest++ library, the <code>neurostr_test</code> will not exist.</p>
+<p><strong>Note:</strong> Only core and io (partially) modules are covered by unit tests.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/core.html">
+                               Core
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/geometry.html">
+                               Geometry
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/traits.html">
+                               Traits
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/log.html">
+                               Log
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/classes/io.html">
+                               I/O
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__parser"> Base Parser Concept </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__s_w_c_parser"> Standard SWC Parser </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__a_s_c_parser"> Neurolucida ASCII Parser </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__d_a_t_parser"> Neurolucida DAT Parser </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__j_s_o_n_parser"> JSON Parser </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__s_w_c_writer"> Standard SWC Writer </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/io.html#class_io__j_s_o_n_writer"> JSON Writer </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/selector.html">
+                               Selector
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/measure.html">
+                               Measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html">
+                               Validator
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="namespace_io">namespace <code>io</code></h1>
+<p>IO namespace contains write/read functionality for most common file formats.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="#class_io__a_s_c_parser"><code>ASCParser</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__d_a_t_parser"><code>DATParser</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__j_s_o_n_parser"><code>JSONParser</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__j_s_o_n_writer"><code>JSONWriter</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__parser"><code>Parser</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__s_w_c_parser"><code>SWCParser</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_io__s_w_c_writer"><code>SWCWriter</code></a></td>
+</tr>
+<tr>
+<td><code>struct</code><a href="#struct_io_contour__info"><code>contour_info</code></a></td>
+<td><a href="core.html#class__contour">Contour</a> header in DAT files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="#struct_io_marker__type"><code>marker_type</code></a></td>
+<td>Markerset structure for NL files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="#struct_io_subtree__info"><code>subtree_info</code></a></td>
+<td>SubTree header in DAT files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="#struct_io_tree__info"><code>tree_info</code></a></td>
+<td>Tree header in DAT files.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="class_io__a_s_c_parser">class <code>ASCParser</code></h1>
+<pre><code class="language-cpp">class ASCParser
+  : public neurostr::io::Parser</code></pre>
+<h2 id="summary-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  ASCParser(std::istream &amp; stream)</code></td>
+<td>Creates a ASC parser.</td>
+</tr>
+<tr>
+<td><code>public inline  ~ASCParser()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></td>
+<td>Reads a reconstruction from the stream.</td>
+</tr>
+<tr>
+<td><code>protected</code><a href="#namespace_io_1afaa11ac86606a3d09b761ace634cf00d"><code>block_type</code></a><code>next_block_type(bool in_block)</code></td>
+<td>Deduces the type of the next block.</td>
+</tr>
+<tr>
+<td><code>protected void process_(</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&amp; r)</code></td>
+<td>Process a single reconstruction.</td>
+</tr>
+<tr>
+<td><code>protected PropertyMap::property_type process_property()</code></td>
+<td>Process a property in the stream.</td>
+</tr>
+<tr>
+<td><code>protected</code><a href="core.html#class_node"><code>Node</code></a><code>process_sample()</code></td>
+<td>Process a sample (node) in the stream.</td>
+</tr>
+<tr>
+<td><code>protected Neurite::branch_iterator process_container_(const Neurite::branch_iterator &amp; pos)</code></td>
+<td>Process a Tree (or contour) inserting the nodes in the container as children of the given parent.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members">Members</h2>
+<h3 id="class_io__a_s_c_parser_1a4281053f992187a93904c0fb835c7a46"><code>public inline  ASCParser(std::istream &amp; stream)</code></h3>
+<p>Creates a ASC parser.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>s</code> Input stream to read from</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p>A ASC parser</p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1afd4cab77214ac891d319b60905edc412"><code>public inline  ~ASCParser()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1a46ff65c270e10cddcea9ae467bdc3dfe"><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></h3>
+<p>Reads a reconstruction from the stream.</p>
+<h4 id="parameters-1">Parameters</h4>
+<ul>
+<li><code>name</code> <a href="core.html#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<h4 id="returns-1">Returns</h4>
+<p>Unique ptr to the reconstruction (Ownership)</p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1a4fe263349601b214f110842ca646786b"><code>protected</code><a href="#namespace_io_1afaa11ac86606a3d09b761ace634cf00d"><code>block_type</code></a><code>next_block_type(bool in_block)</code></h3>
+<p>Deduces the type of the next block.</p>
+<h4 id="parameters-2">Parameters</h4>
+<ul>
+<li><code>in_block</code> Flag: Called inside another block</li>
+</ul>
+<h4 id="returns-2">Returns</h4>
+<p>block type</p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1a7dd84e15a11a30f3dfd2d828cbe2914c"><code>protected void process_(</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&amp; r)</code></h3>
+<p>Process a single reconstruction.</p>
+<h4 id="parameters-3">Parameters</h4>
+<ul>
+<li><code>r</code> <a href="core.html#class_reconstruction">Reconstruction</a> to be fill</li>
+</ul>
+<hr />
+<h3 id="class_io__a_s_c_parser_1a18a695cfd56901d37e10ecb4ef6ace70"><code>protected PropertyMap::property_type process_property()</code></h3>
+<p>Process a property in the stream.</p>
+<h4 id="returns-3">Returns</h4>
+<p>Extracted property</p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1a51dd3968142e4c0ab453d995e2d988e0"><code>protected</code><a href="core.html#class_node"><code>Node</code></a><code>process_sample()</code></h3>
+<p>Process a sample (node) in the stream.</p>
+<h4 id="returns-4">Returns</h4>
+<p><a href="core.html#class_node">Node</a></p>
+<hr />
+<h3 id="class_io__a_s_c_parser_1acde7b14efc0aa8e001bef830ab6f0fa0"><code>protected Neurite::branch_iterator process_container_(const Neurite::branch_iterator &amp; pos)</code></h3>
+<p>Process a Tree (or contour) inserting the nodes in the container as children of the given parent.</p>
+<h4 id="parameters-4">Parameters</h4>
+<ul>
+<li><code>parent</code> Point of insertion</li>
+</ul>
+<h4 id="returns-5">Returns</h4>
+<p>Last point of insertion</p>
+<hr />
+<h1 id="class_io__d_a_t_parser">class <code>DATParser</code></h1>
+<pre><code>class DATParser
+  : public neurostr::io::Parser</code></pre>
+<h2 id="summary-2">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  DATParser(std::istream &amp; stream)</code></td>
+<td>Creates a DAT parser.</td>
+</tr>
+<tr>
+<td><code>public inline  ~DATParser()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp;)</code></td>
+<td>Reads a reconstruction from the stream.</td>
+</tr>
+<tr>
+<td><code>protected bool valid_header()</code></td>
+<td>Checks that the header is correct.</td>
+</tr>
+<tr>
+<td><code>protected std::string process_string(std::size_t len)</code></td>
+<td>Process binary string block.</td>
+</tr>
+<tr>
+<td><code>protected</code><a href="core.html#class_node"><code>Node</code></a><code>process_sample()</code></td>
+<td>Process binary sample block.</td>
+</tr>
+<tr>
+<td><code>protected PropertyMap::property_type process_property()</code></td>
+<td>Process binary property block.</td>
+</tr>
+<tr>
+<td><code>protected</code><a href="#struct_io_marker__type"><code>marker_type</code></a><code>process_markerset()</code></td>
+<td>Proces binary markeset block.</td>
+</tr>
+<tr>
+<td><code>protected std::vector&lt;</code><a href="core.html#class_node"><code>Node</code></a><code>&gt; process_samplelist_()</code></td>
+<td>Process sample list block.</td>
+</tr>
+<tr>
+<td><code>protected std::vector&lt; PropertyMap::property_type &gt; process_proplist_()</code></td>
+<td>Porcess list of properties.</td>
+</tr>
+<tr>
+<td><code>protected std::vector&lt;</code><a href="#struct_io_marker__type"><code>marker_type</code></a><code>&gt; process_markersetlist_()</code></td>
+<td>Process list of markers.</td>
+</tr>
+<tr>
+<td><code>protected std::size_t process_container_(const Neurite::branch_iterator &amp; pos)</code></td>
+<td>Process container block in buffer.</td>
+</tr>
+<tr>
+<td><code>protected void process_block_(</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&amp; r)</code></td>
+<td>Process block in buffer.</td>
+</tr>
+<tr>
+<td><code>protected void skip_block()</code></td>
+<td>Skips current block in buffer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-1">Members</h2>
+<h3 id="class_io__d_a_t_parser_1accfd60cb87cf61102d058287a36842bd"><code>public inline  DATParser(std::istream &amp; stream)</code></h3>
+<p>Creates a DAT parser.</p>
+<h4 id="parameters-5">Parameters</h4>
+<ul>
+<li><code>s</code> Input stream to read from</li>
+</ul>
+<h4 id="returns-6">Returns</h4>
+<p>A DAT parser</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1af5cc747f09dd5924c91bf39a483f8b75"><code>public inline  ~DATParser()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a5d1c835f4fbcfb9e4d6ff32973717b6c"><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp;)</code></h3>
+<p>Reads a reconstruction from the stream.</p>
+<h4 id="parameters-6">Parameters</h4>
+<ul>
+<li><code>name</code> <a href="core.html#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<h4 id="returns-7">Returns</h4>
+<p>Unique ptr to the reconstruction (Ownership)</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a242dff70aa930ad91597048e12e7a561"><code>protected bool valid_header()</code></h3>
+<p>Checks that the header is correct.</p>
+<h4 id="returns-8">Returns</h4>
+<p>True if header is valid</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a2c3459475f6e5269ef292648fe6b726e"><code>protected std::string process_string(std::size_t len)</code></h3>
+<p>Process binary string block.</p>
+<h4 id="parameters-7">Parameters</h4>
+<ul>
+<li><code>len</code> String length</li>
+</ul>
+<h4 id="returns-9">Returns</h4>
+<p>String</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a961e72137c4c234214d2e5118f28eb39"><code>protected</code><a href="core.html#class_node"><code>Node</code></a><code>process_sample()</code></h3>
+<p>Process binary sample block.</p>
+<h4 id="returns-10">Returns</h4>
+<p><a href="core.html#class_node">Node</a></p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a2f067db0775c753fa0e57ffdc653ff19"><code>protected PropertyMap::property_type process_property()</code></h3>
+<p>Process binary property block.</p>
+<h4 id="returns-11">Returns</h4>
+<p>Property</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a1e378e0c180503f53006c83ce5366533"><code>protected</code><a href="#struct_io_marker__type"><code>marker_type</code></a><code>process_markerset()</code></h3>
+<p>Proces binary markeset block.</p>
+<h4 id="returns-12">Returns</h4>
+<p>Marker</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1acd5afed8d8d51c2510a66d4bb184cdc4"><code>protected std::vector&lt;</code><a href="core.html#class_node"><code>Node</code></a><code>&gt; process_samplelist_()</code></h3>
+<p>Process sample list block.</p>
+<h4 id="returns-13">Returns</h4>
+<p><a href="core.html#class_node">Node</a> vector</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a63fbc378663483a61324340395d4892a"><code>protected std::vector&lt; PropertyMap::property_type &gt; process_proplist_()</code></h3>
+<p>Porcess list of properties.</p>
+<h4 id="returns-14">Returns</h4>
+<p>Property vector</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1aaa78418656baa71a62a72b9f841980b5"><code>protected std::vector&lt;</code><a href="#struct_io_marker__type"><code>marker_type</code></a><code>&gt; process_markersetlist_()</code></h3>
+<p>Process list of markers.</p>
+<h4 id="returns-15">Returns</h4>
+<p>Vector of markers</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a727bd6be60a4afb7dcbb0a3dcd589752"><code>protected std::size_t process_container_(const Neurite::branch_iterator &amp; pos)</code></h3>
+<p>Process container block in buffer.</p>
+<h4 id="parameters-8">Parameters</h4>
+<ul>
+<li><code>pos</code> Insertion position</li>
+</ul>
+<h4 id="returns-16">Returns</h4>
+<p>Number of bytes extended</p>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a08317b18972148486669be5704bdb293"><code>protected void process_block_(</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&amp; r)</code></h3>
+<p>Process block in buffer.</p>
+<h4 id="parameters-9">Parameters</h4>
+<ul>
+<li><code>r</code> <a href="core.html#class_reconstruction">Reconstruction</a> to fill</li>
+</ul>
+<hr />
+<h3 id="class_io__d_a_t_parser_1a31d4ca1a0cdd1b03b57229f9d37bbc2d"><code>protected void skip_block()</code></h3>
+<p>Skips current block in buffer.</p>
+<hr />
+<h1 id="class_io__j_s_o_n_parser">class <code>JSONParser</code></h1>
+<pre><code>class JSONParser
+  : public neurostr::io::Parser</code></pre>
+<h2 id="summary-3">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  JSONParser(std::istream &amp; stream)</code></td>
+<td>Creates a JSON parser.</td>
+</tr>
+<tr>
+<td><code>public inline  ~JSONParser()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></td>
+<td>Reads a reconstruction from the stream.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-2">Members</h2>
+<h3 id="class_io__j_s_o_n_parser_1a8d24951c56b9ea05ca0e5f7c63a79210"><code>public inline  JSONParser(std::istream &amp; stream)</code></h3>
+<p>Creates a JSON parser.</p>
+<h4 id="parameters-10">Parameters</h4>
+<ul>
+<li><code>s</code> Input stream to read from</li>
+</ul>
+<h4 id="returns-17">Returns</h4>
+<p>JSON parser</p>
+<hr />
+<h3 id="class_io__j_s_o_n_parser_1a0220ff0fd0f2c9597dea7d248f86dee1"><code>public inline  ~JSONParser()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_io__j_s_o_n_parser_1a4c04c2788638cf4a9cdef1558fec434b"><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></h3>
+<p>Reads a reconstruction from the stream.</p>
+<h4 id="parameters-11">Parameters</h4>
+<ul>
+<li><code>name</code> <a href="core.html#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<h4 id="returns-18">Returns</h4>
+<p>Unique ptr to the reconstruction (Ownership)</p>
+<hr />
+<h1 id="class_io__j_s_o_n_writer">class <code>JSONWriter</code></h1>
+<h2 id="summary-4">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  JSONWriter(std::ostream &amp; s,bool pretty)</code></td>
+<td>Creates a writer over the given output stream.</td>
+</tr>
+<tr>
+<td><code>public inline  ~JSONWriter()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public void write(const</code><a href="core.html#class_reconstruction"><code>neurostr::Reconstruction</code></a><code>&amp; r)</code></td>
+<td>Writes a reconstruction.</td>
+</tr>
+<tr>
+<td><code>public void writeNeuron(const</code><a href="core.html#class_neuron"><code>neurostr::Neuron</code></a><code>&amp; n)</code></td>
+<td>Writes a single neuron (wo rec.</td>
+</tr>
+<tr>
+<td><code>protected void writePoint(const neurostr::point_type &amp; point)</code></td>
+<td>Writes a point object as {x,y,z}.</td>
+</tr>
+<tr>
+<td><code>protected void writeProperty(const neurostr::PropertyMap::const_iterator &amp; p)</code></td>
+<td>Writes the given property as key:value.</td>
+</tr>
+<tr>
+<td><code>protected void writeSoma(const</code><a href="core.html#class_neuron"><code>neurostr::Neuron</code></a><code>&amp; n)</code></td>
+<td>Writes the neuron soma as {nodes:[nodes]}.</td>
+</tr>
+<tr>
+<td><code>protected void writeContour(const</code><a href="core.html#class__contour"><code>neurostr::Contour</code></a><code>&amp; c)</code></td>
+<td>Writes the given contour as an object.</td>
+</tr>
+<tr>
+<td><code>protected void writePropertyMap(const</code><a href="#class__property_map"><code>neurostr::PropertyMap</code></a><code>&amp; pm)</code></td>
+<td>Writes the property map as an object {}.</td>
+</tr>
+<tr>
+<td><code>protected void writeNeurite(const</code><a href="core.html#class_neurite"><code>neurostr::Neurite</code></a><code>&amp; n)</code></td>
+<td>Writes the neurite as an object { id:, type: , tree:}.</td>
+</tr>
+<tr>
+<td><code>protected void writeBranch(const neurostr::Neurite::tree_type::iterator_base &amp; b,const</code><a href="core.html#class_neurite"><code>neurostr::Neurite</code></a><code>&amp; n)</code></td>
+<td>Writes the given branch (member of n) as {root: node, properties: , nodes:[], children:[] }.</td>
+</tr>
+<tr>
+<td><code>protected void writeNode(const</code><a href="core.html#class_node"><code>neurostr::Node</code></a><code>&amp; n)</code></td>
+<td>Writes a single node as {id,x,y,z,r,properties:{}}.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-3">Members</h2>
+<h3 id="class_io__j_s_o_n_writer_1a919b74a083b573424b790554032c351d"><code>public  JSONWriter(std::ostream &amp; s,bool pretty)</code></h3>
+<p>Creates a writer over the given output stream.</p>
+<h4 id="parameters-12">Parameters</h4>
+<ul>
+<li>
+<p><code>s</code> Stream</p>
+</li>
+<li><code>pretty</code> If true, ouptut is prettyfied</li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a9451d8d0e762d6d10cc65130f6b2649d"><code>public inline  ~JSONWriter()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a6c9eb643f187431fac37562a6d9aa49f"><code>public void write(const</code><a href="core.html#class_reconstruction"><code>neurostr::Reconstruction</code></a><code>&amp; r)</code></h3>
+<p>Writes a reconstruction.</p>
+<h4 id="parameters-13">Parameters</h4>
+<ul>
+<li><code>r</code> <a href="core.html#class_reconstruction">Reconstruction</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1abd91c1647f3b723a749b0ae1e1661c19"><code>public void writeNeuron(const</code><a href="core.html#class_neuron"><code>neurostr::Neuron</code></a><code>&amp; n)</code></h3>
+<p>Writes a single neuron (wo rec.</p>
+<p>contours)</p>
+<h4 id="parameters-14">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="core.html#class_neuron">Neuron</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a6b4272449a21c1e7bf3d92525b866e02"><code>protected void writePoint(const neurostr::point_type &amp; point)</code></h3>
+<p>Writes a point object as {x,y,z}.</p>
+<h4 id="parameters-15">Parameters</h4>
+<ul>
+<li><code>point</code> 3D Point</li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1ae849967e57f7e43bbfe0c388cb181a6f"><code>protected void writeProperty(const neurostr::PropertyMap::const_iterator &amp; p)</code></h3>
+<p>Writes the given property as key:value.</p>
+<h4 id="parameters-16">Parameters</h4>
+<ul>
+<li><code>p</code> Property iterator</li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1ab0c824ff96a4f017c2168e61fa4e6266"><code>protected void writeSoma(const</code><a href="core.html#class_neuron"><code>neurostr::Neuron</code></a><code>&amp; n)</code></h3>
+<p>Writes the neuron soma as {nodes:[nodes]}.</p>
+<h4 id="parameters-17">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="core.html#class_neuron">Neuron</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a3042d90ce677118928559196d4c8e871"><code>protected void writeContour(const</code><a href="core.html#class__contour"><code>neurostr::Contour</code></a><code>&amp; c)</code></h3>
+<p>Writes the given contour as an object.</p>
+<p><a href="core.html#class__contour">Contour</a> points are in a array</p>
+<h4 id="parameters-18">Parameters</h4>
+<ul>
+<li><code>c</code> <a href="core.html#class__contour">Contour</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a21a341202c33b450be074bd7b2136408"><code>protected void writePropertyMap(const</code><a href="#class__property_map"><code>neurostr::PropertyMap</code></a><code>&amp; pm)</code></h3>
+<p>Writes the property map as an object {}.</p>
+<h4 id="parameters-19">Parameters</h4>
+<ul>
+<li><code>pm</code> Property map</li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1ab315c2e4f8a4228b86f6f5551a336045"><code>protected void writeNeurite(const</code><a href="core.html#class_neurite"><code>neurostr::Neurite</code></a><code>&amp; n)</code></h3>
+<p>Writes the neurite as an object { id:, type: , tree:}.</p>
+<h4 id="parameters-20">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="core.html#class_neurite">Neurite</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1a420a15878cd69cd016af8f502d5988b9"><code>protected void writeBranch(const neurostr::Neurite::tree_type::iterator_base &amp; b,const</code><a href="core.html#class_neurite"><code>neurostr::Neurite</code></a><code>&amp; n)</code></h3>
+<p>Writes the given branch (member of n) as {root: node, properties: , nodes:[], children:[] }.</p>
+<h4 id="parameters-21">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> <a href="core.html#class_branch">Branch</a> iterator</p>
+</li>
+<li><code>n</code> <a href="core.html#class_neurite">Neurite</a></li>
+</ul>
+<hr />
+<h3 id="class_io__j_s_o_n_writer_1aef7b6e9240b9c470920d2c83e6a2352c"><code>protected void writeNode(const</code><a href="core.html#class_node"><code>neurostr::Node</code></a><code>&amp; n)</code></h3>
+<p>Writes a single node as {id,x,y,z,r,properties:{}}.</p>
+<h4 id="parameters-22">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="core.html#class_node">Node</a></li>
+</ul>
+<hr />
+<h1 id="class_io__parser">class <code>Parser</code></h1>
+<h2 id="summary-5">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  Parser(std::istream &amp; s)</code></td>
+<td>Constructs copy the istream reference.</td>
+</tr>
+<tr>
+<td><code>public inline virtual  ~Parser()</code></td>
+</tr>
+<tr>
+<td><code>public  Parser(const</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp;) = delete</code></td>
+<td>Deleted copy constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp; operator=(const</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp;) = delete</code></td>
+<td>Deleted copy operator.</td>
+</tr>
+<tr>
+<td><code>public inline void reset_errors()</code></td>
+<td>Set the error count to the default state.</td>
+</tr>
+<tr>
+<td><code>public inline int error() const</code></td>
+<td>Get number of errors.</td>
+</tr>
+<tr>
+<td><code>public inline int warn() const</code></td>
+<td>Get number of warnigs.</td>
+</tr>
+<tr>
+<td><code>public inline bool critical() const</code></td>
+<td>Critical error flag.</td>
+</tr>
+<tr>
+<td><code>public std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></td>
+<td>Reads a reconstruction from the stream and returns a unique_ptr.</td>
+</tr>
+<tr>
+<td><code>protected std::istream &amp; stream_</code></td>
+<td>Input stream variable.</td>
+</tr>
+<tr>
+<td><code>protected int error_count</code></td>
+<td>Error status.</td>
+</tr>
+<tr>
+<td><code>protected int warn_count</code></td>
+</tr>
+<tr>
+<td><code>protected bool critical_error</code></td>
+</tr>
+<tr>
+<td><code>protected inline void process_error(const std::exception &amp; e)</code></td>
+<td>Processes the error, log it and increments the error count.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-4">Members</h2>
+<h3 id="class_io__parser_1a41dc46858894bf40bc1a25b746db8f46"><code>public inline  Parser(std::istream &amp; s)</code></h3>
+<p>Constructs copy the istream reference.</p>
+<h4 id="parameters-23">Parameters</h4>
+<ul>
+<li><code>s</code> Input stream</li>
+</ul>
+<hr />
+<h3 id="class_io__parser_1adff96012a3fc1487c4880afca2e3e25a"><code>public inline virtual  ~Parser()</code></h3>
+<hr />
+<h3 id="class_io__parser_1a39aee4432fefafb571b200514a6ac254"><code>public  Parser(const</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp;) = delete</code></h3>
+<p>Deleted copy constructor.</p>
+<hr />
+<h3 id="class_io__parser_1a4abdb30ae04711c7e9d96e0766c464ac"><code>public</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp; operator=(const</code><a href="#class_io__parser"><code>Parser</code></a><code>&amp;) = delete</code></h3>
+<p>Deleted copy operator.</p>
+<hr />
+<h3 id="class_io__parser_1ac92fb6a6e75751939f42c60398e2b407"><code>public inline void reset_errors()</code></h3>
+<p>Set the error count to the default state.</p>
+<hr />
+<h3 id="class_io__parser_1ae4b4264a278ae16bbc90680e7c88b0ca"><code>public inline int error() const</code></h3>
+<p>Get number of errors.</p>
+<h4 id="returns-19">Returns</h4>
+<p>Error count</p>
+<hr />
+<h3 id="class_io__parser_1ac90c5a65a09477652821241d520a229e"><code>public inline int warn() const</code></h3>
+<p>Get number of warnigs.</p>
+<h4 id="returns-20">Returns</h4>
+<p>Warning count</p>
+<hr />
+<h3 id="class_io__parser_1a123021c0facace7209c522ca22e1138c"><code>public inline bool critical() const</code></h3>
+<p>Critical error flag.</p>
+<h4 id="returns-21">Returns</h4>
+<p>True if a critical error has happened.</p>
+<hr />
+<h3 id="class_io__parser_1a0b263f5851fe1fbf15f8f2ff8da1bffa"><code>public std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></h3>
+<p>Reads a reconstruction from the stream and returns a unique_ptr.</p>
+<h4 id="parameters-24">Parameters</h4>
+<ul>
+<li><code>name</code> <a href="core.html#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<h4 id="returns-22">Returns</h4>
+<p>Unique ptr to the reconstruction (Ownership)</p>
+<hr />
+<h3 id="class_io__parser_1af23a76f4ddea0e6220955345009c52b0"><code>protected std::istream &amp; stream_</code></h3>
+<p>Input stream variable.</p>
+<hr />
+<h3 id="class_io__parser_1a5a8625f53a7b72e90fc27ad9a5eff33b"><code>protected int error_count</code></h3>
+<p>Error status.</p>
+<hr />
+<h3 id="class_io__parser_1a3925a66a3d456e10188fe1f424a7705d"><code>protected int warn_count</code></h3>
+<hr />
+<h3 id="class_io__parser_1ae87fbae44066fc9a34edfdb9b1f21028"><code>protected bool critical_error</code></h3>
+<hr />
+<h3 id="class_io__parser_1aef43762839d79e57a709637d6035799a"><code>protected inline void process_error(const std::exception &amp; e)</code></h3>
+<p>Processes the error, log it and increments the error count.</p>
+<h4 id="parameters-25">Parameters</h4>
+<ul>
+<li><code>e</code> Error</li>
+</ul>
+<hr />
+<h1 id="class_io__s_w_c_parser">class <code>SWCParser</code></h1>
+<pre><code>class SWCParser
+  : public neurostr::io::Parser</code></pre>
+<p>luis</p>
+<p>28/10/16</p>
+<h2 id="summary-6">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public const char comment_char</code></td>
+</tr>
+<tr>
+<td><code>public const size_t field_count</code></td>
+</tr>
+<tr>
+<td><code>public  SWCParser(std::istream &amp; s)</code></td>
+<td>Creates a SWC parser with default separators (space)</td>
+</tr>
+<tr>
+<td><code>public  SWCParser(std::istream &amp; s,const std::string &amp; sep)</code></td>
+<td>Creates a SWC parser with given separators.</td>
+</tr>
+<tr>
+<td><code>public  ~SWCParser()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></td>
+<td>Reads a reconstruction from the stream.</td>
+</tr>
+<tr>
+<td><code>public bool is_key(const std::string &amp; s) const</code></td>
+<td>Checks if the given string is a known property name.</td>
+</tr>
+<tr>
+<td><code>public void add_property_key(const std::string &amp;)</code></td>
+<td>Adds a string to the set of recognized property keys.</td>
+</tr>
+<tr>
+<td><code>public void remove_property_key(const std::string &amp;)</code></td>
+<td>Removes a string of the set of recognized property keys.</td>
+</tr>
+<tr>
+<td><code>public const std::set&lt; std::string &gt; &amp; get_property_keys() const</code></td>
+<td>Retrieves the set of recognized property keys.</td>
+</tr>
+<tr>
+<td><code>protected separator sep_</code></td>
+</tr>
+<tr>
+<td><code>protected</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>* neuron_</code></td>
+</tr>
+<tr>
+<td><code>protected std::set&lt; std::string &gt; property_keys_</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-5">Members</h2>
+<h3 id="class_io__s_w_c_parser_1ac39e7742d234ea90e458e12043933e9a"><code>public const char comment_char</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_parser_1add660a818d25a32783b734328109624b"><code>public const size_t field_count</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_parser_1aae94a52eb73e510dcde2e3882fcf54ca"><code>public  SWCParser(std::istream &amp; s)</code></h3>
+<p>Creates a SWC parser with default separators (space)</p>
+<h4 id="parameters-26">Parameters</h4>
+<ul>
+<li><code>s</code> Input stream to read from</li>
+</ul>
+<h4 id="returns-23">Returns</h4>
+<p>A SWC parser</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a561b86a2f30f1d2ff6f881569cff94ba"><code>public  SWCParser(std::istream &amp; s,const std::string &amp; sep)</code></h3>
+<p>Creates a SWC parser with given separators.</p>
+<h4 id="parameters-27">Parameters</h4>
+<ul>
+<li>
+<p><code>s</code> Input stream</p>
+</li>
+<li><code>sep</code> String of separator characters</li>
+</ul>
+<h4 id="returns-24">Returns</h4>
+<p>A SWC parser</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a2c4d8a15cd3153a34639e44087a185cd"><code>public  ~SWCParser()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a10437ca1a53c80a0ccc41025aae8b30c"><code>public virtual std::unique_ptr&lt;</code><a href="core.html#class_reconstruction"><code>Reconstruction</code></a><code>&gt; read(const std::string &amp; name)</code></h3>
+<p>Reads a reconstruction from the stream.</p>
+<p>For SWC files the return will always consist of a reconstruction with exactly one neuron and no contour</p>
+<h4 id="parameters-28">Parameters</h4>
+<ul>
+<li><code>name</code> <a href="core.html#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<h4 id="returns-25">Returns</h4>
+<p>Unique ptr to the reconstruction (Ownership)</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1ae24c59f1d8a9a28a26c094e14e42ec13"><code>public bool is_key(const std::string &amp; s) const</code></h3>
+<p>Checks if the given string is a known property name.</p>
+<h4 id="parameters-29">Parameters</h4>
+<ul>
+<li><code>s</code> String to check</li>
+</ul>
+<h4 id="returns-26">Returns</h4>
+<p>True if the string is in the property key set</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1ab5c3b3a353a7dde327b3a3e9bc4c0f50"><code>public void add_property_key(const std::string &amp;)</code></h3>
+<p>Adds a string to the set of recognized property keys.</p>
+<h4 id="parameters-30">Parameters</h4>
+<ul>
+<li><code>s</code> String to add</li>
+</ul>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a0cef22f421e8ca4557d6ceabc93aefe3"><code>public void remove_property_key(const std::string &amp;)</code></h3>
+<p>Removes a string of the set of recognized property keys.</p>
+<h4 id="parameters-31">Parameters</h4>
+<ul>
+<li><code>s</code> String to add</li>
+</ul>
+<hr />
+<h3 id="class_io__s_w_c_parser_1ae163365eb0c33ceefb875c72f72a7295"><code>public const std::set&lt; std::string &gt; &amp; get_property_keys() const</code></h3>
+<p>Retrieves the set of recognized property keys.</p>
+<h4 id="returns-27">Returns</h4>
+<p>Set of strings</p>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a78c400aff05579899681b6ec5be0c073"><code>protected separator sep_</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_parser_1ae0046bb01cf2943f8330e44bfa55c4ce"><code>protected</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>* neuron_</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_parser_1a52c84546713ca2bbf7d5e98fdbaf4015"><code>protected std::set&lt; std::string &gt; property_keys_</code></h3>
+<hr />
+<h1 id="class_io__s_w_c_writer">class <code>SWCWriter</code></h1>
+<h2 id="summary-7">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public const char comment_char</code></td>
+</tr>
+<tr>
+<td><code>public const int no_parent_id</code></td>
+</tr>
+<tr>
+<td><code>public  SWCWriter(std::ostream &amp;)</code></td>
+<td>Creates a writer over the given stream.</td>
+</tr>
+<tr>
+<td><code>public  ~SWCWriter()</code></td>
+</tr>
+<tr>
+<td><code>public std::ostream &amp; write(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></td>
+<td>Writes the given neuron in SWC format.</td>
+</tr>
+<tr>
+<td><code>protected void writeHeader(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></td>
+<td>Writes document header.</td>
+</tr>
+<tr>
+<td><code>protected void writeData(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></td>
+<td>Writes <a href="core.html#class_neuron">Neuron</a> node positions (SWC DATA)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-6">Members</h2>
+<h3 id="class_io__s_w_c_writer_1a33e3411bb9578026ffa0fedeac96dd70"><code>public const char comment_char</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_writer_1a78c2aa365ef0acfef712e954020f7f63"><code>public const int no_parent_id</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_writer_1a8a6d49931b7c0469aad29ab952c4f74e"><code>public  SWCWriter(std::ostream &amp;)</code></h3>
+<p>Creates a writer over the given stream.</p>
+<h4 id="returns-28">Returns</h4>
+<p><a href="#class_io__s_w_c_writer">SWCWriter</a></p>
+<hr />
+<h3 id="class_io__s_w_c_writer_1aabe7d01639bc9a7ca975902c14d1dd85"><code>public  ~SWCWriter()</code></h3>
+<hr />
+<h3 id="class_io__s_w_c_writer_1a0ade9b9f2e949b13a49348f584b17838"><code>public std::ostream &amp; write(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></h3>
+<p>Writes the given neuron in SWC format.</p>
+<h4 id="returns-29">Returns</h4>
+<p>Output stream reference</p>
+<hr />
+<h3 id="class_io__s_w_c_writer_1a0c160de31da5f1055950da486013e77e"><code>protected void writeHeader(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></h3>
+<p>Writes document header.</p>
+<p>Static header + properties as comments</p>
+<hr />
+<h3 id="class_io__s_w_c_writer_1a54dadd3ec177eb3907a85295a76ecb1d"><code>protected void writeData(</code><a href="core.html#class_neuron"><code>Neuron</code></a><code>&amp;) const</code></h3>
+<p>Writes <a href="core.html#class_neuron">Neuron</a> node positions (SWC DATA)</p>
+<hr />
+<h1 id="struct_io_contour__info">struct <code>contour_info</code></h1>
+<p><a href="core.html#class__contour">Contour</a> header in DAT files.</p>
+<h2 id="summary-8">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public std::uint16_t closed</code></td>
+</tr>
+<tr>
+<td><code>public std::uint8_t face_color</code></td>
+</tr>
+<tr>
+<td><code>public std::uint8_t back_color</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-7">Members</h2>
+<h3 id="struct_io_contour__info_1a4cf89e08b8de78314e1d624f0b09c8f4"><code>public std::uint16_t closed</code></h3>
+<hr />
+<h3 id="struct_io_contour__info_1a5f3b2d781fa9d76032f4acd766115630"><code>public std::uint8_t face_color</code></h3>
+<hr />
+<h3 id="struct_io_contour__info_1a540e6a96260f2a04ec9882005a01ca3c"><code>public std::uint8_t back_color</code></h3>
+<hr />
+<h1 id="struct_io_marker__type">struct <code>marker_type</code></h1>
+<p>Markerset structure for NL files.</p>
+<h2 id="summary-9">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public std::string name</code></td>
+</tr>
+<tr>
+<td><code>public std::uint8_t color</code></td>
+</tr>
+<tr>
+<td><code>public std::vector&lt; property_type &gt; properties</code></td>
+</tr>
+<tr>
+<td><code>public std::vector&lt;</code><a href="core.html#class_node"><code>Node</code></a><code>&gt; samples</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-8">Members</h2>
+<h3 id="struct_io_marker__type_1a67a9f33791d4fdacdfe083b8a18ce5be"><code>public std::string name</code></h3>
+<hr />
+<h3 id="struct_io_marker__type_1a4b5b80b828c9dbb29a4b80ceb2b74eb5"><code>public std::uint8_t color</code></h3>
+<hr />
+<h3 id="struct_io_marker__type_1a7cb4d574f7c72944c42efa9c8b49ebc3"><code>public std::vector&lt; property_type &gt; properties</code></h3>
+<hr />
+<h3 id="struct_io_marker__type_1a50ee62f0e72af18d009bb6e457d0a35e"><code>public std::vector&lt;</code><a href="core.html#class_node"><code>Node</code></a><code>&gt; samples</code></h3>
+<hr />
+<h1 id="struct_io_subtree__info">struct <code>subtree_info</code></h1>
+<p>SubTree header in DAT files.</p>
+<h2 id="summary-10">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public uint16_t value1</code></td>
+</tr>
+<tr>
+<td><code>public uint16_t value2</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-9">Members</h2>
+<h3 id="struct_io_subtree__info_1aaeb1f9cbd685020f0e1a7efeda372245"><code>public uint16_t value1</code></h3>
+<hr />
+<h3 id="struct_io_subtree__info_1a56654a3ae5c20d2655f6b5b71041c75b"><code>public uint16_t value2</code></h3>
+<hr />
+<h1 id="struct_io_tree__info">struct <code>tree_info</code></h1>
+<p>Tree header in DAT files.</p>
+<h2 id="summary-11">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public</code><a href="#namespace_io_1af221fa2a265eae62fc8a3327203fa2a6"><code>tree_type_cd</code></a><code>type</code></td>
+</tr>
+<tr>
+<td><code>public uint8_t face_color</code></td>
+</tr>
+<tr>
+<td><code>public uint8_t back_color</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-10">Members</h2>
+<h3 id="struct_io_tree__info_1aa33774c5d1d2038d8bd887b314cde67e"><code>public</code><a href="#namespace_io_1af221fa2a265eae62fc8a3327203fa2a6"><code>tree_type_cd</code></a><code>type</code></h3>
+<hr />
+<h3 id="struct_io_tree__info_1a7fa9500ef8426472d6991f80a179144e"><code>public uint8_t face_color</code></h3>
+<hr />
+<h3 id="struct_io_tree__info_1a9186732b21bc4e238cd0d0b817f90a7b"><code>public uint8_t back_color</code></h3>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,3486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/classes/core.html">
+                               Core
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_branch"> Branch </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_neurite"> Neurite </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_contour"> Contour </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_neuron"> Neuron </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_node"> Node </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_property_map"> Property Map </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_reconstruction"> Reconstruction </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/core.html#class_with_properties"> With Properties </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/geometry.html">
+                               Geometry
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/traits.html">
+                               Traits
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/log.html">
+                               Log
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/io.html">
+                               I/O
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/selector.html">
+                               Selector
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/measure.html">
+                               Measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html">
+                               Validator
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="core-classes">Core classes</h1>
+<hr />
+<h1 id="class_branch">class <code>Branch</code></h1>
+<pre><code>class Branch
+  : public neurostr::WithProperties</code></pre>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Branch()</code></td>
+<td>Default constructor.</td>
+</tr>
+<tr>
+<td><code>public  Branch(const id_type &amp; id,int order)</code></td>
+<td>Creates a branch with given id and order.</td>
+</tr>
+<tr>
+<td><code>public  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root)</code></td>
+<td>Creates a branch with given id,order and root.</td>
+</tr>
+<tr>
+<td><code>public  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root,const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; nodes)</code></td>
+<td>Creates a branch with given id,order, root and nodes.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root,const Iter &amp; b,const Iter &amp; e)</code></td>
+<td>Creates a branch with given id,order, root and nodes.</td>
+</tr>
+<tr>
+<td><code>public inline  ~Branch()</code></td>
+<td>Empty destructor.</td>
+</tr>
+<tr>
+<td><code>public  Branch(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) = delete</code></td>
+<td>Copy constructor is not allowed.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; operator=(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) = delete</code></td>
+<td>Copy assign is not allowed.</td>
+</tr>
+<tr>
+<td><code>public  Branch(</code><a href="#class_branch"><code>Branch</code></a><code>&amp;&amp; b) = default</code></td>
+<td>Default move constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; operator=(</code><a href="#class_branch"><code>Branch</code></a><code>&amp;&amp; b) = default</code></td>
+<td>Defaul move assign.</td>
+</tr>
+<tr>
+<td><code>public inline int order() const</code></td>
+<td>Centrifugal order accessor.</td>
+</tr>
+<tr>
+<td><code>public inline const id_type &amp; id() const</code></td>
+<td>ID accessor.</td>
+</tr>
+<tr>
+<td><code>public std::string idString() const</code></td>
+<td>Returns <a href="#class_branch">Branch</a> ID as a string.</td>
+</tr>
+<tr>
+<td><code>public inline bool valid_neurite() const</code></td>
+<td><a href="#class_branch">Branch</a> neurite reference validity check.</td>
+</tr>
+<tr>
+<td><code>public const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite() const</code></td>
+<td><a href="#class_branch">Branch</a> parent neurite.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite()</code></td>
+<td><a href="#class_branch">Branch</a> parent neurite.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; id(const id_type &amp; id)</code></td>
+<td>Set branch id.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; order(int o)</code></td>
+<td>Set branch centrifugal order.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>* n)</code></td>
+<td>Set branch parent neurite.</td>
+</tr>
+<tr>
+<td><code>public inline void root(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Copy a node as new root.</td>
+</tr>
+<tr>
+<td><code>public inline void remove_root()</code></td>
+<td>Removes the current root.</td>
+</tr>
+<tr>
+<td><code>public inline void root(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n)</code></td>
+<td>Move a node as new root.</td>
+</tr>
+<tr>
+<td><code>public inline bool operator==(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) const</code></td>
+<td>Compares two branches by their ID.</td>
+</tr>
+<tr>
+<td><code>public inline bool operator!=(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) const</code></td>
+<td>Compares two branches by their ID.</td>
+</tr>
+<tr>
+<td><code>public inline size_type size() const</code></td>
+<td>Number of nodes in the b.</td>
+</tr>
+<tr>
+<td><code>public inline bool has_root() const</code></td>
+<td><a href="#class_branch">Branch</a> root validity check.</td>
+</tr>
+<tr>
+<td><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; root() const</code></td>
+<td>Get root node reference.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; root()</code></td>
+<td>Get root node reference.</td>
+</tr>
+<tr>
+<td><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; first() const</code></td>
+<td>Returns branch first node.</td>
+</tr>
+<tr>
+<td><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; last() const</code></td>
+<td>Returns branch last node.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; first()</code></td>
+<td>Returns branch first node.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; last()</code></td>
+<td>Returns branch last node.</td>
+</tr>
+<tr>
+<td><code>public point_type director_vector() const</code></td>
+<td>Returns vector from the first node of the branch to the last.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,T value,bool recursive)</code></td>
+<td>Adds a property to the branch and optionally to its nodes.</td>
+</tr>
+<tr>
+<td><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></td>
+<td>Adds an empty property to the branch and optionally to its nodes.</td>
+</tr>
+<tr>
+<td><code>public inline iterator begin()</code></td>
+<td>Begin node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline iterator end()</code></td>
+<td>End node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline reverse_iterator rbegin()</code></td>
+<td>Reverse begin node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline reverse_iterator rend()</code></td>
+<td>Reverse end node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_iterator begin() const</code></td>
+<td>Begin node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_iterator end() const</code></td>
+<td>End node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_reverse_iterator rbegin() const</code></td>
+<td>Reverse begin node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_reverse_iterator rend() const</code></td>
+<td>Reverse end node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_iterator cbegin() const</code></td>
+<td>Begin const node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public inline const_iterator cend() const</code></td>
+<td>End const node iterator (indirect iterator)</td>
+</tr>
+<tr>
+<td><code>public void push_back(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Copy a node to the end of the branch.</td>
+</tr>
+<tr>
+<td><code>public void push_back(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n)</code></td>
+<td>Move a node to the end of the branch.</td>
+</tr>
+<tr>
+<td><code>public iterator insert(iterator pos,const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Copies the given node at the position.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline void insert(iterator pos,Iter b,Iter e)</code></td>
+<td>Copies a range of nodes into the branch.</td>
+</tr>
+<tr>
+<td><code>public iterator erase(const iterator &amp; pos)</code></td>
+<td>Deletes a node in the branch.</td>
+</tr>
+<tr>
+<td><code>public iterator erase(const iterator &amp; first,const iterator &amp; last)</code></td>
+<td>Deletes a range of nodes in the branch.</td>
+</tr>
+<tr>
+<td><code>public inline void clear()</code></td>
+<td>Deletes all nodes in the brnach.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>split(const iterator &amp; pos)</code></td>
+<td>Divides the branch at given position and creates a new branch.</td>
+</tr>
+<tr>
+<td><code>public void simplify(float eps)</code></td>
+<td>Applies RDF simplification to the branch nodes.</td>
+</tr>
+<tr>
+<td><code>public void scale(float r)</code></td>
+<td>Scales the branch wrt root by r (&gt;1 bigger, &lt;1 smaller)</td>
+</tr>
+<tr>
+<td><code>public void normalize()</code></td>
+<td>Scales the branch so its length is equal to 1.</td>
+</tr>
+<tr>
+<td><code>public void scale(float rx,float ry,float rz)</code></td>
+<td>Scales branch (including root)</td>
+</tr>
+<tr>
+<td><code>public float length() const</code></td>
+<td>Computes branch path length.</td>
+</tr>
+<tr>
+<td><code>public void traslate(const point_type &amp; p)</code></td>
+<td>Moves the branch (root included) by the vector p.</td>
+</tr>
+<tr>
+<td><code>public void rotate(const Eigen::Quaternionf &amp; q)</code></td>
+<td>Rotates the branch (Root included) aplying the quaternion q.</td>
+</tr>
+<tr>
+<td><code>public void remove_null_segments()</code></td>
+<td>Removes zero-length segments in the branch.</td>
+</tr>
+<tr>
+<td><code>public float discrete_frechet(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; other) const</code></td>
+<td>Computes the frechet distance between two branche s.</td>
+</tr>
+<tr>
+<td><code>public float distance(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; other,bool ignore_radius) const</code></td>
+<td>Computes the distance between both branches.</td>
+</tr>
+<tr>
+<td><code>public void set_nodes_branch()</code></td>
+<td>Updates branch memeber in all nodes.</td>
+</tr>
+<tr>
+<td><code>public box_type boundingBox() const</code></td>
+<td>Gets bounding box.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members">Members</h2>
+<h3 id="class_branch_1aa0b320c5e78c951252ede4e8be08504e"><code>public  Branch()</code></h3>
+<p>Default constructor.</p>
+<p>creates a branch with order -1 and empty id</p>
+<h4 id="returns">Returns</h4>
+<p><a href="#class_branch">Branch</a></p>
+<hr />
+<h3 id="class_branch_1a46c3ebbf1e01047196af0062d62719a0"><code>public  Branch(const id_type &amp; id,int order)</code></h3>
+<p>Creates a branch with given id and order.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_branch">Branch</a> id</p>
+</li>
+<li><code>order</code> <a href="#class_branch">Branch</a> order</li>
+</ul>
+<h4 id="returns-1">Returns</h4>
+<p><a href="#class_branch">Branch</a></p>
+<hr />
+<h3 id="class_branch_1adbd7f94f44e4887262cc67306dc6ba03"><code>public  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root)</code></h3>
+<p>Creates a branch with given id,order and root.</p>
+<h4 id="parameters-1">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_branch">Branch</a> id</p>
+</li>
+<li>
+<p><code>order</code> Centrifugal order</p>
+</li>
+<li><code>root</code> <a href="#class_branch">Branch</a> root node</li>
+</ul>
+<h4 id="returns-2">Returns</h4>
+<p><a href="#class_branch">Branch</a></p>
+<hr />
+<h3 id="class_branch_1a6b4d036568d1a7d6e367a7d61e4c391d"><code>public  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root,const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; nodes)</code></h3>
+<p>Creates a branch with given id,order, root and nodes.</p>
+<h4 id="parameters-2">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_branch">Branch</a> id</p>
+</li>
+<li>
+<p><code>order</code> Centrifugal order</p>
+</li>
+<li>
+<p><code>root</code> <a href="#class_branch">Branch</a> root node</p>
+</li>
+<li><code>nodes</code> <a href="#class_branch">Branch</a> nodes</li>
+</ul>
+<h4 id="returns-3">Returns</h4>
+<p><a href="#class_branch">Branch</a></p>
+<hr />
+<h3 id="class_branch_1a136194adc4838b87416ce12f57ac457f"><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline  Branch(const id_type &amp; id,int order,const</code><a href="#class_node"><code>Node</code></a><code>&amp; root,const Iter &amp; b,const Iter &amp; e)</code></h3>
+<p>Creates a branch with given id,order, root and nodes.</p>
+<h4 id="parameters-3">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_branch">Branch</a> id</p>
+</li>
+<li>
+<p><code>order</code> Centrifugal order</p>
+</li>
+<li>
+<p><code>root</code> <a href="#class_branch">Branch</a> root node</p>
+</li>
+<li>
+<p><code>b</code> <a href="#class_node">Node</a> begin iterator</p>
+</li>
+<li><code>e</code> <a href="#class_node">Node</a> end iterator</li>
+</ul>
+<h4 id="returns-4">Returns</h4>
+<p><a href="#class_branch">Branch</a></p>
+<hr />
+<h3 id="class_branch_1aaf14b7e060421c5fa1008779dd32f674"><code>public inline  ~Branch()</code></h3>
+<p>Empty destructor.</p>
+<hr />
+<h3 id="class_branch_1a1137aff329a5779c9e224a17e6247712"><code>public  Branch(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) = delete</code></h3>
+<p>Copy not allowed.</p>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_branch_1a6d6845c914e6d3f9f7b16e2edd6e8d66"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; operator=(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) = delete</code></h3>
+<p>Copy not allowed.</p>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_branch_1aeeb0df66cbcd2c1489b50fa1f19088dd"><code>public  Branch(</code><a href="#class_branch"><code>Branch</code></a><code>&amp;&amp; b) = default</code></h3>
+<p>Default move constructor.</p>
+<hr />
+<h3 id="class_branch_1a514d825a62be35df18b6b595978f5dae"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; operator=(</code><a href="#class_branch"><code>Branch</code></a><code>&amp;&amp; b) = default</code></h3>
+<p>Defaul move assign.</p>
+<hr />
+<h3 id="class_branch_1af0e7e06c6b7d50951d5e0fb95dac36b6"><code>public inline int order() const</code></h3>
+<p>Centrifugal order accessor.</p>
+<h4 id="returns-5">Returns</h4>
+<p>Centrifugal order</p>
+<hr />
+<h3 id="class_branch_1a11cabaa338d18fb7492926b9468c432e"><code>public inline const id_type &amp; id() const</code></h3>
+<p>Returns the <a href="#class_branch">Branch</a> ID as a vector of integers.</p>
+<h4 id="returns-6">Returns</h4>
+<p><a href="#class_branch">Branch</a> Id</p>
+<hr />
+<h3 id="class_branch_1aeb8511e2eaa637d88cc101834cd281a2"><code>public std::string idString() const</code></h3>
+<p>Returns <a href="#class_branch">Branch</a> ID as a string.</p>
+<h4 id="returns-7">Returns</h4>
+<p>ID as string</p>
+<hr />
+<h3 id="class_branch_1afccafb5312d8ffea0ad707af64d79746"><code>public inline bool valid_neurite() const</code></h3>
+<p><a href="#class_branch">Branch</a> neurite reference validity check.</p>
+<h4 id="returns-8">Returns</h4>
+<p>True if the <a href="#class_neurite">Neurite</a> reference is valid</p>
+<hr />
+<h3 id="class_branch_1a28f7d24538f640d7e06aed62f03cd3d1"><code>public const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite() const</code></h3>
+<p><a href="#class_branch">Branch</a> parent neurite.</p>
+<h4 id="returns-9">Returns</h4>
+<p>Parent <a href="#class_neurite">Neurite</a> reference</p>
+<hr />
+<h3 id="class_branch_1adc4b492f1c2ef06e53afcf37b64c06a0"><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite()</code></h3>
+<p><a href="#class_branch">Branch</a> parent neurite.</p>
+<h4 id="returns-10">Returns</h4>
+<p>Parent neurite reference</p>
+<hr />
+<h3 id="class_branch_1a0f08d3931ca09bbe8e4e661d8ef65493"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; id(const id_type &amp; id)</code></h3>
+<p>Set branch id.</p>
+<h4 id="parameters-4">Parameters</h4>
+<ul>
+<li><code>id</code> new id</li>
+</ul>
+<h4 id="returns-11">Returns</h4>
+<p>Updated branch reference</p>
+<hr />
+<h3 id="class_branch_1a3be74daf6c31a93e6d56ba397be745dc"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; order(int o)</code></h3>
+<p>Set branch centrifugal order.</p>
+<h4 id="parameters-5">Parameters</h4>
+<ul>
+<li><code>o</code> new centrifugal order</li>
+</ul>
+<h4 id="returns-12">Returns</h4>
+<p>Update branch reference</p>
+<hr />
+<h3 id="class_branch_1ac73afc2942a475e19db06472c26c792e"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>* n)</code></h3>
+<p>Set branch parent neurite.</p>
+<h4 id="parameters-6">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_neurite">Neurite</a> pointer</li>
+</ul>
+<h4 id="returns-13">Returns</h4>
+<p>Update branch reference</p>
+<hr />
+<h3 id="class_branch_1a30ef19268a3d8d82f11aa84756932177"><code>public inline void root(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Copy a node as new root.</p>
+<h4 id="parameters-7">Parameters</h4>
+<ul>
+<li><code>n</code> node to copy</li>
+</ul>
+<hr />
+<h3 id="class_branch_1acb0a8e7c50db6b1a65cdb88e585fb6b6"><code>public inline void remove_root()</code></h3>
+<p>Removes the current root.</p>
+<hr />
+<h3 id="class_branch_1a11f6365be493046c7bd311daea1cdc61"><code>public inline void root(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n)</code></h3>
+<p>Move a node as new root.</p>
+<h4 id="parameters-8">Parameters</h4>
+<ul>
+<li><code>n</code> node to move</li>
+</ul>
+<hr />
+<h3 id="class_branch_1acd05258406942a6e88cb21b791c3e05f"><code>public inline bool operator==(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) const</code></h3>
+<p>Compares two branches by their ID.</p>
+<h4 id="parameters-9">Parameters</h4>
+<ul>
+<li><code>b</code> <a href="#class_branch">Branch</a></li>
+</ul>
+<h4 id="returns-14">Returns</h4>
+<p>True if two ids are equal</p>
+<hr />
+<h3 id="class_branch_1a4293f0e0be34abfb2fff756cac7f49aa"><code>public inline bool operator!=(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; b) const</code></h3>
+<p>Compares two branches by their ID.</p>
+<h4 id="parameters-10">Parameters</h4>
+<ul>
+<li><code>b</code> <a href="#class_branch">Branch</a></li>
+</ul>
+<h4 id="returns-15">Returns</h4>
+<p>True if two ids are NOT equal</p>
+<hr />
+<h3 id="class_branch_1a9f4228989204d5e9cd8d0605efcaac32"><code>public inline size_type size() const</code></h3>
+<p>Number of nodes in the b.</p>
+<h4 id="returns-16">Returns</h4>
+<p><a href="#class_branch">Branch</a> size</p>
+<hr />
+<h3 id="class_branch_1a6b4d6f5c02a3aa29b94c397ad9596784"><code>public inline bool has_root() const</code></h3>
+<p><a href="#class_branch">Branch</a> root validity check.</p>
+<h4 id="returns-17">Returns</h4>
+<p>True/False</p>
+<hr />
+<h3 id="class_branch_1afa19d56be3a754ba48b5968476b0b51d"><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; root() const</code></h3>
+<p>Get root node reference.</p>
+<h4 id="throws">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access nullptr reference</li>
+</ul>
+<h4 id="returns-18">Returns</h4>
+<p>Root node reference</p>
+<hr />
+<h3 id="class_branch_1a4b61255c68dbd659702132308f417c92"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; root()</code></h3>
+<p>Get root node reference.</p>
+<h4 id="throws-1">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access nullptr reference</li>
+</ul>
+<h4 id="returns-19">Returns</h4>
+<p>Root node reference</p>
+<hr />
+<h3 id="class_branch_1a9a85d3a1cad2260ef80fcc869be8b0bf"><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; first() const</code></h3>
+<p>Returns branch first node.</p>
+<h4 id="throws-2">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access empty branch</li>
+</ul>
+<h4 id="returns-20">Returns</h4>
+<p><a href="#class_node">Node</a> reference</p>
+<hr />
+<h3 id="class_branch_1a080cc50c1d359f731c6a25cb47fdf9a4"><code>public const</code><a href="#class_node"><code>Node</code></a><code>&amp; last() const</code></h3>
+<p>Returns branch last node.</p>
+<h4 id="throws-3">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access empty branch</li>
+</ul>
+<h4 id="returns-21">Returns</h4>
+<p><a href="#class_node">Node</a> reference</p>
+<hr />
+<h3 id="class_branch_1a18efe57b0cee114d84161ce0992c19d5"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; first()</code></h3>
+<p>Returns branch first node.</p>
+<h4 id="throws-4">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access empty branch</li>
+</ul>
+<h4 id="returns-22">Returns</h4>
+<p><a href="#class_node">Node</a> reference</p>
+<hr />
+<h3 id="class_branch_1ab572b6757b84335171a57316006fadc9"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; last()</code></h3>
+<p>Returns branch last node.</p>
+<h4 id="throws-5">Throws</h4>
+<ul>
+<li><code>runtime_error</code> Attempt to access empty branch</li>
+</ul>
+<h4 id="returns-23">Returns</h4>
+<p><a href="#class_node">Node</a> reference</p>
+<hr />
+<h3 id="class_branch_1a4b658a7e97c72f9c7cff2295e3ee10f4"><code>public point_type director_vector() const</code></h3>
+<p>Returns vector from the first node of the branch to the last.</p>
+<h4 id="returns-24">Returns</h4>
+<p>Vector</p>
+<hr />
+<h3 id="class_branch_1ab5f628b002d50a6bb3bce6dbc768c642"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,T value,bool recursive)</code></h3>
+<p>Adds a property to the branch and optionally to its nodes.</p>
+<h4 id="parameters-11">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property name</p>
+</li>
+<li>
+<p><code>value</code> Property value</p>
+</li>
+<li><code>recursive</code> If true, property is also added to branch nodes</li>
+</ul>
+<h4 id="returns-25">Returns</h4>
+<p>Iterator to added property</p>
+<hr />
+<h3 id="class_branch_1a301b484cb4239af143463e5ad80ce4d4"><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></h3>
+<p>Adds an empty property to the branch and optionally to its nodes.</p>
+<h4 id="parameters-12">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property name</p>
+</li>
+<li><code>recursive</code> If true, property is also added to branch nodes</li>
+</ul>
+<h4 id="returns-26">Returns</h4>
+<p>Iterator to added property</p>
+<hr />
+<h3 id="class_branch_1a24ecb6e31e508f05ffb76c7cafe102d9"><code>public inline iterator begin()</code></h3>
+<p>Begin node iterator (indirect iterator)</p>
+<h4 id="returns-27">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a89b7514bbc9eb233c2bf4beade1932f3"><code>public inline iterator end()</code></h3>
+<p>End node iterator (indirect iterator)</p>
+<h4 id="returns-28">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1aa4985e2559e40ca6efcaaf6cc8fecd09"><code>public inline reverse_iterator rbegin()</code></h3>
+<p>Reverse begin node iterator (indirect iterator)</p>
+<h4 id="returns-29">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a2626c1632fc79fab41ce8781ea95859a"><code>public inline reverse_iterator rend()</code></h3>
+<p>Reverse end node iterator (indirect iterator)</p>
+<h4 id="returns-30">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1aeea5bcdf9726525db6a115683329cd5b"><code>public inline const_iterator begin() const</code></h3>
+<p>Begin node iterator (indirect iterator)</p>
+<h4 id="returns-31">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a2bb0fc46bb5db4efdfc6ffaa75936d4f"><code>public inline const_iterator end() const</code></h3>
+<p>End node iterator (indirect iterator)</p>
+<h4 id="returns-32">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1ac4e3363782ed436f20a6df3613006047"><code>public inline const_reverse_iterator rbegin() const</code></h3>
+<p>Reverse begin node iterator (indirect iterator)</p>
+<h4 id="returns-33">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a9b2b1a5b35bdfd6200681d91d5b3a1ae"><code>public inline const_reverse_iterator rend() const</code></h3>
+<p>Reverse end node iterator (indirect iterator)</p>
+<h4 id="returns-34">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a2f1b2889358e7cb06fd7e9c4bc26babc"><code>public inline const_iterator cbegin() const</code></h3>
+<p>Begin const node iterator (indirect iterator)</p>
+<h4 id="returns-35">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a3922132f47d6896ff9cfc47baa0dc0db"><code>public inline const_iterator cend() const</code></h3>
+<p>End const node iterator (indirect iterator)</p>
+<h4 id="returns-36">Returns</h4>
+<p>Indirect iterator</p>
+<hr />
+<h3 id="class_branch_1a078773ec08af93ae96f50e6c38783236"><code>public void push_back(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Copy a node to the end of the branch.</p>
+<h4 id="parameters-13">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_node">Node</a> to copy</li>
+</ul>
+<hr />
+<h3 id="class_branch_1ab5b1d5bced85cba8b6721d36d73021bb"><code>public void push_back(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n)</code></h3>
+<p>Move a node to the end of the branch.</p>
+<h4 id="parameters-14">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_node">Node</a> to move</li>
+</ul>
+<hr />
+<h3 id="class_branch_1a46649bdb79415c5e79c8e1c44460e3e3"><code>public iterator insert(iterator pos,const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Copies the given node at the position.</p>
+<h4 id="parameters-15">Parameters</h4>
+<ul>
+<li>
+<p><code>pos</code> Position to insert</p>
+</li>
+<li><code>n</code> <a href="#class_node">Node</a></li>
+</ul>
+<h4 id="returns-37">Returns</h4>
+<p>Updated iterator</p>
+<hr />
+<h3 id="class_branch_1a194d46bbd5918605e2b15217cb1fe519"><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline void insert(iterator pos,Iter b,Iter e)</code></h3>
+<p>Copies a range of nodes into the branch.</p>
+<h4 id="parameters-16">Parameters</h4>
+<ul>
+<li>
+<p><code>pos</code> Insert position</p>
+</li>
+<li>
+<p><code>b</code> Range begin iterator</p>
+</li>
+<li><code>e</code> Range end iterator</li>
+</ul>
+<hr />
+<h3 id="class_branch_1a813689cff6010890bd93273964a91b3f"><code>public iterator erase(const iterator &amp; pos)</code></h3>
+<p>Deletes a node in the branch.</p>
+<h4 id="parameters-17">Parameters</h4>
+<ul>
+<li><code>pos</code> Position to delete</li>
+</ul>
+<h4 id="returns-38">Returns</h4>
+<p>Updated iterator</p>
+<hr />
+<h3 id="class_branch_1a8a2f61537826d15a4d3a86293012f026"><code>public iterator erase(const iterator &amp; first,const iterator &amp; last)</code></h3>
+<p>Deletes a range of nodes in the branch.</p>
+<h4 id="parameters-18">Parameters</h4>
+<ul>
+<li>
+<p><code>first</code> first position to delete</p>
+</li>
+<li><code>last</code> last position to delete</li>
+</ul>
+<h4 id="returns-39">Returns</h4>
+<p>Updated iterator</p>
+<hr />
+<h3 id="class_branch_1a7f84824171b7187a4bc0a5717fb13f16"><code>public inline void clear()</code></h3>
+<p>Deletes all nodes in the branch.</p>
+<hr />
+<h3 id="class_branch_1a5de6f0e15af4e7e7a6377ba950f2113a"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>split(const iterator &amp; pos)</code></h3>
+<p>Divides the branch at given position and creates a new branch.</p>
+<h4 id="parameters-19">Parameters</h4>
+<ul>
+<li><code>pos</code> Split position</li>
+</ul>
+<h4 id="returns-40">Returns</h4>
+<p>Split branch</p>
+<hr />
+<h3 id="class_branch_1aa81b77aef56277031a531d22134e576a"><code>public void simplify(float eps)</code></h3>
+<p>Applies RDF simplification to the branch nodes.</p>
+<p>Root and last are always keeped</p>
+<h4 id="parameters-20">Parameters</h4>
+<ul>
+<li><code>eps</code> RDF algorithm epsilon parameter (tolerance). If eps is &lt;0 is used as a relative tolerance to the node radius</li>
+</ul>
+<hr />
+<h3 id="class_branch_1ad42431857e17e3f226b27b3398813af7"><code>public void scale(float r)</code></h3>
+<p>Scales the branch wrt root by r (&gt;1 bigger, &lt;1 smaller)</p>
+<h4 id="parameters-21">Parameters</h4>
+<ul>
+<li><code>r</code> Scale rate</li>
+</ul>
+<hr />
+<h3 id="class_branch_1ab7a18a51e2a8f47e34bc4e9e256b0b31"><code>public void normalize()</code></h3>
+<p>Scales the branch so its length is equal to 1.</p>
+<hr />
+<h3 id="class_branch_1ad38b6ea74db9d8d99d6d46933220ed9f"><code>public void scale(float rx,float ry,float rz)</code></h3>
+<p>Scales branch (including root)</p>
+<h4 id="parameters-22">Parameters</h4>
+<ul>
+<li>
+<p><code>rx</code> x-axis scale</p>
+</li>
+<li>
+<p><code>ry</code> y-axis scale</p>
+</li>
+<li><code>rz</code> z-axis scale</li>
+</ul>
+<hr />
+<h3 id="class_branch_1a7b6cb383f3353013a69664c504f6a6f6"><code>public float length() const</code></h3>
+<p>Computes branch path length.</p>
+<h4 id="returns-41">Returns</h4>
+<p>branch length</p>
+<hr />
+<h3 id="class_branch_1aa1edc843a383392fcd74cb13cc021b18"><code>public void traslate(const point_type &amp; p)</code></h3>
+<p>Moves the branch (root included) by the vector p.</p>
+<h4 id="parameters-23">Parameters</h4>
+<ul>
+<li><code>p</code> Translation vector</li>
+</ul>
+<hr />
+<h3 id="class_branch_1af9f1684cd7106d56f38d397ff8ce8cec"><code>public void rotate(const Eigen::Quaternionf &amp; q)</code></h3>
+<p>Rotates the branch (Root included) aplying the quaternion q.</p>
+<h4 id="parameters-24">Parameters</h4>
+<ul>
+<li><code>q</code> rotation quaternion</li>
+</ul>
+<hr />
+<h3 id="class_branch_1aa7507c972e0b16067028bdb217995563"><code>public void remove_null_segments()</code></h3>
+<p>Removes zero-length segments in the branch.</p>
+<hr />
+<h3 id="class_branch_1adc4bbce7209ca615402bd9b6bdd8d0c4"><code>public float discrete_frechet(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; other) const</code></h3>
+<p>Computes the Discrete Frechet distance between two branches.</p>
+<h4 id="parameters-25">Parameters</h4>
+<ul>
+<li><code>other</code> <a href="#class_branch">Branch</a></li>
+</ul>
+<h4 id="returns-42">Returns</h4>
+<p>Discrete frechet distance</p>
+<hr />
+<h3 id="class_branch_1a156befe9e6fe58e49c3721b3f3329e49"><code>public float distance(const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; other,bool ignore_radius) const</code></h3>
+<p>Computes the distance between both branches.</p>
+<p>Ignores nodes shared by both branches</p>
+<h4 id="parameters-26">Parameters</h4>
+<ul>
+<li><code>other</code></li>
+</ul>
+<h4 id="returns-43">Returns</h4>
+<p>euclidean distance</p>
+<hr />
+<h3 id="class_branch_1a0ca6b621dd9c1a3847c75159c359353f"><code>public void set_nodes_branch()</code></h3>
+<p>Updates branch memeber in all nodes.</p>
+<hr />
+<h3 id="class_branch_1ada85b301fadb90c433bae05374fb25da"><code>public box_type boundingBox() const</code></h3>
+<p>Gets bounding box.</p>
+<hr />
+<h1 id="class_neurite">class <code>Neurite</code></h1>
+<pre><code>class Neurite
+  : public neurostr::WithProperties</code></pre>
+<h2 id="summary-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="#class_neurite_const__node__iterator"><code>const_node_iterator</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a></td>
+</tr>
+<tr>
+<td><code>public  Neurite()</code></td>
+<td>Empty neurite constructor.</td>
+</tr>
+<tr>
+<td><code>public  Neurite(int id)</code></td>
+<td>Create a neurite with given id and type undefined.</td>
+</tr>
+<tr>
+<td><code>public  Neurite(int id,const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; t)</code></td>
+<td>Create a neurite with given id and type.</td>
+</tr>
+<tr>
+<td><code>public  Neurite(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) = default</code></td>
+<td>Default copy constructor.</td>
+</tr>
+<tr>
+<td><code>public  Neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp;&amp; n) = default</code></td>
+<td>Default move constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; operator=(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) = default</code></td>
+<td>Default copy assign.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; operator=(</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp;&amp; n) = default</code></td>
+<td>Default move assign.</td>
+</tr>
+<tr>
+<td><code>public inline  ~Neurite()</code></td>
+<td>Empty destructor (Default)</td>
+</tr>
+<tr>
+<td><code>public inline bool operator==(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) const</code></td>
+<td>Compares two neurites by ID.</td>
+</tr>
+<tr>
+<td><code>public inline bool operator!=(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) const</code></td>
+<td>Compares two neurites by ID.</td>
+</tr>
+<tr>
+<td><code>public inline const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; type() const</code></td>
+<td>Return neurite type.</td>
+</tr>
+<tr>
+<td><code>public inline const int id() const</code></td>
+<td>Returns neurite id.</td>
+</tr>
+<tr>
+<td><code>public inline bool root_is_soma() const</code></td>
+<td>Checks if root is soma.</td>
+</tr>
+<tr>
+<td><code>public inline</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; neuron() const</code></td>
+<td>Return neurite parent neuron reference.</td>
+</tr>
+<tr>
+<td><code>public inline void type(const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; t)</code></td>
+<td>Set neurite type.</td>
+</tr>
+<tr>
+<td><code>public inline void id(int id)</code></td>
+<td>Set neurite ID.</td>
+</tr>
+<tr>
+<td><code>public inline void neuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>*const n)</code></td>
+<td>Set neurite parent neuron pointer.</td>
+</tr>
+<tr>
+<td><code>public inline bool has_root() const</code></td>
+<td>Checks if the root branch of the neurite has root.</td>
+</tr>
+<tr>
+<td><code>public inline const</code><a href="#class_node"><code>Node</code></a><code>&amp; root() const</code></td>
+<td>Get root reference.</td>
+</tr>
+<tr>
+<td><code>public void set_root()</code></td>
+<td>Sets an empt branch as the root branch without root node.</td>
+</tr>
+<tr>
+<td><code>public void set_root(const</code><a href="#class_node"><code>Node</code></a><code>&amp; node)</code></td>
+<td>Creates an empty branch with node as root as root branch.</td>
+</tr>
+<tr>
+<td><code>public int max_centrifugal_order() const</code></td>
+<td>Get neurite max c.order.</td>
+</tr>
+<tr>
+<td><code>public inline int size() const</code></td>
+<td><a href="#class_neurite">Neurite</a> size (branch count)</td>
+</tr>
+<tr>
+<td><code>public int node_count() const</code></td>
+<td><a href="#class_neurite">Neurite</a> node count.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,T v,bool recursive)</code></td>
+<td>Adds a property to the neurite and optionally to its branches.</td>
+</tr>
+<tr>
+<td><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></td>
+<td>Adds an empty property to the neurite and optionally to its branches.</td>
+</tr>
+<tr>
+<td><code>public inline branch_iterator begin_branch() const</code></td>
+<td>Begin DFS branch iterator.</td>
+</tr>
+<tr>
+<td><code>public inline branch_iterator end_branch() const</code></td>
+<td>End DFS branch iterator.</td>
+</tr>
+<tr>
+<td><code>public inline branch_iterator begin_branch_subtree(const typename tree_type::iterator_base &amp; other) const</code></td>
+<td>Creates a branch DFS iterator over the subtree of the branch pointed by €{other}.</td>
+</tr>
+<tr>
+<td><code>public branch_iterator end_branch_subtree(const typename tree_type::iterator_base &amp; other) const</code></td>
+<td>Creates a branch DFS iterator over the subtree of the branch pointed by €{other}.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-1">Members</h2>
+<h3 id="class_neurite_1a70b31382f151a1f7bf1ad21fa3cc88d7"><code>public  Neurite()</code></h3>
+<p>Empty neurite constructor.</p>
+<p>Id -1 and type undefined</p>
+<h4 id="returns-44">Returns</h4>
+<p><a href="#class_neurite">Neurite</a></p>
+<hr />
+<h3 id="class_neurite_1a2a677f05ad1c1409aafb0af4b1263bef"><code>public  Neurite(int id)</code></h3>
+<p>Create a neurite with given id and type undefined.</p>
+<h4 id="parameters-27">Parameters</h4>
+<ul>
+<li><code>id</code> <a href="#class_neurite">Neurite</a> id</li>
+</ul>
+<h4 id="returns-45">Returns</h4>
+<p><a href="#class_neurite">Neurite</a></p>
+<hr />
+<h3 id="class_neurite_1a1294c4fbf3f75b66cebeea1398519d95"><code>public  Neurite(int id,const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; t)</code></h3>
+<p>Create a neurite with given id and type.</p>
+<h4 id="parameters-28">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_neurite">Neurite</a> id</p>
+</li>
+<li><code>t</code> <a href="#class_neurite">Neurite</a> type</li>
+</ul>
+<h4 id="returns-46">Returns</h4>
+<p><a href="#class_neurite">Neurite</a></p>
+<hr />
+<h3 id="class_neurite_1a0a1241d18fc286f358ffe5cf02699bde"><code>public  Neurite(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) = default</code></h3>
+<p>Default copy constructor.</p>
+<hr />
+<h3 id="class_neurite_1ab67cfab486fd55d0117f89812541f80a"><code>public  Neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp;&amp; n) = default</code></h3>
+<p>Default move constructor.</p>
+<hr />
+<h3 id="class_neurite_1a24367013101636c139a5f64e53528091"><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; operator=(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) = default</code></h3>
+<p>Default copy assign.</p>
+<hr />
+<h3 id="class_neurite_1aef76dbfc01e24464dd4cdad2b719cfd8"><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; operator=(</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp;&amp; n) = default</code></h3>
+<p>Default move assign.</p>
+<hr />
+<h3 id="class_neurite_1ad25533d3089434fa779a8508302345a9"><code>public inline  ~Neurite()</code></h3>
+<p>Empty destructor (Default)</p>
+<hr />
+<h3 id="class_neurite_1a812aa3d916432e3126ce74ab3c246234"><code>public inline bool operator==(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) const</code></h3>
+<p>Compares two neurites by ID.</p>
+<h4 id="parameters-29">Parameters</h4>
+<ul>
+<li><code>n</code> Other neurite</li>
+</ul>
+<h4 id="returns-47">Returns</h4>
+<p>True if ids match</p>
+<hr />
+<h3 id="class_neurite_1a3855817e45a82ae1128f1432be77b041"><code>public inline bool operator!=(const</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; n) const</code></h3>
+<p>Compares two neurites by ID.</p>
+<h4 id="parameters-30">Parameters</h4>
+<ul>
+<li><code>n</code> Other neurite</li>
+</ul>
+<h4 id="returns-48">Returns</h4>
+<p>True if ids dont match</p>
+<hr />
+<h3 id="class_neurite_1a3a176cc109a831671afc2386f0c89ac3"><code>public inline const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; type() const</code></h3>
+<p>Return neurite type.</p>
+<h4 id="returns-49">Returns</h4>
+<p>NeuriteType</p>
+<hr />
+<h3 id="class_neurite_1ac24539f00c41e4ec4b1dda3e1fdbfb47"><code>public inline const int id() const</code></h3>
+<p>Returns neurite id.</p>
+<h4 id="returns-50">Returns</h4>
+<p><a href="#class_neurite">Neurite</a> ID</p>
+<hr />
+<h3 id="class_neurite_1aa3638b4160cb23294cfaa808bff4f966"><code>public inline bool root_is_soma() const</code></h3>
+<p>Checks if root is soma.</p>
+<h4 id="returns-51">Returns</h4>
+<p>True if neurite root is soma</p>
+<hr />
+<h3 id="class_neurite_1a9c2d455971e91a6d0c4b99382d107d61"><code>public inline</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; neuron() const</code></h3>
+<p>Return neurite parent neuron reference.</p>
+<h4 id="returns-52">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> reference</p>
+<hr />
+<h3 id="class_neurite_1a14ca8371f112873e1b08e1b4f5272c26"><code>public inline void type(const</code><a href="#namespace_1ac140abc732e29f73bf77fa7c480bc0a4"><code>NeuriteType</code></a><code>&amp; t)</code></h3>
+<p>Set neurite type.</p>
+<h4 id="parameters-31">Parameters</h4>
+<ul>
+<li><code>t</code> New neurite type</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1a2b6a1619fdf62536e411af547185969a"><code>public inline void id(int id)</code></h3>
+<p>Set neurite ID.</p>
+<h4 id="parameters-32">Parameters</h4>
+<ul>
+<li><code>id</code> New neurite ID</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1a8f5c95ae579fbecb3d90ce0c0e7542a6"><code>public inline void neuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>*const n)</code></h3>
+<p>Set neurite parent neuron pointer.</p>
+<h4 id="parameters-33">Parameters</h4>
+<ul>
+<li><code>n</code> Nueron pointer</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1a9a5cdefe94976c5c4d70107328745904"><code>public inline bool has_root() const</code></h3>
+<p>Checks if the root branch of the neurite has root.</p>
+<h4 id="returns-53">Returns</h4>
+<p>True if the neurite is rooted (i.e. attached to soma)</p>
+<hr />
+<h3 id="class_neurite_1a61d474df8a4547803759811c13ca88b8"><code>public inline const</code><a href="#class_node"><code>Node</code></a><code>&amp; root() const</code></h3>
+<p>Get root reference.</p>
+<h4 id="returns-54">Returns</h4>
+<p>Root reference</p>
+<hr />
+<h3 id="class_neurite_1aefb57b25e8fb6d1785ad279f97b8f2f4"><code>public void set_root()</code></h3>
+<p>Sets an empt branch as the root branch without root node.</p>
+<hr />
+<h3 id="class_neurite_1a5ae3bf5ee265b4368668a7622af08f24"><code>public void set_root(const</code><a href="#class_node"><code>Node</code></a><code>&amp; node)</code></h3>
+<p>Creates an empty branch with node as root as root branch.</p>
+<h4 id="parameters-34">Parameters</h4>
+<ul>
+<li><code>node</code> Root node</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1aee53307ab7b52074066b1b31fc37a2e9"><code>public int max_centrifugal_order() const</code></h3>
+<p>Get neurite max c.order.</p>
+<h4 id="returns-55">Returns</h4>
+<p>Centrifugal order</p>
+<hr />
+<h3 id="class_neurite_1a82ea71e2e74624d6d4bc4b675d6a2e21"><code>public inline int size() const</code></h3>
+<p><a href="#class_neurite">Neurite</a> size (branch count)</p>
+<h4 id="returns-56">Returns</h4>
+<p>Number of branches in the neurite</p>
+<hr />
+<h3 id="class_neurite_1aa42ed09f3591dcaf5ba3e17773eccb74"><code>public int node_count() const</code></h3>
+<p><a href="#class_neurite">Neurite</a> node count.</p>
+<h4 id="returns-57">Returns</h4>
+<p>Number of distinct node ins the neurite (roots excluded)</p>
+<hr />
+<h3 id="class_neurite_1a970625d7aba75f047161ae71bb19b955"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,T v,bool recursive)</code></h3>
+<p>Adds a property to the neurite and optionally to its branches.</p>
+<h4 id="parameters-35">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property key</p>
+</li>
+<li>
+<p><code>v</code> Property value</p>
+</li>
+<li><code>recursive</code> If true, property is also added to braches and nodes</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1a71d836cb06374b8442f927c4d01c9a10"><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></h3>
+<p>Adds an empty property to the neurite and optionally to its branches.</p>
+<h4 id="parameters-36">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property key</p>
+</li>
+<li><code>recursive</code> If true, property is also added to braches and nodes</li>
+</ul>
+<hr />
+<h3 id="class_neurite_1aab9f08dd48a1d94f9ca84e9fd98b3efb"><code>public inline branch_iterator begin_branch() const</code></h3>
+<p>Begin DFS branch iterator.</p>
+<h4 id="returns-58">Returns</h4>
+<p>branch_iterator</p>
+<hr />
+<h3 id="class_neurite_1a3f122629f0b5c9d59d4096d01f567f20"><code>public inline branch_iterator end_branch() const</code></h3>
+<p>End DFS branch iterator.</p>
+<h4 id="returns-59">Returns</h4>
+<p>branch_iterator</p>
+<hr />
+<h3 id="class_neurite_1ae68a2a3570c403a4fd59458bcf172b5e"><code>public inline branch_iterator begin_branch_subtree(const typename tree_type::iterator_base &amp; other) const</code></h3>
+<p>Creates a branch DFS iterator over the subtree of the branch pointed by €{other}.</p>
+<h4 id="parameters-37">Parameters</h4>
+<ul>
+<li><code>other</code> <a href="#class_branch">Branch</a> iterator</li>
+</ul>
+<h4 id="returns-60">Returns</h4>
+<p>DFS branch iterator</p>
+<hr />
+<h3 id="class_neurite_1a24a27da8eeb5a54f316c492853b7aa73"><code>public branch_iterator end_branch_subtree(const typename tree_type::iterator_base &amp; other) const</code></h3>
+<p>Creates a branch DFS iterator over the subtree of the branch pointed by €{other}.</p>
+<h4 id="parameters-38">Parameters</h4>
+<ul>
+<li><code>other</code> <a href="#class_branch">Branch</a> iterator</li>
+</ul>
+<h4 id="returns-61">Returns</h4>
+<p>DFS branch iterator</p>
+<hr />
+<h1 id="class_neurite_node__iterator">class <code>node_iterator</code></h1>
+<pre><code>class node_iterator
+  : public boost::iterator_facade&lt; node_iterator&lt; iter &gt;, Node, std::iterator_traits&lt; iter &gt;::iterator_category &gt;</code></pre>
+<p>Template iterator that references directly to the nodes in the tree. The template parameter Iter, a branch iterator, determines  tree-visitor strategy.</p>
+<h2 id="summary-2">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  node_iterator()</code></td>
+<td>Empty constructor.</td>
+</tr>
+<tr>
+<td><code>public  node_iterator(const iter &amp; b,const iter &amp; e)</code></td>
+<td>Creates a node iterator that starts at the first node of b and ends at the first node of e.</td>
+</tr>
+<tr>
+<td><code>public  node_iterator(const iter &amp; b,const iter &amp; e,const iter &amp; c)</code></td>
+<td>Creates a node iterator that starts at the first node of b and ends at the first node of e.</td>
+</tr>
+<tr>
+<td><code>public  node_iterator(const iter &amp; b,const iter &amp; e,const iter &amp; c,const typename Branch::iterator &amp; nodeit)</code></td>
+<td>Creates a node iterator that starts at the first node of b and ends at the first node of e.</td>
+</tr>
+<tr>
+<td><code>public  node_iterator(const</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;) = default</code></td>
+<td>Default copy constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&amp; operator=(const</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;) = default</code></td>
+<td>Default copy assign.</td>
+</tr>
+<tr>
+<td><code>public  node_iterator(</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;&amp;) = default</code></td>
+<td>Default move constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&amp; operator=(</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;&amp;) = default</code></td>
+<td>Default move assign.</td>
+</tr>
+<tr>
+<td><code>public iter begin() const</code></td>
+<td>Get iterator first branch.</td>
+</tr>
+<tr>
+<td><code>public iter end() const</code></td>
+<td>Get iterator last branch.</td>
+</tr>
+<tr>
+<td><code>public iter current() const</code></td>
+<td>Get iterator current branch.</td>
+</tr>
+<tr>
+<td><code>public iter branch() const</code></td>
+<td>Get iterator current branch.</td>
+</tr>
+<tr>
+<td><code>public Branch::iterator node() const</code></td>
+<td>Get iterator current noe.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite() const</code></td>
+<td>Get current branch neurite.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; neuron() const</code></td>
+<td>Get current branch neuron.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; last() const</code></td>
+<td>Get an iterator to the end node.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; first() const</code></td>
+<td>Get an iterator to the first node.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-2">Members</h2>
+<h3 id="class_neurite_node__iterator_1a66419a0b06e9db3bbebcbbfceb9fcbbc"><code>public  node_iterator()</code></h3>
+<p>Empty constructor.</p>
+<h4 id="returns-62">Returns</h4>
+<p><a href="#class_node">Node</a> iterator</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a5a64c917d858ce316e58e2101da113e6"><code>public  node_iterator(const iter &amp; b,const iter &amp; e)</code></h3>
+<p>Creates a node iterator that starts at the first node of b and ends at the first node of e.</p>
+<h4 id="parameters-39">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> First branch</p>
+</li>
+<li><code>e</code> Last branch</li>
+</ul>
+<h4 id="returns-63">Returns</h4>
+<p><a href="#class_node">Node</a> iterator</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a91f50a7999dbcf49e16500159e1e1bd5"><code>public  node_iterator(const iter &amp; b,const iter &amp; e,const iter &amp; c)</code></h3>
+<p>Creates a node iterator that starts at the first node of b and ends at the first node of e.</p>
+<p>Current node is the first node of c.</p>
+<h4 id="parameters-40">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> First branch</p>
+</li>
+<li>
+<p><code>e</code> Last branch</p>
+</li>
+<li><code>c</code> Current branch</li>
+</ul>
+<h4 id="returns-64">Returns</h4>
+<p><a href="#class_node">Node</a> iterator</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a0e56efae1adab796071cfec772b919e9"><code>public  node_iterator(const iter &amp; b,const iter &amp; e,const iter &amp; c,const typename Branch::iterator &amp; nodeit)</code></h3>
+<p>Creates a node iterator that starts at the first node of b and ends at the first node of e.</p>
+<p>Current node is the nodeit node of c.</p>
+<h4 id="parameters-41">Parameters</h4>
+<ul>
+<li>
+<p><code>b</code> First branch</p>
+</li>
+<li>
+<p><code>e</code> Last branch</p>
+</li>
+<li>
+<p><code>c</code> Current branch</p>
+</li>
+<li><code>nodeit</code> Current node</li>
+</ul>
+<h4 id="returns-65">Returns</h4>
+<p><a href="#class_node">Node</a> iterator</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a7e1a5915fcb2fd57fd358a15e146456a"><code>public  node_iterator(const</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;) = default</code></h3>
+<p>Default copy constructor.</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a70bfb7d0caa7d8194e7e035cfa05ce28"><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&amp; operator=(const</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;) = default</code></h3>
+<p>Default copy assign.</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a569568b8b346806027b39300094f5006"><code>public  node_iterator(</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;&amp;) = default</code></h3>
+<p>Default move constructor.</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1af5f6a5385e858dcad2b71f187e3bb511"><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&amp; operator=(</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; &amp;&amp;) = default</code></h3>
+<p>Default move assign.</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1ad5586207b0e67f7cb5b5c76334d3df35"><code>public iter begin() const</code></h3>
+<p>Get iterator first branch.</p>
+<h4 id="returns-66">Returns</h4>
+<p>First branch</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a80e578a455127c48827cbf030bad22c0"><code>public iter end() const</code></h3>
+<p>Get iterator last branch.</p>
+<h4 id="returns-67">Returns</h4>
+<p>Last branch</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a16221aeff3fbbbef0b20fdf8e9afd0bf"><code>public iter current() const</code></h3>
+<p>Get iterator current branch.</p>
+<h4 id="returns-68">Returns</h4>
+<p>Current branch</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1af8bb3f863a844c1ec0fa76b0af78c229"><code>public iter branch() const</code></h3>
+<p>Get iterator current branch.</p>
+<h4 id="returns-69">Returns</h4>
+<p>Current branch</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1acdfdca8aca742c8359d1cadd01902245"><code>public Branch::iterator node() const</code></h3>
+<p>Get iterator current noe.</p>
+<h4 id="returns-70">Returns</h4>
+<p>Current node</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a47f5ac0f31f3bc2e1014035b0b3695b0"><code>public</code><a href="#class_neurite"><code>Neurite</code></a><code>&amp; neurite() const</code></h3>
+<p>Get current branch neurite.</p>
+<h4 id="returns-71">Returns</h4>
+<p><a href="#class_neurite">Neurite</a> reference</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a88f92f31aea01561290cff6e8b844c03"><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; neuron() const</code></h3>
+<p>Get current branch neuron.</p>
+<h4 id="returns-72">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> reference</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1a49d7f38b76ac784f48b520960b4b8e68"><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; last() const</code></h3>
+<p>Get an iterator to the end node.</p>
+<h4 id="returns-73">Returns</h4>
+<p>End node iterator</p>
+<hr />
+<h3 id="class_neurite_node__iterator_1af68cd71c0040200c5b944cef3df7cb12"><code>public</code><a href="#class_neurite_node__iterator"><code>node_iterator</code></a><code>&lt; iter &gt; first() const</code></h3>
+<p>Get an iterator to the first node.</p>
+<h4 id="returns-74">Returns</h4>
+<p>First node iterator</p>
+<hr />
+<h1 id="class_neurite_stem__iterator">class <code>stem_iterator</code></h1>
+<pre><code>class stem_iterator
+  : public iterator_base</code></pre>
+<p>Tree iterator (Actually a forward iterator) that ascends from the given tree node to the root.</p>
+<h2 id="summary-3">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  stem_iterator()</code></td>
+<td>Empty constructor.</td>
+</tr>
+<tr>
+<td><code>public  stem_iterator(tree_node * tn)</code></td>
+<td>Creates an stem iterator that points to tn.</td>
+</tr>
+<tr>
+<td><code>public  stem_iterator(const typename tree_type::iterator_base &amp; other)</code></td>
+<td>Copies the given iterator as stem iterator.</td>
+</tr>
+<tr>
+<td><code>public bool operator==(const</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; other) const</code></td>
+<td>Equality operator (compares two iterators)</td>
+</tr>
+<tr>
+<td><code>public bool operator!=(const</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; other) const</code></td>
+<td>Inequality operator (compares two iterators)</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; operator++()</code></td>
+<td>Stem iterator single step - ascend one branch.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>operator++(int)</code></td>
+<td>Stem iterator single step - ascend one branch.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; operator+=(unsigned int num)</code></td>
+<td>Stem iterator multi step - ascend num branches.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-3">Members</h2>
+<h3 id="class_neurite_stem__iterator_1a2b4e07e724b9c3d9308137afd6c287c5"><code>public  stem_iterator()</code></h3>
+<p>Empty constructor.</p>
+<h4 id="returns-75">Returns</h4>
+<p>Default iterator (actually, useless)</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1a2b9adcb826902fa48966014eb3362e92"><code>public  stem_iterator(tree_node * tn)</code></h3>
+<p>Creates an stem iterator that points to tn.</p>
+<h4 id="parameters-42">Parameters</h4>
+<ul>
+<li><code>tn</code> Tree node pointer</li>
+</ul>
+<h4 id="returns-76">Returns</h4>
+<p>Stem iterator</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1acfdaac57f98bed9fcfd8c241b752325c"><code>public  stem_iterator(const typename tree_type::iterator_base &amp; other)</code></h3>
+<p>Copies the given iterator as stem iterator.</p>
+<h4 id="parameters-43">Parameters</h4>
+<ul>
+<li><code>other</code> Iterator</li>
+</ul>
+<h4 id="returns-77">Returns</h4>
+<p>Copied stem iterator</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1a8011f3911250d56104c5580b4f4a5dc4"><code>public bool operator==(const</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; other) const</code></h3>
+<p>Equality operator (compares two iterators)</p>
+<h4 id="parameters-44">Parameters</h4>
+<ul>
+<li><code>other</code> The other stem iterator</li>
+</ul>
+<h4 id="returns-78">Returns</h4>
+<p>True if they both point to the same node</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1a6f265b692a05563766beeb08ee45aeb2"><code>public bool operator!=(const</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; other) const</code></h3>
+<p>Inequality operator (compares two iterators)</p>
+<h4 id="parameters-45">Parameters</h4>
+<ul>
+<li><code>other</code> The other stem iterator</li>
+</ul>
+<h4 id="returns-79">Returns</h4>
+<p>True if they both dont point to the same node</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1a74941d427d529a68b165c98a16ed6b0f"><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; operator++()</code></h3>
+<p>Stem iterator single step - ascend one branch.</p>
+<h4 id="returns-80">Returns</h4>
+<p>Updated iterator</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1a5462d8d28069592f768fbbf2221e5b65"><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>operator++(int)</code></h3>
+<p>Stem iterator single step - ascend one branch.</p>
+<h4 id="returns-81">Returns</h4>
+<p>new updated iterator</p>
+<hr />
+<h3 id="class_neurite_stem__iterator_1ab4351d5f533d4dfad021c1f4d2ebfd21"><code>public</code><a href="#class_neurite_stem__iterator"><code>stem_iterator</code></a><code>&amp; operator+=(unsigned int num)</code></h3>
+<p>Stem iterator multi step - ascend num branches.</p>
+<h4 id="returns-82">Returns</h4>
+<p>Updated iterator</p>
+<hr />
+<h1 id="class_contour">class <code>Contour</code></h1>
+<h2 id="summary-4">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Contour()</code></td>
+<td><a href="#class_contour">Contour</a> empty constructor.</td>
+</tr>
+<tr>
+<td><code>public  Contour(const std::vector&lt; point_type &gt; &amp; v)</code></td>
+<td>Creates a contour from a point vector.</td>
+</tr>
+<tr>
+<td><code>public  Contour(const</code><a href="#class_contour"><code>Contour</code></a><code>&amp;) = default</code></td>
+<td>Copy constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_contour"><code>Contour</code></a><code>&amp; operator=(const</code><a href="#class_contour"><code>Contour</code></a><code>&amp;) = default</code></td>
+<td>Copy assign.</td>
+</tr>
+<tr>
+<td><code>public  Contour(</code><a href="#class_contour"><code>Contour</code></a><code>&amp;&amp;) = default</code></td>
+<td>Move constructor.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_contour"><code>Contour</code></a><code>&amp; operator=(</code><a href="#class_contour"><code>Contour</code></a><code>&amp;&amp;) = default</code></td>
+<td>Move assign.</td>
+</tr>
+<tr>
+<td><code>public iterator begin()</code></td>
+<td>Returns an iterator to the first point in the contour.</td>
+</tr>
+<tr>
+<td><code>public const_iterator begin() const</code></td>
+<td>Returns an iterator to the first point in the contour.</td>
+</tr>
+<tr>
+<td><code>public iterator end()</code></td>
+<td>Returns an iterator to the next position after the last point in the contour.</td>
+</tr>
+<tr>
+<td><code>public const_iterator end() const</code></td>
+<td>Returns an iterator to the next position after the last point in the contour.</td>
+</tr>
+<tr>
+<td><code>public std::size_t size() const</code></td>
+<td><a href="#class_contour">Contour</a> size.</td>
+</tr>
+<tr>
+<td><code>public float length() const</code></td>
+<td>Computes the length of the contour.</td>
+</tr>
+<tr>
+<td><code>public float area(int component) const</code></td>
+<td><a href="#class_contour">Contour</a> planar area as 2D projection in the given component.</td>
+</tr>
+<tr>
+<td><code>public const std::string &amp; name() const</code></td>
+<td>Returns contour name.</td>
+</tr>
+<tr>
+<td><code>public void name(const std::string &amp; n)</code></td>
+<td>Set contour name.</td>
+</tr>
+<tr>
+<td><code>public const std::string &amp; face_color() const</code></td>
+<td>Returns contour face color.</td>
+</tr>
+<tr>
+<td><code>public const std::string &amp; back_color() const</code></td>
+<td>Returns contour back color.</td>
+</tr>
+<tr>
+<td><code>public void face_color(const std::string &amp; s)</code></td>
+<td>Set contour face color.</td>
+</tr>
+<tr>
+<td><code>public void back_color(const std::string &amp; s)</code></td>
+<td>Set contour back color.</td>
+</tr>
+<tr>
+<td><code>public float fill_density() const</code></td>
+<td>Return contour fill density (alpha channel)</td>
+</tr>
+<tr>
+<td><code>public void fill_density(float f)</code></td>
+<td>Set fill density value.</td>
+</tr>
+<tr>
+<td><code>public float resolution() const</code></td>
+<td><a href="#class_contour">Contour</a> resolution (im not sure what this actually is..like a ratio?)</td>
+</tr>
+<tr>
+<td><code>public void resolution(float f)</code></td>
+<td>Set resolution value.</td>
+</tr>
+<tr>
+<td><code>public bool is_closed() const</code></td>
+<td>True if the contour is defined as closed.</td>
+</tr>
+<tr>
+<td><code>public void properties_from_map(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; p)</code></td>
+<td>Set all contour properties getting them from a p.</td>
+</tr>
+<tr>
+<td><code>public float closing_gap() const</code></td>
+<td>Distance between the last and the first point in the contour.</td>
+</tr>
+<tr>
+<td><code>public void close()</code></td>
+<td>Mark the contour as closed (add a segment bw the last and the first)</td>
+</tr>
+<tr>
+<td><code>public int planar_axis() const</code></td>
+<td>Cehcks if the contour is planar for some axis.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; float, float &gt; range(int component) const</code></td>
+<td>Computes min and max values for the given component (0,1,2 x,y,z)</td>
+</tr>
+<tr>
+<td><code>public std::vector&lt;</code><a href="geometry.html#namespace_geometry_1a8fe2c5b0b8714c17379d950a39935052"><code>geometry::planar_point</code></a><code>&gt; planar_projection(int component) const</code></td>
+<td>Returns the contour points removing the ith component.</td>
+</tr>
+<tr>
+<td><code>public bool clockwise_oriented(int i) const</code></td>
+<td>Checks if the contour points are clockwise ordered (shoelace formula applied)</td>
+</tr>
+<tr>
+<td><code>public void reverse()</code></td>
+<td>Reverses the contour point order.</td>
+</tr>
+<tr>
+<td><code>public void rotate(iterator new_first)</code></td>
+<td>Rotates the contour (if it is closed) so the point pointed by new_first becomes the new first point.</td>
+</tr>
+<tr>
+<td><code>public point_type barycenter() const</code></td>
+<td>Computes contour barycenter.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-4">Members</h2>
+<h3 id="class_contour_1abc19b95f159c8c329bc5a2b146f58480"><code>public  Contour()</code></h3>
+<p><a href="#class_contour">Contour</a> empty constructor.</p>
+<p>Initializes all members to its default value and leaves the contour as empty</p>
+<hr />
+<h3 id="class_contour_1a4fb386c2bddeb93d477e72955af0a62a"><code>public  Contour(const std::vector&lt; point_type &gt; &amp; v)</code></h3>
+<p>Creates a contour from a point vector.</p>
+<h4 id="parameters-46">Parameters</h4>
+<ul>
+<li><code>v</code> <a href="#class_contour">Contour</a> point vector</li>
+</ul>
+<hr />
+<h3 id="class_contour_1ad270c3f186e05d02317796bff4c9bf7c"><code>public  Contour(const</code><a href="#class_contour"><code>Contour</code></a><code>&amp;) = default</code></h3>
+<p>Copy constructor.</p>
+<hr />
+<h3 id="class_contour_1a190654c45e1cab3c6058a8a67ffe0d56"><code>public</code><a href="#class_contour"><code>Contour</code></a><code>&amp; operator=(const</code><a href="#class_contour"><code>Contour</code></a><code>&amp;) = default</code></h3>
+<p>Copy assign.</p>
+<hr />
+<h3 id="class_contour_1a2067ee02499ad671aa276ccbcf31219c"><code>public  Contour(</code><a href="#class_contour"><code>Contour</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Move constructor.</p>
+<hr />
+<h3 id="class_contour_1a3f35c1843e45bb489c80a97923c4e253"><code>public</code><a href="#class_contour"><code>Contour</code></a><code>&amp; operator=(</code><a href="#class_contour"><code>Contour</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Move assign.</p>
+<hr />
+<h3 id="class_contour_1ae0f262ac7f97da4231745e98a12b8981"><code>public iterator begin()</code></h3>
+<p>Returns an iterator to the first point in the contour.</p>
+<h4 id="returns-83">Returns</h4>
+<p>point iterator</p>
+<hr />
+<h3 id="class_contour_1ab5a551017c8246d20138dc2a70daae90"><code>public const_iterator begin() const</code></h3>
+<p>Returns an iterator to the first point in the contour.</p>
+<h4 id="returns-84">Returns</h4>
+<p>const point iterator</p>
+<hr />
+<h3 id="class_contour_1aaa4d717b77cce485ac1b180561ef1851"><code>public iterator end()</code></h3>
+<p>Returns an iterator to the next position after the last point in the contour.</p>
+<h4 id="returns-85">Returns</h4>
+<p>point iterator</p>
+<hr />
+<h3 id="class_contour_1a0cffcab078fa1c91371c149556d459a3"><code>public const_iterator end() const</code></h3>
+<p>Returns an iterator to the next position after the last point in the contour.</p>
+<h4 id="returns-86">Returns</h4>
+<p>const point iterator</p>
+<hr />
+<h3 id="class_contour_1a90a56fe4ef5f8fe9a806ee58222e72cb"><code>public std::size_t size() const</code></h3>
+<p><a href="#class_contour">Contour</a> size.</p>
+<h4 id="returns-87">Returns</h4>
+<p>number of points that describe the contour</p>
+<hr />
+<h3 id="class_contour_1a3b68508d6630157f72b353a4ce746798"><code>public float length() const</code></h3>
+<p>Computes the length of the contour.</p>
+<h4 id="returns-88">Returns</h4>
+<p><a href="#class_contour">Contour</a> length</p>
+<hr />
+<h3 id="class_contour_1ad67c7118e3940a4b82b4ebc8846d498d"><code>public float area(int component) const</code></h3>
+<p><a href="#class_contour">Contour</a> planar area as 2D projection in the given component.</p>
+<h4 id="parameters-47">Parameters</h4>
+<ul>
+<li><code>component</code> Component that is ignored to compute the area</li>
+</ul>
+<h4 id="returns-89">Returns</h4>
+<p><a href="#class_contour">Contour</a> planar area</p>
+<hr />
+<h3 id="class_contour_1ae824cbe1e883dd6090b0a4af396d78c7"><code>public const std::string &amp; name() const</code></h3>
+<p>Returns contour name.</p>
+<h4 id="returns-90">Returns</h4>
+<p><a href="#class_contour">Contour</a> name as string</p>
+<hr />
+<h3 id="class_contour_1acc2ea9cee81730487f5e2bb29ff53841"><code>public void name(const std::string &amp; n)</code></h3>
+<p>Set contour name.</p>
+<h4 id="parameters-48">Parameters</h4>
+<ul>
+<li><code>n</code> The new contour name</li>
+</ul>
+<hr />
+<h3 id="class_contour_1a20974705fb268846bfd3eb9e04ccd631"><code>public const std::string &amp; face_color() const</code></h3>
+<p>Returns contour face color.</p>
+<h4 id="returns-91">Returns</h4>
+<p>Color as hex string #RRGGBB</p>
+<hr />
+<h3 id="class_contour_1a4a0c5368d5989e4263f7b4836ee70012"><code>public const std::string &amp; back_color() const</code></h3>
+<p>Returns contour back color.</p>
+<h4 id="returns-92">Returns</h4>
+<p>Color as hex string #RRGGBB</p>
+<hr />
+<h3 id="class_contour_1aec535071aa39ad88cd35820492da2b5d"><code>public void face_color(const std::string &amp; s)</code></h3>
+<p>Set contour face color.</p>
+<h4 id="parameters-49">Parameters</h4>
+<ul>
+<li><code>s</code> Hex-string color. e.g. #FFFFFF</li>
+</ul>
+<hr />
+<h3 id="class_contour_1a0f7c13db18455f83aa7af43b70f11b63"><code>public void back_color(const std::string &amp; s)</code></h3>
+<p>Set contour back color.</p>
+<h4 id="parameters-50">Parameters</h4>
+<ul>
+<li><code>s</code> Hex-string color. e.g. #FFFFFF</li>
+</ul>
+<hr />
+<h3 id="class_contour_1a3ba38d3ee7605a5376404357140e920a"><code>public float fill_density() const</code></h3>
+<p>Return contour fill density (alpha channel)</p>
+<h4 id="returns-93">Returns</h4>
+<p>Alpha (opacity) value</p>
+<hr />
+<h3 id="class_contour_1af13ec3464710db708b43ae775f2af357"><code>public void fill_density(float f)</code></h3>
+<p>Set fill density value.</p>
+<h4 id="parameters-51">Parameters</h4>
+<ul>
+<li><code>f</code> <a href="#class_contour">Contour</a> fill opacity. Between 0 and 1.</li>
+</ul>
+<hr />
+<h3 id="class_contour_1a0341b0d854c0131d4d5d76d9c2a65f48"><code>public float resolution() const</code></h3>
+<p><a href="#class_contour">Contour</a> resolution (im not sure what this actually is..like a ratio?)</p>
+<h4 id="returns-94">Returns</h4>
+<p>Resolution as float</p>
+<hr />
+<h3 id="class_contour_1a927f4f8f530e7512a6cac05eacee99c0"><code>public void resolution(float f)</code></h3>
+<p>Set resolution value.</p>
+<h4 id="parameters-52">Parameters</h4>
+<ul>
+<li><code>f</code> resolution value. Actual meaning is unknown.</li>
+</ul>
+<hr />
+<h3 id="class_contour_1ac6f92da23aaac9dd3000806904899ee3"><code>public bool is_closed() const</code></h3>
+<p>True if the contour is defined as closed.</p>
+<h4 id="returns-95">Returns</h4>
+<p>boolean flag</p>
+<hr />
+<h3 id="class_contour_1a8318431aeca715e20a07d41c83804b3b"><code>public void properties_from_map(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; p)</code></h3>
+<p>Set all contour properties getting them from a p.</p>
+<p>map</p>
+<h4 id="parameters-53">Parameters</h4>
+<ul>
+<li><code>p</code> input Property map</li>
+</ul>
+<hr />
+<h3 id="class_contour_1ae0ff90e6e38e8e57bac2ebd4566650e0"><code>public float closing_gap() const</code></h3>
+<p>Distance between the last and the first point in the contour.</p>
+<h4 id="returns-96">Returns</h4>
+<p>Closing gap distance</p>
+<hr />
+<h3 id="class_contour_1aa0b59e0bc426568a42fa4c22dda0cdb9"><code>public void close()</code></h3>
+<p>Mark the contour as closed (add a segment bw the last and the first)</p>
+<hr />
+<h3 id="class_contour_1a674a451949d5424cf2954e5383d01467"><code>public int planar_axis() const</code></h3>
+<p>Cehcks if the contour is planar for some axis.</p>
+<h4 id="returns-97">Returns</h4>
+<p>-1 is not planar, 0,1,2 x,y,z are constant respectively</p>
+<hr />
+<h3 id="class_contour_1a84c2863d756e0239ff55d9d2c18d2baf"><code>public std::pair&lt; float, float &gt; range(int component) const</code></h3>
+<p>Computes min and max values for the given component (0,1,2 x,y,z)</p>
+<h4 id="parameters-54">Parameters</h4>
+<ul>
+<li><code>component</code> <a href="#class_contour">Contour</a> component index (0,1,2 &lt;-&gt; x,y,z)</li>
+</ul>
+<h4 id="returns-98">Returns</h4>
+<p>Pair (min,max)</p>
+<hr />
+<h3 id="class_contour_1ace74694b2171c18ad103610649de1aaf"><code>public std::vector&lt;</code><a href="geometry.html#namespace_geometry_1a8fe2c5b0b8714c17379d950a39935052"><code>geometry::planar_point</code></a><code>&gt; planar_projection(int component) const</code></h3>
+<p>Returns the contour points removing the ith component.</p>
+<h4 id="parameters-55">Parameters</h4>
+<ul>
+<li><code>component</code> Index of component to remove</li>
+</ul>
+<h4 id="returns-99">Returns</h4>
+<p>Planar points</p>
+<hr />
+<h3 id="class_contour_1a42e11abd18c76202e262af2ee059a89c"><code>public bool clockwise_oriented(int i) const</code></h3>
+<p>Checks if the contour points are clockwise ordered (shoelace formula applied)</p>
+<h4 id="parameters-56">Parameters</h4>
+<ul>
+<li><code>i</code> component index (0,1,2 &lt;-&gt; x,y,z) that is ignored to compute the orientation</li>
+</ul>
+<h4 id="returns-100">Returns</h4>
+<p>True if clockwise ordered</p>
+<hr />
+<h3 id="class_contour_1a06d15206046a20091f420b77d5111f05"><code>public void reverse()</code></h3>
+<p>Reverses the contour point order.</p>
+<hr />
+<h3 id="class_contour_1a1b178dd119aedad3b6d75a4181244a43"><code>public void rotate(iterator new_first)</code></h3>
+<p>Rotates the contour (if it is closed) so the point pointed by new_first becomes the new first point.</p>
+<h4 id="parameters-57">Parameters</h4>
+<ul>
+<li><code>new_first</code> Point to become the first point</li>
+</ul>
+<hr />
+<h3 id="class_contour_1a2dc5bfbcceeb2cdacd7cc15f4dd9cc30"><code>public point_type barycenter() const</code></h3>
+<p>Computes contour barycenter.</p>
+<h4 id="returns-101">Returns</h4>
+<p>Barycenter</p>
+<hr />
+<h1 id="class_neuron">class <code>Neuron</code></h1>
+<pre><code>class Neuron
+  : public neurostr::WithProperties</code></pre>
+<h2 id="summary-5">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Neuron()</code></td>
+<td>Empty constructor.</td>
+</tr>
+<tr>
+<td><code>public  Neuron(const std::string &amp; id)</code></td>
+<td>Create a neuron with given id, and no neurites nor soma.</td>
+</tr>
+<tr>
+<td><code>public  Neuron(const std::string &amp; id,const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; soma)</code></td>
+<td>Creates a neuron with given id and soma nodes.</td>
+</tr>
+<tr>
+<td><code>public inline  ~Neuron()</code></td>
+<td>Default destructor.</td>
+</tr>
+<tr>
+<td><code>public  Neuron(const</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;) = delete</code></td>
+<td>Deleted.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; operator=(const</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;) = delete</code></td>
+<td>Deleted.</td>
+</tr>
+<tr>
+<td><code>public  Neuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default implementation.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; operator=(</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default implementation.</td>
+</tr>
+<tr>
+<td><code>public inline const std::string &amp; id() const</code></td>
+<td>Get neuron id string.</td>
+</tr>
+<tr>
+<td><code>public inline const point_type &amp; up() const</code></td>
+<td>Get neuron Up vector.</td>
+</tr>
+<tr>
+<td><code>public void up(const point_type &amp; up)</code></td>
+<td>Set neuron up vector.</td>
+</tr>
+<tr>
+<td><code>public inline int size() const</code></td>
+<td>Count number of neurites.</td>
+</tr>
+<tr>
+<td><code>public int node_count() const</code></td>
+<td>Number of different nodes in the neuron.</td>
+</tr>
+<tr>
+<td><code>public neurite_iterator add_neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>*const n)</code></td>
+<td>Add new neurite to the neuron.</td>
+</tr>
+<tr>
+<td><code>public void add_soma(const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; v)</code></td>
+<td>Add node set to soma.</td>
+</tr>
+<tr>
+<td><code>public inline void add_soma(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Add single node to soma.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,const T &amp; v,bool recursive)</code></td>
+<td>Adds a proprety to the neuron and, optionally, to its neurites.</td>
+</tr>
+<tr>
+<td><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></td>
+<td>Adds an empty proprety to the neuron and, optionally, to its neurites.</td>
+</tr>
+<tr>
+<td><code>public inline neurite_iterator begin_neurite()</code></td>
+<td>Creates neurite iterator.</td>
+</tr>
+<tr>
+<td><code>public inline neurite_iterator end_neurite()</code></td>
+<td>Creates neurite iterator.</td>
+</tr>
+<tr>
+<td><code>public inline const_neurite_iterator begin_neurite() const</code></td>
+<td>Creates neurite iterator.</td>
+</tr>
+<tr>
+<td><code>public inline const_neurite_iterator end_neurite() const</code></td>
+<td>Creates neurite iterator.</td>
+</tr>
+<tr>
+<td><code>public inline soma_iterator begin_soma()</code></td>
+<td>Iterator over soma nodes.</td>
+</tr>
+<tr>
+<td><code>public inline soma_iterator end_soma()</code></td>
+<td>Iterator over soma nodes.</td>
+</tr>
+<tr>
+<td><code>public inline const_soma_iterator begin_soma() const</code></td>
+<td>Iterator over soma nodes.</td>
+</tr>
+<tr>
+<td><code>public inline const_soma_iterator end_soma() const</code></td>
+<td>Iterator over soma nodes.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_axon()</code></td>
+<td>Iterator over axon.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_axon()</code></td>
+<td>Iterator over axon.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_apical()</code></td>
+<td>Iterator over apical.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_apical()</code></td>
+<td>Iterator over apical.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_dendrite()</code></td>
+<td>Iterator over basal dendrites.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_dendrite()</code></td>
+<td>Iterator over basal dendrites.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_axon() const</code></td>
+<td>Iterator over axon.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_axon() const</code></td>
+<td>Iterator over axon.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_apical() const</code></td>
+<td>Iterator over apical.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_apical() const</code></td>
+<td>Iterator over apical.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_dendrites() const</code></td>
+<td>Iterator over basal dendrites.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_dendrites() const</code></td>
+<td>Iterator over basal dendrites.</td>
+</tr>
+<tr>
+<td><code>public inline int axon_count() const</code></td>
+<td>Counts number of axon neuritesin the neuron.</td>
+</tr>
+<tr>
+<td><code>public inline int apical_count() const</code></td>
+<td>Counts number of apical neurites in the neuron.</td>
+</tr>
+<tr>
+<td><code>public inline int dendrite_count() const</code></td>
+<td>Counts number of basal dendrites in the neuron.</td>
+</tr>
+<tr>
+<td><code>public inline bool has_soma() const</code></td>
+<td>Checks if the neuron soma is not empty.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_neurite_node__iterator"><code>Neurite::base_node_iterator</code></a><code>find(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Finds a node in the neuron.</td>
+</tr>
+<tr>
+<td><code>public inline</code><a href="#class_neurite_node__iterator"><code>Neurite::base_node_iterator</code></a><code>find(Node::id_type id)</code></td>
+<td>Finds a node in the neuron that matches the id.</td>
+</tr>
+<tr>
+<td><code>public soma_iterator find_soma(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></td>
+<td>Finds a node in the soma.</td>
+</tr>
+<tr>
+<td><code>public inline soma_iterator find_soma(Node::id_type id)</code></td>
+<td>Finds a node in the soma by id.</td>
+</tr>
+<tr>
+<td><code>public bool point_in_soma(const point_type &amp; p) const</code></td>
+<td>Checks if the given point is within the soma.</td>
+</tr>
+<tr>
+<td><code>public void correct()</code></td>
+<td>Correct function calls the correct function over each.</td>
+</tr>
+<tr>
+<td><code>public void remove_null_segments()</code></td>
+<td>Removes zero-length segements in all neurites.</td>
+</tr>
+<tr>
+<td><code>public point_type soma_barycenter() const</code></td>
+<td>Computes soma barycenter.</td>
+</tr>
+<tr>
+<td><code>public void scale(float r)</code></td>
+<td>Scales all nodes in the neuron by r.</td>
+</tr>
+<tr>
+<td><code>public void scale(float rx,float ry,float rz)</code></td>
+<td>Scales all nodes in the neuron by (rx,ry,rz)</td>
+</tr>
+<tr>
+<td><code>public void traslate(const point_type &amp; p)</code></td>
+<td>Moves all nodes in the neuron by p.</td>
+</tr>
+<tr>
+<td><code>public void rotate(const Eigen::Quaternionf &amp; q)</code></td>
+<td>rotates all nodes in the neuron</td>
+</tr>
+<tr>
+<td><code>public void center()</code></td>
+<td>Traslates the neuron so the soma barycenter lies at 0,0,0.</td>
+</tr>
+<tr>
+<td><code>public neurite_iterator erase(const neurite_iterator &amp; n)</code></td>
+<td>Removes a neurite from the neuron.</td>
+</tr>
+<tr>
+<td><code>public void erase_axon()</code></td>
+<td>Removes all axon neurites from the neuron.</td>
+</tr>
+<tr>
+<td><code>public void erase_apical()</code></td>
+<td>Removes all apical dendrties from the neuron.</td>
+</tr>
+<tr>
+<td><code>public void erase_dendrites()</code></td>
+<td>Removes all non-apical dendrties from the neuron.</td>
+</tr>
+<tr>
+<td><code>public void set_apical_up()</code></td>
+<td>Rotates the neuron so the apical towards &quot;up&quot; direction.</td>
+</tr>
+<tr>
+<td><code>public void set_basal_roots_xz()</code></td>
+<td>Rotates the neuron so the basal plane is close to the z=0 plane.</td>
+</tr>
+<tr>
+<td><code>public box_type boundingBox()</code></td>
+<td>Computes the axis-aligned bounding box of the neuron.</td>
+</tr>
+<tr>
+<td><code>public float somaArea() const</code></td>
+<td>Computes soma area.</td>
+</tr>
+<tr>
+<td><code>public void order()</code></td>
+<td>Order all neurites.</td>
+</tr>
+<tr>
+<td><code>public void simplify(float eps)</code></td>
+<td>Applies RDP simplification to all branches in the neruon.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-5">Members</h2>
+<h3 id="class_neuron_1a4cb78f544c3edf455d8ee9bc8fa31303"><code>public  Neuron()</code></h3>
+<p>Empty constructor.</p>
+<p>Create a neuron with no id, neurites nor soma. up vector is set to default value (0,0,1)</p>
+<h4 id="returns-102">Returns</h4>
+<p><a href="#class_neuron">Neuron</a></p>
+<hr />
+<h3 id="class_neuron_1a06b90c889c843eea29338d07666a3d0b"><code>public  Neuron(const std::string &amp; id)</code></h3>
+<p>Create a neuron with given id, and no neurites nor soma.</p>
+<p>up vector is set to default value (0,0,1)</p>
+<h4 id="parameters-58">Parameters</h4>
+<ul>
+<li><code>id</code> <a href="#class_neuron">Neuron</a> id</li>
+</ul>
+<h4 id="returns-103">Returns</h4>
+<p><a href="#class_neuron">Neuron</a></p>
+<hr />
+<h3 id="class_neuron_1aa250137a5beda068324aebd61451d946"><code>public  Neuron(const std::string &amp; id,const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; soma)</code></h3>
+<p>Creates a neuron with given id and soma nodes.</p>
+<p>up vector is set to default value (0,0,1)</p>
+<h4 id="parameters-59">Parameters</h4>
+<ul>
+<li>
+<p><code>id</code> <a href="#class_neuron">Neuron</a> id</p>
+</li>
+<li><code>soma</code> Soma nodes</li>
+</ul>
+<h4 id="returns-104">Returns</h4>
+<p><a href="#class_neuron">Neuron</a></p>
+<hr />
+<h3 id="class_neuron_1a7cf9035e3ed9a3d8c15a7611edb362fe"><code>public inline  ~Neuron()</code></h3>
+<p>Default destructor.</p>
+<hr />
+<h3 id="class_neuron_1ad5505ec842a0d5f7a2812864a50e2a1c"><code>public  Neuron(const</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;) = delete</code></h3>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_neuron_1a3c7b0c2ac410274ae52eed0f658c9127"><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; operator=(const</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;) = delete</code></h3>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_neuron_1a57145c88ee75505af19b0b8b84b7b071"><code>public  Neuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default implementation.</p>
+<hr />
+<h3 id="class_neuron_1a4caa68aee2e9288d8b285ae90ca0ef62"><code>public</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp; operator=(</code><a href="#class_neuron"><code>Neuron</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default implementation.</p>
+<hr />
+<h3 id="class_neuron_1a1f62f3e27e77a8b4f154907a14ac41be"><code>public inline const std::string &amp; id() const</code></h3>
+<p>Get neuron id string.</p>
+<h4 id="returns-105">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> id string</p>
+<hr />
+<h3 id="class_neuron_1aa3be111d2a6ccbf262421a26bb03ca07"><code>public inline const point_type &amp; up() const</code></h3>
+<p>Get neuron Up vector.</p>
+<p>Up vector allows us to orient angles in 3D space</p>
+<h4 id="returns-106">Returns</h4>
+<p>Point</p>
+<hr />
+<h3 id="class_neuron_1a99f5256783a58549d6ad7d0b8a2c624d"><code>public void up(const point_type &amp; up)</code></h3>
+<p>Set neuron up vector.</p>
+<p>Given vector is normalized</p>
+<h4 id="parameters-60">Parameters</h4>
+<ul>
+<li><code>up</code> New up vector</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1a6b60feef77393c8728ac7d70a56b2b23"><code>public inline int size() const</code></h3>
+<p>Count number of neurites.</p>
+<h4 id="returns-107">Returns</h4>
+<p><a href="#class_neurite">Neurite</a> count</p>
+<hr />
+<h3 id="class_neuron_1ac5ab3227e2cbe4db96636144ad534c3a"><code>public int node_count() const</code></h3>
+<p>Number of different nodes in the neuron.</p>
+<h4 id="returns-108">Returns</h4>
+<p><a href="#class_node">Node</a> count</p>
+<hr />
+<h3 id="class_neuron_1ac51fc36355768cc9e29bf78207b94588"><code>public neurite_iterator add_neurite(</code><a href="#class_neurite"><code>Neurite</code></a><code>*const n)</code></h3>
+<p>Add new neurite to the neuron.</p>
+<h4 id="parameters-61">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_neurite">Neurite</a> pointer to be added</li>
+</ul>
+<h4 id="returns-109">Returns</h4>
+<p>Insert point</p>
+<hr />
+<h3 id="class_neuron_1a3ad6997abc8f289caf67a2cd89e93f72"><code>public void add_soma(const std::vector&lt;</code><a href="#class_node"><code>Node</code></a><code>&gt; &amp; v)</code></h3>
+<p>Add node set to soma.</p>
+<h4 id="parameters-62">Parameters</h4>
+<ul>
+<li><code>v</code> Vector of nodes to add to the soma</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1ab908caaa582fc44bbeef4cdb4527be71"><code>public inline void add_soma(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Add single node to soma.</p>
+<h4 id="parameters-63">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_node">Node</a> to add</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1ae75abe07acf0b2156722ea6fa8ff482a"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,const T &amp; v,bool recursive)</code></h3>
+<p>Adds a proprety to the neuron and, optionally, to its neurites.</p>
+<h4 id="parameters-64">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property key</p>
+</li>
+<li>
+<p><code>v</code> Property value</p>
+</li>
+<li><code>recursive</code> If true, property is also added to neuron neurites.</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1a074026c442f144bb55b8f7f545a7aa9a"><code>public inline auto add_property(const std::string &amp; key,bool recursive)</code></h3>
+<p>Adds an empty proprety to the neuron and, optionally, to its neurites.</p>
+<h4 id="parameters-65">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property key</p>
+</li>
+<li><code>recursive</code> If true, property is also added to neuron neurites.</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1ac4654f2183cb7ef41286fe3b9047372d"><code>public inline neurite_iterator begin_neurite()</code></h3>
+<p>Creates neurite iterator.</p>
+<h4 id="returns-110">Returns</h4>
+<p>Begin neurite iterator</p>
+<hr />
+<h3 id="class_neuron_1aebc7afcab95c0a289853e20192bce006"><code>public inline neurite_iterator end_neurite()</code></h3>
+<p>Creates neurite iterator.</p>
+<h4 id="returns-111">Returns</h4>
+<p>End neurite iterator</p>
+<hr />
+<h3 id="class_neuron_1a87271d00eaaead94ce70545601f92b5d"><code>public inline const_neurite_iterator begin_neurite() const</code></h3>
+<p>Creates neurite iterator.</p>
+<h4 id="returns-112">Returns</h4>
+<p>Begin neurite iterator</p>
+<hr />
+<h3 id="class_neuron_1a9d6be9d970b6c5bf6dbc1318c09eb6e9"><code>public inline const_neurite_iterator end_neurite() const</code></h3>
+<p>Creates neurite iterator.</p>
+<h4 id="returns-113">Returns</h4>
+<p>End neurite iterator</p>
+<hr />
+<h3 id="class_neuron_1a47a8a880c43de71cc47de07ea6ed262b"><code>public inline soma_iterator begin_soma()</code></h3>
+<p>Iterator over soma nodes.</p>
+<h4 id="returns-114">Returns</h4>
+<p>Begin soma iterator</p>
+<hr />
+<h3 id="class_neuron_1a892e03fbc1415d25dd84ec8164c665f8"><code>public inline soma_iterator end_soma()</code></h3>
+<p>Iterator over soma nodes.</p>
+<h4 id="returns-115">Returns</h4>
+<p>End soma iterator</p>
+<hr />
+<h3 id="class_neuron_1a5e96e48702c8fc28b36af23c30af9943"><code>public inline const_soma_iterator begin_soma() const</code></h3>
+<p>Iterator over soma nodes.</p>
+<h4 id="returns-116">Returns</h4>
+<p>Begin soma iterator</p>
+<hr />
+<h3 id="class_neuron_1a5a6c9237fc900e4917b39cf2f9782f32"><code>public inline const_soma_iterator end_soma() const</code></h3>
+<p>Iterator over soma nodes.</p>
+<h4 id="returns-117">Returns</h4>
+<p>End soma iterator</p>
+<hr />
+<h3 id="class_neuron_1a9b2d28f4f3f95b971952882c6639de09"><code>public inline auto begin_axon()</code></h3>
+<p>Iterator over axon.</p>
+<p>Axon is supposed to be unique...</p>
+<h4 id="returns-118">Returns</h4>
+<p>Begin axon iterator</p>
+<hr />
+<h3 id="class_neuron_1acbbbfc46ef28c2915b117e86aacf31c2"><code>public inline auto end_axon()</code></h3>
+<p>Iterator over axon.</p>
+<p>Axon is supposed to be unique...</p>
+<h4 id="returns-119">Returns</h4>
+<p>End axon iterator</p>
+<hr />
+<h3 id="class_neuron_1a90cfaacf0a5fb0301ca9186efc48b651"><code>public inline auto begin_apical()</code></h3>
+<p>Iterator over apical.</p>
+<p>Apical is supposed to be unique...</p>
+<h4 id="returns-120">Returns</h4>
+<p>Begin apical iterator</p>
+<hr />
+<h3 id="class_neuron_1a77ea3ddf3db5e5d64780c356b9b95148"><code>public inline auto end_apical()</code></h3>
+<p>Iterator over apical.</p>
+<p>Apical is supposed to be unique...</p>
+<h4 id="returns-121">Returns</h4>
+<p>End apical iterator</p>
+<hr />
+<h3 id="class_neuron_1a2da72392655061683e1ef256f171096a"><code>public inline auto begin_dendrite()</code></h3>
+<p>Iterator over basal dendrites.</p>
+<h4 id="returns-122">Returns</h4>
+<p>Begin basal dendrites iterator</p>
+<hr />
+<h3 id="class_neuron_1a402188c0735cae7798f61f73df8e987f"><code>public inline auto end_dendrite()</code></h3>
+<p>Iterator over basal dendrites.</p>
+<h4 id="returns-123">Returns</h4>
+<p>End basal dendrites iterator</p>
+<hr />
+<h3 id="class_neuron_1a678cceb136fb7aae07d40b5357d024cf"><code>public inline auto begin_axon() const</code></h3>
+<p>Iterator over axon.</p>
+<p>Axon is supposed to be unique...</p>
+<h4 id="returns-124">Returns</h4>
+<p>Begin axon iterator</p>
+<hr />
+<h3 id="class_neuron_1a67beb8d944c75e3f973ea962f31d1556"><code>public inline auto end_axon() const</code></h3>
+<p>Iterator over axon.</p>
+<p>Axon is supposed to be unique...</p>
+<h4 id="returns-125">Returns</h4>
+<p>End axon iterator</p>
+<hr />
+<h3 id="class_neuron_1a464ec6d22ebd9373a82e63c032ca8f96"><code>public inline auto begin_apical() const</code></h3>
+<p>Iterator over apical.</p>
+<p>Apical is supposed to be unique...</p>
+<h4 id="returns-126">Returns</h4>
+<p>Begin apical iterator</p>
+<hr />
+<h3 id="class_neuron_1afa96757fc79f311186101b1fb0d310de"><code>public inline auto end_apical() const</code></h3>
+<p>Iterator over apical.</p>
+<p>Apical is supposed to be unique...</p>
+<h4 id="returns-127">Returns</h4>
+<p>End apical iterator</p>
+<hr />
+<h3 id="class_neuron_1af572ad6f184db84a51884c2e614f82b4"><code>public inline auto begin_dendrites() const</code></h3>
+<p>Iterator over basal dendrites.</p>
+<h4 id="returns-128">Returns</h4>
+<p>Begin basal dendrites iterator</p>
+<hr />
+<h3 id="class_neuron_1ae11bece2309a0b88b7dc14f894717634"><code>public inline auto end_dendrites() const</code></h3>
+<p>Iterator over basal dendrites.</p>
+<h4 id="returns-129">Returns</h4>
+<p>End basal dendrites iterator</p>
+<hr />
+<h3 id="class_neuron_1a8eddcc8c98e97d36b9f6daeb2abdfae6"><code>public inline int axon_count() const</code></h3>
+<p>Counts number of axon neuritesin the neuron.</p>
+<h4 id="returns-130">Returns</h4>
+<p>Number of axon</p>
+<hr />
+<h3 id="class_neuron_1a4a7454c4f18fdba44f0a87f05c5c697b"><code>public inline int apical_count() const</code></h3>
+<p>Counts number of apical neurites in the neuron.</p>
+<h4 id="returns-131">Returns</h4>
+<p>Number of apical</p>
+<hr />
+<h3 id="class_neuron_1a1e6f0416cbf85e09d9aa88bc70dc927b"><code>public inline int dendrite_count() const</code></h3>
+<p>Counts number of basal dendrites in the neuron.</p>
+<h4 id="returns-132">Returns</h4>
+<p>Number of apical</p>
+<hr />
+<h3 id="class_neuron_1aa550bc6f37beede23fbab2b2ae95f02f"><code>public inline bool has_soma() const</code></h3>
+<p>Checks if the neuron soma is not empty.</p>
+<h4 id="returns-133">Returns</h4>
+<p>True if soma is not empty</p>
+<hr />
+<h3 id="class_neuron_1a4f374cee5c129f4443ecc67d80deb377"><code>public</code><a href="#class_neurite_node__iterator"><code>Neurite::base_node_iterator</code></a><code>find(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Finds a node in the neuron.</p>
+<p>doesnt search in soma nodes</p>
+<h4 id="parameters-66">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_node">Node</a> to be found</li>
+</ul>
+<h4 id="returns-134">Returns</h4>
+<p><a href="#class_node">Node</a> iterator. IF node is not found returns the iterator created by the empty constructor</p>
+<hr />
+<h3 id="class_neuron_1ac7c9b8c2c2e83483fd17851d40be9901"><code>public inline</code><a href="#class_neurite_node__iterator"><code>Neurite::base_node_iterator</code></a><code>find(Node::id_type id)</code></h3>
+<p>Finds a node in the neuron that matches the id.</p>
+<p>doesnt search in soma nodes</p>
+<h4 id="parameters-67">Parameters</h4>
+<ul>
+<li><code>id</code> <a href="#class_node">Node</a> Id</li>
+</ul>
+<h4 id="returns-135">Returns</h4>
+<p><a href="#class_node">Node</a> iterator. IF node is not found returns the iterator created by the empty constructor</p>
+<hr />
+<h3 id="class_neuron_1af2601f1bae87181db8871e9056e6b042"><code>public soma_iterator find_soma(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n)</code></h3>
+<p>Finds a node in the soma.</p>
+<h4 id="parameters-68">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_node">Node</a> to be found</li>
+</ul>
+<h4 id="returns-136">Returns</h4>
+<p>Iterator to the node. end_soma otherwise</p>
+<hr />
+<h3 id="class_neuron_1a0043278c084deb7504825092a00bd363"><code>public inline soma_iterator find_soma(Node::id_type id)</code></h3>
+<p>Finds a node in the soma by id.</p>
+<h4 id="parameters-69">Parameters</h4>
+<ul>
+<li><code>id</code> ID of the node to be found</li>
+</ul>
+<h4 id="returns-137">Returns</h4>
+<p>Iterator to the node. end_soma otherwise</p>
+<hr />
+<h3 id="class_neuron_1aef2fbe40f3187792ee29d4c93c9ed119"><code>public bool point_in_soma(const point_type &amp; p) const</code></h3>
+<p>Checks if the given point is within the soma.</p>
+<p>The condition is that the given point should be closer to the soma barycenter than at least one point in the soma</p>
+<h4 id="parameters-70">Parameters</h4>
+<ul>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-138">Returns</h4>
+<p>True if point is considered to be in the soma</p>
+<hr />
+<h3 id="class_neuron_1aa65b61bddc548b8b529dc907eb70cb4f"><code>public void correct()</code></h3>
+<p>Correct function calls the correct function over each.</p>
+<p>Additionaly checks if the neurite root is part of the soma and set is as such if necessary.</p>
+<hr />
+<h3 id="class_neuron_1ab02f8aacd0e38b357d988d84b300ad66"><code>public void remove_null_segments()</code></h3>
+<p>Removes zero-length segements in all neurites.</p>
+<hr />
+<h3 id="class_neuron_1a252b0c622d5f8a48d344adba3f0346bb"><code>public point_type soma_barycenter() const</code></h3>
+<p>Computes soma barycenter.</p>
+<h4 id="returns-139">Returns</h4>
+<p>soma barycenter</p>
+<hr />
+<h3 id="class_neuron_1a2424f863b6f7eb9698fea40e3d5767c8"><code>public void scale(float r)</code></h3>
+<p>Scales all nodes in the neuron by r.</p>
+<h4 id="parameters-71">Parameters</h4>
+<ul>
+<li><code>r</code> scale rate</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1aa38f94006d720cb82fae4aed1090e9b4"><code>public void scale(float rx,float ry,float rz)</code></h3>
+<p>Scales all nodes in the neuron by (rx,ry,rz)</p>
+<h4 id="parameters-72">Parameters</h4>
+<ul>
+<li>
+<p><code>rx</code> x-axis scale</p>
+</li>
+<li>
+<p><code>ry</code> y-axis scale</p>
+</li>
+<li><code>rz</code> z-axis scale</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1add49550d961c36e2e776bfa8803e0ad3"><code>public void traslate(const point_type &amp; p)</code></h3>
+<p>Moves all nodes in the neuron by p.</p>
+<h4 id="parameters-73">Parameters</h4>
+<ul>
+<li><code>p</code> Traslation vector</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1a68d646856577afdcf779fad6cacbb9e0"><code>public void rotate(const Eigen::Quaternionf &amp; q)</code></h3>
+<p>rotates all nodes in the neuron</p>
+<h4 id="parameters-74">Parameters</h4>
+<ul>
+<li><code>q</code> rotation quaternion</li>
+</ul>
+<hr />
+<h3 id="class_neuron_1a87f065861e7277cb1e94d7c46a873697"><code>public void center()</code></h3>
+<p>Traslates the neuron so the soma barycenter lies at 0,0,0.</p>
+<hr />
+<h3 id="class_neuron_1a1591b28a927ebc1e3740f44308cac119"><code>public neurite_iterator erase(const neurite_iterator &amp; n)</code></h3>
+<p>Removes a neurite from the neuron.</p>
+<h4 id="parameters-75">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_neurite">Neurite</a> iterator</li>
+</ul>
+<h4 id="returns-140">Returns</h4>
+<p>updated iterator</p>
+<hr />
+<h3 id="class_neuron_1a3fbb3202cfba9dd22a64e52bea7c52a0"><code>public void erase_axon()</code></h3>
+<p>Removes all axon neurites from the neuron.</p>
+<hr />
+<h3 id="class_neuron_1a467472950549aca38c3b9070fec5731a"><code>public void erase_apical()</code></h3>
+<p>Removes all apical dendrties from the neuron.</p>
+<hr />
+<h3 id="class_neuron_1acd2659624e87cdf7ea5e93afa71f1ad9"><code>public void erase_dendrites()</code></h3>
+<p>Removes all non-apical dendrties from the neuron.</p>
+<hr />
+<h3 id="class_neuron_1a0a4c7344fa13ca08264f85c0a2d40bc7"><code>public void set_apical_up()</code></h3>
+<p>Rotates the neuron so the apical towards &quot;up&quot; direction.</p>
+<hr />
+<h3 id="class_neuron_1a80fbfd144fbd8091b6cdbbdb7414233d"><code>public void set_basal_roots_xz()</code></h3>
+<p>Rotates the neuron so the basal plane is close to the z=0 plane.</p>
+<hr />
+<h3 id="class_neuron_1af81cb2e5ba2c474a69003033cc5ffdcf"><code>public box_type boundingBox()</code></h3>
+<p>Computes the axis-aligned bounding box of the neuron.</p>
+<h4 id="returns-141">Returns</h4>
+<p>bounding box</p>
+<hr />
+<h3 id="class_neuron_1a67de045d57bfb2d5f3537f792a945ea5"><code>public float somaArea() const</code></h3>
+<p>Computes soma area.</p>
+<h4 id="returns-142">Returns</h4>
+<p>Soma area</p>
+<hr />
+<h3 id="class_neuron_1ab4b9b2e6e2122abd367da0482c4f9283"><code>public void order()</code></h3>
+<p>Order all neurites.</p>
+<hr />
+<h3 id="class_neuron_1a1ac32b2b6fe5dc8cfb14af1ac1bc9bd7"><code>public void simplify(float eps)</code></h3>
+<p>Applies RDP simplification to all branches in the neruon.</p>
+<h4 id="parameters-76">Parameters</h4>
+<ul>
+<li><code>eps</code> Tolerance</li>
+</ul>
+<hr />
+<h1 id="class_node">class <code>Node</code></h1>
+<pre><code>class Node
+  : public neurostr::WithProperties</code></pre>
+<h2 id="summary-6">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Node()</code></td>
+<td>Empty constructor, creates a node with ID -1 at 0,0,0 with radius 0.</td>
+</tr>
+<tr>
+<td><code>public  Node(int id)</code></td>
+<td>Creates a node with ID id at 0,0,0 with radius 0.</td>
+</tr>
+<tr>
+<td><code>public  Node(int id,const point_type &amp; p,double r)</code></td>
+<td>Creates a node with ID id at position p with radius r.</td>
+</tr>
+<tr>
+<td><code>public  Node(int id,double x,double y,double z,double r)</code></td>
+<td>Creates a node with ID id at position (x,y,z) with radius r</td>
+</tr>
+<tr>
+<td><code>public  Node(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public  Node(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; operator=(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; operator=(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public inline  ~Node()</code></td>
+<td>Empty destructor.</td>
+</tr>
+<tr>
+<td><code>public inline bool operator==(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) const</code></td>
+<td>Compare two nodes by ID.</td>
+</tr>
+<tr>
+<td><code>public inline bool operator!=(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) const</code></td>
+<td>Compare two nodes by ID.</td>
+</tr>
+<tr>
+<td><code>public inline float radius() const</code></td>
+<td>Returns node radius.</td>
+</tr>
+<tr>
+<td><code>public inline const id_type id() const</code></td>
+<td>Returns node id.</td>
+</tr>
+<tr>
+<td><code>public inline const point_type &amp; position() const</code></td>
+<td>Return node position.</td>
+</tr>
+<tr>
+<td><code>public inline float x() const</code></td>
+<td>Returns node X coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float y() const</code></td>
+<td>Returns node Y coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float z() const</code></td>
+<td>Returns node Z coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline bool valid_branch() const</code></td>
+<td>Checks wether the parent branch referece is valid.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; branch()</code></td>
+<td>Returns parent branch.</td>
+</tr>
+<tr>
+<td><code>public const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; branch() const</code></td>
+<td>Returns parent branch.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; position(const point_type &amp; p)</code></td>
+<td>Changes node position for.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-6">Members</h2>
+<h3 id="class_node_1a465465a95fd1d8e27c09cefca2f82f68"><code>public  Node()</code></h3>
+<p>Empty constructor, creates a node with ID -1 at 0,0,0 with radius 0.</p>
+<h4 id="returns-143">Returns</h4>
+<p><a href="#class_node">Node</a></p>
+<hr />
+<h3 id="class_node_1a330ed6f136f818b7c8ee3453696f3725"><code>public  Node(int id)</code></h3>
+<p>Creates a node with ID id at 0,0,0 with radius 0</p>
+<h4 id="parameters-77">Parameters</h4>
+<ul>
+<li><code>id</code> The Node ID</li>
+</ul>
+<hr />
+<h3 id="class_node_1a17d1d33dd2efb05ddba6db7d51aaa0a7"><code>public  Node(int id,const point_type &amp; p,double r)</code></h3>
+<p>Creates a node with ID id at position p with radius r</p>
+<h4 id="parameters-78">Parameters</h4>
+<ul>
+<li><code>id</code> The Node ID</li>
+<li><code>p</code> Node position (3D point)</li>
+<li><code>r</code> Node radius</li>
+</ul>
+<hr />
+<h3 id="class_node_1a226ccc6591cf05fb860540a51d3ac864"><code>public  Node(int id,double x,double y,double z,double r)</code></h3>
+<p>Creates a node with ID id at position (x,y,z) with radius r</p>
+<h4 id="parameters-79">Parameters</h4>
+<ul>
+<li><code>id</code> The Node ID</li>
+<li><code>x</code> Node x coord.</li>
+<li><code>y</code> Node y coord.</li>
+<li><code>z</code> Node z coord.</li>
+<li><code>r</code> Node radius</li>
+</ul>
+<hr />
+<h3 id="class_node_1af92b6c5ed90ea97735f785d99102c3e0"><code>public  Node(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_node_1ad309afad87a6a4d8f971b97f21fb7b55"><code>public  Node(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_node_1a3944a0afe29dc4192f3b2783161ebb42"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; operator=(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_node_1a89a149c9f8e1060d99067b1bbe8d3d36"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; operator=(</code><a href="#class_node"><code>Node</code></a><code>&amp;&amp; n) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_node_1a69b8325cb8878558506bbb97fe6627a0"><code>public inline  ~Node()</code></h3>
+<p>Empty destructor.</p>
+<h4 id="returns-144">Returns</h4>
+<hr />
+<h3 id="class_node_1aea92d6877c75a8c4bccaaf0318b2283e"><code>public inline bool operator==(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) const</code></h3>
+<p>Compare two nodes by ID.</p>
+<h4 id="parameters-80">Parameters</h4>
+<ul>
+<li><code>n</code> The other node</li>
+</ul>
+<h4 id="returns-145">Returns</h4>
+<p>True if both ids are equal</p>
+<hr />
+<h3 id="class_node_1a32c7aaa50711110db04ca273020ae54c"><code>public inline bool operator!=(const</code><a href="#class_node"><code>Node</code></a><code>&amp; n) const</code></h3>
+<p>Compare two nodes by ID.</p>
+<h4 id="parameters-81">Parameters</h4>
+<ul>
+<li><code>n</code> The other node</li>
+</ul>
+<h4 id="returns-146">Returns</h4>
+<p>True if both ids are different</p>
+<hr />
+<h3 id="class_node_1a8f2c8006725301776d70e9c71d6ad471"><code>public inline float radius() const</code></h3>
+<p>Returns node radius.</p>
+<h4 id="returns-147">Returns</h4>
+<p>Radius</p>
+<hr />
+<h3 id="class_node_1afaf58d5ff5aafc0db0aced5b80e107e6"><code>public inline const id_type id() const</code></h3>
+<p>Returns node id.</p>
+<h4 id="returns-148">Returns</h4>
+<p>ID</p>
+<hr />
+<h3 id="class_node_1a68da2f77aa8904f04e62462e6fe26fb4"><code>public inline const point_type &amp; position() const</code></h3>
+<p>Return node position.</p>
+<h4 id="returns-149">Returns</h4>
+<p>Position</p>
+<hr />
+<h3 id="class_node_1a6236f8be0dc65cef40dc70fee011b8f3"><code>public inline float x() const</code></h3>
+<p>Returns node X coordinate.</p>
+<h4 id="returns-150">Returns</h4>
+<p>X coord</p>
+<hr />
+<h3 id="class_node_1ad123b2b3fb814ba99b72df0e1214850b"><code>public inline float y() const</code></h3>
+<p>Returns node Y coordinate.</p>
+<h4 id="returns-151">Returns</h4>
+<p>Y coord</p>
+<hr />
+<h3 id="class_node_1a9e54426de216dbce57b1c39ab3f0f2dc"><code>public inline float z() const</code></h3>
+<p>Returns node Z coordinate.</p>
+<h4 id="returns-152">Returns</h4>
+<p>Z coordinate</p>
+<hr />
+<h3 id="class_node_1aca9a62ca42e21d4fc116d28a17053ee3"><code>public inline bool valid_branch() const</code></h3>
+<p>Checks whether the parent branch reference is valid.</p>
+<h4 id="returns-153">Returns</h4>
+<p>True if the reference is valid</p>
+<hr />
+<h3 id="class_node_1ae7da2f57d6be848affef69a8d5e60292"><code>public</code><a href="#class_branch"><code>Branch</code></a><code>&amp; branch()</code></h3>
+<p>Returns parent branch.</p>
+<h4 id="throws-6">Throws</h4>
+<ul>
+<li><code>runtime_exception</code> If we attempt to access null branch</li>
+</ul>
+<h4 id="returns-154">Returns</h4>
+<p>Parent branch reference</p>
+<hr />
+<h3 id="class_node_1a1b2c193a1f148d00dcfa701316f5001c"><code>public const</code><a href="#class_branch"><code>Branch</code></a><code>&amp; branch() const</code></h3>
+<p>Returns parent branch.</p>
+<h4 id="parameters-82">Parameters</h4>
+<ul>
+<li><code>runtime_exception</code> If attempt to access null branch</li>
+</ul>
+<h4 id="returns-155">Returns</h4>
+<p>Parent branch const reference</p>
+<hr />
+<h3 id="class_node_1a3bc4ae95a8e8c1f7888b0500e4006767"><code>public</code><a href="#class_node"><code>Node</code></a><code>&amp; position(const point_type &amp; p)</code></h3>
+<p>Changes node position for.</p>
+<h4 id="parameters-83">Parameters</h4>
+<p>*</p>
+<hr />
+<h1 id="class_property_map">class <code>PropertyMap</code></h1>
+<h2 id="summary-7">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  PropertyMap()</code></td>
+<td>Initializes an empty property map.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline  PropertyMap(const Iter &amp; begin,const Iter &amp; end)</code></td>
+<td>Initializes a property map with the content in the range.</td>
+</tr>
+<tr>
+<td><code>public const_iterator find(const std::string &amp; k) const</code></td>
+<td>Returns the property with key k.</td>
+</tr>
+<tr>
+<td><code>public  PropertyMap(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; operator=(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public  PropertyMap(</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; operator=(</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline T get(const std::string &amp; k) const</code></td>
+<td>Returns the value of the poperty with key k.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const property_type &amp; p)</code></td>
+<td>Adds a new property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k)</code></td>
+<td>Adds an empty property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,int v)</code></td>
+<td>Adds a new int valued property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,bool v)</code></td>
+<td>Adds a new bool valued property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,float v)</code></td>
+<td>Adds a new float valued property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,const std::string v)</code></td>
+<td>Adds a new string valued property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,const point_type v)</code></td>
+<td>Adds a new point valued property to the map.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,boost::any v)</code></td>
+<td>Adds a property to the map.</td>
+</tr>
+<tr>
+<td><code>public bool exists(const std::string &amp; k) const</code></td>
+<td>Property exists.</td>
+</tr>
+<tr>
+<td><code>public void remove(const std::string &amp; k)</code></td>
+<td>Deletes a property.</td>
+</tr>
+<tr>
+<td><code>public void remove(const iterator &amp; i)</code></td>
+<td>Deletes a property.</td>
+</tr>
+<tr>
+<td><code>public map_type::size_type size() const</code></td>
+<td>Property map size.</td>
+</tr>
+<tr>
+<td><code>public const_iterator begin() const</code></td>
+<td>Property begin iterator.</td>
+</tr>
+<tr>
+<td><code>public iterator begin()</code></td>
+<td>Property begin iterator.</td>
+</tr>
+<tr>
+<td><code>public const_iterator end() const</code></td>
+<td>Property end iterator.</td>
+</tr>
+<tr>
+<td><code>public iterator end()</code></td>
+<td>Property end iterator.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-7">Members</h2>
+<h3 id="class_property_map_1ad9767f940dc5b0a71650943a4e3b9e2d"><code>public  PropertyMap()</code></h3>
+<p>Initializes an empty property map.</p>
+<hr />
+<h3 id="class_property_map_1a9fa080171fd784ea443ba7e19e7de017"><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline  PropertyMap(const Iter &amp; begin,const Iter &amp; end)</code></h3>
+<p>Initializes a property map with the content in the range.</p>
+<h4 id="parameters-84">Parameters</h4>
+<ul>
+<li>
+<p><code>begin</code> property begin iterator</p>
+</li>
+<li><code>end</code> property end iterator</li>
+</ul>
+<hr />
+<h3 id="class_property_map_1a6a3df4bbe5d587549751a23bcc2e0e6e"><code>public const_iterator find(const std::string &amp; k) const</code></h3>
+<p>Returns the property with key k.</p>
+<h4 id="parameters-85">Parameters</h4>
+<ul>
+<li><code>k</code> Property key</li>
+</ul>
+<h4 id="returns-156">Returns</h4>
+<p>Const iterator. End() if no property with key k exists</p>
+<hr />
+<h3 id="class_property_map_1a01bf1c75a052ea47c59bec6113d3c885"><code>public  PropertyMap(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_property_map_1a6c0d2becb5fd99e39f71875653e31491"><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; operator=(const</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_property_map_1a917410a81744d4b59a11d75084f0ea52"><code>public  PropertyMap(</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_property_map_1a46614ab41b6d2a53bab275fb1873e64d"><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp; operator=(</code><a href="#class_property_map"><code>PropertyMap</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_property_map_1a12db4ea1e97b61a38d0d8495a242c93a"><code>public template&lt;typename T&gt;</code>  <br/><code>inline T get(const std::string &amp; k) const</code></h3>
+<p>Returns the value of the poperty with key k.</p>
+<h4 id="parameters-86">Parameters</h4>
+<ul>
+<li><code>k</code> Key</li>
+</ul>
+<h4 id="returns-157">Returns</h4>
+<p>Property value</p>
+<hr />
+<h3 id="class_property_map_1ade5b967866609097b5f13eafff1d57c2"><code>public std::pair&lt; iterator, bool &gt; set(const property_type &amp; p)</code></h3>
+<p>Adds a new property to the map.</p>
+<h4 id="parameters-87">Parameters</h4>
+<ul>
+<li><code>p</code> Property to add</li>
+</ul>
+<h4 id="returns-158">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1a8952608446ee2e4efd4621cefe0d3175"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k)</code></h3>
+<p>Adds an empty property to the map.</p>
+<h4 id="parameters-88">Parameters</h4>
+<ul>
+<li><code>k</code> Property key</li>
+</ul>
+<h4 id="returns-159">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1aa6032c9580537937340ead90e84f10af"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,int v)</code></h3>
+<p>Adds a new int valued property to the map.</p>
+<h4 id="parameters-89">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-160">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1a5d6b6da98358fc9bb5bb320e72073340"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,bool v)</code></h3>
+<p>Adds a new bool valued property to the map.</p>
+<h4 id="parameters-90">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-161">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1a34f2993bc75b0b3ec6929703473233e6"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,float v)</code></h3>
+<p>Adds a new float valued property to the map.</p>
+<h4 id="parameters-91">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-162">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1af4dc03dddea1f5b736a692a343c62592"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,const std::string v)</code></h3>
+<p>Adds a new string valued property to the map.</p>
+<h4 id="parameters-92">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-163">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1ab41659abd27463c54c9354944a7fef65"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,const point_type v)</code></h3>
+<p>Adds a new point valued property to the map.</p>
+<h4 id="parameters-93">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-164">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1ad7b6298a0a65cb58ddab8e8d597f5634"><code>public std::pair&lt; iterator, bool &gt; set(const std::string &amp; k,boost::any v)</code></h3>
+<p>Adds a property to the map.</p>
+<h4 id="parameters-94">Parameters</h4>
+<ul>
+<li>
+<p><code>k</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-165">Returns</h4>
+<p>pair(iterator, T/F property added)</p>
+<hr />
+<h3 id="class_property_map_1a8bdf31839a617eb97e34b4ea2d1cf88c"><code>public bool exists(const std::string &amp; k) const</code></h3>
+<p>Property exists.</p>
+<h4 id="parameters-95">Parameters</h4>
+<ul>
+<li><code>k</code> Property name</li>
+</ul>
+<h4 id="returns-166">Returns</h4>
+<p>True if the property exists</p>
+<hr />
+<h3 id="class_property_map_1a18a5de6825153f495b45f8425abc0aa0"><code>public void remove(const std::string &amp; k)</code></h3>
+<p>Deletes a property.</p>
+<h4 id="parameters-96">Parameters</h4>
+<ul>
+<li><code>k</code> Poperty key</li>
+</ul>
+<hr />
+<h3 id="class_property_map_1a495cf2173c7256702be59cfe3061613d"><code>public void remove(const iterator &amp; i)</code></h3>
+<p>Deletes a property.</p>
+<h4 id="parameters-97">Parameters</h4>
+<ul>
+<li><code>i</code> property iterator</li>
+</ul>
+<hr />
+<h3 id="class_property_map_1a4790c802c1382c599162386a904f5333"><code>public map_type::size_type size() const</code></h3>
+<p>Property map size.</p>
+<h4 id="returns-167">Returns</h4>
+<p>Number of properties in the map</p>
+<hr />
+<h3 id="class_property_map_1a826c73d2f9e3add3e4cc417600f25beb"><code>public const_iterator begin() const</code></h3>
+<p>Property begin iterator.</p>
+<h4 id="returns-168">Returns</h4>
+<p>const iterator</p>
+<hr />
+<h3 id="class_property_map_1a23e37b429c21fa9fb49385c481bce001"><code>public iterator begin()</code></h3>
+<p>Property begin iterator.</p>
+<h4 id="returns-169">Returns</h4>
+<p>iterator</p>
+<hr />
+<h3 id="class_property_map_1ac6e66207650ff30a515f01f1f30130df"><code>public const_iterator end() const</code></h3>
+<p>Property end iterator.</p>
+<h4 id="returns-170">Returns</h4>
+<p>const iterator</p>
+<hr />
+<h3 id="class_property_map_1a286cb5e85e0eb38e1f8f2d96d4cf665d"><code>public iterator end()</code></h3>
+<p>Property end iterator.</p>
+<h4 id="returns-171">Returns</h4>
+<p>iterator</p>
+<hr />
+<h1 id="class_reconstruction">class <code>Reconstruction</code></h1>
+<pre><code>class Reconstruction
+  : public neurostr::WithProperties</code></pre>
+<h2 id="summary-8">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public  Reconstruction()</code></td>
+<td>Creates a reconsturction with no id, neurons nor contour.</td>
+</tr>
+<tr>
+<td><code>public  Reconstruction(const std::string &amp; id)</code></td>
+<td>Creates an empty reconstruction with given id.</td>
+</tr>
+<tr>
+<td><code>public inline  ~Reconstruction()</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public  Reconstruction(const</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;) = delete</code></td>
+<td>Not allowed.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp; operator=(const</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;) = delete</code></td>
+<td>Not allowed.</td>
+</tr>
+<tr>
+<td><code>public  Reconstruction(</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp; operator=(</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;&amp;) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public inline void addNeuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>*const n)</code></td>
+<td>Adds a neuron to the reconstruction.</td>
+</tr>
+<tr>
+<td><code>public void addContour(const</code><a href="#class_contour"><code>contour_type</code></a><code>&amp; v)</code></td>
+<td>Sets a vector of points as reconstruction contour.</td>
+</tr>
+<tr>
+<td><code>public inline std::vector&lt;</code><a href="#class_contour"><code>contour_type</code></a><code>&gt;::const_iterator contour_begin() const</code></td>
+<td>Get reconstruction contour as polygon.</td>
+</tr>
+<tr>
+<td><code>public inline std::vector&lt;</code><a href="#class_contour"><code>contour_type</code></a><code>&gt;::const_iterator contour_end() const</code></td>
+</tr>
+<tr>
+<td><code>public inline const std::string &amp; id() const</code></td>
+<td>Get reconstruction ID.</td>
+</tr>
+<tr>
+<td><code>public inline std::size_t n_contours() const</code></td>
+<td>Checks whether the contour is empty.</td>
+</tr>
+<tr>
+<td><code>public inline int size() const</code></td>
+<td>Counts number of neurons in the reconstruction.</td>
+</tr>
+<tr>
+<td><code>public int node_count() const</code></td>
+<td>Counts number of different nodes in the reconstruction.</td>
+</tr>
+<tr>
+<td><code>public neuron_iterator closest_soma(const point_type &amp; p)</code></td>
+<td>Finds the neuron whose soma is the closest one to a given point.</td>
+</tr>
+<tr>
+<td><code>public neuron_iterator add_neurite_to_closest_soma(</code><a href="#class_neurite"><code>Neurite</code></a><code>* n)</code></td>
+<td>Adds a neurite to the neuron whose soma is the closest one to the neurite root.</td>
+</tr>
+<tr>
+<td><code>public inline neuron_iterator begin()</code></td>
+<td><a href="#class_neuron">Neuron</a> iterator.</td>
+</tr>
+<tr>
+<td><code>public inline neuron_iterator end()</code></td>
+<td><a href="#class_neuron">Neuron</a> iterator.</td>
+</tr>
+<tr>
+<td><code>public inline const_neuron_iterator begin() const</code></td>
+<td><a href="#class_neuron">Neuron</a> iterator.</td>
+</tr>
+<tr>
+<td><code>public inline const_neuron_iterator end() const</code></td>
+<td><a href="#class_neuron">Neuron</a> iterator.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-8">Members</h2>
+<h3 id="class_reconstruction_1af5862853032770793fcbba2c5d9bb8db"><code>public  Reconstruction()</code></h3>
+<p>Creates a reconsturction with no id, neurons nor contour.</p>
+<hr />
+<h3 id="class_reconstruction_1ae025a7fd0b8bf672adb69859ba822770"><code>public  Reconstruction(const std::string &amp; id)</code></h3>
+<p>Creates an empty reconstruction with given id.</p>
+<h4 id="parameters-98">Parameters</h4>
+<ul>
+<li><code>id</code> <a href="#class_reconstruction">Reconstruction</a> ID</li>
+</ul>
+<hr />
+<h3 id="class_reconstruction_1a2e8bd9cf1a1330131d2336573c798278"><code>public inline  ~Reconstruction()</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_reconstruction_1aa179fbea5f67df3807a1bdb00e4c6b4c"><code>public  Reconstruction(const</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;) = delete</code></h3>
+<p>Not allowed.</p>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_reconstruction_1acd214bb9c9a7a9c335c4306605a6c72d"><code>public</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp; operator=(const</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;) = delete</code></h3>
+<p>Not allowed.</p>
+<p><strong>DELETED</strong></p>
+<hr />
+<h3 id="class_reconstruction_1a5fca77aeaa07c103c3379a7bd3ca76ab"><code>public  Reconstruction(</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_reconstruction_1a2ad388a736f184cb8ee78fb80725f1ed"><code>public</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp; operator=(</code><a href="#class_reconstruction"><code>Reconstruction</code></a><code>&amp;&amp;) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_reconstruction_1a88f7aef15fb664ff1afc999613fd0024"><code>public inline void addNeuron(</code><a href="#class_neuron"><code>Neuron</code></a><code>*const n)</code></h3>
+<p>Adds a neuron to the reconstruction.</p>
+<h4 id="parameters-99">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_neuron">Neuron</a> pointer</li>
+</ul>
+<hr />
+<h3 id="class_reconstruction_1a15a6c62c1bf6794fa36547a708cb186f"><code>public void addContour(const</code><a href="#class_contour"><code>contour_type</code></a><code>&amp; v)</code></h3>
+<p>Sets a vector of points as reconstruction contour.</p>
+<h4 id="parameters-100">Parameters</h4>
+<ul>
+<li><code>v</code> Point vector</li>
+</ul>
+<hr />
+<h3 id="class_reconstruction_1aec969bb73083317d55f5ba38c92dde91"><code>public inline std::vector&lt;</code><a href="#class_contour"><code>contour_type</code></a><code>&gt;::const_iterator contour_begin() const</code></h3>
+<p>Get reconstruction contour as polygon.</p>
+<h4 id="returns-172">Returns</h4>
+<p><a href="#class_reconstruction">Reconstruction</a> contour</p>
+<hr />
+<h3 id="class_reconstruction_1a61dbbb9cc98e33dc8228c0fb564b3c1d"><code>public inline std::vector&lt;</code><a href="#class_contour"><code>contour_type</code></a><code>&gt;::const_iterator contour_end() const</code></h3>
+<hr />
+<h3 id="class_reconstruction_1ad8f01d826047b2d3e4e1fd37dd24ce3e"><code>public inline const std::string &amp; id() const</code></h3>
+<p>Get reconstruction ID.</p>
+<h4 id="returns-173">Returns</h4>
+<p>ID</p>
+<hr />
+<h3 id="class_reconstruction_1a6e24c463b54fcfcf2bfd3fd22d210eae"><code>public inline std::size_t n_contours() const</code></h3>
+<p>Checks whether the contour is empty.</p>
+<h4 id="returns-174">Returns</h4>
+<p>True if contour is not empty</p>
+<hr />
+<h3 id="class_reconstruction_1acc41df688957e610ccfc98fe2b92e4af"><code>public inline int size() const</code></h3>
+<p>Counts number of neurons in the reconstruction.</p>
+<h4 id="returns-175">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> count</p>
+<hr />
+<h3 id="class_reconstruction_1abf9caf634f30b804a8c7d13ecd733a8a"><code>public int node_count() const</code></h3>
+<p>Counts number of different nodes in the reconstruction.</p>
+<h4 id="returns-176">Returns</h4>
+<p><a href="#class_node">Node</a> count</p>
+<hr />
+<h3 id="class_reconstruction_1ac5fd6ed3fa56a399a8a8c342ac2a55fa"><code>public neuron_iterator closest_soma(const point_type &amp; p)</code></h3>
+<p>Finds the neuron whose soma is the closest one to a given point.</p>
+<h4 id="parameters-101">Parameters</h4>
+<ul>
+<li><code>p</code> Point</li>
+</ul>
+<h4 id="returns-177">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> iterator</p>
+<hr />
+<h3 id="class_reconstruction_1ab2ee6017bd833f30b0b7520377508ca9"><code>public neuron_iterator add_neurite_to_closest_soma(</code><a href="#class_neurite"><code>Neurite</code></a><code>* n)</code></h3>
+<p>Adds a neurite to the neuron whose soma is the closest one to the neurite root.</p>
+<h4 id="parameters-102">Parameters</h4>
+<ul>
+<li><code>n</code> <a href="#class_neurite">Neurite</a> pointer</li>
+</ul>
+<h4 id="returns-178">Returns</h4>
+<p><a href="#class_neuron">Neuron</a> iterator (insertion point)</p>
+<hr />
+<h3 id="class_reconstruction_1a43faf0e08d4c2a27d2fb91555372b4fd"><code>public inline neuron_iterator begin()</code></h3>
+<p><a href="#class_neuron">Neuron</a> iterator.</p>
+<h4 id="returns-179">Returns</h4>
+<p>begin neuron interator</p>
+<hr />
+<h3 id="class_reconstruction_1af53522823c64659a3eb4070e3585ab44"><code>public inline neuron_iterator end()</code></h3>
+<p><a href="#class_neuron">Neuron</a> iterator.</p>
+<h4 id="returns-180">Returns</h4>
+<p>end neuron interator</p>
+<hr />
+<h3 id="class_reconstruction_1ac7a8f1eb48d09f3b7ec629ab988f5a96"><code>public inline const_neuron_iterator begin() const</code></h3>
+<p><a href="#class_neuron">Neuron</a> iterator.</p>
+<h4 id="returns-181">Returns</h4>
+<p>begin neuron interator</p>
+<hr />
+<h3 id="class_reconstruction_1ae731f46b922911e920d3c68fb271d8c9"><code>public inline const_neuron_iterator end() const</code></h3>
+<p><a href="#class_neuron">Neuron</a> iterator.</p>
+<h4 id="returns-182">Returns</h4>
+<p>end neuron interator</p>
+<hr />
+<h1 id="class_with_properties">class <code>WithProperties</code></h1>
+<h2 id="summary-9">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>properties</code></td>
+</tr>
+<tr>
+<td><code>public  WithProperties()</code></td>
+<td>create an empty property map</td>
+</tr>
+<tr>
+<td><code>public  WithProperties(const</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; other) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; operator=(const</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; b) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public  WithProperties(</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp;&amp; b) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; operator=(</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp;&amp; b) = default</code></td>
+<td>Default.</td>
+</tr>
+<tr>
+<td><code>public inline auto begin_properties() const</code></td>
+<td>Proprerty begin iterator.</td>
+</tr>
+<tr>
+<td><code>public inline auto end_properties() const</code></td>
+<td>Property end iterator.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,const T &amp; v)</code></td>
+<td>Adds a property.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; PropertyMap::iterator, bool &gt; add_property(const std::string &amp; key)</code></td>
+<td>Adds an empty property.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; PropertyMap::iterator, bool &gt; add_property(const std::pair&lt; std::string, boost::any &gt; &amp; v)</code></td>
+<td>Adds a property.</td>
+</tr>
+<tr>
+<td><code>public PropertyMap::const_iterator get_property(const std::string &amp; key) const</code></td>
+<td>Get property.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-9">Members</h2>
+<h3 id="class_with_properties_1acaefcaaa5a5621434cc6d9838f2c8304"><code>public</code><a href="#class_property_map"><code>PropertyMap</code></a><code>properties</code></h3>
+<hr />
+<h3 id="class_with_properties_1a5974021dd4df42b6fb591b2103b35ace"><code>public  WithProperties()</code></h3>
+<p>create an empty property map</p>
+<hr />
+<h3 id="class_with_properties_1a06a596c731cb5bf78c44e71dc591ef1f"><code>public  WithProperties(const</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; other) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_with_properties_1ae999b598459bcf715798bb35af3e5911"><code>public</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; operator=(const</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; b) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_with_properties_1a779f75b4306be463ce8f9ada017711eb"><code>public  WithProperties(</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp;&amp; b) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_with_properties_1ac5067f16b110988c13f6f05103935d65"><code>public</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp; operator=(</code><a href="#class_with_properties"><code>WithProperties</code></a><code>&amp;&amp; b) = default</code></h3>
+<p>Default.</p>
+<hr />
+<h3 id="class_with_properties_1a471b2630dfebc67c2c8603661ebf7b28"><code>public inline auto begin_properties() const</code></h3>
+<p>Proprerty begin iterator.</p>
+<h4 id="returns-183">Returns</h4>
+<p>property iterator</p>
+<hr />
+<h3 id="class_with_properties_1a9641bc080ab1ab1de3e82fbaa1629a2f"><code>public inline auto end_properties() const</code></h3>
+<p>Property end iterator.</p>
+<h4 id="returns-184">Returns</h4>
+<p>property iterator</p>
+<hr />
+<h3 id="class_with_properties_1a6477eebefb65182bc6dafb1cf54b46c7"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto add_property(const std::string &amp; key,const T &amp; v)</code></h3>
+<p>Adds a property.</p>
+<h4 id="parameters-103">Parameters</h4>
+<ul>
+<li>
+<p><code>key</code> Property key</p>
+</li>
+<li><code>v</code> Property value</li>
+</ul>
+<h4 id="returns-185">Returns</h4>
+<p>property iterator</p>
+<hr />
+<h3 id="class_with_properties_1ada99fd4b17acd29c9b3b63c299e5dfbb"><code>public std::pair&lt; PropertyMap::iterator, bool &gt; add_property(const std::string &amp; key)</code></h3>
+<p>Adds an empty property.</p>
+<h4 id="parameters-104">Parameters</h4>
+<ul>
+<li><code>key</code> Property key</li>
+</ul>
+<h4 id="returns-186">Returns</h4>
+<p>property iterator</p>
+<hr />
+<h3 id="class_with_properties_1ab5843547922860167cf9633ff7eda694"><code>public std::pair&lt; PropertyMap::iterator, bool &gt; add_property(const std::pair&lt; std::string, boost::any &gt; &amp; v)</code></h3>
+<p>Adds a property.</p>
+<h4 id="parameters-105">Parameters</h4>
+<ul>
+<li><code>v</code> Propery</li>
+</ul>
+<h4 id="returns-187">Returns</h4>
+<p>property iterator</p>
+<hr />
+<h3 id="class_with_properties_1a4d5800d7d6108d6fdc383da4b4df5f4c"><code>public PropertyMap::const_iterator get_property(const std::string &amp; key) const</code></h3>
+<p>Get property.</p>
+<h4 id="parameters-106">Parameters</h4>
+<ul>
+<li><code>key</code> Property key</li>
+</ul>
+<h4 id="returns-188">Returns</h4>
+<p>property iterator</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

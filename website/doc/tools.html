@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#converter">
+                               Format converter
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#neuirtefeature">
+                               Neurite Feature Extractor
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#branchfeature">
+                               Branch Feature Extractor
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#validator">
+                               Neuron Validator
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#scholl">
+                               Scholl analysis
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/tools.html#boxcut">
+                               Neuron Box Cutter
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="tools">Tools</h1>
+<h2 id="converter">Format Converter</h2>
+<p>Given a reconstruction file, the converter guess the format by the file extension and reads it. Optionally, it tries to correct errors in the reconstruction and applies a simplification algorithm over the branches. Finally it writes out the reconstruction in <a href="io/format.html#SWC">SWC</a> or <a href="io/format.html#JSON">JSON</a> format.</p>
+<p><strong>Executable name:</strong> <em>NeuroConverter</em></p>
+<h4 id="converter_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">output</td>
+<td style="text-align: center;">o</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Output file</td>
+</tr>
+<tr>
+<td style="text-align: left;">format</td>
+<td style="text-align: center;">f</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Output file format string (<a href="io/format.html#SWC">swc</a> or <a href="io/format.html#JSON">json</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">correct</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">The converter calls the correct method on each neuron in the reconstruction</td>
+</tr>
+<tr>
+<td style="text-align: left;">eps</td>
+<td style="text-align: center;">e</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: left;">Error tolerance for the <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Ramer%E2%80%93Douglas%E2%80%93Peucker">Ramer-Douglas-Peucker</a> simplification algorithm applied at branch level.</td>
+</tr>
+<tr>
+<td style="text-align: left;">verbose</td>
+<td style="text-align: center;">v</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Verbose output. Sets the log level to debug</td>
+</tr>
+</tbody>
+</table>
+<h4 id="converter_example">Use case</h4>
+<p>Imagine that we want to convert the input file <code>fancy_neuron.dat</code> into a more &quot;readable&quot; format, like JSON <code>fancy_readable_neuron.json</code>. Also we want to remove zero-length compartments in the reconstruction, but we don't want to simplify it in any way. To do so, we just need to execute the following command in a BASH console:</p>
+<pre><code class="language-bash">./NeuroConverter -i fancy_neuron.dat -f json -o fancy_readable_neuron.json -c</code></pre>
+<h4 id="help-message">Help message</h4>
+<pre><code class="language-bash">./NeuroConverter --help
+Allowed options:
+  -h [ --help ]         Produce help message
+  -i [ --input ] arg    Neuron reconstruction file
+  -f [ --format ] arg   Output format (swc or json)
+  -o [ --output ] arg   Output file
+  -c [ --correct ]      Try to correct errors in the reconstruction
+  -e [ --eps ] arg (=0) Output file
+  -v [ --verbose ]      Verbose log output
+
+Example: NeuroConverter -i test.swc -o test.json -f json</code></pre>
+<hr />
+<h2 id="neuritefeature">Neurite Feature Extractor</h2>
+<p>The neurite feature extractor computes a set of predefined measure for each neurite in the reconstruction. Measure values are not aggregated in any way, they are returned as-is (usually as vectors). Optionally, it tries to correct errors in the reconstruction.</p>
+<p>The output (in the standard output stream) is a non prettyfied JSON array that contains for each [Neurite]:</p>
+<ul>
+<li>The neuron name (field: <em>neuron</em>)</li>
+<li>The neurite type (field: <em>neurite_type</em>)</li>
+<li>The neurite ID (field: <em>neurite</em>)</li>
+<li>An object <em>measures</em>. The specific measures inside this object are described in the <a href="#neuritefeature_measures">Measures</a> section.</li>
+</ul>
+<p>Some measures might use the logging interface to inform about errors or unexpected conditions.</p>
+<p><strong>Executable name:</strong> <em>NeuriteFeatureExtractor</em></p>
+<h4 id="neuritefeature_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">correct</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">The converter calls the correct method on each neuron in the reconstruction</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitapical</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, apical dendrite is not measured</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitaxon</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, axon is not measured</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitdend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, dendrites are not measured</td>
+</tr>
+</tbody>
+</table>
+<h4 id="neuritefeature_example">Output example</h4>
+<pre><code class="language-json">[
+    {
+        "measures": {
+            "N_bifurcations": [
+                2
+            ],
+            "N_branches": [
+                5
+            ],
+            "N_nodes": [
+                7
+            ],
+            "box_volume": [
+                12.2872
+            ],
+            "branch_fractal_dimension": [
+                0.632963,
+                0.908842,
+                0.908842,
+                1.01944,
+                1.01944
+            ],
+            "branch_length": [
+                3,
+                1.41421,
+                1.41421,
+                1,
+                1
+            ],
+            "branch_surface": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "branch_tortuosity": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "branch_volume": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "burker_taper_rate": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "child_diam_ratio": [
+                0,
+                0
+            ],
+            "local_bifurcation_angle": [
+                1.5708,
+                3.14159
+            ],
+            "local_tilt_angle": [
+                0.785398,
+                1.5708
+            ],
+            "local_torque_angle": [
+                0,
+                0
+            ],
+            "node_length": [
+                1,
+                1,
+                1,
+                1.41421,
+                1.41421,
+                1,
+                1
+            ],
+            "node_root_dist": [
+                1,
+                2,
+                3,
+                4.12311,
+                4.12311,
+                4.24264,
+                4.24264
+            ],
+            "node_root_path": [
+                0,
+                1,
+                2,
+                3.41421,
+                3.41421,
+                4.41421,
+                4.41421
+            ],
+            "partition_asymmetry": [
+                1,
+                0
+            ],
+            "remote_bifurcation_angle": [
+                1.5708,
+                3.14159
+            ],
+            "remote_tilt_angle": [
+                0.785398,
+                1.5708
+            ],
+            "remote_torque_angle": [
+                0,
+                0
+            ],
+            "terminal_branch_length": [
+                1.41421,
+                1,
+                1
+            ],
+            "terminal_branch_order": [
+                1,
+                2,
+                2
+            ],
+            "terminal_nodes_root_dist": [
+                4.12311,
+                4.24264,
+                4.24264
+            ],
+            "terminal_nodes_root_path": [
+                3.41421,
+                4.41421,
+                4.41421
+            ]
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    }
+]</code></pre>
+<h4 id="neuritefeature_help">Help message</h4>
+<pre><code class="language-bash">Allowed options:
+  -h [ --help ]         Produce help message
+  -i [ --input ] arg    Neuron reconstruction file
+  -c [ --correct ]      Try to correct the errors in the reconstruction
+  --omitapical          Ignore the apical dendrite
+  --omitaxon            Ignore the axon
+  --omitdend            Ignore the non-apical dendrites
+
+Example: NeuriteFeatureExtractor -i test.swc</code></pre>
+<h4 id="neuritefeature_measures">Measures</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Measure key</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Value type</th>
+<th style="text-align: right;">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>N_bifurcations</code></td>
+<td style="text-align: left;">Bifurcation node count</td>
+<td style="text-align: center;">Single integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>N_branches</code></td>
+<td style="text-align: left;">Branch count</td>
+<td style="text-align: center;">Single integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>N_nodes</code></td>
+<td style="text-align: left;">Node count</td>
+<td style="text-align: center;">Single integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>node_length</code></td>
+<td style="text-align: left;">Node compartment length</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>box_volume</code></td>
+<td style="text-align: left;">Neurite non axis aligned box volume</td>
+<td style="text-align: center;">Single float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>node_root_dist</code></td>
+<td style="text-align: left;">Node euclidean distance to neurite's root</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>node_root_path</code></td>
+<td style="text-align: left;">Node path distance to neurite's root</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_length</code></td>
+<td style="text-align: left;">Branch total length</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_volume</code></td>
+<td style="text-align: left;">Branch total volume</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Assumes truncated cone shape</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_surface</code></td>
+<td style="text-align: left;">Branch total surface</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Assumes truncated cone shape</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>terminal_branch_length</code></td>
+<td style="text-align: left;">Total length of terminal branches</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>terminal_branch_order</code></td>
+<td style="text-align: left;">Centrifugal order of terminal branches</td>
+<td style="text-align: center;">Integer vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>terminal_nodes_root_dist</code></td>
+<td style="text-align: left;">Terminal tip euclidean distance to the root</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>terminal_nodes_root_path</code></td>
+<td style="text-align: left;">Terminal tip path distance to the root</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_tortuosity</code></td>
+<td style="text-align: left;">Branch tortuosity measure</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hill_taper_rate</code></td>
+<td style="text-align: left;">Hillman taper rate per Branch</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>burker_taper_rate</code></td>
+<td style="text-align: left;">Burker taper rate per branch</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_fractal_dimension</code></td>
+<td style="text-align: left;">Branch fractal dimension</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_bifurcation_angle</code></td>
+<td style="text-align: left;">Bifurcation amplitude from local vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_tilt_angle</code></td>
+<td style="text-align: left;">Bifurcation tilt from local vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_torque_angle</code></td>
+<td style="text-align: left;">Bifurcation torque from local vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_bifurcation_angle</code></td>
+<td style="text-align: left;">Bifurcation amplitude from remote vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_tilt_angle</code></td>
+<td style="text-align: left;">Bifurcation tilt from remote vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_torque_angle</code></td>
+<td style="text-align: left;">Bifurcation torque from remote vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>child_diam_ratio</code></td>
+<td style="text-align: left;">Bifurcation child diameter ratio</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>partition_asymmetry</code></td>
+<td style="text-align: left;">Partition asymmetry at the bifurcation node</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="branchfeature">Branch Feature Extractor</h2>
+<p>The branch feature extractor computes a set of predefined measure for each branch in the reconstruction. Optionally, it tries to correct errors in the reconstruction.</p>
+<p>The output (in the standard output stream) is a non prettyfied JSON array that contains for each [Branch]:</p>
+<ul>
+<li>The neuron name (field: <em>neuron</em>)</li>
+<li>The neurite type (field: <em>neurite_type</em>)</li>
+<li>The neurite ID (field: <em>neurite</em>)</li>
+<li>The branch ID (field: <em>branch</em>)</li>
+<li>An object <em>measures</em>. The specific measures inside this object are described in the <a href="#branchfeature_measures">Measures</a> section.</li>
+</ul>
+<p>Some measures might use the logging interface to inform about errors or unexpected conditions.</p>
+<p><strong>Executable name:</strong> <em>BranchFeatureExtractor</em></p>
+<h4 id="branchfeature_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">correct</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">The converter calls the correct method on each neuron in the reconstruction</td>
+</tr>
+<tr>
+<td style="text-align: left;">selection</td>
+<td style="text-align: center;">s</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">all</td>
+<td style="text-align: left;">Branch subset selection. Accepted values: <code>all</code>, <code>terminal</code>, <code>preterminal</code>, <code>nonterminal</code>, <code>root</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">omitapical</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, apical dendrite is not measured</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitaxon</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, axon is not measured</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitdend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, dendrites are not measured</td>
+</tr>
+</tbody>
+</table>
+<h4 id="branchfeature_example">Output example</h4>
+<pre><code class="language-json">[
+    {
+        "branch": "1",
+        "measures": {
+            "N_descs": 2.0,
+            "N_nodes": 3.0,
+            "box_volume": 0.0,
+            "burker_taper_rate": 0.0,
+            "centrifugal_order": 0.0,
+            "child_diam_ratio": 0.0,
+            "fractal_dimension": 0.632963,
+            "length": 3.0,
+            "local_bifurcation_angle": 1.570796,
+            "local_tilt_angle": 0.785398,
+            "local_torque_angle": 0.0,
+            "partition_asymmetry": 0.632963,
+            "remote_bifurcation_angle": 1.570796,
+            "remote_tilt_angle": 0.785398,
+            "remote_torque_angle": 0.0,
+            "surface": 0.0,
+            "tortuosity": 1.0,
+            "volume": 0.0
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    },
+    {
+        "branch": "1-1",
+        "measures": {
+            "N_descs": 0.0,
+            "N_nodes": 1.0,
+            "box_volume": 0.0,
+            "burker_taper_rate": 0.0,
+            "centrifugal_order": 1.0,
+            "fractal_dimension": 0.908842,
+            "length": 1.414214,
+            "surface": 0.0,
+            "tortuosity": 1.0,
+            "volume": 0.0
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    },
+    {
+        "branch": "1-2",
+        "measures": {
+            "N_descs": 2.0,
+            "N_nodes": 1.0,
+            "box_volume": 0.0,
+            "burker_taper_rate": 0.0,
+            "centrifugal_order": 1.0,
+            "child_diam_ratio": 0.0,
+            "fractal_dimension": 0.908842,
+            "length": 1.414214,
+            "local_bifurcation_angle": 3.141593,
+            "local_tilt_angle": 1.570796,
+            "local_torque_angle": 0.0,
+            "partition_asymmetry": 0.908842,
+            "remote_bifurcation_angle": 3.141593,
+            "remote_tilt_angle": 1.570796,
+            "remote_torque_angle": 0.0,
+            "surface": 0.0,
+            "tortuosity": 1.0,
+            "volume": 0.0
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    },
+    {
+        "branch": "1-2-1",
+        "measures": {
+            "N_descs": 0.0,
+            "N_nodes": 1.0,
+            "box_volume": 0.0,
+            "burker_taper_rate": 0.0,
+            "centrifugal_order": 2.0,
+            "fractal_dimension": 1.019436,
+            "length": 1.0,
+            "surface": 0.0,
+            "tortuosity": 1.0,
+            "volume": 0.0
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    },
+    {
+        "branch": "1-2-2",
+        "measures": {
+            "N_descs": 0.0,
+            "N_nodes": 1.0,
+            "box_volume": 0.0,
+            "burker_taper_rate": 0.0,
+            "centrifugal_order": 2.0,
+            "fractal_dimension": 1.019436,
+            "length": 1.0,
+            "surface": 0.0,
+            "tortuosity": 1.0,
+            "volume": 0.0
+        },
+        "neurite": 1,
+        "neurite_type": "Dendrite",
+        "neuron": "simple_tree"
+    }
+]</code></pre>
+<h4 id="branchfeature_help">Help message</h4>
+<pre><code class="language-bash">Allowed options:
+  -h [ --help ]                 Produce help message
+  -i [ --input ] arg            Neuron reconstruction file
+  -c [ --correct ]              Try to correct the errors in the reconstruction
+  -s [ --selection ] arg (=all) Branch subset: all, terminal, nonterminal,
+                                preterminal or root
+  --omitapical                  Ignore the apical dendrite
+  --omitaxon                    Ignore the axon
+  --omitdend                    Ignore the non-apical dendrites
+
+Example: BranchFeatureExtractor -i test.swc</code></pre>
+<h4 id="branchfeature_example">Measures</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Measure key</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Value type</th>
+<th style="text-align: right;">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>N_descs</code></td>
+<td style="text-align: left;">Daughter branches count</td>
+<td style="text-align: center;">Integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>N_nodes</code></td>
+<td style="text-align: left;">Node count</td>
+<td style="text-align: center;">Single integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tortuosity</code></td>
+<td style="text-align: left;">Branch tortuosity</td>
+<td style="text-align: center;">Single integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>hill_taper_rate</code></td>
+<td style="text-align: left;">Branch Hillman taper rate</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>burker_taper_rate</code></td>
+<td style="text-align: left;">Branch Burker taper rate</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>centrifugal_order</code></td>
+<td style="text-align: left;">Branch centrifugal order</td>
+<td style="text-align: center;">Integer</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>length</code></td>
+<td style="text-align: left;">Branch length</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>volume</code></td>
+<td style="text-align: left;">Branch total volume</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Assumes truncated cone compartments</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>surface</code></td>
+<td style="text-align: left;">Branch total surface</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Assumes truncated cone compartments</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>box_volume</code></td>
+<td style="text-align: left;">Branch non axis aligned box volume</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>branch_fractal_dimension</code></td>
+<td style="text-align: left;">Branch fractal dimension</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_bifurcation_angle</code></td>
+<td style="text-align: left;">Bifurcation amplitude from local vectors</td>
+<td style="text-align: center;">Float vector</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_tilt_angle</code></td>
+<td style="text-align: left;">Bifurcation tilt from local vectors</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>local_torque_angle</code></td>
+<td style="text-align: left;">Bifurcation torque from local vectors</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_bifurcation_angle</code></td>
+<td style="text-align: left;">Bifurcation amplitude from remote vectors</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_tilt_angle</code></td>
+<td style="text-align: left;">Bifurcation tilt from remote vectors</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>remote_torque_angle</code></td>
+<td style="text-align: left;">Bifurcation torque from remote vectors</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>child_diam_ratio</code></td>
+<td style="text-align: left;">Bifurcation child diameter ratio</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>partition_asymmetry</code></td>
+<td style="text-align: left;">Partition asymmetry at the bifurcation node</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: right;">Only for non-terminal branches</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="validator">Neuron Validator</h2>
+<p>The neuron validator runs a test battery to detect possible errors in the reconstruction. It outputs a summary output in JSON format that, for each test, contains the test result and failing nodes. The validation results point out <strong>possible</strong> errors (again, <strong>POSSIBLE</strong>), so don't interpret them as the ground truth. Outliers do exist.</p>
+<p>The default tests are:</p>
+<ul>
+<li>Neurite is attached to soma</li>
+<li>Neuron has soma</li>
+<li>Planar neurite reconstruction</li>
+<li>Abnormal dendrite count</li>
+<li>Abnormal apical count</li>
+<li>Abnormal axon count</li>
+<li>Trifrucation nodes detection</li>
+<li>Linear branches</li>
+<li>Zero-length compartments</li>
+<li>Intersecting node spheres</li>
+<li>Increasing diameters</li>
+<li>Branch collision</li>
+<li>Extreme bifurcation/elongation angles</li>
+</ul>
+<p><strong>Executable name:</strong> <em>Validator</em></p>
+<h4 id="validator_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">exhaustive</td>
+<td style="text-align: center;">e</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Include every test result, not only failures</td>
+</tr>
+<tr>
+<td style="text-align: left;">attached</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable neurite attached to soma validation</td>
+</tr>
+<tr>
+<td style="text-align: left;">noattached</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable neurite attached to soma validation</td>
+</tr>
+<tr>
+<td style="text-align: left;">soma</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable neuron has soma check</td>
+</tr>
+<tr>
+<td style="text-align: left;">nosoma</td>
+<td style="text-align: center;">s</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable neuron has soma check</td>
+</tr>
+<tr>
+<td style="text-align: left;">planar</td>
+<td style="text-align: center;">P</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable planar neurite test</td>
+</tr>
+<tr>
+<td style="text-align: left;">noplanar</td>
+<td style="text-align: center;">p</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable planar neurite test</td>
+</tr>
+<tr>
+<td style="text-align: left;">dendcnt</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable abnormal dendrite count test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nodendcnt</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable abnormal dendrite count test</td>
+</tr>
+<tr>
+<td style="text-align: left;">apical</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable neuron has apical check</td>
+</tr>
+<tr>
+<td style="text-align: left;">noapical</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable neuron has apical check</td>
+</tr>
+<tr>
+<td style="text-align: left;">axon</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable neuron has axon check</td>
+</tr>
+<tr>
+<td style="text-align: left;">noaxon</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable neuron has axon check</td>
+</tr>
+<tr>
+<td style="text-align: left;">trifurcation</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable trifurcation nodes test</td>
+</tr>
+<tr>
+<td style="text-align: left;">notrifurcation</td>
+<td style="text-align: center;">t</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable trifurcation nodes test</td>
+</tr>
+<tr>
+<td style="text-align: left;">linear</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable linear branches test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nolinear</td>
+<td style="text-align: center;">l</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable linear branches test</td>
+</tr>
+<tr>
+<td style="text-align: left;">zero</td>
+<td style="text-align: center;">Z</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable zero-length compartment test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nozero</td>
+<td style="text-align: center;">z</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable zero-length compartment test</td>
+</tr>
+<tr>
+<td style="text-align: left;">intersect</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable intersecting node spheres test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nointersect</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable intersecting node spheres test</td>
+</tr>
+<tr>
+<td style="text-align: left;">decrease</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable increasing diameters test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nodecrease</td>
+<td style="text-align: center;">r</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable increasing diameters test</td>
+</tr>
+<tr>
+<td style="text-align: left;">segcoll</td>
+<td style="text-align: center;">V</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Enable segment collision test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nosegcoll</td>
+<td style="text-align: center;">v</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Disable segment collision test</td>
+</tr>
+<tr>
+<td style="text-align: left;">branchcoll</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable branch collision test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nobranchcoll</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable branch collision test</td>
+</tr>
+<tr>
+<td style="text-align: left;">extremeang</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: left;">Enable extreme bifurcation/elongation angles test</td>
+</tr>
+<tr>
+<td style="text-align: left;">noextremeang</td>
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disable extreme bifurcation/elongation angles test</td>
+</tr>
+<tr>
+<td style="text-align: left;">nostrict</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">No strict mode. Apical and axon counts only fail if there are more than one element defined</td>
+</tr>
+<tr>
+<td style="text-align: left;">nodiameters</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disables tests that use diameter information</td>
+</tr>
+<tr>
+<td style="text-align: left;">is2D</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">Disables tests that assume a 3D reconstruction</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitapical</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, apical dendrite is not validated</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitaxon</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, axon is not validated</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitdend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, dendrites are not validated</td>
+</tr>
+<tr>
+<td style="text-align: left;">planarth</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">1.01</td>
+<td style="text-align: left;">Planar reconstruction test threshold</td>
+</tr>
+<tr>
+<td style="text-align: left;">linearth</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">1.01</td>
+<td style="text-align: left;">Linear branche test threshold</td>
+</tr>
+<tr>
+<td style="text-align: left;">mindend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Minimum number of dendrites for the test (included)</td>
+</tr>
+<tr>
+<td style="text-align: left;">maxdend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: left;">Minimum number of dendrites for the test (excluded)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="validator_example">Output example</h4>
+<pre><code class="language-json">[
+    {
+        "description": "Fails if neurites are not attached to the soma",
+        "name": "Neurites are attached to soma",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Pass if the neuron has at least one soma node",
+        "name": "Neuron has soma",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails if the non-axis aligned box volume of the neurite is lower than predefined threshold",
+        "name": "Planar neurite validation",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Pass if the dendrite count is greater or equal than 2 and less than 13",
+        "name": "Basal dendrite count",
+        "neuron_id": "simple_tree",
+        "pass": false,
+        "results": [
+            {
+                "id": {
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Neuron",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "description": "Pass if and only if there is one apical dendrite",
+        "name": "Strict apical dendrite count",
+        "neuron_id": "simple_tree",
+        "pass": false,
+        "results": [
+            {
+                "id": {
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Neuron",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "description": "Pass if and only if there is one axon",
+        "name": "Strict axon count",
+        "neuron_id": "simple_tree",
+        "pass": false,
+        "results": [
+            {
+                "id": {
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Neuron",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "description": "Fails on those nodes with more than two descendants",
+        "name": "Trifurcation validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails when the branch tortuosity falls below 1.010000",
+        "name": "Linear branch validator",
+        "neuron_id": "simple_tree",
+        "pass": false,
+        "results": [
+            {
+                "id": {
+                    "branch": "1",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+            },
+            {
+                "id": {
+                    "branch": "1-1",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+            },
+            {
+                "id": {
+                    "branch": "1-2",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+            },
+            {
+                "id": {
+                    "branch": "1-2-1",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+            },
+            {
+                "id": {
+                    "branch": "1-2-2",
+                    "neurite": 1,
+                    "neuron": "simple_tree"
+                },
+                "pass": false,
+                "type": "Branch",
+                "value": 1.0
+            }
+        ]
+    },
+    {
+        "description": "Fails when a segment length is close to zero",
+        "name": "Zero length segments validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails when two consecutive node spheres intersection is not empty",
+        "name": "Length smaller than radius validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails when diameter increases between two consecutive nodes",
+        "name": "Non-decreasing diameter validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails when the distance between any two branches is zero",
+        "name": "Branch collision validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    },
+    {
+        "description": "Fails when either elongation or bifurcation angles are too high to be plausible",
+        "name": "Extreme angles validator",
+        "neuron_id": "simple_tree",
+        "pass": true,
+        "results": []
+    }
+]</code></pre>
+<h4 id="validator_help">Help message</h4>
+<pre><code class="language-bash">Allowed options:
+  --help                       Produce help message
+  --input arg                  Neuron reconstruction file
+  -e [ --exhaustive ]          Exhaustive report. Include all validation items,
+                               not only failures
+  -A [ --attached ]            Enable neurites attached to soma validation
+  -a [ --noattached ]          Disable neurites attached to soma validation
+  -S [ --soma ]                Enable soma validation
+  -s [ --nosoma ]              Disable soma validation
+  -P [ --planar ]              Enable planar reconstruction validation
+  -p [ --noplanar ]            Disable planar reconstruction validation
+  -D [ --dendcnt ]             Enable dendrite count validation
+  -d [ --nodendcnt ]           Disable dendrite count validation
+  -C [ --apical ]              Enable apical count validation
+  -c [ --noapical ]            Disable apical count validation
+  -X [ --axon ]                Enable axon count validation
+  -x [ --noaxon ]              Disable axon count validation
+  -T [ --trifurcation ]        Enable trifurcation validation
+  -t [ --notrifurcation ]      Disable trifurcation validation
+  -L [ --linear ]              Enable linear branches validation
+  -l [ --nolinear ]            Disable linear branches validation
+  -Z [ --zero ]                Enable zero length segments validation
+  -z [ --nozero ]              Disable zero length segments validation
+  -I [ --intersect ]           Enable intersecting nodes validation
+  -i [ --nointersect ]         Disable intersecting nodes validation
+  -R [ --decrease ]            Enable non-decrasing radius validation
+  -r [ --nodecrease ]          Disable non-decrasing radius validation
+  -V [ --segcoll ]             Enable segment collision validation
+  -v [ --nosegcoll ]           Disable segment collision validation
+  -B [ --branchcoll ]          Enable branch collision validation
+  -b [ --nobranchcoll ]        Disable branch collision validation
+  -M [ --extremeang ]          Enable extreme angles validation
+  -m [ --noextremeang ]        Disable extreme angles validation
+  --nostrict                   No strict mode
+  --nodiameters                Disables diameter-based nodes
+  --is2D                       Disables validations that assume a 3D
+                               reconstruction
+  --neuron                     Validates the entire neuron
+  --omitapical                 Ignore the apical dendrite
+  --omitaxon                   Ignore the axon
+  --omitdend                   Ignore the non-apical dendrites
+  --omitsoma                   Disable soma tests
+  --planarth arg (=1.00999999) Planar reconstruction threshold
+  --linearth arg (=1.00999999) Linear branch threshold
+  --mindend arg (=2)           Number of dendrites minimum (in)
+  --maxdend arg (=13)          Number of dendrites maximum (out)
+
+Example: validator -i test.swc -e</code></pre>
+<hr />
+<h2 id="scholl">Scholl analysis</h2>
+<p>Performs a simple linear <a href="https://en.wikipedia.org/wiki/Sholl_analysis">Scholl analysis</a> over the neurons in the given reconstruction. The executable outputs a three-column CSV file over the standard output with neuron, distance and branch count (intersections).</p>
+<p><strong>Executable name:</strong> <em>Scholl</em></p>
+<h4 id="scholl_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">correct</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">False</td>
+<td style="text-align: left;">The converter calls the correct method on each neuron in the reconstruction</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitapical</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, apical dendrite is ignored</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitaxon</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, axon is ignored</td>
+</tr>
+<tr>
+<td style="text-align: left;">omitdend</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">false</td>
+<td style="text-align: left;">If set, dendrites are ignored</td>
+</tr>
+</tbody>
+</table>
+<h4 id="scholl_example">Output example</h4>
+<pre><code class="language-csv">Neuron,Distance,Branch_Count
+"test", 0.000000, 7
+"test", 5.791105, 8
+"test", 10.142367, 9
+"test", 10.871992, 10
+"test", 11.452746, 11
+"test", 14.642872, 12
+"test", 15.113467, 11
+"test", 15.681764, 12
+"test", 15.775044, 13
+"test", 19.586906, 14
+"test", 20.254789, 15
+"test", 20.606409, 16
+"test", 23.650518, 15
+"test", 26.021965, 14
+"test", 27.452669, 13
+"test", 29.967087, 14
+"test", 31.035795, 15
+"test", 33.701023, 16
+"test", 35.049515, 17
+"test", 36.404655, 18
+"test", 38.575405, 19
+"test", 39.636028, 20
+"test", 40.954132, 21
+"test", 41.333488, 22
+"test", 41.665516, 21
+"test", 42.522957, 20
+"test", 43.694332, 21
+"test", 43.852596, 22
+"test", 44.253582, 23
+"test", 44.349628, 24
+"test", 44.898899, 23
+"test", 45.466465, 24
+"test", 45.657787, 23
+"test", 46.378159, 24
+"test", 46.378372, 25
+"test", 46.407532, 26
+"test", 46.868195, 25
+"test", 47.220634, 24
+"test", 47.478245, 25
+"test", 47.529491, 26
+...</code></pre>
+<h4 id="scholl_help">Help message</h4>
+<pre><code class="language-bash">Allowed options:
+  -h [ --help ]         Produce help message
+  -i [ --input ] arg    Neuron reconstruction file
+  -c [ --correct ]      Try to correct the errors in the reconstruction
+  --omitapical          Ignore the apical dendrite
+  --omitaxon            Ignore the axon
+  --omitdend            Ignore the non-apical dendrites
+
+Example: Scholl -i test.swc</code></pre>
+<hr />
+<h2 id="boxcut">Box Cutter</h2>
+<p>The neuron box cutter creates a virtual axis-aligned box with given min and max corners and uses it to &quot;cut&quot; the neuron. That is, it creates virtual nodes at the intersection of the box with the neuron, adds an empty property with key &quot;cut&quot; to all branches and nodes that lie outside the reconstruction. It also adds two properties to the neuron &quot;cutbox_min&quot; and &quot;cutbox_max&quot;, the box min and max corner points. If no argument is given for certain corner x,y,z value, it takes the neuron min/max value for that axis.</p>
+<p>The output is always a reconstruction in JSON format, since no other output format can store properties at node/branch level.</p>
+<p>You can use this to select (and measure) nodes and branches outside/inside the box with the property_exists selector.</p>
+<p><strong>Executable name:</strong> <em>BoxCutter</em></p>
+<h4 id="boxcut_options">Options</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: center;">Short</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: center;">Default value</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">help</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Produces help message</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Input reconstruction file (<a href="io/format.html#SWC">swc</a>, <a href="io/format.html#DAT">dat</a>, <a href="io/format.html#ASC">asc</a> or <a href="io/format.html#JSON">json</a> ). File format is guessed from the file extension</td>
+</tr>
+<tr>
+<td style="text-align: left;">input</td>
+<td style="text-align: center;">o</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">The JSON output file</td>
+</tr>
+<tr>
+<td style="text-align: left;">minx</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron min x value</td>
+<td style="text-align: left;">Cut box min x corner value</td>
+</tr>
+<tr>
+<td style="text-align: left;">miny</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron min y value</td>
+<td style="text-align: left;">Cut box min y corner value</td>
+</tr>
+<tr>
+<td style="text-align: left;">minz</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron min z value</td>
+<td style="text-align: left;">Cut box min z corner value</td>
+</tr>
+<tr>
+<td style="text-align: left;">maxx</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron max x value</td>
+<td style="text-align: left;">Cut box min y corner value</td>
+</tr>
+<tr>
+<td style="text-align: left;">maxy</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron max y value</td>
+<td style="text-align: left;">Cut box max y corner value</td>
+</tr>
+<tr>
+<td style="text-align: left;">maxz</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Neuron max z value</td>
+<td style="text-align: left;">Cut box max z corner value</td>
+</tr>
+</tbody>
+</table>
+<h4 id="boxcut_example">Output example</h4>
+<p>Command:</p>
+<pre><code class="language-bash">./BoxCutter -i simple_tree.swc -o simple_tree_out.json --maxx 3.0
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-json">{
+    "neurons": [
+        {
+            "id": "simple_tree",
+            "neurites": [
+                {
+                    "id": 1,
+                    "tree": {
+                        "children": [
+                            {
+                                "nodes": [
+                                    {
+                                        "id": 8,
+                                        "properties": {
+                                            "cut": []
+                                        },
+                                        "r": 0.0,
+                                        "x": 4.0,
+                                        "y": -1.0,
+                                        "z": 0.0
+                                    }
+                                ],
+                                "root": {
+                                    "id": 4,
+                                    "r": 0.0,
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "nodes": [
+                                            {
+                                                "id": 6,
+                                                "properties": {
+                                                    "cut": []
+                                                },
+                                                "r": 0.0,
+                                                "x": 4.0,
+                                                "y": 1.0,
+                                                "z": 1.0
+                                            }
+                                        ],
+                                        "properties": {
+                                            "cut": []
+                                        },
+                                        "root": {
+                                            "id": 5,
+                                            "properties": {
+                                                "cut": []
+                                            },
+                                            "r": 0.0,
+                                            "x": 4.0,
+                                            "y": 1.0,
+                                            "z": 0.0
+                                        }
+                                    },
+                                    {
+                                        "nodes": [
+                                            {
+                                                "id": 7,
+                                                "properties": {
+                                                    "cut": []
+                                                },
+                                                "r": 0.0,
+                                                "x": 4.0,
+                                                "y": 1.0,
+                                                "z": -1.0
+                                            }
+                                        ],
+                                        "properties": {
+                                            "cut": []
+                                        },
+                                        "root": {
+                                            "id": 5,
+                                            "properties": {
+                                                "cut": []
+                                            },
+                                            "r": 0.0,
+                                            "x": 4.0,
+                                            "y": 1.0,
+                                            "z": 0.0
+                                        }
+                                    }
+                                ],
+                                "nodes": [
+                                    {
+                                        "id": 5,
+                                        "properties": {
+                                            "cut": []
+                                        },
+                                        "r": 0.0,
+                                        "x": 4.0,
+                                        "y": 1.0,
+                                        "z": 0.0
+                                    }
+                                ],
+                                "root": {
+                                    "id": 4,
+                                    "r": 0.0,
+                                    "x": 3.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        ],
+                        "nodes": [
+                            {
+                                "id": 2,
+                                "r": 0.0,
+                                "x": 1.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            {
+                                "id": 3,
+                                "r": 0.0,
+                                "x": 2.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            {
+                                "id": 4,
+                                "r": 0.0,
+                                "x": 3.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        ],
+                        "root": {
+                            "id": 1,
+                            "r": 0.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "type": 3
+                }
+            ],
+            "properties": {
+                "cutbox_max": {
+                    "x": 3.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "cutbox_min": {
+                    "x": 0.0,
+                    "y": -1.0,
+                    "z": -1.0
+                }
+            },
+            "soma": {
+                "nodes": [
+                    {
+                        "id": 1,
+                        "r": 0.0,
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                ]
+            }
+        }
+    ]
+}</code></pre>
+<h4 id="boxcut_help">Help message</h4>
+<pre><code class="language-bash">Allowed options:
+  -h [ --help ]         Produce help message
+  -i [ --input ] arg    Neuron reconstruction file
+  -c [ --correct ]      Try to correct the errors in the reconstruction
+  --omitapical          Ignore the apical dendrite
+  --omitaxon            Ignore the axon
+  --omitdend            Ignore the non-apical dendrites
+
+Example: Scholl -i test.swc</code></pre>
+<hr />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>
