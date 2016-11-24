@@ -23,7 +23,7 @@ The library uses some of the C++14 standard features, so it needs a compiler wit
 NeuroSTR also uses the following software depèndencies, some of them are header libraries bundled in the package:
 
 | Library | Version | License |  Bundled | What for?
-| :-- | :--: | :--: | :--: |
+| :-- | :--: | :--: | :--: 
 | [Boost](http://www.boost.org/) | >1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything... |
 | [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | 3.X | [MPL-2](https://www.mozilla.org/en-US/MPL/2.0/) | No | Singular value decomposition and quaternion calculation |
 | [tree.hh](http://tree.phi-sci.com/) | 3.1 | [GPL2/3](https://www.gnu.org/licenses/) | Yes | Neurite tree structure container |
@@ -62,7 +62,7 @@ The `make install` command will copy the library headers, binaries and their bun
 There are several variables that you can set while running the `cmake` command to change the default install directory (`/usr/local`) or to avoid installing the bundled libraries or the executables:
 
 | Flag | Default value | What it does...|
-|:--| :--: |:-|
+|:--| :--: |:-
 |`CMAKE_INSTALL_PREFIX` | `/usr/local` | Default install directory |
 |`NO_INSTALL_BUNDLED` | `false` | If true, bundled headers are not installed |
 |`NO_INSTALL_RAPIDJSON` | `false` | If true, rapidjson headers are not installed |
