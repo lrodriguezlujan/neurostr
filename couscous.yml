@@ -108,23 +108,23 @@ menu:
             relativeUrl: "doc/selectors.html#basics"
           predef:
             text: "Prebuilt selectors"
-            relativeUrl: "doc/selectors/predefined.html"
+            relativeUrl: "doc/selectors/prebuilt.html"
             items:
               neuron:
                 text: "Neuron selectors"
-                relativeUrl: "doc/selectors/predefined.html#neuron_selectors"
+                relativeUrl: "doc/selectors/prebuilt.html#neuron_selectors"
               neurite:
                 text: "Neurite selectors"
-                relativeUrl: "doc/selectors/predefined.html#neurite_selectors"
+                relativeUrl: "doc/selectors/prebuilt.html#neurite_selectors"
               branch:
                 text: "Branch selectors"
-                relativeUrl: "doc/selectors/predefined.html#branch_selectors"
+                relativeUrl: "doc/selectors/prebuilt.html#branch_selectors"
               node:
                 text: "Node selectors"
-                relativeUrl: "doc/selectors/predefined.html#node_selectors"
+                relativeUrl: "doc/selectors/prebuilt.html#node_selectors"
               generic:
                 text: "Generic selectors"
-                relativeUrl: "doc/selectors/predefined.html#generic_selectors"
+                relativeUrl: "doc/selectors/prebuilt.html#generic_selectors"
           create:
             text: "Create selectors"
             relativeUrl: "doc/selectors.html#create"
@@ -144,23 +144,23 @@ menu:
         subsections:
           predef:
             text: "Prebuilt Measures"
-            relativeUrl: "doc/measures/predefined.html"
+            relativeUrl: "doc/measures/prebuilt.html"
             items:
               node:
                 text: "Node measures"
-                relativeUrl: "doc/measures/predefined.html#node"
+                relativeUrl: "doc/measures/prebuilt.html#node"
               branch:
                 text: "Branch measures"
-                relativeUrl: "doc/measures/predefined.html#branch"
+                relativeUrl: "doc/measures/prebuilt.html#branch"
               neurite:
                 text: "Neurite measures"
-                relativeUrl: "doc/measures/predefined.html#neurite"
+                relativeUrl: "doc/measures/prebuilt.html#neurite"
               neuron:
                 text: "Neuron measures"
-                relativeUrl: "doc/measures/predefined.html#neuron"
+                relativeUrl: "doc/measures/prebuilt.html#neuron"
               lmeasure:
                   text: "L-measure measures"
-                  relativeUrl: "doc/measures/predefined.html#lmeasure"
+                  relativeUrl: "doc/measures/prebuilt.html#lmeasure"
           aggregators:
             text: "Aggregators"
             relativeUrl: "doc/measures.html#aggregators"
@@ -183,9 +183,9 @@ menu:
           checks:
             text: "Checks"
             relativeUrl: "doc/classes/validator.html#checks"
-          predefined:
-            text: "Predefined validations"
-            relativeUrl: "doc/classes/validator.html#predefined"
+          prebuilt:
+            text: "prebuilt validations"
+            relativeUrl: "doc/classes/validator.html#prebuilt"
       tools:
         text: "Bundled tools"
         relativeUrl: "doc/tools.html"
@@ -301,5 +301,5 @@ menu:
                 text: "Checks"
                 relativeUrl: "doc/classes/validator.html#checks"
               predef:
-                text: "Predefined validators"
-                relativeUrl: "doc/classes/validator.html#predefined"
+                text: "prebuilt validators"
+                relativeUrl: "doc/classes/validator.html#prebuilt"

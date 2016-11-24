@@ -118,6 +118,6 @@ template <typename F> struct aggr_func_traits {
 };
 ```
 
-# Predefined Measure & Aggregate Functions
+# Prebuilt Measure & Aggregate Functions
 
-Go to the [predefined function section](../measures/predefined.html)
+Go to the [prebuilt function section](../measures/prebuilt.html)

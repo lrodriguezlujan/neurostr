@@ -143,6 +143,6 @@ Difference selector
 
 ---
 
-# Predefined Selector Functions
+# Prebuilt Selector Functions
 
-Go to the [predefined Selectors section](../selectors/predefined.html)
+Go to the [prebuilt Selectors section](../selectors/prebuilt.html)

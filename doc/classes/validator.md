@@ -7,7 +7,7 @@ currentItem:
 
 # namespace `validator` {#namespace_validator}
 
-Validator namespace contains the validator template class and the predefined validators and check functions.
+Validator namespace contains the validator template class and the prebuilt validators and check functions.
 
 ## Summary
 
@@ -328,7 +328,7 @@ Range check factory. Checks that a given value is in the range [min, max)
 
 ---
 
-# Predefined validators {#predefined}
+# Prebuilt validators {#prebuilt}
 
 ## Summary
 
@@ -351,67 +351,67 @@ Range check factory. Checks that a given value is in the range [min, max)
 
 ---
 
-### `public const auto neurites_attached_to_soma` {#predefined_1a78eeeb043ae6bcf33355dd2754f05dc8}
+### `public const auto neurites_attached_to_soma` {#prebuilt_1a78eeeb043ae6bcf33355dd2754f05dc8}
 
 Neurite validator. Checks that neurites are attached to the soma
 
 ---
 
-### `public const auto neuron_has_soma` {#predefined_1aaf136d622198e95e7efe541ca484a9d6}
+### `public const auto neuron_has_soma` {#prebuilt_1aaf136d622198e95e7efe541ca484a9d6}
 
 Neuron validator. Checks that neuron soma is defined
 
 ---
 
-### `public const auto no_trifurcations_validator` {#predefined_1a0d795a5b610517517dad4ba5fa3281bc}
+### `public const auto no_trifurcations_validator` {#prebuilt_1a0d795a5b610517517dad4ba5fa3281bc}
 
 Node validator. Checks that the number of descendants of a node is at most 2.
 
 ---
 
-### `public const auto zero_length_segments_validator` {#predefined_1a9c69478babbe3ea515c49fa04d9c66d7}
+### `public const auto zero_length_segments_validator` {#prebuilt_1a9c69478babbe3ea515c49fa04d9c66d7}
 
 Node validator. Checks that the length of the compartment associated to each node is not zero.
 
 ---
 
-### `public const auto radius_length_segments_validator` {#predefined_1a3f03c313d1982c1d71827b3ed57d0cc1}
+### `public const auto radius_length_segments_validator` {#prebuilt_1a3f03c313d1982c1d71827b3ed57d0cc1}
 
 Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.
 
 ---
 
-### `public const auto increasing_radius_validator` {#predefined_1abd8929d37cf263276eca4b64dae686c9}
+### `public const auto increasing_radius_validator` {#prebuilt_1abd8929d37cf263276eca4b64dae686c9}
 
 Node validator. Checks that the node radius is not increasing.
 
 ---
 
-### `public const auto segment_collision_validator` {#predefined_1aef6d8066ae78ef9a0b798ce9319837aa}
+### `public const auto segment_collision_validator` {#prebuilt_1aef6d8066ae78ef9a0b798ce9319837aa}
 
 Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction
 
 ---
 
-### `public const auto extreme_angles_validator` {#predefined_1a7b0bc777b0f06fac95cd200c49b839c7}
+### `public const auto extreme_angles_validator` {#prebuilt_1a7b0bc777b0f06fac95cd200c49b839c7}
 
 Node validator. Check that the elongation/bifurcation angle are not too high to be plausible
 
 ---
 
-### `public inline auto planar_reconstruction_validator_factory(float min)` {#predefined_1a83541495d8df9fa3234cf79a8599feeb}
+### `public inline auto planar_reconstruction_validator_factory(float min)` {#prebuilt_1a83541495d8df9fa3234cf79a8599feeb}
 
 Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)
 
 ---
 
-### `public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)` {#predefined_1a228addaee18ae1e77d231bc65b9f0c05}
+### `public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)` {#prebuilt_1a228addaee18ae1e77d231bc65b9f0c05}
 
 Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)
 
 ---
 
-### `public inline auto apical_count_validator_factory(bool strict)` {#predefined_1a2b2f9e14c1b2407ca096e3173c9cd655}
+### `public inline auto apical_count_validator_factory(bool strict)` {#prebuilt_1a2b2f9e14c1b2407ca096e3173c9cd655}
 
 Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2
 
@@ -421,7 +421,7 @@ Neuron validator. Checks that the number of apical dendrites in the neuron is no
 
 ---
 
-### `public inline auto axon_count_validator_factory(bool strict)` {#predefined_1a93ccef0d48f3cbe568f51e3bc9e9e799}
+### `public inline auto axon_count_validator_factory(bool strict)` {#prebuilt_1a93ccef0d48f3cbe568f51e3bc9e9e799}
 
 Neuron validator. Checks that the number of axons in the neuron is not greater than 2
 
@@ -431,7 +431,7 @@ Neuron validator. Checks that the number of axons in the neuron is not greater t
 
 ---
 
-### `public inline auto linear_branches_validator_factory(float min)` {#predefined_1a6f0ff22924f955b1df400bf0fbc650b6}
+### `public inline auto linear_branches_validator_factory(float min)` {#prebuilt_1a6f0ff22924f955b1df400bf0fbc650b6}
 
 Branch validator.Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1
 
@@ -441,7 +441,7 @@ Branch validator.Verifies that the branch reconstruction is not a prefect straig
 
 ---
 
-### `public inline auto branch_collision_validator_factory(bool ignore_diams)` {#predefined_1a05c24c03d592c4fc0b77b158da740f2f}
+### `public inline auto branch_collision_validator_factory(bool ignore_diams)` {#prebuilt_1a05c24c03d592c4fc0b77b158da740f2f}
 
 Branch validator. Check that the Branch dont collide with any other branch in the neuron
 
