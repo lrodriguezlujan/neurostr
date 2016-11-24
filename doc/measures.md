@@ -5,13 +5,13 @@ currentItem:
 ---
 # Measures
 
-Measures are functions that take a single reference to an [element of a neuron](goals_architecture.html) or a set of them and compute some output value, the measure. We can distinguish between single and set measures, depending on whether they take one or more references as input. Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`.
+Measures are functions that take a single reference to an [element of a neuron](data_model.html) or a set of them and compute some output value, the measure. We can distinguish between single and set measures, depending on whether they take one or more references as input. Single elements references (e.g. a single Node) are simply C++ references, whereas sets are `std::vector` of `std::reference_wrapper`.
 
 All classes, functions, etc. related to selectors are defined in the `neurostr::measure` namespace. You can include their headers individually or take them all by adding the header file `measure.h`
 
 Measures are intended to be combined with [Selectors](selectors.html) and [Aggregators](#aggregators) to create complex and meaningful measures with low coding effort. You can implement your own measures and, if they have the adequate signature, use them as any other predefined measure.
 
-## Predefined <a id="predef"></a>
+## Prebuilt measures <a id="predef"></a>
 
 NeuroSTR includes a huge library of predefined measures some new, others already presented in the scientific literature or implemented in existing neuroanatomy tools.
 

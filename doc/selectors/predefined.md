@@ -4,15 +4,13 @@ currentSubsection: predef
 currentItem:
 ---
 
-# Predefined selectors
+# Prebuilt selectors
 
-<a id="node_selectors"></a>
-
-# Node selectors
+# Node selectors {#node}
 
 All node selectors are implemented in the file `selector/node_selector.h`. They belong to the namespace  `neurostr::selector`.
 
-## Self selector <a id="self"></a>
+## Self selector <a id="node_self"></a>
 
 **Function**:  `node_self`
 
@@ -25,7 +23,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 | [Node] | Single | [Node] | Single|
 
 
-## Parent node selector <a id="parent"></a>
+## Parent node selector <a id="node_parent"></a>
 
 **Function**: `node_parent`
 
@@ -38,7 +36,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 | [Node] | Single | [Node] | Single|
 
 
-## Parent branch selector <a id="branch"></a>
+## Parent branch selector <a id="node_branch"></a>
 
 **Function**: `node_branch_selector`
 
@@ -50,7 +48,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Branch] | Single|
 
-## Subtree selector <a id="subtree"></a>
+## Subtree selector <a id="node_subtree"></a>
 
 **Function**: `node_subtree_selector`
 
@@ -62,7 +60,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Node] | Set|
 
-## Subtree terminals selector <a id="subtree_terminals"></a>
+## Subtree terminals selector <a id="node_subtree_terminals"></a>
 
 **Function**: `node_subtree_terminals`
 
@@ -74,7 +72,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Node] | Set|
 
-## Stem selector <a id="stem"></a>
+## Stem selector <a id="node_stem"></a>
 
 **Function**: `node_stem_selector`
 
@@ -86,7 +84,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Node] | Set|
 
-## Descendant selector <a id="descendants"></a>
+## Descendant selector <a id="node_descendants"></a>
 
 **Function**: `node_descendants`
 
@@ -98,7 +96,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Node] | Set|
 
-## Bifurcation nodes filter <a id="bifurcation"></a>
+## Bifurcation nodes filter <a id="node_bifurcation"></a>
 
 **Function**: `node_bifurcation_selector`
 
@@ -110,7 +108,7 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 |:---|:---|:---|:---|
 | [Node] | Single | [Node] | Set|
 
-## Terminals nodes filter <a id="terminal"></a>
+## Terminals nodes filter <a id="node_terminal"></a>
 
 **Function**: `node_terminal_selector`
 
@@ -124,13 +122,11 @@ All node selectors are implemented in the file `selector/node_selector.h`. They 
 
 ---
 
-<a id="branch_selectors"></a>
-
-# Branch selectors
+# Branch selectors {#branch}
 
 All branch selectors are implemented in the file `selector/branch_selector.h`. They belong to the namespace  `neurostr::selector`.
 
-## Neurite selector <a id="neurite"></a>
+## Neurite selector <a id="branch_neurite"></a>
 
 **Function**:  `branch_neurite_selector`
 
@@ -142,7 +138,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Neurite] | Single|
 
-## Parent branch selector <a id="parent"></a>
+## Parent branch selector <a id="branch_parent"></a>
 
 **Function**:  `branch_parent_selector`
 
@@ -154,7 +150,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Branch] | Single|
 
-## Sibling branch selector <a id="sibling"></a>
+## Sibling branch selector <a id="branch_sibling"></a>
 
 **Function**:  `branch_parent_selector`
 
@@ -167,7 +163,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 | [Branch] | Single | [Branch] | Single|
 
 
-## Last node selector <a id="last_node"></a>
+## Last node selector <a id="branch_last_node"></a>
 
 **Function**:  `branch_last_node_selector`
 
@@ -179,7 +175,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Node] | Single|
 
-## First node selector <a id="first_node"></a>
+## First node selector <a id="branch_first_node"></a>
 
 **Function**:  `branch_first_node_selector`
 
@@ -191,7 +187,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Node] | Single|
 
-## All nodes selector <a id="nodes"></a>
+## All nodes selector <a id="branch_nodes"></a>
 
 **Function**:  `branch_node_selector`
 
@@ -203,7 +199,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Node] | Set|
 
-## Subtree selector <a id="subtree"></a>
+## Subtree selector <a id="branch_subtree"></a>
 
 **Function**:  `branch_subtree_selector`
 
@@ -215,7 +211,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Branch] | Set|
 
-## Stem selector <a id="stem"></a>
+## Stem selector <a id="branch_stem"></a>
 
 **Function**:  `branch_stem_selector`
 
@@ -227,7 +223,7 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 |:---|:---|:---|:---|
 | [Branch] | Single | [Branch] | Set|
 
-## Centrifugal order filter <a id="order"></a>
+## Centrifugal order filter <a id="branch_order"></a>
 
 **NOTE**: This is a selector factory function. Selector factories create selector functions given some parameters.
 
@@ -246,13 +242,11 @@ All branch selectors are implemented in the file `selector/branch_selector.h`. T
 
 ---
 
-<a id="neurite_selectors"></a>
-
-# Neurite selectors
+# Neurite selectors {#neurite}
 
 Neurite selectors are implemented in the header file `selector/neurite_selector.h`. They belong to the namespace  `neurostr::selector`.
 
-## Neuron selector <a id="neuron"></a>
+## Neuron selector <a id="neurite_neuron"></a>
 
 **Function**:  `neurite_neuron_selector = [](const Neurite& n) -> const Neuron& `
 
@@ -264,7 +258,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Neuron] | Single|
 
-## Node set selector <a id="nodes"></a>
+## Node set selector <a id="neurite_nodes"></a>
 
 **Function**:  `neurite_node_selector = [](const Neurite& n) ->  std::vector<const_node_reference>`
 
@@ -276,7 +270,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Node] | Set|
 
-## Branch set selector <a id="branches"></a>
+## Branch set selector <a id="neurite_branches"></a>
 
 **Function**:  `neurite_branch_selector = [](const Neurite& n) -> std::vector<const_branch_reference>`
 
@@ -289,7 +283,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 | [Neurite] | Single | [Branch] | Set|
 
 
-## First branch selector <a id="first_branch"></a>
+## First branch selector <a id="neurite_first_branch"></a>
 
 **Function**:  `neurite_first_branch_selector = [](const Neurite& n) -> const Branch&`
 
@@ -301,7 +295,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Branch] | Single|
 
-## Bifurcation nodes selector <a id="bifurcation_nodes"></a>
+## Bifurcation nodes selector <a id="neurite_bifurcation_nodes"></a>
 
 **Function**:  `neurite_bifurcation_selector = [](const Neurite& n) -> std::vector<const_node_reference>`
 
@@ -313,7 +307,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Node] | Set|
 
-## Terminal nodes selector <a id="terminal_nodes"></a>
+## Terminal nodes selector <a id="neurite_terminal_nodes"></a>
 
 **Function**:  `neurite_terminal_selector = [](const Neurite& n) -> std::vector<const_node_reference>`
 
@@ -325,7 +319,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Node] | Set|
 
-## Terminal branches selector <a id="terminal_branches"></a>
+## Terminal branches selector <a id="neurite_terminal_branches"></a>
 
 **Function**:  `neurite_terminal_branches = [](const Neurite& n) -> std::vector<const_branch_reference>`
 
@@ -337,7 +331,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Branch] | Set|
 
-## Non terminal branches selector <a id="nonterminal"></a>
+## Non terminal branches selector <a id="neurite_nonterminal"></a>
 
 **Function**:  `neurite_non_terminal_branches = [](const Neurite& n) -> std::vector<const_branch_reference>`
 
@@ -349,7 +343,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Single | [Branch] | Set|
 
-## Pre-terminal branches selector <a id="preterminal"></a>
+## Pre-terminal branches selector <a id="neurite_preterminal"></a>
 
 **Function**:  `neurite_pre_terminal_branches = [](const Neurite &n) -> std::vector<const_branch_reference>`
 
@@ -362,7 +356,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 | [Neurite] | Single | [Branch] | Set|
 
 
-## Terminal bifurcation node selector <a id="terminal_bif"></a>
+## Terminal bifurcation node selector <a id="neurite_terminal_bif"></a>
 
 **Function**:  `neurite_terminal_bifurcations = [](const Neurite &n) -> std::vector<const_node_reference>`
 
@@ -374,7 +368,7 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 |:---|:---|:---|:---|
 | [Neurite] | Set | [Node] | Set|
 
-## Neurite type filter <a id="type"></a>
+## Neurite type filter <a id="neurite_type"></a>
 
 **NOTE**: This is a selector factory function. Selector factories create selector functions given some parameters.
 
@@ -398,13 +392,11 @@ Neurite selectors are implemented in the header file `selector/neurite_selector.
 
 ---
 
-<a id="neuron_selectors"></a>
-
-# Neuron selectors
+# Neuron selectors {#neuron}
 
 Neuron selectors are implemented in the header file `selector/neuron_selector.h`. They belong to the namespace  `neurostr::selector`.
 
-## Neurites selector <a id="neurites"></a>
+## Neurites selector <a id="neuron_neurites"></a>
 
 **Function**:  `neuron_neurites = [](const Neuron &n) -> std::vector<const_neurite_reference>`
 
@@ -416,7 +408,7 @@ Neuron selectors are implemented in the header file `selector/neuron_selector.h`
 |:---|:---|:---|:---|
 | [Neuron] | Single | [Neurite] | Set|
 
-## Branch selector <a id="branch"></a>
+## Branch selector <a id="neuron_branch"></a>
 
 **Function**:  `neuron_neurites = [](const Neuron &n) -> std::vector<const_branch_reference>`
 
@@ -429,7 +421,7 @@ Neuron selectors are implemented in the header file `selector/neuron_selector.h`
 | [Neuron] | Single | [Branch] | Set|
 
 
-## Nodes selector <a id="nodes"></a>
+## Nodes selector <a id="neuron_nodes"></a>
 
 **Function**:  `neuron_node_selector = [](const Neuron &n) -> std::vector<const_node_reference>`
 
@@ -447,7 +439,7 @@ Neuron selectors are implemented in the header file `selector/neuron_selector.h`
 
 # Generic selectors
 
-[Node]: ../goals_architecture.html#node
-[Branch]: ../goals_architecture.html#branch
-[Neurite]: ../goals_architecture.html#neurite
-[Neuron]: ../goals_architecture.html#neuron
+[Node]: ../data_model.html#node
+[Branch]: ../data_model.html#branch
+[Neurite]: ../data_model.html#neurite
+[Neuron]: ../data_model.html#neuron

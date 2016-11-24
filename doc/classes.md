@@ -34,9 +34,9 @@ Geometry namespace hides geometry specific implementation details from the rest 
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[``DiscreteFrechet``](classes/geometry.html#class_geometry__discrete_frechet)        |
-`class `[``RDPSimplifier``](classes/geometry.html#class_geometry__r_d_p_simplifier)        |
-`class `[``TriangleMesh``](classes/geometry.html#class_geometry__triangle_mesh)        |
+`class `[``DiscreteFrechet``](classes/geometry.html#class_geometry__discrete_frechet)        | |
+`class `[``RDPSimplifier``](classes/geometry.html#class_geometry__r_d_p_simplifier)        | |
+`class `[``TriangleMesh``](classes/geometry.html#class_geometry__triangle_mesh)        | |
 `public template<int I>`  <br/>`inline float get(const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p)` | Gets the ith component from a point.
 `public template<int I>`  <br/>`inline float get(const `[`planar_point`](classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a)` & p)` | Gets the ith component from a 2D point.
 `public inline float getx(const `[`point_type`](classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e)` & p)` | Gets point x coordinate.
@@ -109,8 +109,8 @@ Log namespace contains logger functions.
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[``_logger_storage``](classes/log.html#class_log___logger__storage)        |
-`public `[`_logger_storage`](classes/log.html#class_log___logger__storage)` _nstr_logger_` |
+`class `[``_logger_storage``](classes/log.html#class_log___logger__storage)        | |
+`public `[`_logger_storage`](classes/log.html#class_log___logger__storage)` _nstr_logger_` | |
 `public void init_log_file(const std::string & path)` | Inits file logger.
 `public void init_log_cout()` | Initializes the logger using the standard output stream.
 `public void init_log_cerr()` | Initializes the logger using the standard error stream.
@@ -129,13 +129,13 @@ IO namespace contains write/read functionality for most common file formats.
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[``ASCParser``](classes/io.html#class_io__a_s_c_parser)    |
-`class `[``DATParser``](classes/io.html#class_io__d_a_t_parser)    |
-`class `[``JSONParser``](classes/io.html#class_io__j_s_o_n_parser)    |
-`class `[``JSONWriter``](classes/io.html#class_io__j_s_o_n_writer)    |
-`class `[``Parser``](classes/io.html#class_io__parser)    |
-`class `[``SWCParser``](classes/io.html#class_io__s_w_c_parser)    |
-`class `[``SWCWriter``](classes/io.html#class_io__s_w_c_writer)    |
+`class `[``ASCParser``](classes/io.html#class_io__a_s_c_parser)    | |
+`class `[``DATParser``](classes/io.html#class_io__d_a_t_parser)    | |
+`class `[``JSONParser``](classes/io.html#class_io__j_s_o_n_parser)    | |
+`class `[``JSONWriter``](classes/io.html#class_io__j_s_o_n_writer)    | |
+`class `[``Parser``](classes/io.html#class_io__parser)    | |
+`class `[``SWCParser``](classes/io.html#class_io__s_w_c_parser)    | |
+`class `[``SWCWriter``](classes/io.html#class_io__s_w_c_writer)    | |
 `struct `[``contour_info``](classes/io.html#struct_io_contour__info)    | [Contour](classes/core.html#class__contour) header in DAT files.
 `struct `[``marker_type``](classes/io.html#struct_io_marker__type)    | Markerset structure for NL files.
 `struct `[``subtree_info``](classes/io.html#struct_io_subtree__info)    | SubTree header in DAT files.
@@ -151,7 +151,7 @@ IO namespace contains write/read functionality for most common file formats.
 --------------------------------|---------------------------------------------
 `struct `[``selector_func_traits``](classes/selectors.html#struct_selector__func__traits)        | Selector function traits.
 `struct `[``type_chooser``](classes/selectors.html#struct_type__chooser)        | Trait that extracts the selector i/o type.
-`struct `[``type_chooser< true, T >``](classes/selectors.html#struct_type__chooser_3_01true_00_01_t_01_4)        |
+`struct `[``type_chooser< true, T >``](classes/selectors.html#struct_type__chooser_3_01true_00_01_t_01_4)        | |
 `public template<typename F1,typename F2,typename... Funcs,std::enable_if_t< sizeof...(Funcs)==0 > *>`  <br/>`inline constexpr auto compose_selector(const F1 & f1,const F2 & f2,Funcs... fns)` | Recursive template for selector composition.
 `public template<typename F,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F >::out_set > *>`  <br/>`inline constexpr auto selector_out_single_to_set(const F & f)` | Converts a selector with single output in one with set output Case: Output is already set.
 `public template<typename F,std::enable_if_t< `[`selector_func_traits`](classes/selectors.html#struct_selector__func__traits)`< F >::in_set > *>`  <br/>`inline constexpr auto selector_in_single_to_set(const F & f)` | Converts a selector with single output in one with set output Case: Output is already set.
@@ -183,9 +183,9 @@ Validator namespace contains the validator template class and the predefined val
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[``Validator``](classes/validator.html#class_validator)    |
-`class `[``ValidatorItem``](classes/validator.html#class_validator_item)    |
-`class `[``check_func_traits``](classes/validator.html#struct_check__func__traits)        |
+`class `[``Validator``](classes/validator.html#class_validator)    | |
+`class `[``ValidatorItem``](classes/validator.html#class_validator_item)    | |
+`class `[``check_func_traits``](classes/validator.html#struct_check__func__traits)        | |
 `public const auto is_true` | Dummy. Checks that a given boolean is true
 `public const auto is_false` | Dummy. Checks that a given boolean is false
 `public const auto empty_string` | Dummy. Checks that a given string is empty

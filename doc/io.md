@@ -37,7 +37,7 @@ Parsers are expected to be error tolerant (up to some extent). Although detailed
 - `critical` Returns true if the last error has been critical
 - `reset_errors` Sets all counts to 0 and critical flag to false.
 
-If you plan to develop your own parser, please check the [Parser class](#) documentation for further details.
+If you plan to develop your own parser, please check the [Parser class](classes/io.html#class_io__parser) documentation for further details.
 
 ---
 

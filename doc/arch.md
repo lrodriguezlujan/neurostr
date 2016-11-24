@@ -11,7 +11,7 @@ NeuroSTR is structured in five heavily interrelated modules:
 
 ### Core <a id="core"></a>
 
-The core module is the angular stone of the library, as its name suggests. It contains all classes described in the [Data model](#model) section, as well as other additional functionality such as the basic geometry functions, properties, log, etc. All core functionality is in the namespace `neurostr`. Please make yourself familiar with the core module before trying to use the library, you will need it.
+The core module is the angular stone of the library, as its name suggests. It contains all classes described in the [Data model](data_model.html) section, as well as other additional functionality such as the basic geometry functions, properties, log, etc. All core functionality is in the namespace `neurostr`. Please make yourself familiar with the core module before trying to use the library, you will need it.
 
 **What's in the core module?:**
 - Property map classes - *property.h/c*
@@ -49,11 +49,11 @@ A selector is a function that takes one or more elements of a neuron, and return
 
 **What's in the selector module?:**
 - Shorthand to include everything - *selector.h*
-- [Selectors with node as input](selectors/node.html) - *node_selector.h*
-- [Selectors with branch as input](selectors/branch.html) - *branch_selector.h*
-- [Selectors with neurite as input](selectors/neurite.html) - *neurite_selector.h*
-- [Selectors with neuron as input](selectors/neuron.html) - *neuron_selector.h*
-- [Generic selectors](selectors/generic.html) - *universal_selector.h*
+- [Selectors with node as input](selectors/predefined.html#node) - *node_selector.h*
+- [Selectors with branch as input](selectors/predefined.html#branch) - *branch_selector.h*
+- [Selectors with neurite as input](selectors/predefined.html#neurite) - *neurite_selector.h*
+- [Selectors with neuron as input](selectors/predefined.html#neuron) - *neuron_selector.h*
+- [Generic selectors](selectors/predefined.html#generic) - *universal_selector.h*
 - [Selector operations](selectors/operations.html#inner) - *selector_operations.h*
 - [Selector set operations](selectors/operations.html#set) - *selector_set_operations.h*
 
@@ -66,21 +66,14 @@ A measure is a function that given one or several elements of a neuron, return a
 **What's in the selector module?:**
 - Shorthand to include everything - *measure.h*
 - Template traits - *measure_traits.h*
-- [Measure with node as input](measures/node.html) - *node_measure.h*
-- [Measure with branch as input](measures/branch.html) - *branch_measure.h*
-- [Measure with neurite as input](measures/neurite.html) - *neurite_measure.h*
-- [Measure with neuron as input](measures/neuron.html) - *neuron_measure.h*
-- [L-measure definitions](measures/lmeasure.html) - *lmeasure_decl.h*
-- [Generic measures](measures/generic.html) - *universal_measure.h*
-- [Measure operations](measures/operations.html) - *measure_operations.h*
-- [Selector set operations](selectors/operations.html#set) - *selector_set_operations.h*
+- [Measure with node as input](measures/predefined.html#node) - *node_measure.h*
+- [Measure with branch as input](measures/predefined.html#branch) - *branch_measure.h*
+- [Measure with neurite as input](measures/predefined.html#neurite) - *neurite_measure.h*
+- [Measure with neuron as input](measures/predefined.html#neuron) - *neuron_measure.h*
+- [L-measure definitions](measures/predefined.html#lmeasure) - *lmeasure_decl.h*
+- [Generic measures](measures/predefined.html#generic) - *universal_measure.h*
+- [Measure operations](measures.html#operations) - *measure_operations.h*
 - [Aggregators](measures.html#aggregators) - *aggregate.h*
 - Aggregators traits - *aggregator_traits.h*
-
----
-
-### Methods <a id="methods"></a>
-
-TO-DO
 
 ---

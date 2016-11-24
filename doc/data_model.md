@@ -33,7 +33,7 @@ Nodes usually appear as part of a [branch](#branch), but they can also appear as
 
 ![Node parent branch](node_parent_branch.png "Node parent branch")
 
-The first node in a neurite is called the **root** node of the neurite. A node with no descendants is a **terminal** node or terminal tip. Finally, a node with two or more descendants is a **bifurcation** node. The node itself and all its descendants are the **subtree** of the node. For implementation details (such as member data elements, functions, etc) please check the [Node class](classes/core/node.html) section.
+The first node in a neurite is called the **root** node of the neurite. A node with no descendants is a **terminal** node or terminal tip. Finally, a node with two or more descendants is a **bifurcation** node. The node itself and all its descendants are the **subtree** of the node. For implementation details (such as member data elements, functions, etc) please check the [Node class](classes/core.html#class_node) section.
 
 ---
 
@@ -51,7 +51,7 @@ Branches are always part of a single neurite. In the context of the neurite we c
 
 ![Branch within a neurite](branch_in_neurite.png "")
 
-The details about branch representation in NeuroSTR are available at the [class documentation](classes/core/branch.html)
+The details about branch representation in NeuroSTR are available at the [class documentation](classes/core.html#class_branch)
 
 ---
 
@@ -91,7 +91,7 @@ The soma, i.e. the neuron cell body, representation is embedded within the neuro
 
 ![Soma](soma.png "Soma")
 
-Please check [Neuron class](classes/core/neuron.html) documentation for implementation details.
+Please check [Neuron class](classes/core.html#class_neuron) documentation for implementation details.
 
 ---
 
@@ -101,7 +101,7 @@ A contour is a sequence of three dimensional points, usually in the same plane, 
 
 In the vast majority of the cases, contours are not used for computing or measure anything. They are merely informative elements that can be drawn in a representation. However, in some cases they can be useful as they can define three-dimensional regions of interest (for example, cortical layers), and the end-user might be interested in selecting / measuring parts of the neuron inside/outside that region.
 
-[Contour class](classes/core/contour.html) documentation.
+[Contour class](classes/core.html#class_contour) documentation.
 
 ![Contour](contour.png "")
 
@@ -112,4 +112,4 @@ In the vast majority of the cases, contours are not used for computing or measur
 
 The reconstruction is the lat component in the data model. A reconstruction is simply a container class that accommodates several neurons and contours in a single element. The reason behind the definition of the reconstruction class is in the Neurolucida files: A single file can contain several neurons and contours, which are common to all neurons.
 
-Since it is a simple container, the reconstruction has little functionality itself. For details check [Reconstruction class](classes/core/reconstruction.html) documentation.
+Since it is a simple container, the reconstruction has little functionality itself. For details check [Reconstruction class](classes/core.html#class_reconstruction) documentation.

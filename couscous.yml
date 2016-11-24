@@ -73,31 +73,6 @@ menu:
           test:
             text: "Testing"
             relativeUrl: "doc/install.html#test"
-      tutorial:
-        text: "Tutorial"
-        relativeUrl: "doc/tutorial.html"
-        subsections:
-          basics:
-            text: "Basics"
-            relativeUrl: "doc/tutorial/basics.html"
-            items:
-              basics_a:
-                text: "TO-DO"
-                relativeUrl: "doc/tutorial/basics.html#todo"
-          selectors:
-            text: "Using selectors"
-            relativeUrl: "doc/tutorial/selectors.html"
-            items:
-              selectors_a:
-                text: "TO-DO"
-                relativeUrl: "doc/tutorial/selectors.html#todo"
-          measures:
-            text: "Measures"
-            relativeUrl: "doc/tutorial/measures.html"
-            items:
-              measures_a:
-                text: "TO-DO"
-                relativeUrl: "doc/tutorial/measures.html#todo"
       io:
         text: "Input/Output"
         relativeUrl: "doc/io.html"
@@ -132,7 +107,7 @@ menu:
             text: "Selector basics"
             relativeUrl: "doc/selectors.html#basics"
           predef:
-            text: "Predefined selectors"
+            text: "Prebuilt selectors"
             relativeUrl: "doc/selectors/predefined.html"
             items:
               neuron:
@@ -168,7 +143,7 @@ menu:
         relativeUrl: "doc/measures.html"
         subsections:
           predef:
-            text: "Predefined Measures"
+            text: "Prebuilt Measures"
             relativeUrl: "doc/measures/predefined.html"
             items:
               node:
