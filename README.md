@@ -61,7 +61,7 @@ The `make install` command will copy the library headers, binaries and their bun
 
 There are several variables that you can set while running the `cmake` command to change the default install directory (`/usr/local`) or to avoid installing the bundled libraries or the executables:
 
-| Flag | Default value | What it does...|
+| Flag | Default value | What it does...
 |:--| :--: |:-
 |`CMAKE_INSTALL_PREFIX` | `/usr/local` | Default install directory |
 |`NO_INSTALL_BUNDLED` | `false` | If true, bundled headers are not installed |
