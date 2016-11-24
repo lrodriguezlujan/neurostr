@@ -141,7 +141,7 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 
 **Output:** Real number.
 
-ADD IMAGE
+
 
 ---
 
@@ -156,7 +156,7 @@ ADD IMAGE
 **Details:** The Hillman taper rate defined as the ratio of the difference between first and last node diameters and the first node diameter. If the branch's root exists, it is taken as the first node. If we assume non-decreasing diameters, the hillman taper rate should be non-negative. Note that it will throw an
 exception for a [Branch] with no nodes.
 
-ADD IMAGE
+
 
 ---
 
@@ -170,7 +170,7 @@ ADD IMAGE
 
 **Details:** See [Branch order](branch.html#order)
 
-ADD IMAGE
+
 
 ---
 
@@ -184,7 +184,7 @@ ADD IMAGE
 
 **Details:** Please note that the border variant might return negative values if the sum of radius is greater than the distance
 
-ADD IMAGE
+
 
 ---
 
@@ -198,7 +198,7 @@ ADD IMAGE
 
 **Details:** If the [Neurite] doesn't have a root node, the distance is computed to its first [Node]
 
-ADD IMAGE
+
 
 ---
 
@@ -212,7 +212,7 @@ ADD IMAGE
 
 **Details:** If the [Neuron] doesn't have a [Soma], the the method returns the distance between the given node and the point (0,0,0).
 
-ADD IMAGE
+
 
 ---
 
@@ -224,7 +224,7 @@ ADD IMAGE
 
 **Output:** Non negative real Number.
 
-ADD IMAGE
+
 
 ---
 
@@ -239,7 +239,7 @@ ADD IMAGE
 
 **Details:** The aforementioned cone has the radius of the parent at one end and the radius of the given [Node] at the other. If the parent of the given [Node] cannot be determined, it returns 0.
 
-ADD IMAGE
+
 
 ---
 
@@ -253,7 +253,7 @@ ADD IMAGE
 
 **Details:** The aforementioned cone has the radius of the parent at one end and the radius of the given [Node] at the other. If the parent of the given [Node] cannot be determined, it returns 0.
 
-ADD IMAGE
+
 
 ---
 
@@ -267,7 +267,7 @@ ADD IMAGE
 
 **Details:** If the parent of the given [Node] cannot be determined, the circle radius is just the given node radius.
 
-ADD IMAGE
+
 
 ---
 
@@ -282,7 +282,7 @@ ADD IMAGE
 **Details:** If the parent of the given [Node] cannot be determined, the taper rate is 0. The Hillman taper rate is given by:
 `(parent.radius-node.radius)/parent.radius`
 
-ADD IMAGE
+
 
 ---
 
@@ -297,7 +297,7 @@ ADD IMAGE
 **Details:** If the parent of the given [Node] cannot be determined, the taper rate is 0. The Burker taper rate is given by:
 `(parent.radius-node.radius)/distance(parent,node)`
 
-ADD IMAGE
+
 
 ---
 
@@ -312,7 +312,7 @@ ADD IMAGE
 
 **Details:** The box volume is computed by applying a PCA over the position of the nodes, and then computing the axis-aligned box volume on the rotated positions.
 
-ADD IMAGE
+
 
 ---
 
@@ -326,7 +326,7 @@ ADD IMAGE
 
 **Details:** If the parent of the given [Node] cannot be determined, the method returns the null vector.
 
-ADD IMAGE
+
 
 ---
 
@@ -340,7 +340,7 @@ ADD IMAGE
 
 **Details:** If the node is not a bifurcation node it returns 0. See [Branch local bifurcation angle](branch.html#localbif)
 
-ADD IMAGE
+
 
 ---
 
@@ -354,7 +354,7 @@ ADD IMAGE
 
 **Details:** If the node is not an elongation node it returns 0. The reference vector for 3D angle orientation is the [Neuron] up vector (by default it is the (0,0,1) vector)
 
-ADD IMAGE
+
 
 ---
 
@@ -366,7 +366,7 @@ ADD IMAGE
 
 **Output:** Pair of angles in radians (-pi,pi). Azimuth and elevation
 
-ADD IMAGE
+
 
 ---
 
@@ -378,7 +378,7 @@ ADD IMAGE
 
 **Output:** Boolean value. True if the node's branch is terminal.
 
-ADD IMAGE
+
 
 ---
 
@@ -390,7 +390,7 @@ ADD IMAGE
 
 **Output:** Non negative value. If the parent of the given [Node] cannot be determined, the method returns the highest value representable in a float.
 
-ADD IMAGE
+
 
 ---
 
@@ -402,7 +402,7 @@ ADD IMAGE
 
 **Output:** Non negative value. If the parent of the given [Node] cannot be determined, the method returns the highest value representable in a float.
 
-ADD IMAGE
+
 
 ---
 
@@ -419,7 +419,7 @@ ADD IMAGE
 **Details:** See [L-measure fractal dimension documentation](http://cng.gmu.edu:8080/Lm/help/Fractal_Dim.htm).
 
 
-ADD IMAGE
+
 
 ---
 
@@ -438,7 +438,7 @@ exception for a [Branch] with no nodes.
 
 `(first.diameter - last.diameter) / first.diameter`
 
-ADD IMAGE
+
 
 ---
 
@@ -454,7 +454,7 @@ ADD IMAGE
 
 `(first.diameter - last.diameter) / distance(first,last)`
 
-ADD IMAGE
+
 
 ---
 
@@ -470,7 +470,7 @@ ADD IMAGE
 
 `branch.length / distance(first,last)`
 
-ADD IMAGE
+
 
 ---
 
@@ -508,7 +508,7 @@ ADD IMAGE
 
 **Details:** Branch orders counts the number of bifurcations in the path from the given [Branch] to the root of the [Neurite]. That is, the root [Branch] has a centrifugal order of 0, it's daughters have a centrifugal order of 1, and so on.
 
-ADD IMAGE
+
 
 ---
 
@@ -553,7 +553,7 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2, the measure always returns -1.
 
-ADD IMAGE
+
 
 ---
 
@@ -615,7 +615,7 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2 it returns -1. NAN values might appear if null segments are present.
 
-ADD IMAGE
+
 
 ---
 
@@ -629,7 +629,7 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2 it returns -1. NAN values might appear if null segments are present.
 
-ADD IMAGE
+
 
 ---
 
@@ -643,7 +643,7 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2 it returns -1. NAN values might appear if null segments are present.
 
-ADD IMAGE
+
 
 ---
 
@@ -657,7 +657,7 @@ ADD IMAGE
 
 **Details:** If the number of descendants of the given [Branch] is not equal to 2 it returns -1. NAN values might appear if null segments are present.
 
-ADD IMAGE
+
 
 ---
 
@@ -671,7 +671,7 @@ ADD IMAGE
 
 **Details:** If the branch don't have a sibling branch, it returns the null vector.
 
-ADD IMAGE
+
 
 ---
 
@@ -685,7 +685,7 @@ ADD IMAGE
 
 **Details:** If the branch don't have a sibling branch, it returns the null vector.
 
-ADD IMAGE
+
 
 ---
 
@@ -699,7 +699,7 @@ ADD IMAGE
 
 **Details:** If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See [Local plane vector](#localplane) function.
 
-ADD IMAGE
+
 
 ---
 
@@ -713,7 +713,7 @@ ADD IMAGE
 
 **Details:** If the number of daughter branches is not equal to 2, returns -1. NAN values might appear if the tree is malformed. See [Local plane vector](#localplane) function.
 
-ADD IMAGE
+
 
 ---
 
@@ -725,7 +725,7 @@ ADD IMAGE
 
 **Output:** Non negative real number - branch length.
 
-ADD IMAGE
+
 
 ---
 
@@ -741,7 +741,7 @@ ADD IMAGE
 
 **Details:** The function pre-checks the possible intersection by checking the bounding box of each pair of [Branches]. If the boxes intersect, then computes the branch-branch distance (that is, the segment-segment distance for each pair of segments).
 
-ADD IMAGE
+
 
 ---
 
@@ -824,7 +824,7 @@ ADD IMAGE
 
 **Details:** If there are several soma points, the computed area is the surface of the sphere centered at the soma barycenter with radius the average distance from the barycenter to the external border of the sphere. See [soma_surface](neuron.html#soma_surface) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -878,7 +878,7 @@ ADD IMAGE HERE
 
 **Output:** Non-negative real number.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -916,7 +916,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node length to parent](node.html#length) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -930,7 +930,7 @@ ADD IMAGE HERE
 
 **Details:** See [Branch length](branch.html#length) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -944,7 +944,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node compartment surface](node.html#surface) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -958,7 +958,7 @@ ADD IMAGE HERE
 
 **Details:** Branch surface is computed as the sum of compartment surfaces. See [Node compartment surface](node.html#surface) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -972,7 +972,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node compartment section area](node.html#section_area) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -987,7 +987,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node compartment volume](node.html#volume) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1001,7 +1001,7 @@ ADD IMAGE HERE
 
 **Details:** Branch volume is computed as the sum of compartment surfaces. See [Node compartment volume](node.html#volume) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1015,7 +1015,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node root distance](node.html#rootdist) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1029,7 +1029,7 @@ ADD IMAGE HERE
 
 **Details:** See [Node path distance](node.html#rootpath) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1043,7 +1043,7 @@ ADD IMAGE HERE
 
 **Details:** See [Branch centrifugal order](branch.html#order) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1055,7 +1055,7 @@ ADD IMAGE HERE
 
 **Output:** Terminal degree [Summary] stats (sum, max, min, median, mean and sd).
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1067,7 +1067,7 @@ ADD IMAGE HERE
 
 **Output:** Terminal degree [Summary] stats (sum, max, min, median, mean and sd).
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1082,7 +1082,7 @@ ADD IMAGE HERE
 
 **Details:** See [Burker taper rate](branch.html#burker) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1096,7 +1096,7 @@ ADD IMAGE HERE
 
 **Details:** See [Hillman taper rate](branch.html#hillman) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1110,7 +1110,7 @@ ADD IMAGE HERE
 
 **Details:** See [Tortuosity](branch.html#tortuosity) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1124,7 +1124,7 @@ ADD IMAGE HERE
 
 **Details:** See [Branch size](branch.html#size) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1138,7 +1138,7 @@ ADD IMAGE HERE
 
 **Details:** See [Child diameter ratio](branch.html#chid_diam) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1152,7 +1152,7 @@ ADD IMAGE HERE
 
 **Details:** See [Partition asymmetry](branch.html#partition_asymmetry) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1166,7 +1166,7 @@ ADD IMAGE HERE
 
 **Details:** See [Rall's power fit ](branch.html#rall) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1180,7 +1180,7 @@ ADD IMAGE HERE
 
 **Details:** See [Rall's power fit ](branch.html#rall) and [Pk factory](branch.html#pk) measures.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1194,7 +1194,7 @@ ADD IMAGE HERE
 
 **Details:** See [Pk factory](branch.html#pk) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1208,7 +1208,7 @@ ADD IMAGE HERE
 
 **Details:** See [Local bifurcation angle](branch.html#local_bif) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1222,7 +1222,7 @@ ADD IMAGE HERE
 
 **Details:** See [Remote bifurcation angle](branch.html#remote_bif) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1236,7 +1236,7 @@ ADD IMAGE HERE
 
 **Details:** See [Local tilt angle](branch.html#local_tilt) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1250,7 +1250,7 @@ ADD IMAGE HERE
 
 **Details:** See [Remote tilt angle](branch.html#remote_tilt) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1264,7 +1264,7 @@ ADD IMAGE HERE
 
 **Details:** See [Local torque angle](branch.html#local_torque) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1278,7 +1278,7 @@ ADD IMAGE HERE
 
 **Details:** See [Remote torque angle](branch.html#remote_torque) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1290,7 +1290,7 @@ ADD IMAGE HERE
 
 **Output:** [Node] diameter [Summary] stats (sum, max, min, median, mean and sd).
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1304,7 +1304,7 @@ ADD IMAGE HERE
 
 **Details:** See [Hillman threshold](branch.html#hillman_threshold) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
@@ -1318,7 +1318,7 @@ ADD IMAGE HERE
 
 **Details:** See [Fractal dimension](node.html#fractal_dimension) measure.
 
-ADD IMAGE HERE
+
 
 ---
 
