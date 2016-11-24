@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/core.html">
+                               Core
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/geometry.html">
+                               Geometry
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/traits.html">
+                               Traits
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/log.html">
+                               Log
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/io.html">
+                               I/O
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/selector.html">
+                               Selector
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/measure.html">
+                               Measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html">
+                               Validator
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="namespace">namespace <code>neurostr</code></h1>
+<p>Neurostr namespace contains all other namespaces in the library as well as the data model classes.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namespace</code><a href="classes/log.html#namespace_log"><code>log</code></a></td>
+<td>Log namespace contains logger functions.</td>
+</tr>
+<tr>
+<td><code>namespace</code><a href="classes/io.html#namespace_io"><code>io</code></a></td>
+<td>IO namespace contains write/read functionality for most common file formats.</td>
+</tr>
+<tr>
+<td><code>namespace</code><a href="classes/traits.html#namespace_traits"><code>traits</code></a></td>
+<td>Core template traits</td>
+</tr>
+<tr>
+<td><code>namespace</code><a href="classes/geometry.html#namespace_geometry"><code>geometry</code></a></td>
+<td>Geometry namespace hides geometry specific implementation details from the rest of the library.</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_branch"><code>Branch</code></a></td>
+<td>Representation of a single branch in a reconstruction. Conceptually is an ordered sequence of nodes.</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_neurite"><code>Neurite</code></a></td>
+<td>Represents a single neurite (dendrite, apical dend. or axon)</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_contour"><code>Contour</code></a></td>
+<td>3D contour in the reconstruction. It is an ordered sequence of 3D points (not nodes). Contours are usually closed but it is not  mandatory.</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_neuron"><code>Neuron</code></a></td>
+<td>Represents a single neuron, its soma and neurites</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_node"><code>Node</code></a></td>
+<td>Node concept class. stores a numeric ID, x,y,z coordinates and radius. Also stores references to its branch and parent node if they exist and implements basic operations.</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_property_map"><code>PropertyMap</code></a></td>
+<td>Auxiliar class. Stores key-value properties</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_reconstruction"><code>Reconstruction</code></a></td>
+<td>Stores several neuron as well as common contours</td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/core.html#class_with_properties"><code>WithProperties</code></a></td>
+<td>Base class for neuron , neurite ... that have a property map</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="namespace_geometry">namespace <a href="classes/geometry.html"><code>geometry</code></a></h1>
+<p>Geometry namespace hides geometry specific implementation details from the rest of the library.</p>
+<h2 id="summary-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="classes/geometry.html#class_geometry__discrete_frechet"><code>DiscreteFrechet</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/geometry.html#class_geometry__r_d_p_simplifier"><code>RDPSimplifier</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/geometry.html#class_geometry__triangle_mesh"><code>TriangleMesh</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets the ith component from a point.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><code>inline float get(const</code><a href="classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; p)</code></td>
+<td>Gets the ith component from a 2D point.</td>
+</tr>
+<tr>
+<td><code>public inline float getx(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets point x coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float gety(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>gets pòint y coordinate</td>
+</tr>
+<tr>
+<td><code>public inline float getz(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Gets point z coordinate.</td>
+</tr>
+<tr>
+<td><code>public inline float get(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int coord)</code></td>
+<td>Gets the ith component from a point.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I&gt;</code>  <br/><a href="classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Removes the ith component from P.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>planar_projection(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,int i)</code></td>
+<td>Dynamic planar projection.</td>
+</tr>
+<tr>
+<td><code>public float distance(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Euclidean distance between a and b.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>vectorFromTo(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; from,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; to)</code></td>
+<td>Vector with origin in from and end in to.</td>
+</tr>
+<tr>
+<td><code>public void traslate(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v)</code></td>
+<td>Adds v to p.</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ref)</code></td>
+<td>Modifies the point p scaling it by scale wrt ref so its norm is multiplied by scale.</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float rx,float ry,float rz)</code></td>
+<td>Modifies the point p scaling it by (rx,ry,rz)</td>
+</tr>
+<tr>
+<td><code>public void scale(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,float scale)</code></td>
+<td>Modifies p multiplying its norm by scale.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>cross_product(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q)</code></td>
+<td>Computes the 3D cross product p ^ q.</td>
+</tr>
+<tr>
+<td><code>public float norm(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Returns de 2-norm of p as vector.</td>
+</tr>
+<tr>
+<td><code>public inline bool equal(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Checks whether two point a and b are equal.</td>
+</tr>
+<tr>
+<td><code>public inline bool equal(const</code><a href="classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1a0be2bd3dfe9e29d27900d58c051ec20a"><code>planar_point</code></a><code>&amp; b)</code></td>
+<td>Checks whether two point a and b are equal.</td>
+</tr>
+<tr>
+<td><code>public std::array&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; get_basis(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; vx,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; up)</code></td>
+<td>Retunrs a orthonormal right-oriented basis where vx is the first vector.</td>
+</tr>
+<tr>
+<td><code>public float segment_segment_distance(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q0,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; q1)</code></td>
+<td>Computes the distance between two line-segments p and q.</td>
+</tr>
+<tr>
+<td><code>public Eigen::Quaternionf align_vectors(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; v,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; u,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></td>
+<td>Returns the quaternion to transform v into u (both unitary)</td>
+</tr>
+<tr>
+<td><code>public bool segment_box_intersection(const</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,const</code><a href="classes/geometry.html#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; inter)</code></td>
+<td>Computes the box-segment intersection of b and s.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename G1,typename G2&gt;</code>  <br/><code>inline bool covered_by(const G1 &amp; g1,const G2 &amp; g2)</code></td>
+<td>Checks if first geometry is covered by the second.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline bool segment_cross_plane(const</code><a href="classes/geometry.html#class_geometry_1a1155e1ecb90affb2cdd8464f4692d342"><code>segment_type</code></a><code>&amp; s,const Point &amp; v,Point &amp; inter)</code></td>
+<td>Segment-axis plane intersection.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void min_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Set the ith component in res to the minimim betweeen the ith components in p and res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;int I,typename Point&gt;</code>  <br/><code>inline void max_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Set the ith component in res to the maximum betweeen the ith components in p and res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void max_by_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Computes the component-wise maximum between p and res and stores it in res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Point&gt;</code>  <br/><code>inline void min_by_component(const Point &amp; p,Point &amp; res)</code></td>
+<td>Computes the component-wise minimum between p and res and stores it in res.</td>
+</tr>
+<tr>
+<td><code>public template&lt;</code><a href="classes/geometry.html#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>float axisLength(const</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Return box axis length.</td>
+</tr>
+<tr>
+<td><code>public template&lt;</code><a href="classes/geometry.html#class_geometry_1a19daa71ce572e7c06c78b8872dbac4b9"><code>Axis</code></a><code>axis&gt;</code>  <br/><code>void setAxis(</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b,float v)</code></td>
+<td>Set box axis to given value.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>as_planar_polygon(const std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+</tr>
+<tr>
+<td><code>public template&lt;typename G&gt;</code>  <br/><code>inline std::size_t num_points(const G &amp; geom)</code></td>
+<td>Number of points in the geometry.</td>
+</tr>
+<tr>
+<td><code>public float polygon_area(const</code><a href="classes/geometry.html#class_geometry_1acc0ab5374c64759f77fcf4e7291b25fb"><code>polygon_type</code></a><code>&amp; p)</code></td>
+<td>Computes the pclosed polygon area.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename Iter&gt;</code>  <br/><code>inline float polygon_area(const Iter &amp; begin,const Iter &amp; end)</code></td>
+<td>Computes the closed polygon area.</td>
+</tr>
+<tr>
+<td><code>public void negate(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Multiplies every component by -1.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>barycenter(const std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Computes the barycenter of a pointset.</td>
+</tr>
+<tr>
+<td><code>public void normalize(</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Modifies p so its norm is equal to 1.</td>
+</tr>
+<tr>
+<td><code>public float vector_vector_angle(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b)</code></td>
+<td>Computes the planar vector-vector shortest angle.</td>
+</tr>
+<tr>
+<td><code>public bool box_box_intersection(const</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Checks if box a intersects with box b (axis aligned)</td>
+</tr>
+<tr>
+<td><code>public std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; box_corners(const</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>&amp; b)</code></td>
+<td>Returns 8 corner points in a axis-aligned box.</td>
+</tr>
+<tr>
+<td><code>public float lineseg_dist(const std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; u,const std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Euclidean distance between two line-segments.</td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/geometry.html#class_geometry_1a67f4955807b967aad3b839d637ee7657"><code>box_type</code></a><code>bounding_box(const std::vector&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&gt; &amp; v)</code></td>
+<td>Computes the bounding box of a node set.</td>
+</tr>
+<tr>
+<td><code>public float vector_vector_directed_angle(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; a,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; b,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>up)</code></td>
+<td>Computes the planar angle from a to b.</td>
+</tr>
+<tr>
+<td><code>public std::pair&lt; float, float &gt; local_orientation(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p,const std::array&lt;</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>, 3 &gt; &amp; basis)</code></td>
+<td>Computes the local orientation (Azimuth and elevation) of p wrt basis.</td>
+</tr>
+<tr>
+<td><code>public bool in_triangle_border(const</code><a href="classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if p is in the border of the triangle t.</td>
+</tr>
+<tr>
+<td><code>public bool is_triangle_vertex(const</code><a href="classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if P is one of the vertices of T.</td>
+</tr>
+<tr>
+<td><code>public bool within_triangle(const</code><a href="classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p)</code></td>
+<td>Verifies if p is inside the triangle t.</td>
+</tr>
+<tr>
+<td><code>public bool triangle_ray_intersection(const</code><a href="classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_o,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; ray_v,</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; intersection)</code></td>
+<td>Computes Triangle-ray intersection with the moller-trumbore algorithm.</td>
+</tr>
+<tr>
+<td><code>public float tetrahedron_volume(const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p0,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p1,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p2,const</code><a href="classes/geometry.html#class_geometry_1ae5d33f53c10261df2871104fa1c76c8e"><code>point_type</code></a><code>&amp; p3)</code></td>
+<td>Returns the volume of the tetrahedron.</td>
+</tr>
+<tr>
+<td><code>public float triangle_area(const</code><a href="classes/geometry.html#class_geometry_1a8af5bb35f5a90c3474257df24c3e8b74"><code>triangle_type</code></a><code>&amp; t)</code></td>
+<td>Compute the triangle area.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="namespace_traits">namespace <a href="classes/traits.html"><code>traits</code></a></h1>
+<h2 id="summary-2">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Trait</code><a href="classes/traits.html#struct_traits_function__traits"><code>function_traits</code></a></td>
+<td>Extract basic information from a fuctor like out type, arg type, arity...</td>
+</tr>
+<tr>
+<td><code>Trait</code><a href="classes/traits.html#struct_traits_is__vector"><code>is_vector</code></a></td>
+<td>Base false trait is vector.</td>
+</tr>
+<tr>
+<td><code>Trait</code><a href="#struct_traits_is_base_of_template"><code>is_base_of_template</code></a></td>
+<td>Is base of template base trait.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="namespace_log">namespace <a href="classes/log.html"><code>log</code></a></h1>
+<p>Log namespace contains logger functions.</p>
+<h2 id="summary-3">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="classes/log.html#class_log___logger__storage"><code>_logger_storage</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>public</code><a href="classes/log.html#class_log___logger__storage"><code>_logger_storage</code></a><code>_nstr_logger_</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>public void init_log_file(const std::string &amp; path)</code></td>
+<td>Inits file logger.</td>
+</tr>
+<tr>
+<td><code>public void init_log_cout()</code></td>
+<td>Initializes the logger using the standard output stream.</td>
+</tr>
+<tr>
+<td><code>public void init_log_cerr()</code></td>
+<td>Initializes the logger using the standard error stream.</td>
+</tr>
+<tr>
+<td><code>public void disable_log()</code></td>
+<td>Disables the log.</td>
+</tr>
+<tr>
+<td><code>public void enable_log()</code></td>
+<td>Enables the log.</td>
+</tr>
+<tr>
+<td><code>public void set_format(const std::string &amp; s)</code></td>
+<td>Changes current log format.</td>
+</tr>
+<tr>
+<td><code>public void set_level(</code><a href="classes/log.html#class_log_1a10acfc5ebf7a1e159905211f5b89d5df"><code>severity_level</code></a><code>l)</code></td>
+<td>Changes current logger severity threshold.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="namespace_io">namespace <a href="classes/io.html"><code>io</code></a></h1>
+<p>IO namespace contains write/read functionality for most common file formats.</p>
+<h2 id="summary-4">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__a_s_c_parser"><code>ASCParser</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__d_a_t_parser"><code>DATParser</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__j_s_o_n_parser"><code>JSONParser</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__j_s_o_n_writer"><code>JSONWriter</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__parser"><code>Parser</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__s_w_c_parser"><code>SWCParser</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/io.html#class_io__s_w_c_writer"><code>SWCWriter</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/io.html#struct_io_contour__info"><code>contour_info</code></a></td>
+<td><a href="classes/core.html#class__contour">Contour</a> header in DAT files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/io.html#struct_io_marker__type"><code>marker_type</code></a></td>
+<td>Markerset structure for NL files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/io.html#struct_io_subtree__info"><code>subtree_info</code></a></td>
+<td>SubTree header in DAT files.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/io.html#struct_io_tree__info"><code>tree_info</code></a></td>
+<td>Tree header in DAT files.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="namespace_selector">namespace <a href="classes/selector.html#namespace_selector"><code>selector</code></a></h1>
+<h2 id="summary-5">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>struct</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a></td>
+<td>Selector function traits.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/selectors.html#struct_type__chooser"><code>type_chooser</code></a></td>
+<td>Trait that extracts the selector i/o type.</td>
+</tr>
+<tr>
+<td><code>struct</code><a href="classes/selectors.html#struct_type__chooser_3_01true_00_01_t_01_4"><code>type_chooser&lt; true, T &gt;</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F1,typename F2,typename... Funcs,std::enable_if_t&lt; sizeof...(Funcs)==0 &gt; *&gt;</code>  <br/><code>inline constexpr auto compose_selector(const F1 &amp; f1,const F2 &amp; f2,Funcs... fns)</code></td>
+<td>Recursive template for selector composition.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F,std::enable_if_t&lt;</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a><code>&lt; F &gt;::out_set &gt; *&gt;</code>  <br/><code>inline constexpr auto selector_out_single_to_set(const F &amp; f)</code></td>
+<td>Converts a selector with single output in one with set output Case: Output is already set.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F,std::enable_if_t&lt;</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a><code>&lt; F &gt;::in_set &gt; *&gt;</code>  <br/><code>inline constexpr auto selector_in_single_to_set(const F &amp; f)</code></td>
+<td>Converts a selector with single output in one with set output Case: Output is already set.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F1,typename F2,std::enable_if_t&lt;</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a><code>&lt; F1 &gt;::in_set &gt; *,std::enable_if_t&lt;</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a><code>&lt; F2 &gt;::out_set &gt; *&gt;</code>  <br/><code>inline constexpr auto selector_foreach(const F1 &amp; f1,const F2 &amp; f2)</code></td>
+<td>Creates a new selector that applies the selector f2 to each selected element of f1.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F1,typename F2,typename... Funcs,std::enable_if_t&lt; sizeof...(Funcs)==0 &gt; *&gt;</code>  <br/><code>inline constexpr auto union_selector(const F1 &amp; f1,const F2 &amp; f2,Funcs... fns)</code></td>
+<td>Recursive template for selector union.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F1,typename F2,typename... Funcs,std::enable_if_t&lt; sizeof...(Funcs)==0 &gt; *&gt;</code>  <br/><code>inline constexpr auto intersection_selector(const F1 &amp; f1,const F2 &amp; f2,Funcs... fns)</code></td>
+<td>Recursive template for selector intersection.</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename F1,typename F2,std::enable_if_t&lt;!</code><a href="classes/selectors.html#struct_selector__func__traits"><code>selector_func_traits</code></a><code>&lt; F1 &gt;::in_set &gt; *&gt;</code>  <br/><code>inline constexpr auto diff_selector_factory(const F1 &amp; f_1,const F2 &amp; f_2)</code></td>
+<td>Assymetric difference.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="namespace_measure">namespace <a href="classes/measure.html#namespace_measure"><code>measure</code></a></h1>
+<h2 id="summary-6">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namespace</code><a href="classes/measure.html#namespace_aggregate"><code>aggregate</code></a></td>
+<td>Namespace that contains aggregate-related functions and traits</td>
+</tr>
+<tr>
+<td><code>template &lt;typename Fn&gt; auto measureEach(const Fn&amp; f)</code></td>
+<td>Converts a single-input measure into a set measure that applies the original measure to each element of the input set</td>
+</tr>
+<tr>
+<td><code>template &lt;typename Fn, typename Aggr&gt; auto measureEachAggregate(const Fn&amp; f, const Aggr&amp; aggr)</code></td>
+<td>Converts a single-input measure into a set measure that applies the original measure to each element of the input set and then aggregates the  output.</td>
+</tr>
+<tr>
+<td><code>template &lt;typename S, typename M&gt; auto selectorMeasureCompose(const S&amp; selector, const M&amp; measure)</code></td>
+<td>Creates a new measure as result of the composition of the selector and the measure (M o S). Types and arity must match</td>
+</tr>
+<tr>
+<td><code>template &lt;typename... Measures&gt; auto createMeasureTuple(const Measures&amp;... measures )</code></td>
+<td>Creates a measure that applies several measures to the same input and returns their result in a tuple</td>
+</tr>
+<tr>
+<td><code>template &lt;typename F&gt; struct measure_func_traits</code></td>
+<td>Measure function traits. Extracts input type, input arity and output type.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="namespace_validator">namespace <a href="classes/validator.html#namespace_validator"><code>validator</code></a></h1>
+<p>Validator namespace contains the validator template class and the predefined validators and check functions.</p>
+<h2 id="summary-7">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="classes/validator.html#class_validator"><code>Validator</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/validator.html#class_validator_item"><code>ValidatorItem</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class</code><a href="classes/validator.html#struct_check__func__traits"><code>check_func_traits</code></a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>public const auto is_true</code></td>
+<td>Dummy. Checks that a given boolean is true</td>
+</tr>
+<tr>
+<td><code>public const auto is_false</code></td>
+<td>Dummy. Checks that a given boolean is false</td>
+</tr>
+<tr>
+<td><code>public const auto empty_string</code></td>
+<td>Dummy. Checks that a given string is empty</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto range_check_factory(T min,T max)</code></td>
+<td>Range check factory. Checks that a given value is in the range [min, max)</td>
+</tr>
+<tr>
+<td><code>public const auto neurites_attached_to_soma</code></td>
+<td>Neurite validator. Checks that neurites are attached to the soma</td>
+</tr>
+<tr>
+<td><code>public const auto neuron_has_soma</code></td>
+<td>Neuron validator. Checks that neuron soma is defined</td>
+</tr>
+<tr>
+<td><code>public const auto no_trifurcations_validator</code></td>
+<td>Node validator. Checks that the number of descendants of a node is at most 2.</td>
+</tr>
+<tr>
+<td><code>public const auto zero_length_segments_validator</code></td>
+<td>Node validator. Checks that the length of the compartment associated to each node is not zero.</td>
+</tr>
+<tr>
+<td><code>public const auto radius_length_segments_validator</code></td>
+<td>Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.</td>
+</tr>
+<tr>
+<td><code>public const auto increasing_radius_validator</code></td>
+<td>Node validator. Checks that the node radius is not increasing.</td>
+</tr>
+<tr>
+<td><code>public const auto segment_collision_validator</code></td>
+<td>Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction</td>
+</tr>
+<tr>
+<td><code>public const auto extreme_angles_validator</code></td>
+<td>Node validator. Check that the elongation/bifurcation angle are not too high to be plausible</td>
+</tr>
+<tr>
+<td><code>public inline auto planar_reconstruction_validator_factory(float min)</code></td>
+<td>Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)</td>
+</tr>
+<tr>
+<td><code>public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)</code></td>
+<td>Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)</td>
+</tr>
+<tr>
+<td><code>public inline auto apical_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto axon_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of axons in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto linear_branches_validator_factory(float min)</code></td>
+<td>Branch validator. Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1</td>
+</tr>
+<tr>
+<td><code>public inline auto branch_collision_validator_factory(bool ignore_diams)</code></td>
+<td>Branch validator. Check that the Branch dont collide with any other branch in the neuron</td>
+</tr>
+</tbody>
+</table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/io.html#parsers">
+                               Parsers
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/io.html#writers">
+                               Writers
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/io/format.html">
+                               Format specifications
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/io/format.html#SWC"> Standard SWC </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/io/format.html#ASC"> Neurolucida ASCII </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/io/format.html#DAT"> Neurolucida binary DAT </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/io/format.html#JSON"> JSON </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="input">Input</h1>
+<p>text</p>
+<p><a id="SWC"></a></p>
+<h2 id="standard-swc">Standard SWC</h2>
+<p>The standard SWC files are tabular text files (ASCII encoded) with two types of lines, the header/comment lines and the data lines. A simple SWC file look as follows:</p>
+<pre><code># This is a SWC example file
+# with some header lines
+#
+# With space-delimited data fields: Node ID Type X Y Z Diameter Parent ID
+1 1 0.0 0.0 0.0 0.1 -1</code></pre>
+<p>SWC files are contain only one neuron per file, and don't contain other structures such as markers or contours. Parent nodes are required to be declared before their descendants.</p>
+<h3 id="header">Header</h3>
+<p>Header/comment lines start with the pound character '#'. The whole line is considered a comment. Although we call them <em>header lines</em>, comments can be placed anywhere in the file.</p>
+<p>Reconstruction properties can be placed in header lines of the SWC file, but this functionality is not standard. The parser identifies keywords (property names) in the comments and stores the rest of the line as its value.</p>
+<pre><code># Region Hippocampus
+# Creature Rat
+# MyOwnKey This is the property value if myownkey is a registered key
+#
+# Note that the property format is: Key/Name[Space]Value</code></pre>
+<p>There are 16 default keys (check the list below), but you can add or remove any key to the list. Key matching is case-insensitive, so you don't need to worry about upper or lower case characters. All property values are processed as strings and added to the reconstruction property map.</p>
+<p><strong>Default property keys</strong></p>
+<ul>
+<li>Original_source</li>
+<li>Creature</li>
+<li>Region</li>
+<li>Field</li>
+<li>Layer</li>
+<li>Field/Layer</li>
+<li>Type</li>
+<li>Contributor</li>
+<li>Reference</li>
+<li>Raw</li>
+<li>Extras</li>
+<li>Soma_area</li>
+<li>Shrinkage_correction</li>
+<li>Version_number</li>
+<li>Version_date</li>
+<li>Scale</li>
+</ul>
+<h3 id="data">Data</h3>
+<p>Data lines are simple text line with space-separated values for storing data in a tabular structure. Each line/record contains 7 data fields that corresponds to one <a href="../goal">Node</a> in the reconstruction.</p>
+<h4 id="data-fields">Data fields</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Node ID</td>
+<td style="text-align: left;">Non negative integer</td>
+<td style="text-align: left;">Node unique ID. Ususally starts at 1</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Node type ID</td>
+<td style="text-align: left;">Non negative integer</td>
+<td style="text-align: left;">Node type (<a href="#swc_nodetype">Type table</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">X value</td>
+<td style="text-align: left;">Real number</td>
+<td style="text-align: left;">Node x position</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Y value</td>
+<td style="text-align: left;">Real number</td>
+<td style="text-align: left;">Node y position</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Z value</td>
+<td style="text-align: left;">Real number</td>
+<td style="text-align: left;">Node z position</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Diameter</td>
+<td style="text-align: left;">Non negative Real number</td>
+<td style="text-align: left;">Node diameter value</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Parent node ID</td>
+<td style="text-align: left;">-1 or non negative integer</td>
+<td style="text-align: left;">Parent node ID. -1 For no parent node.</td>
+</tr>
+</tbody>
+</table>
+<p><a id="swc_nodetype"></a></p>
+<h4 id="node-types">Node types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Type ID</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">Undefined</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Soma</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Axon</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Dendrite</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Apical</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Other</td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<p>The SWC parser is tolerant to errors. This means that it will try to continue parsing the document when he find faulty lines. These errors will be registered as warnings in the logger and the faulty lines are usually skipped. You should check the warning count after reading a file.</p>
+<h4 id="error-types">Error types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Error</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Line is discarded?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Missing fields</strong></td>
+<td style="text-align: left;">The data line has less than 7 fields</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Field type mismatch</strong></td>
+<td style="text-align: left;">The value of some data field doesn't match the expect type</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Negative diameter value</strong></td>
+<td style="text-align: left;">The diameter value is negative</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Orphan node</strong></td>
+<td style="text-align: left;">Can't find the parent node in the reconstruction</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Extra fields</strong></td>
+<td style="text-align: left;">There are extra fields at the end of the data line</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><a id="ASC"></a></p>
+<h2 id="neurolucida-ascii">Neurolucida ASCII</h2>
+<p><strong>WARNING:</strong> The Neurolucida ASCII format specification is not available. This means that the parser and all the content in this section is based on knowledge extracted from a variety of sample files. If you have a valid ASC file that isn't accepted by the parser, please contact us to fix the issue.</p>
+<p>The Neurolucida ASCII (so called ASC files) are the ASCII encoded text format used by the Neurolucida neuron reconstruction software. The ASC files are built by blocks in a tree-structure.</p>
+<p>The ASC files support inline comments starting with the semicolon character:</p>
+<pre><code>; This is a valid comment that spans until the end of the line
+(x y z d) ; This is also a valid comment</code></pre>
+<p>Blocks are delimited by special character sequences. These are the delimiter characters for our parser:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Character</th>
+<th style="text-align: left;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>;</code></td>
+<td style="text-align: left;">Inline comment</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>(</code></td>
+<td style="text-align: left;">Block start</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>)</code></td>
+<td style="text-align: left;">Block end</td>
+</tr>
+<tr>
+<td style="text-align: center;">&#124;</td>
+<td style="text-align: left;">Sibling branch start. It is equivalent to <code>)(</code>.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: left;">Spine start</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: left;">Spine end</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>""</code></td>
+<td style="text-align: left;">String escape</td>
+</tr>
+</tbody>
+</table>
+<p>The parser works as follows:</p>
+<ol>
+<li>Skips comments, spaces and empty lines until it finds a <em>stopper</em> character</li>
+<li>If the <em>stopper</em> is a block start character, it tries to read the first value to infer the block type</li>
+<li>If the block is determined as a <em>Tree</em> block, processes it recursively (go to 1), otherwise it process the block according to the deduced type.</li>
+<li>Go to 1 until it finds a block end character or the file ends</li>
+</ol>
+<h4 id="block-types">Block types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Block</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Detection logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Contour</td>
+<td style="text-align: left;">Set of samples that delimit an area</td>
+<td style="text-align: left;">It is the only named block. Starts with a escaped string</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tree</td>
+<td style="text-align: left;">Container. First block of the tree (<a href="../data_model.html#neurite">Neurite</a>) - can contain properties, samples, etc.</td>
+<td style="text-align: left;">Got an empty value when trying to read inside the block</td>
+</tr>
+<tr>
+<td style="text-align: left;">Property</td>
+<td style="text-align: left;">Key-value pair, values can be empty, string, numeric or colors</td>
+<td style="text-align: left;">First value is a non-escaped string</td>
+</tr>
+<tr>
+<td style="text-align: left;">Marker set</td>
+<td style="text-align: left;">Tags in the reconstruction</td>
+<td style="text-align: left;">Like properties but with special names: doublecircle, filledcircle...</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sample</td>
+<td style="text-align: left;">Reconstruction <a href="../data_model.html#node">Node</a> (x,y,z,d)</td>
+<td style="text-align: left;">First value is numeric</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sub tree</td>
+<td style="text-align: left;">Containers inside a tree (<a href="../data_model.html#branch">Branch</a>)</td>
+<td style="text-align: left;">Got an empty value when trying to read inside the block and we are already inside a tree block.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Spine</td>
+<td style="text-align: left;">Spine position mark. We ignore it</td>
+<td style="text-align: left;">Spine start detected</td>
+</tr>
+</tbody>
+</table>
+<p>A single ASC file can contain several neurons. Neurons' somas are contours with the name &quot;cellbody&quot; (and also an empty property with name &quot;cellbody&quot;). Somas are required to be defined before their trees (<a href="../data_model.html#neurite">Neurite</a>). For each soma contour a new neuron is created in the reconstruction. Trees are attached to the closest soma in the reconstruction. The parser assigns an auto-incremental ID (starting at 1) to each <a href="../data_model.html#node">Node</a> in the file.</p>
+<h3 id="errors-1">Errors</h3>
+<p>The ASC parser is tolerant to errors. This means that it will try to recover from error found when parsing the document. It tries to skip the faulty blocks (and emits a warning), but if it cannot recover from the error, it will emit one. All warnings and errors are registered through the logger, and can be checked after calling the <code>read</code> function.</p>
+<h4 id="error-types-1">Error types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Error</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Block is discarded?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Wrong termination</strong></td>
+<td style="text-align: left;">Block end was expected but some other character/value was found</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Type mismatch</strong></td>
+<td style="text-align: left;">Block or value types don't match the expected ones</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>End of file reached</strong></td>
+<td style="text-align: left;">EOF reached while trying to recover from a error</td>
+<td style="text-align: center;">Yes - Fatal</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Non empty ended</strong></td>
+<td style="text-align: left;">Unexpected value at the end of a block</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><a id="DAT"></a></p>
+<h2 id="neurolucida-dat">Neurolucida DAT</h2>
+<p><strong>WARNING:</strong> The Neurolucida binary DAT format specification is not available. This means that the parser and all the content in this section is based on knowledge extracted from a variety of sample files. If you have a valid DAT file that isn't accepted by the parser, please contact us to fix the issue. The current specification is an extension of the <a href="http://neuronland.org/NLMorphologyConverter/MorphologyFormats/NeurolucidaDAT/Spec.html">NLMorphologyConverter  documentation</a></p>
+<p>The Neurolucida DAT files are the binary (little-endian) format used by the Neurolucida neuron reconstruction software. The DAT files are build by blocks in a tree-structure like the ASC files. Obviously, DAT files don't support comments and they are not &quot;human-readable&quot;.</p>
+<p>The DAT files start with a 70-byte header and end with a 4-byte footer. The parser verifies that the header matches before staring to read the file and emits an error if the footer don't match.</p>
+<p>All data blocks share a 6 byte long common header (block header). This header identifies the type of the block and its size (including any sub-blocks). However, in practices, we notice that the size declared in some blocks don't match their real size.</p>
+<h4 id="block-header">Block header</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Block type</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">2</td>
+<td>Block types as a 16-bit unsigned int</td>
+</tr>
+<tr>
+<td style="text-align: left;">Block size</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">4</td>
+<td>Block size as a 32-bit unsigned int. This size includes the header itself and all sub-blocks</td>
+</tr>
+</tbody>
+</table>
+<p>There are <a href="http://neuronland.org/NLMorphologyConverter/MorphologyFormats/NeurolucidaDAT/Spec.html">18 block types</a> that can be identified by the <code>block type</code> field value. Most of them are processed by the parser, and their information added to the reconstruction, but a little subset is either skipped or ignored</p>
+<h4 id="block-types-1">Block types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Block type</th>
+<th style="text-align: left;">Hex value</th>
+<th style="text-align: left;">Processed</th>
+<th style="text-align: left;">Ignored</th>
+<th style="text-align: left;">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;"><code>0x0001</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sample</td>
+<td style="text-align: left;"><code>0x0101</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sample List</td>
+<td style="text-align: left;"><code>0x0103</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Property</td>
+<td style="text-align: left;"><code>0x0104</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Property list</td>
+<td style="text-align: left;"><code>0x0105</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Contour</td>
+<td style="text-align: left;"><code>0x0201</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Tree</td>
+<td style="text-align: left;"><code>0x0202</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sub Tree</td>
+<td style="text-align: left;"><code>0x0203</code> and <code>0x0209</code></td>
+<td style="text-align: left;">Yes / No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Second subtree id is not processed</td>
+</tr>
+<tr>
+<td style="text-align: left;">Markerset</td>
+<td style="text-align: left;"><code>0x0204</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Usually the declared size don't match the real size. Expect warnings</td>
+</tr>
+<tr>
+<td style="text-align: left;">Markerset list</td>
+<td style="text-align: left;"><code>0x0205</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Usually the declared size don't match the real size. Expect warnings</td>
+</tr>
+<tr>
+<td style="text-align: left;">Spine</td>
+<td style="text-align: left;"><code>0x0206</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Spine list</td>
+<td style="text-align: left;"><code>0x0207</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Text</td>
+<td style="text-align: left;"><code>0x0208</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Thumbnail</td>
+<td style="text-align: left;"><code>0x0401</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Description</td>
+<td style="text-align: left;"><code>0x0402</code></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Image</td>
+<td style="text-align: left;"><code>0x0403</code></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Image is store as a base64 encoded string in a property called 'image'</td>
+</tr>
+</tbody>
+</table>
+<p>A single DAT file can contain several neurons. Neurons' somas are contours with an empty property with name &quot;cellbody&quot;. Somas are required to be defined before their trees (<a href="../data_model.html#neurite">Neurite</a>). For each soma contour a new neuron is created in the reconstruction. Trees are attached to the closest soma in the reconstruction. Trees (<a href="../data_model.html#neurite">Neurite</a>) and subtrees (<a href="../data_model.html#branch">Branch</a>) are processed recursively to build the neurites gradually.</p>
+<h3 id="block-details">Block details</h3>
+<p><a id="strblock"></a></p>
+<h4 id="string-block">String block</h4>
+<p>String blocks contain ASCII-encoded strings. The string are not usually null-ended (that is, the last character is not <code>\0</code>), so the string length is the total block length minus the header size (6 bytes). This is done by the <code>get_value</code> function.</p>
+<p><a id="sampleblock"></a></p>
+<h4 id="sample-block">Sample block</h4>
+<p>Sample blocks are the representation of <a href="../data_model.html#node">Node</a>s in the file. They contain the position, diameter and section (slice number) of each node. The parser assigns an auto-incremental ID (starting at 1) to each <a href="../data_model.html#node">Node</a> in the file. The data which follows the header is:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">X position</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">4</td>
+<td>X position as a 32-bit float number</td>
+</tr>
+<tr>
+<td style="text-align: left;">Y position</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">4</td>
+<td>Y position as a 32-bit float number</td>
+</tr>
+<tr>
+<td style="text-align: left;">Z position</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">4</td>
+<td>Z position as a 32-bit float number</td>
+</tr>
+<tr>
+<td style="text-align: left;">Diameter</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">4</td>
+<td>Diameter position as a 32-bit float number</td>
+</tr>
+<tr>
+<td style="text-align: left;">Section</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: left;">2</td>
+<td>Section as a 16-bit unsigned integer</td>
+</tr>
+</tbody>
+</table>
+<p><a id="propblock"></a></p>
+<h4 id="property-block">Property block</h4>
+<p>Property blocks are key-value pairs where the value can be empty, a string, or a number. Properties are inserted in the property map of the neuron element that contains them (usually a <a href="../data_model.html#neuron">Neuron</a> or <a href="../data_model.html#neurite">Neurite</a>). The data which follows the header is:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Property name</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">Variable (<em>s_len</em>)</td>
+<td>Property name. A <a href="#strblock">String block</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Has value flag</td>
+<td style="text-align: center;"><em>s_len</em></td>
+<td style="text-align: left;">2</td>
+<td>A 16-bit unsigned integer. If it is not equal to 0 the property is not empty (it has a value).</td>
+</tr>
+<tr>
+<td style="text-align: left;">String valued flag</td>
+<td style="text-align: center;"><em>s_len</em> + 2</td>
+<td style="text-align: left;">2</td>
+<td>Flag as a 16-bit unsigned integer. If it is not equal to 0 the property value is A <a href="#strblock">string block</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Value</td>
+<td style="text-align: center;"><em>s_len</em> + 4</td>
+<td style="text-align: left;">Variable</td>
+<td>Property value. Either a 32-bit float number or a <a href="#strblock">string block</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="contour-block">Contour block</h4>
+<p>Contour blocks are plain containers with usually a <a href="#sampleblock">sample list</a> and some <a href="#propblock">properties</a>. They have a contour block header with some common properties:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Closed flag</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">2</td>
+<td>A 16-bit unsigned integer. If it is not equal to 0 the contour is closed. Stored as a bool-valued property named &quot;closed&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left;">Face color</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">3</td>
+<td>Three bytes (RGB) that determine the contour face (line) color. Stored as a hexstring-valued property named &quot;face_color&quot; (#RRGGBB)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Back color</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">3</td>
+<td>Three bytes (RGB) that determine the contour back (fill) color. Stored as a hexstring-valued property named &quot;back_color&quot; (#RRGGBB)</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, there are some properties that appear in almost every contour with some auxiliar information about the contour:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property name</th>
+<th style="text-align: center;">Value type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">filldensity</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: left;">Contour fill opacity</td>
+</tr>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: center;"><a href="#strblock">String</a></td>
+<td style="text-align: left;">Contour name</td>
+</tr>
+<tr>
+<td style="text-align: left;">resolution</td>
+<td style="text-align: center;">Float</td>
+<td style="text-align: left;">Unknwon</td>
+</tr>
+</tbody>
+</table>
+<h4 id="markerset-block">Markerset block</h4>
+<p>Markers are simply tags located in the 3D space. Probably their position matches the position of a existing <a href="../data_model.html#node">Node</a>, but it is not confirmed yet. They contain the following block after the header:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Marker name</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">Variable (<em>s_len</em>)</td>
+<td>Marker name. A <a href="#strblock">String block</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: center;"><em>s_len</em></td>
+<td style="text-align: left;">4</td>
+<td>Unknown. RGBA color? flags? 32-bit float? To be determined.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Property list</td>
+<td style="text-align: center;"><em>s_len</em> + 4</td>
+<td style="text-align: left;">Variable (<em>p_len</em>)</td>
+<td>Marker properties</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sample list</td>
+<td style="text-align: center;"><em>s_len</em> + <em>p_len</em> + 4</td>
+<td style="text-align: left;">Variable</td>
+<td>Marker positions. Usually a single sample node.</td>
+</tr>
+</tbody>
+</table>
+<p>Markers are processed and a <code>marker_type</code> structure is filled with their data, but the it is not added to the reconstruction (maybe in the future...).</p>
+<h4 id="tree-block">Tree block</h4>
+<p>Tree blocks are complex containers that contain other blocks (sample, subtree, properties, markers...). They are the representation of a <a href="../data_model.html#neurite">Neurite</a> in the file. There is a tree-specific header following the block header:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Neurite type</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">2</td>
+<td>A 16-bit unsigned integer. Numeric ID for the Neurite type.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Face color</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">3</td>
+<td>Three bytes (RGB) that determine the face (line) color. Stored as a hexstring-valued property named &quot;face_color&quot; (#RRGGBB)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Back color</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">3</td>
+<td>Three bytes (RGB) that determine the back (fill) color. Stored as a hexstring-valued property named &quot;back_color&quot; (#RRGGBB)</td>
+</tr>
+</tbody>
+</table>
+<p>The tree type codes are:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tree type</th>
+<th style="text-align: left;">Hex value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Axon</td>
+<td style="text-align: left;"><code>0x00</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Dendrite</td>
+<td style="text-align: left;"><code>0x01</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Apical</td>
+<td style="text-align: left;"><code>0x02</code></td>
+</tr>
+</tbody>
+</table>
+<p>Then the tree block can contain any block but tree, contour, text, thumbnail, image or description nodes. The blocks within a tree block can appear in any order.</p>
+<h4 id="subtree-block">Subtree block</h4>
+<p>Tree blocks are complex containers that contain other blocks (sample, subtree, properties, markers...). They are the representation of a <a href="../data_model.html#branch">Branch</a> in the file. They have a 4-byte header following the block header which meaning is unknown:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Unknown</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">4</td>
+<td>Unknown. RGBA color? flags? 32-bit float? To be determined.</td>
+</tr>
+</tbody>
+</table>
+<p>Then the subtree block can contain any block but tree, contour, text, thumbnail, image or description nodes. The blocks within a subtree block can appear in any order.</p>
+<h4 id="list-blocks">List blocks</h4>
+<p>There are four possible types of list blocks: sample list, property list, marker list and spine list. All list block share the same header following the block header:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Offset (bytes)</th>
+<th style="text-align: left;">Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Number of elements</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">2</td>
+<td>Number of blocks in the list as a 16-bit unsigned integer</td>
+</tr>
+<tr>
+<td style="text-align: left;">Content</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">variable</td>
+<td>Set of blocks (sample, property, marker or spine) that are part of the list</td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors-2">Errors</h3>
+<p>The DAT parser is tolerant to errors. It will try to recover from error found when parsing the document. It tries to skip the faulty blocks (and emits a warning), but if it cannot recover from the error, it will emit one. All warnings and errors are registered in the logger, and their count can be checked after calling the <code>read</code> function.</p>
+<h4 id="error-types-2">Error types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Error</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Block is discarded?</th>
+<th style="text-align: center;">Critical? (parsing stops)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Invalid header</strong></td>
+<td style="text-align: left;">Header check failed</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Buffer expansion required</strong></td>
+<td style="text-align: left;">Blocks spans past the declared size</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Missing block name</strong></td>
+<td style="text-align: left;">First inner block is not a string in named blocks</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Block type don't match</strong></td>
+<td style="text-align: left;">Got a unexpected block type</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Missing block</strong></td>
+<td style="text-align: left;">Unexpected block ending</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Buffer size exceeded</strong></td>
+<td style="text-align: left;">Block size greater than the buffer size. This is probably a consequence of a previous error</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Unexpected End of File</strong></td>
+<td style="text-align: left;">EOF reached while reading a block (wrong footer?)</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><a id="JSON"></a></p>
+<h2 id="json">JSON</h2>
+<p><strong>NOTE:</strong> The structure defined in this section is work in progress and might change drastically in the close future.</p>
+<p>The JSON (acronym of JavaScript Object notation) is syntactically  identical to the code used for creating objects in JavaScript. In practice, it has become a lightweight data-interchange format across different applications and languages. Here we propose a JSON structure to represent three-dimensional neuron reconstructions, initially defined for our own use.</p>
+<p>So you might wonder, why JSON?. We wanted a format easy to read and write for both humans and computer programs. There are JSON parsers and writers for every programming language, or at least for the popular ones. Also, we need a file format capable of storing complex structures and easy to extend in the future. <a href="http://www.w3schools.com/js/js_json_syntax.asp">Here</a> you can learn about syntax and get some examples.</p>
+<p>The proposed structure is a hierarchical structure, somewhat similar to the structure used in the Neurolucida formats. We define 8 objects (blocks) to be part of our structure. Each one corresponds to a data structure in the <a href="../data_model.html">data model</a>(with a couple of exceptions). In bottom-top order, the objects are:</p>
+<ul>
+<li><strong>3DPoint</strong> A three dimensional point</li>
+<li><strong>PropertyMap</strong> Set of key-value pairs</li>
+<li><strong>Node</strong>  Equivalent to data model <a href="../data_model.html#node">Node</a></li>
+<li><strong>Branch</strong> Equivalent to data model <a href="../data_model.html#branch">Branch</a></li>
+<li><strong>Neurite</strong> Equivalent to data model <a href="../data_model.html#neurite">Neurite</a></li>
+<li><strong>Neuron</strong>   Equivalent to data model <a href="../data_model.html#neuron">Neuron</a></li>
+<li><strong>Contour</strong>  Equivalent to data model <a href="../data_model.html#contour">Contour</a></li>
+<li><strong>Reconstruction</strong>  Equivalent to data model <a href="../data_model.html#reconstruction">Reconstruction</a></li>
+</ul>
+<p>A valid JSON document can be a single <em>Neuron</em> or <em>Reconstruction</em> object. Below you can find the specifications for each object type. Please note that you can add extra elements to any object described here, as long as they do not have the same key as a required member.</p>
+<p><a id="json_point"></a></p>
+<h3 id="3dpoint-object">3DPoint Object</h3>
+<h5 id="members">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">x coordinate value</td>
+</tr>
+<tr>
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">y coordinate value</td>
+</tr>
+<tr>
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">z coordinate value</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example">Example</h5>
+<pre><code class="language-json">{
+  "x" : 1.0,
+  "y" : 0.0,
+  "z" : 0.0
+}</code></pre>
+<hr />
+<p><a id="json_propertymap"></a></p>
+<h3 id="propertymap-object">PropertyMap Object</h3>
+<p>Property map are simply objects whose members are properties. The member's name is the property key and its value is the property value. However, not every property value is accepted:</p>
+<h5 id="accepted-values">Accepted values</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Value type</th>
+<th style="text-align: center;">Representation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Empty value</td>
+<td style="text-align: center;"><code>"empty" : []</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: center;"><code>"integer" : 10</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Float</td>
+<td style="text-align: center;"><code>"float" : 3.14</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: center;"><code>"bool_A" : true, "bool_B" : false</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">String</td>
+<td style="text-align: center;"><code>"string" : "text"</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Point</td>
+<td style="text-align: center;"><a href="#json_point">3DPoint object</a> -  <code>"point" : {"x" : 1.0, "y" : 0.0, "z" : 0.0}</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-1">Example</h5>
+<pre><code class="language-json">{
+  "description" : "this is an example property map",
+  "creature" : "rat",
+  "width" : 100.00,
+  "height" : 100.00,
+  "some random number" : 1,
+  "this is a good example?" : false
+}</code></pre>
+<hr />
+<p><a id="json_node"></a></p>
+<h3 id="node-object">Node Object</h3>
+<p>Node objects can be seen as a point objects with some extra required fields and, optionally, a property map.</p>
+<h5 id="members-1">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">Integer (&gt;= 0)</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Node unique ID</td>
+</tr>
+<tr>
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Node x coordinate value</td>
+</tr>
+<tr>
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Node y coordinate value</td>
+</tr>
+<tr>
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Number</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Node z coordinate value</td>
+</tr>
+<tr>
+<td style="text-align: left;">r</td>
+<td style="text-align: left;">Number (&gt;= 0)</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Node radius</td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Node properties</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-2">Example</h5>
+<pre><code class="language-json">{
+  "id" : 42,
+  "x" : 1.0,
+  "y" : 1.0,
+  "z" : 1.0,
+  "r" : 0.01,
+  "properties" : {
+    "fake" : true
+  }
+}</code></pre>
+<hr />
+<p><a id="json_branch"></a></p>
+<h3 id="branch-object">Branch Object</h3>
+<h5 id="members-2">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">root</td>
+<td style="text-align: left;"><a href="#json_node">Node object</a></td>
+<td style="text-align: center;">No (but it will show a wanrning msg)</td>
+<td style="text-align: left;">Branch root node</td>
+</tr>
+<tr>
+<td style="text-align: left;">nodes</td>
+<td style="text-align: left;">Array of <a href="#json_node">Node objects</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Nodes which are part of the <a href="../data_model.html#branch">Branch</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Branch properties</td>
+</tr>
+<tr>
+<td style="text-align: left;">children</td>
+<td style="text-align: left;">Array of Branch objects</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Daughter branches of the given one</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-3">Example</h5>
+<pre><code class="language-json">{
+  "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+    "nodes" : [
+       { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0}
+    ],
+    "children":[
+    {
+            "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                "nodes" : [
+                      { "id": 6, "x": 4.0, "y": 1.0, "z" : 1.0 , "r": 0.0}
+                ]
+        },
+        {
+            "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                "nodes" : [
+                 { "id": 7, "x": 4.0, "y": 1.0, "z" : -1.0 , "r": 0.0}
+                ]
+    }
+  ]
+}</code></pre>
+<hr />
+<p><a id="json_neurite"></a></p>
+<h3 id="neurite-object">Neurite Object</h3>
+<h5 id="members-3">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">Integer (&gt;= 0)</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Neurite unique ID</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Neurite <a href="#swc_nodetype">SWC Type</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">tree</td>
+<td style="text-align: left;"><a href="#json_branch">Branch object</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Neurite's root <a href="../data_model.html#branch">Branch</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Neurite properties</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-4">Example</h5>
+<pre><code class="language-json">{
+                    "id" : 1,
+                    "type" : 3,
+                    "tree" : {
+                        "root" : { "id": 1, "x": 0.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                        "nodes" : [
+                            { "id": 2, "x": 1.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 3, "x": 2.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0}
+                        ],
+                        "children":[
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0}
+                                ],
+                                "children":[
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 6, "x": 4.0, "y": 1.0, "z" : 1.0 , "r": 0.0}
+                                        ]
+                                    },
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 7, "x": 4.0, "y": 1.0, "z" : -1.0 , "r": 0.0}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 8, "x": 4.0, "y": -1.0, "z" : 0.0 , "r": 0.0}
+                                ]
+                            }
+                        ]
+          }
+}</code></pre>
+<hr />
+<p><a id="json_neuron"></a></p>
+<h3 id="neuron-object">Neuron Object</h3>
+<h5 id="members-4">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">String</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Neuron ID / name</td>
+</tr>
+<tr>
+<td style="text-align: left;">soma</td>
+<td style="text-align: left;">Soma object</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Neuron's soma</td>
+</tr>
+<tr>
+<td style="text-align: left;">neurites</td>
+<td style="text-align: left;">Array of <a href="#json_neurite">Neurite objects</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Neuron neurites</td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Neuron properties</td>
+</tr>
+</tbody>
+</table>
+<p>A soma object is only required to have a member called &quot;nodes&quot;, which is an array of <a href="#json_node">Node objects</a>.</p>
+<h5 id="example-5">Example</h5>
+<pre><code class="language-json">{
+            "id" : "test neuron",
+            "neurites" : [
+                {
+                    "id" : 1,
+                    "type" : 3,
+                    "tree" : {
+                        "root" : { "id": 1, "x": 0.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                        "nodes" : [
+                            { "id": 2, "x": 1.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 3, "x": 2.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0}
+                        ],
+                        "children":[
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0}
+                                ],
+                                "children":[
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 6, "x": 4.0, "y": 1.0, "z" : 1.0 , "r": 0.0}
+                                        ]
+                                    },
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 7, "x": 4.0, "y": 1.0, "z" : -1.0 , "r": 0.0}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 8, "x": 4.0, "y": -1.0, "z" : 0.0 , "r": 0.0}
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "soma" : {
+                "nodes" : [
+                    { "id": 1, "x": 0.0, "y": 0.0, "z" : 0.0 , "r": 0.0}
+                ]
+            }
+}</code></pre>
+<hr />
+<p><a id="json_contour"></a></p>
+<h3 id="contour-object">Contour Object</h3>
+<h5 id="members-5">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">String</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Contour name</td>
+</tr>
+<tr>
+<td style="text-align: left;">face_color</td>
+<td style="text-align: left;">Soma object</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">RGB hex border color string</td>
+</tr>
+<tr>
+<td style="text-align: left;">back_color</td>
+<td style="text-align: left;">String</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">RGB hex fill color string</td>
+</tr>
+<tr>
+<td style="text-align: left;">closed</td>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">If true, the countour is closed</td>
+</tr>
+<tr>
+<td style="text-align: left;">fill</td>
+<td style="text-align: left;">Float</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Contour fill color opacity</td>
+</tr>
+<tr>
+<td style="text-align: left;">resolution</td>
+<td style="text-align: left;">Float</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Contour resolution (actual meaning - unknown)</td>
+</tr>
+<tr>
+<td style="text-align: left;">points</td>
+<td style="text-align: left;">Array of <a href="#json_point">3DPoint objects</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Conour points (ordered)</td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Contour properties</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-6">Example</h5>
+<pre><code class="language-json">{
+            "name" : "test",
+            "face_color" : "#000000",
+            "back_color" : "#FFFFFF",
+            "closed" : true,
+            "fill" : 1.0,
+            "resolution" : 1.0,
+            "points" : [
+                { "x" : 1.0, "y" : 1.0, "z" : 1.0},
+                { "x" : 2.0, "y" : 2.0, "z" : 1.0},
+                { "x" : 1.0, "y" : 2.0, "z" : 1.0},
+                { "x" : 1.0, "y" : 1.0, "z" : 1.0}
+            ]
+}</code></pre>
+<hr />
+<p><a id="json_reconstruction"></a></p>
+<h3 id="reconstruction-object">Reconstruction Object</h3>
+<h5 id="members-6">Members</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;">Is mandatory?</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">neurons</td>
+<td style="text-align: left;">Array of <a href="#json_neuron">Neuron objects</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;">Reconstruction neurons</td>
+</tr>
+<tr>
+<td style="text-align: left;">contours</td>
+<td style="text-align: left;">Array of <a href="#json_contour">Contour objects</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Reconstruction contours</td>
+</tr>
+<tr>
+<td style="text-align: left;">properties</td>
+<td style="text-align: left;"><a href="#json_propertymap">Property Map</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Reconstruction properties</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-7">Example</h5>
+<pre><code class="language-json">{
+    "neurons" : [
+        {
+            "id" : "test",
+            "neurites" : [
+                {
+                    "id" : 1,
+                    "type" : 3,
+                    "tree" : {
+                        "root" : { "id": 1, "x": 0.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                        "nodes" : [
+                            { "id": 2, "x": 1.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 3, "x": 2.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                            { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0}
+                        ],
+                        "children":[
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0}
+                                ],
+                                "children":[
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 6, "x": 4.0, "y": 1.0, "z" : 1.0 , "r": 0.0}
+                                        ]
+                                    },
+                                    {
+                                        "root" : { "id": 5, "x": 4.0, "y": 1.0, "z" : 0.0 , "r": 0.0},
+                                        "nodes" : [
+                                            { "id": 7, "x": 4.0, "y": 1.0, "z" : -1.0 , "r": 0.0}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "root" : { "id": 4, "x": 3.0, "y": 0.0, "z" : 0.0 , "r": 0.0},
+                                "nodes" : [
+                                    { "id": 8, "x": 4.0, "y": -1.0, "z" : 0.0 , "r": 0.0}
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "soma" : {
+                "nodes" : [
+                    { "id": 1, "x": 0.0, "y": 0.0, "z" : 0.0 , "r": 0.0}
+                ]
+            }
+        }
+    ]
+}</code></pre>
+<hr />
+<h3 id="errors-3">Errors</h3>
+<p>The JSON parser is tolerant to errors. It will try to recover from error found when parsing the document. It tries to skip the faulty objects (and emits a warning), but if the JSON file is malformed or the document is empty it will emit a critical error. All warnings and errors are registered in the logger, and their count can be checked after calling the <code>read</code> function.</p>
+<h4 id="error-types-3">Error types</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Error</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Object is discarded?</th>
+<th style="text-align: center;">Critical? (parsing stops)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Empty document</strong></td>
+<td style="text-align: left;">Document/Stream is empty</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Malformed JSON</strong></td>
+<td style="text-align: left;">JSON Parsing error</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Missing field</strong></td>
+<td style="text-align: left;">Mandatory field is missing</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wrong field type</strong></td>
+<td style="text-align: left;">Unexpeted field type</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Unrecognized property type</strong></td>
+<td style="text-align: left;">Property value is not one of the accepted types</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Negative radius</strong></td>
+<td style="text-align: left;">Node radius is negative</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Unrooted branch</strong></td>
+<td style="text-align: left;">Branch with no root declared</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+</tr>
+</tbody>
+</table>
+<hr />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

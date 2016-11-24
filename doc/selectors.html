@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#basics">
+                               Selector basics
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/prebuilt.html">
+                               Prebuilt selectors
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors.html#create">
+                               Create selectors
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/selectors/operations.html">
+                               Selector operations
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="selectors">Selectors</h1>
+<p>This section reviews what are NeuroSTR selector functions and how to use them. Selectors are a key component in the NeuroSTR architecture. All classes, functions, etc. related to selectors are defined in the <code>neurostr::selector</code> namespace. You can include their headers individually or take them all by adding the header file <code>selector.h</code></p>
+<h2 id="basics">Basics</h2>
+<p>The selector concept is quite simple: A selector is a function that takes one or more references to <a href="goals_architecture.html">elements of a neuron</a> (or the neuron itself) as input, and returns one or more elements as output. Easy, isn't it?</p>
+<p><img src="figures/selector_basics.png" alt="Selector basics" title="Selector basic schema" /></p>
+<p>Single elements references (e.g. a single Node) are simply C++ references, whereas sets are <code>std::vector</code> of <code>std::reference_wrapper</code>. So, looking at the input and output arity we distinguish four selector function types:</p>
+<ol>
+<li>Single input - single output: <code>[](const ElementA&amp; n) =&gt; const ElementB&amp; {}</code></li>
+<li>Single input - set output: <code>[](const ElementA&amp; n) =&gt; std::vector&lt;std::reference_wrapper&lt;ElementB&gt;&gt; {}</code></li>
+<li>Set input - single output:  <code>[](const reference_iter&amp; beg, const reference_iter&amp; end) =&gt; const ElementB&amp; {}</code></li>
+<li>Set input - set output:  <code>[](const reference_iter&lt;A&gt;&amp; beg, const reference_iter&lt;A&gt;&amp; end) =&gt; std::vector&lt;std::reference_wrapper&lt;ElementB&gt;&gt; {}</code></li>
+</ol>
+<p>Here we use <code>reference_iter&lt;Element&gt;</code> as shorthand for <code>std::vector&lt;std::reference_wrapper&lt;Element&gt;&gt;::iterator</code>
+Any function with signature equal to one of these, can be used as selector in <em>NeuroSTR</em> and it is compatible with all selector functionality in the library. Along the documentation, we might mention <strong>filter functions</strong> which are just <em>Set input - set output (type 4)</em> selectors that return a subset of a given set of elements.</p>
+<hr />
+<h2 id="predef">Prebuilt selectors</h2>
+<p>NeuroSTR includes a relatively large set of predefined selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the <em>Node</em> category.</p>
+<p>Here is the list of available selectors, you can find more details about each selector by clicking on their name:</p>
+<h3><a href="selectors/predefined.html#node_selectors">Node Selectors</a></h3>
+<ul>
+<li><a href="selectors/predefined.html#node_self">Self selector</a></li>
+<li><a href="selectors/predefined.html#node_parent">Parent node selector</a></li>
+<li><a href="selectors/predefined.html#node_branch">Parent branch selector</a></li>
+<li><a href="selectors/predefined.html#node_subtree">Subtree selector</a></li>
+<li><a href="selectors/predefined.html#node_subtree_terminals">Subtree terminals selector</a></li>
+<li><a href="selectors/predefined.html#node_stem">Stem selector</a></li>
+<li><a href="selectors/predefined.html#node_descendants">Descendant selector</a></li>
+<li><a href="selectors/predefined.html#node_bifurcation">Bifurcation nodes filter</a></li>
+<li>
+<p><a href="selectors/predefined.html#node_terminal">Terminal nodes filter</a></p>
+<hr />
+</li>
+</ul>
+<h3><a href="selectors/predefined.html#branch_selectors">Branch Selectors</a></h3>
+<ul>
+<li><a href="selectors/predefined.html#branch_neurite">Parent neurite selector</a></li>
+<li><a href="selectors/predefined.html#branch_parent">Parent branch selector</a></li>
+<li><a href="selectors/predefined.html#branch_sibling">Sibling branch selector</a></li>
+<li><a href="selectors/predefined.html#branch_last_node">Last node selector</a></li>
+<li><a href="selectors/predefined.html#branch_first_node">First node selector</a></li>
+<li><a href="selectors/predefined.html#branch_nodes">All nodes selector</a></li>
+<li><a href="selectors/predefined.html#branch_subtree">Subtree selector</a></li>
+<li><a href="selectors/predefined.html#branch_stem">Stem selector</a></li>
+<li><a href="selectors/predefined.html#branch_order">Centrifugal order filter</a></li>
+</ul>
+<hr />
+<h3><a href="selectors/predefined.html#neurite_selectors">Neurite Selectors</a></h3>
+<ul>
+<li><a href="selectors/predefined.html#neurite_neuron">Neuron selector</a></li>
+<li><a href="selectors/predefined.html#neurite_nodes">Node set selector</a></li>
+<li><a href="selectors/predefined.html#neurite_branches">Branch set selector</a></li>
+<li><a href="selectors/predefined.html#neurite_first_branch">First branch selector</a></li>
+<li><a href="selectors/predefined.html#neurite_bifurcation_nodes">Bifurcation nodes selector</a></li>
+<li><a href="selectors/predefined.html#neurite_terminal_nodes">Terminal nodes selector</a></li>
+<li><a href="selectors/predefined.html#neurite_terminal_branches">Terminal branches selector</a></li>
+<li><a href="selectors/predefined.html#neurite_nonterminal">Non terminal branches selector</a></li>
+<li><a href="selectors/predefined.html#neurite_preterminal">Pre-terminal branches selector</a></li>
+<li><a href="selectors/predefined.html#neurite_terminal_bif">Terminal bifurcation node selector</a></li>
+<li><a href="selectors/predefined.html#neurite_type">Dendrite filter</a></li>
+<li><a href="selectors/predefined.html#neurite_type">Apical filter</a></li>
+<li><a href="selectors/predefined.html#neurite_type">Axon filter</a></li>
+</ul>
+<hr />
+<h3><a href="selectors/predefined.html#neuron_selectors">Neuron Selectors</a></h3>
+<ul>
+<li><a href="selectors/neuron.html#neuron_neurites">Neurites selector</a></li>
+<li><a href="selectors/neuron.html#neuron_branch">Branch selector</a></li>
+<li><a href="selectors/neuron.html#neuron_nodes">Nodes selector</a></li>
+</ul>
+<hr />
+<h3><a href="selectors/predefined.html#generic_selectors">Generic Selectors</a></h3>
+<ul>
+<li><a href="selectors/generic.html#generic_self">Generic self selector</a></li>
+<li><a href="selectors/generic.html#generic_property">Property exists filter</a></li>
+<li><a href="selectors/generic.html#generic_unique">Unique filter</a></li>
+</ul>
+<hr />
+<h2 id="operations">Selector operations</h2>
+<p>So far, we have a (large) set of selector functions that might cover our needs. But, imagine that we need a essential selector that, unfortunately, we forgot to implement. Wouldn't be nice to be able to reuse other selectors?. That's where selector operations become really useful. Now we proceed to describe the operations available, but in the <a href="#create">next section</a> we show you how to use the selector operations to create a new useful selector. At the moment all operations are templated operations, in other words they are done in compile time, in the close future neuroSTR will support execution time operations.</p>
+<p>There are two classes of selector operations: selector functions inner operations and selection set operations. The latter, are operations that combine the output of two selectors, whereas the first are regular function operation over selectors.</p>
+<h3><a href="selectors/operations.html#inner">Inner operations</a></h3>
+<ul>
+<li><a href="selectors/operations.html#compose">Composition</a></li>
+<li><a href="selectors/operations.html#out_to_set">Single Output to Set</a></li>
+<li><a href="selectors/operations.html#in_to_set">Single Input to Set (foreach)</a></li>
+<li><a href="selectors/operations.html#foreach">Combined Foreach</a></li>
+</ul>
+<hr />
+<h3><a href="selectors/operations.html#set">Set operations</a></h3>
+<ul>
+<li><a href="selectors/operations.html#union">Union</a></li>
+<li><a href="selectors/operations.html#intersection">Intersection</a></li>
+<li><a href="selectors/operations.html#diff">Asymmetric Difference</a></li>
+</ul>
+<hr />
+<h2 id="create">Create a selector</h2>
+<p>So far you have read all about selectors but you still feel like a fish out of water. To ease your mind we will show you how to create a new selector in 5 lines. Let's start by picking a predefined selector that seems &quot;hard&quot; to implement: <a href="selectors/predefined.html#neurite_preterminal">Pre-termianl branches selector</a>.</p>
+<ol>
+<li>
+<p>The <a href="selectors/predefined.html#neurite_preterminal">Pre-termianl branches selector</a> selects all branches in a neurite which have at least one daughter branch that is terminal. Instead of writing it from scratch we will use the selector operations. Selecting all terminal branches in the neurite seems like a good start, so we use the <a href="selectors/predefined.html#neurite_terminal_branches">Terminal branches selector</a>.</p>
+<pre><code>using namespace ns = neurostr::selector;
+ns::neurite_terminal_branches();</code></pre>
+</li>
+<li>
+<p>Since we want the pre-terminal seems pretty obvious that we should use the <a href="selectors/predefined.html#branch_parent">Parent branch selector</a> somewhere. Actually we want to select the parent of each terminal branch...that is exactly what the <a href="selectors/operations.html#foreach">Combined Foreach</a> operation does:</p>
+<pre><code>ns::selector_foreach(ns::neurite_terminal_branches,
+                   ns::branch_parent_selector);</code></pre>
+</li>
+<li>
+<p>But...what if the neurite has only one branch? We should select and empty set (and the parent selector don't work that way). We need to remove the first branch from the terminal branches selection first. We can select the first branch with the <a href="selectors/prdefined.html#neurite_first_branch">First branch selector</a>, but the <a href="selectors/operations.html#diff">Asymmetric Difference</a> operator requires both arguments to output a set (and to have the same input type), so first we convert the <a href="selectors/predefined.html#neurite_first_branch">First branch selector</a> to an output set selector:</p>
+<pre><code>ns::selector_out_single_to_set(ns::neurite_first_branch_selector);</code></pre>
+</li>
+<li>
+<p>Then we can remove it from the terminal branches selection</p>
+<pre><code>ns::diff_selector_factory(ns::neurite_terminal_branches,
+                        ns::selector_out_single_to_set(ns::neurite_first_branch_selector));</code></pre>
+</li>
+<li>
+<p>Finally, we can create our selector in one (really long) line. Of course, for the sake of code readability, you ought to store intermediate results in auxiliar variables:</p>
+<pre><code>auto preterminal_selector = ns::selector_foreach(
+
+                            ns::diff_selector_factory(ns::neurite_terminal_branches,
+                                                      ns::selector_out_single_to_set(ns::neurite_first_branch_selector)),
+                            ns::branch_parent_selector);</code></pre>
+</li>
+</ol>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

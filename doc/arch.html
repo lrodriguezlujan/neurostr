@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/arch.html">
+                               Library modules
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                          </ul>
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/data_model.html">
+                               Data model
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="library-architecture">Library Architecture</h1>
+<h2 id="library-modules">Library modules  <a id="modules"></a></h2>
+<p>NeuroSTR is structured in five heavily interrelated modules:</p>
+<h3 id="core">Core <a id="core"></a></h3>
+<p>The core module is the angular stone of the library, as its name suggests. It contains all classes described in the <a href="data_model.html">Data model</a> section, as well as other additional functionality such as the basic geometry functions, properties, log, etc. All core functionality is in the namespace <code>neurostr</code>. Please make yourself familiar with the core module before trying to use the library, you will need it.</p>
+<p><strong>What's in the core module?:</strong></p>
+<ul>
+<li>Property map classes - <em>property.h/c</em></li>
+<li>Log functions - <em>log.h/c</em></li>
+<li>Geometry functions - <em>geometry.h/c</em></li>
+<li>Node class - <em>node.h/c</em></li>
+<li>Branch class - <em>branch.h/c</em></li>
+<li>Neurite class and neurite type enumeration - <em>neurite.h/c, neurite_type.h</em></li>
+<li>Neuron class - <em>neuron.h/c</em></li>
+<li>Contour class - <em>contour.h/c</em></li>
+<li>Tree class (from: <a href="http://tree.phi-sci.com/">tree.hh</a> ) - <em>tree.hh</em></li>
+<li>Template traits - <em>traits.h</em></li>
+</ul>
+<hr />
+<h3 id="io">IO <a id="core"></a></h3>
+<p>The <em>input/output</em> module contains the classes that read/write files containing reconstructions. All IO functionality is in the namespace <code>neurostr::io</code>. There are parsers for the SWC, Neurolucida ASCII, Neurolucida DAT and JSON formats, and writers for the SWC and JSON formats. For more information about the module and its functionality check out the <a href="io.html">Input/output section</a>.</p>
+<p><strong>What's in the io module?:</strong></p>
+<ul>
+<li>Parser abstract class - <em>parser.h , parser_dispatcher.h</em></li>
+<li>Neurolucida auxiliar structures - <em>nl_structure.h</em></li>
+<li>SWC Parser - <em>SWCParser.h/c</em></li>
+<li>SWC Writer - <em>SWCWriter.h/c</em></li>
+<li>Neurolucida ASCII Parser - <em>ASCParser.h/c</em></li>
+<li>Neurolucida DAT Parser - <em>DATParser.h/c</em></li>
+<li>JSON Parser - <em>JSONParser.h/c</em></li>
+<li>JSON Writer - <em>JSONWriter.h/c</em></li>
+</ul>
+<hr />
+<h3 id="selectors">Selectors <a id="selector"></a></h3>
+<p>A selector is a function that takes one or more elements of a neuron, and return other elements of that same neuron. An example can be a selector that given a branch, returns its root node. All selector-related functions and classes are in the namespace <code>neurostr::selector</code>. Please check the module documentation in the <a href="selector.html">Selector section</a>.</p>
+<p><strong>What's in the selector module?:</strong></p>
+<ul>
+<li>Shorthand to include everything - <em>selector.h</em></li>
+<li><a href="selectors/predefined.html#node">Selectors with node as input</a> - <em>node_selector.h</em></li>
+<li><a href="selectors/predefined.html#branch">Selectors with branch as input</a> - <em>branch_selector.h</em></li>
+<li><a href="selectors/predefined.html#neurite">Selectors with neurite as input</a> - <em>neurite_selector.h</em></li>
+<li><a href="selectors/predefined.html#neuron">Selectors with neuron as input</a> - <em>neuron_selector.h</em></li>
+<li><a href="selectors/predefined.html#generic">Generic selectors</a> - <em>universal_selector.h</em></li>
+<li><a href="selectors/operations.html#inner">Selector operations</a> - <em>selector_operations.h</em></li>
+<li><a href="selectors/operations.html#set">Selector set operations</a> - <em>selector_set_operations.h</em></li>
+</ul>
+<hr />
+<h3 id="measures">Measures <a id="measure"></a></h3>
+<p>A measure is a function that given one or several elements of a neuron, return a value based on the input, the measure. An example can be a measure that given a branch, returns its total length. All measure-related functions and classes are in the namespace <code>neurostr::measure</code>. Please check the module documentation in the <a href="measures.html">Measure section</a>.</p>
+<p><strong>What's in the selector module?:</strong></p>
+<ul>
+<li>Shorthand to include everything - <em>measure.h</em></li>
+<li>Template traits - <em>measure_traits.h</em></li>
+<li><a href="measures/predefined.html#node">Measure with node as input</a> - <em>node_measure.h</em></li>
+<li><a href="measures/predefined.html#branch">Measure with branch as input</a> - <em>branch_measure.h</em></li>
+<li><a href="measures/predefined.html#neurite">Measure with neurite as input</a> - <em>neurite_measure.h</em></li>
+<li><a href="measures/predefined.html#neuron">Measure with neuron as input</a> - <em>neuron_measure.h</em></li>
+<li><a href="measures/predefined.html#lmeasure">L-measure definitions</a> - <em>lmeasure_decl.h</em></li>
+<li><a href="measures/predefined.html#generic">Generic measures</a> - <em>universal_measure.h</em></li>
+<li><a href="measures.html#operations">Measure operations</a> - <em>measure_operations.h</em></li>
+<li><a href="measures.html#aggregators">Aggregators</a> - <em>aggregate.h</em></li>
+<li>Aggregators traits - <em>aggregator_traits.h</em></li>
+</ul>
+<hr />
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>

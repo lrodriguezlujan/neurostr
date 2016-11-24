@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSTR</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="stylesheet" href="/css/theme-fixes.css" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="https://github.com/lrodriguezlujan/neurostr" title="NeuroSTR GitHub">
+                  <i class="fa fa-github"></i>
+                  NeuroSTR
+                </a>
+                <div class="version"> C++ Neuroanatomy library </div>
+                <div class="version" style="font-size:x-small"> alpha version</div>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+
+                                      <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/index.html">
+                         NeuroSTR
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/arch.html">
+                         Library Architecture
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/install.html">
+                         Installation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/io.html">
+                         Input/Output
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/selectors.html">
+                         Selectors
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/measures.html">
+                         Measures
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/validation.html">
+                         Neuron validation
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 ">
+                      <a class="reference internal "
+                         href="/doc/tools.html">
+                         Bundled tools
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                        </li>
+                                        <li class="sidenav toctree-l1 current">
+                      <a class="reference internal current"
+                         href="/doc/classes.html">
+                         Classes
+                                                  <span class = "toctree-expand"></span>
+                                               </a>
+
+
+                                          <span class = "toctree-expand"></span>
+                      <ul class="sidenav current">
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/core.html">
+                               Core
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/geometry.html">
+                               Geometry
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/traits.html">
+                               Traits
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/log.html">
+                               Log
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/io.html">
+                               I/O
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/selector.html">
+                               Selector
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2  ">
+                            <a class="reference internal current"
+                               href="/doc/classes/measure.html">
+                               Measure
+                                                           </a>
+
+                                                    </li>
+                        
+                          <li class="sidenav toctree-l2 current ">
+                            <a class="reference internal current"
+                               href="/doc/classes/validator.html">
+                               Validator
+                                                               <span class = "toctree-expand"></span>
+                                                           </a>
+
+                                                      <ul class="sidenav current" style="display:block">
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/validator.html#class_validator"> Validator class </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/validator.html#checks"> Checks </a>
+                              </li>
+                                                            <li class="sidenav toctree-l3 ">
+                                <a class="reference internal "
+                                   href="/doc/classes/validator.html#prebuilt"> prebuilt validators </a>
+                              </li>
+                                                          </ul>
+                                                    </li>
+                                              </ul>
+                                          </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="/">NeuroSTR</a>
+            </nav>
+
+
+                        <div class="wy-nav-content" style="max-width:100%">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h1 id="namespace_validator">namespace <code>validator</code></h1>
+<p>Validator namespace contains the validator template class and the prebuilt validators and check functions.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code><a href="#class_validator"><code>Validator</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#class_validator_item"><code>ValidatorItem</code></a></td>
+</tr>
+<tr>
+<td><code>class</code><a href="#struct_check__func__traits"><code>check_func_traits</code></a></td>
+</tr>
+<tr>
+<td><code>public const auto is_true</code></td>
+<td>Dummy. Checks that a given boolean is true</td>
+</tr>
+<tr>
+<td><code>public const auto is_false</code></td>
+<td>Dummy. Checks that a given boolean is false</td>
+</tr>
+<tr>
+<td><code>public const auto empty_string</code></td>
+<td>Dummy. Checks that a given string is empty</td>
+</tr>
+<tr>
+<td><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto range_check_factory(T min,T max)</code></td>
+<td>Range check factory. Checks that a given value is in the range [min, max)</td>
+</tr>
+<tr>
+<td><code>public const auto neurites_attached_to_soma</code></td>
+<td>Neurite validator. Checks that neurites are attached to the soma</td>
+</tr>
+<tr>
+<td><code>public const auto neuron_has_soma</code></td>
+<td>Neuron validator. Checks that neuron soma is defined</td>
+</tr>
+<tr>
+<td><code>public const auto no_trifurcations_validator</code></td>
+<td>Node validator. Checks that the number of descendants of a node is at most 2.</td>
+</tr>
+<tr>
+<td><code>public const auto zero_length_segments_validator</code></td>
+<td>Node validator. Checks that the length of the compartment associated to each node is not zero.</td>
+</tr>
+<tr>
+<td><code>public const auto radius_length_segments_validator</code></td>
+<td>Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.</td>
+</tr>
+<tr>
+<td><code>public const auto increasing_radius_validator</code></td>
+<td>Node validator. Checks that the node radius is not increasing.</td>
+</tr>
+<tr>
+<td><code>public const auto segment_collision_validator</code></td>
+<td>Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction</td>
+</tr>
+<tr>
+<td><code>public const auto extreme_angles_validator</code></td>
+<td>Node validator. Check that the elongation/bifurcation angle are not too high to be plausible</td>
+</tr>
+<tr>
+<td><code>public inline auto planar_reconstruction_validator_factory(float min)</code></td>
+<td>Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)</td>
+</tr>
+<tr>
+<td><code>public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)</code></td>
+<td>Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)</td>
+</tr>
+<tr>
+<td><code>public inline auto apical_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto axon_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of axons in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto linear_branches_validator_factory(float min)</code></td>
+<td>Branch validator. Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1</td>
+</tr>
+<tr>
+<td><code>public inline auto branch_collision_validator_factory(bool ignore_diams)</code></td>
+<td>Branch validator. Check that the Branch dont collide with any other branch in the neuron</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="class_validator">class <code>Validator</code></h1>
+<h2 id="summary-1">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public inline  Validator(M measure,C check)</code></td>
+<td>Creates a validator with given measure and check functions.</td>
+</tr>
+<tr>
+<td><code>public inline void validate(const Neuron &amp; n)</code></td>
+<td>Runs the validation for the given Neuron.</td>
+</tr>
+<tr>
+<td><code>public inline storage_type::const_iterator begin() const</code></td>
+<td>Begin const bidirectional iterator to the validation results.</td>
+</tr>
+<tr>
+<td><code>public inline storage_type::const_iterator end() const</code></td>
+<td>End const bidirectional iterator to the validation results.</td>
+</tr>
+<tr>
+<td><code>public inline storage_type::size_type size() const</code></td>
+<td>Returns the number of validated items.</td>
+</tr>
+<tr>
+<td><code>public inline void set_name(const std::string &amp; s)</code></td>
+<td>Sets the validation name.</td>
+</tr>
+<tr>
+<td><code>public inline void set_description(const std::string &amp; s)</code></td>
+<td>Sets the validation description string.</td>
+</tr>
+<tr>
+<td><code>public inline bool pass() const</code></td>
+<td>Check if all validated elements passed the check function.</td>
+</tr>
+<tr>
+<td><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os,bool failuresOnly) const</code></td>
+<td>Writes the validator (name and description), the neuron id and the results as a JSON string in the given stream.</td>
+</tr>
+<tr>
+<td><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os,const std::string &amp; name,const std::string &amp; desc,bool failuresOnly) const</code></td>
+<td>Writes the validator, the neuron id and the results as a JSON string in the given stream.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members">Members</h2>
+<hr />
+<h3 id="class_validator_1a2ea05efa57aa1bcb4bb7b7c7f3e8c102"><code>public inline  Validator(M measure,C check)</code></h3>
+<p>Creates a validator with given measure and check functions.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li>
+<p><code>measure</code> Measure function. Should take a single element as imput</p>
+</li>
+<li><code>check</code> Check function. Should take a single measure value as input</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<p><a href="#class_validator">Validator</a></p>
+<hr />
+<h3 id="class_validator_1a3bb743dfaff3fd772115478682c77e11"><code>public inline void validate(const Neuron &amp; n)</code></h3>
+<p>Runs the validation for the given Neuron.</p>
+<h4 id="parameters-1">Parameters</h4>
+<ul>
+<li><code>n</code> Neuron to be validated</li>
+</ul>
+<hr />
+<h3 id="class_validator_1a68b3697fb5cc756710e80d8b2384e7dc"><code>public inline storage_type::const_iterator begin() const</code></h3>
+<p>Begin const bidirectional iterator to the validation results.</p>
+<h4 id="returns-1">Returns</h4>
+<p>Bidirectional iterator to <a href="#class_validator_item">ValidatorItem</a></p>
+<hr />
+<h3 id="class_validator_1a12ced46941085d69d268c7260d501a9d"><code>public inline storage_type::const_iterator end() const</code></h3>
+<p>End const bidirectional iterator to the validation results.</p>
+<h4 id="returns-2">Returns</h4>
+<p>Bidirectional iterator to <a href="#class_validator_item">ValidatorItem</a></p>
+<hr />
+<h3 id="class_validator_1aac32ae7f1163d05eb3670e68e4c1ca19"><code>public inline storage_type::size_type size() const</code></h3>
+<p>Returns the number of validated items.</p>
+<h4 id="returns-3">Returns</h4>
+<p>Number of validated items</p>
+<hr />
+<h3 id="class_validator_1a4cbfc0b4ac1cfa167fd633cd42b0849c"><code>public inline void set_name(const std::string &amp; s)</code></h3>
+<p>Sets the validation name.</p>
+<h4 id="parameters-2">Parameters</h4>
+<ul>
+<li><code>s</code> Validation shortname</li>
+</ul>
+<hr />
+<h3 id="class_validator_1a9581bb7ff40d6528510b417f5184aac2"><code>public inline void set_description(const std::string &amp; s)</code></h3>
+<p>Sets the validation description string.</p>
+<h4 id="parameters-3">Parameters</h4>
+<ul>
+<li><code>s</code> Validation description</li>
+</ul>
+<hr />
+<h3 id="class_validator_1a026af77c6d04a7e81c0cb170e5b4f444"><code>public inline bool pass() const</code></h3>
+<p>Check if all validated elements passed the check function.</p>
+<h4 id="returns-4">Returns</h4>
+<p>True if all elements passed</p>
+<hr />
+<h3 id="class_validator_1ad66cfc6465ce75ddfdc7b3ea915ba468"><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os,bool failuresOnly) const</code></h3>
+<p>Writes the validator (name and description), the neuron id and the results as a JSON string in the given stream.</p>
+<h4 id="parameters-4">Parameters</h4>
+<ul>
+<li>
+<p><code>os</code> Output stream</p>
+</li>
+<li><code>failuresOnly</code> Write only failing <a href="#class_validator_item">ValidatorItem</a></li>
+</ul>
+<h4 id="returns-5">Returns</h4>
+<p>Stream</p>
+<hr />
+<h3 id="class_validator_1a9642cbe9cc468782746dd347cf2ec03e"><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os,const std::string &amp; name,const std::string &amp; desc,bool failuresOnly) const</code></h3>
+<p>Writes the validator, the neuron id and the results as a JSON string in the given stream.</p>
+<h4 id="parameters-5">Parameters</h4>
+<ul>
+<li>
+<p><code>os</code> Output stream</p>
+</li>
+<li>
+<p><code>name</code> Validation shortname</p>
+</li>
+<li>
+<p><code>desc</code> Validation description</p>
+</li>
+<li><code>failuresOnly</code> Write only failing <a href="#class_validator_item">ValidatorItem</a></li>
+</ul>
+<h4 id="returns-6">Returns</h4>
+<p>Output stream</p>
+<hr />
+<h1 id="class_validator_item">class <code>ValidatorItem</code></h1>
+<h2 id="summary-2">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public std::reference_wrapper&lt; T &gt; element</code></td>
+<td>Validated element.</td>
+</tr>
+<tr>
+<td><code>public V value</code></td>
+<td>Measure value.</td>
+</tr>
+<tr>
+<td><code>public bool valid</code></td>
+<td>Check function value.</td>
+</tr>
+<tr>
+<td><code>public inline  ValidatorItem()</code></td>
+<td>Default empty constructor.</td>
+</tr>
+<tr>
+<td><code>public inline  ValidatorItem(T &amp; el,</code><a href="#class_validator_item_1a63c24f7557578f2ee2de9329117e6e99"><code>value_type</code></a><code>val,bool is_valid)</code></td>
+<td>Creates an item with the given parameters.</td>
+</tr>
+<tr>
+<td><code>public inline std::string element_id_json() const</code></td>
+<td>Creates a JSON object with the full ID for the given element.</td>
+</tr>
+<tr>
+<td><code>public inline std::string element_type() const</code></td>
+<td>Returns an string with the element name (Neuron, Neurite, Branch or Node)</td>
+</tr>
+<tr>
+<td><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os) const</code></td>
+<td>Writes the Item to the given stream as a JSON object.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-1">Members</h2>
+<hr />
+<h3 id="class_validator_item_1ae391872de0bdc2ae9f6c41d08325955d"><code>public std::reference_wrapper&lt; T &gt; element</code></h3>
+<p>Validated element.</p>
+<hr />
+<h3 id="class_validator_item_1a16d624a3647be1ca846d2d85850eaab2"><code>public V value</code></h3>
+<p>Measure value.</p>
+<hr />
+<h3 id="class_validator_item_1a7810f1c3e7f87501682f9211f02ff8d8"><code>public bool valid</code></h3>
+<p>Check function value.</p>
+<hr />
+<h3 id="class_validator_item_1a443d2a678fdc8ab3451162eb149ec924"><code>public inline  ValidatorItem()</code></h3>
+<p>Default empty constructor.</p>
+<hr />
+<h3 id="class_validator_item_1aefaf2aa192ab5f982d4856937b38b2a4"><code>public inline  ValidatorItem(T &amp; el,</code><a href="#class_validator_item_1a63c24f7557578f2ee2de9329117e6e99"><code>value_type</code></a><code>val,bool is_valid)</code></h3>
+<p>Creates an item with the given parameters.</p>
+<h4 id="parameters-6">Parameters</h4>
+<ul>
+<li>
+<p><code>el</code> Validated element reference</p>
+</li>
+<li>
+<p><code>val</code> Measure value</p>
+</li>
+<li><code>is_valid</code> Check function value</li>
+</ul>
+<hr />
+<h3 id="class_validator_item_1a2411272581911ccb2909fdd301ef4ece"><code>public inline std::string element_id_json() const</code></h3>
+<p>Creates a JSON object with the full ID for the given element.</p>
+<h4 id="returns-7">Returns</h4>
+<p>JSON ID Object string</p>
+<hr />
+<h3 id="class_validator_item_1a93aa844e2207f1982f8e289d833ce474"><code>public inline std::string element_type() const</code></h3>
+<p>Returns an string with the element name (Neuron, Neurite, Branch or Node)</p>
+<h4 id="returns-8">Returns</h4>
+<p>Element type string</p>
+<hr />
+<h3 id="class_validator_item_1ace622c47b152ec2c395bcb1eb47bb629"><code>public inline std::ostream &amp; toJSON(std::ostream &amp; os) const</code></h3>
+<p>Writes the Item to the given stream as a JSON object.</p>
+<h4 id="parameters-7">Parameters</h4>
+<ul>
+<li><code>os</code> Output stream</li>
+</ul>
+<h4 id="returns-9">Returns</h4>
+<p>JSON Object with type, id, value and pass result.</p>
+<hr />
+<h1 id="checks">Checks</h1>
+<h3 id="validator_1a128a16765e070295d35571f6d10b0742"><code>public const auto is_true</code></h3>
+<p>Dummy. Checks that a given boolean is true</p>
+<hr />
+<h3 id="validator_1afacaa9569f94681110397b10b978e131"><code>public const auto is_false</code></h3>
+<p>Dummy.</p>
+<p>Checks that a given booelan is false</p>
+<hr />
+<h3 id="validator_1acb1df86eff8e9f3ad364e1b3c077695b"><code>public const auto empty_string</code></h3>
+<p>Dummy.</p>
+<p>Checks that a given string is empty</p>
+<hr />
+<h3 id="validator_1aed93cdcdc407542ac556b3a69c62ce3e"><code>public template&lt;typename T&gt;</code>  <br/><code>inline auto range_check_factory(T min,T max)</code></h3>
+<p>Range check factory. Checks that a given value is in the range [min, max)</p>
+<h4 id="parameters-8">Parameters</h4>
+<ul>
+<li>
+<p><code>min</code> Range minimum</p>
+</li>
+<li><code>max</code> Range maximum</li>
+</ul>
+<hr />
+<h1 id="prebuilt">Prebuilt validators</h1>
+<h2 id="summary-3">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Members</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public const auto neurites_attached_to_soma</code></td>
+<td>Neurite validator. Checks that neurites are attached to the soma</td>
+</tr>
+<tr>
+<td><code>public const auto neuron_has_soma</code></td>
+<td>Neuron validator. Checks that neuron soma is defined</td>
+</tr>
+<tr>
+<td><code>public const auto no_trifurcations_validator</code></td>
+<td>Node validator. Checks that the number of descendants of a node is at most 2.</td>
+</tr>
+<tr>
+<td><code>public const auto zero_length_segments_validator</code></td>
+<td>Node validator. Checks that the length of the compartment associated to each node is not zero.</td>
+</tr>
+<tr>
+<td><code>public const auto radius_length_segments_validator</code></td>
+<td>Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.</td>
+</tr>
+<tr>
+<td><code>public const auto increasing_radius_validator</code></td>
+<td>Node validator. Checks that the node radius is not increasing.</td>
+</tr>
+<tr>
+<td><code>public const auto segment_collision_validator</code></td>
+<td>Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction</td>
+</tr>
+<tr>
+<td><code>public const auto extreme_angles_validator</code></td>
+<td>Node validator. Check that the elongation/bifurcation angle are not too high to be plausible</td>
+</tr>
+<tr>
+<td><code>public inline auto planar_reconstruction_validator_factory(float min)</code></td>
+<td>Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)</td>
+</tr>
+<tr>
+<td><code>public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)</code></td>
+<td>Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)</td>
+</tr>
+<tr>
+<td><code>public inline auto apical_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto axon_count_validator_factory(bool strict)</code></td>
+<td>Neuron validator. Checks that the number of axons in the neuron is not greater than 2</td>
+</tr>
+<tr>
+<td><code>public inline auto linear_branches_validator_factory(float min)</code></td>
+<td>Branch validator. Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1</td>
+</tr>
+<tr>
+<td><code>public inline auto branch_collision_validator_factory(bool ignore_diams)</code></td>
+<td>Branch validator. Check that the Branch dont collide with any other branch in the neuron</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="prebuilt_1a78eeeb043ae6bcf33355dd2754f05dc8"><code>public const auto neurites_attached_to_soma</code></h3>
+<p>Neurite validator. Checks that neurites are attached to the soma</p>
+<hr />
+<h3 id="prebuilt_1aaf136d622198e95e7efe541ca484a9d6"><code>public const auto neuron_has_soma</code></h3>
+<p>Neuron validator. Checks that neuron soma is defined</p>
+<hr />
+<h3 id="prebuilt_1a0d795a5b610517517dad4ba5fa3281bc"><code>public const auto no_trifurcations_validator</code></h3>
+<p>Node validator. Checks that the number of descendants of a node is at most 2.</p>
+<hr />
+<h3 id="prebuilt_1a9c69478babbe3ea515c49fa04d9c66d7"><code>public const auto zero_length_segments_validator</code></h3>
+<p>Node validator. Checks that the length of the compartment associated to each node is not zero.</p>
+<hr />
+<h3 id="prebuilt_1a3f03c313d1982c1d71827b3ed57d0cc1"><code>public const auto radius_length_segments_validator</code></h3>
+<p>Node validator. Check that the distance between two consecutive nodes is greater than the sum of their radii.</p>
+<hr />
+<h3 id="prebuilt_1abd8929d37cf263276eca4b64dae686c9"><code>public const auto increasing_radius_validator</code></h3>
+<p>Node validator. Checks that the node radius is not increasing.</p>
+<hr />
+<h3 id="prebuilt_1aef6d8066ae78ef9a0b798ce9319837aa"><code>public const auto segment_collision_validator</code></h3>
+<p>Node validator. Check that the node compartment don't collide with any other compartment in the reconstruction</p>
+<hr />
+<h3 id="prebuilt_1a7b0bc777b0f06fac95cd200c49b839c7"><code>public const auto extreme_angles_validator</code></h3>
+<p>Node validator. Check that the elongation/bifurcation angle are not too high to be plausible</p>
+<hr />
+<h3 id="prebuilt_1a83541495d8df9fa3234cf79a8599feeb"><code>public inline auto planar_reconstruction_validator_factory(float min)</code></h3>
+<p>Neurite validator. Verifies that neurite reconstruction is not planar by checking that its non-axis aligned box volume is over the minimum value (close to 0)</p>
+<hr />
+<h3 id="prebuilt_1a228addaee18ae1e77d231bc65b9f0c05"><code>public inline auto dendrite_count_validator_factory(unsigned int min,unsigned int max)</code></h3>
+<p>Neuron validator. Checks that the number of dendrites in the neuron is in the range [min,max)</p>
+<hr />
+<h3 id="prebuilt_1a2b2f9e14c1b2407ca096e3173c9cd655"><code>public inline auto apical_count_validator_factory(bool strict)</code></h3>
+<p>Neuron validator. Checks that the number of apical dendrites in the neuron is not greater than 2</p>
+<h4 id="parameters-9">Parameters</h4>
+<ul>
+<li><code>strict</code> If true, Neurons with no apical dendrite are rejected</li>
+</ul>
+<hr />
+<h3 id="prebuilt_1a93ccef0d48f3cbe568f51e3bc9e9e799"><code>public inline auto axon_count_validator_factory(bool strict)</code></h3>
+<p>Neuron validator. Checks that the number of axons in the neuron is not greater than 2</p>
+<h4 id="parameters-10">Parameters</h4>
+<ul>
+<li><code>strict</code> If true, Neurons with no axon are rejected</li>
+</ul>
+<hr />
+<h3 id="prebuilt_1a6f0ff22924f955b1df400bf0fbc650b6"><code>public inline auto linear_branches_validator_factory(float min)</code></h3>
+<p>Branch validator.Verifies that the branch reconstruction is not a prefect straight line by checking that its tortuosity value is not equal to 1</p>
+<h4 id="parameters-11">Parameters</h4>
+<ul>
+<li><code>min</code> Minimum accepted tortuosity value</li>
+</ul>
+<hr />
+<h3 id="prebuilt_1a05c24c03d592c4fc0b77b158da740f2f"><code>public inline auto branch_collision_validator_factory(bool ignore_diams)</code></h3>
+<p>Branch validator. Check that the Branch dont collide with any other branch in the neuron</p>
+<h4 id="parameters-12">Parameters</h4>
+<ul>
+<li><code>ignore_diams</code> If true, node diameter value are ignored</li>
+</ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="rst-versions shift">
+          Built with <a href="http://couscous.io/">Couscous</a>
+        </seciton>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>
