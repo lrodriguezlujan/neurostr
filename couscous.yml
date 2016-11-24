@@ -20,6 +20,7 @@ github:
     user: lrodriguezlujan
     repo: neurostr
 
+baseUrl: ../
 title: NeuroSTR
 subTitle: C++ Neuroanatomy library
 version: alpha
