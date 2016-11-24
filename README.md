@@ -24,13 +24,13 @@ NeuroSTR also uses the following software depèndencies, some of them are header
 
 | Library | Version | License |  Bundled | What for?
 | :-- | :--: | :--: | :--: |
-| [Boost](http://www.boost.org/) | >1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything...
-| [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | 3.X | [MPL-2](https://www.mozilla.org/en-US/MPL/2.0/) | No | Singular value decomposition and quaternion calculation
-| [tree.hh](http://tree.phi-sci.com/) | 3.1 | [GPL2/3](https://www.gnu.org/licenses/) | Yes | Neurite tree structure container
-| [rapidJSON](http://rapidjson.org/) | 1.1.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | JSON file read/write
-| [spdlog](https://github.com/gabime/spdlog) | 0.11.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | [Logging](classes/log.html)
-| [base-n](https://github.com/azawadzki/base-n) | 1.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | Write binary data (image) as base64 string
-| (optional) [UnitTest++](https://github.com/unittest-cpp/unittest-cpp) | 1.6.1 | [MIT](https://opensource.org/licenses/MIT) | No | Unit tests
+| [Boost](http://www.boost.org/) | >1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything... |
+| [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | 3.X | [MPL-2](https://www.mozilla.org/en-US/MPL/2.0/) | No | Singular value decomposition and quaternion calculation |
+| [tree.hh](http://tree.phi-sci.com/) | 3.1 | [GPL2/3](https://www.gnu.org/licenses/) | Yes | Neurite tree structure container |
+| [rapidJSON](http://rapidjson.org/) | 1.1.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | JSON file read/write |
+| [spdlog](https://github.com/gabime/spdlog) | 0.11.0 | [MIT](https://opensource.org/licenses/MIT) | Yes | [Logging](classes/log.html) |
+| [base-n](https://github.com/azawadzki/base-n) | 1.0 |  [MIT](https://opensource.org/licenses/MIT) | Yes | Write binary data (image) as base64 string |
+| (optional) [UnitTest++](https://github.com/unittest-cpp/unittest-cpp) | 1.6.1 | [MIT](https://opensource.org/licenses/MIT) | No | Unit tests |
 
 Specifically, these are the boost libraries used in NeuroSTR:
 
@@ -63,13 +63,13 @@ There are several variables that you can set while running the `cmake` command t
 
 | Flag | Default value | What it does...|
 |:--| :--: |:-|
-|`CMAKE_INSTALL_PREFIX` | `/usr/local` | Default install directory
-|`NO_INSTALL_BUNDLED` | `false` | If true, bundled headers are not installed
-|`NO_INSTALL_RAPIDJSON` | `false` | If true, rapidjson headers are not installed
-|`NO_INSTALL_SPDLOG` | `false` | If true, spdlog headers are not installed
-|`NO_INSTALL_TREE` | `false` | If true, tree.hh header is not installed
-|`NO_INSTALL_BASEN` | `false` | If true, basen.hhp header is not installed
-|`NO_INSTALL_TOOLS` | `false` | If true, executables are not installed
+|`CMAKE_INSTALL_PREFIX` | `/usr/local` | Default install directory |
+|`NO_INSTALL_BUNDLED` | `false` | If true, bundled headers are not installed |
+|`NO_INSTALL_RAPIDJSON` | `false` | If true, rapidjson headers are not installed |
+|`NO_INSTALL_SPDLOG` | `false` | If true, spdlog headers are not installed |
+|`NO_INSTALL_TREE` | `false` | If true, tree.hh header is not installed |
+|`NO_INSTALL_BASEN` | `false` | If true, basen.hhp header is not installed |
+|`NO_INSTALL_TOOLS` | `false` | If true, executables are not installed |
 
 For example, this will install the library but not the tools at `/home/cig/local`:
 
