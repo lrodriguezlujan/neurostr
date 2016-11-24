@@ -24,7 +24,7 @@ NeuroSTR also uses the following software depèndencies, some of them are header
 
 | Library | Version | License |  Bundled | What for?
 | :-- | :--: | :--: | :--:
-| [Boost](http://www.boost.org/) | >1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything... |
+| [Boost](http://www.boost.org/) | 1.62.0 | [BSL-1](http://www.boost.org/users/license.html) | No | Everything... |
 
 
 | [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page) | 3.X | [MPL-2](https://www.mozilla.org/en-US/MPL/2.0/) | No | Singular value decomposition and quaternion calculation |
