@@ -6,6 +6,72 @@ currentItem:
 
 # Prebuilt selectors
 
+euroSTR includes a relatively large set of prebuilt selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the *Node* category.
+
+Here is the list of available selectors, you can find more details about each selector by clicking on their name:
+
+### [Node Selectors](#node_selectors)
+
+- [Self selector](#node_self)
+- [Parent node selector](#node_parent)
+- [Parent branch selector](#node_branch)
+- [Subtree selector](#node_subtree)
+- [Subtree terminals selector](#node_subtree_terminals)
+- [Stem selector](#node_stem)
+- [Descendant selector](#node_descendants)
+- [Bifurcation nodes filter](#node_bifurcation)
+- [Terminal nodes filter](#node_terminal)
+
+ ---
+
+### [Branch Selectors](#branch_selectors)
+
+- [Parent neurite selector](#branch_neurite)
+- [Parent branch selector](#branch_parent)
+- [Sibling branch selector](#branch_sibling)
+- [Last node selector](#branch_last_node)
+- [First node selector](#branch_first_node)
+- [All nodes selector](#branch_nodes)
+- [Subtree selector](#branch_subtree)
+- [Stem selector](#branch_stem)
+- [Centrifugal order filter](#branch_order)
+
+---
+
+### [Neurite Selectors](#neurite_selectors)
+
+- [Neuron selector](#neurite_neuron)
+- [Node set selector](#neurite_nodes)
+- [Branch set selector](#neurite_branches)
+- [First branch selector](#neurite_first_branch)
+- [Bifurcation nodes selector](#neurite_bifurcation_nodes)
+- [Terminal nodes selector](#neurite_terminal_nodes)
+- [Terminal branches selector](#neurite_terminal_branches)
+- [Non terminal branches selector](#neurite_nonterminal)
+- [Pre-terminal branches selector](#neurite_preterminal)
+- [Terminal bifurcation node selector](#neurite_terminal_bif)
+- [Dendrite filter](#neurite_type)
+- [Apical filter](#neurite_type)
+- [Axon filter](#neurite_type)
+
+---
+
+### [Neuron Selectors](#neuron_selectors)
+
+- [Neurites selector](#neuron_neurites)
+- [Branch selector](#neuron_branch)
+- [Nodes selector](#neuron_nodes)
+
+---
+
+### [Generic Selectors](#generic_selectors)
+
+- [Generic self selector](#generic_self)
+- [Property exists filter](#generic_property)
+- [Unique filter](#generic_unique)
+
+---
+
 # Node selectors {#node}
 
 All node selectors are implemented in the file `selector/node_selector.h`. They belong to the namespace  `neurostr::selector`.

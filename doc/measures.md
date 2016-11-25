@@ -77,7 +77,7 @@ You might notice (and it seems odd) that there are very few Neurite and Neuron m
 
 ### [Neurite Measures](measures/prebuilt.html#neurite)
 
-- [Root is soma](measures/neurite.html#rootsoma)
+- [Root is soma](measures/prebuilt.html#neurite_rootsoma)
 
 ---
 

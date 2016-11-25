@@ -185,6 +185,67 @@
                 <div class="rst-content">
                     <div role="main" class="document">
                         <h1 id="prebuilt-selectors">Prebuilt selectors</h1>
+<p>euroSTR includes a relatively large set of prebuilt selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the <em>Node</em> category.</p>
+<p>Here is the list of available selectors, you can find more details about each selector by clicking on their name:</p>
+<h3><a href="#node_selectors">Node Selectors</a></h3>
+<ul>
+<li><a href="#node_self">Self selector</a></li>
+<li><a href="#node_parent">Parent node selector</a></li>
+<li><a href="#node_branch">Parent branch selector</a></li>
+<li><a href="#node_subtree">Subtree selector</a></li>
+<li><a href="#node_subtree_terminals">Subtree terminals selector</a></li>
+<li><a href="#node_stem">Stem selector</a></li>
+<li><a href="#node_descendants">Descendant selector</a></li>
+<li><a href="#node_bifurcation">Bifurcation nodes filter</a></li>
+<li>
+<p><a href="#node_terminal">Terminal nodes filter</a></p>
+<hr />
+</li>
+</ul>
+<h3><a href="#branch_selectors">Branch Selectors</a></h3>
+<ul>
+<li><a href="#branch_neurite">Parent neurite selector</a></li>
+<li><a href="#branch_parent">Parent branch selector</a></li>
+<li><a href="#branch_sibling">Sibling branch selector</a></li>
+<li><a href="#branch_last_node">Last node selector</a></li>
+<li><a href="#branch_first_node">First node selector</a></li>
+<li><a href="#branch_nodes">All nodes selector</a></li>
+<li><a href="#branch_subtree">Subtree selector</a></li>
+<li><a href="#branch_stem">Stem selector</a></li>
+<li><a href="#branch_order">Centrifugal order filter</a></li>
+</ul>
+<hr />
+<h3><a href="#neurite_selectors">Neurite Selectors</a></h3>
+<ul>
+<li><a href="#neurite_neuron">Neuron selector</a></li>
+<li><a href="#neurite_nodes">Node set selector</a></li>
+<li><a href="#neurite_branches">Branch set selector</a></li>
+<li><a href="#neurite_first_branch">First branch selector</a></li>
+<li><a href="#neurite_bifurcation_nodes">Bifurcation nodes selector</a></li>
+<li><a href="#neurite_terminal_nodes">Terminal nodes selector</a></li>
+<li><a href="#neurite_terminal_branches">Terminal branches selector</a></li>
+<li><a href="#neurite_nonterminal">Non terminal branches selector</a></li>
+<li><a href="#neurite_preterminal">Pre-terminal branches selector</a></li>
+<li><a href="#neurite_terminal_bif">Terminal bifurcation node selector</a></li>
+<li><a href="#neurite_type">Dendrite filter</a></li>
+<li><a href="#neurite_type">Apical filter</a></li>
+<li><a href="#neurite_type">Axon filter</a></li>
+</ul>
+<hr />
+<h3><a href="#neuron_selectors">Neuron Selectors</a></h3>
+<ul>
+<li><a href="#neuron_neurites">Neurites selector</a></li>
+<li><a href="#neuron_branch">Branch selector</a></li>
+<li><a href="#neuron_nodes">Nodes selector</a></li>
+</ul>
+<hr />
+<h3><a href="#generic_selectors">Generic Selectors</a></h3>
+<ul>
+<li><a href="#generic_self">Generic self selector</a></li>
+<li><a href="#generic_property">Property exists filter</a></li>
+<li><a href="#generic_unique">Unique filter</a></li>
+</ul>
+<hr />
 <h1 id="node">Node selectors</h1>
 <p>All node selectors are implemented in the file <code>selector/node_selector.h</code>. They belong to the namespace  <code>neurostr::selector</code>.</p>
 <h2 id="self-selector">Self selector <a id="node_self"></a></h2>

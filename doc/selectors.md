@@ -76,17 +76,17 @@ Here is the list of available selectors, you can find more details about each se
 
 ### [Neuron Selectors](selectors/prebuilt.html#neuron_selectors)
 
-- [Neurites selector](selectors/neuron.html#neuron_neurites)
-- [Branch selector](selectors/neuron.html#neuron_branch)
-- [Nodes selector](selectors/neuron.html#neuron_nodes)
+- [Neurites selector](selectors/prebuilt.html#neuron_neurites)
+- [Branch selector](selectors/prebuilt.html#neuron_branch)
+- [Nodes selector](selectors/prebuilt.html#neuron_nodes)
 
 ---
 
 ### [Generic Selectors](selectors/prebuilt.html#generic_selectors)
 
-- [Generic self selector](selectors/generic.html#generic_self)
-- [Property exists filter](selectors/generic.html#generic_property)
-- [Unique filter](selectors/generic.html#generic_unique)
+- [Generic self selector](selectors/prebuilt.html#generic_self)
+- [Property exists filter](selectors/prebuilt.html#generic_property)
+- [Unique filter](selectors/prebuilt.html#generic_unique)
 
 ---
 
