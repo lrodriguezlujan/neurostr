@@ -179,7 +179,7 @@
                         <h1 id="tools">Tools</h1>
 <h2 id="converter">Format Converter</h2>
 <p>Given a reconstruction file, the converter guess the format by the file extension and reads it. Optionally, it tries to correct errors in the reconstruction and applies a simplification algorithm over the branches. Finally it writes out the reconstruction in <a href="io/format.html#SWC">SWC</a> or <a href="io/format.html#JSON">JSON</a> format.</p>
-<p><strong>Executable name:</strong> <em>NeuroConverter</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_converter</em></p>
 <h4 id="converter_options">Options</h4>
 <table>
 <thead>
@@ -245,9 +245,9 @@
 </table>
 <h4 id="converter_example">Use case</h4>
 <p>Imagine that we want to convert the input file <code>fancy_neuron.dat</code> into a more &quot;readable&quot; format, like JSON <code>fancy_readable_neuron.json</code>. Also we want to remove zero-length compartments in the reconstruction, but we don't want to simplify it in any way. To do so, we just need to execute the following command in a BASH console:</p>
-<pre><code class="language-bash">./NeuroConverter -i fancy_neuron.dat -f json -o fancy_readable_neuron.json -c</code></pre>
+<pre><code class="language-bash">neurostr_converter -i fancy_neuron.dat -f json -o fancy_readable_neuron.json -c</code></pre>
 <h4 id="help-message">Help message</h4>
-<pre><code class="language-bash">./NeuroConverter --help
+<pre><code class="language-bash">./neurostr_converter --help
 Allowed options:
   -h [ --help ]         Produce help message
   -i [ --input ] arg    Neuron reconstruction file
@@ -257,7 +257,7 @@ Allowed options:
   -e [ --eps ] arg (=0) Output file
   -v [ --verbose ]      Verbose log output
 
-Example: NeuroConverter -i test.swc -o test.json -f json</code></pre>
+Example: neurostr_converter -i test.swc -o test.json -f json</code></pre>
 <hr />
 <h2 id="neuritefeature">Neurite Feature Extractor</h2>
 <p>The neurite feature extractor computes a set of prebuilt measure for each neurite in the reconstruction. Measure values are not aggregated in any way, they are returned as-is (usually as vectors). Optionally, it tries to correct errors in the reconstruction.</p>
@@ -269,7 +269,7 @@ Example: NeuroConverter -i test.swc -o test.json -f json</code></pre>
 <li>An object <em>measures</em>. The specific measures inside this object are described in the <a href="#neuritefeature_measures">Measures</a> section.</li>
 </ul>
 <p>Some measures might use the logging interface to inform about errors or unexpected conditions.</p>
-<p><strong>Executable name:</strong> <em>NeuriteFeatureExtractor</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_neuritefeatures</em></p>
 <h4 id="neuritefeature_options">Options</h4>
 <table>
 <thead>
@@ -478,7 +478,7 @@ Example: NeuroConverter -i test.swc -o test.json -f json</code></pre>
   --omitaxon            Ignore the axon
   --omitdend            Ignore the non-apical dendrites
 
-Example: NeuriteFeatureExtractor -i test.swc</code></pre>
+Example: neurostr_neuritefeatures -i test.swc</code></pre>
 <h4 id="neuritefeature_measures">Measures</h4>
 <table>
 <thead>
@@ -660,7 +660,7 @@ Example: NeuriteFeatureExtractor -i test.swc</code></pre>
 <li>An object <em>measures</em>. The specific measures inside this object are described in the <a href="#branchfeature_measures">Measures</a> section.</li>
 </ul>
 <p>Some measures might use the logging interface to inform about errors or unexpected conditions.</p>
-<p><strong>Executable name:</strong> <em>BranchFeatureExtractor</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_branchfeatures</em></p>
 <h4 id="branchfeature_options">Options</h4>
 <table>
 <thead>
@@ -844,7 +844,7 @@ Example: NeuriteFeatureExtractor -i test.swc</code></pre>
   --omitaxon                    Ignore the axon
   --omitdend                    Ignore the non-apical dendrites
 
-Example: BranchFeatureExtractor -i test.swc</code></pre>
+Example: neurostr_branchfeatures -i test.swc</code></pre>
 <h4 id="branchfeature_example">Measures</h4>
 <table>
 <thead>
@@ -991,7 +991,7 @@ Example: BranchFeatureExtractor -i test.swc</code></pre>
 <li>Branch collision</li>
 <li>Extreme bifurcation/elongation angles</li>
 </ul>
-<p><strong>Executable name:</strong> <em>Validator</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_validator</em></p>
 <h4 id="validator_options">Options</h4>
 <table>
 <thead>
@@ -1513,11 +1513,11 @@ Example: BranchFeatureExtractor -i test.swc</code></pre>
   --mindend arg (=2)           Number of dendrites minimum (in)
   --maxdend arg (=13)          Number of dendrites maximum (out)
 
-Example: validator -i test.swc -e</code></pre>
+Example: neurostr_validator -i test.swc -e</code></pre>
 <hr />
 <h2 id="scholl">Scholl analysis</h2>
 <p>Performs a simple linear <a href="https://en.wikipedia.org/wiki/Sholl_analysis">Scholl analysis</a> over the neurons in the given reconstruction. The executable outputs a three-column CSV file over the standard output with neuron, distance and branch count (intersections).</p>
-<p><strong>Executable name:</strong> <em>Scholl</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_scholl</em></p>
 <h4 id="scholl_options">Options</h4>
 <table>
 <thead>
@@ -1626,13 +1626,13 @@ Example: validator -i test.swc -e</code></pre>
   --omitaxon            Ignore the axon
   --omitdend            Ignore the non-apical dendrites
 
-Example: Scholl -i test.swc</code></pre>
+Example: neurostr_scholl -i test.swc</code></pre>
 <hr />
 <h2 id="boxcut">Box Cutter</h2>
 <p>The neuron box cutter creates a virtual axis-aligned box with given min and max corners and uses it to &quot;cut&quot; the neuron. That is, it creates virtual nodes at the intersection of the box with the neuron, adds an empty property with key &quot;cut&quot; to all branches and nodes that lie outside the reconstruction. It also adds two properties to the neuron &quot;cutbox_min&quot; and &quot;cutbox_max&quot;, the box min and max corner points. If no argument is given for certain corner x,y,z value, it takes the neuron min/max value for that axis.</p>
 <p>The output is always a reconstruction in JSON format, since no other output format can store properties at node/branch level.</p>
 <p>You can use this to select (and measure) nodes and branches outside/inside the box with the property_exists selector.</p>
-<p><strong>Executable name:</strong> <em>BoxCutter</em></p>
+<p><strong>Executable name:</strong> <em>neurostr_boxcutter</em></p>
 <h4 id="boxcut_options">Options</h4>
 <table>
 <thead>
@@ -1712,7 +1712,7 @@ Example: Scholl -i test.swc</code></pre>
 </table>
 <h4 id="boxcut_example">Output example</h4>
 <p>Command:</p>
-<pre><code class="language-bash">./BoxCutter -i simple_tree.swc -o simple_tree_out.json --maxx 3.0
+<pre><code class="language-bash">./neurostr_boxcutter -i simple_tree.swc -o simple_tree_out.json --maxx 3.0
 </code></pre>
 <p>Output:</p>
 <pre><code class="language-json">{
@@ -1887,12 +1887,15 @@ Example: Scholl -i test.swc</code></pre>
 <pre><code class="language-bash">Allowed options:
   -h [ --help ]         Produce help message
   -i [ --input ] arg    Neuron reconstruction file
-  -c [ --correct ]      Try to correct the errors in the reconstruction
-  --omitapical          Ignore the apical dendrite
-  --omitaxon            Ignore the axon
-  --omitdend            Ignore the non-apical dendrites
+  -o [ --output ] arg   Neuron reconstruction JSON output file
+  --minx arg            Box min corner - x value
+  --miny arg            Box min corner - y value
+  --minz arg            Box min corner - z value
+  --maxx arg            Box max corner - x value
+  --maxy arg            Box max corner - y value
+  --maxz arg            Box max corner - z value
 
-Example: Scholl -i test.swc</code></pre>
+Example: neurostr_boxcutter -i test.swc --minx 300</code></pre>
 <hr />
                     </div>
                 </div>
