@@ -177,7 +177,7 @@ void Validator&lt;M,C&gt;::validate(const Neuron&amp; n)</code></pre>
 <li><em>value</em>: The measure value</li>
 <li><em>valid</em>: The check function evaluated over <em>value</em></li>
 </ul>
-<p>There are a bunch of <a href="classes/validator.html#checks">predefined check functions</a> and <a href="classes/validator.html#predefined">validators</a> included in the library. All validations described in the <a href="classes/validator.html#predefined">Predefined validations</a> sections are included in the <a href="tools.html#validator">Validator tool</a> bundled with the library. Details about the <a href="classes/validator.html#class_validator">validator class template</a> and the <a href="classes/validator.html#class_validator_item">ValidatorItem</a> are available in the <a href="classes/validator.html">validator namespace</a> documentation.</p>
+<p>There are a bunch of <a href="classes/validator.html#checks">prebuilt check functions</a> and <a href="classes/validator.html#prebuilt">validators</a> included in the library. All validations described in the <a href="classes/validator.html#prebuilt">Prebuilt validations</a> sections are included in the <a href="tools.html#validator">Validator tool</a> bundled with the library. Details about the <a href="classes/validator.html#class_validator">validator class template</a> and the <a href="classes/validator.html#class_validator_item">ValidatorItem</a> are available in the <a href="classes/validator.html">validator namespace</a> documentation.</p>
 <p>The Validator class and the ValidatorItem class as well have a <code>toJSON</code> method that writes the validation results in a easily readable JSON format (the <a href="tools.html#validator">Validator tool</a> output uses this function). The output specifications are detailed <a href="#output">at the end of this section</a>.</p>
 <hr />
 <h2 id="checks">Checks</h2>
@@ -205,7 +205,7 @@ void Validator&lt;M,C&gt;::validate(const Neuron&amp; n)</code></pre>
 <p>The <code>toJSON</code> method in the <a href="classes/validator.html#class_validator">validator class template</a> writes the results into an output stream as a JSON Object with the following fields:</p>
 <ul>
 <li><em>name</em>: The name given to the validator. Usually a short test name. e.g. &quot;Planar neurite validation&quot;</li>
-<li><em>description</em>: Test description. e.g. &quot;Fails if the non-axis aligned box volume of the neurite is lower than predefined threshold&quot;</li>
+<li><em>description</em>: Test description. e.g. &quot;Fails if the non-axis aligned box volume of the neurite is lower than prebuilt threshold&quot;</li>
 <li><em>neuron_id</em>: The validated neuron ID</li>
 <li><em>pass</em>: Boolean. True if the neuron (or all its sub-elements) passed the test</li>
 <li><em>results</em>: An array of Validation Items</li>
