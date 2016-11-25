@@ -9,18 +9,25 @@
 #include <neurostr/core/neurite.h>
 #include <neurostr/core/neuron.h>
 
+#include <neurostr/selector/selector_traits.h>
+
 
 namespace neurostr {
 namespace measure {
   
 /** STATIC count*/
 template <typename T, typename C_type = int>
-auto count_factory(const C_type c){
+std::function<C_type(const T&)>  count_factory(const C_type c){
   return [c_ = c](const T& item) -> C_type {return c_;};
 };
 
-template <typename T>
-const auto set_size = [](const T& b, const T& e) -> unsigned int {return std::distance(b,e);};
+/* template <typename T>
+const std::function<unsigned int(const selector::const_selector_iterator<T>&, 
+                                 const selector::const_selector_iterator<T>&)> 
+set_size = [](const selector::const_selector_iterator<T>& b, 
+              const selector::const_selector_iterator<T>& e) -> unsigned int {return std::distance(b,e);};
+*/
+
 } // measure namespace
 } // neurostr namespace
 

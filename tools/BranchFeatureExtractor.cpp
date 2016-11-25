@@ -224,14 +224,14 @@ int main(int ac, char **av)
   
 	if (vm.count("help")){
     std::cout << desc << "\n";
-    std::cout << "Example: BranchFeatureExtractor -i test.swc " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_branchfeature -i test.swc " << std::endl << std::endl ;
     return 1;
   }
   
   if(!vm.count("input") || !vm.count("input")){
     std::cout << "ERROR: input file required" << std::endl << std::endl;
     std::cout << desc << "\n";
-    std::cout << "Example: BranchFeatureExtractor -i test.swc " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_branchfeature -i test.swc " << std::endl << std::endl ;
     return 2;
   }
   

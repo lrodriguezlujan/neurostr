@@ -48,7 +48,7 @@ template <typename T>
 std::vector<T> 
   remove_nan_values( typename std::vector<T>::iterator b,  
                      typename std::vector<T>::iterator e){
-  return; // Default - do nothing
+  return std::vector<T>(b,e); // Default - do nothing
 };
 
 // Internal function to be called by the float double ..instances

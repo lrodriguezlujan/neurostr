@@ -186,7 +186,7 @@ namespace lmeasure{
                                                       aggregate::all_aggr_factory<int,float>(0.)
                                                     )); 
                                                     
-  const auto branch_terminal_degree = selectorMeasureCompose( ns::neuron_branch_selector,
+  /*const auto branch_terminal_degree = selectorMeasureCompose( ns::neuron_branch_selector,
                                                       measureEachAggregate(
                                                       selectorMeasureCompose(
                                                         ns::intersection_selector(
@@ -194,10 +194,10 @@ namespace lmeasure{
                                                                                 ns::branch_neurite_selector),
                                                           ns::branch_subtree_selector
                                                         ),
-                                                        set_size
+                                                        set_size<Branch>
                                                       ), 
                                                       aggregate::all_aggr_factory<int,float>(0.)
-                                                    )); 
+                                                    )); */
   
   // Terminal segment.... nope
   

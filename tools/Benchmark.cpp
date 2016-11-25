@@ -13,6 +13,17 @@
 #include <algorithm>
 #include <type_traits>
 
+#include <boost/program_options/cmdline.hpp>
+#include <boost/program_options/parsers.hpp>
+#include <boost/program_options/option.hpp>
+#include <boost/program_options/options_description.hpp>
+#include <boost/program_options/variables_map.hpp>
+#include <boost/format.hpp>
+
+//#define BOOST_FILESYSTEM_NO_DEPRECATED 
+#include <boost/filesystem.hpp>
+
+
 #include <neurostr/core/log.h>
 #include <neurostr/core/neuron.h>
 #include <neurostr/io/parser_dispatcher.h>
@@ -118,9 +129,9 @@ struct experiment_impl {
 	void print(ostream& os) const {
     string token{ "" }; 
 
-		os << ", 'factor_name' : '" << _fctName << "'"; 
+		os << ", \"factor_name\" : \"" << _fctName << "\""; 
 		// print the factor list
-		os << ", 'factors' : [ "; 
+		os << ", \"factors\" : [ "; 
 		for (auto&& Pair : _timings) {
       os << token; 
 			os << Pair.first; 
@@ -129,7 +140,7 @@ struct experiment_impl {
 		os << " ]"; 
 		// print the timings
 		token.clear(); 
-		os << ", 'timings' : [ ";
+		os << ", \"timings\" : [ ";
 		for (auto&& Pair : _timings){
       os << token; 
 			os << mean(Pair.second).count();
@@ -154,7 +165,7 @@ struct experiment_impl < TimeT, void >
 	{
 		string token{ "" };
 		// print the timings
-		os << ", 'timings' : [ ";
+		os << ", \"timings\" : [ ";
 		for (auto&& elem : _timings)
 		{
 			os << token;
@@ -341,11 +352,11 @@ struct measure
 		{
 			for (auto&& Pair : _data)
 			{
-				os << "{ 'benchmark_name' : '" << benchmarkName << "'";
-				os << ", 'experiment_name' : '" << Pair.first << "'";
-				os << ", 'time_type' : '" << time_type<TimeT>() << "'";
+				os << "{ \"benchmark_name\" : \"" << benchmarkName << "\"";
+				os << ", \"experiment_name\" : \"" << Pair.first << "\"";
+				os << ", \"time_type\" : \"" << time_type<TimeT>() << "\"";
 				Pair.second->print(os);
-				os << " } \n";
+				os << " },\n";
 			}
 		}
 
@@ -357,9 +368,9 @@ struct measure
 			os.open(filename, mode);
 			for (auto&& Pair : _data)
 			{
-				os << "{ 'benchmark_name' : '" << benchmarkName << "'";
-				os << ", 'experiment_name' : '" << Pair.first << "'";
-				os << ", 'time_type' : '" << time_type<TimeT>() << "'";
+				os << "{ \"benchmark_name\" : \"" << benchmarkName << "\"";
+				os << ", \"experiment_name\" : \"" << Pair.first << "\"";
+				os << ", \"time_type\" : \"" << time_type<TimeT>() << "\"";
 				Pair.second->print(os);
 				os << " } \n";
 			}
@@ -371,21 +382,6 @@ struct measure
 
 
 /**** PROGRAM STARTS HERE! */
-const std::string dat_small = "../data/A9-7.DAT";
-const std::string dat_med = "../data/RC6-P1F6C4LVc-cs-Sh.DAT";
-const std::string dat_large = "../data/A090622.DAT";
-
-const std::string asc_small = "../data/02b_pyramidal1aACC.ASC";
-const std::string asc_med = "../data/cZI_2.asc";
-const std::string asc_large = "../data/VPM_1.asc";
-
-const std::string swc_small = "../data/A9-7.CNG.swc";
-const std::string swc_med = "../data/cZI_2.CNG.swc";
-const std::string swc_large = "../data/VPM_1.CNG.swc";
-
-const std::string json_small = "../data/A9-7.json";
-const std::string json_med = "../data/cZI_2.json";
-const std::string json_large = "../data/VPM_1.json";
 
 // READ SPPED TEST
 const auto load_file_test = [](const std::string& path){
@@ -452,7 +448,7 @@ const auto increasing_radius_validator = [](const Neuron& n){
 
 const auto segment_collision_validator = [](const Neuron& n){
   //auto test = neurostr::validator::segment_collision_validator;
-  auto test = neurostr::validator::branch_collision_validator;
+  auto test = neurostr::validator::branch_collision_validator_factory(false);
   test.validate(n);
 };
 
@@ -462,8 +458,8 @@ const auto extreme_angles_validator = [](const Neuron& n){
 };
 // End validation fncs
 
-void validation_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& m ){
-  const int nrep = 5;
+void validation_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& m, int nrep){
+  
   bm.run("Attached to soma",nrep, [&](){neurites_attached_to_soma(m);});
   bm.run("Has soma",nrep, [&](){neuron_has_soma(m);});
   bm.run("Planar reconstruction",nrep, [&](){planar_reconstruction_validator(m);});
@@ -475,13 +471,12 @@ void validation_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron&
   bm.run("Zero length segments",nrep, [&](){zero_length_segments_validator(m);});
   bm.run("Radius length segments",nrep, [&](){radius_length_segments_validator(m);});
   bm.run("Non-decreasing diameter",nrep, [&](){increasing_radius_validator(m);});
-  bm.run("Segment collision",nrep, [&](){segment_collision_validator(m);});
+  bm.run("Branch collision",nrep, [&](){segment_collision_validator(m);});
   bm.run("Extreme angles",nrep, [&](){extreme_angles_validator(m);});
 }
 
-void lmeasures_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& n ){
+void lmeasures_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& n, int nrep){
   namespace nlm = neurostr::measure::lmeasure;
-  const int nrep = 5;
   
   n.remove_null_segments();
   
@@ -525,75 +520,81 @@ void lmeasures_benchmark(bmk::benchmark<std::chrono::microseconds>& bm, Neuron& 
   bm.run("fractal_dim",nrep, [&](){nlm::fractal_dim(n);});
 }
 
+namespace po = boost::program_options;
 
-int main()
+int main(int ac, char **av)
 {    
-    const int nrep = 5;
+    int nrep ;
+    std::string ifile;
     
-    neurostr::log::init_log_cout(); // Log to cout
-
+    
+    // Program options declaration
+    po::options_description desc("Allowed options");
+    desc.add_options()
+    ("help,h", "Produce help message")
+    ("input,i", po::value< std::string >(&ifile), "Neuron reconstruction file")
+    ("nrep,n", po::value< int >(&nrep) -> default_value(100), "Number of repetitions per test");
+    
+      // Parse options into the variable map
+    po::variables_map vm;
+    try{
+      po::store(po::command_line_parser(ac, av).options(desc).run(), vm);
+      po::notify(vm);    
+    } catch (std::exception e){
+      // Something went wrong in the param. parsing
+      NSTR_LOG_(error, "Unrecognized option");
+      std::cout << desc << "\n";
+      std::cout << "Example: neurostr_benchmark -i test.swc " << std::endl << std::endl ;
+      return 1;
+    }
+    
+    // Help option
+    if (vm.count("help")){
+      std::cout << desc << "\n";
+      std::cout << "Example: neurostr_benchmark -i test.swc " << std::endl << std::endl ;
+      return 2;
+    }
+  
+    // Missing input/output
+    if(!vm.count("input")){
+      NSTR_LOG_(error, "Input/output file required");
+      std::cout << desc << "\n";
+      std::cout << "Example: neurostr_benchmark -i test.swc " << std::endl << std::endl ;
+      return 3;
+    }
+    
+    neurostr::log::init_log_cerr(); // Log to cerr
+    
+    // Validation speed
+    auto r = neurostr::io::read_file_by_ext(ifile);
+    Neuron& n = *(r->begin());
+    
+    auto nodecount = n.node_count();
+    
+    std::cout << "{ " << std::endl;
+          
+    std::cout << " \"file\": \" " << ifile << "\"," << std::endl;
+    std::cout << " \"node_count\": " << std::to_string(nodecount) << "," << std::endl;
+    
+      
+    std::cout << "\"benchmark\": [" << std::endl;
+    
+  
     /** Read speed test **/
-    // SWC READ SPEEd
-    bmk::benchmark<std::chrono::microseconds> bm_swc;
-    bm_swc.run("swc_read_small",nrep, load_file_test, "file", {swc_small});
-    bm_swc.run("swc_read_medium",nrep, load_file_test, "file", {swc_med});
-    bm_swc.run("swc_read_large",nrep, load_file_test, "file", {swc_large});
-    bm_swc.print("swc_read", std::cout);
-    
-    
-    // ASC READ SPEED
-    bmk::benchmark<std::chrono::microseconds> bm_asc;
-    bm_asc.run("asc_read_small",10, load_file_test, "file", {asc_small});
-    bm_asc.run("asc_read_medium",nrep, load_file_test, "file", {asc_med});
-    bm_asc.run("asc_read_large",10, load_file_test, "file", {asc_large}); // FIX ISSUE #49
-    bm_asc.print("asc_read", std::cout);
-    
-    // DAT READ SPEED
-    bmk::benchmark<std::chrono::microseconds> bm_dat;
-    bm_dat.run("dat_read_small",nrep, load_file_test, "file", {dat_small});
-    bm_dat.run("dat_read_medium",nrep, load_file_test, "file", {dat_med});
-    bm_dat.run("dat_read_large",nrep, load_file_test, "file", {dat_large});
-    bm_dat.print("dat_read", std::cout);
-    
-    // JSON READ SPEEd
-    bmk::benchmark<std::chrono::microseconds> bm_json;
-    bm_json.run("json_read_small",10, load_file_test, "file", {json_small});
-    bm_json.run("json_read_medium",10, load_file_test, "file", {json_med});
-    bm_json.run("json_read_large",10, load_file_test, "file", {json_large});
-    bm_json.print("json_read", std::cout);
-    
-    // Read small, medium and large
-    auto r_small = neurostr::io::read_file_by_ext(swc_small);
-    auto r_med = neurostr::io::read_file_by_ext(swc_med);
-    auto r_large = neurostr::io::read_file_by_ext(swc_large);
-    
-    Neuron& n_small = *(r_small->begin());
-    Neuron& n_med = *(r_med->begin());
-    Neuron& n_large = *(r_large->begin());
+    bmk::benchmark<std::chrono::microseconds> bm_read;
+    bm_read.run("Read_speed",nrep, [_f = ifile](){auto  r = neurostr::io::read_file_by_ext(_f);});
+    bm_read.print("Read", std::cout);
     
     // Run Validation tests
-    bmk::benchmark<std::chrono::microseconds> bm_validation_small;
-    validation_benchmark(bm_validation_small,n_small);
-    bm_validation_small.print("Validation - small size neuron", std::cout);
+    bmk::benchmark<std::chrono::microseconds> bm_validation;
+    validation_benchmark(bm_validation,n, nrep);
+    bm_validation.print("Validation", std::cout);
     
+    // Run Measure test
+    bmk::benchmark<std::chrono::microseconds> bm_measures;
+    lmeasures_benchmark(bm_measures, n, nrep);
+    bm_measures.print("Measures", std::cout);
     
-    bmk::benchmark<std::chrono::microseconds> bm_validation_med;
-    validation_benchmark(bm_validation_med,n_med);
-    bm_validation_med.print("Validation - med size neuron", std::cout);
-    
-    bmk::benchmark<std::chrono::microseconds> bm_validation_large;
-    validation_benchmark(bm_validation_large,n_large);
-    bm_validation_large.print("Validation - large size neuron", std::cout);
-    
-    bmk::benchmark<std::chrono::microseconds> bm_measures_small;
-    lmeasures_benchmark(bm_measures_small, n_small);
-    bm_measures_small.print("Measure - small size neuron", std::cout);
-    
-    bmk::benchmark<std::chrono::microseconds> bm_measures_med;
-    lmeasures_benchmark(bm_measures_med, n_med);
-    bm_measures_med.print("Measure - medium size neuron", std::cout);
-    
-    bmk::benchmark<std::chrono::microseconds> bm_measures_large;
-    lmeasures_benchmark(bm_measures_large, n_med);
-    bm_measures_large.print("Measure - large size neuron", std::cout);
+    // Mock object and close
+    std::cout << " {}]} "<< std::endl;
 }

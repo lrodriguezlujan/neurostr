@@ -9,6 +9,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 # Workspace name
 project(NeuroSTR)
 
+#set(CMAKE_CXX_COMPILER g++-6)
 
 
 # This setting is useful for providing JSON file used by CodeLite for code completion
@@ -35,7 +36,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 #file(COPY ./bundled/ DESTINATION ${CMAKE_BINARY_DIR}/include)
 
 # Find boost
-find_package(Boost 1.62.0 REQUIRED 
+find_package(Boost 1.62.0 REQUIRED
               filesystem
               program_options )
 
@@ -103,11 +104,11 @@ set ( LIB_CXX_SRCS
 # Define the library compile flags
 if(${CONFIGURATION_NAME} STREQUAL "Release")
 set_source_files_properties(
-    ${LIB_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${LIB_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O3 -std=c++14")
 else()
 set_source_files_properties(
-    ${LIB_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${LIB_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O0 -std=c++14 -Wall")
 endif()
 
@@ -137,53 +138,58 @@ set ( TOOLS_CXX_SRCS
     ${TOOL_SRC_DIR}/NeuroConverter.cpp
     ${TOOL_SRC_DIR}/Scholl.cpp
     ${TOOL_SRC_DIR}/Validator.cpp
+    ${TOOL_SRC_DIR}/Benchmark.cpp
 )
 
 # Define the Tools compile flags
 if(${CONFIGURATION_NAME} STREQUAL "Debug")
 set_source_files_properties(
-    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O0 -std=c++14 -Wall")
-    
+
 else()
 set_source_files_properties(
-    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O3 -std=c++14")
 endif()
 
 link_directories( ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
 
-add_executable(BoxCutter ${CMAKE_SOURCE_DIR}/tools/BoxCutter.cpp)
-target_link_libraries(BoxCutter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(BoxCutter neurostr)
+add_executable(neurostr_boxcutter ${CMAKE_SOURCE_DIR}/tools/BoxCutter.cpp)
+target_link_libraries(neurostr_boxcutter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_boxcutter neurostr)
 
-add_executable(BranchFeatureExtractor ${CMAKE_SOURCE_DIR}/tools/BranchFeatureExtractor.cpp)
-target_link_libraries(BranchFeatureExtractor -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(BranchFeatureExtractor neurostr)
+add_executable(neurostr_branchfeatures ${CMAKE_SOURCE_DIR}/tools/BranchFeatureExtractor.cpp)
+target_link_libraries(neurostr_branchfeatures -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_branchfeatures neurostr)
 
-add_executable(NeuriteFeatureExtractor ${CMAKE_SOURCE_DIR}/tools/NeuriteFeatureExtractor.cpp)
-target_link_libraries(NeuriteFeatureExtractor -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(NeuriteFeatureExtractor neurostr)
+add_executable(neurostr_neuritefeatures ${CMAKE_SOURCE_DIR}/tools/NeuriteFeatureExtractor.cpp)
+target_link_libraries(neurostr_neuritefeatures -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_neuritefeatures neurostr)
 
-add_executable(NeuroConverter ${CMAKE_SOURCE_DIR}/tools/NeuroConverter.cpp)
-target_link_libraries(NeuroConverter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(NeuroConverter neurostr)
+add_executable(neurostr_converter ${CMAKE_SOURCE_DIR}/tools/NeuroConverter.cpp)
+target_link_libraries(neurostr_converter -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_converter neurostr)
 
-add_executable(Scholl ${CMAKE_SOURCE_DIR}/tools/Scholl.cpp)
-target_link_libraries(Scholl -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(Scholl neurostr)
+add_executable(neurostr_scholl ${CMAKE_SOURCE_DIR}/tools/Scholl.cpp)
+target_link_libraries(neurostr_scholl -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_scholl neurostr)
 
-add_executable(Validator ${CMAKE_SOURCE_DIR}/tools/Validator.cpp)
-target_link_libraries(Validator -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
-add_dependencies(Validator neurostr)
+add_executable(neurostr_validator ${CMAKE_SOURCE_DIR}/tools/Validator.cpp)
+target_link_libraries(neurostr_validator -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_validator neurostr)
+
+add_executable(neurostr_benchmark EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/Benchmark.cpp)
+target_link_libraries(neurostr_benchmark -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_benchmark neurostr)
 
 add_custom_target(tools DEPENDS
-                    BoxCutter 
-                    BranchFeatureExtractor
-                    NeuriteFeatureExtractor
-                    NeuroConverter
-                    Scholl
-                    Validator)
+                    neurostr_boxcutter
+                    neurostr_branchfeatures
+                    neurostr_neuritefeatures
+                    neurostr_converter
+                    neurostr_scholl
+                    neurostr_validator)
 
 ## TESTS
 set( TEST_SRC_DIR ${CMAKE_SOURCE_DIR}/test/src)
@@ -210,11 +216,11 @@ set ( TEST_CXX_SRCS
 # Define the test compile flags
 if(${CONFIGURATION_NAME} STREQUAL "Release")
 set_source_files_properties(
-    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O3 -std=c++14")
 else()
 set_source_files_properties(
-    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS 
+    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O0 -std=c++14 -Wall")
 endif()
 
@@ -230,7 +236,7 @@ else()
       ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
       ${UNITTEST++_LIBRARY}
     )
-    
+
     # Includes..
     include_directories(
       .
@@ -245,17 +251,17 @@ else()
     add_executable(neurostr_test EXCLUDE_FROM_ALL ${TEST_CXX_SRCS} )
     target_link_libraries(neurostr_test -lneurostr -lpthread -lUnitTest++)
     set_target_properties( neurostr_test PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/test)
-    
-    
+
+
     # Create run test
-    
+
     # Set test data var
     set(ENV{NSTR_TEST_DIR} ${CMAKE_SOURCE_DIR}/test/)
-    add_custom_target( run_test 
+    add_custom_target( run_test
                        COMMAND neurostr_test
                        DEPENDS neurostr_test
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test )
-  
+
 endif()
 
 
@@ -298,8 +304,9 @@ install(TARGETS neurostr
         ARCHIVE DESTINATION lib/neurostr
         RUNTIME DESTINATION bin/ )
 
-# basen.hpp
+
+# Tools
 if(NOT NO_INSTALL_TOOLS)
-  install(TARGETS BoxCutter BranchFeatureExtractor NeuriteFeatureExtractor NeuroConverter Scholl Validator
+  install(TARGETS neurostr_boxcutter neurostr_branchfeatures neurostr_neuritefeatures neurostr_converter neurostr_scholl neurostr_validator
         RUNTIME DESTINATION bin/ )
 endif()

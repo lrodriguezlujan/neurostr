@@ -8,7 +8,7 @@ currentSection: tools
 
 Given a reconstruction file, the converter guess the format by the file extension and reads it. Optionally, it tries to correct errors in the reconstruction and applies a simplification algorithm over the branches. Finally it writes out the reconstruction in [SWC](io/format.html#SWC) or [JSON](io/format.html#JSON) format.
 
-**Executable name:** *NeuroConverter*
+**Executable name:** *neurostr_converter*
 
 #### Options {#converter_options}
 
@@ -27,13 +27,13 @@ Given a reconstruction file, the converter guess the format by the file extensio
 Imagine that we want to convert the input file `fancy_neuron.dat` into a more "readable" format, like JSON `fancy_readable_neuron.json`. Also we want to remove zero-length compartments in the reconstruction, but we don't want to simplify it in any way. To do so, we just need to execute the following command in a BASH console:
 
 ```bash
-./NeuroConverter -i fancy_neuron.dat -f json -o fancy_readable_neuron.json -c
+neurostr_converter -i fancy_neuron.dat -f json -o fancy_readable_neuron.json -c
 ```
 
 #### Help message
 
 ```bash
-./NeuroConverter --help
+./neurostr_converter --help
 Allowed options:
   -h [ --help ]         Produce help message
   -i [ --input ] arg    Neuron reconstruction file
@@ -43,7 +43,7 @@ Allowed options:
   -e [ --eps ] arg (=0) Output file
   -v [ --verbose ]      Verbose log output
 
-Example: NeuroConverter -i test.swc -o test.json -f json
+Example: neurostr_converter -i test.swc -o test.json -f json
 ```
 ---
 
@@ -60,7 +60,7 @@ The output (in the standard output stream) is a non prettyfied JSON array that c
 
 Some measures might use the logging interface to inform about errors or unexpected conditions.
 
-**Executable name:** *NeuriteFeatureExtractor*
+**Executable name:** *neurostr_neuritefeatures*
 
 #### Options {#neuritefeature_options}
 
@@ -231,7 +231,7 @@ Allowed options:
   --omitaxon            Ignore the axon
   --omitdend            Ignore the non-apical dendrites
 
-Example: NeuriteFeatureExtractor -i test.swc
+Example: neurostr_neuritefeatures -i test.swc
 ```
 
 #### Measures {#neuritefeature_measures}
@@ -281,7 +281,7 @@ The output (in the standard output stream) is a non prettyfied JSON array that c
 
 Some measures might use the logging interface to inform about errors or unexpected conditions.
 
-**Executable name:** *BranchFeatureExtractor*
+**Executable name:** *neurostr_branchfeatures*
 
 #### Options {#branchfeature_options}
 
@@ -421,7 +421,7 @@ Allowed options:
   --omitaxon                    Ignore the axon
   --omitdend                    Ignore the non-apical dendrites
 
-Example: BranchFeatureExtractor -i test.swc
+Example: neurostr_branchfeatures -i test.swc
 ```
 
 #### Measures {#branchfeature_example}
@@ -471,7 +471,7 @@ The default tests are:
 - Extreme bifurcation/elongation angles
 
 
-**Executable name:** *Validator*
+**Executable name:** *neurostr_validator*
 
 #### Options {#validator_options}
 
@@ -745,7 +745,7 @@ Allowed options:
   --mindend arg (=2)           Number of dendrites minimum (in)
   --maxdend arg (=13)          Number of dendrites maximum (out)
 
-Example: validator -i test.swc -e
+Example: neurostr_validator -i test.swc -e
 ```
 ---
 
@@ -753,7 +753,7 @@ Example: validator -i test.swc -e
 
 Performs a simple linear [Scholl analysis](https://en.wikipedia.org/wiki/Sholl_analysis) over the neurons in the given reconstruction. The executable outputs a three-column CSV file over the standard output with neuron, distance and branch count (intersections).
 
-**Executable name:** *Scholl*
+**Executable name:** *neurostr_scholl*
 
 #### Options {#scholl_options}
 
@@ -824,7 +824,7 @@ Allowed options:
   --omitaxon            Ignore the axon
   --omitdend            Ignore the non-apical dendrites
 
-Example: Scholl -i test.swc
+Example: neurostr_scholl -i test.swc
 ```
 
 ---
@@ -837,7 +837,7 @@ The output is always a reconstruction in JSON format, since no other output form
 
 You can use this to select (and measure) nodes and branches outside/inside the box with the property_exists selector.
 
-**Executable name:** *BoxCutter*
+**Executable name:** *neurostr_boxcutter*
 
 #### Options {#boxcut_options}
 
@@ -858,7 +858,7 @@ You can use this to select (and measure) nodes and branches outside/inside the b
 Command:
 
 ```bash
-./BoxCutter -i simple_tree.swc -o simple_tree_out.json --maxx 3.0
+./neurostr_boxcutter -i simple_tree.swc -o simple_tree_out.json --maxx 3.0
 
 ```
 
@@ -1041,12 +1041,15 @@ Output:
 Allowed options:
   -h [ --help ]         Produce help message
   -i [ --input ] arg    Neuron reconstruction file
-  -c [ --correct ]      Try to correct the errors in the reconstruction
-  --omitapical          Ignore the apical dendrite
-  --omitaxon            Ignore the axon
-  --omitdend            Ignore the non-apical dendrites
+  -o [ --output ] arg   Neuron reconstruction JSON output file
+  --minx arg            Box min corner - x value
+  --miny arg            Box min corner - y value
+  --minz arg            Box min corner - z value
+  --maxx arg            Box max corner - x value
+  --maxy arg            Box max corner - y value
+  --maxz arg            Box max corner - z value
 
-Example: Scholl -i test.swc
+Example: neurostr_boxcutter -i test.swc --minx 300
 ```
 
 

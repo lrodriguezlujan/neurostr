@@ -158,14 +158,14 @@ int main(int ac, char **av)
   
 	if (vm.count("help")){
     std::cout << desc << "\n";
-    std::cout << "Example: validator -i test.swc -e" << std::endl << std::endl ;
+    std::cout << "Example: neurostr_validator -i test.swc -e" << std::endl << std::endl ;
     return 1;
   }
   
   if(!vm.count("input") || !vm.count("input")){
     std::cout << "ERROR: input/output file required" << std::endl << std::endl;
     std::cout << desc << "\n";
-    std::cout << "Example: validator -i test.swc -e" << std::endl << std::endl ;
+    std::cout << "Example: neurostr_validator -i test.swc -e" << std::endl << std::endl ;
     return 2;
   }
   

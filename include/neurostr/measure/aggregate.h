@@ -75,21 +75,27 @@ const auto mean_sd_factory(T zero){
 };
 
 template <typename U = float, typename T = U>
-const auto max = [](const detail::iterator_type<U>& b, 
+const std::function<T(const detail::iterator_type<U>&,
+                      const detail::iterator_type<U>&)>  
+     max = [](const detail::iterator_type<U>& b, 
               const detail::iterator_type<U>& e) -> T {
   if(b == e) return std::numeric_limits<T>::infinity();
      return static_cast<T>(*std::max_element(b,e));
 };
   
 template <typename U = float, typename T = U>
-const auto min = [](const detail::iterator_type<U>& b, 
+const std::function<T(const detail::iterator_type<U>&,
+                      const detail::iterator_type<U>&)> 
+     min = [](const detail::iterator_type<U>& b, 
               const detail::iterator_type<U>& e) -> T {
   if(b == e) return std::numeric_limits<T>::infinity();
     return static_cast<T>(*std::min_element(b,e));
 };
   
 template <typename U = float, typename T = U>
-const auto median = [](const detail::iterator_type<U>& b, 
+const std::function<T(const detail::iterator_type<U>&,
+                      const detail::iterator_type<U>&)>  
+     median = [](const detail::iterator_type<U>& b, 
                  const detail::iterator_type<U>& e) -> T {
      if(b == e) return std::numeric_limits<T>::infinity();
     
@@ -108,8 +114,10 @@ const auto median = [](const detail::iterator_type<U>& b,
 };
 
 template <typename T>
-auto range_length = [](const detail::iterator_type<T>& b, 
-                       const detail::iterator_type<T>& e) -> T {
+const std::function<T( const detail::iterator_type<T>&, 
+                       const detail::iterator_type<T>&) > 
+      range_length = [](const detail::iterator_type<T>& b, 
+                        const detail::iterator_type<T>& e) -> T {
             T min_ = min<T,T>(b,e);
             T max_ = max<T,T>(b,e);
             return max_-min_;

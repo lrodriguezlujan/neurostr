@@ -60,14 +60,14 @@ int main(int ac, char **av)
   
 	if (vm.count("help")){
     std::cout << desc << "\n";
-    std::cout << "Example: BoxCutter -i test.swc -o test_cutz10.json --minz 10 " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_boxcutter -i test.swc -o test_cutz10.json --minz 10 " << std::endl << std::endl ;
     return 1;
   }
   
   if(!vm.count("input") || !vm.count("output")){
     std::cout << "ERROR: input and output files required" << std::endl << std::endl;
     std::cout << desc << "\n";
-    std::cout << "Example: BoxCutter -i test.swc -o test_cutz10.json --minz 10 " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_boxcutter -i test.swc -o test_cutz10.json --minz 10 " << std::endl << std::endl ;
     return 2;
   }
   

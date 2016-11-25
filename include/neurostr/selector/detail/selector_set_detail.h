@@ -162,10 +162,10 @@ constexpr auto intersection_selector_pair(const F1& f1, const F2& f2) {
  * @return A \ B
  */
 template<typename T>
-std::vector<std::reference_wrapper<T>> reference_vector_diff(
-    const std::vector<std::reference_wrapper<T>>& a,
-    const std::vector<std::reference_wrapper<T>>& b){
-      std::vector<std::reference_wrapper<T>> ret;
+std::vector<std::reference_wrapper<const T>> reference_vector_diff(
+    const std::vector<std::reference_wrapper<const T>>& a,
+    const std::vector<std::reference_wrapper<const T>>& b){
+      std::vector<std::reference_wrapper<const T>> ret;
       
       for(auto it = a.begin(); it != a.end(); ++it){
         // Arhg we need to compare reference wrappers

@@ -62,14 +62,14 @@ int main(int ac, char **av)
     // Something went wrong in the param. parsing
     NSTR_LOG_(error, "Unrecognized option");
     std::cout << desc << "\n";
-    std::cout << "Example: NeuroConverter -i test.swc -o test.json  -f json" << std::endl << std::endl ;
+    std::cout << "Example: neurostr_converter -i test.swc -o test.json  -f json" << std::endl << std::endl ;
     return 1;
   }
   
   // Help option
 	if (vm.count("help")){
     std::cout << desc << "\n";
-    std::cout << "Example: NeuroConverter -i test.swc -o test.json -f json " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_converter -i test.swc -o test.json -f json " << std::endl << std::endl ;
     return 2;
   }
   
@@ -77,7 +77,7 @@ int main(int ac, char **av)
   if(!vm.count("input") || !vm.count("output")){
     NSTR_LOG_(error, "Input/output file required");
     std::cout << desc << "\n";
-    std::cout << "Example: NeuroConverter -i test.swc -o test.json -f json " << std::endl << std::endl ;
+    std::cout << "Example: neurostr_converter -i test.swc -o test.json -f json " << std::endl << std::endl ;
     return 3;
   }
   
