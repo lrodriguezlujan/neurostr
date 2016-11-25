@@ -52,7 +52,7 @@ Parser dispatchers are a pair of auxiliary functions to ease the task to read a 
 
 ## Writers
 
-Parsers are classes that write a given [Reconstruction] into a output stream `std::ostream` following some predefined format. At the moment, just [SWC](io/format.html#SWC) and [JSON](io/format.html#JSON) file formats are supported by the `SWCWriter` and `JSONWriter` respectively. Check the data format specification and the writers documentation for further details about how to use them.
+Parsers are classes that write a given [Reconstruction] into a output stream `std::ostream` following some prebuilt format. At the moment, just [SWC](io/format.html#SWC) and [JSON](io/format.html#JSON) file formats are supported by the `SWCWriter` and `JSONWriter` respectively. Check the data format specification and the writers documentation for further details about how to use them.
 
 [Reconstruction]: data_model.html#reconstruction
 [Contour]: data_model.html#contour

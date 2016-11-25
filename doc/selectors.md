@@ -24,57 +24,57 @@ Here we use `reference_iter<Element>` as shorthand for ` std::vector<std::refere
 
 ## Prebuilt selectors {#predef}
 
-NeuroSTR includes a relatively large set of predefined selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the *Node* category.
+NeuroSTR includes a relatively large set of prebuilt selector functions. They are organized in four categories, according to their input element type. For example, all selector functions that take either a single node or a node set as input fall into the *Node* category.
 
 Here is the list of available selectors, you can find more details about each selector by clicking on their name:
 
-### [Node Selectors](selectors/predefined.html#node_selectors)
+### [Node Selectors](selectors/prebuilt.html#node_selectors)
 
-- [Self selector](selectors/predefined.html#node_self)
-- [Parent node selector](selectors/predefined.html#node_parent)
-- [Parent branch selector](selectors/predefined.html#node_branch)
-- [Subtree selector](selectors/predefined.html#node_subtree)
-- [Subtree terminals selector](selectors/predefined.html#node_subtree_terminals)
-- [Stem selector](selectors/predefined.html#node_stem)
-- [Descendant selector](selectors/predefined.html#node_descendants)
-- [Bifurcation nodes filter](selectors/predefined.html#node_bifurcation)
-- [Terminal nodes filter](selectors/predefined.html#node_terminal)
+- [Self selector](selectors/prebuilt.html#node_self)
+- [Parent node selector](selectors/prebuilt.html#node_parent)
+- [Parent branch selector](selectors/prebuilt.html#node_branch)
+- [Subtree selector](selectors/prebuilt.html#node_subtree)
+- [Subtree terminals selector](selectors/prebuilt.html#node_subtree_terminals)
+- [Stem selector](selectors/prebuilt.html#node_stem)
+- [Descendant selector](selectors/prebuilt.html#node_descendants)
+- [Bifurcation nodes filter](selectors/prebuilt.html#node_bifurcation)
+- [Terminal nodes filter](selectors/prebuilt.html#node_terminal)
 
  ---
 
-### [Branch Selectors](selectors/predefined.html#branch_selectors)
+### [Branch Selectors](selectors/prebuilt.html#branch_selectors)
 
-- [Parent neurite selector](selectors/predefined.html#branch_neurite)
-- [Parent branch selector](selectors/predefined.html#branch_parent)
-- [Sibling branch selector](selectors/predefined.html#branch_sibling)
-- [Last node selector](selectors/predefined.html#branch_last_node)
-- [First node selector](selectors/predefined.html#branch_first_node)
-- [All nodes selector](selectors/predefined.html#branch_nodes)
-- [Subtree selector](selectors/predefined.html#branch_subtree)
-- [Stem selector](selectors/predefined.html#branch_stem)
-- [Centrifugal order filter](selectors/predefined.html#branch_order)
-
----
-
-### [Neurite Selectors](selectors/predefined.html#neurite_selectors)
-
-- [Neuron selector](selectors/predefined.html#neurite_neuron)
-- [Node set selector](selectors/predefined.html#neurite_nodes)
-- [Branch set selector](selectors/predefined.html#neurite_branches)
-- [First branch selector](selectors/predefined.html#neurite_first_branch)
-- [Bifurcation nodes selector](selectors/predefined.html#neurite_bifurcation_nodes)
-- [Terminal nodes selector](selectors/predefined.html#neurite_terminal_nodes)
-- [Terminal branches selector](selectors/predefined.html#neurite_terminal_branches)
-- [Non terminal branches selector](selectors/predefined.html#neurite_nonterminal)
-- [Pre-terminal branches selector](selectors/predefined.html#neurite_preterminal)
-- [Terminal bifurcation node selector](selectors/predefined.html#neurite_terminal_bif)
-- [Dendrite filter](selectors/predefined.html#neurite_type)
-- [Apical filter](selectors/predefined.html#neurite_type)
-- [Axon filter](selectors/predefined.html#neurite_type)
+- [Parent neurite selector](selectors/prebuilt.html#branch_neurite)
+- [Parent branch selector](selectors/prebuilt.html#branch_parent)
+- [Sibling branch selector](selectors/prebuilt.html#branch_sibling)
+- [Last node selector](selectors/prebuilt.html#branch_last_node)
+- [First node selector](selectors/prebuilt.html#branch_first_node)
+- [All nodes selector](selectors/prebuilt.html#branch_nodes)
+- [Subtree selector](selectors/prebuilt.html#branch_subtree)
+- [Stem selector](selectors/prebuilt.html#branch_stem)
+- [Centrifugal order filter](selectors/prebuilt.html#branch_order)
 
 ---
 
-### [Neuron Selectors](selectors/predefined.html#neuron_selectors)
+### [Neurite Selectors](selectors/prebuilt.html#neurite_selectors)
+
+- [Neuron selector](selectors/prebuilt.html#neurite_neuron)
+- [Node set selector](selectors/prebuilt.html#neurite_nodes)
+- [Branch set selector](selectors/prebuilt.html#neurite_branches)
+- [First branch selector](selectors/prebuilt.html#neurite_first_branch)
+- [Bifurcation nodes selector](selectors/prebuilt.html#neurite_bifurcation_nodes)
+- [Terminal nodes selector](selectors/prebuilt.html#neurite_terminal_nodes)
+- [Terminal branches selector](selectors/prebuilt.html#neurite_terminal_branches)
+- [Non terminal branches selector](selectors/prebuilt.html#neurite_nonterminal)
+- [Pre-terminal branches selector](selectors/prebuilt.html#neurite_preterminal)
+- [Terminal bifurcation node selector](selectors/prebuilt.html#neurite_terminal_bif)
+- [Dendrite filter](selectors/prebuilt.html#neurite_type)
+- [Apical filter](selectors/prebuilt.html#neurite_type)
+- [Axon filter](selectors/prebuilt.html#neurite_type)
+
+---
+
+### [Neuron Selectors](selectors/prebuilt.html#neuron_selectors)
 
 - [Neurites selector](selectors/neuron.html#neuron_neurites)
 - [Branch selector](selectors/neuron.html#neuron_branch)
@@ -82,7 +82,7 @@ Here is the list of available selectors, you can find more details about each se
 
 ---
 
-### [Generic Selectors](selectors/predefined.html#generic_selectors)
+### [Generic Selectors](selectors/prebuilt.html#generic_selectors)
 
 - [Generic self selector](selectors/generic.html#generic_self)
 - [Property exists filter](selectors/generic.html#generic_property)
@@ -115,21 +115,21 @@ There are two classes of selector operations: selector functions inner operation
 
 ## Create a selector {#create}
 
-So far you have read all about selectors but you still feel like a fish out of water. To ease your mind we will show you how to create a new selector in 5 lines. Let's start by picking a predefined selector that seems "hard" to implement: [Pre-termianl branches selector](selectors/predefined.html#neurite_preterminal).
+So far you have read all about selectors but you still feel like a fish out of water. To ease your mind we will show you how to create a new selector in 5 lines. Let's start by picking a prebuilt selector that seems "hard" to implement: [Pre-termianl branches selector](selectors/prebuilt.html#neurite_preterminal).
 
-1. The [Pre-termianl branches selector](selectors/predefined.html#neurite_preterminal) selects all branches in a neurite which have at least one daughter branch that is terminal. Instead of writing it from scratch we will use the selector operations. Selecting all terminal branches in the neurite seems like a good start, so we use the [Terminal branches selector](selectors/predefined.html#neurite_terminal_branches).
+1. The [Pre-termianl branches selector](selectors/prebuilt.html#neurite_preterminal) selects all branches in a neurite which have at least one daughter branch that is terminal. Instead of writing it from scratch we will use the selector operations. Selecting all terminal branches in the neurite seems like a good start, so we use the [Terminal branches selector](selectors/prebuilt.html#neurite_terminal_branches).
 ```
   using namespace ns = neurostr::selector;
   ns::neurite_terminal_branches();
 ```
 
-1. Since we want the pre-terminal seems pretty obvious that we should use the [Parent branch selector](selectors/predefined.html#branch_parent) somewhere. Actually we want to select the parent of each terminal branch...that is exactly what the [Combined Foreach](selectors/operations.html#foreach) operation does:
+1. Since we want the pre-terminal seems pretty obvious that we should use the [Parent branch selector](selectors/prebuilt.html#branch_parent) somewhere. Actually we want to select the parent of each terminal branch...that is exactly what the [Combined Foreach](selectors/operations.html#foreach) operation does:
 ```
   ns::selector_foreach(ns::neurite_terminal_branches,
                        ns::branch_parent_selector);
 ```
 
-1. But...what if the neurite has only one branch? We should select and empty set (and the parent selector don't work that way). We need to remove the first branch from the terminal branches selection first. We can select the first branch with the [First branch selector](selectors/prdefined.html#neurite_first_branch), but the [Asymmetric Difference](selectors/operations.html#diff) operator requires both arguments to output a set (and to have the same input type), so first we convert the [First branch selector](selectors/predefined.html#neurite_first_branch) to an output set selector:
+1. But...what if the neurite has only one branch? We should select and empty set (and the parent selector don't work that way). We need to remove the first branch from the terminal branches selection first. We can select the first branch with the [First branch selector](selectors/prdefined.html#neurite_first_branch), but the [Asymmetric Difference](selectors/operations.html#diff) operator requires both arguments to output a set (and to have the same input type), so first we convert the [First branch selector](selectors/prebuilt.html#neurite_first_branch) to an output set selector:
 ```
   ns::selector_out_single_to_set(ns::neurite_first_branch_selector);
 ```

@@ -1,6 +1,6 @@
 # Reconstruction Validation
 
-## Predefined validations
+## Prebuilt validations
 
 ### Definition
 

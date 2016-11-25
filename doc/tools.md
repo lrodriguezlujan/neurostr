@@ -49,7 +49,7 @@ Example: NeuroConverter -i test.swc -o test.json -f json
 
 ## Neurite Feature Extractor {#neuritefeature}
 
-The neurite feature extractor computes a set of predefined measure for each neurite in the reconstruction. Measure values are not aggregated in any way, they are returned as-is (usually as vectors). Optionally, it tries to correct errors in the reconstruction.
+The neurite feature extractor computes a set of prebuilt measure for each neurite in the reconstruction. Measure values are not aggregated in any way, they are returned as-is (usually as vectors). Optionally, it tries to correct errors in the reconstruction.
 
 The output (in the standard output stream) is a non prettyfied JSON array that contains for each [Neurite]:
 
@@ -269,7 +269,7 @@ Example: NeuriteFeatureExtractor -i test.swc
 
 ## Branch Feature Extractor {#branchfeature}
 
-The branch feature extractor computes a set of predefined measure for each branch in the reconstruction. Optionally, it tries to correct errors in the reconstruction.
+The branch feature extractor computes a set of prebuilt measure for each branch in the reconstruction. Optionally, it tries to correct errors in the reconstruction.
 
 The output (in the standard output stream) is a non prettyfied JSON array that contains for each [Branch]:
 
@@ -538,7 +538,7 @@ The default tests are:
         "results": []
     },
     {
-        "description": "Fails if the non-axis aligned box volume of the neurite is lower than predefined threshold",
+        "description": "Fails if the non-axis aligned box volume of the neurite is lower than prebuilt threshold",
         "name": "Planar neurite validation",
         "neuron_id": "simple_tree",
         "pass": true,

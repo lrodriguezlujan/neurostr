@@ -177,7 +177,7 @@ IO namespace contains write/read functionality for most common file formats.
 
 # namespace [`validator`](classes/validator.html#namespace_validator) {#namespace_validator}
 
-Validator namespace contains the validator template class and the predefined validators and check functions.
+Validator namespace contains the validator template class and the prebuilt validators and check functions.
 
 ## Summary
 
