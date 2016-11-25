@@ -135,10 +135,7 @@ namespace nm = neurostr::measure;
 
   // Branch fractal dimension
   m.emplace( "branch_fractal_dimension", nm::selectorMeasureCompose( ns::neurite_branch_selector,
-                                          nm::measureEach(
-                                            nm::selectorMeasureCompose(
-                                              ns::branch_node_selector,
-                                              nm::node_set_fractal_dim)))(n)); 
+                                          nm::measureEach( nm::branch_fractal_dim))(n)); 
 
 
   /** Bifurcation measures **/

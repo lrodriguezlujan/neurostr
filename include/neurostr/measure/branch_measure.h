@@ -522,6 +522,24 @@ const auto branch_length = [](const Branch &b) -> float {
   return len;
 };
 
+const auto branch_fractal_dim = [](const Branch &b) -> float {
+  if(b.size() == 0){
+      NSTR_LOG_(warn, std::string("Empty branch measure ") + b.idString() );
+      return NAN;
+  }
+  // Get branch nodes
+  auto v = selector::branch_node_selector(b);
+  
+  if(b.has_root()){
+    // Insert at the begining
+    v.emplace(v.begin(), b.root());
+  }
+  
+  return measure::node_set_fractal_dim(v.begin(),v.end());
+  
+};
+
+
 static inline auto branch_intersects_factory(bool ignore_radius = false){
  
   return [_ign = ignore_radius](const Branch &b ) -> std::string {

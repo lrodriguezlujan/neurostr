@@ -86,8 +86,7 @@ namespace nm = neurostr::measure;
                                                        nm::box_volume)(b));
                                                        
   // Fractal dim
-  m.emplace("fractal_dimension",   nm::selectorMeasureCompose(ns::branch_node_selector,
-                                                              nm::node_set_fractal_dim)(b));
+  m.emplace("fractal_dimension",   nm::branch_fractal_dim(b));
 
 
   /** Bifurcation measures **/
