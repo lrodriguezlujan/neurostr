@@ -15,6 +15,14 @@ COUSCOUS_GENERATED=".couscous/generated"
 # Copy folders into website
 cp -r "${COUSCOUS_GENERATED}/css" "${COUSCOUS_GENERATED}/doc" "${COUSCOUS_GENERATED}/fonts" "${COUSCOUS_GENERATED}/img" "${COUSCOUS_GENERATED}/js" "./website"
 
+# commit
+#git add website/
+#git commit -m $1
+#git push
+
+# Deploy
+#git subtree push --prefix website/ origin gh-pages
+
 # Restore
 #rm -r ./website
 #git checkout -- website/

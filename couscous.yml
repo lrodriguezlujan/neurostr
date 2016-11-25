@@ -19,8 +19,8 @@ branch: gh-pages
 github:
     user: lrodriguezlujan
     repo: neurostr
-
-baseUrl: ../
+# Change this to preview
+baseUrl: /neurostr
 title: NeuroSTR
 subTitle: C++ Neuroanatomy library
 version: alpha
