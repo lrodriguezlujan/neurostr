@@ -15,3 +15,5 @@ build_release/
 **/Release/
 cmake-build-Debug
 cmake-build-Release
+.couscous
+doc/.couscous
