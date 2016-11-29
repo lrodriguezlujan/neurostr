@@ -41,14 +41,17 @@ auto property_exists_factory(const std::string& key){
 template <typename T, typename V>
 auto property_exists_factory(const std::string& key, V value){
   using reference = const_selector_reference<T>;
+  using type = V;
+  
   //using value_type = V;
   return [k_ = key, v_ = value](const const_selector_iterator<T>& b,
                                 const const_selector_iterator<T>& e ) 
                                 -> std::vector<reference> {
         std::vector<reference> st;
         for (auto it = b; it != e; ++it) {
-          if( it->get().properties.exists(k_) &&  
-              it->get().properties.get(k_) == v_ )
+          PropertyMap& p = it->get().properties;
+          if( p.exists(k_) &&  
+              p.get<type>(k_) == v_ )
             st.emplace_back(*it);
         }
         return st;

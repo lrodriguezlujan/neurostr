@@ -730,10 +730,16 @@ namespace geometry
     using face_iterator = face_storage::iterator;
     using const_face_iterator = face_storage::const_iterator;
     
+    using index_type = std::uint_fast32_t;
+    using index_face_type = std::array<index_type,3>;
+    using index_face_storage = std::vector<index_face_type>;
+    using index_face_iterator = index_face_storage::iterator;
+    using const_index_face_iterator = index_face_storage::const_iterator;
+    
     private:
       
       vertex_storage vertices_;
-      face_storage faces_;
+      index_face_storage faces_;
     
     public:
       
@@ -786,14 +792,14 @@ namespace geometry
        * @brief Removes the vertex and all its faces from the mesh
        * @param it Vertex iterator
        */
-      void remove(const vertex_iterator& it);
+      // void remove(const vertex_iterator& it);
       
       /**
        * @brief Removes a range of vertices and their faces from the mesh
        * @param b Range begin
        * @param e Range end
        */
-      void remove(const vertex_iterator& b, const vertex_iterator& e);
+      // void remove(const vertex_iterator& b, const vertex_iterator& e);
       
       /**
        * @brief Removes all vertices and faces
@@ -840,9 +846,22 @@ namespace geometry
        * 
        * @return Iterator to the inserted face
        */         
-      face_iterator add(const point_type& v0,
+      index_face_iterator add(const point_type& v0,
                const point_type& v1,
                const point_type& v2);
+               
+      /**
+       * @brief Adds a new triangular face to the mesh with index faces
+       * @param v0 Frist index
+       * @param v1 Second index
+       * @param v2 Third index
+       * 
+       * @return Iterator to the inserted face
+       */         
+      index_face_iterator add(const index_type& v0,
+               const index_type& v1,
+               const index_type& v2);
+      
       
       /**
        * @brief Adds a new triangular face to the mesh. Inserts the vertices
@@ -851,20 +870,20 @@ namespace geometry
        * 
        * @return Iterator to the inserted face
        */                  
-      face_iterator add(const triangle_type& t);
+      index_face_iterator add(const triangle_type& t);
         
       /**
        * @brief Removes a face from the mesh
        * @param it Face iterator
        */
-      void remove(const face_iterator& it);
+      void remove(const index_face_iterator& it);
       
       /**
        * @brief Removes a set of faces from the mesh
        * @param b Begin iterator
        * @param e End iterator
        */
-      void remove(const face_iterator& b, const face_iterator& e);
+      void remove(const index_face_iterator& b, const index_face_iterator& e);
       
       /**
        * @brief Removes all faces (but not the vertices)
@@ -877,24 +896,24 @@ namespace geometry
        * @brief Returns an iterator to the first face in the mesh
        * @return Begin iterator
        */
-      face_iterator begin_face();
+      index_face_iterator begin_face();
       /**
        * @brief Returns an iterator to the first face in the mesh
        * @return Begin iterator
        */
-      const_face_iterator begin_face() const;
+      const_index_face_iterator begin_face() const;
       
       /**
        * @brief Returns an iterator to one-past the last face in the mesh
        * @return End iterator
        */
-      face_iterator end_face();
+      index_face_iterator end_face();
       
       /**
        * @brief Returns an iterator to one-past the last face in the mesh
        * @return End iterator
        */
-      const_face_iterator end_face() const;
+      const_index_face_iterator end_face() const;
       
       /**
        * @brief Number of faces in the mesh
@@ -918,6 +937,15 @@ namespace geometry
        */
       point_type ray_intersection(const point_type& p, const point_type& ray_direction = point_type(1,0,0)) const;
       
+      /**
+       * @brief Get triange from face indexes
+       * @param f Face indexes
+       * @return  Triangle
+       */
+       triangle_type get_triangle(const index_face_type& f) const;
+       
+       std::ostream& toJSON(std::ostream&);
+      
     private:
       
       /**
@@ -927,6 +955,10 @@ namespace geometry
        * @return 
        */
       static bool vertex_of_face(const vertex_type& v, const face_type& f);
+      static bool vertex_of_face(const index_type& v, const index_face_type& f);
+      
+      
+
       
   };//Triangle mesh
 
@@ -943,8 +975,5 @@ namespace geometry
   
   
 } // namespace neurostr
-
-// Trimesh output
-  std::ostream& operator<<(std::ostream&,  const neurostr::geometry::TriangleMesh&);
 
 #endif

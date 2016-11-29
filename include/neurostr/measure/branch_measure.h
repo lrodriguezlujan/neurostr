@@ -40,6 +40,7 @@ const auto taper_rate_hillman = [](const Branch& b) -> float {
     }
   } else {
     if(b.first().radius() == b.last().radius()){
+      return 0.0; // FIXME! How to solve this
     } else if(b.first().radius() == 0.0){
       NSTR_LOG_(warn, std::string("Node with diameter equal to 0 - Node ID:") + std::to_string(b.first().id()) );
       return NAN;

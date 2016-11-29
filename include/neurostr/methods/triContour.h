@@ -226,7 +226,7 @@ namespace methods{
    * @param name
    * @param component
    */
-  void reconstructionContourProcess( Reconstruction& r, const std::string& name, int component = 2);
+  void reconstructionContourProcess( Reconstruction& r, const std::string& name, int component = 2, bool nointer_nodes = false);
   
   /**
    * @brief 
@@ -234,7 +234,7 @@ namespace methods{
    * @param name
    * @param contour
    */
-  void neuronContourProcess( Neuron& n, const std::string& name, const triMesh_type& contour);
+  void neuronContourProcess( Neuron& n, const std::string& name, const triMesh_type& contour, bool nointer_nodes = false);
   
   /**
    * @brief 
@@ -242,7 +242,7 @@ namespace methods{
    * @param name
    * @param contour
    */
-  void neuriteContourProcess( Neurite& n, const std::string& name, const triMesh_type& contour);
+  void neuriteContourProcess( Neurite& n, const std::string& name, const triMesh_type& contour, bool nointer_nodes = false);
   
   /**
    * @brief 
@@ -251,7 +251,7 @@ namespace methods{
    * @param contour
    * @return 
    */
-  void branchContourProcess( Branch& b, const std::string& name, const triMesh_type& contour);
+  void branchContourProcess( Branch& b, const std::string& name, const triMesh_type& contour, bool nointer_nodes = false);
   
   /**
    * @brief 

@@ -201,7 +201,7 @@ namespace neurostr {
       }
       
       float min = std::numeric_limits<float>::max();
-      float max = std::numeric_limits<float>::min();
+      float max = std::numeric_limits<float>::lowest();
       
       for(auto it = begin(); it != end(); ++it ) {
         float v = geometry::get(*it,component);

@@ -62,7 +62,7 @@ namespace methods{
    * @param name
    * @param component
    */
-  void reconstructionContourProcess( Reconstruction& r, const std::string& name, int component){
+  void reconstructionContourProcess( Reconstruction& r, const std::string& name, int component, bool nointer_nodes){
     
     std::vector<Contour> selected;
     
@@ -95,9 +95,14 @@ namespace methods{
     // Join and create triangular contour
     triMesh_type tricontour = create_triangular_contour(selected.begin(),selected.end(),component);
     
+    // DELETEME
+    // tricontour.toJSON(std::cout);
+    
+    // Print
+    
     // Apply to each neuron in the rec
     for(auto it = r.begin(); it != r.end(); ++it){
-      neuronContourProcess(*it,name,tricontour);
+      neuronContourProcess(*it,name,tricontour, nointer_nodes);
     }
     
     // Done.
@@ -110,11 +115,11 @@ namespace methods{
    * @param name
    * @param contour
    */
-  void neuronContourProcess( Neuron& n, const std::string& name, const triMesh_type& contour){
+  void neuronContourProcess( Neuron& n, const std::string& name, const triMesh_type& contour, bool nointer_nodes){
     
     // Cut each neurite
     for(auto it = n.begin_neurite() ; it != n.end_neurite(); ++it ){
-      neuriteContourProcess(*it, name, contour);
+      neuriteContourProcess(*it, name, contour, nointer_nodes);
     }
     
     // Cut soma
@@ -129,11 +134,11 @@ namespace methods{
    * @param name
    * @param contour
    */
-  void neuriteContourProcess( Neurite& n, const std::string& name, const triMesh_type& contour){
+  void neuriteContourProcess( Neurite& n, const std::string& name, const triMesh_type& contour, bool nointer_nodes){
      
      // ITerate over the neurite
     for( auto it = n.begin_branch() ; it != n.end_branch(); ++it ){
-      branchContourProcess( *it, name, contour );
+      branchContourProcess( *it, name, contour, nointer_nodes);
     }
   }
   
@@ -144,51 +149,63 @@ namespace methods{
    * @param contour
    * @return 
    */
-  void branchContourProcess( Branch& b, const std::string& name, const triMesh_type& contour){
+  void branchContourProcess( Branch& b, const std::string& name, const triMesh_type& contour, bool nointer_nodes){
+    
+    bool branch_in = true;
     
      if(b.has_root()){
-       b.root().properties.set(name, contour.point_inside(b.root().position()));
-     }
+       if(contour.point_inside(b.root().position())){
+        b.root().properties.set(name);
+       } else {
+         branch_in=false;
+       }
+     } 
     
      for(auto it = b.begin(); it != b.end() ; ++it){
       // Check if the node is inside the contour
       if( !contour.point_inside(it->position()) ){
-        it->properties.set(name,false);
+        branch_in = false;
         // If node is not in the contour (and the parent is) add a virtual node
-        Node parent;
-        
-        // Find parent
-        if(it == b.begin()){
-          if(b.has_root()){
-            parent = b.root();
-          } else {
-            parent = *it;
-          }
-        } else {
-          parent = *(it-1);
-        }
-        
-        // Already set
-        if(parent != *it && parent.properties.get<bool>(name)){
-          // Find cutpoint - ray direction
-          point_type ray_direction = parent.vectorTo(*it);
-          geometry::normalize(ray_direction);
+        if(!nointer_nodes){
+          Node parent;
           
-          point_type intersection = contour.ray_intersection(parent.position(), ray_direction);
-          // Check that the intersection is not at some of the already existing nodes
-          if( geometry::distance(intersection, parent.position()) > 1E-3 
-              && geometry::distance(intersection, it->position()) > 1E-3 ){
-                // Insert a node with id -3
-              auto insert_it = b.insert(it, Node(-3,intersection, (parent.radius() + it->radius())/2 ) );
-              it = insert_it;
-              it->properties.set(name,false); // The point is NOT in the contour (well...actually it is... nevermind
+          // Find parent
+          if(it == b.begin()){
+            if(b.has_root()){
+              parent = b.root();
+            } else {
+              parent = *it;
+            }
+          } else {
+            parent = *(it-1);
+          }
+          
+          // Already set
+          if(parent != *it && parent.properties.exists(name)){
+            // Find cutpoint - ray direction
+            point_type ray_direction = parent.vectorTo(*it);
+            geometry::normalize(ray_direction);
+            
+            point_type intersection = contour.ray_intersection(parent.position(), ray_direction);
+            // Check that the intersection is not at some of the already existing nodes
+            if( geometry::distance(intersection, parent.position()) > 1E-3 
+                && geometry::distance(intersection, it->position()) > 1E-3 ){
+                  // Insert a node with id -3
+                auto insert_it = b.insert(it, Node(-3,intersection, (parent.radius() + it->radius())/2 ) );
+                it = insert_it;
+                branch_in = false;
+            }
           }
         }
       } else {
-        // End IF inside by
-        it->properties.set(name,true);
+        // End IF -  inside
+        it->properties.set(name);
       }
     } // End for loop
+    
+    // If branch in is still true..
+    if(branch_in)
+      b.properties.set(name);
   }
   
   /**
@@ -209,54 +226,7 @@ namespace methods{
       }
     }
   }
-  
-  bool branchBoxCutter( Branch& b, const box_type& box){
-    
-    for(auto it = b.begin(); it != b.end() ; ++it){
-      // Check if the node is inside the box
-      if( !geometry::covered_by(it->position(),box) ){
-        // If node is not in the box, we need to find its cutpoint
-        Node parent;
-        
-        // Find parent
-        if(it == b.begin()){
-          if(b.has_root()){
-            parent = b.root();
-          } else {
-            parent = *it;
-          }
-        } else {
-          parent = *(it-1);
-        }
-        
-        // Find cutpoint
-        segment_type seg(parent.position(), it->position());
-        point_type cutpoint;  
-        if( geometry::segment_box_intersection(box, seg, cutpoint) ){
-          
-          // Intersects -> add a node at the intersection point. ID -1 since it is a virtual node
-          // Iterator changes
-          // Note: id -1 is a special id for invalid node.
-          if( !geometry::equal(cutpoint, parent.position()) && !geometry::equal(cutpoint, it->position()) ){
-                auto insert_it = b.insert(it, Node(-2,cutpoint, (parent.radius() + it->radius())/2 ) );
-          
-                // Mark the following nodes as "CUT"
-                for(++insert_it ; insert_it != b.end(); ++insert_it){
-                    insert_it->properties.set("cut");
-                }
-          } else {
-              // Node is the intersection point
-              for(++it ; it != b.end(); ++it){
-                    it->properties.set("cut");
-                }
-          }
-          
-          return true;
-        }
-      } // End IF covered by
-    } // End for loop
-    return false;
-  }
+
 
   
 } // End namespace methods  

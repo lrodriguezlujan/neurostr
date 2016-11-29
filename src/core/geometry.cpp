@@ -695,7 +695,7 @@ TriangleMesh::vertex_iterator TriangleMesh::add(const point_type& p){
 }
 
 
-void TriangleMesh::remove(const TriangleMesh::vertex_iterator& v_it){
+/*void TriangleMesh::remove(const TriangleMesh::vertex_iterator& v_it){
   // First remove faces
   for(auto it = begin_face(); it != end_face(); ++it){
     if(vertex_of_face(*v_it,*it)){
@@ -712,7 +712,7 @@ void TriangleMesh::remove(const TriangleMesh::vertex_iterator& b, const Triangle
   for(auto it = b; it != e ; ++it){
     remove(it);
   }
-}
+}*/
 
 void TriangleMesh::clear(){
   faces_.clear();
@@ -743,26 +743,38 @@ std::size_t TriangleMesh::vertex_count() const{
 }
 
 
-TriangleMesh::face_iterator TriangleMesh::add(const point_type& v0, const point_type& v1, const point_type& v2){
-  point_type v0_p = *add(v0);
-  point_type v1_p = *add(v1);
-  point_type v2_p = *add(v2);
+TriangleMesh::index_face_iterator TriangleMesh::add(const point_type& v0, const point_type& v1, const point_type& v2){
+  index_type v0_p = std::distance(vertices_.begin(),add(v0));
+  index_type v1_p = std::distance(vertices_.begin(),add(v1));
+  index_type v2_p = std::distance(vertices_.begin(),add(v2));
+  
   // This is a reminder: Adding a element to a vector MAY invalidate other iterators since
   // IT could BE REALLOCATED!!!!
-  triangle_type t = {v0_p,v1_p,v2_p};
+  index_face_type t = {v0_p,v1_p,v2_p};
   faces_.push_back(t);
   return std::prev(faces_.end(),1);
 }
 
-TriangleMesh::face_iterator TriangleMesh::add(const triangle_type& t){
+TriangleMesh::index_face_iterator TriangleMesh::add(const index_type& v0, const index_type& v1, const index_type& v2){
+  
+  if(v0 >= vertices_.size() || v1 >= vertices_.size() || v2 >= vertices_.size()){
+    return faces_.end();
+  }
+  
+  index_face_type t = {v0,v1,v2};
+  faces_.push_back(t);
+  return std::prev(faces_.end(),1);
+}
+
+TriangleMesh::index_face_iterator TriangleMesh::add(const triangle_type& t){
   return add(t[0],t[1],t[2]);
 }
 
-void TriangleMesh::remove(const TriangleMesh::face_iterator& it){
+void TriangleMesh::remove(const TriangleMesh::index_face_iterator& it){
   faces_.erase(it);
 }
 
-void TriangleMesh::remove(const TriangleMesh::face_iterator& b, const TriangleMesh::face_iterator& e){
+void TriangleMesh::remove(const TriangleMesh::index_face_iterator& b, const TriangleMesh::index_face_iterator& e){
   for(auto it = b  ;it != e; ++it){
     remove(it);
   }
@@ -772,19 +784,19 @@ void TriangleMesh::clear_faces(){
   faces_.clear();
 }
 
-TriangleMesh::face_iterator TriangleMesh::begin_face(){
+TriangleMesh::index_face_iterator TriangleMesh::begin_face(){
     return faces_.begin();
 }
 
-TriangleMesh::const_face_iterator TriangleMesh::begin_face() const{
+TriangleMesh::const_index_face_iterator TriangleMesh::begin_face() const{
     return faces_.begin();
 }
 
-TriangleMesh::face_iterator TriangleMesh::end_face(){
+TriangleMesh::index_face_iterator TriangleMesh::end_face(){
     return faces_.end();
 }
 
-TriangleMesh::const_face_iterator TriangleMesh::end_face() const {
+TriangleMesh::const_index_face_iterator TriangleMesh::end_face() const {
     return faces_.end();
 }
 
@@ -818,7 +830,7 @@ bool TriangleMesh::point_inside(const point_type& p, const point_type& ray_direc
   bool new_point;
   
   for (auto it = begin_face(); it != end_face(); ++it) {
-      if(triangle_ray_intersection(*it,
+      if(triangle_ray_intersection(get_triangle(*it),
                                      p,
                                      ray_direction,
                                      i_point)){
@@ -828,7 +840,7 @@ bool TriangleMesh::point_inside(const point_type& p, const point_type& ray_direc
         // Its a new intersection point?
         for(auto ip_it = intersections.begin(); 
             new_point && ip_it != intersections.end(); ++ip_it){
-          if( distance(i_point,*ip_it) < 1E-3 )
+          if( distance(i_point,*ip_it) < 1E-6 )
             new_point = false;
         }
         
@@ -839,14 +851,14 @@ bool TriangleMesh::point_inside(const point_type& p, const point_type& ray_direc
       }
   }
   // Return is even
-  return (intersections.size() % 2 == 1);
+  return ( (intersections.size() % 2) == 1);
 }
 
 point_type TriangleMesh::ray_intersection(const point_type& p, 
                                           const point_type& ray_direction) const {
   point_type i_point;
   for (auto it = begin_face(); it != end_face(); ++it) {
-      if(triangle_ray_intersection(*it,
+      if(triangle_ray_intersection(get_triangle(*it),
                                      p,
                                      ray_direction,
                                      i_point)){
@@ -856,6 +868,19 @@ point_type TriangleMesh::ray_intersection(const point_type& p,
   return i_point;
 }
 
+triangle_type TriangleMesh::get_triangle(const TriangleMesh::index_face_type& f) const {
+  
+  // Check length
+  for(auto it = f.begin(); it != f.end() ; ++it){
+    if(*it >= vertices_.size()) return triangle_type();
+  }
+  
+  triangle_type t = {   vertices_[f[0]], 
+                        vertices_[f[1]],
+                        vertices_[f[2]] };
+  return t;
+}
+
 /**
  * @brief Aux function that transforms a face to a triangle
  * @param p Face
@@ -863,33 +888,45 @@ point_type TriangleMesh::ray_intersection(const point_type& p,
  */
 
 bool TriangleMesh::vertex_of_face(const TriangleMesh::vertex_type& v, const TriangleMesh::face_type& f){
-  return ( equal(v,(f[0])) || equal(v,(f[1])) || equal(v,(f[2])));
+  return ( equal(v,f[0]) || equal(v,f[1]) || equal(v,f[2]));
 }
 
+bool TriangleMesh::vertex_of_face(const TriangleMesh::index_type& v, const TriangleMesh::index_face_type& f){
+  return ( v==f[0] || v == f[1] || v==f[2]);
+}
+
+std::ostream& TriangleMesh::toJSON(std::ostream& os){
+   os << "{" << std::endl;
+   if(vertex_count() > 0){
+    
+    os << "\t\"vertices\" : [ " << std::endl ;
+    // Print first
+    os << "\t\t { \"x\" : " << getx(*begin_vertex()) << 
+                  ", \"y\" :" << gety(*begin_vertex()) << 
+                  ", \"z\" : " << getz(*begin_vertex()) << "}" << std::endl;
+    // Print rest
+    for(auto it = std::next(begin_vertex(),1); it != end_vertex(); ++it){
+      os << "\t\t ,{ \"x\" : " << getx(*it) << ", \"y\" :" << gety(*it) << ", \"z\" : " << getz(*it) << "}" << std::endl;
+    }
+    os << "\t]" << std::endl ;
+  }
+  
+  if(face_count() > 0 ){
+    
+    os << "\t, \"faces\" : [" << std::endl ;
+    auto face = *begin_face();
+    os << "\t\t [" << face[0]  << ", " << face[1]<< ", " << face[2] << "]" << std::endl;
+   
+    for(auto face = std::next(begin_face(),1); face != end_face(); ++face){
+      os << "\t\t, [" << (*face)[0] << ", " << (*face)[1] << ", " << (*face)[2] << "]" << std::endl;
+    }
+    os << "]";
+  }
+  
+  os << "}" << std::endl;
+  return os;
+}
 
 
 }  // namespace geoutils
 }  // namespace neurostr
-
-std::ostream& operator<<(std::ostream& os,const neurostr::geometry::TriangleMesh& m) {
-  
-  using namespace neurostr::geometry;
-  
-  os << "--Mesh--" << std::endl;
-  
-  os << "\tVertices: " << std::endl ;
-  for(auto it = m.begin_vertex(); it != m.end_vertex(); ++it){
-    os << "\t\t (" << getx(*it) << ", " << gety(*it) << ", " << getz(*it) << ")" << std::endl;
-  }
-  
-  os << "\tFaces: " << std::endl ;
-  for(auto it = m.begin_face(); it != m.end_face(); ++it){
-    os << "\t\tFace: " << std::endl ;  
-    os << "\t\t\t (" << getx( (*it)[0] ) << ", " << gety((*it)[0]) << ", " << getz((*it)[0]) << ")" << std::endl;
-    os << "\t\t\t (" << getx( (*it)[1] ) << ", " << gety((*it)[1]) << ", " << getz((*it)[1]) << ")" << std::endl;
-    os << "\t\t\t (" << getx( (*it)[2] ) << ", " << gety((*it)[2]) << ", " << getz((*it)[2]) << ")" << std::endl;
-  }
-  
-  os << "--END Mesh--" << std::endl;
-  return os;
-}

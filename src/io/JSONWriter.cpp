@@ -302,7 +302,7 @@ namespace io {
       // Node JSON format is just [id, x, y ,z, r]
       writer->StartObject();
       writer->Key("id");
-      writer->Uint(n.id());
+      writer->Int(n.id());
       writer->Key("x");
       writer->Double(n.x()); 
       writer->Key("y");

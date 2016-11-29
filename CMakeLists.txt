@@ -139,6 +139,8 @@ set ( TOOLS_CXX_SRCS
     ${TOOL_SRC_DIR}/Scholl.cpp
     ${TOOL_SRC_DIR}/Validator.cpp
     ${TOOL_SRC_DIR}/Benchmark.cpp
+    ${TOOL_SRC_DIR}/Contour3DTagger.cpp
+    ${TOOL_SRC_DIR}/TagFeatureExtractor.cpp
 )
 
 # Define the Tools compile flags
@@ -183,13 +185,23 @@ add_executable(neurostr_benchmark EXCLUDE_FROM_ALL ${CMAKE_SOURCE_DIR}/tools/Ben
 target_link_libraries(neurostr_benchmark -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
 add_dependencies(neurostr_benchmark neurostr)
 
+add_executable(neurostr_contourtag ${CMAKE_SOURCE_DIR}/tools/Contour3DTagger.cpp)
+target_link_libraries(neurostr_contourtag -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_contourtag neurostr)
+
+add_executable(neurostr_tagfeatures ${CMAKE_SOURCE_DIR}/tools/TagFeatureExtractor.cpp)
+target_link_libraries(neurostr_tagfeatures -lneurostr -lpthread -lboost_filesystem -lboost_program_options)
+add_dependencies(neurostr_tagfeatures neurostr)
+
 add_custom_target(tools DEPENDS
                     neurostr_boxcutter
                     neurostr_branchfeatures
                     neurostr_neuritefeatures
                     neurostr_converter
                     neurostr_scholl
-                    neurostr_validator)
+                    neurostr_validator
+                    neurostr_contourtag
+                    neurostr_tagfeatures)
 
 ## TESTS
 set( TEST_SRC_DIR ${CMAKE_SOURCE_DIR}/test/src)
