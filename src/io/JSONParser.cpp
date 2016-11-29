@@ -232,7 +232,7 @@ namespace io {
         NSTR_LOG_(warn,"Neurite markers field is not an object - Ignoring");
         ++warn_count;
       } else {
-        parseMarkers(v["properties"].GetObject(),*n);
+        parseMarkers(v["markers"].GetObject(),*n);
       }
     }
     
@@ -254,17 +254,17 @@ namespace io {
       // Get marker name
       name = it->name.GetString();
       
-      if(! (it->value.HasMember("markers")) ){
+      if(! (it->value.HasMember("nodes")) ){
         NSTR_LOG_(warn,std::string("Marker ") + name + " dont have a node array - Skipping");
         ++warn_count;
-      } else if (!(it->value["markers"].IsArray()) ) {
+      } else if (!(it->value["nodes"].IsArray()) ) {
         NSTR_LOG_(warn,std::string("Marker ") + name + " nodes is not an array - Skipping");
         ++warn_count;
       }else {
         // Clear array
         nodes.clear();
         // Add nodes
-        auto tmp = it->value["markers"].GetArray();
+        auto tmp = it->value["nodes"].GetArray();
         try{
           // Parse and add
           for(auto node_it = tmp.begin(); node_it != tmp.end(); ++node_it){

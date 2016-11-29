@@ -469,20 +469,38 @@ std::size_t DATParser::process_container_(
       } else if (type_in_buffer_ == block_type::MARKERSET_LIST ) {
         // Property list
         std::vector<marker_type> v = process_markersetlist_();
+        
         for(auto it = v.begin(); it != v.end() ; ++it){
-            current_pos->neurite().add_marker(it->name,it->samples.begin(), it->samples.end());
+            // Get name
+            std::string marker_name = it->name;
+            for(auto prop_it = it->properties.begin(); prop_it != it->properties.end(); ++prop_it){
+              if(PropertyMap::key(*prop_it) == "name"){
+                marker_name = PropertyMap::value_as_string(*prop_it);
+              }
+            }
+            current_pos->neurite().add_marker(marker_name,it->samples.begin(), it->samples.end());
         }
         
         
       } else if (type_in_buffer_ == block_type::MARKERSET ) {
         // Property list
         marker_type m = process_markerset();
+        
+        std::string marker_name = m.name;
+        
         // Set branch (current)
         for(auto marker_it = m.samples.begin(); marker_it != m.samples.end(); ++marker_it){
           marker_it->branch( &(*current_pos) );
         }
+        
+        for(auto prop_it = m.properties.begin(); prop_it != m.properties.end(); ++prop_it){
+          if(PropertyMap::key(*prop_it) == "name"){
+            marker_name = PropertyMap::value_as_string(*prop_it);
+          }
+        }
+        
         // Add
-        current_pos->neurite().add_marker(m.name,m.samples.begin(), m.samples.end());
+        current_pos->neurite().add_marker(marker_name,m.samples.begin(), m.samples.end());
         
       } else {
           skip_block();
