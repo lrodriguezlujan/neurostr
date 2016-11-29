@@ -469,15 +469,15 @@ std::size_t DATParser::process_container_(
       } else if (type_in_buffer_ == block_type::MARKERSET_LIST ) {
         // Property list
         std::vector<marker_type> v = process_markersetlist_();
-        //for(auto it = v.begin(); it != v.end() ; ++it) 
-        //  for(auto p = it->properties.begin(); p != it->properties.end() ; ++p)
-        //    pos.neurite()->add_property(*p);
+        for(auto it = v.begin(); it != v.end() ; ++it){
+            current_pos->neurite().add_marker(it->name,it->samples.begin(), it->samples.end());
+        }
+        
         
       } else if (type_in_buffer_ == block_type::MARKERSET ) {
         // Property list
         marker_type m = process_markerset();
-        //for(auto p = m.properties.begin(); p != m.properties.end() ; ++p)
-        //  pos.neurite()->add_property(*p);
+        current_pos->neurite().add_marker(m.name,m.samples.begin(), m.samples.end());
         
       } else {
           skip_block();
