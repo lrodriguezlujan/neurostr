@@ -10,7 +10,8 @@ Neurite::Neurite()
       , id_(-1)
       , type_(NeuriteType::kUndefined)
       , root_is_soma_(false)
-      , neuron_(){
+      , neuron_()
+      , markers_(){
         tree_.head->data.neurite(this);
         tree_.feet->data.neurite(this);
         //set_root();
@@ -22,7 +23,8 @@ Neurite::Neurite(int id)
       , id_(id)
       , type_(NeuriteType::kUndefined)
       , root_is_soma_(false)
-      , neuron_(){
+      , neuron_()
+      , markers_(){
         //set_root();
         tree_.head->data.neurite(this);
         tree_.feet->data.neurite(this);
@@ -34,7 +36,8 @@ Neurite::Neurite(int id, const NeuriteType& t)
       , id_(id)
       , type_(t)
       , root_is_soma_(false)
-      , neuron_(){
+      , neuron_()
+      , markers_(){
         tree_.head->data.neurite(this);
         tree_.feet->data.neurite(this);
         //set_root();
@@ -424,7 +427,54 @@ std::ostream& operator<<(std::ostream& os, const Neurite& n) {
       }
       return *this;
     };
+    
+    
 
+  void Neurite::add_marker(const std::string& name, const Node& n){
+    auto it = markers_.find(name);
+    if( it == markers_.end()){
+      // Create entry
+      std::vector<Node> v;
+      v.push_back(n);
+      markers_.emplace(name,v);
+    } else {
+      // Append to existing
+      it->second.push_back(n);
+    }
+  }
+  
+  bool Neurite::exists_marker(const std::string& name) const {
+    return( markers_.find(name) != markers_.end() );
+  }
+
+  Neurite::marker_container::iterator Neurite::find(const std::string& name){
+    return markers_.find(name); // Just return the iterator
+  }
+  
+
+  Neurite::marker_container::const_iterator Neurite::find(const std::string& name) const{
+    return markers_.find(name); // Just return the iterator
+  }
+  
+
+  Neurite::marker_container::iterator Neurite::begin_marker(){
+    return markers_.begin();
+  }
+  
+
+  Neurite::marker_container::const_iterator Neurite::begin_marker() const{
+    return markers_.begin();
+  }
+  
+
+  Neurite::marker_container::iterator Neurite::end_marker(){
+    return markers_.end();
+  }
+  
+
+  Neurite::marker_container::const_iterator Neurite::end_marker() const{
+    return markers_.end();
+  }
 
 
 }  // namespace neurostr

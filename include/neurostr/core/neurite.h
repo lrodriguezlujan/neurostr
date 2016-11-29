@@ -57,6 +57,8 @@ class Neurite : public WithProperties  {
   using branch_bfs_iterator       = tree_type::breadth_first_iterator;
   using sibling_iterator          = tree_type::sibling_iterator;
 
+  using marker_container = std::map<std::string, std::vector<Node>>;
+
   /**
    * @brief Empty neurite constructor. Id -1 and type undefined
    * @return Neurite
@@ -117,6 +119,9 @@ class Neurite : public WithProperties  {
   
   // Belongs to...
   Neuron* neuron_;
+  
+  // Markers
+  marker_container markers_;
 
   public:
  
@@ -965,6 +970,69 @@ class Neurite : public WithProperties  {
   unsigned int index(sibling_iterator it) const { return tree_.index(it); }
 
   friend std::ostream& operator<<(std::ostream&, const Neurite&);
+  
+  /**** Markers method ***/
+  
+  /**
+   * @brief Add a single node as a marker 
+   * @param name The marker name
+   * @param n The marker position
+   */
+  void add_marker(const std::string& name, const Node& n);
+  
+  /**
+   * @brief Add the nodes in the range [b,e) as markers
+   * @param name Marker name
+   * @param b Node begin iterator
+   * @param e Node end iterator
+   */
+  template <typename Iter>
+  void add_marker(const std::string& name, Iter b, Iter e);
+  
+  /**
+   * @brief Checks that a marker with the given name exists
+   * @param name Marker name
+   * @return True if it exists
+   */
+  bool exists_marker(const std::string& name) const;
+  
+  /**
+   * @brief Returns an iterator to the marker with the given name
+   * @param name Marker name
+   * @return Iterator position .end if it doesnt exist
+   */
+  marker_container::iterator find(const std::string& name);
+  
+  /**
+   * @brief Returns an iterator to the marker with the given name
+   * @param name Marker name
+   * @return Iterator position .end if it doesnt exist
+   */
+  marker_container::const_iterator find(const std::string& name) const;
+  
+  /**
+   * @brief Returns the map begin iterator
+   * @return Map iterator
+   */
+  marker_container::iterator begin_marker();
+  
+  /**
+   * @brief Returns the map begin iterator
+   * @return Map iterator
+   */
+  marker_container::const_iterator begin_marker() const;
+  
+  /**
+   * @brief Returns the map end iterator
+   * @return Map iterator
+   */
+  marker_container::iterator end_marker();
+  
+  /**
+   * @brief Returns the map end iterator
+   * @return Map iterator
+   */
+  marker_container::const_iterator end_marker() const;
 
   private:
 
@@ -1097,6 +1165,18 @@ void Neurite::node_iterator<iter>::decrement() {
         }
       }
     }
+
+template <typename Iter>
+void Neurite::add_marker(const std::string& name, Iter b, Iter e){
+    auto it = markers_.find(name);
+    // Add entry
+    if( it == markers_.end() ){
+      markers_.emplace(name, std::vector<Node>(b,e));
+    } else {
+      // Append
+      it->second.insert( it->second.end(), b, e);
+    }
+}
 
 }  // namespace neurostr
 
