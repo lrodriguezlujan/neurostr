@@ -258,13 +258,29 @@ namespace nm = neurostr::measure;
                                             nm::measureEach( nm::partition_asymmetry )) (n));
   }
 }
+
+void add_tag_neurite_markers(const neurostr::Neurite& n , 
+                                     const std::string& tag, 
+                                     const std::vector<std::string>& markers,
+                                     std::map<std::string, std::vector<float>>& m){
+
+  std::vector<float> aux(1);
+  
+  for(auto mark_name = markers.begin(); mark_name != markers.end(); ++mark_name){
+    
+    aux[0] = ns::compose_selector(ns::property_exists_factory<neurostr::Node>(tag),
+                                  ns::neurite_marker_selector(*mark_name))(n).size();
+    m.emplace(std::string("marker_count_")+*mark_name, aux);
+  }
+}
  
- std::map<std::string, std::vector<float>> get_tag_measures(const neurostr::Neurite& n, const std::string& tag){
+std::map<std::string, std::vector<float>> get_tag_measures(const neurostr::Neurite& n, const std::string& tag, const std::vector<std::string>& markers){
    
    std::map<std::string, std::vector<float>> m; // measures
    
   add_tag_neurite_node_measures(n,tag,m);
   add_tag_neurite_branch_measures(n,tag,m);
+  add_tag_neurite_markers(n,tag,markers,m);
   
   return m;
   
@@ -334,7 +350,7 @@ void print_vector_measures(std::map<std::string, std::vector<float>>& m,
   os << " }"; // Close measures
 }
 
-void print_tag_measures(const neurostr::Neurite& n, const std::string& tag, std::ostream& os){
+void print_tag_measures(const neurostr::Neurite& n, const std::string& tag, const std::vector<std::string>& markers, std::ostream& os){
   os << "{" ;
   // Print neurite ID
   print_neurite_id(n,os);
@@ -344,7 +360,7 @@ void print_tag_measures(const neurostr::Neurite& n, const std::string& tag, std:
   os << " \"tag\" : " << escape_string(tag) << ", ";
   
   // Get measures
-  auto m = get_tag_measures(n,tag);
+  auto m = get_tag_measures(n,tag, markers);
   
   // Print them
   print_vector_measures(m,os);
@@ -378,6 +394,7 @@ int main(int ac, char **av)
     ("help,h", "Produce help message")
     ("input,i", po::value< std::string >(&ifile), "Neuron reconstruction file")
     ("tag,t", po::value< std::string >(&tag), "Tag (property key")
+    ("marker,m", po::value< std::vector<std::string>>(), "Marker names")
     ("omitapical", "Ignore the apical dendrite")
     ("omitaxon", "Ignore the axon")
     ("omitdend", "Ignore the non-apical dendrites");
@@ -394,14 +411,20 @@ int main(int ac, char **av)
     return 1;
   }
   
-  if(!vm.count("input") || !vm.count("input")){
+  if(!vm.count("input") || !vm.count("tag")){
     std::cout << "ERROR: input file required" << std::endl << std::endl;
     std::cout << desc << "\n";
     std::cout << "Example: neurostr_tagfeature -i test.swc " << std::endl << std::endl ;
     return 2;
   }
   
-  
+  // Process contour
+   std::vector<std::string> markers;
+   
+   if(vm.count("marker") > 0){
+     markers=vm["marker"].as<std::vector<std::string>>();
+   }
+   
   omitapical = (vm.count("omitapical") > 0);
   omitaxon = (vm.count("omitaxon") > 0);
   omitdend = (vm.count("omitdend") > 0);
@@ -430,7 +453,7 @@ int main(int ac, char **av)
         std::cout << " , ";
       }
       first = false;
-      print_tag_measures(*it, tag, std::cout);
+      print_tag_measures(*it, tag, markers, std::cout);
     }  
   }
   

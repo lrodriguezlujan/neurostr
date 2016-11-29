@@ -140,6 +140,15 @@ namespace methods{
     for( auto it = n.begin_branch() ; it != n.end_branch(); ++it ){
       branchContourProcess( *it, name, contour, nointer_nodes);
     }
+    
+    // Markers
+    for( auto it = n.begin_marker(); it != n.end_marker(); ++it){
+      for(auto n_it = it->second.begin(); n_it != it->second.end(); ++n_it){
+        if(contour.point_inside(n_it->position())){
+          n_it->properties.set(name);
+        }
+      }
+    }
   }
   
   /**

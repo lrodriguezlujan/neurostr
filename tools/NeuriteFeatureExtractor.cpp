@@ -43,7 +43,7 @@ namespace nm = neurostr::measure;
  
  
  
- std::map<std::string, std::vector<float>> get_neurite_measures(const neurostr::Neurite& n){
+ std::map<std::string, std::vector<float>> get_neurite_measures(const neurostr::Neurite& n,  const std::vector<std::string>& markers){
    
    std::map<std::string, std::vector<float>> m; // measures
    
@@ -175,6 +175,15 @@ namespace nm = neurostr::measure;
     NSTR_LOG_(info, std::string("Neurite ") + std::to_string(n.id()) + " doesn't have any bifuractions. Bifurcations measures are skipped.." );
   }
   
+  // MARKERS
+  
+  for(auto mark_name = markers.begin(); mark_name != markers.end(); ++mark_name){
+    
+    aux.clear();
+    aux.push_back(static_cast<float>(ns::neurite_marker_selector(*mark_name)(n).size()));
+    m.emplace(std::string("marker_count_")+*mark_name, aux);
+  }
+  
   return m;
   
 }
@@ -243,14 +252,14 @@ void print_vector_measures(std::map<std::string, std::vector<float>>& m ,
   os << " }"; // Close measures
 }
 
-void print_neurite_measures(const neurostr::Neurite& n, std::ostream& os){
+void print_neurite_measures(const neurostr::Neurite& n, const std::vector<std::string>& markers, std::ostream& os){
   os << "{" ;
   // Print neurite ID
   print_neurite_id(n,os);
   os << ", ";
   
   // Get measures
-  auto m = get_neurite_measures(n);
+  auto m = get_neurite_measures(n,markers);
   
   // Print them
   print_vector_measures(m,os);
@@ -284,6 +293,7 @@ int main(int ac, char **av)
     ("help,h", "Produce help message")
     ("input,i", po::value< std::string >(&ifile), "Neuron reconstruction file")
     ("correct,c", "Try to correct the errors in the reconstruction")
+    ("marker,m", po::value< std::vector<std::string>>(), "Marker names")
     ("omitapical", "Ignore the apical dendrite")
     ("omitaxon", "Ignore the axon")
     ("omitdend", "Ignore the non-apical dendrites");
@@ -313,6 +323,13 @@ int main(int ac, char **av)
   omitdend = (vm.count("omitdend") > 0);
   correct = (vm.count("correct") > 0);
   
+  // Process contour
+   std::vector<std::string> markers;
+   
+   if(vm.count("marker") > 0){
+     markers=vm["marker"].as<std::vector<std::string>>();
+   }
+  
   /*** END PARAMETER PARSING */
   
   // Read
@@ -338,7 +355,7 @@ int main(int ac, char **av)
         std::cout << " , ";
       }
       first = false;
-      print_neurite_measures(*it, std::cout);
+      print_neurite_measures(*it, markers, std::cout);
     }  
   }
   

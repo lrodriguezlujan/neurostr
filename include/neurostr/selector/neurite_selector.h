@@ -148,6 +148,24 @@ const auto neurite_pre_terminal_branches = [](const Neurite &n) ->
 const auto neurite_terminal_bifurcations = 
   compose_selector(selector_in_single_to_set(branch_last_node_selector), 
           neurite_pre_terminal_branches);
+          
+static inline std::function<std::vector<const_node_reference>(const Neurite &)> 
+              neurite_marker_selector(const std::string& name){
+    return [name_ = name](const Neurite& n){
+      std::vector<const_node_reference> ret;
+      
+      auto it = n.find(name_);
+      
+      if( it == n.end_marker() ){
+        return ret;
+      } else {
+        for(auto n_it = it->second.begin(); n_it != it->second.end() ; ++n_it){
+          ret.emplace_back(*n_it);
+        }
+        return ret;
+      }
+    };
+};
 
 
 } // End selector
