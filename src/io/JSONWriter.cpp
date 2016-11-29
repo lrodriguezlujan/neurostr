@@ -238,6 +238,17 @@ namespace io {
         writePropertyMap(n.properties);
       }
       
+      // Write markers
+      if(std::distance(n.begin_marker(), n.end_marker()) > 0){
+        writer->Key("markers");
+        writer->StartObject();
+        for(auto it = n.begin_marker(); it != n.end_marker(); ++it){
+          writer->Key(it->first.c_str());
+          writeMarker(it->second);
+        }
+        writer->EndObject();
+      }
+      
       // Write tree
       writer->Key("tree");
       writeBranch(n.begin_branch(),n);
@@ -320,6 +331,19 @@ namespace io {
       
       writer->EndObject();
     };
+    
+    
+    void JSONWriter::writeMarker(const std::vector<neurostr::Node>& v){
+      writer->StartObject();
+      writer->Key("nodes");
+      writer->StartArray();
+      // Write nodes
+      for(auto it = v.begin(); it != v.end(); ++it){
+        writeNode(*it);
+      }
+      writer->EndArray();
+      writer->EndObject();
+    }
     
 } //  end io namespace
 } // end neurostr namespace

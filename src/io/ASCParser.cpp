@@ -453,7 +453,7 @@ void ASCParser::process_(Reconstruction & r) {
     case block_type::MARKERSET:
       // We process and ignore it
       try{
-        process_marker();
+        marker_type m = process_marker();
       } catch(std::logic_error e){
         process_error(e);
         recover_from_error();

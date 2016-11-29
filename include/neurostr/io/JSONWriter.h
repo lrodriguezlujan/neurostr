@@ -125,7 +125,13 @@ namespace io {
      * @brief Writes a single node as {id,x,y,z,r,properties:{}}
      * @param n Node
      */
-    void writeNode(const neurostr::Node& n);    
+    void writeNode(const neurostr::Node& n);
+    
+    /**
+     * @brief Writes marker content 
+     * @param v Marker nodes
+     */
+    void writeMarker(const std::vector<neurostr::Node>& v);
   };
 }
 }

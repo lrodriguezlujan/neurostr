@@ -127,6 +127,14 @@ class JSONParser : public Parser{
    */
   void parseBranch(const rapidjson::Value::ConstObject& v,
                      const Neurite::branch_iterator& pos);
+
+  /**
+  * @brief Parses a markers object and adds them to the neurite
+  * @param v JSON Marker object
+  * @param n neurite
+  */
+  void parseMarkers(const rapidjson::Value::ConstObject& v,
+                   Neurite& n);
                      
   /**
    * @brief Processes a contour JSON object

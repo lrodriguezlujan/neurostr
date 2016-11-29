@@ -226,12 +226,57 @@ namespace io {
       }
     }
     
+    // Markers
+    if(v.HasMember("markers")){
+       if(!v["markers"].IsObject() ){
+        NSTR_LOG_(warn,"Neurite markers field is not an object - Ignoring");
+        ++warn_count;
+      } else {
+        parseMarkers(v["properties"].GetObject(),*n);
+      }
+    }
+    
     // Tree
     n->set_root(); // Create empty root
     n->begin_branch()->order(0);
     parseBranch(v["tree"].GetObject(), n->begin_branch());
     
     return n;
+  }
+  
+  
+  void JSONParser::parseMarkers(const rapidjson::Value::ConstObject& v, Neurite& n){
+    
+    std::vector<Node> nodes;
+    std::string name;
+    
+    for( auto it = v.MemberBegin(); it != v.MemberEnd(); ++it){
+      // Get marker name
+      name = it->name.GetString();
+      
+      if(! (it->value.HasMember("markers")) ){
+        NSTR_LOG_(warn,std::string("Marker ") + name + " dont have a node array - Skipping");
+        ++warn_count;
+      } else if (!(it->value["markers"].IsArray()) ) {
+        NSTR_LOG_(warn,std::string("Marker ") + name + " nodes is not an array - Skipping");
+        ++warn_count;
+      }else {
+        // Clear array
+        nodes.clear();
+        // Add nodes
+        auto tmp = it->value["markers"].GetArray();
+        try{
+          // Parse and add
+          for(auto node_it = tmp.begin(); node_it != tmp.end(); ++node_it){
+            nodes.push_back(parseNode(node_it->GetObject()));
+          }
+          n.add_marker(name,nodes.begin(),nodes.end());
+        } catch(std::logic_error e){
+          NSTR_LOG_(warn,std::string("Error while parsing marker ") + name + "- Skipping");
+          ++warn_count;
+        }
+      }
+    }
   }
   
   Neuron* JSONParser::parseNeuron(const rapidjson::Value::ConstObject& v ){
