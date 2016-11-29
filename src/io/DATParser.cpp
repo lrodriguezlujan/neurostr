@@ -477,6 +477,11 @@ std::size_t DATParser::process_container_(
       } else if (type_in_buffer_ == block_type::MARKERSET ) {
         // Property list
         marker_type m = process_markerset();
+        // Set branch (current)
+        for(auto marker_it = m.samples.begin(); marker_it != m.samples.end(); ++marker_it){
+          marker_it->branch( &(*current_pos) );
+        }
+        // Add
         current_pos->neurite().add_marker(m.name,m.samples.begin(), m.samples.end());
         
       } else {
