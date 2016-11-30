@@ -241,7 +241,7 @@ endif()
 ## Find Unittest++
 #find_package( FindUnitTestcpp REQUIRED )
 include(FindUnitTest++)
-if( NOT ${UNITTESTCPP_FOUND})
+if( NOT ${UNITTEST++_FOUND})
   message( WARNING "Unittest++ library not found - test cannot be compiled")
 else()
     # Add unittest paths
