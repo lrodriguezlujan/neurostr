@@ -7,7 +7,9 @@ endif(UNIX)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 # Workspace name
-project(NeuroSTR)
+project(NeuroSTR 
+        VERSION 0.1 
+        LANGUAGES CXX)
 
 #set(CMAKE_CXX_COMPILER g++-6)
 
@@ -102,7 +104,7 @@ set ( LIB_CXX_SRCS
 
 
 # Define the library compile flags
-if(${CONFIGURATION_NAME} STREQUAL "Release")
+if( DEFINED ${CONFIGURATION_NAME} AND ${CONFIGURATION_NAME} STREQUAL "Release")
 set_source_files_properties(
     ${LIB_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O3 -std=c++14")
@@ -144,7 +146,7 @@ set ( TOOLS_CXX_SRCS
 )
 
 # Define the Tools compile flags
-if(${CONFIGURATION_NAME} STREQUAL "Debug")
+if( DEFINED ${CONFIGURATION_NAME} AND ${CONFIGURATION_NAME} STREQUAL "Debug")
 set_source_files_properties(
     ${TOOLS_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O0 -std=c++14 -Wall")
@@ -226,14 +228,14 @@ set ( TEST_CXX_SRCS
 
 
 # Define the test compile flags
-if(${CONFIGURATION_NAME} STREQUAL "Release")
-set_source_files_properties(
-    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS
-    " -O3 -std=c++14")
-else()
+if( DEFINED ${CONFIGURATION_NAME} AND ${CONFIGURATION_NAME} STREQUAL "Debug")
 set_source_files_properties(
     ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS
     " -O0 -std=c++14 -Wall")
+else()
+set_source_files_properties(
+    ${TEST_CXX_SRCS} PROPERTIES COMPILE_FLAGS
+    " -O3 -std=c++14")
 endif()
 
 ## Find Unittest++
